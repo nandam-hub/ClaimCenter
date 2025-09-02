@@ -1,0 +1,6 @@
+name: "Trusted for Sensitive Claims"
+endpoints: []
+accessibleFields:
+  "*":
+    edit: "*"
+    view: "*"

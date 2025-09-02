@@ -1,0 +1,59 @@
+package rules.Assignment.DefaultGroupClaimAssignmentRules_dir
+
+uses gw.api.locale.DisplayKey
+uses gw.api.system.CCLoggerCategory
+uses gw.assignment.AssignExposureSameCoverageImpl
+uses gw.assignment.AssignmentUtil_Ext
+
+@gw.rules.RuleName("DGC00500 - Balanced workload within group")
+internal class DGC00500Balancedworkloadwithingroup {
+  static function doCondition(claim : entity.Claim) : boolean {
+    
+/*start00rule*/
+    var scriptWWLEnabled = AssignExposureSameCoverageImpl.EnableWeightedWorkload_Ext
+    return scriptWWLEnabled
+        and claim.AssignedGroup != null
+        and AssignmentUtil_Ext.getEligibleUsersFromGroupAndChildren(claim.AssignedGroup).size() > 0
+/*end00rule*/
+
+  }
+
+  static function doAction(claim : entity.Claim, actions : gw.rules.Action) {
+
+/*start00rule*/
+    var logger = CCLoggerCategory.ASSIGNMENT_WEIGHTED_WORKLOAD
+    var wwlEnabled = gw.api.system.CCConfigParameters.WeightedAssignmentEnabled.Value
+    var scriptWWLEnabled = AssignExposureSameCoverageImpl.EnableWeightedWorkload_Ext
+
+    logger.info("### DGC00500: Rule triggered for Claim ID: " + claim.ID +
+        ", Config WWL=" + wwlEnabled +
+        ", ScriptParam WWL=" + scriptWWLEnabled +
+        ", AssignedGroup=" + claim.AssignedGroup)
+
+    var assigned = false
+
+    // Try WWL only if both config and script param are enabled
+    if (wwlEnabled and scriptWWLEnabled) {
+      assigned = claim.assignUserByWorkload(true, claim.AssignedGroup)
+      if (assigned) {
+        logger.info("### DGC00500: WWL assigned Claim to: " + claim.AssignedUser)
+        actions.exit()
+      } else {
+        logger.info("### DGC00500: WWL failed or tie — trying RR fallback")
+      }
+    } else {
+      logger.info("### DGC00500: WWL disabled — using RR fallback")
+    }
+
+    // Fallback to Round Robin using group and its children
+    assigned = claim.assignUserByRoundRobin(true, claim.AssignedGroup)
+    if (assigned) {
+      logger.info("### DGC00500: Round Robin assigned Claim to: " + claim.AssignedUser)
+      actions.exit()
+    } else {
+      logger.warn("### DGC00500: Both WWL and RR failed — no assignment made")
+    }
+/*end00rule*/
+
+  }
+}

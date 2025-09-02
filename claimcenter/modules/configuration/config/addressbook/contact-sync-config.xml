@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContactSyncConfigFile
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="contact-sync-config.xsd">
+  <!--
+  The contents of this configuration file are no longer in use.  It is unnecessary to add or modify content 
+  in this file; all content is disregarded.
+   
+  Use ContactMapper and RelationshipSyncConfig to define ignored properties and syncable relationships instead.  
+   
+  Deprecated since 8.0. Use ContactMapper and RelationshipSyncConfig to define ignored properties and syncable relationships.
+  
+  This file will be removed in a near future release.      
+  -->
+</ContactSyncConfigFile>

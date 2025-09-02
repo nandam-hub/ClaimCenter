@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    id="ExposureRules"
+    canVisit="gw.bizrules.ExposureRules.ExposureRulesNavigationContext.Instance.Perm.View"
+    title="DisplayKey.get('Web.ExposureRules.LG.Title')">
+    <ScreenRef
+      def="CCRulesListScreen(gw.bizrules.ExposureRules.ExposureRulesNavigationContext.Instance)"/>
+  </Page>
+</PCF>

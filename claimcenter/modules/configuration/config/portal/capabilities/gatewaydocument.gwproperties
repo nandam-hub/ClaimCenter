@@ -1,0 +1,3 @@
+# GAR START: config/portal/capabilities/gatewaydocument.gwproperties [/opt/teamcity/agent/work/45c3a2f1b8ee4237/gpm-generator/downloads/edge/backend/xcenter-config/xcenter-utils/cc-utils/../../../Capabilities/gpa-claim/src/main]
+httphandlers.claimDocument=edge.capabilities.document.DocumentRetrievalHandler
+# GAR END

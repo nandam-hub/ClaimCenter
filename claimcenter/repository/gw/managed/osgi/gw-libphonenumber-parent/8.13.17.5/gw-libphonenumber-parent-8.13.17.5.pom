@@ -1,0 +1,201 @@
+<?xml version="1.0"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>gw-libphonenumber-parent</artifactId>
+  <version>8.13.17.5</version>
+  <packaging>pom</packaging>
+  <url>https://github.com/google/libphonenumber/</url>
+
+  <parent>
+    <groupId>gw.managed.osgi</groupId>
+    <artifactId>gw-libphonenumber-build-parent</artifactId>
+    <version>8.13.17.5</version>
+  </parent>
+
+  <description>
+    Phone number utility library for handling and manipulating localized and international phonenumbers.
+  </description>
+
+  <organization>
+    <name>Guidewire, Inc.</name>
+    <url>http://guidewire.com</url>
+  </organization>
+
+  <licenses>
+    <license>
+      <name>Apache License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+
+  <scm>
+    <developerConnection>scm:git:ssh://git@stash.guidewire.com/pl/libphonenumber.git</developerConnection>
+    <connection>scm:git:https://git@stash.guidewire.com/scm/pl/libphonenumber.git</connection>
+    <tag>gw-libphonenumber-build-parent-8.13.17.5</tag>
+  </scm>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <developers>
+    <developer>
+      <id>jia.shao.peng</id>
+      <name>Shaopeng Jia</name>
+      <email>jia.shao.peng@gmail.com</email>
+      <organization>Google</organization>
+      <roles>
+        <role>owner</role>
+        <role>developer</role>
+      </roles>
+    </developer>
+    <developer>
+      <id>lararennie</id>
+      <name>Lara Rennie</name>
+      <email>lararennie@google.com</email>
+      <organization>Google</organization>
+      <roles>
+        <role>developer</role>
+      </roles>
+    </developer>
+  </developers>
+
+  <contributors>
+    <contributor>
+      <name>tronikos</name>
+      <email>tronikos@gmail.com</email>
+    </contributor>
+    <contributor>
+      <name>g1smd.email</name>
+      <email>g1smd.email@gmail.com</email>
+    </contributor>
+    <contributor>
+      <name>Philippe Liard</name>
+      <email>philip.liard@gmail.com</email>
+    </contributor>
+  </contributors>
+
+  <modules>
+    <module>libphonenumber</module>
+    <!--<module>internal/prefixmapper</module>-->
+    <!--<module>carrier</module>-->
+    <!--<module>geocoder</module>-->
+    <!--<module>demo</module>-->
+  </modules>
+
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.felix</groupId>
+          <artifactId>maven-bundle-plugin</artifactId>
+          <version>3.2.0</version>
+          <executions>
+            <execution>
+              <id>bundle-manifest</id>
+              <phase>process-classes</phase>
+              <goals>
+                <goal>manifest</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>animal-sniffer-maven-plugin</artifactId>
+          <version>1.15</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>2.12</version>
+        <configuration>
+          <includes>
+            <include>**/*Test.java</include>
+          </includes>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <version>2.1.2</version>
+        <executions>
+          <execution>
+            <id>attach-sources</id>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>2.7</version>
+        <executions>
+          <execution>
+            <id>attach-javadocs</id>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-release-plugin</artifactId>
+        <version>2.5.2</version>
+        <configuration>
+          <tagNameFormat>v@{project.version}</tagNameFormat>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>2.3.2</version>
+        <configuration>
+          <source>1.7</source>
+          <target>1.7</target>
+          <encoding>UTF-8</encoding>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+  <!-- Until 08. Dec 2016, this pom worked with maven-release-plugin at 2.2.1
+       and default SCM dependencies. On 11. Jan, 2017 that was no longer the
+       case, presumably because the default SCM version changed (cannot find
+       references), and the 2.5.2, 1.9.4 versions ended up working. -->
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.apache.maven.scm</groupId>
+        <artifactId>maven-scm-api</artifactId>
+        <version>1.9.4</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.maven.scm</groupId>
+        <artifactId>maven-scm-provider-gitexe</artifactId>
+        <version>1.9.4</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.13.1</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-core</artifactId>
+      <version>2.23.4</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+</project>

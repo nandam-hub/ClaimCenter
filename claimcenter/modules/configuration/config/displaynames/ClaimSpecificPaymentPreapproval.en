@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<Entity
+  name="ClaimSpecificPaymentPreapproval">
+  <Columns>
+    <Column
+      beanPath="ClaimSpecificPaymentPreapproval.Rationale"
+      name="rationale"/>
+    <Column
+      beanPath="ClaimSpecificPaymentPreapproval.User"
+      name="user"/>
+    <Column
+      beanPath="ClaimSpecificPaymentPreapproval.ReserveLine"
+      name="reserveLine"/>
+    <Column
+      beanPath="ClaimSpecificPaymentPreapproval.CoverageType"
+      name="coverageType"/>
+    <Column
+      beanPath="ClaimSpecificPaymentPreapproval.CostType"
+      name="costType"/>
+    <Column
+      beanPath="ClaimSpecificPaymentPreapproval.ExpirationDate"
+      name="expirationDate"/>
+    <Column
+      beanPath="ClaimSpecificPaymentPreapproval.ApprovedAmount"
+      name="approvedAmount"/>
+    <Column
+      beanPath="ClaimSpecificPaymentPreapproval.Class.SimpleName"
+      name="className"/>
+    <Column
+      beanPath="ClaimSpecificPaymentPreapproval.Claim.ClaimNumber"
+      name="claimNumber"/>
+  </Columns>
+  <DisplayName>var sb = new StringBuffer(DisplayKey.get("Feature.ClaimSpecificPaymentPreapproval.Name"))
+sb.append(": ").append(user).append(" to ").append(approvedAmount)
+if (reserveLine != null) {
+  sb.append(" for ").append(reserveLine)
+} else if (coverageType != null and costType != null) {
+  sb.append(" for ").append(coverageType + "/" + costType)
+} else if (coverageType != null) {
+  sb.append(" for ").append(coverageType)
+} else if (costType != null) {
+  sb.append(" for ").append(costType)
+}
+
+if (rationale.HasContent) {
+  sb.append(" '").append(rationale).append("'")
+}
+
+return sb.toString()</DisplayName>
+</Entity>

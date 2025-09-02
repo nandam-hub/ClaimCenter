@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<typelistextension
+  xmlns="http://guidewire.com/typelists"
+  name="ErrorCategory">
+  <typecode
+    code="dataaudit_err_SP"
+    desc="Error sending Data audit message"
+    name="Data Audit Error"/>
+</typelistextension>

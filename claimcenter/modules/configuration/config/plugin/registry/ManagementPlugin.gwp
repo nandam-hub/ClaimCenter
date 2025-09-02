@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<plugin
+  interface="ManagementPlugin"
+  name="ManagementPlugin">
+  <plugin-osgi
+    servicepid="com.guidewire.pl.management.JMXManagementPlugin">
+    <!-- Do not start connector in TC to avoid "Port already in use: 1099"  -->
+    <param name="rmiPort" value="${rmiPort:-1}" /> 
+  </plugin-osgi>
+</plugin>

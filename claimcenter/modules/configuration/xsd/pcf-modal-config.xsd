@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<xsd:schema 
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+  elementFormDefault="qualified" 
+  targetNamespace="http://guidewire.com/pcfmodalconfig" 
+  xmlns:pcf="http://guidewire.com/pcfmodalconfig"
+  xmlns="http://guidewire.com/pcfmodalconfig">
+
+  <xsd:element name="PcfModeConfig">
+    <xsd:complexType>
+      <xsd:choice minOccurs="0" maxOccurs="unbounded">
+        <xsd:element ref="PcfModeDef" minOccurs="0" maxOccurs="unbounded"/>
+        <xsd:element ref="PcfModeTypelistConditionalDef" minOccurs="0" maxOccurs="unbounded"/>
+      </xsd:choice>
+    </xsd:complexType>
+    <xsd:unique name="UniquePcfModeDefId">
+      <xsd:selector xpath="pcf:PcfModeDef"/>
+      <xsd:field xpath="@id"/>
+    </xsd:unique>
+    <xsd:unique name="UniquePcfModeTypelistConditionalDefId">
+      <xsd:selector xpath="pcf:PcfModeTypelistConditionalDef"/>
+      <xsd:field xpath="@id"/>
+    </xsd:unique>
+  </xsd:element>
+
+  <xsd:element name="PcfModeDef">
+    <xsd:complexType>
+      <xsd:attribute name="id" type="xsd:string" use="required"/>
+      <xsd:attribute name="mode" type="xsd:string" use="required"/>
+    </xsd:complexType>
+  </xsd:element>
+
+  <xsd:element name="PcfModeTypelistConditionalDef">
+    <xsd:complexType>
+      <xsd:sequence maxOccurs="unbounded">
+        <xsd:element ref="PcfModeDefTypelistCondition" maxOccurs="unbounded"/>
+      </xsd:sequence>
+      <xsd:attribute name="id" type="xsd:string" use="required"/>
+      <xsd:attribute name="typelist" type="xsd:string" use="required"/>
+    </xsd:complexType>
+    <xsd:unique name="UniquePcfModeDefTypelistConditionMode">
+      <xsd:selector xpath="pcf:PcfModeDefTypelistCondition"/>
+      <xsd:field xpath="@code"/>
+    </xsd:unique>
+  </xsd:element>
+
+  <xsd:element name="PcfModeDefTypelistCondition">
+    <xsd:complexType>
+      <xsd:attribute name="code" type="xsd:string" use="required"/>
+      <xsd:attribute name="mode" type="xsd:string" use="required"/>
+    </xsd:complexType>
+  </xsd:element>
+
+</xsd:schema>

@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Popup
+    afterReturnFromPopup="if (popupCommitted) CurrentLocation.commit()"
+    canEdit="true"
+    id="CCRuleComparisonPopup"
+    title="DisplayKey.get(&quot;BizRules.Import.Comparison.Title&quot;)">
+    <LocationEntryPoint
+      signature="CCRuleComparisonPopup(context: gw.bizrules.CCRulesNavigationContext, version1 : RuleVersion, version2 : RuleVersion)"/>
+    <LocationEntryPoint
+      signature="CCRuleComparisonPopup(context: gw.bizrules.CCRulesNavigationContext, importEntry : RuleImportTaskEntry, importHelper : gw.bizrules.pcf.RuleExportImportPageHelper)"/>
+    <Variable
+      name="context"
+      type="gw.bizrules.CCRulesNavigationContext"/>
+    <Variable
+      name="importEntry"
+      type="RuleImportTaskEntry"/>
+    <Variable
+      name="importHelper"
+      type="gw.bizrules.pcf.RuleExportImportPageHelper"/>
+    <Variable
+      initialValue="importEntry.ExistingVersion"
+      name="version1"
+      type="RuleVersion"/>
+    <Variable
+      initialValue="importEntry.ImportedVersion"
+      name="version2"
+      type="RuleVersion"/>
+    <Variable
+      initialValue="new gw.bizrules.pcf.RuleVersionComparisonController(version1, version2, 1, context.UIConfigs, CurrentLocation)"
+      name="controller"
+      type="gw.bizrules.pcf.RuleVersionComparisonController"/>
+    <Variable
+      initialValue="new gw.bizrules.RuleVersionComparisonHelper(controller.RuleVersions)"
+      name="helper"
+      type="gw.bizrules.RuleVersionComparisonHelper"/>
+    <Screen>
+      <Toolbar>
+        <ToolbarButtonSetRef
+          toolbarButtonSet="RuleComparisonToolbarButtonSet(importEntry, importHelper, context)"/>
+      </Toolbar>
+      <AlertBar
+        id="draftAlert"
+        label="DisplayKey.get(&quot;BizRules.Import.Comparison.NoEditOfExistingDraftAlert&quot;)"
+        visible="perm.Rule.edit(importEntry.ImportedVersion.Rule) and importEntry.ExistingVersionDraft"/>
+      <DetailViewPanel>
+        <Layout
+          columns="controller.TotalColumns"
+          type="table"/>
+        <InputSetRef
+          def="RuleComparisonColumnHeadingsInputSet(controller, {DisplayKey.get('BizRules.Import.Comparison.Existing',context.VersionController.getLabelForExistingVersion(version1,false)), DisplayKey.get('BizRules.Import.Comparison.Importing',context.VersionController.getLabelForImportingVersion(version2))})"
+          id="ComparisonHeadings"/>
+        <InputSetRef
+          def="RuleComparisonSectionLabelInputSet(controller, DisplayKey.get(&quot;BizRules.Import.Comparison.RuleDetails&quot;))"
+          id="RuleDetailsSectionLabel"/>
+        <InputSetRef
+          def="RuleComparisonRowStringInputSet(helper.NameRow)"
+          id="NameRow"/>
+        <InputSetRef
+          def="RuleComparisonRowTextAreaInputSet(helper.DescriptionRow)"
+          id="DescriptionRow"/>
+        <InputSetRef
+          def="RuleComparisonRowTypeKeyInputSet(helper.ContextRow)"
+          id="ContextRow"/>
+        <InputSetRef
+          def="RuleComparisonRowTypeKeyInputSet(helper.TriggerRow)"
+          id="TriggerRow"/>
+        <InputSetRef
+          def="RuleComparisonRowBooleanInputSet(helper.AvailableToRunRow)"
+          id="AvailableToRunRow"/>
+        <InputSetRef
+          def="CCRuleApplicabilityCriteriaComparisonInputSet(controller)"
+          id="RuleApplicabilityCriteria"
+          mode="version1.Rule.Subtype"/>
+        <InputSetRef
+          def="RuleComparisonVariablesSectionInputSet(controller)"
+          id="RuleVariables"/>
+        <InputSetRef
+          def="RuleComparisonConditionInputSet(controller)"
+          id="RuleCondition"/>
+        <InputSetRef
+          def="RuleComparisonActionsInputSet(controller)"
+          id="RuleActions"/>
+      </DetailViewPanel>
+    </Screen>
+  </Popup>
+</PCF>

@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="Category of the ServiceRequestStatementLineItem"
+  name="ServiceRequestStatementLineItemCategory"
+  tableName="servicereqstmtlineitemcat">
+  <typecode
+    code="inspection"
+    desc="Inspection"
+    name="Inspection"/>
+  <typecode
+    code="parts"
+    desc="Parts"
+    name="Parts"/>
+  <typecode
+    code="labor"
+    desc="Labor"
+    name="Labor"/>
+  <typecode
+    code="towing"
+    desc="Towing"
+    name="Towing"/>
+  <typecode
+    code="CourtCosts"
+    desc="Court costs"
+    name="Court costs"/>
+  <typecode
+    code="Deposition"
+    desc="Deposition"
+    name="Deposition"/>
+  <typecode
+    code="Hearing"
+    desc="Hearing"
+    name="Hearing"/>
+  <typecode
+    code="Investigation"
+    desc="Investigation"
+    name="Investigation"/>
+  <typecode
+    code="chiro"
+    desc="Chiropractor"
+    name="Chiropractor"/>
+  <typecode
+    code="diagnostic"
+    desc="X-ray/diagnostic"
+    name="X-ray/diagnostic"/>
+  <typecode
+    code="doctor"
+    desc="Doctor's care"
+    name="Doctor"/>
+  <typecode
+    code="pt"
+    desc="Physical therapy"
+    name="Physical therapy"/>
+  <typecode
+    code="hospital"
+    desc="Hospital"
+    name="Hospital"/>
+  <typecode
+    code="other"
+    desc="Other"
+    name="Other"/>
+</typelist>

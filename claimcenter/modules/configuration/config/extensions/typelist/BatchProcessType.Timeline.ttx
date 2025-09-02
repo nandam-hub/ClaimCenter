@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<typelistextension
+  xmlns="http://guidewire.com/typelists"
+  name="BatchProcessType">
+  <typecode code="ClaimTimelineCreation_SP"
+    desc="Creates and adds timeline entries to the Claim Timeline"
+    name="Claim Timeline Creation">
+    <category
+      code="Schedulable"
+      typelist="BatchProcessTypeUsage"/>
+    <category
+      code="UIRunnable"
+      typelist="BatchProcessTypeUsage"/>
+    <category
+      code="APIRunnable"
+      typelist="BatchProcessTypeUsage"/>
+  </typecode>
+</typelistextension>

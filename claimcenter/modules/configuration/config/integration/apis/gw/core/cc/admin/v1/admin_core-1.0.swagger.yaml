@@ -1,0 +1,829 @@
+swagger: "2.0"
+info:
+  title: "ClaimCenter Admin API"
+consumes:
+- application/json
+produces:
+- application/json
+x-gw-combine:
+- gw.core.pl.admin.v1.admin_pl-1.0
+- gw.core.cc.framework.v1.framework_core-1.0
+x-gw-schema-import:
+  admin: gw.core.cc.admin.v1.admin_core-1.0
+x-gw-apihandlers:
+- gw.rest.core.cc.admin.v1.AdminApiCoreHandler
+paths:
+  /authority-limit-profiles:
+    get:
+      summary: "Retrieve a list of authority limit profiles"
+      description: "Retrieve a list of authority limit profiles"
+      operationId: getAuthorityLimitProfiles
+      x-gw-sinceVersion: "1.4.0"
+      x-gw-extensions:
+        childResourceType: AuthorityLimitProfile
+        operationType: get-collection
+        resourceType: AuthorityLimitProfiles
+      x-gw-parameter-sets:
+      - get-collection
+      responses:
+        "200":
+          description: "Successfully returned a list of authority limit profiles"
+          schema:
+            $ref: "#/definitions/AuthorityLimitProfileList"
+    post:
+      summary: "Create an authority limit profile"
+      description: "Create an authority limit profile"
+      operationId: createAuthorityLimitProfile
+      x-gw-sinceVersion: "1.4.0"
+      x-gw-extensions:
+        childResourceType: AuthorityLimitProfile
+        operationType: post-collection
+        resourceType: AuthorityLimitProfiles
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: "#/definitions/AuthorityLimitProfileRequest"
+      x-gw-parameter-sets:
+      - post-collection
+      responses:
+        "201":
+          description: "Successfully created an authority limit profile"
+          schema:
+            $ref: "#/definitions/AuthorityLimitProfileResponse"
+  "/authority-limit-profiles/{authorityLimitProfileId}":
+    parameters:
+    - $ref: "#/parameters/authorityLimitProfileId"
+    get:
+      summary: "Retrieve an authority limit profile"
+      description: "Retrieve an authority limit profile"
+      operationId: getAuthorityLimitProfile
+      x-gw-sinceVersion: "1.4.0"
+      x-gw-extensions:
+        operationType: get-element
+        resourceType: AuthorityLimitProfile
+      x-gw-parameter-sets:
+      - get-element
+      responses:
+        "200":
+          description: "Successfully returned an authority limit profile"
+          schema:
+            $ref: "#/definitions/AuthorityLimitProfileResponse"
+    patch:
+      summary: "Update an authority limit profile"
+      description: "Update an authority limit profile"
+      operationId: patchAuthorityLimitProfile
+      x-gw-sinceVersion: "1.4.0"
+      x-gw-extensions:
+        operationType: patch-element
+        resourceType: AuthorityLimitProfile
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: "#/definitions/AuthorityLimitProfileRequest"
+      x-gw-parameter-sets:
+      - patch-element
+      responses:
+        "200":
+          description: "Successfully updated an authority limit profile"
+          schema:
+            $ref: "#/definitions/AuthorityLimitProfileResponse"
+    delete:
+      summary: "Delete an authority limit profile"
+      description: "Delete an authority limit profile"
+      operationId: deleteAuthorityLimitProfile
+      x-gw-sinceVersion: "1.4.0"
+      x-gw-extensions:
+        operationType: delete-element
+        resourceType: AuthorityLimitProfile
+      x-gw-parameter-sets:
+      - delete-element
+      responses:
+        "204":
+          description: "Successfully deleted an authority limit profile"
+  "/authority-limit-profiles/{authorityLimitProfileId}/limits":
+    parameters:
+    - $ref: "#/parameters/authorityLimitProfileId"
+    get:
+      summary: "Retrieve the list of limits for the given authority limit profile"
+      description: "Retrieve the list of limits for the given authority limit profile"
+      operationId: getLimits
+      x-gw-sinceVersion: "1.4.0"
+      x-gw-extensions:
+        childResourceType: AuthorityLimit
+        operationType: get-collection
+        resourceType: AuthorityLimits
+      x-gw-parameter-sets:
+      - get-collection
+      responses:
+        "200":
+          description: "Successfully returned a list of limits for the given authority limit profile"
+          schema:
+            $ref: "#/definitions/AuthorityLimitList"
+    post:
+      summary: "Create a new limit for the given authority limit profile"
+      description: "Create a new limit for the given authority limit profile"
+      operationId: createLimit
+      x-gw-sinceVersion: "1.4.0"
+      x-gw-extensions:
+        childResourceType: AuthorityLimit
+        operationType: post-collection
+        resourceType: AuthorityLimits
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: "#/definitions/AuthorityLimitRequest"
+      x-gw-parameter-sets:
+      - post-collection
+      responses:
+        "201":
+          description: "Successfully created an authority limit on the authority limit profile"
+          schema:
+            $ref: "#/definitions/AuthorityLimitResponse"
+  "/authority-limit-profiles/{authorityLimitProfileId}/limits/{limitId}":
+    parameters:
+    - $ref: "#/parameters/authorityLimitProfileId"
+    - $ref: "#/parameters/limitId"
+    get:
+      summary: "Retrieve an authority limit"
+      description: "Retrieve an authority limit"
+      operationId: getLimit
+      x-gw-sinceVersion: "1.4.0"
+      x-gw-extensions:
+        operationType: get-element
+        resourceType: AuthorityLimit
+      x-gw-parameter-sets:
+      - get-element
+      responses:
+        "200":
+          description: "Successfully returned an authority limit"
+          schema:
+            $ref: "#/definitions/AuthorityLimitResponse"
+    patch:
+      summary: "Update an authority limit"
+      description: "Update an authority limit"
+      operationId: patchLimit
+      x-gw-sinceVersion: "1.4.0"
+      x-gw-extensions:
+        operationType: patch-element
+        resourceType: AuthorityLimit
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: "#/definitions/AuthorityLimitRequest"
+      x-gw-parameter-sets:
+      - patch-element
+      responses:
+        "200":
+          description: "Successfully updated an authority limit"
+          schema:
+            $ref: "#/definitions/AuthorityLimitResponse"
+    delete:
+      summary: "Delete an authority limit"
+      description: "Delete an authority limit"
+      operationId: deleteLimit
+      x-gw-sinceVersion: "1.4.0"
+      x-gw-extensions:
+        operationType: delete-element
+        resourceType: AuthorityLimit
+      x-gw-parameter-sets:
+      - delete-element
+      responses:
+        "204":
+          description: "Successfully deleted an authority limit"
+  /catastrophes:
+    get:
+      summary: "Retrieve a collection of catastrophes"
+      description: "Retrieve a collection of catastrophes"
+      operationId: getCatastrophes
+      x-gw-sinceVersion: "1.13.0"
+      x-gw-extensions:
+        childResourceType: Catastrophe
+        operationType: get-collection
+        resourceType: Catastrophes
+      x-gw-parameter-sets: get-collection
+      responses:
+        "200":
+          description: "Successful response"
+          schema:
+            $ref: "#/definitions/CatastropheList"
+    post:
+      summary: "Create a new catastrophe"
+      description: "Create a new catastrophe"
+      operationId: createCatastrophe
+      x-gw-sinceVersion: "1.13.0"
+      x-gw-extensions:
+        childResourceType: Catastrophe
+        operationType: post-collection
+        resourceType: Catastrophes
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: "#/definitions/CatastropheRequest"
+      x-gw-parameter-sets: post-collection
+      responses:
+        "201":
+          description: "The details of the newly-created Catastrophe"
+          schema:
+            $ref: "#/definitions/CatastropheResponse"
+  "/catastrophes/{catastropheId}":
+    parameters:
+    - $ref: "#/parameters/catastropheId"
+    get:
+      summary: "Retrieve details of a catastrophe"
+      description: "Retrieve details of a catastrophe"
+      operationId: getCatastrophe
+      x-gw-sinceVersion: "1.13.0"
+      x-gw-extensions:
+        operationType: get-element
+        resourceType: Catastrophe
+      x-gw-parameter-sets: get-element
+      responses:
+        "200":
+          description: "Successful response"
+          schema:
+            $ref: "#/definitions/CatastropheResponse"
+    patch:
+      summary: "Update a catastrophe"
+      description: "Update a catastrophe"
+      operationId: updateCatastrophe
+      x-gw-sinceVersion: "1.13.0"
+      x-gw-extensions:
+        operationType: patch-element
+        resourceType: Catastrophe
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: "#/definitions/CatastropheRequest"
+      x-gw-parameter-sets: patch-element
+      responses:
+        "200":
+          description: "Successful response"
+          schema:
+            $ref: "#/definitions/CatastropheResponse"
+    delete:
+      summary: "Delete a catastrophe"
+      description: "Delete a catastrophe"
+      operationId: deleteCatastrophe
+      x-gw-sinceVersion: "1.13.0"
+      x-gw-extensions:
+        operationType: delete-element
+        resourceType: Catastrophe
+      x-gw-parameter-sets: delete-element
+      responses:
+        "204":
+          description: "Successful deletion"
+  "/catastrophes/{catastropheId}/catastrophe-zones":
+    parameters:
+    - $ref: "#/parameters/catastropheId"
+    get:
+      summary: "Retrieve a collection of catastrophe zones"
+      description: "Retrieve a collection of catastrophe zones"
+      operationId: getCatastropheZones
+      x-gw-sinceVersion: "1.13.0"
+      x-gw-extensions:
+        childResourceType: CatastropheZone
+        operationType: get-collection
+        resourceType: CatastropheZones
+      x-gw-parameter-sets: get-collection
+      responses:
+        "200":
+          description: "Successful response"
+          schema:
+            $ref: "#/definitions/CatastropheZoneList"
+    post:
+      summary: "Create a new catastrophe zone"
+      description: "Create a new catastrophe zone"
+      operationId: createCatastropheZone
+      x-gw-sinceVersion: "1.13.0"
+      x-gw-extensions:
+        childResourceType: CatastropheZone
+        operationType: post-collection
+        resourceType: CatastropheZones
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: "#/definitions/CatastropheZoneRequest"
+      x-gw-parameter-sets: post-collection
+      responses:
+        "201":
+          description: "The details of the newly-created CatastropheZone"
+          schema:
+            $ref: "#/definitions/CatastropheZoneResponse"
+  "/catastrophes/{catastropheId}/catastrophe-zones/{catastropheZoneId}":
+    parameters:
+    - $ref: "#/parameters/catastropheId"
+    - $ref: "#/parameters/catastropheZoneId"
+    get:
+      summary: "Retrieve details of a catastrophe zone"
+      description: "Retrieve details of a catastrophe zone"
+      operationId: getCatastropheZone
+      x-gw-sinceVersion: "1.13.0"
+      x-gw-extensions:
+        operationType: get-element
+        resourceType: CatastropheZone
+      x-gw-parameter-sets: get-element
+      responses:
+        "200":
+          description: "Successful response"
+          schema:
+            $ref: "#/definitions/CatastropheZoneResponse"
+    delete:
+      summary: "Delete a catastrophe zone"
+      description: "Delete a catastrophe zone"
+      operationId: deleteCatastropheZone
+      x-gw-sinceVersion: "1.13.0"
+      x-gw-extensions:
+        operationType: delete-element
+        resourceType: CatastropheZone
+      x-gw-parameter-sets: delete-element
+      responses:
+        "204":
+          description: "Successful deletion"
+  "/catastrophes/{catastropheId}/perils":
+    parameters:
+    - $ref: "#/parameters/catastropheId"
+    get:
+      summary: "Retrieve a collection of catastrophe perils"
+      description: "Retrieve a collection of catastrophe perils"
+      operationId: getCatastrophePerils
+      x-gw-sinceVersion: "1.13.0"
+      x-gw-extensions:
+        childResourceType: CatastrophePeril
+        operationType: get-collection
+        resourceType: CatastrophePerils
+      x-gw-parameter-sets: get-collection
+      responses:
+        "200":
+          description: "Successful response"
+          schema:
+            $ref: "#/definitions/CatastrophePerilList"
+    post:
+      summary: "Create a new catastrophe peril"
+      description: "Create a new catastrophe peril"
+      operationId: createCatastrophePeril
+      x-gw-sinceVersion: "1.13.0"
+      x-gw-extensions:
+        childResourceType: CatastrophePeril
+        operationType: post-collection
+        resourceType: CatastrophePerils
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: "#/definitions/CatastrophePerilRequest"
+      x-gw-parameter-sets: post-collection
+      responses:
+        "201":
+          description: "The details of the newly-created CatastrophePeril"
+          schema:
+            $ref: "#/definitions/CatastrophePerilResponse"
+  "/catastrophes/{catastropheId}/perils/{catastrophePerilId}":
+    parameters:
+    - $ref: "#/parameters/catastropheId"
+    - $ref: "#/parameters/catastrophePerilId"
+    get:
+      summary: "Retrieve details of a catastrophe peril"
+      description: "Retrieve details of a catastrophe peril"
+      operationId: getCatastrophePeril
+      x-gw-sinceVersion: "1.13.0"
+      x-gw-extensions:
+        operationType: get-element
+        resourceType: CatastrophePeril
+      x-gw-parameter-sets: get-element
+      responses:
+        "200":
+          description: "Successful response"
+          schema:
+            $ref: "#/definitions/CatastrophePerilResponse"
+    patch:
+      summary: "Update a catastrophe peril"
+      description: "Update a catastrophe peril"
+      operationId: updateCatastrophePeril
+      x-gw-sinceVersion: "1.13.0"
+      x-gw-extensions:
+        operationType: patch-element
+        resourceType: CatastrophePeril
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: "#/definitions/CatastrophePerilRequest"
+      x-gw-parameter-sets: patch-element
+      responses:
+        "200":
+          description: "Successful response"
+          schema:
+            $ref: "#/definitions/CatastrophePerilResponse"
+    delete:
+      summary: "Delete a catastrophe peril"
+      description: "Delete a catastrophe peril"
+      operationId: deleteCatastrophePeril
+      x-gw-sinceVersion: "1.13.0"
+      x-gw-extensions:
+        operationType: delete-element
+        resourceType: CatastrophePeril
+      x-gw-parameter-sets: delete-element
+      responses:
+        "204":
+          description: "Successful deletion"
+  /icd-codes:
+    get:
+      summary: "Retrieve a collection of icd codes"
+      description: "Retrieve a collection of icd codes"
+      operationId: getICDCodes
+      x-gw-sinceVersion: "1.11.0"
+      x-gw-extensions:
+        childResourceType: ICDCode
+        operationType: get-collection
+        resourceType: ICDCodes
+      x-gw-parameter-sets: get-collection
+      responses:
+        "200":
+          description: "Successful response"
+          schema:
+            $ref: "#/definitions/ICDCodeList"
+    post:
+      summary: "Create a new icd code"
+      description: "Create a new icd code"
+      operationId: createICDCode
+      x-gw-sinceVersion: "1.11.0"
+      x-gw-extensions:
+        childResourceType: ICDCode
+        operationType: post-collection
+        resourceType: ICDCodes
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: "#/definitions/ICDCodeRequest"
+      x-gw-parameter-sets: post-collection
+      responses:
+        "201":
+          description: "The details of the newly-created ICDCode"
+          schema:
+            $ref: "#/definitions/ICDCodeResponse"
+  "/icd-codes/{icdCodeId}":
+    parameters:
+    - $ref: "#/parameters/icdCodeId"
+    get:
+      summary: "Retrieve details of a icd code"
+      description: "Retrieve details of a icd code"
+      operationId: getICDCode
+      x-gw-sinceVersion: "1.11.0"
+      x-gw-extensions:
+        operationType: get-element
+        resourceType: ICDCode
+      x-gw-parameter-sets: get-element
+      responses:
+        "200":
+          description: "Successful response"
+          schema:
+            $ref: "#/definitions/ICDCodeResponse"
+    patch:
+      summary: "Update a icd code"
+      description: "Update a icd code"
+      operationId: updateICDCode
+      x-gw-sinceVersion: "1.11.0"
+      x-gw-extensions:
+        operationType: patch-element
+        resourceType: ICDCode
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: "#/definitions/ICDCodeRequest"
+      x-gw-parameter-sets: patch-element
+      responses:
+        "200":
+          description: "Successful response"
+          schema:
+            $ref: "#/definitions/ICDCodeResponse"
+  /search/icd-codes:
+    post:
+      summary: "Searches for ICD codes that match the specified criteria"
+      description: "Searches for ICD codes that match the specified criteria"
+      operationId: searchICDCodes
+      x-gw-sinceVersion: "1.11.0"
+      x-gw-extensions:
+        childResourceType: ICDCode
+        operationType: search-collection
+        resourceType: ICDCodeSearch
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: "#/definitions/ICDCodeSearchRequest"
+      x-gw-parameter-sets:
+      - search-collection
+      responses:
+        "200":
+          description: "Returns a list of ICD codes that match the search criteria"
+          schema:
+            $ref: "#/definitions/ICDCodeList"
+parameters:
+  authorityLimitProfileId:
+    name: authorityLimitProfileId
+    in: path
+    description: "The identifier for the authority limit profile"
+    required: true
+    type: string
+    x-gw-sinceVersion: "1.4.0"
+  catastropheId:
+    name: catastropheId
+    in: path
+    description: "The REST identifier for the catastrophe"
+    required: true
+    type: string
+    x-gw-sinceVersion: "1.13.0"
+  catastrophePerilId:
+    name: catastrophePerilId
+    in: path
+    description: "The REST identifier for the catastrophe peril"
+    required: true
+    type: string
+    x-gw-sinceVersion: "1.13.0"
+  catastropheZoneId:
+    name: catastropheZoneId
+    in: path
+    description: "The REST identifier for the catastrophe zone"
+    required: true
+    type: string
+    x-gw-sinceVersion: "1.13.0"
+  icdCodeId:
+    name: icdCodeId
+    in: path
+    description: "The REST identifier for the icd code"
+    required: true
+    type: string
+    x-gw-sinceVersion: "1.11.0"
+  limitId:
+    name: limitId
+    in: path
+    description: "The identifier for the authority limit"
+    required: true
+    type: string
+    x-gw-sinceVersion: "1.4.0"
+x-gw-cors-policy: admin
+definitions:
+  AdminInclusions:
+    type: object
+    properties:
+      AuthorityLimit:
+        type: array
+        items:
+          $ref: "#/definitions/AuthorityLimitData"
+  AuthorityLimitData:
+    x-gw-extend:
+    - "#/definitions/DataEnvelope"
+    required:
+    - attributes
+    properties:
+      attributes:
+        $ref: "admin#/definitions/AuthorityLimit"
+  AuthorityLimitList:
+    type: object
+    x-gw-extend:
+    - "#/definitions/DataListEnvelope"
+    properties:
+      data:
+        type: array
+        items:
+          $ref: "#/definitions/AuthorityLimitData"
+      included:
+        $ref: "#/definitions/AdminInclusions"
+  AuthorityLimitProfileData:
+    x-gw-extend:
+    - "#/definitions/DataEnvelope"
+    required:
+    - attributes
+    properties:
+      attributes:
+        $ref: "admin#/definitions/AuthorityLimitProfile"
+  AuthorityLimitProfileList:
+    type: object
+    x-gw-extend:
+    - "#/definitions/DataListEnvelope"
+    properties:
+      data:
+        type: array
+        items:
+          $ref: "#/definitions/AuthorityLimitProfileData"
+      included:
+        $ref: "#/definitions/AdminInclusions"
+  AuthorityLimitProfileRequest:
+    type: object
+    required:
+    - data
+    properties:
+      data:
+        $ref: "#/definitions/AuthorityLimitProfileData"
+      included:
+        $ref: "#/definitions/AdminInclusions"
+  AuthorityLimitProfileResponse:
+    type: object
+    properties:
+      data:
+        $ref: "#/definitions/AuthorityLimitProfileData"
+      included:
+        $ref: "#/definitions/AdminInclusions"
+  AuthorityLimitRequest:
+    type: object
+    required:
+    - data
+    properties:
+      data:
+        $ref: "#/definitions/AuthorityLimitData"
+      included:
+        $ref: "#/definitions/AdminInclusions"
+  AuthorityLimitResponse:
+    type: object
+    properties:
+      data:
+        $ref: "#/definitions/AuthorityLimitData"
+      included:
+        $ref: "#/definitions/AdminInclusions"
+  CatastropheData:
+    x-gw-extend:
+    - "#/definitions/DataEnvelope"
+    required:
+    - attributes
+    properties:
+      attributes:
+        $ref: "admin#/definitions/Catastrophe"
+  CatastropheList:
+    type: object
+    x-gw-extend:
+    - "#/definitions/DataListEnvelope"
+    properties:
+      data:
+        type: array
+        items:
+          $ref: "#/definitions/CatastropheData"
+      included:
+        $ref: "#/definitions/CatastropheResponseInclusions"
+  CatastrophePerilData:
+    x-gw-extend:
+    - "#/definitions/DataEnvelope"
+    required:
+    - attributes
+    properties:
+      attributes:
+        $ref: "admin#/definitions/CatastrophePeril"
+  CatastrophePerilList:
+    type: object
+    x-gw-extend:
+    - "#/definitions/DataListEnvelope"
+    properties:
+      data:
+        type: array
+        items:
+          $ref: "#/definitions/CatastrophePerilData"
+      included:
+        $ref: "#/definitions/CatastropheResponseInclusions"
+  CatastrophePerilRequest:
+    type: object
+    required:
+    - data
+    properties:
+      data:
+        $ref: "#/definitions/CatastrophePerilData"
+      included:
+        $ref: "#/definitions/CatastropheRequestInclusions"
+  CatastrophePerilResponse:
+    type: object
+    properties:
+      data:
+        $ref: "#/definitions/CatastrophePerilData"
+      included:
+        $ref: "#/definitions/CatastropheResponseInclusions"
+  CatastropheRequest:
+    type: object
+    required:
+    - data
+    properties:
+      data:
+        $ref: "#/definitions/CatastropheData"
+      included:
+        $ref: "#/definitions/CatastropheRequestInclusions"
+  CatastropheRequestInclusions:
+    type: object
+    properties:
+      CatastropheZone:
+        type: array
+        items:
+          $ref: "#/definitions/CatastropheZoneData"
+  CatastropheResponse:
+    type: object
+    properties:
+      data:
+        $ref: "#/definitions/CatastropheData"
+      included:
+        $ref: "#/definitions/CatastropheResponseInclusions"
+  CatastropheResponseInclusions:
+    type: object
+    properties:
+      CatastrophePeril:
+        type: array
+        items:
+          $ref: "#/definitions/CatastrophePerilData"
+      CatastropheZone:
+        type: array
+        items:
+          $ref: "#/definitions/CatastropheZoneData"
+  CatastropheZoneData:
+    x-gw-extend:
+    - "#/definitions/DataEnvelope"
+    required:
+    - attributes
+    properties:
+      attributes:
+        $ref: "admin#/definitions/CatastropheZone"
+  CatastropheZoneList:
+    type: object
+    x-gw-extend:
+    - "#/definitions/DataListEnvelope"
+    properties:
+      data:
+        type: array
+        items:
+          $ref: "#/definitions/CatastropheZoneData"
+      included:
+        $ref: "#/definitions/CatastropheResponseInclusions"
+  CatastropheZoneRequest:
+    type: object
+    required:
+    - data
+    properties:
+      data:
+        $ref: "#/definitions/CatastropheZoneData"
+      included:
+        $ref: "#/definitions/CatastropheRequestInclusions"
+  CatastropheZoneResponse:
+    type: object
+    properties:
+      data:
+        $ref: "#/definitions/CatastropheZoneData"
+      included:
+        $ref: "#/definitions/CatastropheResponseInclusions"
+  ICDCodeData:
+    x-gw-extend:
+    - "#/definitions/DataEnvelope"
+    required:
+    - attributes
+    properties:
+      attributes:
+        $ref: "admin#/definitions/ICDCode"
+  ICDCodeList:
+    type: object
+    x-gw-extend:
+    - "#/definitions/DataListEnvelope"
+    properties:
+      data:
+        type: array
+        items:
+          $ref: "#/definitions/ICDCodeData"
+  ICDCodeRequest:
+    type: object
+    required:
+    - data
+    properties:
+      data:
+        $ref: "#/definitions/ICDCodeData"
+  ICDCodeResponse:
+    type: object
+    properties:
+      data:
+        $ref: "#/definitions/ICDCodeData"
+  ICDCodeSearchRequest:
+    type: object
+    required:
+    - data
+    properties:
+      data:
+        $ref: "#/definitions/ICDCodeSearchRequestData"
+  ICDCodeSearchRequestData:
+    type: object
+    required:
+    - attributes
+    properties:
+      attributes:
+        $ref: "admin#/definitions/ICDCodeSearchRequestAttributes"

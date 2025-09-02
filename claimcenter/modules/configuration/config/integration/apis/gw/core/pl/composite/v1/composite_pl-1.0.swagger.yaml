@@ -1,0 +1,51 @@
+swagger: "2.0"
+info:
+  description: "API for composite requests that execute multiple API sub-requests in a single database transaction"
+  version: "1.13.0"
+basePath: /composite/v1
+consumes:
+- application/json
+produces:
+- application/json
+x-gw-combine:
+- gw.core.pl.framework.v1.framework_pl-1.0
+x-gw-schema-import:
+  composite: gw.core.pl.composite.v1.composite_pl-1.0
+x-gw-authorizer: gw.api.rest.auth.ApiRoleApiAuthorizer
+paths:
+  /composite:
+    post:
+      summary: "Composite API"
+      description: "Composite API"
+      operationId: compositeRequest
+      parameters:
+      - name: body
+        in: body
+        description: "The body of the request"
+        required: true
+        schema:
+          $ref: "composite#/definitions/CompositeRequest"
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "composite#/definitions/CompositeResponse"
+  /openapi.json:
+    get:
+      summary: "Retrieve the `OpenAPI 3.0` schema for this API"
+      description: "Retrieves the `OpenAPI 3.0` schema for this API"
+      operationId: getOpenApiSchema
+      x-gw-extensions:
+        operationType: get-element
+        resourceType: CompositeOpenApiSchema
+      x-gw-parameter-sets:
+      - openapi
+      responses:
+        "200":
+          description: "The `OpenAPI 3.0` schema for this API"
+          schema:
+            type: string
+parameters: {}
+x-gw-cors-policy: composite
+x-gw-localizationKeyPrefix: composite.v1
+definitions: {}

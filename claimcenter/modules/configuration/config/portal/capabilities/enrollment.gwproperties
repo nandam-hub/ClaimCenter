@@ -1,0 +1,3 @@
+# GAR START: config/portal/capabilities/enrollment.gwproperties [/opt/teamcity/agent/work/45c3a2f1b8ee4237/gpm-generator/downloads/edge/backend/xcenter-config/xcenter-utils/cc-utils/../../../Shared/enrollment/src/main]
+handlers.selfenrollment=edge.capabilities.enrollment.SelfEnrollmentHandler
+# GAR END

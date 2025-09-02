@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <LoginPage
+    afterEnter="loginForm.checkDirectHTTPLogin()"
+    autosaveable="false"
+    canEdit="true"
+    countsAsWork="false"
+    id="Login"
+    startInEditMode="true"
+    title="&quot;&quot;">
+    <LocationEntryPoint
+      signature="Login(target : pcf.api.Destination, entryException : java.lang.Exception)"/>
+    <Variable
+      name="target"
+      type="pcf.api.Destination"/>
+    <Variable
+      name="entryException"
+      type="java.lang.Exception"/>
+    <Variable
+      initialValue="new gw.api.util.LoginForm(target, entryException)"
+      name="loginForm"
+      type="gw.api.util.LoginForm"/>
+    <Variable
+      initialValue="gw.auth.AuthHelper.displayLoginFields()"
+      name="displayLoginFields"
+      recalculateOnRefresh="true"
+      type="java.lang.Boolean"/>
+    <!--
+      This supports MultiFactorAuthentication, you can add additional factors, for example:
+      new gw.api.util.LoginForm(target, entryException).withFactor("Web.Login.RSADongleNumber", "DongleNumber").withFactor("Web.Login.RSADongleId","RSADongleID")
+    -->
+    <Screen
+      id="LoginScreen">
+      <PanelColumn>
+        <Spacer
+          classList="app--login-page--stripes"/>
+        <Spacer
+          classList="app--login-page--logo"/>
+        <Spacer
+          classList="app--login-page--name"/>
+        <PanelRef
+          def="LoginDV(loginForm)"
+          visible="displayLoginFields">
+          <Verbatim
+            label="loginForm.Message"/>
+        </PanelRef>
+        <PanelRow
+          classList="app--login-page--special-error"
+          visible="!displayLoginFields">
+          <PanelSet>
+            <Verbatim
+              label="gw.auth.AuthHelper.errorMessage()"
+              visible="gw.auth.AuthHelper.hasErrorMessage()"/>
+          </PanelSet>
+        </PanelRow>
+      </PanelColumn>
+    </Screen>
+  </LoginPage>
+</PCF>

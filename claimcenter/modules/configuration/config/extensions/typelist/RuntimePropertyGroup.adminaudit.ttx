@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<typelistextension xmlns="http://guidewire.com/typelists" name="RuntimePropertyGroup">
+  <typecode
+    code="data_auditor_sp"
+    desc="Data Auditor Feature Properties"
+    name="Data Auditor"/>
+</typelistextension>

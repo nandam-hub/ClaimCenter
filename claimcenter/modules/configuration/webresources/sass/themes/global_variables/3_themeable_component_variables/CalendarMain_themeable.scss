@@ -1,0 +1,83 @@
+// General vars for all aspects of the Calendar
+$gw-app--CalendarWidget--general-margin: gw-pxFixed(10) !default;
+$gw-app--CalendarWidget--top-h-padding: gw-pxFixed(50) !default;
+$gw-app--CalendarWidget--border-radius: 0 !default;
+$gw-app--CalendarWidget--ui-border: transparent !default;
+$gw-app--CalendarWidget--cell-border: $gw-app--palette--gray-C !default;
+$gw-app--CalendarWidget--general-inset: gw-remScaled(.2) !default;
+$gw-app--CalendarWidget--font-size: gw-emFixed(.9) !default;
+$gw-app--CalendarWidget--ui-bg: #ededed !default;
+$gw-app--CalendarWidget--small-cell-border-col: #ededed !default;
+$gw-app--CalendarWidget--ui-header-bg: #d8d8d8 !default;
+$gw-app--CalendarWidget--month-border-col: $gw-app--CalendarWidget--ui-header-bg !default;
+$gw-app--CalendarWidget--main-holders-bg: $gw-app--bg !default;
+$gw-app--CalendarWidget--ui-accent-bg: $gw-app--palette--gray-D !default;
+$gw-app--CalendarWidget--not-month-bg: #f8f9fa !default;
+$gw-app--CalendarWidget--not-month-small-bg: #f8f9fa !default;
+$gw-app--CalendarWidget--cell--bg: $gw-app--bg !default;
+$gw-app--CalendarWidget--today-border-col: $gw-app--palette--blue-dark !default;
+$gw-app--CalendarWidget--today-border-w: gw-pxFixed(2) !default;
+$gw-app--CalendarWidget--day-hover-bg: #e8f1df !default;
+
+$gw-app--CalendarWidget--critical-glyph: "exclamation-circle" !default;
+$gw-app--CalendarWidget--critical-base-color: transparent !default;
+$gw-app--CalendarWidget--critical-text-color: $gw-app--palette--red !default;
+
+$gw-app--CalendarWidget--select-glyph: "chevron-circle-down" !default;
+
+// vars for specific sections of the calendar
+$gw-app--CalendarWidget--Month--cell-size: gw-remScaled(7) !default;
+$gw-app--CalendarWidget--Month--cell-selected-bg: null !default;
+$gw-app--CalendarWidget--Month--selected-week-bg: #e7f5fa !default;
+$gw-app--CalendarWidget--Month--day-header-h: gw-emFixed(1.5) !default;
+$gw-app--CalendarWidget--Month--day-header-padding: gw-pxFixed(4) gw-pxFixed(4) 0 0 !default;
+$gw-app--CalendarWidget--Month--day-header-today--h: gw-emFixed(1.8) !default;
+$gw-app--CalendarWidget--Month--day-header-today--padding: gw-remScaled(.15) !default;
+
+$gw-app--CalendarWidget--Week--bg: #f8f9fa !default;
+$gw-app--CalendarWidget--Week--action-col: #31aade !default;
+$gw-app--CalendarWidget--Week--action-bg: transparent !default;
+$gw-app--CalendarWidget--Week--action-hover-col: inherit !default;
+$gw-app--CalendarWidget--Week--action-hover-bg: #e8f1de !default;
+$gw-app--CalendarWidget--Week--action-max-width: gw-emFixed(26) !default;
+$gw-app--CalendarWidget--Week--left-action-icon-width: gw-emFixed(2) !default;
+$gw-app--CalendarWidget--Week--prev-glyph: "chevron-left" !default;
+$gw-app--CalendarWidget--Week--next-glyph: "chevron-right" !default;
+$gw-app--CalendarWidget--Week--event-toggle-col: #586d87 !default;
+$gw-app--CalendarWidget--Week--event-toggle-bg: white !default;
+$gw-app--CalendarWidget--Week--day-overview-open-glyph: "chevron-down" !default;
+$gw-app--CalendarWidget--Week--day-overview-close-glyph: "chevron-up" !default;
+$gw-app--CalendarWidget--Week--day-overview-open-close-col: #586d87 !default;
+$gw-app--CalendarWidget--Week--day-border-col: $gw-app--CalendarWidget--ui-header-bg !default;
+$gw-app--CalendarWidget--Week--activity-open-glyph: "plus-square" !default;
+$gw-app--CalendarWidget--Week--activity-close-glyph: "minus-square" !default;
+$gw-app--CalendarWidget--Week--border-col: #d9dde1 !default;
+$gw-app--CalendarWidget--Week--title-font-size: gw-pxFixed(20) !default;
+$gw-app--CalendarWidget--Week--title-col: #1f1f1f !default;
+
+
+$gw-app--CalendarWidget--Header--title-align: center !default;
+$gw-app--CalendarWidget--Header--title-font-size: gw-emFixed(2) !default;
+$gw-app--CalendarWidget--Header--title-pad-h: gw-emFixed(.25) !default;
+$gw-app--CalendarWidget--Header--title-pad-v: gw-pxFixed(0) !default;
+
+$gw-app--CalendarWidget--Title--prev-next-height: gw-emFixed($gw-app--line-height-unitless * 1.75) !default;
+$gw-app--CalendarWidget--Title--prev-next-col: #586d87 !default;
+$gw-app--CalendarWidget--Title--prev-next-bg: transparent !default;
+$gw-app--CalendarWidget--Title--button-col: #586d87 !default;
+$gw-app--CalendarWidget--Title--button-bg: transparent !default;
+$gw-app--CalendarWidget--Title--button-hover-bg: #e2e4e7 !default;
+$gw-app--CalendarWidget--Title--height: gw-pxFixed(48) !default;
+$gw-app--CalendarWidget--Title--prev-glyph: "chevron-left" !default;
+$gw-app--CalendarWidget--Title--next-glyph: "chevron-right" !default;
+$gw-app--CalendarWidget--Title--font-size: gw-emFixed(1.1) !default;
+$gw-app--CalendarWidget--Title--today-glyph: "calendar-check-o" !default;
+$gw-app--CalendarWidget--Title--filter-glyph: "filter" !default;
+
+$gw-app--CalendarWidget--Small--cell-size: gw-emFixed(2.4) !default;
+$gw-app--CalendarWidget--Small--title-height: gw-pxFixed(35) !default;
+$gw-app--CalendarWidget--Small--title-font-size: gw-remScaled(1) !default;
+$gw-app--CalendarWidget--Small--title-col: #1f1f1f !default;
+
+
+

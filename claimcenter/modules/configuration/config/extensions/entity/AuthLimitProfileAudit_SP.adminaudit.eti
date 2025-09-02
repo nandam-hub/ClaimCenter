@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  entity="AuthLimitProfileAudit_SP"
+  supertype="DataAudit_SP">
+  <foreignkey
+    columnName="AuthLimitProfileID"
+    fkentity="AuthorityLimitProfile"
+    name="AuthLimitProfile"
+    nullok="true"/>
+</subtype>

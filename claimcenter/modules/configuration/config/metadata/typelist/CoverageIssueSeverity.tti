@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<typelist xmlns="http://guidewire.com/typelists" name="CoverageIssueSeverity" desc="The severity of the coverage issue.">
+  <typecode
+    code="high"
+    desc="High"
+    name="High"
+    priority="100"/>
+  <typecode
+    code="medium"
+    desc="Medium"
+    name="Medium"
+    priority="200"/>
+</typelist>

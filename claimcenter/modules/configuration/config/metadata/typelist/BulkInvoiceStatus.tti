@@ -1,0 +1,139 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="Possible statuses for BulkInvoice entities"
+  final="true"
+  name="BulkInvoiceStatus">
+  <typecode
+    code="awaitingsubmission"
+    desc="Awaiting submission to the downstream system"
+    name="Awaiting submission"/>
+  <typecode
+    code="cleared"
+    desc="Bulk invoice's associated bulk check has been cleared"
+    name="Cleared"/>
+  <typecode
+    code="creatingchecks"
+    desc="Checks are being created for the invoice"
+    name="Creating checks"/>
+  <typecode
+    code="draft"
+    desc="Bulk invoice is possibly committed to DB, but not yet ready for validation"
+    name="Draft"/>
+  <typecode
+    code="initiatingcheckcreation"
+    desc="The invoice is ready for the check creation process to begin"
+    name="Initiating check creation"/>
+  <typecode
+    code="initiatingdelete"
+    desc="The invoice is ready for the delete process to begin"
+    name="Initiating delete"/>
+  <typecode
+    code="initiatingescalation"
+    desc="The invoice is ready for the escalation process to begin"
+    name="Initiating escalation"/>
+  <typecode
+    code="initiatingstop"
+    desc="The invoice is ready for the stop process to begin"
+    name="Initiating stop"/>
+  <typecode
+    code="initiatingvoid"
+    desc="The invoice is ready for the void process to begin"
+    name="Initiating void"/>
+  <typecode
+    code="inreview"
+    desc="Bulk invoice is under review"
+    name="In review"/>
+  <typecode
+    code="invaliditems"
+    desc="One or more approved items on the bulk invoice failed validation or had some problem with the associated check"
+    name="Invalid bulk invoice items"/>
+  <typecode
+    code="issued"
+    desc="Bulk invoice's associated bulk check has been issued"
+    name="Issued"/>
+  <typecode
+    code="onhold"
+    desc="Bulk invoice was put on hold by downstream system"
+    name="On hold"/>
+  <typecode
+    code="pendingstop"
+    desc="Bulk invoice was stopped, and confirmation of stop is pending"
+    name="Pending stop"/>
+  <typecode
+    code="pendingvoid"
+    desc="Bulk invoice was voided, and confirmation of void is pending"
+    name="Pending void"/>
+  <typecode
+    code="processingdelete"
+    desc="The invoice is being deleted"
+    name="Processing delete"/>
+  <typecode
+    code="errorduringprocessing"
+    desc="The invoice encountered a problem during processing"
+    name="Error during processing"/>
+  <typecode
+    code="processingescalation"
+    desc="The invoice is being escalated"
+    name="Processing escalation"/>
+  <typecode
+    code="processingstop"
+    desc="The invoice is being stopped"
+    name="Processing stop"/>
+  <typecode
+    code="processingvoid"
+    desc="The invoice is being voided"
+    name="Processing void"/>
+  <typecode
+    code="rejected"
+    desc="Bulk invoice rejected by assigned approver"
+    name="Rejected"/>
+  <typecode
+    code="requested"
+    desc="Sent to downstream system and acknowledged"
+    name="Requested"/>
+  <typecode
+    code="requesting"
+    desc="Queued for submission to the downstream system"
+    name="Requesting"/>
+  <typecode
+    code="retired"
+    desc="The invoice has been retired"
+    name="Retired"/>
+  <typecode
+    code="stopped"
+    desc="Bulk invoice was stopped"
+    name="Stopped"/>
+  <typecode
+    code="voided"
+    desc="Bulk invoice was voided"
+    name="Voided"/>
+  <typefilter
+    desc="Statuses indicating the invoice is in the middle of an asynchronous operation"
+    name="AsyncProcessing">
+    <include
+      code="initiatingcheckcreation"/>
+    <include
+      code="initiatingescalation"/>
+    <include
+      code="initiatingvoid"/>
+    <include
+      code="initiatingstop"/>
+    <include
+      code="initiatingdelete"/>
+  </typefilter>
+  <typefilter
+    desc="Statuses indicating the invoice's items are currently being processed by the InvoiceItemWorkQueue"
+    name="ParallelProcessing">
+    <include
+      code="creatingchecks"/>
+    <include
+      code="processingescalation"/>
+    <include
+      code="processingvoid"/>
+    <include
+      code="processingstop"/>
+    <include
+      code="processingdelete"/>
+  </typefilter>
+</typelist>

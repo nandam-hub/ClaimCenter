@@ -1,0 +1,20 @@
+package rules.Closed.ClaimClosed_dir
+
+uses gw.api.system.CCConfigParameters
+uses gw.api.util.DateUtil
+
+@gw.rules.RuleDisabled
+@gw.rules.RuleName("CCL05000 - Set archived entity purge date")
+internal class CCL05000Setarchivedentitypurgedate {
+  static function doCondition(claim : entity.Claim) : boolean {
+/*start00rule*/
+return true
+/*end00rule*/
+}
+
+  static function doAction(claim : entity.Claim, actions : gw.rules.Action) {
+/*start00rule*/
+    claim.ClaimInfo.ArchivedEntityPurgeDate = DateUtil.addYears(DateUtil.currentDate(), 7)
+/*end00rule*/
+  }
+}

@@ -1,0 +1,22 @@
+<div class="gw-action--outer" role="presentation" data-gw-no-tab-index>
+    <div role="link" class="gw-action--inner"
+         data-gw-click="gwMultiTab.openInNewTab index:${index}"
+         aria-label="${openInNewTabTooltip}"
+         aria-posinset="${posInSet}" aria-setsize="${setSize}"
+    >
+        <div class="gw-MultiTabMenuItem">
+            <div class="top-section">
+                <div aria-hidden="true" class="open-tab-icon"></div>
+                <div class="title">${label}</div>
+            </div>
+            <div :if="subLabel" class="sub-label">
+                <div aria-hidden="true" class="group-icon"></div>
+                <div>${subLabel}</div>
+            </div>
+            <div :if="hasUnsavedWork" class="unsaved-work">
+                <div aria-hidden="true" class="unsaved-work-icon"></div>
+                <div>${hasUnsavedWorkLabel}</div>
+            </div>
+        </div>
+    </div>
+</div>

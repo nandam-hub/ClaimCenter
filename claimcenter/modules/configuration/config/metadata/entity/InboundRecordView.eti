@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<viewEntity
+  xmlns="http://guidewire.com/datamodel"
+  exportable="false"
+  entity="InboundRecordView"
+  platform="true"
+  primaryEntity="InboundRecord">
+  <viewEntityLink
+    name="InboundRecord"
+    path="ID"/>
+  <viewEntityColumn
+    name="LineNumber"
+    path="LineNumber"/>
+  <viewEntityColumn
+    name="Config"
+    path="Config"/>
+  <viewEntityTypekey
+    name="Status"
+    path="Status"/>
+  <viewEntityColumn
+    name="Content"
+    path="Content"/>
+  <viewEntityColumn
+    name="ErrorMessage"
+    path="ErrorMessage"/>
+  <viewEntityLink
+    name="InboundFile"
+    path="InboundFile"/>
+  <viewEntityColumn
+    name="UpdateTime"
+    path="UpdateTime"/>
+  <viewEntityName
+    name="UpdateUser"
+    path="UpdateUser"/>
+</viewEntity>

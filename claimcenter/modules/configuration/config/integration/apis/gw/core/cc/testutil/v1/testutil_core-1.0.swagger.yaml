@@ -1,0 +1,289 @@
+swagger: "2.0"
+info:
+  title: "ClaimCenter Test Util API"
+  description: "APIs for controlling aspects of ClaimCenter as necessary for testing purposes. Not intended for production use."
+  version: "1.13.0"
+basePath: /test-util/v1
+consumes:
+- application/json
+produces:
+- application/json
+x-gw-combine:
+- gw.core.pl.framework.v1.framework_pl-1.0
+x-gw-schema-import:
+  testutil: gw.core.cc.testutil.v1.testutil_core-1.0
+x-gw-apihandlers:
+- gw.rest.core.cc.testutil.v1.TestUtilApiCoreHandler
+paths:
+  /contacts:
+    post:
+      summary: "Create a new contact for tests"
+      description: "For test environments that aren't hooked up to a policy administration system or contact management system."
+      operationId: createContact
+      x-gw-extensions:
+        childResourceType: TestUtilContact
+        operationType: post-collection
+        resourceType: TestUtilContacts
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: "#/definitions/TestUtilContactRequest"
+      x-gw-parameter-sets:
+      - post-collection
+      responses:
+        "201":
+          description: "Successful creation"
+          schema:
+            $ref: "#/definitions/TestUtilContactResponse"
+  /delete-documents:
+    post:
+      summary: "Delete all documents for tests"
+      operationId: deleteAllDocuments
+      x-gw-extensions:
+        operationType: custom-action
+      responses:
+        "204":
+          description: "Successful deletion"
+  /groups:
+    post:
+      summary: "Create a new group for tests"
+      description: "Create a new group for tests"
+      operationId: createGroup
+      x-gw-extensions:
+        childResourceType: TestUtilGroup
+        operationType: post-collection
+        resourceType: TestUtilGroups
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: "#/definitions/TestUtilGroupRequest"
+      x-gw-parameter-sets:
+      - post-collection
+      responses:
+        "201":
+          description: "Successful creation"
+          schema:
+            $ref: "#/definitions/TestUtilGroupResponse"
+  /openapi.json:
+    get:
+      summary: "Return the Open API 3.0 representation of the schema"
+      description: "Return the Open API 3.0 representation of the schema"
+      operationId: getOpenApiSchema
+      x-gw-extensions:
+        operationType: get-element
+        resourceType: TestUtilOpenApiSchema
+      x-gw-parameter-sets:
+      - openapi
+      responses:
+        "200":
+          description: "Successful response"
+          schema:
+            type: string
+  /policies:
+    post:
+      summary: "Create a new policy for tests"
+      description: "For test environments that aren't hooked up to a policy administration system."
+      operationId: createPolicy
+      x-gw-extensions:
+        childResourceType: TestUtilPolicy
+        operationType: post-collection
+        resourceType: TestUtilPolicies
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: "#/definitions/TestUtilPolicyRequest"
+      x-gw-parameter-sets:
+      - post-collection
+      responses:
+        "201":
+          description: "Successful creation"
+          schema:
+            $ref: "#/definitions/TestUtilPolicyResponse"
+  /specialist-services:
+    get:
+      summary: "Retrieves a list of specialist services"
+      description: "Retrieves a non hiearchical list of specialist services"
+      operationId: getSpecialistServices
+      x-gw-extensions:
+        childResourceType: TestUtilSpecialistService
+        operationType: get-collection
+        resourceType: TestUtilSpecialistServices
+      x-gw-parameter-sets:
+      - get-collection
+      responses:
+        "200":
+          description: "The list of specialist services"
+          schema:
+            $ref: "#/definitions/TestUtilSpecialistServiceList"
+    post:
+      summary: "Create a new specialist service for tests"
+      description: "For test environments that don't have services loaded."
+      operationId: createTestUtilSpecialistService
+      x-gw-extensions:
+        childResourceType: TestUtilSpecialistService
+        operationType: post-collection
+        resourceType: TestUtilSpecialistServices
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: "#/definitions/TestUtilSpecialistServiceRequest"
+      x-gw-parameter-sets:
+      - post-collection
+      responses:
+        "201":
+          description: "Successful creation"
+          schema:
+            $ref: "#/definitions/TestUtilSpecialistServiceResponse"
+  /users:
+    post:
+      summary: "Create a new user for tests"
+      description: "Create a new user for tests"
+      operationId: createUser
+      x-gw-extensions:
+        childResourceType: TestUtilUser
+        operationType: post-collection
+        resourceType: TestUtilUsers
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: "#/definitions/TestUtilUserRequest"
+      x-gw-parameter-sets:
+      - post-collection
+      responses:
+        "201":
+          description: "Successful creation"
+          schema:
+            $ref: "#/definitions/TestUtilUserResponse"
+x-gw-cors-policy: testutil
+x-gw-cors-policies:
+  testutil:
+    enabled: "${cors.testutil.enabled:true}"
+    allowOrigins: "${cors.testutil.allowOrigins:any}"
+    allowCredentials: "${cors.testutil.allowCredentials:true}"
+    allowHeaders: "${cors.testutil.allowHeaders:null}"
+    exposeHeaders: "${cors.testutil.exposeHeaders:null}"
+    maxAge: "${cors.testutil.maxAge:1200}"
+    allowMethods: "${cors.testutil.allowMethods:null}"
+definitions:
+  TestUtilContactData:
+    x-gw-extend:
+    - "#/definitions/DataEnvelope"
+    required:
+    - attributes
+    properties:
+      attributes:
+        $ref: "testutil#/definitions/TestUtilContact"
+  TestUtilContactRequest:
+    type: object
+    required:
+    - data
+    properties:
+      data:
+        $ref: "#/definitions/TestUtilContactData"
+  TestUtilContactResponse:
+    type: object
+    properties:
+      data:
+        $ref: "#/definitions/TestUtilContactData"
+  TestUtilGroupData:
+    x-gw-extend:
+    - "#/definitions/DataEnvelope"
+    required:
+    - attributes
+    properties:
+      attributes:
+        $ref: "testutil#/definitions/TestUtilGroup"
+  TestUtilGroupRequest:
+    type: object
+    required:
+    - data
+    properties:
+      data:
+        $ref: "#/definitions/TestUtilGroupData"
+  TestUtilGroupResponse:
+    type: object
+    properties:
+      data:
+        $ref: "#/definitions/TestUtilGroupData"
+  TestUtilPolicyData:
+    x-gw-extend:
+    - "#/definitions/DataEnvelope"
+    properties:
+      attributes:
+        $ref: "testutil#/definitions/TestUtilPolicy"
+  TestUtilPolicyRequest:
+    type: object
+    required:
+    - data
+    properties:
+      data:
+        $ref: "#/definitions/TestUtilPolicyData"
+      included:
+        $ref: "#/definitions/TestUtilPolicyRequestInclusions"
+  TestUtilPolicyRequestInclusions:
+    type: object
+    properties:
+      TestUtilContact:
+        type: array
+        items:
+          $ref: "#/definitions/TestUtilContactData"
+  TestUtilPolicyResponse:
+    type: object
+    properties:
+      data:
+        $ref: "#/definitions/TestUtilPolicyData"
+  TestUtilSpecialistServiceData:
+    x-gw-extend:
+    - "#/definitions/DataEnvelope"
+    properties:
+      attributes:
+        $ref: "testutil#/definitions/TestUtilSpecialistService"
+  TestUtilSpecialistServiceList:
+    type: object
+    x-gw-extend:
+    - "#/definitions/DataListEnvelope"
+    properties:
+      data:
+        type: array
+        items:
+          $ref: "#/definitions/TestUtilSpecialistServiceData"
+  TestUtilSpecialistServiceRequest:
+    type: object
+    required:
+    - data
+    properties:
+      data:
+        $ref: "#/definitions/TestUtilSpecialistServiceData"
+  TestUtilSpecialistServiceResponse:
+    type: object
+    properties:
+      data:
+        $ref: "#/definitions/TestUtilSpecialistServiceData"
+  TestUtilUserData:
+    x-gw-extend:
+    - "#/definitions/DataEnvelope"
+    properties:
+      attributes:
+        $ref: "testutil#/definitions/TestUtilUser"
+  TestUtilUserRequest:
+    type: object
+    required:
+    - data
+    properties:
+      data:
+        $ref: "#/definitions/TestUtilUserData"
+  TestUtilUserResponse:
+    type: object
+    properties:
+      data:
+        $ref: "#/definitions/TestUtilUserData"

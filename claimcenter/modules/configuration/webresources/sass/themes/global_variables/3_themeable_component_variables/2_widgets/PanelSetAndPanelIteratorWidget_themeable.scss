@@ -1,0 +1,18 @@
+//Other
+$gw-app--PanelSetAndIterator--child--border: gw-border($gw-app--border--col-lighter, $gw-app--border-width-px);
+
+// Panel Iterator
+
+// Only applies when iterator checkboxes are enabled
+// Position to other widgets
+$gw-app--PanelIteratorChildren-with-borders--spacing-widget-top-rem: $gw-app--SPACING-rem-XS !default;
+$gw-app--PanelIteratorChildren-with-borders--spacing-widget-left-rem: $gw-app--SPACING-rem-M !default;
+$gw-app--PanelIteratorChildren-with-borders--spacing-widget-right-rem: $gw-app--SPACING-rem-XS !default;
+$gw-app--PanelIteratorChildren-with-borders--spacing-widget-bottom-rem: $gw-app--SPACING-rem-XS !default;
+
+// Internal padding
+//NOTE: setting the top and left of this padding to be smaller than the input checkbox widget, will have odd effects;
+$gw-app--PanelIteratorChildren-with-borders--spacing-inner-top-rem: $gw-app--SPACING-rem-XS !default;
+$gw-app--PanelIteratorChildren-with-borders--spacing-inner-left-rem: $gw-app--SPACING-rem-M !default;
+$gw-app--PanelIteratorChildren-with-borders--spacing-inner-right-rem: $gw-app--SPACING-rem-M !default;
+$gw-app--PanelIteratorChildren-with-borders--spacing-inner-bottom-rem: $gw-app--SPACING-rem-M !default;

@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<typelistextension xmlns="http://guidewire.com/typelists"
+                   name="HOPCoverageForm"
+                   desc="HOP Coverage Form">
+  <typecode
+    code="ho2"
+    desc="Homeowners (Good)"
+    name="HO2">
+    <category
+      code="hopdwelling"
+      typelist="CoveragePartType"/>
+  </typecode>
+  <typecode
+    code="ho3"
+    desc="Homeowners (Better)"
+    name="HO3">
+    <category
+      code="hopdwelling"
+      typelist="CoveragePartType"/>
+  </typecode>
+  <typecode
+    code="ho5"
+    desc="Homeowners (Best)"
+    name="HO5">
+    <category
+      code="hopdwelling"
+      typelist="CoveragePartType"/>
+  </typecode>
+  <typecode
+    code="ho8"
+    desc="Homeowners (Older Homes)"
+    name="HO8"
+    retired="true">
+    <category
+      code="hopdwelling"
+      typelist="CoveragePartType"/>
+  </typecode>
+  <typecode
+    code="ho4"
+    desc="Renters"
+    name="HO4">
+    <category
+      code="hoprental"
+      typelist="CoveragePartType"/>
+  </typecode>
+  <typecode
+    code="ho6"
+    desc="Condo"
+    name="HO6">
+    <category
+      code="hopcondo"
+      typelist="CoveragePartType"/>
+  </typecode>
+</typelistextension>

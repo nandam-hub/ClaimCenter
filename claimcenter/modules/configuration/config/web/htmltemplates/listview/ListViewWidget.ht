@@ -1,0 +1,11 @@
+<div class="gw-ListView--inner ${isEmpty ? 'gw-ListView--empty' : ''}">
+  ${:children}
+  <div :if="isEmpty" class="gw-ListView--empty-info-row">
+    <div id="${emptyTableCaptionId}" class="gw-ListView--empty-info-cell">${emptyTableLabel}</div>
+  </div>
+  <div class="gw-ListView--bottom-bumper ${jumpToTopLabel ? 'gw-hasJumpToTopLink' : ''}">
+    <div :if="jumpToTopLabel" class="gw-JumpToTopLink" data-gw-tooltip="${jumpToTopLabel}">
+        <div role="link" tabindex="0" data-gw-click="gwListView.moveFocusToTop"></div>
+    </div>
+  </div>
+</div>

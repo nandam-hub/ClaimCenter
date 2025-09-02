@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  admin="true"
+  desc="A collection of FXExchangeRates."
+  entity="FXExchangeRateSet"
+  platform="true"
+  table="fxexchangerateset"
+  type="editable">
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.InsertCallback"
+    impl="com.guidewire.pl.domain.exchangerates.FXExchangeRateSetImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.UpdateCallback"
+    impl="com.guidewire.pl.domain.exchangerates.FXExchangeRateSetImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.RemoveCallback"
+    impl="com.guidewire.pl.domain.exchangerates.FXExchangeRateSetImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.domain.exchangerates.FXExchangeRateSetPublicMethods"
+    impl="com.guidewire.pl.domain.exchangerates.FXExchangeRateSetImpl"/>
+  <typekey
+    desc="The base currency used by this FXExchangeRateSet to converts from."
+    name="BaseCurrency"
+    nullok="false"
+    typelist="Currency"/>
+  <typekey
+    desc="Rate type"
+    name="RateType"
+    nullok="false"
+    typelist="FXRateMarket"/>
+  <column
+    desc="The date and time this rate set becomes effective."
+    name="EffectiveDate"
+    nullok="false"
+    type="datetime"/>
+  <column
+    desc="The date and time this rate set is no longer effective."
+    name="ExpirationDate"
+    nullok="true"
+    type="datetime"/>
+  <array
+    arrayentity="FXExchangeRate"
+    desc="FXExchangeRates in this FXExchangeRateSet."
+    name="FXExchangeRates"/>
+  <index
+    desc="Ensure uniqueness for combination of base currency, rate type and effective date."
+    name="exchratesetu1"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="BaseCurrency"/>
+    <indexcol
+      keyposition="2"
+      name="RateType"/>
+    <indexcol
+      keyposition="3"
+      name="EffectiveDate"/>
+  </index>
+  <index
+    desc="Ensure uniqueness for combination of base currency, rate type and expiration date."
+    name="exchratesetu2"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="BaseCurrency"/>
+    <indexcol
+      keyposition="2"
+      name="RateType"/>
+    <indexcol
+      keyposition="3"
+      name="ExpirationDate"/>
+  </index>
+</entity>

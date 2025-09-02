@@ -1,0 +1,417 @@
+swagger: '2.0'
+x-gw-combine:
+- gw.pl.framework.paging_definitions-1.0
+- gw.pl.framework.query_definitions-1.0
+info:
+  title: "System tools workflow API"
+  description: "This API is related to system workflow resources"
+  version: '1.0'
+basePath: /system/v1/workflows
+x-gw-permissions:
+- integadmin
+x-gw-runlevel: maintenance
+x-gw-schema-import:
+  workflow: gw.pl.system.workflow-1.0
+x-gw-apihandlers:
+- gw.api.rest.pl.system.v1.WorkflowAPIHandler
+paths:
+  /:
+    get:
+      summary: Get summary of all workflow types that are available
+      operationId: getWorkflowTypes
+      parameters:
+        - name: workflowType
+          description: Workflow type
+          in: query
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: All workflow types and corresponding versions
+          schema:
+            type: array
+            items:
+              $ref: 'workflow#/definitions/WorkflowType'
+  /types/{workflowType}:
+    get:
+      summary: Get all active executions of this workflow type
+      description: |
+        - No named filters
+        - The supported properties are:
+        -- createdTime : a date, the create time, use ISO-8601 value or ('now' for today) with offset (example use -P1W for last week)
+        -- version : an integer, the version of corresponding workflowType
+        - Any of these can be used as sort columns as well
+      operationId: getActiveExecutionsForWorkflowType
+      parameters:
+        - $ref: '#/parameters/workflowType'
+        - $ref: '#/parameters/filter'
+        - $ref: '#/parameters/sort'
+        - $ref: '#/parameters/pageToken'
+        - $ref: '#/parameters/pageSize100'
+        - $ref: '#/parameters/includeTotalCount'
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: Summary of execution for active workflows matching specified criteria
+          schema:
+            $ref: 'workflow#/definitions/WorkflowExecutionPage'
+  /types/{workflowType}/history:
+    get:
+      summary: Get all executions of this workflow type
+      description: |
+        - No named filters
+        - The supported properties for filter and sort are:
+        -- createdTime : a date, the create time, use ISO-8601 value or ('now' for today) with offset (example use -P1W for last week)
+        -- state : a string, allowed values ae active, completed, suspended and error
+        -- version : an integer, the version of corresponding workflowType
+        - Any of these can be used as sort columns as well
+      operationId: getExecutionHistoryForWorkflowType
+      parameters:
+        - $ref: '#/parameters/workflowType'
+        - $ref: '#/parameters/includeTotalCount'
+        - $ref: '#/parameters/filter'
+        - $ref: '#/parameters/sort'
+        - $ref: '#/parameters/pageToken'
+        - $ref: '#/parameters/pageSize100'
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: Summary of execution for workflows matching specified criteria
+          schema:
+            $ref: 'workflow#/definitions/WorkflowExecutionPage'
+  /types/{workflowType}/statistics:
+    get:
+      summary: Get statistics around execution of various workflows of this workflow type
+      description: |
+        - No named filters
+        - The supported properties for filter and sort are:
+        -- from : a date, the create time, use ISO-8601 value or ('now' for today) with offset (example use -P1W for last week)
+        -- to : a date, the create time, use ISO-8601 value or ('now' for today) with offset (example use -P1W for last week)
+        - Any of these can be used as sort columns as well
+      operationId: getExecutionStatisticsForWorkflowType
+      parameters:
+        - $ref: '#/parameters/workflowType'
+        - $ref: '#/parameters/includeTotalCount'
+        - $ref: '#/parameters/filter'
+        - $ref: '#/parameters/sort'
+        - $ref: '#/parameters/pageToken'
+        - $ref: '#/parameters/pageSize100'
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: Summary of execution for workflows matching specified criteria
+          schema:
+            $ref: 'workflow#/definitions/WorkflowExecutionStatisticsPage'
+  /{workflowId}/execution:
+    get:
+      summary: Get execution details of this workflow
+      operationId: getWorkflowExecutionDetails
+      parameters:
+        - $ref: '#/parameters/workflowId'
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: Execution details of this workflow
+          schema:
+            $ref: 'workflow#/definitions/WorkflowExecutionPageRow'
+  /{workflowId}/logs:
+    get:
+      summary: Get workflow logs for this workflow
+      operationId: getWorkflowExecutionLogs
+      parameters:
+        - $ref: '#/parameters/workflowId'
+        - $ref: '#/parameters/pageToken'
+        - $ref: '#/parameters/pageSize100'
+        - $ref: '#/parameters/includeTotalCount'
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: Execution logs of this workflow
+          schema:
+            $ref: 'workflow#/definitions/WorkflowLogsPage'
+  /{workflowId}/complete:
+    post:
+      summary: "Sets the state of the workflow with specified workflowId to completed"
+      operationId: completeWorkflow
+      parameters:
+        - $ref: '#/parameters/workflowId'
+        - $ref: '#/parameters/waitTimeout'
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: Execution details of this workflow
+          schema:
+            $ref: 'workflow#/definitions/WorkflowExecutionPageRow'
+  /{workflowId}/suspend:
+    post:
+      summary: "Suspends the workflow with specified workflowId"
+      operationId: suspendWorkflow
+      parameters:
+      - $ref: '#/parameters/workflowId'
+      - $ref: '#/parameters/waitTimeout'
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: Execution details of this workflow
+          schema:
+            $ref: 'workflow#/definitions/WorkflowExecutionPageRow'
+  /{workflowId}/resume:
+    post:
+      summary: "Resumes the workflow with specified workflowId"
+      operationId: resumeWorkflow
+      parameters:
+      - $ref: '#/parameters/workflowId'
+      - $ref: '#/parameters/waitTimeout'
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: Execution details of this workflow
+          schema:
+            $ref: 'workflow#/definitions/WorkflowExecutionPageRow'
+  /{workflowId}/{timeoutBranch}/timeout:
+    post:
+      summary: "Times out specified branch on the workflow"
+      operationId: timeoutBranch
+      parameters:
+      - $ref: '#/parameters/workflowId'
+      - $ref: '#/parameters/waitTimeout'
+      - name: timeoutBranch
+        in: path
+        type: string
+        required: true
+        description: Timeout branch
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: Execution details of this workflow
+          schema:
+            $ref: 'workflow#/definitions/WorkflowExecutionPageRow'
+  /{workflowId}/triggers:
+    get:
+      summary: "Get available triggers for specified workflowId"
+      operationId: getAvailableTriggersForWorkflow
+      parameters:
+      - $ref: '#/parameters/workflowId'
+      produces:
+      - application/json
+      responses:
+        '200':
+            description: "Triggers for this workflow"
+            schema:
+              type: array
+              items:
+                type: string
+  /{workflowId}/{triggerKey}/trigger:
+    post:
+      summary: "Invokes the triggerKey on the current step of the specified workflow causing the workflow to advance to the next step"
+      description: Invokes the triggerKey on the current step of the specified workflow causing
+                    the workflow to advance to the next step.
+      operationId: invokeTriggerOnWorkflow
+      parameters:
+      - $ref: '#/parameters/workflowId'
+      - $ref: '#/parameters/triggerKey'
+      - $ref: '#/parameters/waitTimeout'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Execution details of workflow where triggerKey is invoked
+          schema:
+            $ref: 'workflow#/definitions/WorkflowExecutionPageRow'
+  /complete:
+    post:
+      summary: "Sets the state of specified workflows to completed"
+      description: Sets the state of specified workflow to completed
+      operationId: bulkCompleteWorkflows
+      parameters:
+      - name: body
+        in: body
+        description: Information around workflows on which this action will be performed
+        required: true
+        schema:
+          $ref: "workflow#/definitions/BulkworkflowActionInput"
+      - $ref: '#/parameters/waitTimeout'
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: Summary of execution for workflows matching specified criteria
+          schema:
+            type: array
+            items:
+              $ref: 'workflow#/definitions/WorkflowExecutionPageRow'
+  /resume:
+    post:
+      summary: "Resumes specified workflows"
+      description: |
+                    Resumes specified workflows.  The workflow engine will subsequently attempt to advance these workflows to their next steps. For each one, if an error occurs, the error
+                    will be logged and the workflow will go in to error state.
+      operationId: bulkResumeWorkflows
+      parameters:
+      - name: body
+        in: body
+        description: Information around workflows on which this action will be performed
+        required: true
+        schema:
+          $ref: "workflow#/definitions/BulkworkflowActionInput"
+      - $ref: '#/parameters/waitTimeout'
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: Summary of execution for workflows matching specified criteria
+          schema:
+            type: array
+            items:
+              $ref: 'workflow#/definitions/WorkflowExecutionPageRow'
+  /suspend:
+    post:
+      summary: "Suspends specified workflows"
+      description: Suspends specified workflows
+      operationId: bulkSuspendWorkflows
+      parameters:
+      - name: body
+        in: body
+        description: Information around workflows on which this action will be performed
+        required: true
+        schema:
+          $ref: "workflow#/definitions/BulkworkflowActionInput"
+      - $ref: '#/parameters/waitTimeout'
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: Summary of execution for workflows matching specified criteria
+          schema:
+            type: array
+            items:
+              $ref: 'workflow#/definitions/WorkflowExecutionPageRow'
+  /{timeoutBranch}/timeout:
+    post:
+      summary: "Times out specified branch on specified workflows"
+      description: Times out specified branch on specified workflows
+      operationId: bulkTimeoutBranchOnWorkflows
+      parameters:
+      - name: body
+        in: body
+        description: Information around workflows on which this action will be performed
+        required: true
+        schema:
+          $ref: "workflow#/definitions/BulkworkflowActionInput"
+      - $ref: '#/parameters/waitTimeout'
+      - name: timeoutBranch
+        in: path
+        type: string
+        required: true
+        description: Timeout branch
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: Summary of execution for workflows matching specified criteria
+          schema:
+            type: array
+            items:
+              $ref: 'workflow#/definitions/WorkflowExecutionPageRow'
+  /{triggerKey}/trigger:
+    post:
+      summary: "Invokes the triggerKey on the current step of the specified workflows causing those workflows to advance to the next step"
+      description: Invokes the triggerKey on the current step of the specified workflows causing those workflows to advance to the next step.  If the trigger key is not valid for specified workflow, it will be ignored.
+      operationId: invokeTriggerOnWorkflows
+      parameters:
+      - name: body
+        in: body
+        description: Information around workflows on which this action will be performed
+        required: true
+        schema:
+          $ref: "workflow#/definitions/BulkworkflowActionInput"
+      - $ref: '#/parameters/waitTimeout'
+      - $ref: '#/parameters/triggerKey'
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: Summary of execution for workflows matching specified criteria
+          schema:
+            type: array
+            items:
+              $ref: 'workflow#/definitions/WorkflowExecutionPageRow'
+  /resume/all:
+    post:
+      summary: "Resumes specified workflows"
+      description: |
+                    Resumes specified workflows.  The workflow engine will subsequently attempt to advance these workflows to their next steps. For each one, if an error occurs, the error
+                    will be logged and the workflow will go in to error state.
+                    - No named filters
+                    - The supported properties are:
+                    -- createdTime : a date, the create time, use ISO-8601 value or ('now' for today) with offset (example use -P1W for last week)
+                    -- version : an integer, the version of corresponding workflowType
+      operationId: resumeWorkflows
+      parameters:
+      - $ref: '#/parameters/filter'
+      - $ref: '#/parameters/waitTimeout'
+      - name: includeErrorWorkflows
+        in: query
+        description: Including error workflows
+        type: boolean
+        default: true
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: Summary of execution for workflows matching specified criteria
+          schema:
+            type: array
+            items:
+              $ref: 'workflow#/definitions/WorkflowExecutionPageRow'
+parameters:
+  workflowId:
+    name: workflowId
+    in: path
+    description: Workflow Id
+    required: true
+    type: string
+    maxLength: 64
+  triggerKey:
+    name: triggerKey
+    in: path
+    description: Trigger key
+    required: true
+    type: string
+    x-gw-type: typekey.WorkflowTriggerKey
+    x-gw-export-enumeration: true
+  workflowType:
+    name: workflowType
+    in: path
+    description: Type of workflow
+    type: string
+    required: true
+  waitTimeout:
+    name: waitTimeout
+    in: query
+    type: integer
+    description: Wait time out in seconds before re-querying state of this workflow after executing this operation.  Maximum wait time allowed is 600 seconds.
+    maximum: 600
+    default: 0

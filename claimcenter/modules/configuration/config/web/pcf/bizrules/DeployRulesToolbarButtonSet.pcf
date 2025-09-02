@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <ToolbarButtonSet
+    id="DeployRulesToolbarButtonSet">
+    <ReferencedIterator
+      flags="AlwaysTrue"
+      valueType="RuleVersion"
+      widget="Rules"/>
+    <Require
+      name="navigationSupport"
+      type="gw.bizrules.pcf.BizRulesPageNavigationSupport"/>
+    <Require
+      name="checkedValuesAccessor"
+      type="gw.bizrules.pcf.RuleListPageHelper.IteratorCheckedValuesRuleVersionAccessor"/>
+    <Require
+      name="visibleRulesQuery"
+      type="gw.api.database.Query&lt;RuleVersion&gt;"/>
+    <Require
+      name="ruleTypeRef"
+      type="gw.pl.persistence.type.EntityTypeReference&lt;Rule&gt;"/>
+    <Require
+      name="pageHelper"
+      type="gw.bizrules.pcf.RuleListPageHelper"/>
+    <ToolbarButton
+      available="not gw.bizrules.management.BizRulesRollingUpgradeManager.Instance.RollingUpgradeProcessStartedInDB"
+      id="DeployButton"
+      label="DisplayKey.get('BizRules.RulesPage.DeployButton')"
+      tooltip="DisplayKey.get('BizRules.RulesPage.DeployMenuItemSet.DeployTooltip')"
+      visible="pageHelper.VersionController.DeploymentEnabled and gw.bizrules.pcf.RulePermissionUIHelper.canDeployRule(ruleTypeRef.get())">
+      <MenuItem
+        action="gw.bizrules.pcf.RuleDeploymentPageHelper.deployFromList(navigationSupport, ruleTypeRef, checkedValuesAccessor.RuleVersions)"
+        id="DeploySelected"
+        label="DisplayKey.get(&quot;BizRules.RulesPage.DeployMenuItemSet.DeploySelected&quot;)"
+        tooltip="DisplayKey.get('BizRules.RulesPage.DeployMenuItemSet.DeploySelectedTooltip')"
+        visible="gw.bizrules.pcf.RulePermissionUIHelper.canDeployRule(ruleTypeRef.get())"/>
+      <MenuItem
+        action="gw.bizrules.pcf.RuleDeploymentPageHelper.deployFromQuery(navigationSupport, ruleTypeRef, visibleRulesQuery)"
+        id="DeployAll"
+        label="DisplayKey.get(&quot;BizRules.RulesPage.DeployMenuItemSet.DeployAll&quot;)"
+        tooltip="DisplayKey.get('BizRules.RulesPage.DeployMenuItemSet.DeployAllTooltip')"
+        visible="gw.bizrules.pcf.RulePermissionUIHelper.canDeployRule(ruleTypeRef.get())"/>
+    </ToolbarButton>
+  </ToolbarButtonSet>
+</PCF>

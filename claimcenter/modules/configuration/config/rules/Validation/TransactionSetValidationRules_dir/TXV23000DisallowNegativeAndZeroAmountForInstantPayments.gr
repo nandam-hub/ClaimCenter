@@ -1,0 +1,25 @@
+package rules.Validation.TransactionSetValidationRules_dir
+uses gw.api.locale.DisplayKey
+uses gw.api.system.CCConfigParameters
+uses gw.financials.payment.InstantCheckUtil
+uses typekey.TransactionSet
+
+@gw.rules.RuleName("TXV23000 - Disallow Negative And Zero Amount For Instant Payments")
+internal class TXV23000DisallowNegativeAndZeroAmountForInstantPayments {
+  static function doCondition(transactionSet  :  entity.TransactionSet) : boolean {
+/*start00rule*/
+return CCConfigParameters.InstantPaymentIntegrationEnabled.Value and transactionSet typeis CheckSet
+/*end00rule*/
+}
+
+  static function doAction(transactionSet  :  entity.TransactionSet, actions : gw.rules.Action) {
+/*start00rule*/
+for (check in (transactionSet as CheckSet).Checks) {
+      if (InstantCheckUtil.instantPaymentGrossAmountValidation(check)) {
+        transactionSet.reject(ValidationLevel.TC_PAYMENT,
+            DisplayKey.get("Rules.Validation.Instant.DisallowNegativeZeroGrossAmount"), null, null)
+      }
+    } 
+/*end00rule*/
+  }
+}

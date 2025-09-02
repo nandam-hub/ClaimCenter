@@ -1,0 +1,70 @@
+{
+  "theme_files_to_include_and_their_display_key_names": {
+    "gw-theme--darcula": "Web.Theme.Dark",
+    "gw-theme--cloud-banff": "Web.Theme.CloudBanff",
+    "gw-theme--high-contrast": "Web.Theme.CloudHighContrast",
+    "gw-theme--jutro-enterprise": "Web.Theme.JutroEnterprise"
+  },
+  "font_sizes": [
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    18,
+    24,
+    28
+  ],
+  "global_spacing_modifiers": [
+    0.5,
+    0.75,
+    1,
+    1.25,
+    1.5
+  ],
+  "pref_panel_defaults": {
+    "theme": "gw-theme--cloud-banff",
+    "fontSize": "default",
+    "globalSpacingModifier": "default",
+    "enableMacroChars": true,
+    "copyAndCutGrabSymbol": true,
+    "todayClosesDatePicker": true,
+    "disableBrowserAutocomplete": true,
+    "default0Placeholder": false,
+    "capDateTimeUserInput": false,
+    "scrollToTopOnError": true,
+    "showWidgetTypesAsInlineTitles": false,
+    "highlightDirtyData": true,
+    "keyboardNavSelectsListDetail": true,
+    "replaceWordProcessingCharacters": true,
+    "forceStandardMenus": false,
+    "useListDetailViewRowSelectionButtons": false,
+    "showJumpToListViewTopLink": false,
+    "tabIndexedTooltips": false,
+    "includeFontColorSignal": false,
+    "requiredFieldVisibleLabel": false,
+    "disableFocusOutline": false,
+    "alwaysConfirmNavigation": false,
+    "useIllegalAutocompleteValueForInputs": false,
+    "topNavCollapseLevelOptions": "none",
+    "scrollingCenterHidesTopNav": true,
+    "enableUIEventsDuringFileDownload": false,
+    "enableNumericAutoFormatting": true,
+    "showEmptyFieldCharacters": false,
+    "showInlineValueTypes": false,
+    "alwaysRestoreFocus": false
+  },
+  "pref_panel_hidden_preferences": {
+    "showDrawFlash": true,
+    "enableNumericAutoFormatting": true,
+    "enableUIEventsDuringFileDownload": true
+  },
+  "system_preferences": {
+    "show_debug_preferences_in_production": false,
+    "default_max_editable_chars": 50000,
+    "enable_legacy_reflection_for_currency_values": false,
+    "allow_inline_file_downloads": false
+  }
+}

@@ -1,0 +1,24 @@
+package rules.Preupdate.TransactionSetPreupdate_dir
+uses gw.api.system.CCConfigParameters
+uses typekey.TransactionSet
+
+@gw.rules.RuleName("TPU06000 - Escalate Instant Payment Check Status")
+internal class TPU06000EscalateInstantPaymentCheckStatus {
+  static function doCondition(transactionSet  :  entity.TransactionSet) : boolean {
+/*start00rule*/
+return CCConfigParameters.InstantPaymentIntegrationEnabled.Value and transactionSet.Subtype == TransactionSet.TC_CHECKSET
+/*end00rule*/
+}
+
+  static function doAction(transactionSet  :  entity.TransactionSet, actions : gw.rules.Action) {
+/*start00rule*/
+for (check in (transactionSet as CheckSet).Checks) {
+      if (check.PaymentMethod == PaymentMethod.TC_INSTANT
+          and check.Status == TransactionStatus.TC_AWAITINGSUBMISSION
+          and check.ScheduledSendDate < Date.Tomorrow) {
+        check.requestCheck()
+      }
+    }
+/*end00rule*/
+  }
+}

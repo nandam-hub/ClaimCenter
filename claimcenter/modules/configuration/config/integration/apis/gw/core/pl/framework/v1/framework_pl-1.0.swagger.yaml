@@ -1,0 +1,206 @@
+swagger: "2.0"
+x-gw-schema-import:
+  framework: gw.core.pl.framework.v1.framework_pl-1.0
+x-gw-authorizer: gw.api.rest.auth.ApiRoleApiAuthorizer
+paths: {}
+parameters:
+  enablePolymorphism:
+    name: enablePolymorphism
+    in: query
+    description: "Whether or not to use the `discriminator`/`oneOf` pattern to output schemas in cases where the valid set of fields can vary based on some attribute of the data such as the country or subtype.  Defaults to `true`. See the documentation for more information."
+    type: boolean
+    default: true
+  fields:
+    name: fields
+    in: query
+    description: "Allows the caller to specify the set of fields that should be included on the response. This can be used to limit the set of fields returned as well as to include optional fields that otherwise wouldn't normally be returned. The parameter is either of the form `fields=<field list>` or `fields=<include>:<field list>`, where `<field list>` consists of a comma-separated list of field or field set names. See the documentation for more information."
+    type: array
+    items:
+      type: string
+    collectionFormat: multi
+    x-gw-extensions:
+      allowForCompositeApi: true
+  filter:
+    name: filter
+    in: query
+    description: "Filters the list of results based on the specified field, operator, and value. The parameter is either of the form `filter=<field>:<operator>:<value>` or `filter=<include>:<field>:<operator>:<value>`. See the documentation for more information."
+    type: array
+    items:
+      type: string
+    collectionFormat: multi
+    x-gw-extensions:
+      allowForCompositeApi: true
+  filterByUser:
+    name: filterByUser
+    in: query
+    description: "Whether or not to filter endpoints and schema properties by the authorization of the caller. Defaults to `false`."
+    type: boolean
+    default: false
+  include:
+    name: include
+    in: query
+    description: "Used to request that additional resources be returned with the API response in the `included` section of the responses. The `include` parameter can appear multiple times, and is a comma-separated list of additional resources to include. See the documentation for more information."
+    type: array
+    items:
+      type: string
+    collectionFormat: multi
+  includeLocalizations:
+    name: includeLocalizations
+    in: query
+    description: "A comma-separated list of language codes to include localizations for, or the special code `*all` to include all languages configured in the application"
+    type: array
+    items:
+      type: string
+    x-gw-sinceVersion: "1.12.0"
+  includeTotal:
+    name: includeTotal
+    in: query
+    description: "Used to request that results should include a count of the total number of results available, which may be more than the total number of results currently being returned. This parameter is of the form `includeTotal=<true|false>` or `includeTotal=<include>:<true|false>`. If not specified, the default is considered to be `false`. See the documentation for more information about response pagination."
+    type: array
+    items:
+      type: string
+    collectionFormat: multi
+    x-gw-extensions:
+      allowForCompositeApi: true
+  omitInclusions:
+    name: omitInclusions
+    in: query
+    description: "Whether or not to omit the `included` properties on request and response schemas.  Defaults to `false`. See the documentation for more information."
+    type: boolean
+    default: false
+    x-gw-sinceVersion: "1.4.0"
+  pageOffset:
+    name: pageOffset
+    in: query
+    description: "The offset of the first result to fetch when fetching a paginated set of results. The parameter is of the form `pageOffset=<number>` where the first result has an offset of 0. For example, `pageOffset=25` will skip the first 25 results in sorted order. If not specified, the default value is 0. See the documentation for more information about response pagination."
+    type: string
+    x-gw-extensions:
+      allowForCompositeApi: true
+  pageSize:
+    name: pageSize
+    in: query
+    description: "The maximum number of results to return in the response. The parameter is of the form `pageSize=<size>` or `pageSize=<include>:<size>`. The maximum allowed `pageSize` and the default `pageSize` both depend on the specific API endpoint the request is made to. See the documentation for more information about response pagination."
+    type: array
+    items:
+      type: string
+    collectionFormat: multi
+    x-gw-extensions:
+      allowForCompositeApi: true
+  prettyPrintSchema:
+    name: prettyPrint
+    in: query
+    description: "Whether or not to pretty-print the returned schema, making it larger but more human readable.  Defaults to `false`."
+    type: boolean
+    default: false
+  sort:
+    name: sort
+    in: query
+    description: "Controls the sorting of elements within a response. The sort parameter is of the form `sort=<fields>` or `sort=<include>:<fields>`, where `<fields>` represents a comma-separated list of field names to sort on. Field names can be prefixed with `-` to request a descending sort, otherwise the sort will be ascending. See the documentation for more information."
+    type: array
+    items:
+      type: string
+    collectionFormat: multi
+    x-gw-extensions:
+      allowForCompositeApi: true
+x-gw-parameter-sets:
+  custom-action:
+  - $ref: "#/parameters/fields"
+  delete-element: null
+  get-collection:
+  - $ref: "#/parameters/fields"
+  - $ref: "#/parameters/filter"
+  - $ref: "#/parameters/include"
+  - $ref: "#/parameters/includeLocalizations"
+  - $ref: "#/parameters/includeTotal"
+  - $ref: "#/parameters/pageSize"
+  - $ref: "#/parameters/pageOffset"
+  - $ref: "#/parameters/sort"
+  get-element:
+  - $ref: "#/parameters/fields"
+  - $ref: "#/parameters/filter"
+  - $ref: "#/parameters/include"
+  - $ref: "#/parameters/includeLocalizations"
+  - $ref: "#/parameters/includeTotal"
+  - $ref: "#/parameters/pageSize"
+  - $ref: "#/parameters/sort"
+  openapi:
+  - $ref: "#/parameters/enablePolymorphism"
+  - $ref: "#/parameters/filterByUser"
+  - $ref: "#/parameters/omitInclusions"
+  - $ref: "#/parameters/prettyPrintSchema"
+  patch-element:
+  - $ref: "#/parameters/fields"
+  - $ref: "#/parameters/includeLocalizations"
+  post-collection:
+  - $ref: "#/parameters/fields"
+  - $ref: "#/parameters/includeLocalizations"
+  search-collection:
+  - $ref: "#/parameters/fields"
+  - $ref: "#/parameters/filter"
+  - $ref: "#/parameters/include"
+  - $ref: "#/parameters/includeTotal"
+  - $ref: "#/parameters/pageSize"
+  - $ref: "#/parameters/pageOffset"
+  - $ref: "#/parameters/sort"
+x-gw-localizationKeyPrefix: framework.v1
+definitions:
+  DataEnvelope:
+    title: "Data envelope"
+    description: "Data envelope for requests and responses for individual elements. The primary data for the element will be in the `attributes` field."
+    type: object
+    properties:
+      checksum:
+        title: Checksum
+        description: "A checksum for the element that can be used to prevent lost updates by detecting that the element has been updated since the caller last retrieved it. See the documentation for more information about lost update prevention."
+        type: string
+      id:
+        title: ID
+        description: "The unique identifier of the element"
+        type: string
+      links:
+        title: Links
+        description: "Links related to the specific element, including child elements and actions that can be taken on the element. Links are sensitive to both the caller's permissions and the state of the data. Only applicable to responses."
+        $ref: "framework#/definitions/Links"
+        readOnly: true
+      method:
+        title: Method
+        description: "The HTTP method that should be used for an included element. Valid values (case-insensitive): [POST, PATCH]. Only applicable to requests. See the documentation for more information about request inclusion."
+        type: string
+      refid:
+        title: "Reference ID"
+        description: "Used to assign a temporary identifier to an element created using request inclusion. Only applicable to requests. See the documentation for more information about request inclusion."
+        type: string
+      related:
+        title: Related
+        description: "Information about collections and elements related to this element that have been included in the response through request inclusion. Only applicable to responses. See the documentation for more information about read inclusion."
+        $ref: "framework#/definitions/RelatedCollections"
+        readOnly: true
+      type:
+        title: Type
+        description: "The type of this element"
+        type: string
+        readOnly: true
+      uri:
+        title: URI
+        description: "The URI for an included element, representing the parent to create the element on if the `method` is `post` or the element to update if the `method` is `patch`. Only applicable to requests. See the documentation for more information about request inclusion."
+        type: string
+  DataListEnvelope:
+    title: "Data list envelope"
+    description: "Data envelope for responses for lists of elements. The primary list of elements will be in the `data` field."
+    type: object
+    properties:
+      count:
+        title: Count
+        description: "The number of elements currently being returned. This may be less than the total number of elements. Pagination links under the `links` property can be used to access additional pages of results, if any are available."
+        type: integer
+        readOnly: true
+      links:
+        title: Links
+        description: "Links related to the overall list of elements, used to paginate the list"
+        $ref: "framework#/definitions/Links"
+        readOnly: true
+      total:
+        title: Total
+        description: "The total number of elements available, which may be greater than the `count` of elements currently being returned. Only included in responses when the `includeTotal` query parameter is set to `true`. The maximum number of elements counted is 1000. If the response value is 1000, the actual count could be 1000 or greater."
+        type: integer
+        readOnly: true

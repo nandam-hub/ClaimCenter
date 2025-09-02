@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="A custom work item for the timeline creation work queue"
+  entity="TimeCreationWorkItem_SP"
+  table="timecreationworkitem_sp"
+  type="keyable">
+  <implementsEntity
+    name="WorkItem"/>
+  <foreignkey
+    fkentity="Claim"
+    name="Claim"
+    nullok="false"/>
+</entity>

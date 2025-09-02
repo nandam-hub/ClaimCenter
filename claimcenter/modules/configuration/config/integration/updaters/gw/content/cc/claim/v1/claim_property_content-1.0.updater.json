@@ -1,0 +1,29 @@
+{
+  "schemaName": "gw.content.cc.claim.v1.claim_property_content-1.0",
+  "combine": [
+    "gw.content.cc.claim.v1.claim_content-1.0",
+    "gw.core.cc.claim.v1.claim_property_core-1.0"
+  ],
+  "updaters": {
+    "DwellingIncident": {
+      "properties": {
+        "incidentOwner": {
+          "path": "DwellingIncident.incidentowner",
+          "valueResolver": {
+            "typeName": "gw.rest.core.cc.claim.v1.claims.contacts.ClaimContactJsonValueResolver"
+          }
+        }
+      }
+    },
+    "LivingExpensesIncident": {
+      "properties": {
+        "incidentOwner": {
+          "path": "LivingExpensesIncident.incidentowner",
+          "valueResolver": {
+            "typeName": "gw.rest.core.cc.claim.v1.claims.contacts.ClaimContactJsonValueResolver"
+          }
+        }
+      }
+    }
+  }
+}

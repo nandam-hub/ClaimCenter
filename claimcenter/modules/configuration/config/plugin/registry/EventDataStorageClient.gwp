@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<plugin
+  interface="EventDataStorageClient"
+  name="EventDataStorageClient">
+  <plugin-java
+    javaclass="com.guidewire.events.system.integration.datastorage.DatabaseEventDataStorageClient"/>
+</plugin>

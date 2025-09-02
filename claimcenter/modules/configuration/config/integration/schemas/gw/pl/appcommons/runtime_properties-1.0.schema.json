@@ -1,0 +1,70 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "x-gw-import": {
+    "linking": "gw.pl.framework.linking-1.0"
+  },
+  "definitions": {
+    "RuntimePropertyAttributes": {
+      "type" : "object",
+      "properties" : {
+        "description": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string",
+          "readOnly": true
+        },
+        "propertyGroup": {
+          "type": "string",
+          "x-gw-type" : "typekey.RuntimePropertyGroup"
+        },
+        "name": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "propertyGroup",
+        "value"
+      ]
+    },
+    "RuntimePropertyData": {
+      "type": "object",
+      "properties": {
+        "attributes": {
+          "$ref": "#/definitions/RuntimePropertyAttributes"
+        },
+        "_links": {
+          "$ref": "linking#/definitions/Links",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "attributes"
+      ]
+    },
+    "RuntimePropertyList": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RuntimePropertyData"
+          }
+        },
+        "_links": {
+          "$ref": "linking#/definitions/Links"
+        },
+        "count": {
+          "type": "integer"
+        },
+        "totalCount": {
+          "type": "integer"
+        }
+      }
+    }
+  }
+}

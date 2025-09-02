@@ -1,0 +1,14 @@
+<div class="gw-CalendarTopNavigation--TopNav">
+  <div class="gw-CalendarTopNavigation--JumpTo gw-ValueWidget" data-gw-change="calendar.jumpTo id:${calendarId}">
+    <div class="gw-label">${jumpToLabel}</div>
+    <div class="gw-select-wrapper">
+      <div class="gw-icon"></div>
+      <select id="${prefixId}ccCalJumpToSelect" aria-label="${ariaLabel}">
+        <option value="clearCalendarState=1">${todayText}</option>
+        <option :for="option" :in="jumpToOptionsBeforeSelected" value="${option.value}">${option.label}</option>
+        <option value="${selectedJumpToOption.value}" selected>${selectedJumpToOption.label}</option>
+        <option :for="option" :in="jumpToOptionsAfterSelected" value="${option.value}">${option.label}</option>
+      </select>
+    </div>
+  </div>
+</div>

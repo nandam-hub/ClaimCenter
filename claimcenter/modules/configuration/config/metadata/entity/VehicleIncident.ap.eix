@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<internalExtension
+  xmlns="http://guidewire.com/datamodel"
+  entityName="VehicleIncident">
+  <column
+    desc="Number of occupants in the vehicle, including the driver, if present"
+    name="NumOccupants"
+    nullok="true"
+    type="integer"/>
+  <typekey
+    desc="Status of the child safety seat"
+    name="ChildSafetySeatStatus"
+    nullok="true"
+    typelist="ChildSafetySeatStatus"/>
+</internalExtension>

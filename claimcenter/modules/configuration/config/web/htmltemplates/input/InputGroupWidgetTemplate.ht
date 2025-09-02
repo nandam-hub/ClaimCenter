@@ -1,0 +1,12 @@
+<div class="gw-InputGroup--header">
+    ${checkbox}
+    ${icon}
+    <div class="gw-InputGroup--header--label">${groupLabel}</div>
+</div>
+<div class="gw-InputGroup--body ${widgetInnerSpacing}" role="group" aria-label="${groupLabel}">
+    ${:children}
+</div>
+<div class="gw-InputGroup--footer" aria-hidden="true">
+    <div class="gw-label"></div>
+    <div class="gw-value"></div>
+</div>

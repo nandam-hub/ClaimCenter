@@ -1,0 +1,111 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Popup
+    beforeCommit="createUserAndAddAuthorities()"
+    canEdit="true"
+    id="PortalAuthUserCreatePopup"
+    returnType="edge.uaaoperations.dto.ScimUserDTO"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Edge.Web.AuthAdminConsole.PortalAuthUserCreatePopup.Title&quot;)">
+    <LocationEntryPoint
+      signature="PortalAuthUserCreatePopup()"/>
+    <Variable
+      initialValue="createUser()"
+      name="user"
+      type="edge.uaaoperations.dto.ScimUserDTO"/>
+    <Variable
+      initialValue="injectUAAHandler()"
+      name="handler"
+      type="edge.capabilities.extusermgmt.authadminconsole.UAAAdministrationHandler"/>
+    <Variable
+      initialValue="new java.util.ArrayList&lt;edge.security.authorization.Authority&gt;()"
+      name="authorities"
+      type="java.util.ArrayList&lt;edge.security.authorization.Authority&gt;"/>
+    <Screen>
+      <PanelRef
+        def="PortalAuthUserDV(user, true)">
+        <Toolbar>
+          <EditButtons
+            pickValue="user"/>
+        </Toolbar>
+      </PanelRef>
+      <PanelRef>
+        <TitleBar
+          title="DisplayKey.get(&quot;Edge.Web.AuthAdminConsole.PortalGrantedAuthorities.Title&quot;)"/>
+        <Toolbar>
+          <ToolbarButton
+            available="InEditMode"
+            id="AddAuthorityButton"
+            label="DisplayKey.get(&quot;Edge.Web.AuthAdminConsole.PortalGrantedAuthorities.AddAuthority&quot;)">
+            <MenuItemSetRef
+                          def="PortalAuthUserGrantedAuthoritiesMenuItemSet(authorities)"/>
+          </ToolbarButton>
+          <CheckedValuesToolbarButton
+            allCheckedRowsAction="authorities.removeAll(CheckedValues.toList() as ArrayList&lt;edge.security.authorization.Authority&gt;)"
+            available="InEditMode"
+            id="deleteAuthoritiesButton"
+            iterator="PortalAuthUserGrantedAuthoritiesLV"
+            label="DisplayKey.get(&quot;Edge.Web.AuthAdminConsole.PortalGrantedAuthorities.DeleteAuthority&quot;)"/>
+        </Toolbar>
+        <ListViewPanel
+          id="PortalAuthUserGrantedAuthoritiesLV">
+          <RowIterator
+            checkBoxVisible="true"
+            editable="true"
+            elementName="authority"
+            hasCheckBoxes="true"
+            id="authoritiesIterator"
+            value="authorities"
+            valueType="ArrayList&lt;edge.security.authorization.Authority&gt;">
+            <Row>
+              <TextCell
+                id="d"
+                label="DisplayKey.get(&quot;Edge.Web.AuthAdminConsole.PortalGrantedAuthorities.Authority.Type&quot;)"
+                value="(authority as edge.security.authorization.Authority).AuthorityType.Code"/>
+              <TextCell
+                id="v"
+                label="DisplayKey.get(&quot;Edge.Web.AuthAdminConsole.PortalGrantedAuthorities.Authority.Target&quot;)"
+                value="(authority as edge.security.authorization.Authority).Target"/>
+              <TextCell
+                id="a"
+                label="DisplayKey.get(&quot;Edge.Web.AuthAdminConsole.PortalGrantedAuthorities.Authority.AccessLevel&quot;)"
+                value="(authority as edge.security.authorization.Authority).AccessLevel.Code"/>
+            </Row>
+          </RowIterator>
+        </ListViewPanel>
+      </PanelRef>
+    </Screen>
+    <Code><![CDATA[uses edge.di.CapabilityAndPath
+uses edge.di.Path
+uses edge.capabilities.extusermgmt.authadminconsole.UAAAdministrationHandler
+uses java.lang.RuntimeException
+uses edge.security.authorization.Authority
+uses edge.uaaoperations.dto.ScimUserDTO
+
+function injectUAAHandler(): UAAAdministrationHandler {
+  var handlerEither = edge.di.boot.Bootstrap.createNode(new CapabilityAndPath("extusermgmt", Path.parse("handlers.uaaadministration")), UAAAdministrationHandler)
+  if (handlerEither.isRight){
+    return handlerEither.right as UAAAdministrationHandler
+  } else {
+    throw new RuntimeException("Failed to initialise UAAAdministrationHandler")
+  }
+}
+
+function createUser() : ScimUserDTO {
+  var newUser = new ScimUserDTO(null,null,null,null)
+  newUser.Emails.add(new ScimUserDTO.EmailAddress(){:Primary = true})
+  return newUser
+}
+
+function createUserAndAddAuthorities() : ScimUserDTO{
+  var createdUser = handler.createUser(user)
+  if (authorities.HasElements){
+    var authArray = authorities.toArray(new edge.security.authorization.Authority[authorities.size()])
+    createdUser = handler.addAuthoritiesForUser(createdUser.UserName, authArray)
+  }
+  return createdUser
+}]]></Code>
+  </Popup>
+</PCF>

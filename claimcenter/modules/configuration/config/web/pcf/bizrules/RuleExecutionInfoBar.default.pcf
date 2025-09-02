@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <InfoBar
+    hideIfEditable="true"
+    id="RuleExecutionInfoBar"
+    mode="default">
+    <Require
+      name="head"
+      type="RuleHead"/>
+    <Require
+      name="status"
+      type="RuleExecutionStatus"/>
+    <Require
+      name="versionController"
+      type="gw.bizrules.management.BizRulesVersionController"/>
+    <InfoBarElement
+      icon="&quot;runstatus_executing&quot;"
+      iconColor="gw.api.web.color.GWColor.THEME_ALERT_SUCCESS"
+      iconType="svgFileName"
+      id="Executing"
+      value="status != null ? status.Description : &quot;&quot;"
+      visible="status != null and status == TC_ENABLED"/>
+    <InfoBarElement
+      icon="&quot;runstatus_not_executing&quot;"
+      iconColor="gw.api.web.color.GWColor.THEME_ALERT_ERROR"
+      iconType="svgFileName"
+      id="NotExecuting"
+      value="status != null ? status.Description : &quot;&quot;"
+      visible="status != null and RuleExecutionStatus.TF_NOTEXECUTING.TypeKeys.contains(status)"/>
+    <InfoBarElement
+      icon="&quot;runstatus_prev_executing&quot;"
+      iconColor="gw.api.web.color.GWColor.THEME_ALERT_WARNING"
+      iconType="svgFileName"
+      id="PrevExecuting"
+      value="head != null ? head.getPrevExecutionTooltip(versionController) : &quot;&quot;"
+      visible="status != null and status == TC_PREVENABLED"/>
+    <InfoBarElement
+      icon="&quot;runstatus_unknown&quot;"
+      iconColor="gw.api.web.color.GWColor.THEME_ACTION_NEUTRAL"
+      iconType="svgFileName"
+      id="Unknown"
+      value="status != null ? status.Description : &quot;&quot;"
+      visible="status != null and status == TC_UNKNOWN"/>
+  </InfoBar>
+</PCF>

@@ -1,0 +1,522 @@
+swagger: "2.0"
+info:
+  description: "APIs for InsuranceSuite system tools"
+  version: "1.13.0"
+basePath: /systemtools/v1
+consumes:
+- application/json
+produces:
+- application/json
+x-gw-combine:
+- gw.core.pl.framework.v1.framework_pl-1.0
+x-gw-schema-import:
+  systemtools: gw.core.pl.systemtools.v1.systemtools_pl-1.0
+paths:
+  /api-roles:
+    get:
+      summary: "Retrieves a list of api roles"
+      description: "Retrieves a list of api roles"
+      operationId: getApiRoles
+      x-gw-sinceVersion: "1.13.0"
+      x-gw-extensions:
+        childResourceType: ApiRole
+        operationType: get-collection
+        resourceType: ApiRoles
+      x-gw-parameter-sets:
+      - get-collection
+      responses:
+        "200":
+          description: "The list of api roles"
+          schema:
+            $ref: "#/definitions/ApiRolesList"
+  /batch-processes:
+    get:
+      summary: "Retrieve information about all batch processes"
+      description: "Retrieve information about all batch processes"
+      operationId: getBatchProcesses
+      produces:
+      - application/json
+      x-gw-sinceVersion: "1.5.0"
+      x-gw-extensions:
+        childResourceType: BatchProcess
+        operationType: get-collection
+        resourceType: BatchProcesses
+      x-gw-parameter-sets:
+      - get-collection
+      responses:
+        "200":
+          description: "The paginated list of `BatchProcess` elements"
+          schema:
+            $ref: "#/definitions/BatchProcessList"
+  "/batch-processes/{batchProcessType}":
+    parameters:
+    - $ref: "#/parameters/batchProcessType"
+    get:
+      summary: "Retrieve details of a batch process"
+      description: "Retrieves a batch process by its type name. A batch process is an automated process that can be run in the background."
+      operationId: getBatchProcess
+      x-gw-sinceVersion: "1.5.0"
+      x-gw-extensions:
+        operationType: get-element
+        resourceType: BatchProcess
+      x-gw-parameter-sets:
+      - get-element
+      responses:
+        "200":
+          description: "The details of the batch process"
+          schema:
+            $ref: "#/definitions/BatchProcessResponse"
+  "/batch-processes/{batchProcessType}/histories":
+    parameters:
+    - $ref: "#/parameters/batchProcessType"
+    get:
+      summary: "Retrieve a list of histories associated with this batch process"
+      description: "Retrieve a list of histories associated with this batch process"
+      operationId: getProcessHistories
+      x-gw-sinceVersion: "1.11.0"
+      x-gw-extensions:
+        childResourceType: ProcessHistory
+        operationType: get-collection
+        resourceType: ProcessHistories
+      x-gw-parameter-sets:
+      - get-collection
+      responses:
+        "200":
+          description: "Successful response"
+          schema:
+            $ref: "#/definitions/ProcessHistoryList"
+  "/batch-processes/{batchProcessType}/histories/{processHistoryId}":
+    parameters:
+    - $ref: "#/parameters/batchProcessType"
+    - $ref: "#/parameters/processHistoryId"
+    get:
+      summary: "Retrieve details of a batch process run"
+      description: "Retrieve details of a batch process run"
+      operationId: getProcessHistory
+      x-gw-sinceVersion: "1.11.0"
+      x-gw-extensions:
+        operationType: get-element
+        resourceType: ProcessHistory
+      x-gw-parameter-sets: get-element
+      responses:
+        "200":
+          description: "Successful response"
+          schema:
+            $ref: "#/definitions/ProcessHistoryResponse"
+  "/batch-processes/{batchProcessType}/start":
+    parameters:
+    - $ref: "#/parameters/batchProcessType"
+    post:
+      summary: "Starts the batch process"
+      description: "Starts the batch process. If the batch process was already running, no new process is started. The response will indicate whether a new process was actually started, based on whether the `processId` property is populated."
+      operationId: startBatchProcess
+      x-gw-sinceVersion: "1.5.0"
+      x-gw-extensions:
+        operationType: custom-action
+        resourceType: BatchProcess
+      parameters:
+      - name: body
+        in: body
+        required: false
+        schema:
+          $ref: "#/definitions/BatchProcessStartRequest"
+      x-gw-parameter-sets:
+      - custom-action
+      responses:
+        "200":
+          description: "Returns the batch process details. The new process id is populated if the batch process was not already running."
+          schema:
+            $ref: "#/definitions/BatchProcessResponse"
+  "/batch-processes/{batchProcessType}/stop":
+    parameters:
+    - $ref: "#/parameters/batchProcessType"
+    post:
+      summary: "Stops the batch process"
+      description: "Stops the batch process. If the batch process was not already running, this has no effect. The response will indicate whether this call actually stopped the batch process, based on the `wasStopped` property."
+      operationId: stopBatchProcess
+      x-gw-sinceVersion: "1.5.0"
+      x-gw-extensions:
+        operationType: custom-action
+        resourceType: BatchProcess
+      x-gw-parameter-sets:
+      - custom-action
+      responses:
+        "200":
+          description: "Returns the batch process details"
+          schema:
+            $ref: "#/definitions/BatchProcessResponse"
+  /database-consistency-checks:
+    get:
+      summary: "Retrieves a list of consistency check runs"
+      description: "Retrieves a list of consistency check runs"
+      operationId: getDatabaseConsistencyChecks
+      x-gw-sinceVersion: "1.5.0"
+      x-gw-extensions:
+        childResourceType: DatabaseConsistencyCheck
+        operationType: get-collection
+        resourceType: DatabaseConsistencyChecks
+      x-gw-parameter-sets:
+      - get-collection
+      responses:
+        "200":
+          description: "The list of consistency check runs"
+          schema:
+            $ref: "#/definitions/DatabaseConsistencyCheckList"
+  "/database-consistency-checks/{dbccId}":
+    parameters:
+    - $ref: "#/parameters/dbccId"
+    get:
+      summary: "Retrieve details of a consistency check run"
+      description: "Retrieve details of a consistency check run"
+      operationId: getDatabaseConsistencyCheck
+      x-gw-sinceVersion: "1.5.0"
+      x-gw-extensions:
+        operationType: get-element
+        resourceType: DatabaseConsistencyCheck
+      x-gw-parameter-sets:
+      - get-element
+      responses:
+        "200":
+          description: "Details of a consistency check run"
+          schema:
+            $ref: "#/definitions/DatabaseConsistencyCheckResponse"
+  "/database-consistency-checks/{dbccId}/report":
+    get:
+      summary: "Returns the consistency check report in zip file format"
+      description: "Returns the consistency check report in zip file format"
+      operationId: getDatabaseConsistencyReport
+      produces:
+      - application/zip
+      x-gw-sinceVersion: "1.5.0"
+      x-gw-extensions:
+        operationType: get-element
+        resourceType: DatabaseConsistencyCheckReport
+      parameters:
+      - $ref: "#/parameters/dbccId"
+      - name: errorsOnly
+        in: query
+        description: "Whether to include only errors in the consistency check report. Defaults to false."
+        type: boolean
+      responses:
+        "200":
+          description: "The consistency check report in zip file format"
+  /design-api-extension-bundles:
+    get:
+      summary: "Retrieve a list of design api extension bundles"
+      description: "Retrieve a list of design api extension bundles"
+      operationId: getDesignApiExtensionBundles
+      x-gw-sinceVersion: "1.13.0"
+      x-gw-extensions:
+        childResourceType: DesignApiExtensionBundle
+        operationType: get-collection
+        resourceType: DesignApiExtensionBundles
+      x-gw-parameter-sets:
+      - get-collection
+      responses:
+        "200":
+          description: "Successfully returned a list of design api extension bundles"
+          schema:
+            $ref: "#/definitions/DesignApiExtensionBundleList"
+    post:
+      summary: "Create a new design API extension bundle in design mode"
+      description: "Create a new design API extension bundle in design mode"
+      operationId: createDesignApiExtensionBundle
+      x-gw-sinceVersion: "1.13.0"
+      x-gw-extensions:
+        childResourceType: DesignApiExtensionBundle
+        operationType: post-collection
+        resourceType: DesignApiExtensionBundles
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: "#/definitions/DesignApiExtensionBundleRequest"
+      x-gw-parameter-sets:
+      - post-collection
+      responses:
+        "201":
+          description: "Return the details for the newly-created design api extension bundle"
+          schema:
+            $ref: "#/definitions/DesignApiExtensionBundleResponse"
+  "/design-api-extension-bundles/{apiExtensionBundleCode}":
+    parameters:
+    - $ref: "#/parameters/apiExtensionBundleCode"
+    get:
+      summary: "Return details of a single design api extension bundle"
+      description: "Return details of a single design api extension bundle"
+      operationId: getDesignApiExtensionBundle
+      x-gw-sinceVersion: "1.13.0"
+      x-gw-extensions:
+        operationType: get-element
+        resourceType: DesignApiExtensionBundle
+      x-gw-parameter-sets:
+      - get-element
+      responses:
+        "200":
+          description: "Successfully returned details for a single design api extension bundle"
+          schema:
+            $ref: "#/definitions/DesignApiExtensionBundleResponse"
+    patch:
+      summary: "Update the details of a design API extension bundle"
+      description: "Update the details of a design API extension bundle"
+      operationId: patchDesignApiExtensionBundle
+      x-gw-sinceVersion: "1.13.0"
+      x-gw-extensions:
+        operationType: patch-element
+        resourceType: DesignApiExtensionBundle
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: "#/definitions/DesignApiExtensionBundleRequest"
+      x-gw-parameter-sets:
+      - patch-element
+      responses:
+        "200":
+          description: "Return the details for the patched api extension bundle"
+          schema:
+            $ref: "#/definitions/DesignApiExtensionBundleResponse"
+    delete:
+      summary: "Delete a design API extension bundle"
+      description: "Delete a design API extension bundle"
+      operationId: deleteDesignApiExtensionBundle
+      x-gw-sinceVersion: "1.13.0"
+      x-gw-extensions:
+        operationType: delete-element
+        resourceType: DesignApiExtensionBundle
+      x-gw-parameter-sets:
+      - delete-element
+      responses:
+        "204":
+          description: "Successful deletion"
+  /installed-api-extension-bundles:
+    get:
+      summary: "Retrieve a list of installed api extension bundles"
+      description: "Retrieve a list of installed api extension bundles"
+      operationId: getInstalledApiExtensionBundles
+      x-gw-sinceVersion: "1.13.0"
+      x-gw-extensions:
+        childResourceType: InstalledApiExtensionBundle
+        operationType: get-collection
+        resourceType: InstalledApiExtensionBundles
+      x-gw-parameter-sets:
+      - get-collection
+      responses:
+        "200":
+          description: "Successfully returned a list of installed api extension bundles"
+          schema:
+            $ref: "#/definitions/InstalledApiExtensionBundleList"
+  "/installed-api-extension-bundles/{apiExtensionBundleCode}":
+    parameters:
+    - $ref: "#/parameters/apiExtensionBundleCode"
+    get:
+      summary: "Return details of a single installed api extension bundle"
+      description: "Return details of a single installed api extension bundle"
+      operationId: getInstalledApiExtensionBundle
+      x-gw-sinceVersion: "1.13.0"
+      x-gw-extensions:
+        operationType: get-element
+        resourceType: InstalledApiExtensionBundle
+      x-gw-parameter-sets:
+      - get-element
+      responses:
+        "200":
+          description: "Successfully returned details for a single installed api extension bundle"
+          schema:
+            $ref: "#/definitions/InstalledApiExtensionBundleResponse"
+  /openapi.json:
+    get:
+      summary: "Retrieve the `OpenAPI 3.0` schema for this API"
+      description: "Retrieves the `OpenAPI 3.0` schema for this API"
+      operationId: getSystemToolsOpenApiSchema
+      x-gw-extensions:
+        operationType: get-element
+        resourceType: SystemToolsOpenApiSchema
+      x-gw-parameter-sets:
+      - openapi
+      responses:
+        "200":
+          description: "The `OpenAPI 3.0` schema for this API"
+          schema:
+            type: string
+parameters:
+  apiExtensionBundleCode:
+    name: apiExtensionBundleCode
+    in: path
+    description: "The code for the API extension bundle"
+    required: true
+    type: string
+    x-gw-sinceVersion: "1.13.0"
+  batchProcessType:
+    name: batchProcessType
+    in: path
+    description: "The type of the batch process"
+    required: true
+    type: string
+    x-gw-sinceVersion: "1.5.0"
+  dbccId:
+    name: dbccId
+    in: path
+    description: "The identifier for the dbcc run"
+    required: true
+    type: string
+    x-gw-sinceVersion: "1.5.0"
+  processHistoryId:
+    name: processHistoryId
+    in: path
+    description: "The id of the batch process history"
+    required: true
+    type: string
+    x-gw-sinceVersion: "1.11.0"
+x-gw-cors-policy: systemtools
+x-gw-localizationKeyPrefix: systemtools.v1
+definitions:
+  ApiRolesData:
+    x-gw-extend:
+    - "#/definitions/DataEnvelope"
+    required:
+    - attributes
+    properties:
+      attributes:
+        $ref: "systemtools#/definitions/ApiRole"
+  ApiRolesList:
+    type: object
+    x-gw-extend:
+    - "#/definitions/DataListEnvelope"
+    properties:
+      data:
+        type: array
+        items:
+          $ref: "#/definitions/ApiRolesData"
+  BatchProcessData:
+    x-gw-extend:
+    - "#/definitions/DataEnvelope"
+    required:
+    - attributes
+    properties:
+      attributes:
+        $ref: "systemtools#/definitions/BatchProcess"
+  BatchProcessList:
+    type: object
+    x-gw-extend:
+    - "#/definitions/DataListEnvelope"
+    properties:
+      data:
+        type: array
+        items:
+          $ref: "#/definitions/BatchProcessData"
+  BatchProcessResponse:
+    type: object
+    properties:
+      data:
+        $ref: "#/definitions/BatchProcessData"
+  BatchProcessStartData:
+    x-gw-extend:
+    - "#/definitions/DataEnvelope"
+    required:
+    - attributes
+    properties:
+      attributes:
+        $ref: "systemtools#/definitions/BatchProcessArguments"
+  BatchProcessStartRequest:
+    type: object
+    properties:
+      data:
+        $ref: "#/definitions/BatchProcessStartData"
+  DatabaseConsistencyCheckData:
+    x-gw-extend:
+    - "#/definitions/DataEnvelope"
+    required:
+    - attributes
+    properties:
+      attributes:
+        $ref: "systemtools#/definitions/DatabaseConsistencyCheck"
+  DatabaseConsistencyCheckList:
+    type: object
+    x-gw-extend:
+    - "#/definitions/DataListEnvelope"
+    properties:
+      data:
+        type: array
+        items:
+          $ref: "#/definitions/DatabaseConsistencyCheckData"
+  DatabaseConsistencyCheckResponse:
+    type: object
+    properties:
+      data:
+        $ref: "#/definitions/DatabaseConsistencyCheckData"
+  DesignApiExtensionBundleData:
+    x-gw-extend:
+    - "#/definitions/DataEnvelope"
+    required:
+    - attributes
+    properties:
+      attributes:
+        $ref: "systemtools#/definitions/DesignApiExtensionBundle"
+  DesignApiExtensionBundleList:
+    type: object
+    x-gw-extend:
+    - "#/definitions/DataListEnvelope"
+    properties:
+      data:
+        type: array
+        items:
+          $ref: "#/definitions/DesignApiExtensionBundleData"
+  DesignApiExtensionBundleRequest:
+    type: object
+    required:
+    - data
+    properties:
+      data:
+        $ref: "#/definitions/DesignApiExtensionBundleData"
+  DesignApiExtensionBundleResponse:
+    type: object
+    properties:
+      data:
+        $ref: "#/definitions/DesignApiExtensionBundleData"
+  InstalledApiExtensionBundleData:
+    x-gw-extend:
+    - "#/definitions/DataEnvelope"
+    required:
+    - attributes
+    properties:
+      attributes:
+        $ref: "systemtools#/definitions/InstalledApiExtensionBundle"
+  InstalledApiExtensionBundleList:
+    type: object
+    x-gw-extend:
+    - "#/definitions/DataListEnvelope"
+    properties:
+      data:
+        type: array
+        items:
+          $ref: "#/definitions/InstalledApiExtensionBundleData"
+  InstalledApiExtensionBundleResponse:
+    type: object
+    properties:
+      data:
+        $ref: "#/definitions/InstalledApiExtensionBundleData"
+  ProcessHistoryData:
+    x-gw-extend:
+    - "#/definitions/DataEnvelope"
+    required:
+    - attributes
+    properties:
+      attributes:
+        $ref: "systemtools#/definitions/ProcessHistory"
+  ProcessHistoryList:
+    type: object
+    x-gw-extend:
+    - "#/definitions/DataListEnvelope"
+    properties:
+      data:
+        type: array
+        items:
+          $ref: "#/definitions/ProcessHistoryData"
+  ProcessHistoryResponse:
+    type: object
+    properties:
+      data:
+        $ref: "#/definitions/ProcessHistoryData"

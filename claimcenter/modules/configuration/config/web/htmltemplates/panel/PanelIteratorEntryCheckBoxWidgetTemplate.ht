@@ -1,0 +1,24 @@
+<div
+        role="checkbox"
+        tabindex="0"
+        aria-checked="${checked ? 'true' : 'false'}"
+        class="gw-checkboxDiv ${checked ? 'gw-checked'}"
+        data-gw-click="gwCheckboxDiv.onCheckboxDivClick"
+        id="${renderId}_checkboxDiv"
+        data-gw-event-barrier>
+    <div
+            class="gw-checkboxDiv--inner"></div>
+    <input
+            aria-hidden="true"
+            class="gw-hidden"
+            type="checkbox"
+            value="true"
+            name="${renderId}"
+            data-gw-uses-checkbox-div
+            data-gw-change="gwFlags.checkBoxChanged"
+            data-gw-flags-scope="${scope}"
+            data-gw-flags-target="${target}"
+            data-gw-flags-for-entry
+            data-gw-event-barrier
+            checked="${checked}"/>
+</div>

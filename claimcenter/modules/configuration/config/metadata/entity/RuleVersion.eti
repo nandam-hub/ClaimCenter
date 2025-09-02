@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Business Rule Version"
+  entity="RuleVersion"
+  extendable="false"
+  loadable="false"
+  platform="true"
+  table="bizruleversion"
+  type="versionable">
+  <implementsEntity
+    name="RuleVersionAware"/>
+  <implementsInterface
+    iface="com.guidewire.bizrules.domain.RuleVersionDomainMethods"
+    impl="com.guidewire.bizrules.domain.RuleVersionImpl"/>
+  <implementsInterface
+    iface="com.guidewire.bizrules.management.RuleVersionInternalMethods"
+    impl="com.guidewire.bizrules.domain.RuleVersionImpl"/>
+  <implementsInterface
+    iface="com.guidewire.bizrules.management.RuleVersionAwareInternal"
+    impl="com.guidewire.bizrules.domain.RuleVersionImpl"/>
+  <column
+    desc="Identifies the RuleHead to which this version applies."
+    name="GlobalRuleID"
+    nullok="false"
+    type="publicid"/>
+  <column
+    name="CreateTime"
+    nullok="false"
+    setterScriptability="hidden"
+    type="datetime"/>
+  <column
+    desc="The name of the user who created this version."
+    name="CreateUserName"
+    nullok="false"
+    setterScriptability="hidden"
+    type="username">
+  </column>
+  <column
+    desc="Identifier of the system on which the version was created."
+    name="CreateSystemId"
+    nullok="false"
+    setterScriptability="hidden"
+    type="shorttext"/>
+  <column
+    name="LockedInternal"
+    columnName="locked"
+    nullok="true"
+    getterScriptability="hidden"
+    type="bit"
+    setterScriptability="hidden"/>
+  <typekey
+    name="Status"
+    nullok="false"
+    typelist="RuleStatus"/>
+  <foreignkey
+    columnName="RuleID"
+    desc="The business rule definition of this version."
+    fkentity="Rule"
+    name="Rule"
+    nullok="false"
+    setterScriptability="doesNotExist"/>
+  <array
+    arrayentity="RuleVersionParentEdge"
+    arrayfield="Owner"
+    name="ParentEdges"
+    getterScriptability="doesNotExist"
+    owner="true"
+    setterScriptability="doesNotExist"/>
+  <array
+    arrayentity="DeployedRuleTag"
+    name="DeploymentTags"
+    owner="true"/>
+  <onetoone
+    fkentity="RuleImportAuditRecord"
+    name="ImportRecord"
+    nullok="true"
+    setterScriptability="doesNotExist"/>
+</entity>

@@ -1,0 +1,71 @@
+{
+  "schemaName" : "gw.events.effdate.v1.bulk_write-1.0",
+  "mappers" : {
+    "BranchCopied" : {
+      "schemaDefinition" : "BranchCopied",
+      "root" : "gw.events.effdate.BranchCopiedEventInfo",
+      "properties" : {
+        "source" : {
+          "path" : "BranchCopiedEventInfo.SourceBranch.PublicID",
+          "eventSafe" : true
+        },
+        "target" : {
+          "path" : "BranchCopiedEventInfo.TargetBranch.PublicID",
+          "eventSafe" : true
+        },
+        "start" : {
+          "path" : "BranchCopiedEventInfo.NewPeriodStart",
+          "eventSafe" : true
+        },
+        "end" : {
+          "path" : "BranchCopiedEventInfo.NewPeriodEnd",
+          "eventSafe" : true
+        },
+        "excludes": {
+          "path": "BranchCopiedEventInfo.Excludes",
+          "eventSafe" : true
+        }
+      }
+    },
+    "PeriodChanged" : {
+      "schemaDefinition" : "PeriodChanged",
+      "root" : "gw.events.effdate.PeriodChangedEventInfo",
+      "properties" : {
+        "branch" : {
+          "path" : "PeriodChangedEventInfo.SourceBranch.PublicID",
+          "eventSafe" : true
+        },
+        "start" : {
+          "path" : "PeriodChangedEventInfo.NewPeriodStart",
+          "eventSafe" : true
+        },
+        "end" : {
+          "path" : "PeriodChangedEventInfo.NewPeriodEnd",
+          "eventSafe" : true
+        }
+      }
+    },
+    "SliceCopied" : {
+      "schemaDefinition" : "SliceCopied",
+      "root" : "gw.events.effdate.SliceCopiedEventInfo",
+      "properties" : {
+        "source" : {
+          "path" : "SliceCopiedEventInfo.SourceBranch.PublicID",
+          "eventSafe" : true
+        },
+        "target" : {
+          "path" : "SliceCopiedEventInfo.TargetBranch.PublicID",
+          "eventSafe" : true
+        },
+        "date" : {
+          "path" : "SliceCopiedEventInfo.SliceCopyDate",
+          "eventSafe" : true
+        },
+        "excludes": {
+          "path": "SliceCopiedEventInfo.Excludes",
+          "eventSafe" : true
+        }
+      }
+    }
+  }
+}

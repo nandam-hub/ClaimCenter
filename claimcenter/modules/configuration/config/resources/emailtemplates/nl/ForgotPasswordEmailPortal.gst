@@ -1,0 +1,1 @@
+<%@ params( email: String, portalURL: String, code: String ) %>Dag ${email}, <br /> Klik op de volgende URL om uw wachtwoord opnieuw in te stellen: <br /> <a href="${portalURL}?token=${code}">Wachtwoord opnieuw instellen</a><br /><br /> Met vriendelijke groet,  

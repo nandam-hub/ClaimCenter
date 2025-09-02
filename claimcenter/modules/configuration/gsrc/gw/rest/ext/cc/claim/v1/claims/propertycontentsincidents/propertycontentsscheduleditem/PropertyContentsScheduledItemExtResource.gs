@@ -1,0 +1,8 @@
+package gw.rest.ext.cc.claim.v1.claims.propertycontentsincidents.propertycontentsscheduleditem
+
+uses gw.rest.core.cc.claim.v1.claims.propertycontentsincidents.propertycontentsscheduleditem.PropertyContentsScheduledItemCoreResource
+
+@Export
+class PropertyContentsScheduledItemExtResource extends PropertyContentsScheduledItemCoreResource {
+
+}

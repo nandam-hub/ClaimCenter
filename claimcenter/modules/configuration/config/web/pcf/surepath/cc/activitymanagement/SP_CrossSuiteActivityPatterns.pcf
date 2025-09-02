@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Page
+    canEdit="perm.System.editcrossappact_sp"
+    canVisit="gw.surepath.cc.configuration.activitymanagement.util.ActivityManagementProperties.INSTANCE.FeatureEnabled and gw.surepath.cc.configuration.activitymanagement.util.ActivityManagementProperties.INSTANCE.SharedActivitiesEnabled and perm.System.viewcrossappact_sp"
+    id="SP_CrossSuiteActivityPatterns"
+    title="DisplayKey.get(&quot;SP.ActivityManagement.PCF.CrossSuiteActivityPatterns&quot;)">
+    <LocationEntryPoint
+      signature="SP_CrossSuiteActivityPatterns()"/>
+    <Screen>
+      <TitleBar
+        id="Title"
+        title="DisplayKey.get(&quot;SP.ActivityManagement.PCF.CrossSuiteActivityPatterns&quot;)"/>
+      <ListViewPanel>
+        <RowIterator
+          editable="false"
+          elementName="crossSuitePattern"
+          id="CrossSuitePatternIterator"
+          value="gw.surepath.cc.configuration.activitymanagement.util.ActivityPatternFinder.retrieveCrossSuiteActivityPatterns()"
+          valueType="gw.api.database.IQueryBeanResult&lt;entity.CrossAppActPattern_SP&gt;">
+          <Row>
+            <TextCell
+              id="PatternCode"
+              label="DisplayKey.get(&quot;SP.ActivityManagement.PCF.PatternCode&quot;)"
+              value="crossSuitePattern.PatternCode"/>
+            <TextCell
+              id="PatternDisplay"
+              label="DisplayKey.get(&quot;SP.ActivityManagement.PCF.PatternDisplayName&quot;)"
+              value="crossSuitePattern.PatternDisplayName"/>
+            <TypeKeyCell
+              id="PatternDestinationApplication"
+              label="DisplayKey.get(&quot;SP.ActivityManagement.PCF.DestinationApplication&quot;)"
+              value="crossSuitePattern.DestinationApplication"
+              valueType="typekey.CrossAppActivityDest_SP"/>
+          </Row>
+        </RowIterator>
+      </ListViewPanel>
+    </Screen>
+  </Page>
+</PCF>

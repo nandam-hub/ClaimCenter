@@ -1,0 +1,27 @@
+package rules.Preupdate.ClaimPreupdate_dir
+
+uses gw.api.locale.DisplayKey
+
+@gw.rules.RuleName("CPU37000 - Auto Set Vehicle Incident Valuation Source")
+internal class CPU37000AutoSetVehicleIncidentValuationSource {
+  static function doCondition(claim     :     entity.Claim) : boolean {
+/*start00rule*/
+return true
+/*end00rule*/
+}
+
+  static function doAction(claim     :     entity.Claim, actions : gw.rules.Action) {
+/*start00rule*/
+    var vehicleIncidentsToAutoSet = claim.VehicleIncidentsOnly
+        .where(\vi -> vi.getOriginalValue(vi#PropertyValue) == null
+            and vi.PropertyValue != null
+            and vi.ValuationSource == null)
+
+    for (var vehicleIncident in vehicleIncidentsToAutoSet) {
+      vehicleIncident.ValuationSource = PropertyValuationSource.TC_MANUAL
+      claim.createHistoryEvent(HistoryType.TC_AUTOPILOT,
+          DisplayKey.get("Java.Autopilot.HistoryEvent.VehicleIncident.ValuationSourceAutoSetManual", vehicleIncident, PropertyValuationSource.TC_MANUAL))
+    }
+/*end00rule*/
+  }
+}

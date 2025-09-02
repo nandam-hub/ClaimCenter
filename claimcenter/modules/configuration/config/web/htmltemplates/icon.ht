@@ -1,0 +1,1 @@
+<span aria-hidden="${isAriaHidden ? 'true'}" ${classBuilder} ${attrBuilder} ${styleBuilder}></span>

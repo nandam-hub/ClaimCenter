@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin
+  interface="AuthenticationServicePlugin"
+  name="AuthenticationServicePlugin">
+  <plugin-gosu
+    gosuclass="edge.oauth.authplugin.EdgeAuthenticationServicePlugin">
+    <param
+      name="policyholder.integration.username"
+      value="pu"/>
+  </plugin-gosu>
+</plugin>

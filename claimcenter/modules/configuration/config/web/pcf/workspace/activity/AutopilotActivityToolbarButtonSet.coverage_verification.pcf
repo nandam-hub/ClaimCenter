@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <ToolbarButtonSet
+    id="AutopilotActivityToolbarButtonSet"
+    mode="coverage_verification">
+    <Require
+      name="Activity"
+      type="entity.Activity"/>
+    <ToolbarButton
+      hideIfEditable="true"
+      id="AutopilotActivityDetailScreen_CoverageVerification_CompleteButton_Dropdown"
+      label="DisplayKey.get(&quot;Button.Activity.Complete&quot;)"
+      shortcut="P"
+      visible="Activity.canComplete() &amp;&amp; (Activity.AutopilotPurpose == AutopilotPurpose.TC_COVERAGE_VERIFICATION)">
+      <MenuItem
+        action="setAutopilotRelatedFlagsAndComplete(AutopilotHandlingDecision.TC_HANDLED_BY_AUTOPILOT);"
+        id="ActivityDetailScreen_CompleteButton_EngageAutopilot"
+        label="DisplayKey.get(&quot;Button.Activity.Complete.Autopilot.Engage&quot;)"/>
+      <MenuItem
+        action="setAutopilotRelatedFlagsAndComplete(AutopilotHandlingDecision.TC_HANDLED_MANUALLY);"
+        id="ActivityDetailScreen_CompleteButton_DisableAutopilot"
+        label="DisplayKey.get(&quot;Button.Activity.Complete.Autopilot.Disable&quot;)"/>
+    </ToolbarButton>
+    <Code>uses gw.autopilot.AutopilotActivityUIHelper
+
+    function setAutopilotRelatedFlagsAndComplete(handlingDecision : AutopilotHandlingDecision) {
+      AutopilotActivityUIHelper.setAutopilotRelatedFlagsAndComplete(CurrentLocation, Activity, handlingDecision);
+    }</Code>
+  </ToolbarButtonSet>
+</PCF>

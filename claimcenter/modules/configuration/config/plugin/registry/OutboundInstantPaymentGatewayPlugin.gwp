@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<plugin
+  interface="OutboundInstantPaymentGatewayPlugin"
+  name="OutboundInstantPaymentGatewayPlugin">
+  <plugin-gosu
+    gosuclass="gw.plugin.financials.payment.StandAloneOutboundInstantPaymentGatewayPlugin"/>
+</plugin>

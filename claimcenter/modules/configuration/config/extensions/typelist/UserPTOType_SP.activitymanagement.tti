@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="UserPTOType"
+  name="UserPTOType_SP">
+  <typecode
+    code="vacation"
+    desc="Vacation"
+    name="Vacation"/>
+  <typecode
+    code="illness"
+    desc="Illness"
+    name="Illness"/>
+  <typecode
+    code="bereavement"
+    desc="Bereavement"
+    name="Bereavement"/>
+  <typecode
+    code="juryduty"
+    desc="Jury Duty"
+    name="Jury Duty"/>
+  <typecode
+    code="leavewithoutpay"
+    desc="Leave without pay"
+    name="Leave without pay"/>
+</typelist>

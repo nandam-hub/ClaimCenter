@@ -1,0 +1,6 @@
+{
+  "schemaName": "ext.claim.v1.claim_graph_combined-1.0",
+  "combine": [
+    "ext.claim.v1.claim_graph_ext-1.0"
+  ]
+}

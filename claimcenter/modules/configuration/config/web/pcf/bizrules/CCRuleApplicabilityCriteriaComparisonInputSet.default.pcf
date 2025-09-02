@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <InputSet
+    id="CCRuleApplicabilityCriteriaComparisonInputSet"
+    mode="default">
+    <Require
+      name="controller"
+      type="gw.bizrules.pcf.RuleVersionComparisonController"/>
+    <InputSetRef
+      def="RuleComparisonSectionLabelInputSet(controller, DisplayKey.get(&quot;Web.BizRules.Rule.ApplicabilityCriteria&quot;))"
+      id="ApplicabilityCriteriaSectionLabel"/>
+  </InputSet>
+</PCF>

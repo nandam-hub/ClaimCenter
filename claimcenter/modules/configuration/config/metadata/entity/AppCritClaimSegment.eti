@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<entity
+  desc="Claim Segment Applicability Criteria "
+  loadable="false"
+  xmlns="http://guidewire.com/datamodel"
+  entity="AppCritClaimSegment"
+  table="appcritclaimsegment"
+  type="versionable">
+  <typekey
+    desc="Claim segment in a rule availability criteria"
+    name="ClaimSegment"
+    nullok="false"
+    typelist="ClaimSegment"/>
+  <foreignkey
+    columnName="RuleID"
+    desc="The associated rule"
+    fkentity="CCRule"
+    name="Rule"
+    nullok="false"/>
+  <implementsEntity
+    name="RuleVersionDependent"/>
+  <implementsInterface
+    iface="gw.bizrules.domain.RuleVersionDependent"
+    impl="com.guidewire.cc.domain.bizrules.AppCritClaimSegmentImpl"/>
+  <index
+    desc="Enforce uniqueness per claimSegment/rule combo"
+    name="UniqueEntryIndex"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="RuleID"/>
+    <indexcol
+      keyposition="2"
+      name="ClaimSegment"/>
+  </index>
+</entity>

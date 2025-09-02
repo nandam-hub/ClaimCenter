@@ -1,0 +1,3 @@
+<a :if="hasEmailValue" class="gw-link" href="mailto:${emailValue}">
+  ${emailValue}
+</a>

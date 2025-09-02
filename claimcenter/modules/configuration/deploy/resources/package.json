@@ -1,0 +1,47 @@
+{
+  "name": "pl",
+  "version": "1.0.0",
+  "author": "Guidewire Development",
+  "main": "build/app-ts.js",
+  "typings": "build/types",
+  "engines": {
+    "node": ">=16.15.0"
+  },
+  "scripts": {
+    "lint": "cross-env eslint --ext .ts ts/",
+    "test": "cross-env NODE_ENV=test mocha $NODE_DEBUG_OPTION \"./ts/test/**/*.spec.ts\" -n loader=ts-node/esm --exit --type-check -r mochaSetup.js"
+  },
+  "devDependencies": {
+    "@types/chai": "4.1.2",
+    "@types/d3": "5.0.0",
+    "@types/jquery": "3.5.16",
+    "@types/mocha": "2.2.48",
+    "@types/node": "18.7.10",
+    "@typescript-eslint/eslint-plugin": "5.36.1",
+    "@typescript-eslint/parser": "5.36.1",
+    "chai": "4.3.6",
+    "cross-env": "7.0.3",
+    "eslint": "8.25.0",
+    "eslint-config-prettier": "8.5.0",
+    "eslint-plugin-prettier": "4.2.1",
+    "fork-ts-checker-webpack-plugin": "7.2.13",
+    "jsdom": "20.0.0",
+    "jsdom-global": "3.0.2",
+    "mocha": "10.2.0",
+    "prettier": "2.7.1",
+    "prettier-plugin-organize-imports": "3.1.0",
+    "sass": "1.50.1",
+    "source-map-loader": "4.0.0",
+    "ts-loader": "9.3.1",
+    "ts-node": "10.9.1",
+    "typescript": "4.7.4",
+    "webpack": "5.83.1"
+  },
+  "dependencies": {
+    "d3": "4.13.0",
+    "jquery": "3.7.0"
+  },
+  "overrides": {
+    "d3-color": "3.1.0"
+  }
+}

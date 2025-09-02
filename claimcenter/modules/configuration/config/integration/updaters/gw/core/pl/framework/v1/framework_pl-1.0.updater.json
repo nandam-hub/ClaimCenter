@@ -1,0 +1,9 @@
+{
+  "schemaName": "gw.core.pl.framework.v1.framework_pl-1.0",
+  "typeUses": [
+    "gw.api.modules.rest.framework.v1.updater.resolver.CurrencyAmountValueResolver",
+    "gw.api.modules.rest.framework.v1.updater.resolver.MonetaryAmountValueResolver",
+    "gw.api.modules.rest.framework.v1.updater.resolver.SpatialPointValueResolver",
+    "gw.api.modules.rest.framework.v1.updater.resolver.TypeKeyValueResolver"
+  ]
+}

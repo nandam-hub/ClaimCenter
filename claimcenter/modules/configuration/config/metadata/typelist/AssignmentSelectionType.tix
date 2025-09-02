@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<internaltypelistextension 
+  xmlns="http://guidewire.com/typelists" 
+  name="AssignmentSelectionType" 
+  desc="Possible selection types for the assignment pop-up">
+  <typecode
+    code="FromProximitySearch"
+    desc="FromProximitySearch"
+    name="FromProximitySearch"
+    priority="3"/>
+</internaltypelistextension>

@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="User Paid Time Off"
+  entity="UserPTO_SP"
+  exportable="true"
+  extendable="true"
+  table="userpto_sp"
+  type="retireable">
+  <foreignkey
+    columnName="UserID"
+    desc="The User this entry belongs to"
+    exportable="false"
+    fkentity="User"
+    name="User"
+    nullok="false"/>
+  <typekey
+    desc="Type of PTO"
+    name="PTOType"
+    nullok="false"
+    typelist="UserPTOType_SP"/>
+  <column
+    desc="Vacation Start Date"
+    name="BeginDate"
+    nullok="false"
+    type="datetime"/>
+  <column
+    desc="Vacation End Date"
+    name="EndDate"
+    nullok="false"
+    type="datetime"/>
+  <column
+    desc="Date and time the batch processed this record"
+    name="BatchProcessDate"
+    nullok="true"
+    type="datetime"/>
+  <column
+    default="true"
+    desc="An active state. Could be useful for the batch"
+    name="Active"
+    nullok="false"
+    type="bit"/>
+  <implementsEntity
+    name="Validatable"/>
+</entity>

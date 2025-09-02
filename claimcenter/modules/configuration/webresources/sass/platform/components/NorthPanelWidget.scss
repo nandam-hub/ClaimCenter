@@ -1,0 +1,419 @@
+// Component specific
+$gw-TabBar--TabBarUnsavedWork--discard--menu-icon: "trash-alt-solid";
+$gw-TabBar--TabBarUnsavedWork--discard--menu-icon--size: gw-emFixed(1);
+$gw-TabBar--TabBarUnsavedWork--group--min-spacing: gw-emFixed(1);
+
+$gw-TabBar--caret-svg: "<svg x='0px' y='0px' width='200px' height='100px' viewBox='0 0 200 100' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' style='enable-background:new 0 0 200 100;' xml:space='preserve'><polyline stroke='#{$gw-app--NorthPanel--border--col}' stroke-width='1px' points='0 100 100 0 200 100'/><polygon fill='#{$gw-app--bg}' points='0 100 100 0 200 100'/></svg>"; //@px-allowed
+
+#gw-center-tab-bar {
+  position: relative;
+  color: $gw-app--NorthPanel--col;
+  @if ($gw-app--allow-css-animations) {
+    transition: height #{$gw-app--NorthPanel--top-nav-scroll-hide-height-speed}, opacity #{$gw-app--NorthPanel--top-nav-scroll-hide-opacity-speed};
+  }
+  transition-timing-function: ease-in-out;
+  overflow: hidden;
+  height: $gw-app--top-nav--height;
+  opacity: 1;
+
+  // Internal padding
+  padding-top: $gw-app--NorthPanel--spacing-inner-top-rem;
+  padding-left: $gw-app--NorthPanel--spacing-inner-left-rem;
+  padding-right: 1rem;
+  padding-bottom: $gw-app--NorthPanel--spacing-inner-bottom-rem;
+
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  border-bottom: $gw-app--NorthPanel--border--width-px solid $gw-app--NorthPanel--border--col;
+  background-color: $gw-app--NorthPanel--bg;
+
+  &.gw-forced-sizing {
+    //TODO
+    //height: var(--gw-forced-sizing-center-panel);
+    //opacity: var(--gw-forced-opacity-center-panel);
+  }
+}
+
+#gw-center-top-section {
+  &.gw-collapse-level--all {
+    #gw-center-tab-bar {
+      display: none;
+    }
+  }
+
+  .gw-TabBarWidget {
+    display: inline-flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: stretch;
+    flex-wrap: nowrap;
+    align-self: stretch;
+    flex-grow: 1;
+    flex-shrink: 1;
+
+    .gw-event-temp-active {
+      > .gw-action--inner {
+        @include gw-button--colors($gw-app--NorthPanel--button--active--bg, $gw-app--NorthPanel--button--active--col, $add-gradient: $gw-app--NorthPanel--use-pill-buttons);
+      }
+
+      & > .gw-action--expand-button {
+        @include gw-button--colors(transparent, $gw-app--NorthPanel--button--active--col);
+      }
+    }
+  }
+
+  @mixin gw-northPanelMenuItem($icon-static: false, $no-expand: false) {
+    @include gw-menuItem(
+            $bg: $gw-app--NorthPanel--button--bg,
+            $col: $gw-app--NorthPanel--button--col,
+            $hover-bg: $gw-app--NorthPanel--button--hover--bg,
+            $hover-col: $gw-app--NorthPanel--button--hover--col,
+            $active-bg: $gw-app--NorthPanel--button--active--bg,
+            $active-col: $gw-app--NorthPanel--button--active--col,
+            $pad-v: $gw-app--NorthPanel--button--pad-v-rem,
+            $inner-action--pad-h: $gw-app--NorthPanel--button--pad-h-rem,
+            $expand--pad-h: $gw-app--NorthPanel--button--expand-pad-h-em,
+            $is-button: false,
+            $glyph: $gw-app--NorthPanel--tab-expand-glyph,
+            $force-no-expand: $no-expand,
+            $force-expand-only: false,
+            $add-gradient: $gw-app--NorthPanel--use-pill-buttons
+    );
+
+    .gw-action--inner {
+      position: relative;
+    }
+
+    @if ($gw-app--NorthPanel--use-pill-buttons) {
+      @include gw-borderCap($top: true);
+      border-bottom: 0 solid transparent;
+      margin-top: gw-remScaled(.8);
+      & + .gw-action--outer {
+        margin-left: $gw-app--border-width-px;
+      }
+
+      > .gw-action--inner {
+        font-weight: bold;
+        @include gw-borderCap($top: true);
+        border-color: $gw-app--NorthPanel--border--col;
+        border-bottom: 0 solid transparent;
+        position: relative;
+      }
+    }
+
+    &.gw-isTopLevelMenu {
+      & > .gw-action--inner {
+        display: flex !important;
+        align-items: center !important;
+        padding-top: 1px !important;
+        padding-bottom: 1px !important;
+      }
+
+      & > .gw-action--inner, & > .gw-action--expand-button, & > .gw-action--divider {
+        font-size: $gw-app--NorthPanel--font-size-em;
+      }
+
+      & > .gw-action--expand-button {
+        height: 1.2em !important;
+        top: 50% !important;
+        transform: translateY(-50%);
+      }
+
+      & > .gw-subMenu {
+        min-width: $gw-app--NorthPanel--tab-width-submenu-min-width;
+
+        .gw-label {
+          @include gw-wrapOnWhiteSpace();
+          max-width: $gw-app--NorthPanel--menu-item-label-max-width;
+        }
+      }
+
+      @if ($gw-app--NorthPanel--active-tab-has-caret) {
+        &.gw-active {
+          &:after {
+            content: "";
+            @include gw-backgroundResourceUrl($gw-TabBar--caret-svg);
+            display: inline-block;
+            width: gw-emFixed(2);
+            height: gw-emFixed(1);
+            position: absolute;
+            left: 50%;
+            @include gw-transform(translateX(-50%));
+            bottom: -$gw-app--NorthPanel--border--width-px;
+          }
+        }
+      }
+
+      @if ($gw-app--NorthPanel--active-tab-has-bottom-bar) {
+        &.gw-active {
+          &:after {
+            content: "";
+            display: block;
+            box-sizing: border-box;
+            //width: calc(100% - #{(2 * (-$gw-app--focus--outline-offset-px - $gw-app--focus--outline-width-px))});
+            width: 100%;
+            //margin: (-$gw-app--focus--outline-offset-px - $gw-app--focus--outline-width-px);
+            height: $gw-app--NorthPanel--active-tab-bottom-bar-height;
+            position: absolute;
+            background-color: $gw-app--NorthPanel--active-tab-bottom-bar-bg;
+            bottom: 0;
+            left: 0;
+          }
+        }
+      }
+    }
+
+    @include gw-subMenu();
+    @include gw-wrapNever();
+  }
+
+  .gw-isTopLevelMenu {
+    & > .gw-action--inner, & > .gw-action--expand-button, & > .gw-action--divider {
+      font-size: $gw-app--NorthPanel--font-size-em;
+    }
+  }
+
+  .gw-TabBarWidget--tab-holder {
+    display: flex;
+    align-items: stretch;
+    flex-grow: 0;
+    flex-shrink: 0;
+    padding-left: .8rem;
+
+    > .gw-action--outer {
+      @include gw-northPanelMenuItem();
+
+      > .gw-action--inner {
+        > .gw-icon {
+          line-height: 1;
+        }
+      }
+    }
+
+    .gw-TabWidget.gw-hasChildren {
+      & > .gw-action--expand-button {
+        margin-right: $gw-app--NorthPanel--button--margin-right-offset-em;
+      }
+    }
+  }
+
+  .gw-TabBarWidget--icon-holder {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  // 1. Use the top offset to shift a specific icon that's an irregular y-size up or down to line some em value.
+  // 2. The tab icons need to be larger than 1em, but we don't want that largeness resizing the north panel, and thereby
+  // resizing the tab widgets. But we also want them to have the exact same format as tab widgets.
+  // So we put the vertical padding on the blank label, which sizes the element, and the icon just sits center center
+  // in the action--inner element with no padding.
+  @mixin gw-makeTabIcon($glyph) {
+    padding: 0 0;
+    // Using flex-basis instead of min-width causes problems on IE/Edge
+    min-width: $gw-app--NorthPanel--menu-icon-size-em;
+    flex-shrink: 0;
+    flex-grow: 0;
+
+    & > .gw-action--inner {
+      padding: 0 0;
+      height: calc(#{(2 * $gw-app--NorthPanel--button--pad-v-rem)} + #{gw-lineHeightStripped() + gw-emFixed(2/14)}); //TODO: cooper, revisit
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+
+      .gw-icon {
+        top: 0;
+        left: 0;
+        @include gw-icon($glyph, $gw-app--NorthPanel--menu-icon-size-em, $h-align: center, $v-align: middle, $width: $gw-app--NorthPanel--menu-icon-size-em);
+        position: relative;
+      }
+    }
+  }
+
+  #TabBarWidget--more-options, #gw-TabBarWidget--settings, #TabBar-UnsavedWorkTabBarLink, #gw-TabBarWidget--toolbarOverflow, #gw-TabBarWidget--multiTabInfo {
+    @include gw-northPanelMenuItem(true, true);
+  }
+
+  #TabBarWidget--more-options {
+    @include gw-makeTabIcon($gw-app--NorthPanel--hamburger-menu-glyph);
+  }
+
+  #TabBarWidget--more-options.gw-compactedHamburger {
+    @include gw-makeTabIcon($gw-app--NorthPanel--hamburger-compacted-menu-glyph);
+  }
+
+  #gw-TabBarWidget--settings {
+    @include gw-makeTabIcon($gw-app--NorthPanel--options-glyph);
+  }
+
+  #gw-TabBarWidget--multiTabInfo {
+    @include gw-makeTabIcon($gw-app--NorthPanel--toolbar-multiTab-glyph);
+  }
+
+  #gw-TabBarWidget--toolbarOverflow {
+    @include gw-makeTabIcon($gw-app--NorthPanel--toolbar-overflow-glyph);
+    margin-right: $gw-app--SPACING-rem-S;
+
+    & > .gw-subMenu > * {
+      margin: 0 !important;
+      box-shadow: none !important;
+    }
+
+    .gw-ToolbarDividerWidget {
+      height: 1px !important;
+      width: 100% !important;
+      margin: 0 !important;
+      display: block !important;
+    }
+  }
+
+  &.gw-collapse-level--all {
+
+    #gw-TabBarWidget--toolbarOverflow {
+      margin-right: $gw-app--collapse-level-all--toolbar-overflow-right-margin
+    }
+
+    #TabBarWidget--more-options.gw-compactedHamburger {
+      margin-right: $gw-app--collapse-level-all--hamburger-right-margin
+    }
+
+    #gw-TabBarWidget--toolbarOverflow, #TabBarWidget--more-options.gw-compactedHamburger {
+      background-color: inherit;
+      color: inherit;
+
+      & > .gw-action--inner {
+        border: 0px solid transparent;
+        background-color: inherit;
+        color: inherit;
+      }
+    }
+  }
+
+  #TabBar-UnsavedWorkTabBarLink {
+    @include gw-makeTabIcon($gw-app--NorthPanel--unsaved-work-glyph);
+
+    &:not([aria-disabled="true"]) {
+      & > .gw-action--inner {
+        & > .gw-icon {
+          color: $gw-app--NorthPanel--unsaved-work-active-color;
+        }
+
+        background: $gw-app--NorthPanel--unsaved-work-active-background;
+      }
+    }
+
+    .gw-multi-tab-unsaved-work-title {
+      display: inline-flex;
+      max-width: 30em;
+      min-width: 0;
+      white-space: pre-wrap;
+      font-size: .8em;
+      font-style: italic;
+      flex-wrap: wrap;
+      min-height: 0;
+      border-bottom: 1px solid $gw-app--menus--divider-col;
+      padding: 4px 6px;
+      margin-bottom: 1px;
+      background-color: $gw-app--menus--bg;
+      color: $gw-app--menus--col;
+    }
+
+    .gw-subMenu {
+
+
+      .gw-TabBarUnsavedWorkWidget-group {
+        .gw-action--inner {
+          display: flex;
+          justify-content: space-between;
+
+          div.gw-label:first-child {
+            font-weight: bold;
+            margin-right: $gw-TabBar--TabBarUnsavedWork--group--min-spacing;
+          }
+        }
+      }
+
+      .gw-TabBarUnsavedWorkWidget-active {
+        display: flex;
+        justify-content: space-between;
+
+        .gw-TabBarUnsavedWorkWidget-active-go {
+          flex-grow: 1;
+        }
+
+        .gw-TabBarUnsavedWorkWidget-discard .gw-label-icon {
+          @include gw-icon($gw-TabBar--TabBarUnsavedWork--discard--menu-icon, $gw-TabBar--TabBarUnsavedWork--discard--menu-icon--size);
+        }
+      }
+
+      .gw-TabBarUnsavedWorkWidget-inactive {
+        display: flex;
+        justify-content: space-between;
+      }
+    }
+  }
+}
+
+#gw-debug-mock-launcher {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #3c4c5e;
+  color: white;
+  height: 56px;
+}
+
+#gw-debug-mock-launcher--left {
+  display: flex;
+  flex-wrap: wrap;
+  background-image: url("../../logos/WhiteAppLogo.svg");
+  margin-left: 32px;
+  height: 48px;
+  width: 230px;
+  background-repeat: no-repeat;
+  background-position: left center;
+}
+
+#gw-debug-mock-launcher--right {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  $margin-right: 2em;
+
+  .icon1 span {
+    @include gw-icon("question-circle");
+    margin-right: $margin-right;
+  }
+
+  .icon2 span {
+    @include gw-icon("th");
+    margin-right: $margin-right;
+
+  }
+
+  .icon3 span {
+    @include gw-icon("bell");
+    margin-right: $margin-right;
+
+  }
+
+  .icon4 span:after {
+    margin-right: $margin-right;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    content: "GW";
+    color: white;
+    background-color: #00739d;
+    height: 32px;
+    width: 32px;
+    border-radius: 9999px;
+  }
+}

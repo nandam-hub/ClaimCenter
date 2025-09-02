@@ -1,0 +1,33 @@
+.gw-TileWidget {
+  .gw-TileInputColumnWidget.gw-styleTag--TileWidget,
+  .gw-TileInputColumnWidget.gw-styleTag--DetailViewWidget {
+    flex-grow: 1;
+    flex-shrink: 1;
+    max-width: 100%;
+    overflow: hidden;
+
+    .gw-InputColumnWidget {
+      min-width: 0;
+      padding: 0;
+    }
+
+    .gw-InputWidget {
+      flex-wrap: wrap;
+      max-width: 100%;
+
+      .gw-BarValueWidget {
+        flex-wrap: wrap;
+        .gw-progress--holder {
+          margin-right: $gw-app--SPACING-rem-M;
+        }
+        .gw-progress--status-label {
+          flex-grow: 1;
+          max-width: 100%;
+          // moving margin to the progress--holder
+          margin-left: initial;
+          padding-left: initial;
+        }
+      }
+    }
+  }
+}

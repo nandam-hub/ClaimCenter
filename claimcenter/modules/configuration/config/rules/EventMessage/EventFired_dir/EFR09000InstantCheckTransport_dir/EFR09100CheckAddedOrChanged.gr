@@ -1,0 +1,23 @@
+package rules.EventMessage.EventFired_dir.EFR09000InstantCheckTransport_dir
+
+uses gw.financials.payment.InstantCheckUtil
+
+@gw.rules.RuleName("EFR09100 - Check Added Or Changed")
+internal class EFR09100CheckAddedOrChanged {
+  static function doCondition(messageContext : entity.MessageContext) : boolean {
+/*start00rule*/
+    return messageContext.Root typeis Check
+        and (messageContext.EventName == Check.CHECKADDED_EVENT
+        or messageContext.EventName == Check.CHECKCHANGED_EVENT)
+/*end00rule*/
+  }
+
+  static function doAction(messageContext : entity.MessageContext, actions : gw.rules.Action) {
+/*start00rule*/
+    var chk = messageContext.Root as Check
+    if (chk.isFieldChanged(Check#Status) and InstantCheckUtil.shouldMakeOutboundPayment(chk)) {
+      messageContext.createMessage(InstantCheckUtil.createMessagePayload(messageContext))
+    }
+/*end00rule*/
+  }
+}

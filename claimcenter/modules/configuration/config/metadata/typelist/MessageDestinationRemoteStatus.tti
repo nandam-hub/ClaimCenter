@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="Message destination remote running state"
+  name="MessageDestinationRemoteStatus"
+  platform="true">
+  <typecode
+    code="unknown"
+    desc="Remote state is unknown"
+    name="Unknown"/>
+  <typecode
+    code="down"
+    desc="Remote state is down"
+    name="Down"/>
+  <typecode
+    code="up"
+    desc="Remote state is up"
+    name="Up"/>
+  <typecode
+    code="not_configured"
+    desc="The transport does not define a method to determine the remote application status."
+    name="Not Configured"/>
+  <typecode
+    code="starting"
+    desc="suite manager is not up yet"
+    name="Starting"/>
+</typelist>

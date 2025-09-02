@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <ModalCell
+    id="RuleValidationInfoCell"
+    mode="default">
+    <Require
+      name="rule"
+      type="Rule"/>
+    <FormatCell
+      align="left"
+      id="ValidityIcons">
+      <ContentInput
+        align="center"
+        visible="rule != null">
+        <Link
+          icon="&quot;alert&quot;"
+          iconType="svgFileName"
+          iconColor="gw.api.web.color.GWColor.THEME_ALERT_ERROR"
+          id="Invalid"
+          tooltip="DisplayKey.get('BizRules.ValidateAll.InvalidIcon')"
+          visible="rule.Valid == Boolean.FALSE"/>
+        <Link
+          icon="&quot;completed&quot;"
+          iconType="svgFileName"
+          id="Valid"
+          tooltip="DisplayKey.get('BizRules.ValidateAll.ValidIcon')"
+          visible="rule.Valid == Boolean.TRUE"/>
+        <Link
+          icon="&quot;runstatus_unknown&quot;"
+          iconType="svgFileName"
+          iconColor="gw.api.web.color.GWColor.THEME_ACTION_NEUTRAL"
+          id="Unknown"
+          tooltip="DisplayKey.get('BizRules.ValidateAll.UnknownIcon')"
+          visible="rule.Valid == null"/>
+      </ContentInput>
+    </FormatCell>
+  </ModalCell>
+</PCF>

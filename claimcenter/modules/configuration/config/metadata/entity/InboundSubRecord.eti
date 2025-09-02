@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  entity="InboundSubRecord"
+  loadable="false"
+  desc="Additional information related to an inbound file record."
+  table="inboundsubrecord"
+  platform="true"
+  type="editable"
+  replicable="false">
+  <column
+    desc="The line number of the sub-record."
+    name="LineNumber"
+    nullok="false"
+    type="nonnegativeinteger"/>
+  <column
+    desc="The content of the sub-record."
+    name="Content"
+    nullok="false"
+    type="text">
+    <columnParam
+      name="trimwhitespace"
+      value="false"/>
+  </column>
+  <foreignkey
+    desc="The Inbound Record this sub-record is associated with."
+    fkentity="InboundRecord"
+    name="InboundRecord"
+    nullok="false"/>
+</entity>

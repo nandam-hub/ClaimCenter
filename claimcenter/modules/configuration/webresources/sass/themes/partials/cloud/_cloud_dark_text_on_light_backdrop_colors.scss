@@ -1,0 +1,112 @@
+@import "../platform_colors_base";
+
+$gw-app--default-focus-outline-col: #79cdcc;
+$gw-app--palette--left-nav--bg: rgba(48, 62, 77, 0.9);// #43505d
+
+$gw-app--divider--col: lightgray;
+$gw-app--border--col: lightgray;
+$gw-app--border--col-lighter: lightgray;
+
+// Sections
+$gw-app--bg: white;
+$gw-app--col: #404040;
+
+$gw-app--section-primary--bg: white;
+
+$gw-app--TileWidget--bg: white;
+$gw-app--TileWidget--border-color: $gw-app--border--col;
+
+// Buttons
+$gw-app--buttons--col: white;
+$gw-app--buttons--bg: #00739d; //rgb(0, 134, 182)
+
+$gw-app--buttons--secondary--col: $gw-app--buttons--bg;
+$gw-app--buttons--secondary--bg: white;
+
+// Menus
+$gw-app--menus--bg: white;
+
+
+// North
+$gw-app--NorthPanel--bg: #3C4C5E;
+$gw-app--NorthPanel--col: white;
+$gw-app--NorthPanel--button--hover--col: $gw-app--default-focus-outline-col;
+$gw-app--NorthPanel--button--hover--bg: $gw-app--NorthPanel--bg;
+$gw-app--NorthPanel--button--active--col: $gw-app--default-focus-outline-col;
+$gw-app--NorthPanel--button--active--bg: $gw-app--NorthPanel--bg;
+
+// West
+$gw-app--WestPanel--button--active--border--col: $gw-app--default-focus-outline-col;
+$gw-app--WestPanel--button--active--bg: #485d69;
+$gw-app--WestPanel--button--active--col: white;
+$gw-app--WestPanel--button--hover--bg: $gw-app--WestPanel--button--active--bg;
+$gw-app--WestPanel--button--hover--col: $gw-app--WestPanel--button--active--col;
+
+$gw-app--WestPanel--border-right--col: #3C4C5E;
+
+$gw-app--WestPanel--button--bg: #525e6b;
+
+$gw-app--WestPanel--button--topborder: 0px solid transparent;
+$gw-app--WestPanel--button--bottomborder: 0px solid transparent;
+
+// Progress Bar
+$gw-app--progress-bar--holder-inset-shadow: none; 
+$gw-app--progress-bar--holder-outset-shadow: none; 
+$gw-app--progress-bar--bar-inset-shadow: none; 
+$gw-app--progress-bar--bar-outset-shadow: none; 
+
+$gw-app--progress-bar--empty-bar-bg: $gw-app--palette--gray-E;
+
+//Dashboards
+$gw-app--DashboardScreen--bg: transparent;
+
+$gw-app--tooltips--bg: black;
+$gw-app--tooltips--col: white;
+$gw-app--tooltips--border-col: black;
+
+$gw-app--TitleBar--screen--drop-shadow: none;
+$gw-app--CenterPanel-topsection--bg: white;
+$gw-app--TitleBar--screen--border-col: lightgray;
+
+// Buttons
+$gw-app--buttons--disabled-shadow: none;
+$gw-app--buttons--border-darken-percent: 0%;
+
+// Inputs
+$gw-app--inputs--changed--col: $gw-app--col;
+$gw-app--inputs--editable-inner-shadow: none;
+
+
+$gw-app--Screen--file-paste-area--border: 0px solid transparent;
+
+
+//InfoBar
+$gw-app--InfoBar--info-bar-border-bottom: 1px solid $gw-app--border--col;
+$gw-app--InfoBar--info-bar-bg: white;
+$gw-app--InfoBar--info-bar-col: black;
+
+// Alert Bar
+$gw-app--AlertBar--border-col: transparent;
+
+$gw-app--panels--bg: $gw-app--bg;
+$gw-app--panels--col: $gw-app--col;
+
+// LV
+
+$gw-app--ListView--row--highlighted-style--bg: $gw-app--palette--orange-light; //TODO
+
+$gw-app--ListView--row-even--bg: white;
+$gw-app--ListView--row-odd--bg: white;
+
+$gw-app--HeaderCell--sort--generic--col: $gw-app--default-focus-outline-col;
+
+// =====================================
+// == INPUT COLUMN
+// =====================================
+$gw-app--InputColumn--bg: transparent;
+$gw-app--InputGroup--bg: white;
+
+// =====================================
+// == CARD
+// =====================================
+$gw-app--Card--bg: white;

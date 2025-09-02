@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<Entity
+  name="InboundSubRecord">
+  <Columns>
+    <Column
+      beanPath="InboundSubRecord.InboundRecord"
+      displayName="true"
+      name="Record"
+      sortOrder="1"/>
+    <Column
+      beanPath="InboundSubRecord.LineNumber"
+      name="LineNumber"
+      sortOrder="2"/>
+  </Columns>
+  <DisplayName><![CDATA[return "[" + Record + "]#" + LineNumber]]></DisplayName>
+</Entity>

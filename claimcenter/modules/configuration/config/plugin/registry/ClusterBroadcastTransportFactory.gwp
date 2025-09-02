@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<plugin
+  interface="ClusterBroadcastTransportFactory"
+  name="ClusterBroadcastTransportFactory">
+  <plugin-osgi
+    servicepid="com.guidewire.pl.cluster.internal.broadcast.ClusterBroadcastTransportDelegatingFactory">
+    <param
+      name="delegateTo"
+      value="${PLUGIN_CLUSTER_BROADCAST_TRANSPORT_TYPE:DB}"/>
+    <param
+      name="valkeyServiceName"
+      value="${PLUGIN_CLUSTER_BROADCAST_TRANSPORT_VALKEY_SERVICE_NAME:valkey-service}"/>
+  </plugin-osgi>
+</plugin>

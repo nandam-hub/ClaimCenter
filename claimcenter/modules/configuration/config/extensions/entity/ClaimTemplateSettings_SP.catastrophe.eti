@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Catastrophe claim template settings"
+  entity="ClaimTemplateSettings_SP"
+  exportable="true"
+  table="claimtemplatesettings_sp"
+  type="retireable">
+  <column
+    default="false"
+    desc="Are these cat template parameters active?"
+    name="Active"
+    nullok="false"
+    type="bit"/>
+  <array
+    arrayentity="ClaimTemplateActivity_SP"
+    cascadeDelete="true"
+    desc="Activities to create on new claim"
+    name="ActivityRules"
+    owner="true"/>
+  <foreignkey
+    columnName="AssignGroupID"
+    desc="If assignment method is set to Individual Assignment, the assigned group is stored here."
+    fkentity="Group"
+    name="AssignGroup"
+    nullok="true"/>
+  <typekey
+    default="rules"
+    desc="Claim assignment method."
+    name="AssignMethod"
+    nullok="false"
+    typelist="ClaimTempAssignType_SP"/>
+  <foreignkey
+    columnName="AssignQueueID"
+    desc="If assignment method is set to Queue assignment, the assigned queue is stored here."
+    fkentity="AssignableQueue"
+    name="AssignQueue"
+    nullok="true"/>
+  <foreignkey
+    columnName="AssignUserID"
+    desc="If assignment method is set to Individual Assignment, the assigned user is stored here."
+    fkentity="User"
+    name="AssignUser"
+    nullok="true"/>
+  <foreignkey
+    columnName="CatastropheID"
+    desc="Reference to parent catastrophe."
+    fkentity="Catastrophe"
+    name="Catastrophe"
+    nullok="false"/>
+  <array
+    arrayentity="ClaimTemplateExposure_SP"
+    cascadeDelete="true"
+    desc="Settings around creating exposures on policy coverages for catastrophe claims."
+    name="ExposureRules"
+    owner="true"/>
+  <typekey
+    desc="The cause (from the catastrophe) of the loss."
+    name="LossCause"
+    nullok="true"
+    typelist="LossCause"/>
+  <column
+    default="false"
+    desc="Do we override Workplan rules?"
+    name="WorkplanOverride"
+    nullok="false"
+    type="bit"/>
+</entity>

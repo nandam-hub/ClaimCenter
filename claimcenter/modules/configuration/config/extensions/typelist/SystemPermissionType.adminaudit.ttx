@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<!-- Typelists related to security -->
+<typelistextension
+  xmlns="http://guidewire.com/typelists"
+  name="SystemPermissionType">
+  <typecode
+    code="viewDataAuditHistory_sp"
+    desc="Permission to view admin data audit records"
+    name="View Admin Data Audit History"/>
+</typelistextension>

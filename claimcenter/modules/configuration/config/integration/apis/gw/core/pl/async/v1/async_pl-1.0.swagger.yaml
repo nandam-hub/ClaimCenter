@@ -1,0 +1,94 @@
+swagger: "2.0"
+info:
+  description: "APIs for checking the status of asynchronous API requests"
+  version: "1.13.0"
+basePath: /async/v1
+consumes:
+- application/json
+produces:
+- application/json
+x-gw-combine:
+- gw.core.pl.framework.v1.framework_pl-1.0
+x-gw-schema-import:
+  async: gw.core.pl.async.v1.async_pl-1.0
+x-gw-apihandlers:
+- gw.rest.core.pl.async.v1.AsyncApiPlatformHandler
+paths:
+  /openapi.json:
+    get:
+      summary: "Retrieve the `OpenAPI 3.0` schema for this API"
+      description: "Retrieves the `OpenAPI 3.0` schema for this API"
+      operationId: getAsyncOpenApiSchema
+      x-gw-extensions:
+        operationType: get-element
+        resourceType: AsyncOpenApiSchema
+      x-gw-parameter-sets:
+      - openapi
+      responses:
+        "200":
+          description: "The `OpenAPI 3.0` schema for this API"
+          schema:
+            type: string
+  "/requests/{asyncRequestId}":
+    parameters:
+    - $ref: "#/parameters/asyncRequestId"
+    get:
+      summary: "Retrieve details of an async request"
+      description: "Retrieves the details of an async request. An async request is made by specifying the `Prefer respond-async` header on the original request."
+      operationId: getAsyncRequest
+      x-gw-sinceVersion: "1.5.0"
+      x-gw-extensions:
+        operationType: get-element
+        resourceType: AsyncRequest
+      x-gw-parameter-sets:
+      - get-element
+      responses:
+        "200":
+          description: "The details of the async request"
+          schema:
+            $ref: "#/definitions/AsyncRequestResponse"
+  "/requests/{asyncRequestId}/response":
+    parameters:
+    - $ref: "#/parameters/asyncRequestId"
+    get:
+      summary: "Retrieve the response to an async request"
+      description: "Retrieve the response to an async request directly on the response payload. The response to this call will have the response code, headers, and response body of the async request."
+      operationId: getAsyncRequestResponse
+      produces:
+      - "*/*"
+      x-gw-sinceVersion: "1.5.0"
+      x-gw-extensions:
+        allowForCompositeApi: false
+        operationType: get-element
+        resourceType: AsyncRequestResponse
+      responses:
+        "200":
+          description: "The response from the async request"
+        "201":
+          description: "The response from the async request"
+        "204":
+          description: "The response from the async request"
+parameters:
+  asyncRequestId:
+    name: asyncRequestId
+    in: path
+    description: "The ID of the async request"
+    required: true
+    type: string
+    x-gw-sinceVersion: "1.5.0"
+x-gw-cors-policy: async
+x-gw-localizationKeyPrefix: async.v1
+definitions:
+  AsyncRequestData:
+    x-gw-extend:
+    - "#/definitions/DataEnvelope"
+    required:
+    - attributes
+    properties:
+      attributes:
+        $ref: "async#/definitions/AsyncRequest"
+  AsyncRequestResponse:
+    type: object
+    properties:
+      data:
+        $ref: "#/definitions/AsyncRequestData"

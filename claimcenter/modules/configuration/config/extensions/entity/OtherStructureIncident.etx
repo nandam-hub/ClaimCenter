@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<extension
+  xmlns="http://guidewire.com/datamodel"
+  entityName="OtherStructureIncident">
+  <implementsInterface
+    iface="gw.cc.exposure.entity.CoverageSupplier"
+    impl="gw.api.exposure.incident.LossLocationCoverageSupplier"/>
+  <implementsInterface
+    iface="gw.cc.exposure.entity.ClaimantSupplier"
+    impl="gw.api.exposure.claimant.InsuredClaimantSupplier"/>
+</extension>

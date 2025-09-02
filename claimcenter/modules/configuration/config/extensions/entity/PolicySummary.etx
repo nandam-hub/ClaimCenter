@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<extension xmlns="http://guidewire.com/datamodel" entityName="PolicySummary">
+  <!--GAR START: Entities/PolicySummary.etx [/opt/teamcity/agent/work/45c3a2f1b8ee4237/gpm-generator/downloads/edge/backend/xcenter-config/xcenter-utils/cc-utils/../../../Shared/claim-shared/src/main]-->
+    
+  <column desc="Code of the Agency that sold the policy" name="ProducerCodeCode" nullok="true" type="shorttext"/>
+    
+  <column desc="Account number" name="AccountNumber" nullok="true" type="shorttext"/>
+  
+  <!--GAR END-->
+</extension>

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<Properties xmlns="http://guidewire.com/psc/properties">
+  <Property>
+    <Group>actmanagement_sp</Group>
+    <Name>Enabled</Name>
+    <Description>Runtime property to indicate whether the activity management feature has been enabled</Description>
+    <Value>true</Value>
+  </Property>
+  <Property>
+    <Group>actmanagement_sp</Group>
+    <Name>SharingEnabled</Name>
+    <Description>Runtime property to indicate whether the shared activities portion of the activity management feature has been enabled</Description>
+    <Value>true</Value>
+  </Property>
+  <Property>
+    <Group>actmanagement_sp</Group>
+    <Name>BackupUserEnabled</Name>
+    <Description>Runtime property to indicate whether the backup user portion of the activity management feature has been enabled</Description>
+    <Value>true</Value>
+  </Property>
+</Properties>

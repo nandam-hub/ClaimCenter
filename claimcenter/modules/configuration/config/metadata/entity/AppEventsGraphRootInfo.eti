@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<entity
+  loadable="false"
+  xmlns="http://guidewire.com/datamodel"
+  entity="AppEventsGraphRootInfo"
+  desc="App Events Graph Root Most Recent TransactionId"
+  table="appeventsgraphrootinfo"
+  type="keyable">
+  <column
+    desc="The graph root object type"
+    name="GraphObjectType"
+    nullok="false"
+    setterScriptability="doesNotExist"
+    type="shorttext"/>
+  <column
+    desc="The graph root object type instance PublicID"
+    name="GraphObjectId"
+    nullok="false"
+    setterScriptability="doesNotExist"
+    type="publicid"/>
+  <column
+    desc="The identifier of the most recent transaction that updated the graph root object instance"
+    name="LastTransactionId"
+    nullok="false"
+    setterScriptability="hidden"
+    type="shorttext"/>
+  <index
+    desc="Guarantees a unique graph root"
+    name="UniqueGraphRoot"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="GraphObjectId"/>
+    <indexcol
+      keyposition="2"
+      name="GraphObjectType"/>
+  </index>
+</entity>

@@ -1,0 +1,34 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "x-gw-combine": [
+    "gw.content.cc.common.v1.common_content-1.0",
+    "gw.core.cc.admin.v1.admin_core-1.0"
+  ],
+  "definitions": {
+    "User": {
+      "properties": {
+        "firstNameKanji": {
+          "title": "First name kanji",
+          "description": "The kanji version of the first name of the person represented by this `User`",
+          "type": "string",
+          "x-gw-nullable": true,
+          "x-gw-sinceVersion": "1.5.0"
+        },
+        "lastNameKanji": {
+          "title": "Last name kanji",
+          "description": "The kanji version of the last name of the person represented by this `User`",
+          "type": "string",
+          "x-gw-nullable": true,
+          "x-gw-sinceVersion": "1.5.0"
+        },
+        "particle": {
+          "title": "Particle",
+          "description": "The particle portion of the name of the person represented by this `User`",
+          "type": "string",
+          "x-gw-nullable": true,
+          "x-gw-sinceVersion": "1.5.0"
+        }
+      }
+    }
+  }
+}

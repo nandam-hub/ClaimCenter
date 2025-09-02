@@ -1,0 +1,19 @@
+package rules.Preupdate.ClaimPreupdate_dir
+uses gw.surepath.cc.configuration.timeline.creation.TimelineUtil
+
+@gw.rules.RuleName("CPU35000 - Claim Timeline Update")
+internal class CPU35000ClaimTimelineUpdate {
+  static function doCondition(claim   :   entity.Claim) : boolean {
+/*start00rule*/
+return true
+/*end00rule*/
+}
+
+  static function doAction(claim   :   entity.Claim, actions : gw.rules.Action) {
+/*start00rule*/
+
+ TimelineUtil.registerCallback(claim, claim.Bundle)
+
+/*end00rule*/
+  }
+}

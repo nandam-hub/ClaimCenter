@@ -1,0 +1,36 @@
+swagger: '2.0'
+parameters:
+  sort:
+    name: sort
+    in: query
+    type: array
+    items:
+      type: string
+    description: |
+      This is the sort column, if descending preceed with '-'.  Order is from primary (significant)
+      to minor (least significant)
+  filter:
+    name: filter
+    in: query
+    type: array
+    collectionFormat: multi
+    items:
+      type: string
+    description: |
+          The filters are specific to the operation and should be documented there.
+          The filter is a string in the format of "property:operator:value" or is a "named filter"
+           * Supported filter properties are declared in the operation discription
+           * with 'null' value will compare against null, only useable for 'eq' and 'ne'
+           * Explicit strings are treated as ignoring case
+           * Dates are treated specially:
+             - 'now' is recognized as the current date
+             - 'P...' or '-P...' are duration strings and are offset (-P is before, P is after)
+           * Supported operations for all property are:
+             - 'eq' is equal, 'ne' is not equal, if value ommitted, will test against null
+             - 'in' (or 'ni') property value is in (or not in) this list of comma delimited values
+             - 'lt' less than, 'gt' greater than, 'le' less than or equal, 'ge' greater than or equal.
+             - a null property value is considered less than any filter value; not equal to any filter value (except 'null'); and not in any set
+           * Additional supported operations for string property are:
+             - 'pm' pattern match,
+             - 'cn' string contains value, 'sw' string starts with value.
+           * Filtering on child property accepts root if any child matches.

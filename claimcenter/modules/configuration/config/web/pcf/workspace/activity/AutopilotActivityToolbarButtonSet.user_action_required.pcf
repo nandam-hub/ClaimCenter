@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <ToolbarButtonSet
+    id="AutopilotActivityToolbarButtonSet"
+    mode="user_action_required">
+    <Require
+      name="Activity"
+      type="entity.Activity"/>
+    <ToolbarButton
+      action="setAutopilotRelatedFlagsAndComplete(AutopilotHandlingDecision.TC_HANDLED_MANUALLY);"
+      hideIfEditable="true"
+      id="AutopilotActivityDetailScreen_UserActionRequired_CompleteButton"
+      label="DisplayKey.get(&quot;Button.Activity.Complete&quot;)"
+      shortcut="P"
+      visible="Activity.canComplete() &amp;&amp; (Activity.AutopilotPurpose == AutopilotPurpose.TC_USER_ACTION_REQUIRED)"/>
+    <Code>uses gw.autopilot.AutopilotActivityUIHelper
+
+    function setAutopilotRelatedFlagsAndComplete(handlingDecision : AutopilotHandlingDecision) {
+      AutopilotActivityUIHelper.setAutopilotRelatedFlagsAndComplete(CurrentLocation, Activity, handlingDecision);
+    }</Code>
+  </ToolbarButtonSet>
+</PCF>

@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<plugin interface="IPolicyRefreshPlugin" name="IPolicyRefreshPlugin">
+  <plugin-gosu gosuclass="gw.plugin.policy.refresh.basic.BasicPolicyRefreshPlugin"/>
+  <plugin-gosu env="cloud-dev" gosuclass="gw.plugin.policy.refresh.pc5000.PCPolicyRefreshPlugin"/>
+</plugin>

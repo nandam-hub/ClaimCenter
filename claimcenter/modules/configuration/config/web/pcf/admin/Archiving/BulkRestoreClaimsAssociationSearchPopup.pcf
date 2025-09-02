@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!-- Deprecated since 50.3.1. Claim Association is no longer created when submitting a bulk restore request -->
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Popup
+    id="BulkRestoreClaimsAssociationSearchPopup"
+    parent="BulkRestoreArchivedClaims()"
+    returnType="ClaimAssociation"
+    title="DisplayKey.get(&quot;Web.Claim.AssociationSearch&quot;)">
+    <LocationEntryPoint
+      signature="BulkRestoreClaimsAssociationSearchPopup()"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <Variable
+      initialValue="new gw.api.archiving.BulkRestoreArchivedClaimsHelper()"
+      name="bulkRestoreArchivedClaimsHelper"
+      type="gw.api.archiving.BulkRestoreArchivedClaimsHelper"/>
+    <Screen
+      id="BulkRestoreClaimsAssociationSearchPopupScreen">
+      <SearchPanel
+        criteriaName="claimAssociationSearchCriteria"
+        resultsName="claimAssociationList"
+        search="claimAssociationSearchCriteria.performSearch()"
+        searchCriteria="new ClaimAssociationSearchCriteria()"
+        searchCriteriaType="entity.ClaimAssociationSearchCriteria"
+        searchResultsType="ClaimAssociation[]">
+        <PanelRef
+          def="ClaimAssociationSearchDV(claimAssociationSearchCriteria)"/>
+        <PanelRef
+          def="ClaimAssociationsSearchResultsLV(bulkRestoreArchivedClaimsHelper.filterBulkRestoreAssociations(claimAssociationList))">
+          <TitleBar
+            title="DisplayKey.get(&quot;Web.Search.Results&quot;)"/>
+          <Toolbar/>
+        </PanelRef>
+      </SearchPanel>
+    </Screen>
+  </Popup>
+</PCF>

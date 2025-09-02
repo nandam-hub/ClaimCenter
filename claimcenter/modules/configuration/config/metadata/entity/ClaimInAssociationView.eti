@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<viewEntity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Displays Claims efficiently in the Bulk Restore Claim Association Details page."
+  entity="ClaimInAssociationView"
+  exportable="false"
+  final="false"
+  primaryEntity="ClaimInAssociation">
+  <fulldescription><![CDATA[<p>Aggregates the information needed to display one claim row ( Claim Number and Archive State ) on the Bulk Restore Claim Association Details page.</p>
+    ]]></fulldescription>
+  <viewEntityColumn
+    name="ClaimNumber"
+    path="ClaimInfo.ClaimNumber"/>
+  <viewEntityTypekey
+    name="ArchiveState"
+    path="ClaimInfo.ArchiveState"/>
+</viewEntity>

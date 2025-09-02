@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    beforeCommit="invoice.pay()"
+    canEdit="true"
+    id="MarkInvoicePaidPopup"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.ServiceRequest.MarkAsPaidPopup.Title&quot;)">
+    <LocationEntryPoint
+      signature="MarkInvoicePaidPopup(invoice: ServiceRequestInvoice)"/>
+    <Variable
+      name="invoice"
+      type="ServiceRequestInvoice"/>
+    <Screen>
+      <Toolbar>
+        <EditButtons/>
+      </Toolbar>
+      <DetailViewPanel>
+        <InputColumn>
+          <InputSet>
+            <RangeInput
+              editable="true"
+              id="ClaimChecks"
+              label="DisplayKey.get(&quot;Web.ServiceRequest.MarkAsPaidPopup.ClaimChecks&quot;)"
+              required="true"
+              value="invoice.Check"
+              valueRange="invoice.CoreSR.CompatibleChecks"
+              valueType="entity.Check"/>
+          </InputSet>
+        </InputColumn>
+      </DetailViewPanel>
+    </Screen>
+  </Popup>
+</PCF>

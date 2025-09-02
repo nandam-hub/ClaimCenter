@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <InputSet
+    id="ReinsuranceInputSet">
+    <Require
+      name="claim"
+      type="Claim"/>
+    <BooleanDropdownInput
+      editable="perm.System.reinsuranceedit"
+      id="ReinsuranceReportable"
+      label="DisplayKey.get(&quot;Web.Claim.ClaimStatus.ReinsuranceReportable&quot;)"
+      value="claim.ReinsuranceReportable">
+      <PostOnChange/>
+    </BooleanDropdownInput>
+    <TextAreaInput
+      editable="perm.System.reinsuranceedit"
+      id="ReinsuranceReason"
+      label="DisplayKey.get(&quot;Web.Claim.ClaimStatus.ReinsuranceEditReason&quot;)"
+      numRows="3"
+      required="claim.ReinsuranceReportable!=null"
+      value="claim.ReinsuranceReason"
+      visible="claim.ReinsuranceReportable!=null"/>
+    <TypeKeyInput
+      id="ReinsuranceFlagged"
+      label="DisplayKey.get(&quot;Web.Claim.ClaimStatus.ReinsuranceFlaggedStatus&quot;)"
+      value="claim.ReinsuranceFlaggedStatus"
+      valueType="typekey.ReinsuranceFlaggedStatus"
+      visible="claim.ReinsuranceReportable!=null &amp;&amp; !CurrentLocation.InEditMode"/>
+  </InputSet>
+</PCF>

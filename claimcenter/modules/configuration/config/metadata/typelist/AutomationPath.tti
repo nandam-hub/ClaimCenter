@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<typelist xmlns="http://guidewire.com/typelists" name="AutomationPath" desc="">
+  <typecode
+    code="vehicletotalloss"
+    desc="Vehicle Total Loss"
+    name="Vehicle Total Loss"/>
+  <typecode
+    code="vehiclerepair"
+    desc="Vehicle Repair"
+    name="Vehicle Repair"/>
+</typelist>

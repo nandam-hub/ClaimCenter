@@ -1,0 +1,375 @@
+name: thirdpartyprivileged
+accessibleFields:
+  AssessmentContentItem:
+    edit:
+    - contentCategory
+    - dateAcquired
+    - description
+    - incidentOrder
+    - itemComment
+    - numberOfItems
+    - purchaseCost
+    - replacementValue
+    view:
+    - amountAfterLimit
+    - contentCategory
+    - contentSchedule
+    - dateAcquired
+    - depreciationPercentage
+    - description
+    - id
+    - incidentOrder
+    - itemComment
+    - numberOfItems
+    - purchaseCost
+    - replacementValue
+  BaggageIncident:
+    edit:
+    - baggageMissingFrom
+    - baggageRecoveredOn
+    - baggageType
+    - carrierCompensated
+    - carrierCompensatedAmount
+    - delayOnly
+    - description
+    - incidentOwner
+    - lossParty
+    view:
+    - baggageMissingFrom
+    - baggageRecoveredOn
+    - baggageType
+    - carrierCompensated
+    - carrierCompensatedAmount
+    - delayOnly
+    - description
+    - id
+    - incidentOwner
+    - lossParty
+    - severity
+  ClaimContact:
+    edit:
+    - addressBookUID
+    - cellPhone
+    - claimUpdatesViaEmailOptIn
+    - claimUpdatesViaTextOptIn
+    - companyName
+    - companyNameKanji
+    - contactSubtype
+    - dateOfBirth
+    - editableRoles
+    - emailAddress1
+    - emailAddress2
+    - firstName
+    - homePhone
+    - lastName
+    - licenseNumber
+    - licenseState
+    - preferredPhoneType
+    - primaryAddress
+    - primaryLanguage
+    - primaryLocale
+    - primaryPhoneType
+    - syncAddressBookUID
+    - workPhone
+    view:
+    - addressBookUID
+    - authorizationID
+    - cellPhone
+    - claimUpdatesViaEmailOptIn
+    - claimUpdatesViaTextOptIn
+    - companyName
+    - companyNameKanji
+    - contactSubtype
+    - dateOfBirth
+    - displayName
+    - doctorSpecialty
+    - editableRoles
+    - emailAddress1
+    - emailAddress2
+    - firstName
+    - homePhone
+    - id
+    - lastName
+    - licenseNumber
+    - licenseState
+    - medicalLicense
+    - preferredPhoneType
+    - primaryAddress
+    - primaryContact
+    - primaryLanguage
+    - primaryLocale
+    - primaryPhone
+    - primaryPhoneType
+    - roles
+    - workPhone
+  DwellingIncident:
+    edit:
+    - damagedAreaSize
+    - description
+    - dwellingRoomDamages
+    - incidentOwner
+    - location
+    - lossParty
+    - materialsDamaged
+    - occupancyType
+    - propertySize
+    - yearBuilt
+    - yearsInHome
+    view:
+    - damagedAreaSize
+    - description
+    - dwellingRoomDamages
+    - id
+    - incidentOwner
+    - fireProtectionAvailable
+    - location
+    - lossParty
+    - materialsDamaged
+    - numberOfPeopleOnPolicy
+    - occupancyType
+    - propertySize
+    - severity
+    - yearBuilt
+    - yearsInHome
+  Exposure:
+    edit: []
+    view:
+    - baggageIncident
+    - claimant
+    - claimantType
+    - closeDate
+    - externalStatus
+    - fixedPropertyIncident
+    - generalIncident
+    - id
+    - injuryIncident
+    - primaryCoverage
+    - jurisdiction
+    - lossParty
+    - otherStructureIncident
+    - propertyContentsIncident
+    - tripIncident
+    - vehicleIncident
+  FixedPropertyIncident:
+    edit:
+    - description
+    - incidentOwner
+    - location
+    - lossParty
+    - occupancyType
+    view:
+    - description
+    - id
+    - incidentOwner
+    - location
+    - lossParty
+    - occupancyType
+    - severity
+  GeneralIncident:
+    edit:
+    - description
+    - incidentOwner
+    - lossParty
+    view:
+    - description
+    - id
+    - incidentOwner
+    - lossParty
+    - severity
+  InjuryIncident:
+    edit:
+    - ambulanceUsed
+    - bodyParts
+    - description
+    - detailedInjuryType
+    - disabledDueToAccident
+    - injuredPerson
+    - generalInjuryType
+    - lossParty
+    - lostWages
+    - primaryDoctor
+    view:
+    - ambulanceUsed
+    - bodyParts
+    - description
+    - detailedInjuryType
+    - disabledDueToAccident
+    - injuredPerson
+    - id
+    - generalInjuryType
+    - lossParty
+    - lostWages
+    - primaryDoctor
+    - severity
+    - treatmentType
+  LivingExpensesIncident:
+    edit:
+    - description
+    - lossParty
+    - startDate
+    - incidentOwner
+    view:
+    - description
+    - id
+    - lossParty
+    - startDate
+    - incidentOwner
+  OtherStructureIncident:
+    edit:
+    - alreadyRepaired
+    - description
+    - estimatesReceived
+    - estimatedRepairCost
+    - estimatedRepairTime
+    - fencesDamaged
+    - incidentOwner
+    - lossEstimate
+    - lossParty
+    - severity
+    view:
+    - alreadyRepaired
+    - description
+    - estimatesReceived
+    - estimatedRepairCost
+    - estimatedRepairTime
+    - fencesDamaged
+    - id
+    - incidentOwner
+    - lossEstimate
+    - lossParty
+    - severity
+  PolicyLocation:
+    edit: []
+    view:
+    - address
+    - buildings
+    - displayName
+    - id
+    - locationNumber
+    - notes
+    - policySystemId
+    - primaryLocation
+  PropertyContentsIncident:
+    edit:
+    - description
+    - incidentOwner
+    - location
+    - lossParty
+    view:
+    - description
+    - id
+    - incidentOwner
+    - location
+    - lossParty
+    - severity
+  PropertyContentsScheduledItem:
+    edit:
+    - propertyItem
+    view:
+    - id
+    - itemOrder
+    - propertyItem
+  TripAccommodation:
+    edit:
+    - address
+    - cancelOnly
+    - checkinDateTime
+    - checkoutDateTime
+    - propertyName
+    view:
+    - address
+    - agentFees
+    - assessment
+    - cancelOnly
+    - cancellationFees
+    - checkinDateTime
+    - checkoutDateTime
+    - id
+    - otherFees
+    - paidAmount
+    - propertyName
+    - reasonForCancellation
+    - reasonForDenial
+  TripIncident:
+    edit:
+    - description
+    - incidentOwner
+    - tripRiskUnit
+    view:
+    - description
+    - id
+    - incidentOwner
+    - severity
+    - tripRiskUnit
+  TripSegment:
+    edit:
+    - arrivalDateTime
+    - cancelOnly
+    - carrierName
+    - carrierNumber
+    - departureDateTime
+    - portOfDisembarkation
+    - portOfEmbarkation
+    - transportType
+    view:
+    - agentFees
+    - arrivalDateTime
+    - assessment
+    - cancelOnly
+    - cancellationFees
+    - carrierName
+    - carrierNumber
+    - departureDateTime
+    - id
+    - otherFees
+    - paidAmount
+    - portOfDisembarkation
+    - portOfEmbarkation
+    - reasonForCancellation
+    - reasonForDenial
+    - transportType
+  VehicleIncident:
+    edit:
+    - airbagsDeployed
+    - childSafetySeatStatus
+    - collision
+    - collisionPoint
+    - damageDescription
+    - driver
+    - equipmentFailure
+    - incidentOwner
+    - lossParty
+    - numOccupants
+    - passengers
+    - propertyDamageDescription
+    - safeToDrive
+    - theft
+    - vehicle
+    - vehicleDirection
+    - vehicleParked
+    - vehicleType
+    - vehicleUseReason
+    view:
+    - airbagsDeployed
+    - childSafetySeatStatus
+    - collision
+    - collisionPoint
+    - damageDescription
+    - driver
+    - equipmentFailure
+    - id
+    - incidentOwner
+    - lossParty
+    - numOccupants
+    - passengers
+    - propertyDamageDescription
+    - propertyValue
+    - safeToDrive
+    - severity
+    - theft
+    - totalLoss
+    - vehicle
+    - vehicleDirection
+    - vehicleParked
+    - vehicleType
+    - vehicleUseReason

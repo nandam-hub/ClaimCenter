@@ -1,0 +1,22 @@
+package rules.Reopened.ExposureReopened_dir
+
+@gw.rules.RuleName("ERO01000 - Notify external systems")
+internal class ERO01000Notifyexternalsystems {
+  static function doCondition(exposure : entity.Exposure) : boolean {
+    
+/*start00rule*/
+return true /* always notify */
+/*end00rule*/
+
+  }
+
+  static function doAction(exposure : entity.Exposure, actions : gw.rules.Action) {
+
+/*start00rule*/
+/* The same event under a different name (ExposureReopened) is now built in. If you do not need the exposure_reopened
+   event, you can safely disable this rule. */
+exposure.Claim.addEvent("exposure_reopened")
+/*end00rule*/
+
+  }
+}

@@ -1,0 +1,9 @@
+swagger: "2.0"
+consumes:
+- application/json
+produces:
+- application/json
+x-gw-combine:
+- gw.core.cc.common.v1.common_core-1.0
+x-gw-schema-import:
+  common: gw.content.cc.common.v1.common_content-1.0

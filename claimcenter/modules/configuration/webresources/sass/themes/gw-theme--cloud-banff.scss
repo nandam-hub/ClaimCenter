@@ -1,0 +1,126 @@
+@import "./partials/cloud/cloud_general";
+@import "./partials/cloud/cloud_dark_text_on_light_backdrop_colors";
+@import "./partials/cloud/cloud_spacing";
+
+//#00739d
+$gw-app--bg: #F0F1F5;
+$gw-app--col: #1F1F1F;
+
+$gw-app--palette--left-nav--bg: #131e2e;
+$gw-app--palette--left-nav--col: white;
+$gw-app--palette--left-nav--bg-highlight: lighten($gw-app--palette--left-nav--bg, 10%);
+$gw-app--palette--left-nav--bg-lighter: lighten($gw-app--palette--left-nav--bg, 15%);
+$gw-app--palette--left-nav--border-col: #586D87;
+
+// NORTH PANEL
+$gw-app--NorthPanel--active-tab-has-bottom-bar: true;
+$gw-app--NorthPanel--active-tab-bottom-bar-height: 3px;
+$gw-app--NorthPanel--active-tab-bottom-bar-bg: #65C6C4;
+
+$gw-app--NorthPanel--bg: #324c76;
+$gw-app--NorthPanel--button--bg: $gw-app--NorthPanel--bg;
+
+$gw-app--NorthPanel--button--active--col: white;
+$gw-app--NorthPanel--button--active--bg: #40659a; //mix($gw-app--NorthPanel--button--bg, white, 78%)
+$gw-app--NorthPanel--button--hover--col: white;
+$gw-app--NorthPanel--button--hover--bg: #40659a; //mix($gw-app--NorthPanel--button--bg, white, 85%)
+
+$gw-app--NorthPanel--tab-expand-glyph: "angle-down";
+
+// West Panel Color
+$gw-app--WestPanel--bg: $gw-app--palette--left-nav--bg;
+$gw-app--WestPanel--bg-darker: darken($gw-app--WestPanel--bg, 5%);
+$gw-app--WestPanel--bg-darkest: darken($gw-app--WestPanel--bg, 10%);
+$gw-app--WestPanel--bg-lighter: lighten($gw-app--WestPanel--bg, 10%);
+$gw-app--WestPanel--bg-lightest: lighten($gw-app--WestPanel--bg, 15%);
+
+$gw-app--SouthPanel--floatToggle--bg: $gw-app--palette--gray-C;
+$gw-app--SouthPanel--floatToggle--col: $gw-app--palette--gray-5;
+
+$gw-app--WestPanel--button--bg: $gw-app--palette--left-nav--bg;
+$gw-app--WestPanel--button--col: $gw-app--palette--left-nav--col;
+$gw-app--WestPanel--button--active--bg: $gw-app--NorthPanel--button--active--bg; //#D3DDED
+$gw-app--WestPanel--button--active--col: $gw-app--NorthPanel--button--active--col;
+$gw-app--WestPanel--button--hover--bg: $gw-app--NorthPanel--button--hover--bg;
+$gw-app--WestPanel--button--hover--col: $gw-app--NorthPanel--button--hover--col;
+$gw-app--WestPanel--button-active-border-width-px: 4px;
+$gw-app--WestPanel--button--active--border--col: #65C6C4;
+$gw-app--WestPanel--button--topborder: 0px solid transparent;
+$gw-app--WestPanel--button--bottomborder:  0px solid transparent;
+
+$gw-app--WestPanel--submenu--button--bg: darken($gw-app--WestPanel--button--bg, 8%); //#F8F9FA
+$gw-app--WestPanel--submenu--button--col: $gw-app--WestPanel--button--col;
+$gw-app--WestPanel--submenu--button--active--bg: darken($gw-app--WestPanel--button--active--bg, 8%);
+$gw-app--WestPanel--submenu--button--active--col: $gw-app--WestPanel--button--active--col;
+$gw-app--WestPanel--submenu--button--hover--bg: darken($gw-app--WestPanel--button--hover--bg, 8%);
+$gw-app--WestPanel--submenu--button--hover--col: $gw-app--WestPanel--button--hover--col;
+$gw-app--WestPanel--submenu--button-active-border-width-px: $gw-app--WestPanel--button-active-border-width-px;
+$gw-app--WestPanel--submenu--button--active--border--col: $gw-app--WestPanel--button--active--border--col;
+$gw-app--WestPanel--submenu--button--topborder:  0px solid transparent;
+$gw-app--WestPanel--submenu--button--bottomborder:  0px solid transparent;
+
+//This more closely matches current UX banff design, but they are missing some puzzle pieces, so leaving for now
+//$gw-app--WestPanel--submenu--button--bg: #F8F9FA;
+//$gw-app--WestPanel--submenu--button--col: $gw-app--col;
+//$gw-app--WestPanel--submenu--button--active--bg: $gw-app--WestPanel--button--active--bg;
+//$gw-app--WestPanel--submenu--button--active--col: $gw-app--WestPanel--button--active--col;
+//$gw-app--WestPanel--submenu--button--hover--bg: $gw-app--WestPanel--button--hover--bg;
+//$gw-app--WestPanel--submenu--button--hover--col: $gw-app--WestPanel--button--hover--col;
+//$gw-app--WestPanel--submenu--button-active-border-width-px: $gw-app--WestPanel--button-active-border-width-px;
+//$gw-app--WestPanel--submenu--button--active--border--col: $gw-app--WestPanel--button--active--border--col;
+//$gw-app--WestPanel--submenu--button--topborder:  0px solid transparent;
+//$gw-app--WestPanel--submenu--button--bottomborder:  0px solid transparent;
+
+//West Panel Other
+$gw-app--WestPanel--button--pad-h-rem: $gw-app--SPACING-rem-XL;
+$gw-app--WestPanel--button--pad-v-rem: $gw-app--SPACING-rem-L;
+
+$gw-app--WestPanel--submenu--button--pad-h-rem: $gw-app--WestPanel--button--pad-h-rem;
+$gw-app--WestPanel--submenu--button--pad-v-rem: $gw-app--WestPanel--button--pad-v-rem;
+
+$gw-app--palette--left-nav--wizard-bg: $gw-app--palette--left-nav--bg;
+
+$gw-app--WestPanel--item-spacing-v-rem: 0rem;
+$gw-app--WestPanel--padding-h-rem: 0rem;
+
+$gw-app--WestPanel--button--pad-v-rem: $gw-app--SPACING-rem-L;
+
+
+$gw-app--WestPanel--minmax-open-glyph: "angle-double-right";
+$gw-app--WestPanel--minmax-close-glyph: "angle-double-left";
+
+$gw-app--WestPanel--button--glyph-open: "angle-down";
+$gw-app--WestPanel--button--glyph-close: "angle-up";
+
+$gw-app--wizards--title-area--pad-h-rem: $gw-app--SPACING-rem-M;
+$gw-app--wizards--title-area--pad-v-rem: $gw-app--SPACING-rem-M;
+
+$gw-app--WestPanel--shadow: inset 0 4px 5px -4px black;
+
+// CENTER PANEL
+$gw-app--TitleBar--screen--drop-shadow: $gw-app--WestPanel--shadow;
+
+// MENU ACTIONS WIDGET
+$gw-app--MenuActionsWidget--has-button-appearance: false;
+
+$gw-app--MenuActionsWidget--spacing-widget-top-rem: 0; //gw-remScaled(20/15)
+$gw-app--MenuActionsWidget--spacing-widget-left-rem: $gw-app--WestPanel--padding-h-rem;
+$gw-app--MenuActionsWidget--spacing-widget-right-rem: $gw-app--WestPanel--padding-h-rem;
+$gw-app--MenuActionsWidget--spacing-widget-bottom-rem: $gw-app--WestPanel--item-spacing-v-rem;
+
+//$gw-app--MenuActionsWidget--spacing-inner-top-rem: $gw-app--SPACING-rem-M;
+$gw-app--MenuActionsWidget--spacing-inner-left-rem: $gw-app--WestPanel--button--pad-h-rem;
+$gw-app--MenuActionsWidget--spacing-inner-right-rem: $gw-app--WestPanel--button--pad-h-rem - $gw-app--MenuActionsWidget--spacing-widget-right-rem;
+//$gw-app--MenuActionsWidget--spacing-inner-bottom-rem: $gw-app--SPACING-rem-M;
+
+// LISTVIEW
+$gw-app--ListView--columns-button-icon: "th";
+
+// Wizard
+$gw-app--wizards--step-button-graphics--channel-bg: black;
+$gw-app--wizards--step-button-graphics--visited-col: darkgray;
+//$gw-app--wizards--step-button-graphics--error-col: $gw-app--palette--error;
+//$gw-app--wizards--step-button-graphics--warning-col: $gw-app--palette--warning;
+$gw-app--wizards--step-button-graphics--active-col: white;
+
+//inset 0 4px 5px -4px black

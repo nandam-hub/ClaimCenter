@@ -1,0 +1,110 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Page
+    autosaveable="false"
+    canEdit="true"
+    canVisit="perm.User.EditLog or perm.User.DevAllAccess"
+    countsAsWork="false"
+    id="IntentionalLogging"
+    parent="ServerTools()"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.InternalTools.IntentionalLogging&quot;)">
+    <LocationEntryPoint
+      signature="IntentionalLogging()"/>
+    <Variable
+      initialValue="new gw.api.tools.IntentionalLoggingUI()"
+      name="IntentionalLoggingData"
+      type="gw.api.tools.IntentionalLoggingUI"/>
+    <Variable
+      initialValue="IntentionalLoggingData.AvailableMarkers.toTypedArray()"
+      name="Markers"
+      recalculateOnRefresh="true"
+      type="org.slf4j.Marker[]"/>
+
+    
+    <Screen
+      id="IntentionalLoggingScreen">
+      <Toolbar>
+        <ToolbarButton
+          action="IntentionalLoggingData.updateGlobalState(true)"
+          available="IntentionalLoggingData.shouldGlobalOnButtonBeVisible()"
+          id="globalButtonOn"
+          label="DisplayKey.get(&quot;Web.InternalTools.IntentionalLogging.TurnAllOn&quot;)"
+          tooltip="DisplayKey.get(&quot;Web.InternalTools.IntentionalLogging.TooltipEnable&quot;)"/>
+        <ToolbarButton
+          action="IntentionalLoggingData.updateGlobalState(false)"
+          available="IntentionalLoggingData.shouldGlobalOffButtonBeVisible()"
+          id="globalButtonOff"
+          label="DisplayKey.get(&quot;Web.InternalTools.IntentionalLogging.TurnAllOff&quot;)"
+          tooltip="DisplayKey.get(&quot;Web.InternalTools.IntentionalLogging.TooltipDisable&quot;)"/>
+      </Toolbar>
+      <Verbatim
+        label="DisplayKey.get(&quot;Web.InternalTools.IntentionalLogging.TabDescription&quot;)"/>
+      <PanelRef>
+        <TitleBar
+          id="titleBar"
+          title="DisplayKey.get(&quot;Web.InternalTools.IntentionalLogging.PerTagSettings&quot;)"/>
+        <ListViewPanel
+          disableUserCustomization="true"
+          id="IntentionalLoggingLV">
+          <RowIterator
+            editable="false"
+            elementName="IntentionalLoggingRow"
+            id="IntentionalLoggingRowIterator"
+            pageSize="100"
+            value="Markers"
+            valueType="org.slf4j.Marker[]">
+            <Variable
+              initialValue="IntentionalLoggingData.shouldSwitchOnButtonBeVisible(IntentionalLoggingRow)"
+              name="turnOnEnabled"
+              recalculateOnRefresh="true"
+              type="boolean"/>
+            <Variable
+              initialValue="IntentionalLoggingData.shouldSwitchOffButtonBeVisible(IntentionalLoggingRow)"
+              name="turnOffEnabled"
+              recalculateOnRefresh="true"
+              type="boolean"/>
+            <Variable
+              initialValue="IntentionalLoggingData.isEnabled(IntentionalLoggingRow)"
+              name="isEnabled"
+              recalculateOnRefresh="true"
+              type="boolean"/>
+          
+            <Row>
+              <TextCell
+                id="Name"
+                label="DisplayKey.get(&quot;Web.InternalTools.IntentionalLogging.Name&quot;)"
+                sortOrder="1"
+                value="IntentionalLoggingRow.Name"/>
+              <TextCell
+                id="Status"
+                label="DisplayKey.get(&quot;Web.InternalTools.IntentionalLogging.Status&quot;)"
+                value="isEnabled ? DisplayKey.get(&quot;Web.InternalTools.IntentionalLogging.StatusOn&quot;) 
+                : DisplayKey.get(&quot;Web.InternalTools.IntentionalLogging.StatusOff&quot;)"/>
+              <LinkCell
+                id="Actions"
+                label="DisplayKey.get(&quot;Web.InternalTools.IntentionalLogging.Action&quot;)"
+                visible="perm.User.EditPlugin or perm.User.DevAllAccess">
+                <Link
+                  action="IntentionalLoggingData.updateMarkerState(IntentionalLoggingRow, true)"
+                  available="turnOnEnabled"
+                  id="Start"
+                  label="DisplayKey.get(&quot;Web.InternalTools.IntentionalLogging.TurnOn&quot;)"
+                  styleClass="miniButton"/>
+                <Link
+                  action="IntentionalLoggingData.updateMarkerState(IntentionalLoggingRow, false)"
+                  available="turnOffEnabled"
+                  id="Stop"
+                  label="DisplayKey.get(&quot;Web.InternalTools.IntentionalLogging.TurnOff&quot;)"
+                  styleClass="miniButton"/>
+              </LinkCell>
+            </Row>
+          </RowIterator>
+        </ListViewPanel>
+      </PanelRef>
+
+    </Screen>
+  </Page>
+</PCF>

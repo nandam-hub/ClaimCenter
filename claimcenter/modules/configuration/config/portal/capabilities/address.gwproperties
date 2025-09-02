@@ -1,0 +1,3 @@
+# GAR START: config/portal/capabilities/address.gwproperties [/opt/teamcity/agent/work/45c3a2f1b8ee4237/gpm-generator/downloads/edge/backend/xcenter-config/xcenter-utils/cc-utils/../../../Shared/address/src/main]
+handlers.lookup=edge.capabilities.address.AddressLookupHandler
+# GAR END

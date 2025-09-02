@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="Policy system from which line of business, coverage, etc. codes are sourced"
+  name="SourceSystem">
+  <typecode
+    code="PC"
+    desc="PolicyCenter product model codes"
+    name="PolicyCenter"/>
+  <typecode
+    code="APD"
+    desc="Advanced Product Designer product model codes"
+    name="AdvancedProductDesigner"/>
+</typelist>

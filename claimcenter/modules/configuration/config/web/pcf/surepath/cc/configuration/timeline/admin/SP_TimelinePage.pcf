@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../../../pcf.xsd">
+  <Page
+    id="SP_TimelinePage"
+    canEdit="true"
+    title="DisplayKey.get(&quot;SP.Timeline.JSP.ClaimPageLinks.PageLink.Timeline&quot;)">
+    <Screen
+      id="TimelineScreen">
+      <Variable
+        initialValue="gw.surepath.cc.configuration.timeline.creation.TimelineUtil.getTimelineEventTypes()"
+        name="timelineEventValues"
+        type="gw.api.database.IQueryBeanResult&lt;TimelineEvent_SP&gt;"/>
+      <PanelRef
+        def="SP_TimelineLV(timelineEventValues)">
+        <Toolbar>
+          <EditButtons/>
+          <IteratorButtons
+            addVisible="true"
+            iterator="SP_TimelineLV.TimelineEventIterator"
+            removeVisible="true"/>
+        </Toolbar>
+      </PanelRef>
+    </Screen>
+  </Page>
+</PCF>

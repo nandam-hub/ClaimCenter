@@ -1,0 +1,51 @@
+.gw-client-validation-float {
+  display: inline-block;
+  @include gw-borderRadius();
+  background-color: $gw-app--bg;
+  color: $gw-app--col;
+  max-width: 90%;
+  @include gw-wrapOnWhiteSpace();
+  max-height: 10em;
+  padding: $gw-app--SPACING-rem-XS;
+  margin: $gw-app--SPACING-rem-XS;
+  position: fixed;
+  @include gw-z-index(clientValidation);
+  top: 100%;
+  left: $gw-app--SPACING-rem-S;
+  box-shadow: $gw-app--menus--shadow;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  @mixin makeIconElements ($icon-name, $color, $above: false) {
+    border: gw-border($color);
+    @include gw-icon($icon-name, $color: $color, $v-align: baseline, $width: 1.6em, $h-align: left, $display: inline, $pad-right: .5em);
+
+    @if ($above) {
+      @include gw-iconAfter("caret-down-solid", $color: $color, $v-align: top, $h-align: center, $position: absolute, $top: 1em, $left: $gw-app--SPACING-rem-XS);
+    } @else {
+      @include gw-iconAfter("caret-up-solid", $color: $color, $v-align: bottom, $h-align: center, $position: absolute, $bottom: 1em, $left: $gw-app--SPACING-rem-XS);
+    }
+  }
+
+  &.gw-client-validation-warning {
+    &:not(.gw-client-validation-float--above) {
+      @include makeIconElements("exclamation-triangle-solid", $gw-app--palette--warning);
+    }
+
+    &.gw-client-validation-float--above {
+      @include makeIconElements("exclamation-triangle-solid", $gw-app--palette--warning, true);
+    }
+  }
+
+  &.gw-client-validation-error {
+    &:not(.gw-client-validation-float--above) {
+      @include makeIconElements("exclamation-circle-solid", $gw-app--palette--error);
+    }
+
+    &.gw-client-validation-float--above {
+      @include makeIconElements("exclamation-circle-solid", $gw-app--palette--error, true);
+    }
+  }
+}

@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<delegate
+  platform="true"
+  xmlns="http://guidewire.com/datamodel"
+  name="EpdrDataContainer">
+  <column
+    desc="JSON object holding data for the object"
+    getterScriptability="hidden"
+    name="Data"
+    nullok="true"
+    setterScriptability="hidden"
+    type="text"/>
+  <implementsInterface
+    iface="com.guidewire.pl.domain.apiextensionbundles.EpdrDataContainerMethods"
+    impl="com.guidewire.pl.domain.apiextensionbundles.EpdrDataContainerMethodsImpl"/>
+</delegate>

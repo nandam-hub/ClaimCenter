@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Page
+    canVisit="gw.api.feature.AdsDisplayFeatureInfo.isEnabled()"
+    id="AdsAnalyticsOverview"
+    parent="ClaimStatus(claim)"
+    title="DisplayKey.get(&quot;Web.Ads.AnalyticsOverview&quot;)">
+    <LocationEntryPoint
+      signature="AdsAnalyticsOverview(claim: Claim)"/>
+    <Variable
+      name="claim"
+      type="Claim"/>
+    <Screen>
+      <TemplatePanel>
+        <TemplatePanelContents><![CDATA[<div id="jutromfe" style="position:absolute; width:82vw; height:100vh"></div>
+<script>
+  function renderApp() {
+  if (typeof JutroMicroFrontends === 'function') {
+    JutroMicroFrontends.createRoot(
+      document.getElementById('jutromfe'), 
+      'assessments@<%printContent(gw.api.feature.AdsDisplayFeatureInfo.getDisplayUiUrl(), false)%>').render();
+  } else {
+    const scriptPath = '<%printContent(gw.api.feature.AdsDisplayFeatureInfo.getDisplayUiUrl(), false)%>';
+    var script = document.createElement('script');
+    script.src = scriptPath + '/jutro-micro-frontends.js';
+    script.async = false;
+    script.onload = function () {
+      const selector = document.getElementById('jutromfe');
+
+      const request = '<%printContent(new gw.api.ads.AdsEmbeddedAnalyticsDisplay(claim).getAssessmentSummariesDisplayRequest(), false)%>';
+
+      const renderer = JutroMicroFrontends.createRoot(
+        selector,
+        'assessments@<%printContent(gw.api.feature.AdsDisplayFeatureInfo.getDisplayUiUrl(), false)%>'
+      );
+
+      renderer.render(
+        {
+          value: { request },
+          jutro: {
+            integrateJutro: false,
+          },
+        },
+        {
+          onLoaded: () => { },
+        }
+      );
+    };
+    document.head.appendChild(script);
+  }
+}
+
+// Check if the embedded app is already loaded, otherwise render it.
+if (document.getElementById('jutromfe')) {
+  renderApp();
+} else {
+  document.addEventListener('DOMContentLoaded', renderApp);
+}
+</script>
+]]></TemplatePanelContents>
+      </TemplatePanel>
+    </Screen>
+  </Page>
+</PCF>

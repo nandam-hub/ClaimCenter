@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Queue to restore archived claims. This is a system-internal entity."
+  entity="RestoreArchivedClaimWorkItem"
+  extendable="true"
+  final="true"
+  ignoreForEvents="true"
+  loadable="false"
+  table="restoreArchvdClaimWorkItem"
+  type="keyable">
+  <implementsEntity
+    name="WorkItem"/>
+  <fulldescription><![CDATA[Retrieve a claim that was archived back into active database. Work items are recorded with the PublicID value of (ClaimCenter) entities. This is a system-internal entity.
+    ]]></fulldescription>
+  <column
+    desc="Soft foreign key to the archived claimInfo to be retrieved."
+    name="ClaimInfoId"
+    nullok="false"
+    type="softentityreference"/>
+  <column
+    desc="Reason/Description for Bulk Claims Restore."
+    name="Comments"
+    nullok="false"
+    type="shorttext">
+  </column>
+</entity>

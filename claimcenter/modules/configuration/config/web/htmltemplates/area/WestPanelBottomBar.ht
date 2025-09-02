@@ -1,0 +1,5 @@
+<div id="${renderId}">
+    <div id="${renderId}--minmax" class="gw-west-panel--minmax-button" role="button" aria-label="${floatToggleLabel}" data-gw-click="gwWestPanel.toggleMinMax" id="WestPanel-ToggleMinMax">
+        <div class="gw-icon"></div>
+    </div>
+</div>

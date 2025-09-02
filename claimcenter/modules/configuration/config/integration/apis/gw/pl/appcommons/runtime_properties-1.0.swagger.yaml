@@ -1,0 +1,108 @@
+swagger: '2.0'
+x-gw-combine:
+- gw.pl.framework.paging_definitions-1.0
+- gw.pl.framework.query_definitions-1.0
+info:
+  description: "API for CRUD operations on Runtime Properties"
+  title: "Runtime Properties API"
+  version: '1.0'
+basePath: /runtimeproperties/v1
+x-gw-schema-import:
+ runtime_properties: gw.pl.appcommons.runtime_properties-1.0
+x-gw-apihandlers:
+- gw.api.rest.appcommons.v1.RuntimePropertiesApiHandler
+paths:
+  /properties:
+      post:
+        summary: "Create a new runtime property"
+        description: "Returns a newly created runtime property"
+        operationId: createRuntimeProperty
+        consumes:
+        - application/json
+        produces:
+        - application/json
+        x-gw-permissions:
+        - editproperties
+        parameters:
+          name: body
+          in: body
+          required: true
+          schema:
+            $ref: "runtime_properties#/definitions/RuntimePropertyData"
+        responses:
+          '201':
+            description: "Successful creation"
+            schema:
+              $ref: "runtime_properties#/definitions/RuntimePropertyData"
+      get:
+        summary: "Get all runtime properties"
+        description: "Returns a list of properties"
+        operationId: getAllProperties
+        parameters:
+        - $ref: "#/parameters/includeTotalCount"
+        - $ref: "#/parameters/filter"
+        - $ref: "#/parameters/sort"
+        - $ref: "#/parameters/pageToken"
+        - $ref: "#/parameters/pageSize25"
+        produces:
+        - application/json
+        x-gw-permissions:
+        - viewproperties
+        responses:
+          '200':
+            description: "Successful operation"
+            schema:
+              $ref: "runtime_properties#/definitions/RuntimePropertyList"
+
+  /properties/{propertyId}:
+      get:
+        summary: "Find runtime property by public ID"
+        description: "Returns a single runtime property"
+        operationId: findRuntimePropertyById
+        produces:
+        - application/json
+        x-gw-permissions:
+        - viewproperties
+        parameters:
+        - name: propertyId
+          type: string
+          required: true
+          in: path
+        responses:
+          '200':
+            description: "Successful operation"
+            schema:
+              $ref: "runtime_properties#/definitions/RuntimePropertyData"
+      delete:
+        summary: "Delete runtime property by public ID"
+        operationId: deleteRuntimePropertyById
+        x-gw-permissions:
+        - deleteproperties
+        parameters:
+        - name: propertyId
+          type: string
+          required: true
+          in: path
+        responses:
+          '204':
+            description: "Successful operation"
+      put:
+        summary: "Update existing runtime property"
+        operationId: updateRuntimeProperty
+        consumes:
+          - application/json
+        x-gw-permissions:
+          - editproperties
+        parameters:
+          - name: propertyId
+            type: string
+            required: true
+            in: path
+          - name: body
+            in: body
+            required: true
+            schema:
+              $ref: "runtime_properties#/definitions/RuntimePropertyAttributes"
+        responses:
+          '204':
+            description: "Successful operation"

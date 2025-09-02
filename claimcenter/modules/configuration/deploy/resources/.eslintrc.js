@@ -1,0 +1,40 @@
+module.exports = {
+  root: true,
+  parser: "@typescript-eslint/parser",
+  plugins: ["@typescript-eslint"],
+  extends: [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    //"plugin:@typescript-eslint/recommended-requiring-type-checking",
+    //"plugin:@typescript-eslint/strict",
+    "prettier",
+  ],
+  ignorePatterns: ["/**/*.spec.ts", "*.js"],
+  parserOptions: {
+    ecmaVersion: 2020,
+    sourceType: "module",
+  },
+  overrides: [
+    {
+      files: ["*.ts", "*.tsx"],
+      rules: {
+        "no-unused-expressions": "off",
+        "no-warning-comments": ["error", { terms: ["NO_MERGE"], location: "anywhere" }],
+        "no-use-before-define": "off",
+        "@typescript-eslint/no-use-before-define": "off",
+        "@typescript-eslint/no-inferrable-types": "off",
+        "@typescript-eslint/no-empty-interface": "off",
+        "@typescript-eslint/explicit-function-return-type": "off",
+        "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/no-non-null-assertion": "off",
+        "@typescript-eslint/no-unused-vars": "off",
+        "no-shadow": "off",
+        "no-undef": "off",
+        "@typescript-eslint/no-shadow": ["error"],
+        "no-useless-escape": "off",
+        "no-dupe-class-members": "off",
+        "no-debugger": "off",
+      },
+    },
+  ],
+};

@@ -1,0 +1,67 @@
+swagger: '2.0'
+basePath: /system/v1/server/profiler
+x-gw-runlevel: maintenance
+x-gw-schema-import:
+  profiler: gw.pl.system.server.profiler.base-1.0
+x-gw-permissions:
+- toolsProfilerview
+x-gw-combine:
+- gw.pl.system.server.profiler.base-1.0
+- gw.pl.system.server.profiler.batch_processes-1.0
+- gw.pl.system.server.profiler.rest-1.0
+- gw.pl.system.server.profiler.work_queues-1.0
+- gw.pl.system.server.profiler.message_destinations-1.0
+- gw.pl.system.server.profiler.web_services-1.0
+- gw.pl.system.server.profiler.startable_services-1.0
+- gw.pl.system.server.profiler.gosu_servlets-1.0
+- gw.pl.framework.paging_definitions-1.0
+- gw.pl.framework.query_definitions-1.0
+x-gw-apihandlers:
+- gw.api.rest.pl.system.v1.ServerProfilerAPIHandler
+- gw.api.rest.pl.system.v1.server.profiler.BatchProcessesAPIHandler
+- gw.api.rest.pl.system.v1.server.profiler.RestAPIHandler
+- gw.api.rest.pl.system.v1.server.profiler.WorkQueuesAPIHandler
+- gw.api.rest.pl.system.v1.server.profiler.MessageDestinationsAPIHandler
+- gw.api.rest.pl.system.v1.server.profiler.WebServicesAPIHandler
+- gw.api.rest.pl.system.v1.server.profiler.StartableServicesAPIHandler
+- gw.api.rest.pl.system.v1.server.profiler.GosuServletsAPIHandler
+paths:
+  /config:
+    get:
+      summary: "Get configuration for all enabled entry points"
+      description: "Get configuration for all enabled entry points. The only supported filter property is 'entrypoint', value type string"
+      operationId: getConfigurationForAllEnabledEntryPoints
+      parameters:
+        - $ref: "#/parameters/filter"
+        - $ref: "#/parameters/pageSize100"
+        - $ref: "#/parameters/pageToken"
+        - $ref: "#/parameters/includeTotalCount"
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: "Return configurations"
+          schema:
+            $ref: "profiler#/definitions/VerboseEntryPointPage"
+  /history:
+      get:
+        summary: "Get history occurrences for all profiler entry points"
+        description: |
+          Get history occurrences for all profiler entry points. The only supported filter property is 'entrypoint', value type string.
+          Note that the parameter 'entrypoint' is the same as the filter 'entrypoint', the parameter entry point must match, where the
+          filter permits operators.
+        operationId: getOccurrencesForAllEntryPoints
+        parameters:
+          - $ref: "#/parameters/entrypointCode"
+          - $ref: "#/parameters/sort"
+          - $ref: "#/parameters/filter"
+          - $ref: "#/parameters/pageSize100"
+          - $ref: "#/parameters/pageToken"
+          - $ref: "#/parameters/includeTotalCount"
+        produces:
+          - application/json
+        responses:
+          '200':
+            description: "Return all history occurrences"
+            schema:
+              $ref: "profiler#/definitions/HistoryPage"

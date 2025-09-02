@@ -1,0 +1,11 @@
+combine:
+- gw.core.pl.composite.v1.composite_pl-1.0
+resourceAccess:
+  contactAuthorizationIds:
+    yaml: gw.core.pl.composite.v1.composite_pl-1.0
+  gwabuid:
+    yaml: gw.core.pl.composite.v1.composite_pl-1.0
+  policyNumbers:
+    yaml: gw.core.pl.composite.v1.composite_pl-1.0
+  producerCodes:
+    yaml: gw.core.pl.composite.v1.composite_pl-1.0

@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<typelistextension 
+  xmlns="http://guidewire.com/typelists" 
+  name="ServiceRequestExternalStatus" 
+  desc="Status of a service request to be exposed to external users">
+  <typecode
+    code="inprogress"
+    desc="In Progress"
+    name="In Progress"
+    priority="1">
+    <category
+      code="requested"
+      typelist="ServiceRequestProgress"/>
+    <category
+      code="specialistwaiting"
+      typelist="ServiceRequestProgress"/>
+    <category
+      code="inprogress"
+      typelist="ServiceRequestProgress"/>
+  </typecode>
+  <typecode
+    code="completed"
+    desc="Completed"
+    name="Completed"
+    priority="2">
+    <category
+      code="workcomplete"
+      typelist="ServiceRequestProgress"/>
+  </typecode>
+  <typecode
+    code="discontinued"
+    desc="Discontinued"
+    name="Discontinued"
+    priority="3">
+    <category
+      code="declined"
+      typelist="ServiceRequestProgress"/>
+    <category
+      code="canceled"
+      typelist="ServiceRequestProgress"/>
+    <category
+      code="expired"
+      typelist="ServiceRequestProgress"/>
+  </typecode>
+</typelistextension>

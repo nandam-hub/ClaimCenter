@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<internaltypelistextension xmlns="http://guidewire.com/typelists" name="PurgeType" desc="">
+  <!-- Force codegen. If any type is ever added this comment can be removed. -->
+</internaltypelistextension>

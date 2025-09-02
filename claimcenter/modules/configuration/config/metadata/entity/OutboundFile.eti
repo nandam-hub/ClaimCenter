@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<entity
+  loadable="false"
+  xmlns="http://guidewire.com/datamodel"
+  entity="OutboundFile"
+  desc="An outbound file."
+  table="outboundfile"
+  type="editable"
+  platform="true"
+  replicable="false">
+  <foreignkey
+    desc="The name of the outbound file config."
+    fkentity="OutboundFileConfig"
+    name="Config"
+    nullok="false"/>
+  <column
+    desc="A unique batch ID."
+    name="BatchID"
+    nullok="false"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="256"/>
+  </column>
+  <column
+    desc="The date and time that the file was created."
+    name="CreateDate"
+    nullok="false"
+    type="datetime"/>
+  <column
+    desc="The date and time that the file is eligible to be purged."
+    name="PurgeDate"
+    nullok="false"
+    type="datetime"/>
+  <column
+    desc="The full path name of the file."
+    name="FileName"
+    nullok="false"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="512"/>
+  </column>
+  <index
+    desc="Support search for config"
+    name="OutFileConfigIx">
+    <indexcol
+      keyposition="1"
+      name="Config"/>
+  </index>
+  <index
+    desc="Support check for purging files"
+    name="OutFilePrgIx">
+    <indexcol
+      keyposition="1"
+      name="PurgeDate"/>
+  </index>
+</entity>

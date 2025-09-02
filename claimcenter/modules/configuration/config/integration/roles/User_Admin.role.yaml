@@ -1,0 +1,121 @@
+name: "User Admin"
+endpoints:
+- endpoint: /admin/v1/authority-limit-profiles
+  methods:
+  - GET
+  - POST
+- endpoint: "/admin/v1/authority-limit-profiles/*"
+  methods:
+  - GET
+  - PATCH
+  - DELETE
+- endpoint: "/admin/v1/authority-limit-profiles/*/limits"
+  methods:
+  - GET
+  - POST
+- endpoint: "/admin/v1/authority-limit-profiles/*/limits/*"
+  methods:
+  - GET
+  - PATCH
+  - DELETE
+- endpoint: /admin/v1/groups
+  methods:
+  - GET
+  - POST
+- endpoint: "/admin/v1/groups/*"
+  methods:
+  - GET
+  - PATCH
+  - DELETE
+- endpoint: "/admin/v1/groups/*/queues"
+  methods:
+  - GET
+  - POST
+- endpoint: "/admin/v1/groups/*/queues/*"
+  methods:
+  - GET
+  - PATCH
+  - DELETE
+- endpoint: "/admin/v1/groups/*/users"
+  methods:
+  - GET
+  - POST
+- endpoint: "/admin/v1/groups/*/users/*"
+  methods:
+  - GET
+  - PATCH
+  - DELETE
+- endpoint: /admin/v1/roles
+  methods:
+  - GET
+  - POST
+- endpoint: "/admin/v1/roles/*"
+  methods:
+  - GET
+  - PATCH
+  - DELETE
+- endpoint: /admin/v1/security-zones
+  methods:
+  - GET
+  - POST
+- endpoint: "/admin/v1/security-zones/*"
+  methods:
+  - GET
+  - PATCH
+  - DELETE
+- endpoint: /admin/v1/users
+  methods:
+  - GET
+  - POST
+- endpoint: "/admin/v1/users/*"
+  methods:
+  - GET
+  - PATCH
+- endpoint: /admin/v1/geographic-zones
+  methods:
+  - GET
+- endpoint: /async/v1/openapi.json
+  methods:
+  - GET
+- endpoint: "/async/v1/requests/*"
+  methods:
+  - GET
+- endpoint: "/async/v1/requests/*/response"
+  methods:
+  - GET
+- endpoint: "/common/v1/activities/*/assign"
+  methods:
+  - POST
+- endpoint: "/common/v1/activities/*/assignees"
+  methods:
+  - GET
+- endpoint: /common/v1/openapi.json
+  methods:
+  - GET
+- endpoint: /composite/v1/composite
+  methods:
+  - POST
+- endpoint: /composite/v1/openapi.json
+  methods:
+  - GET
+accessibleFields:
+  "*":
+    edit:
+    - "*public"
+    - "*internal"
+    view:
+    - "*public"
+    - "*internal"
+  User:
+    edit:
+    - "*public"
+    - "*internal"
+    - authorityLimitProfile
+    - roles
+    view:
+    - "*public"
+    - "*internal"
+    - authorityLimitProfile
+    - authorityLimitProfileId
+    - authorityLimitProfileName
+    - roles

@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<plugin
+  interface="MessageTransport"
+  name="DataAuditTransport_SP">
+  <plugin-gosu
+    disabled="false"
+    gosuclass="gw.surepath.cc.configuration.adminaudit.plugin.DataAuditTransportPlugin">
+    <param
+      name="maxRetries"
+      value="3"/>
+    <param
+      name="retryDelayMultiplier"
+      value="5"/>
+  </plugin-gosu>
+</plugin>

@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="A Claim Timeline"
+  entity="Timeline_SP"
+  table="timeline_sp"
+  type="retireable">
+  <foreignkey
+    fkentity="Claim"
+    name="Claim"
+    nullok="false"/>
+  <array
+    arrayentity="TimelineEntry_SP"
+    cascadeDelete="true"
+    name="TimelineEntries"/>
+  <column
+    desc="Date when the timeline starts watching the bundle for commits of entities to create timeline entries"
+    name="RestoreDate"
+    nullok="true"
+    type="datetime"/>
+  <implementsEntity
+    name="Extractable"/>
+  <typekey
+    default="new"
+    name="TimelineStatus"
+    nullok="false"
+    typelist="TimelineStatus_SP"/>
+</entity>

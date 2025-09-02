@@ -1,0 +1,9 @@
+<:control :unless="hideAnimation">
+  <div class="gw-progress--holder ${status ? 'gw-progress--has-status'}">
+    <div class="gw-progress--bar ${barClasses}" style="width:${barWidth}%"
+         role="progressbar" aria-valuenow="${percentComplete}" aria-label="${status}">
+        <div class="gw-progress--bar-label ${isShiftedLabel ? 'gw-progress--shifted-label'}">${percentComplete}%</div>
+    </div>
+  </div>
+</:control>
+<div :if="status" class="gw-progress--status-label">${status}</div>

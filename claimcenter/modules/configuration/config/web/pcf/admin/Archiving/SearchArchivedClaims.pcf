@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<!-- Deprecated since 50.3.1. Claim Association is no longer created when submitting a bulk restore request -->
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    canVisit="gw.api.claim.ClaimUtil.ArchivingEnabled and gw.api.system.PLConfigParameters.FreeTextSearchEnabled.Value"
+    autosaveable="false"
+    id="SearchArchivedClaims"
+    parent="Admin()"
+    title="DisplayKey.get(&quot;Web.Admin.Utilities.SearchArchivedClaims.Title&quot;)">
+    <LocationEntryPoint
+      signature="SearchArchivedClaims()"/>
+    <Screen
+      id="SearchArchivedClaimsScreen">
+      <Variable
+        initialValue="&quot;FreeTextArchivedClaimSearchResultsLV&quot;"
+        name="PrintTargetLV"
+        type="java.lang.String"/>
+      <Variable
+        initialValue="new gw.api.archiving.FreeTextArchivedClaimSearchScreenHelper()"
+        name="helper"
+        type="gw.api.archiving.FreeTextArchivedClaimSearchScreenHelper"/>
+      <SearchPanel
+        criteriaName="criteriaWrapper"
+        maxSearchResults="java.lang.Integer.MAX_VALUE"
+        resultCachingEnabled="false"
+        resultsName="claimSearchResults"
+        search="helper.search()"
+        searchCriteria="helper.Criteria"
+        searchCriteriaType="gw.cc.claim.ArchivedClaimSearchCriteriaWrapper"
+        searchOnEnter="false"
+        searchResultsType="gw.api.database.IQueryBeanResult&lt;ArchivedClaimSearchEntity&gt;">
+        <PanelRef
+          def="FreeTextArchivedClaimSearchDV(criteriaWrapper.Criteria, true, helper)"/>
+        <PanelRef
+          def="FreeTextArchivedClaimSearchResultsLV(helper, claimSearchResults)"
+          mode="criteriaWrapper.Criteria.FreeTextClaimSearchType.Code">
+          <TitleBar
+            title="DisplayKey.get(&quot;JSP.ClaimSearch.Search.Results&quot;)"/>
+          <Toolbar>
+            <ToolbarButton
+              action="helper.selectAllOnScreen(claimSearchResults)"
+              id="ClaimSearchScreen_SelectAllBtn"
+              label="DisplayKey.get(&quot;LV.Claim.ClaimSearchResults.Button.SelectAll&quot;)"
+              shortcut="A"/>
+            <ToolbarDivider/>
+            <ToolbarButton
+              action="helper.resetSelections()"
+              id="ClaimSearchScreen_ResetSelectionBtn"
+              label="DisplayKey.get(&quot;LV.Claim.ClaimSearchResults.Button.Reset&quot;)"
+              shortcut="R"/>
+            <ToolbarDivider/>
+            <ToolbarButton
+              action="NewBulkRestoreArchivedClaims.push(helper.selectedClaimNumbers.join(', '))"
+              available="helper.selectedClaimCount &gt; 0"
+              id="ClaimSearchScreen_RestoreClaimsBtn"
+              label="DisplayKey.get(&quot;LV.Claim.ClaimSearchResults.Button.BulkRestoreSelected&quot;, helper.selectedClaimCount)"
+              shortcut="B"/>
+            <ToolbarDivider/>
+            <ToolbarButton
+              action="gw.api.print.ListViewPrintOptionPopupAction.printListViewOnlyWithOptions(PrintTargetLV, DisplayKey.get(&quot;JSP.ClaimSearch.Search.Results&quot;), null)"
+              available="perm.User.printlistviews"
+              id="ClaimSearchScreen_PrintButton"
+              label="DisplayKey.get(&quot;Java.ListView.Print&quot;)"
+              shortcut="N"/>
+          </Toolbar>
+        </PanelRef>
+      </SearchPanel>
+    </Screen>
+  </Page>
+</PCF>

@@ -1,0 +1,589 @@
+<?xml version="1.0"?>
+<wsdl:definitions targetNamespace="http://guidewire.com/pc/ws/gw/webservice/pc/pc1000/community/EdgeProducerAPI" name="EdgeProducerAPI" xmlns:gwsoap="http://guidewire.com/ws/soapheaders" xmlns:gwwsdl="http://guidewire.com/pl/wsdl" xmlns:pogo="http://guidewire.com/pc/ws/gw/webservice/pc/pc1000/community/datamodel/ProducerCodeDTO" xmlns:pogo2="http://guidewire.com/pc/ws/gw/webservice/pc/pc1000/community/datamodel/AddressDTO" xmlns:pogo3="http://guidewire.com/pc/typekey" xmlns:pogo4="http://guidewire.com/pc/ws/gw/webservice/pc/pc1000/community/datamodel/CommissionPlanDTO" xmlns:soap11="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:tns="http://guidewire.com/pc/ws/gw/webservice/pc/pc1000/community/EdgeProducerAPI" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xs:schema targetNamespace="http://guidewire.com/pc/ws/gw/webservice/pc/pc1000/community/EdgeProducerAPI" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://guidewire.com/ws/soapheaders" schemaLocation="soapheaders.xsd"/>
+      <xs:import namespace="http://guidewire.com/pc/ws/gw/webservice/pc/pc1000/community/datamodel/CommissionPlanDTO"/>
+      <xs:import namespace="http://guidewire.com/pc/typekey"/>
+      <xs:import namespace="http://guidewire.com/pc/ws/gw/webservice/pc/pc1000/community/datamodel/AddressDTO"/>
+      <xs:import namespace="http://guidewire.com/pc/ws/gw/webservice/pc/pc1000/community/datamodel/ProducerCodeDTO"/>
+      <xs:element name="getProducerCodesByUserName">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="userName" type="xs:string" minOccurs="0"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getProducerCodesByUserNameResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="return" minOccurs="0" gw:viewas="list" xmlns:gw="http://guidewire.com/xsd">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="Entry" type="pogo:ProducerCodeDTO" minOccurs="0" maxOccurs="unbounded" nillable="true"/>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="WsiAuthenticationException">
+        <xs:complexType/>
+      </xs:element>
+    </xs:schema>
+    <xs:schema targetNamespace="http://guidewire.com/pc/ws/gw/webservice/pc/pc1000/community/datamodel/ProducerCodeDTO" elementFormDefault="qualified" xmlns:gw="http://guidewire.com/xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://guidewire.com/pc/ws/gw/webservice/pc/pc1000/community/datamodel/CommissionPlanDTO"/>
+      <xs:import namespace="http://guidewire.com/pc/typekey"/>
+      <xs:import namespace="http://guidewire.com/pc/ws/gw/webservice/pc/pc1000/community/datamodel/AddressDTO"/>
+      <xs:complexType name="ProducerCodeDTO">
+        <xs:sequence>
+          <xs:element name="Address" type="pogo2:AddressDTO" minOccurs="0"/>
+          <xs:element name="AppointmentDate" type="xs:dateTime" minOccurs="0" gw:type="java.util.Date"/>
+          <xs:element name="BranchPublicID" type="xs:string" minOccurs="0"/>
+          <xs:element name="Code" type="xs:string" minOccurs="0"/>
+          <xs:element name="CommissionPlans" minOccurs="0" gw:viewas="array">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="Entry" type="pogo4:CommissionPlanDTO" minOccurs="0" maxOccurs="unbounded" nillable="true"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="Description" type="xs:string" minOccurs="0"/>
+          <xs:element name="ParentPublicID" type="xs:string" minOccurs="0"/>
+          <xs:element name="PreferredUnderwriterPublicID" type="xs:string" minOccurs="0"/>
+          <xs:element name="ProducerStatus" type="pogo3:ProducerStatus" minOccurs="0"/>
+          <xs:element name="PublicID" type="xs:string" minOccurs="0"/>
+          <xs:element name="TerminationDate" type="xs:dateTime" minOccurs="0" gw:type="java.util.Date"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema targetNamespace="http://guidewire.com/pc/ws/gw/webservice/pc/pc1000/community/datamodel/AddressDTO" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://guidewire.com/pc/ws/gw/webservice/pc/pc1000/community/datamodel/CommissionPlanDTO"/>
+      <xs:import namespace="http://guidewire.com/pc/typekey"/>
+      <xs:import namespace="http://guidewire.com/pc/ws/gw/webservice/pc/pc1000/community/datamodel/ProducerCodeDTO"/>
+      <xs:complexType name="AddressDTO">
+        <xs:sequence>
+          <xs:element name="AddressLine1" type="xs:string" minOccurs="0"/>
+          <xs:element name="AddressLine1Kanji" type="xs:string" minOccurs="0"/>
+          <xs:element name="AddressLine2" type="xs:string" minOccurs="0"/>
+          <xs:element name="AddressLine2Kanji" type="xs:string" minOccurs="0"/>
+          <xs:element name="AddressLine3" type="xs:string" minOccurs="0"/>
+          <xs:element name="AddressType" type="pogo3:AddressType" minOccurs="0"/>
+          <xs:element name="CEDEX" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="CEDEXBureau" type="xs:string" minOccurs="0"/>
+          <xs:element name="City" type="xs:string" minOccurs="0"/>
+          <xs:element name="CityKanji" type="xs:string" minOccurs="0"/>
+          <xs:element name="Country" type="pogo3:Country" minOccurs="0"/>
+          <xs:element name="County" type="xs:string" minOccurs="0"/>
+          <xs:element name="Description" type="xs:string" minOccurs="0"/>
+          <xs:element name="PostalCode" type="xs:string" minOccurs="0"/>
+          <xs:element name="PublicID" type="xs:string" minOccurs="0"/>
+          <xs:element name="State" type="pogo3:State" minOccurs="0"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema targetNamespace="http://guidewire.com/pc/typekey" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://guidewire.com/pc/ws/gw/webservice/pc/pc1000/community/datamodel/CommissionPlanDTO"/>
+      <xs:import namespace="http://guidewire.com/pc/ws/gw/webservice/pc/pc1000/community/datamodel/AddressDTO"/>
+      <xs:import namespace="http://guidewire.com/pc/ws/gw/webservice/pc/pc1000/community/datamodel/ProducerCodeDTO"/>
+      <xs:simpleType name="AddressType">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="billing"/>
+          <xs:enumeration value="business"/>
+          <xs:enumeration value="home"/>
+          <xs:enumeration value="other"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="Country">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="US"/>
+          <xs:enumeration value="CA"/>
+          <xs:enumeration value="AF"/>
+          <xs:enumeration value="AL"/>
+          <xs:enumeration value="DZ"/>
+          <xs:enumeration value="AS"/>
+          <xs:enumeration value="AD"/>
+          <xs:enumeration value="AO"/>
+          <xs:enumeration value="AI"/>
+          <xs:enumeration value="AQ"/>
+          <xs:enumeration value="AG"/>
+          <xs:enumeration value="AR"/>
+          <xs:enumeration value="AM"/>
+          <xs:enumeration value="AW"/>
+          <xs:enumeration value="AU"/>
+          <xs:enumeration value="AT"/>
+          <xs:enumeration value="AZ"/>
+          <xs:enumeration value="BS"/>
+          <xs:enumeration value="BH"/>
+          <xs:enumeration value="BD"/>
+          <xs:enumeration value="BB"/>
+          <xs:enumeration value="BY"/>
+          <xs:enumeration value="BE"/>
+          <xs:enumeration value="BZ"/>
+          <xs:enumeration value="BJ"/>
+          <xs:enumeration value="BM"/>
+          <xs:enumeration value="BT"/>
+          <xs:enumeration value="BO"/>
+          <xs:enumeration value="BA"/>
+          <xs:enumeration value="BW"/>
+          <xs:enumeration value="BV"/>
+          <xs:enumeration value="BR"/>
+          <xs:enumeration value="IO"/>
+          <xs:enumeration value="VG"/>
+          <xs:enumeration value="BN"/>
+          <xs:enumeration value="BG"/>
+          <xs:enumeration value="BF"/>
+          <xs:enumeration value="BI"/>
+          <xs:enumeration value="KH"/>
+          <xs:enumeration value="CM"/>
+          <xs:enumeration value="CV"/>
+          <xs:enumeration value="KY"/>
+          <xs:enumeration value="CF"/>
+          <xs:enumeration value="TD"/>
+          <xs:enumeration value="CL"/>
+          <xs:enumeration value="CN"/>
+          <xs:enumeration value="CX"/>
+          <xs:enumeration value="CC"/>
+          <xs:enumeration value="CO"/>
+          <xs:enumeration value="KM"/>
+          <xs:enumeration value="CG"/>
+          <xs:enumeration value="CD"/>
+          <xs:enumeration value="CK"/>
+          <xs:enumeration value="CR"/>
+          <xs:enumeration value="HR"/>
+          <xs:enumeration value="CU"/>
+          <xs:enumeration value="CY"/>
+          <xs:enumeration value="CZ"/>
+          <xs:enumeration value="DK"/>
+          <xs:enumeration value="DJ"/>
+          <xs:enumeration value="DM"/>
+          <xs:enumeration value="DO"/>
+          <xs:enumeration value="EC"/>
+          <xs:enumeration value="EG"/>
+          <xs:enumeration value="SV"/>
+          <xs:enumeration value="GQ"/>
+          <xs:enumeration value="ER"/>
+          <xs:enumeration value="EE"/>
+          <xs:enumeration value="ET"/>
+          <xs:enumeration value="FK"/>
+          <xs:enumeration value="FO"/>
+          <xs:enumeration value="FJ"/>
+          <xs:enumeration value="FI"/>
+          <xs:enumeration value="FR"/>
+          <xs:enumeration value="GF"/>
+          <xs:enumeration value="PF"/>
+          <xs:enumeration value="TF"/>
+          <xs:enumeration value="GA"/>
+          <xs:enumeration value="GM"/>
+          <xs:enumeration value="GE"/>
+          <xs:enumeration value="DE"/>
+          <xs:enumeration value="GH"/>
+          <xs:enumeration value="GI"/>
+          <xs:enumeration value="GR"/>
+          <xs:enumeration value="GL"/>
+          <xs:enumeration value="GD"/>
+          <xs:enumeration value="GP"/>
+          <xs:enumeration value="GU"/>
+          <xs:enumeration value="GT"/>
+          <xs:enumeration value="GN"/>
+          <xs:enumeration value="GW"/>
+          <xs:enumeration value="GY"/>
+          <xs:enumeration value="HT"/>
+          <xs:enumeration value="HM"/>
+          <xs:enumeration value="HN"/>
+          <xs:enumeration value="HK"/>
+          <xs:enumeration value="HU"/>
+          <xs:enumeration value="IS"/>
+          <xs:enumeration value="IN"/>
+          <xs:enumeration value="ID"/>
+          <xs:enumeration value="IR"/>
+          <xs:enumeration value="IQ"/>
+          <xs:enumeration value="IE"/>
+          <xs:enumeration value="IL"/>
+          <xs:enumeration value="IT"/>
+          <xs:enumeration value="CI"/>
+          <xs:enumeration value="JM"/>
+          <xs:enumeration value="JP"/>
+          <xs:enumeration value="JO"/>
+          <xs:enumeration value="KZ"/>
+          <xs:enumeration value="KE"/>
+          <xs:enumeration value="KI"/>
+          <xs:enumeration value="KP"/>
+          <xs:enumeration value="KR"/>
+          <xs:enumeration value="KW"/>
+          <xs:enumeration value="KG"/>
+          <xs:enumeration value="LA"/>
+          <xs:enumeration value="LV"/>
+          <xs:enumeration value="LB"/>
+          <xs:enumeration value="LS"/>
+          <xs:enumeration value="LR"/>
+          <xs:enumeration value="LY"/>
+          <xs:enumeration value="LI"/>
+          <xs:enumeration value="LT"/>
+          <xs:enumeration value="LU"/>
+          <xs:enumeration value="MO"/>
+          <xs:enumeration value="MK"/>
+          <xs:enumeration value="MG"/>
+          <xs:enumeration value="MW"/>
+          <xs:enumeration value="MY"/>
+          <xs:enumeration value="MV"/>
+          <xs:enumeration value="ML"/>
+          <xs:enumeration value="MT"/>
+          <xs:enumeration value="MH"/>
+          <xs:enumeration value="MQ"/>
+          <xs:enumeration value="MR"/>
+          <xs:enumeration value="MU"/>
+          <xs:enumeration value="YT"/>
+          <xs:enumeration value="MX"/>
+          <xs:enumeration value="FM"/>
+          <xs:enumeration value="MD"/>
+          <xs:enumeration value="MC"/>
+          <xs:enumeration value="MN"/>
+          <xs:enumeration value="ME"/>
+          <xs:enumeration value="MS"/>
+          <xs:enumeration value="MA"/>
+          <xs:enumeration value="MZ"/>
+          <xs:enumeration value="MM"/>
+          <xs:enumeration value="NA"/>
+          <xs:enumeration value="NR"/>
+          <xs:enumeration value="NP"/>
+          <xs:enumeration value="NL"/>
+          <xs:enumeration value="AN"/>
+          <xs:enumeration value="NC"/>
+          <xs:enumeration value="NZ"/>
+          <xs:enumeration value="NI"/>
+          <xs:enumeration value="NE"/>
+          <xs:enumeration value="NG"/>
+          <xs:enumeration value="NU"/>
+          <xs:enumeration value="NF"/>
+          <xs:enumeration value="MP"/>
+          <xs:enumeration value="NO"/>
+          <xs:enumeration value="OM"/>
+          <xs:enumeration value="PK"/>
+          <xs:enumeration value="PW"/>
+          <xs:enumeration value="PS"/>
+          <xs:enumeration value="PA"/>
+          <xs:enumeration value="PG"/>
+          <xs:enumeration value="PY"/>
+          <xs:enumeration value="PE"/>
+          <xs:enumeration value="PH"/>
+          <xs:enumeration value="PN"/>
+          <xs:enumeration value="PL"/>
+          <xs:enumeration value="PT"/>
+          <xs:enumeration value="PR"/>
+          <xs:enumeration value="QA"/>
+          <xs:enumeration value="RE"/>
+          <xs:enumeration value="RO"/>
+          <xs:enumeration value="RU"/>
+          <xs:enumeration value="RW"/>
+          <xs:enumeration value="BL"/>
+          <xs:enumeration value="MF"/>
+          <xs:enumeration value="WS"/>
+          <xs:enumeration value="SM"/>
+          <xs:enumeration value="ST"/>
+          <xs:enumeration value="SA"/>
+          <xs:enumeration value="SN"/>
+          <xs:enumeration value="RS"/>
+          <xs:enumeration value="SC"/>
+          <xs:enumeration value="SL"/>
+          <xs:enumeration value="SG"/>
+          <xs:enumeration value="SK"/>
+          <xs:enumeration value="SI"/>
+          <xs:enumeration value="SB"/>
+          <xs:enumeration value="SO"/>
+          <xs:enumeration value="ZA"/>
+          <xs:enumeration value="GS"/>
+          <xs:enumeration value="ES"/>
+          <xs:enumeration value="LK"/>
+          <xs:enumeration value="SH"/>
+          <xs:enumeration value="KN"/>
+          <xs:enumeration value="LC"/>
+          <xs:enumeration value="PM"/>
+          <xs:enumeration value="VC"/>
+          <xs:enumeration value="SD"/>
+          <xs:enumeration value="SR"/>
+          <xs:enumeration value="SJ"/>
+          <xs:enumeration value="SZ"/>
+          <xs:enumeration value="SE"/>
+          <xs:enumeration value="CH"/>
+          <xs:enumeration value="SY"/>
+          <xs:enumeration value="TW"/>
+          <xs:enumeration value="TJ"/>
+          <xs:enumeration value="TZ"/>
+          <xs:enumeration value="TH"/>
+          <xs:enumeration value="TL"/>
+          <xs:enumeration value="TG"/>
+          <xs:enumeration value="TK"/>
+          <xs:enumeration value="TO"/>
+          <xs:enumeration value="TT"/>
+          <xs:enumeration value="TN"/>
+          <xs:enumeration value="TR"/>
+          <xs:enumeration value="TM"/>
+          <xs:enumeration value="TC"/>
+          <xs:enumeration value="TV"/>
+          <xs:enumeration value="UM"/>
+          <xs:enumeration value="VI"/>
+          <xs:enumeration value="UG"/>
+          <xs:enumeration value="UA"/>
+          <xs:enumeration value="AE"/>
+          <xs:enumeration value="GB"/>
+          <xs:enumeration value="UY"/>
+          <xs:enumeration value="UZ"/>
+          <xs:enumeration value="VU"/>
+          <xs:enumeration value="VA"/>
+          <xs:enumeration value="VE"/>
+          <xs:enumeration value="VN"/>
+          <xs:enumeration value="WF"/>
+          <xs:enumeration value="EH"/>
+          <xs:enumeration value="YE"/>
+          <xs:enumeration value="ZM"/>
+          <xs:enumeration value="ZW"/>
+          <xs:enumeration value="unknown"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="State">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="Hokkaido"/>
+          <xs:enumeration value="Aomori"/>
+          <xs:enumeration value="Iwate"/>
+          <xs:enumeration value="Miyagi"/>
+          <xs:enumeration value="Akita"/>
+          <xs:enumeration value="Yamagata"/>
+          <xs:enumeration value="Fukushima"/>
+          <xs:enumeration value="Ibaraki"/>
+          <xs:enumeration value="AU_JBT"/>
+          <xs:enumeration value="Tochigi"/>
+          <xs:enumeration value="Gumma"/>
+          <xs:enumeration value="Saitama"/>
+          <xs:enumeration value="Chiba"/>
+          <xs:enumeration value="Tokyo"/>
+          <xs:enumeration value="Kanagawa"/>
+          <xs:enumeration value="Niigata"/>
+          <xs:enumeration value="Toyama"/>
+          <xs:enumeration value="Ishikawa"/>
+          <xs:enumeration value="Fukui"/>
+          <xs:enumeration value="Yamanashi"/>
+          <xs:enumeration value="Nagano"/>
+          <xs:enumeration value="Gifu"/>
+          <xs:enumeration value="Shizuoka"/>
+          <xs:enumeration value="Aichi"/>
+          <xs:enumeration value="Mie"/>
+          <xs:enumeration value="Shiga"/>
+          <xs:enumeration value="Kyoto"/>
+          <xs:enumeration value="Osaka"/>
+          <xs:enumeration value="Hyogo"/>
+          <xs:enumeration value="Nara"/>
+          <xs:enumeration value="Wakayama"/>
+          <xs:enumeration value="Tottori"/>
+          <xs:enumeration value="Shimane"/>
+          <xs:enumeration value="Okayama"/>
+          <xs:enumeration value="Hiroshima"/>
+          <xs:enumeration value="Yamaguchi"/>
+          <xs:enumeration value="Tokushima"/>
+          <xs:enumeration value="Kagawa"/>
+          <xs:enumeration value="Ehime"/>
+          <xs:enumeration value="Kochi"/>
+          <xs:enumeration value="Fukuoka"/>
+          <xs:enumeration value="Saga"/>
+          <xs:enumeration value="Nagasaki"/>
+          <xs:enumeration value="Kumamoto"/>
+          <xs:enumeration value="Oita"/>
+          <xs:enumeration value="Miyazaki"/>
+          <xs:enumeration value="Kagoshima"/>
+          <xs:enumeration value="Okinawa"/>
+          <xs:enumeration value="AU_ACT"/>
+          <xs:enumeration value="AL"/>
+          <xs:enumeration value="AK"/>
+          <xs:enumeration value="AB"/>
+          <xs:enumeration value="AZ"/>
+          <xs:enumeration value="AR"/>
+          <xs:enumeration value="DE_BW"/>
+          <xs:enumeration value="DE_BY"/>
+          <xs:enumeration value="DE_BE"/>
+          <xs:enumeration value="DE_BB"/>
+          <xs:enumeration value="DE_HB"/>
+          <xs:enumeration value="BC"/>
+          <xs:enumeration value="CA"/>
+          <xs:enumeration value="CO"/>
+          <xs:enumeration value="CT"/>
+          <xs:enumeration value="DE"/>
+          <xs:enumeration value="DC"/>
+          <xs:enumeration value="FM"/>
+          <xs:enumeration value="FL"/>
+          <xs:enumeration value="GA"/>
+          <xs:enumeration value="GU"/>
+          <xs:enumeration value="DE_HH"/>
+          <xs:enumeration value="HI"/>
+          <xs:enumeration value="DE_HE"/>
+          <xs:enumeration value="ID"/>
+          <xs:enumeration value="IL"/>
+          <xs:enumeration value="IN"/>
+          <xs:enumeration value="IA"/>
+          <xs:enumeration value="KS"/>
+          <xs:enumeration value="KY"/>
+          <xs:enumeration value="LA"/>
+          <xs:enumeration value="DE_NI"/>
+          <xs:enumeration value="ME"/>
+          <xs:enumeration value="MB"/>
+          <xs:enumeration value="MH"/>
+          <xs:enumeration value="MD"/>
+          <xs:enumeration value="MA"/>
+          <xs:enumeration value="DE_MV"/>
+          <xs:enumeration value="MI"/>
+          <xs:enumeration value="MN"/>
+          <xs:enumeration value="MS"/>
+          <xs:enumeration value="MO"/>
+          <xs:enumeration value="MT"/>
+          <xs:enumeration value="NE"/>
+          <xs:enumeration value="NV"/>
+          <xs:enumeration value="NB"/>
+          <xs:enumeration value="NH"/>
+          <xs:enumeration value="NJ"/>
+          <xs:enumeration value="NM"/>
+          <xs:enumeration value="AU_NSW"/>
+          <xs:enumeration value="NY"/>
+          <xs:enumeration value="NL"/>
+          <xs:enumeration value="NC"/>
+          <xs:enumeration value="ND"/>
+          <xs:enumeration value="DE_NW"/>
+          <xs:enumeration value="MP"/>
+          <xs:enumeration value="AU_NT"/>
+          <xs:enumeration value="NT"/>
+          <xs:enumeration value="NS"/>
+          <xs:enumeration value="NU"/>
+          <xs:enumeration value="OH"/>
+          <xs:enumeration value="OK"/>
+          <xs:enumeration value="ON"/>
+          <xs:enumeration value="OR"/>
+          <xs:enumeration value="PA"/>
+          <xs:enumeration value="PE"/>
+          <xs:enumeration value="PR"/>
+          <xs:enumeration value="QC"/>
+          <xs:enumeration value="AU_QLD"/>
+          <xs:enumeration value="DE_RP"/>
+          <xs:enumeration value="RI"/>
+          <xs:enumeration value="DE_SL"/>
+          <xs:enumeration value="SK"/>
+          <xs:enumeration value="DE_SN"/>
+          <xs:enumeration value="DE_ST"/>
+          <xs:enumeration value="DE_SH"/>
+          <xs:enumeration value="AU_SA"/>
+          <xs:enumeration value="SC"/>
+          <xs:enumeration value="SD"/>
+          <xs:enumeration value="AU_TAS"/>
+          <xs:enumeration value="TN"/>
+          <xs:enumeration value="TX"/>
+          <xs:enumeration value="DE_TH"/>
+          <xs:enumeration value="UT"/>
+          <xs:enumeration value="VT"/>
+          <xs:enumeration value="AU_VIC"/>
+          <xs:enumeration value="VI"/>
+          <xs:enumeration value="VA"/>
+          <xs:enumeration value="WA"/>
+          <xs:enumeration value="WV"/>
+          <xs:enumeration value="AU_WA"/>
+          <xs:enumeration value="WI"/>
+          <xs:enumeration value="WY"/>
+          <xs:enumeration value="YT"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="Currency">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="usd"/>
+          <xs:enumeration value="eur"/>
+          <xs:enumeration value="gbp"/>
+          <xs:enumeration value="cad"/>
+          <xs:enumeration value="aud"/>
+          <xs:enumeration value="rub"/>
+          <xs:enumeration value="jpy"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="ProducerStatus">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="Active"/>
+          <xs:enumeration value="Limited"/>
+          <xs:enumeration value="Suspended"/>
+          <xs:enumeration value="Terminating"/>
+          <xs:enumeration value="Terminated"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:schema>
+    <xs:schema targetNamespace="http://guidewire.com/pc/ws/gw/webservice/pc/pc1000/community/datamodel/CommissionPlanDTO" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://guidewire.com/pc/typekey"/>
+      <xs:import namespace="http://guidewire.com/pc/ws/gw/webservice/pc/pc1000/community/datamodel/AddressDTO"/>
+      <xs:import namespace="http://guidewire.com/pc/ws/gw/webservice/pc/pc1000/community/datamodel/ProducerCodeDTO"/>
+      <xs:complexType name="CommissionPlanDTO">
+        <xs:sequence>
+          <xs:element name="CommissionPlanID" type="xs:string" minOccurs="0"/>
+          <xs:element name="Currency" type="pogo3:Currency" minOccurs="0"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:portType name="EdgeProducerAPIPortType">
+    <wsdl:operation name="getProducerCodesByUserName">
+      <wsdl:input name="getProducerCodesByUserName" message="tns:getProducerCodesByUserName"/>
+      <wsdl:output name="getProducerCodesByUserNameResponse" message="tns:getProducerCodesByUserNameResponse"/>
+      <wsdl:fault name="WsiAuthenticationException" message="tns:WsiAuthenticationException"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="EdgeProducerAPISoap12Binding" type="tns:EdgeProducerAPIPortType">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+    <wsdl:operation name="getProducerCodesByUserName">
+      <soap12:operation soapActionRequired="false" style="document"/>
+      <wsdl:input name="getProducerCodesByUserName">
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap12:header message="tns:gw-locale" part="gw-locale" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getProducerCodesByUserNameResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap12:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="EdgeProducerAPISoap11Binding" type="tns:EdgeProducerAPIPortType">
+    <soap11:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+    <wsdl:operation name="getProducerCodesByUserName">
+      <soap11:operation style="document"/>
+      <wsdl:input name="getProducerCodesByUserName">
+        <soap11:body use="literal"/>
+        <soap11:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap11:header message="tns:gw-locale" part="gw-locale" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getProducerCodesByUserNameResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap11:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="EdgeProducerAPI">
+    <wsdl:port name="EdgeProducerAPISoap12Port" binding="tns:EdgeProducerAPISoap12Binding">
+      <soap12:address location="http://localhost:8180/pc/ws/edge/webservice/pc/pc1000/community/EdgeProducerAPI"/>
+      <gwwsdl:address location="${pc}/ws/edge/webservice/pc/pc1000/community/EdgeProducerAPI"/>
+    </wsdl:port>
+    <wsdl:port name="EdgeProducerAPISoap11Port" binding="tns:EdgeProducerAPISoap11Binding">
+      <soap11:address location="http://localhost:8180/pc/ws/edge/webservice/pc/pc1000/community/EdgeProducerAPI/soap11"/>
+      <gwwsdl:address location="${pc}/ws/edge/webservice/pc/pc1000/community/EdgeProducerAPI/soap11"/>
+    </wsdl:port>
+  </wsdl:service>
+  <wsdl:message name="getProducerCodesByUserName">
+    <wsdl:part name="parameters" element="tns:getProducerCodesByUserName"/>
+  </wsdl:message>
+  <wsdl:message name="getProducerCodesByUserNameResponse">
+    <wsdl:part name="parameters" element="tns:getProducerCodesByUserNameResponse"/>
+  </wsdl:message>
+  <wsdl:message name="WsiAuthenticationException">
+    <wsdl:part name="WsiAuthenticationException" element="tns:WsiAuthenticationException"/>
+  </wsdl:message>
+  <wsdl:message name="gw-authentication">
+    <wsdl:part name="gw-authentication" element="gwsoap:authentication"/>
+  </wsdl:message>
+  <wsdl:message name="gw-locale">
+    <wsdl:part name="gw-locale" element="gwsoap:locale"/>
+  </wsdl:message>
+</wsdl:definitions>

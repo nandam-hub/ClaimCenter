@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Popup
+    beforeCommit="authorities.add(authority)"
+    canEdit="true"
+    id="PortalCreateUserGrantedAuthorityPopup"
+    returnType="edge.security.authorization.Authority"
+    startEditing=" "
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Edge.Web.AuthAdminConsole.NewPortalAuthUserGrantedAuthorityPopup.CreateGrantedAuthority&quot;)">
+    <LocationEntryPoint
+      signature="PortalCreateUserGrantedAuthorityPopup(authorityType : edge.security.authorization.AuthorityType, authorities: java.util.List&lt;edge.security.authorization.Authority&gt;)"/>
+    <Variable
+      name="authorities"
+      type="java.util.List&lt;edge.security.authorization.Authority&gt;"/>
+    <Variable
+      name="authorityType"
+      type="edge.security.authorization.AuthorityType"/>
+    <Variable
+      initialValue="new edge.security.authorization.Authority(authorityType,null)"
+      name="authority"
+      type="edge.security.authorization.Authority"/>
+    <Screen>
+      <Toolbar>
+        <EditButtons
+          pickValue="authority"/>
+      </Toolbar>
+      <DetailViewPanel>
+        <InputColumn>
+          <TextInput
+            editable="true"
+            id="authorityTarget"
+            label="getTargetDisplayKeyFromAuthorityType()"
+            required="true"
+            value="authority.Target"/>
+        </InputColumn>
+      </DetailViewPanel>
+    </Screen>
+    <Code><![CDATA[function getTargetDisplayKeyFromAuthorityType() : String {
+  switch(authorityType.toString()){
+    case "ACCOUNT":
+        return DisplayKey.get("Edge.Web.AuthAdminConsole.NewPortalAuthUserGrantedAuthorityPopup.Account")
+    case "POLICY":
+        return DisplayKey.get("Edge.Web.AuthAdminConsole.NewPortalAuthUserGrantedAuthorityPopup.Policy")
+    case "PRODUCER":
+        return DisplayKey.get("Edge.Web.AuthAdminConsole.NewPortalAuthUserGrantedAuthorityPopup.ProducerCode")
+    default :
+        return DisplayKey.get("Edge.Web.AuthAdminConsole.PortalGrantedAuthorities.Authority.Target")
+  }
+}]]></Code>
+  </Popup>
+</PCF>

@@ -1,0 +1,65 @@
+.gw-InputColumnWidget { //Specificity
+  .gw-InputColumnSubGroupWidget {
+    vertical-align: top;
+    position: relative;
+    flex-grow: 1;
+    flex-shrink: 1;
+    @include gw-wrapNever();
+    display: block;
+
+    &:not(.gw-has-widget-style) {
+      .gw-InputWidget .gw-label {
+        color: $gw-app--InputWidget-in-InputColumnSubGroup--label-col;
+      }
+    }
+
+    @include gw-panelOuterSpacing();
+    @include gw-widgetStyles($gw-app--InputColumnSubGroup--bg, $gw-app--InputColumnSubGroup--col);
+
+    .gw-InputColumnSubGroup--header {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      border-bottom: $gw-app--InputColumnSubGroup--header-border-bottom;
+      border-top-left-radius: $gw-app--InputColumnSubGroup--border-radius-px;
+      border-top-right-radius: $gw-app--InputColumnSubGroup--border-radius-px;
+
+      // Internal padding
+      padding-top: $gw-app--InputColumnSubGroup-title-bar--spacing-inner-top-rem;
+      padding-left: $gw-app--InputColumnSubGroup-title-bar--spacing-inner-left-rem;
+      padding-right: $gw-app--InputColumnSubGroup-title-bar--spacing-inner-right-rem;
+      padding-bottom: $gw-app--InputColumnSubGroup-title-bar--spacing-inner-bottom-rem;
+
+      .gw-InputColumnSubGroup--header--label {
+        max-width: $gw-app--InputColumn--max-label-above-width-em;
+        @include gw-wrapOnWhiteSpace();
+      }
+
+      .gw-icon {
+        margin-right: $gw-app--InputColumnSubGroup-title-bar--internal-spacing-rem;
+      }
+    }
+
+    &.gw-use-standard-label-style {
+      .gw-InputColumnSubGroup--header {
+        color: $gw-app--InputColumnSubGroup--header-font-col;
+        font-weight: $gw-app--InputColumnSubGroup--header-font-weight;
+      }
+    }
+
+    &:not(.gw-use-standard-label-style) {
+      .gw-InputColumnSubGroup--header {
+        color: $gw-app--LabelWidget--color;
+        font-weight: $gw-app--bold-label-weight;
+      }
+    }
+
+    .gw-InputColumnSubGroup--body {
+      display: block;
+      // Internal padding
+      @include gw-panelInnerSpacing();
+      border-bottom: 1px solid rgba(0,0,0,0) // prevent margin collapse
+    }
+  }
+}

@@ -1,0 +1,26 @@
+# GAR START: config/portal/capabilities/gatewayfnol.gwproperties [/opt/teamcity/agent/work/45c3a2f1b8ee4237/gpm-generator/downloads/edge/backend/xcenter-config/xcenter-utils/cc-utils/../../../Capabilities/gpa-claim/src/main]
+handlers.policy=edge.capabilities.claim.fnol.policy.GatewayPolicySearchHandler
+handlers.fnol=edge.capabilities.claim.fnol.FnolHandler
+
+# LOB START PA
+fnol.lob.PersonalAuto=edge.capabilities.claim.lob.impl.personalauto.fnol.PAFnolPlugin
+# LOB END PA
+# LOB START CA
+fnol.lob.CommercialAuto=edge.capabilities.claim.lob.impl.commercialauto.fnol.CAFnolPlugin
+# LOB END CA
+# LOB START HO
+fnol.lob.Homeowners=edge.capabilities.claim.lob.impl.homeowners.fnol.HOFnolPlugin
+# LOB END HO
+# LOB START IM
+fnol.lob.InlandMarine=edge.capabilities.claim.lob.impl.inlandmarine.fnol.IMFnolPlugin
+# LOB END IM
+# LOB START GL
+fnol.lob.GeneralLiability=edge.capabilities.claim.lob.impl.generalliability.fnol.GLFnolPlugin
+# LOB END GL
+# LOB START WC
+fnol.lob.WorkersComp=edge.capabilities.claim.lob.impl.workerscomp.fnol.WCFnolPlugin
+# LOB END WC
+# LOB START CP
+fnol.lob.CommercialProperty=edge.capabilities.claim.lob.impl.commercialproperty.fnol.CPFnolPlugin
+# LOB END CP
+# GAR END

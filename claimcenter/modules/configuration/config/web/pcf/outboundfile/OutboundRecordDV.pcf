@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="OutboundRecordDV">
+    <Require
+      name="record"
+      type="OutboundRecord"/>
+    <InputColumn>
+      <DateInput
+        id="OutboundRecordDVCreateDate"
+        label="DisplayKey.get(&quot;OutboundRecord.CreateDate&quot;)"
+        value="record.CreateDate"/>
+      <TextInput
+        id="OutboundRecordDVConfig"
+        label="DisplayKey.get(&quot;OutboundFile.Config&quot;)"
+        value="record.Config"
+        valueType="OutboundFileConfig"/>
+      <TypeKeyInput
+        id="OutboundRecordDVStatus"
+        label="DisplayKey.get(&quot;OutboundRecord.Status&quot;)"
+        value="(record as OutboundRecord).Status"
+        valueType="OutboundRecordStatus"/>
+      <TextInput
+        id="OutboundRecordDVLastModifiedUser"
+        label="DisplayKey.get(&quot;OutboundRecord.LastModifiedUser&quot;)"
+        value="record.UpdateUser.DisplayName"/>
+      <TextInput
+        id="OutboundRecordDVErrorMessage"
+        label="DisplayKey.get(&quot;OutboundRecord.ErrorMessage&quot;)"
+        value="record.ErrorMessage"/>
+      <TextAreaInput
+        editable="gw.api.outboundfile.OutboundFileHelper.canEdit(record)"
+        id="OutboundRecordDVContent"
+        label="DisplayKey.get(&quot;OutboundRecord.Content&quot;)"
+        numRows="20"
+        value="record.Content"
+        visible="gw.api.outboundfile.OutboundFileHelper.canView(record)"/>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

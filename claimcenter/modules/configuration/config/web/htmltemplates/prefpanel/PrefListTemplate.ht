@@ -1,0 +1,15 @@
+<div id="${name}" class="gw-Pref gw-ValueWidget gw-editable" data-gw-change="gwPrefPanel.change" data-gw-getset="select">
+    <div class="gw-Pref--inner">
+        <div class="gw-label" id="${name}-label">${label}</div>
+        <div class="gw-value">
+            <div class="gw-select-wrapper">
+                <select class="gw-Pref--val gw-Pref--list" name="${name}" aria-describedby="${name}-label">
+                    <option :if="defaultOption" value="${defaultOption.value}">${defaultOption.display}</option>
+                    <option value="${selectedOption.value}" selected>${selectedOption.display}</option>
+                    <option :for="option" :in="notSelectedOptions" value="${option.value}">${option.display}</option>
+                </select>
+                <div class="gw-icon"></div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="Types of Claim Associations"
+  final="false"
+  name="ClaimAssocType">
+  <typecode
+    code="bulkarchivedclaimrestore"
+    desc="Bulk Claim Restore"
+    name="Bulk Claim Restore"/>
+</typelist>

@@ -1,0 +1,301 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "x-gw-localizationKeyPrefix": "framework.v1",
+  "x-gw-enableLocalizedProperties": true,
+  "definitions": {
+    "GenericRelation": {
+      "title": "Generic relation",
+      "description": "A reference to a related element",
+      "type": "object",
+      "required": [
+        "id",
+        "type"
+      ],
+      "x-gw-extensions": {
+        "resourceReference": true
+      },
+      "properties": {
+        "displayName": {
+          "title": "Display name",
+          "description": "The formatted name of the referenced element",
+          "type": "string"
+        },
+        "id": {
+          "title": "ID",
+          "description": "The unique identifier of the referenced element",
+          "type": "string"
+        },
+        "jsonPath": {
+          "title": "JSON path",
+          "description": "The path to the referenced element within the overall JSON document",
+          "type": "string",
+          "readOnly": true,
+          "x-gw-extensions": {
+            "defaultViews": [
+              "none"
+            ]
+          }
+        },
+        "type": {
+          "title": "Type",
+          "description": "The type of the referenced element",
+          "type": "string"
+        },
+        "uri": {
+          "title": "URI",
+          "description": "The canonical URI for the referenced element",
+          "type": "string"
+        }
+      }
+    },
+    "LinkObject": {
+      "title": "Linked object",
+      "description": "A standard HTTP link",
+      "type": "object",
+      "properties": {
+        "href": {
+          "title": "HREF",
+          "description": "The URL of the link",
+          "type": "string"
+        },
+        "methods": {
+          "title": "Methods",
+          "description": "An array of HTTP method names that can be used with the link URL",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Links": {
+      "title": "Links",
+      "description": "A set of named links",
+      "type": "object",
+      "additionalProperties": {
+        "title": "Links",
+        "description": "A set of named links. Each key represents the name of the link, such as a child of the current element, an action that can be taken on it, or a navigation option.",
+        "$ref": "#/definitions/LinkObject"
+      }
+    },
+    "MetaObject": {
+      "title": "Meta object",
+      "description": "An element",
+      "type": "object",
+      "properties": {
+        "checksum": {
+          "title": "Checksum",
+          "description": "The checksum of the element",
+          "type": "string"
+        },
+        "id": {
+          "title": "ID",
+          "description": "The unique identifier of the element",
+          "type": "string"
+        },
+        "links": {
+          "title": "Links",
+          "description": "The set of links related to the element",
+          "$ref": "#/definitions/Links"
+        },
+        "refid": {
+          "title": "Reference ID",
+          "description": "A unique identifier given to the newly created element in the context of the current request",
+          "type": "string"
+        },
+        "related": {
+          "title": "Related collections",
+          "description": "The set of related collections included with the element",
+          "$ref": "#/definitions/RelatedCollections"
+        },
+        "type": {
+          "title": "Type",
+          "description": "The type of element",
+          "type": "string"
+        }
+      }
+    },
+    "MonetaryAmount": {
+      "title": "Monetary amount",
+      "description": "A monetary amount that combines a decimal amount with a currency",
+      "type": "object",
+      "required": [
+        "amount",
+        "currency"
+      ],
+      "properties": {
+        "amount": {
+          "title": "Amount",
+          "description": "The decimal amount",
+          "type": "string",
+          "format": "gw-bigdecimal"
+        },
+        "currency": {
+          "title": "Currency",
+          "description": "The currency for the amount",
+          "type": "string",
+          "x-gw-type": "typekey.Currency"
+        }
+      }
+    },
+    "PhoneNumber": {
+      "title": "Phone number",
+      "description": "A phone number, with different components of the number broken out as separate fields",
+      "type": "object",
+      "required": [
+        "number"
+      ],
+      "properties": {
+        "countryCode": {
+          "title": "Country code",
+          "description": "The country code for the phone number",
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-extensions": {
+            "typelist": "PhoneCountryCode"
+          }
+        },
+        "displayName": {
+          "title": "Display name",
+          "description": "The phone number formatted in a standardized way",
+          "type": "string",
+          "readOnly": true
+        },
+        "extension": {
+          "title": "Extension",
+          "description": "The extension for the phone number",
+          "type": "string",
+          "x-gw-nullable": true
+        },
+        "number": {
+          "title": "Number",
+          "description": "The actual phone number, including area code, but excluding the country code and extension",
+          "type": "string"
+        }
+      }
+    },
+    "RelatedCollection": {
+      "title": "Related collection",
+      "description": "A set of element references that are related to the element in some way. Used to link elements with their relations when a request is made using the `include` query parameter.",
+      "properties": {
+        "count": {
+          "title": "Count",
+          "description": "The number of elements included in the `data` array",
+          "type": "integer"
+        },
+        "data": {
+          "title": "Data",
+          "description": "The list of references to the related elements",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SimpleReference"
+          }
+        },
+        "total": {
+          "title": "Total",
+          "description": "The total number of elements in the related set of elements. Only present if the `includeTotal` query parameter is used to request that the total be calculated for an included collection.",
+          "type": "integer"
+        }
+      }
+    },
+    "RelatedCollections": {
+      "title": "Related collections",
+      "description": "A set of `RelatedCollection` elements that contain references to elements included using the `include` query parameter on a request",
+      "additionalProperties": {
+        "title": "Related collections",
+        "description": "The related collections. Each key in this object will match the name of the inclusion requested via the `include` query parameter.",
+        "$ref": "#/definitions/RelatedCollection"
+      }
+    },
+    "SimpleReference": {
+      "title": "Simple reference",
+      "description": "A reference to an element",
+      "type": "object",
+      "x-gw-extensions": {
+        "resourceReference": true
+      },
+      "properties": {
+        "displayName": {
+          "title": "Display name",
+          "description": "The formatted name of the element",
+          "type": "string"
+        },
+        "id": {
+          "title": "ID",
+          "description": "The unique identifier of the referenced element",
+          "type": "string"
+        },
+        "jsonPath": {
+          "title": "JSON path",
+          "description": "The path to the referenced element within the overall JSON document",
+          "type": "string",
+          "readOnly": true,
+          "x-gw-sinceVersion": "1.2.0",
+          "x-gw-extensions": {
+            "defaultViews": [
+              "none"
+            ]
+          }
+        },
+        "refid": {
+          "title": "Reference ID",
+          "description": "A unique identifier given to the newly created element in the context of the current request",
+          "type": "string"
+        },
+        "type": {
+          "title": "Type",
+          "description": "The type of the referenced element",
+          "type": "string"
+        },
+        "uri": {
+          "title": "URI",
+          "description": "The canonical URI for the referenced element",
+          "type": "string"
+        }
+      }
+    },
+    "SpatialPoint": {
+      "title": "Spatial point",
+      "description": "An object that combines a latitude with a longitude",
+      "type": "object",
+      "required": [
+        "latitude",
+        "longitude"
+      ],
+      "x-gw-sinceVersion": "1.2.0",
+      "properties": {
+        "latitude": {
+          "title": "Latitude",
+          "description": "The latitude of the spatial point",
+          "type": "string",
+          "format": "gw-bigdecimal"
+        },
+        "longitude": {
+          "title": "Longitude",
+          "description": "The longitude of the spatial point",
+          "type": "string",
+          "format": "gw-bigdecimal"
+        }
+      }
+    },
+    "TypeKeyReference": {
+      "title": "TypeKey reference",
+      "description": "A reference to a `TypeKey` element that defines an enumerated value from a `TypeList`",
+      "type": "object",
+      "required": [
+        "code"
+      ],
+      "properties": {
+        "code": {
+          "title": "Code",
+          "description": "The `code` of the `TypeKey`",
+          "type": "string"
+        },
+        "name": {
+          "title": "Name",
+          "description": "The `name` of the `TypeKey`",
+          "type": "string"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension
+  entityName="PolicySearchCriteria"
+  xmlns="http://guidewire.com/datamodel">
+  <column
+    desc="This contact&apos;s name in kanji (used only for Japanese names and will be null otherwise)"
+    name="NameKanji"
+    nullok="true"
+    type="companyname"/>
+  <column
+    desc="First name in kanji (used only for Japanese names and will be null otherwise)"
+    name="FirstNameKanji"
+    nullok="true"
+    type="firstname"/>
+  <column
+    desc="Last name in kanji (used only for Japanese names and will be null otherwise)"
+    name="LastNameKanji"
+    nullok="true"
+    type="lastname"/>
+  <column
+    name="AccountNumber"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    name="ProducerCode"
+    nullok="true"
+    type="shorttext"/>
+  <!-- GAR START: Entities/PolicySearchCriteria.etx [/opt/teamcity/agent/work/45c3a2f1b8ee4237/gpm-generator/downloads/edge/backend/xcenter-config/xcenter-utils/cc-utils/../../../Shared/claim-shared/src/main] -->
+  <!-- GAR END -->
+</extension>

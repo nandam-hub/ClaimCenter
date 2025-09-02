@@ -1,0 +1,3 @@
+<div id="gw-center-top-section" ${classBuilder} role="region" aria-label="${label}">
+  ${:children}
+</div>

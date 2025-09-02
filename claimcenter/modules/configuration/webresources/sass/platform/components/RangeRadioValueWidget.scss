@@ -1,0 +1,108 @@
+.gw-RangeRadioValueWidget,
+.gw-BooleanRadioValueWidget,
+.gw-TypeKeyRadioValueWidget {
+
+  &.gw-retired {
+    .gw-radioDiv {
+      @include gw-retired();
+    }
+  }
+
+  & > .gw-vw--value {
+    .gw-actionRangeValue > div {
+      @include gw-link();
+    }
+
+    .gw-retired {
+      @include gw-retired();
+    }
+
+    .gw-actionBooleanValue {
+      .gw-icon {
+        @include gw-clickable($gw-app--inputs--col);
+      }
+    }
+  }
+
+  .gw-radioDiv--radio-group {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    column-gap: $gw-app--SPACING-rem-L;
+    row-gap: $gw-app--SPACING-rem-XS;
+  }
+
+  &.gw-stacked .gw-radioDiv--radio-group {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+
+  .gw-radioDiv {
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    &.gw-focus {
+      @include gw-addFocusOutline(null, $gw-app--inputs--radio-focus-offset-px);
+    }
+
+    @include ifNotDisabled() {
+      .gw-radioDiv--inner {
+        box-shadow: $gw-app--inputs--editable-inner-shadow;
+      }
+    }
+
+    &:not(.gw-checked) {
+      cursor: pointer;
+    }
+
+    @include gw-disabled();
+    $size: gw-roundRemToNearestPixel($gw-app--inputs--radio-size-em);
+
+    & > .gw-radioDiv--inner {
+      flex-grow: 0;
+      flex-shrink: 0;
+      align-self: center;
+      padding: 0;
+      position: relative;
+      display: inline-block;
+      width: $size;
+      height: $size;
+      border-radius: 100%;
+      border: gw-border($gw-app--inputs--border--col);
+      background-color: $gw-app--inputs--bg;
+      vertical-align: middle;
+      text-align: center;
+    }
+
+    $inner-size: $size - (2 * $gw-app--border-width-px);
+    $dot-size: gw-roundRemToNearestPixel($gw-app--inputs--radio-glyph-size-em);
+
+    &.gw-checked > .gw-radioDiv--inner {
+      &:before {
+        content: "";
+        display: inline-block;
+        position: absolute;
+        border: #{($inner-size - $dot-size) / 2} solid $gw-app--inputs--radio-checked-bg;
+        border-radius: 100%;
+        background-color: $gw-app--inputs--radio-checked-col;
+        width: $inner-size;
+        height: $inner-size;
+        left: 0;
+        top: 0;
+      }
+    }
+  }
+
+  .gw-radioDiv--icon {
+    margin-left: $gw-app--SPACING-rem-S;
+  }
+
+  .gw-radioDiv--label {
+    margin-left: $gw-app--SPACING-rem-S;
+  }
+
+}
+

@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <ListViewPanel
+    id="ContactOfficialIDsLV">
+    <ExposeIterator
+      valueType="entity.OfficialID"
+      widget="ContactOfficialIDsLV"/>
+    <Require
+      name="Contact"
+      type="Contact"/>
+    <RowIterator
+      editable="true"
+      elementName="officialID"
+      hideCheckBoxesIfReadOnly="true"
+      toAdd="Contact.addToOfficialIDs( officialID )"
+      toRemove="Contact.removeFromOfficialIDs( officialID )"
+      value="Contact.OfficialIDs"
+      valueType="entity.OfficialID[]">
+      <Row>
+        <TypeKeyCell
+          editable="true"
+          id="officialIDType"
+          label="DisplayKey.get('Web.Contact.OfficialID.Type')"
+          required="true"
+          value="officialID.OfficialIDType"
+          valueType="typekey.OfficialIDType">
+        <PostOnChange/>
+      </TypeKeyCell>
+        <TypeKeyCell
+          editable="true"
+          id="officialIDJurisdiction"
+          label="DisplayKey.get('Web.Contact.OfficialID.Jurisdiction')"
+          value="officialID.State"
+          valueType="typekey.Jurisdiction"/>
+        <TextCell
+          available="officialID.OfficialIDValue == null or not (officialID.isMaskable)"
+          editable="true"
+          id="officialIDValue"
+          inputMask="officialID.inputMaskIDValue()"
+          label="DisplayKey.get('Web.Contact.OfficialID.Value')"
+          outputConversion="officialID.outputConversionIDValue(VALUE)"
+          requestValidationExpression="officialID.validateIDValueInput(VALUE)"
+          required="true"
+          value="officialID.OfficialIDValue"/>
+        <ButtonCell
+          action="officialID.OfficialIDValue = &quot;&quot;"
+          available="officialID.isMaskable and officialID.OfficialIDValue != null"
+          id="OfficialIDValueEditButton"
+          value="DisplayKey.get(&quot;Web.ContactDetail.OfficialID.Button&quot;)"
+          visible="CurrentLocation.isInEditMode()"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

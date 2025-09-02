@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<plugin
+  interface="HealthProbePlugin"
+  name="HealthProbePlugin">
+  <plugin-gosu
+    gosuclass="gw.plugin.management.HealthProbePluginImpl"/>
+</plugin>

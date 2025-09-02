@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <LocationGroup
+    id="Desktop"
+    menuActions="DesktopMenuActions()"
+    title="DisplayKey.get(&quot;Web.TabBar.Desktop&quot;)">
+    <LocationEntryPoint
+      signature="Desktop()"/>
+    <LocationRef
+      icon="&quot;activities&quot;"
+      iconType="svgFileName"
+      label="DisplayKey.get(&quot;Web.DesktopMenuLinks.Activities&quot;, gw.api.desktop.DesktopCounts.getDesktopCounts().Activities)"
+      location="DesktopActivities()"/>
+    <LocationRef
+      icon="&quot;activities&quot;"
+      iconType="svgFileName"
+      location="SP_CrossSuiteActivities()"/>
+    <LocationRef
+      icon="&quot;claims&quot;"
+      iconType="svgFileName"
+      label="DisplayKey.get(&quot;Web.DesktopMenuLinks.Claims&quot;, gw.api.desktop.DesktopCounts.getDesktopCounts().Claims)"
+      location="DesktopClaims()"/>
+    <LocationRef
+      icon="&quot;exposures&quot;"
+      iconType="svgFileName"
+      label="DisplayKey.get(&quot;Web.DesktopMenuLinks.Exposures&quot;, gw.api.desktop.DesktopCounts.getDesktopCounts().Exposures)"
+      location="DesktopExposures()"/>
+    <LocationRef
+      icon="&quot;subrogations_nav&quot;"
+      iconType="svgFileName"
+      label="DisplayKey.get(&quot;Web.DesktopMenuLinks.Subrogations&quot;, gw.api.desktop.DesktopCounts.getDesktopCounts().ActiveSubrogations)"
+      location="DesktopSubrogations()"/>
+    <LocationRef
+      icon="&quot;pending_assignments&quot;"
+      iconType="svgFileName"
+      label="DisplayKey.get(&quot;Web.DesktopMenuLinks.UnassignedItems&quot;, gw.api.desktop.DesktopCounts.getDesktopCounts().AwaitingAssignment)"
+      location="DesktopAwaitingAssignment()"/>
+    <LocationRef
+      icon="&quot;queues&quot;"
+      iconType="svgFileName"
+      label="DisplayKey.get(&quot;Web.DesktopMenuLinks.ActivityQueues&quot;, gw.api.desktop.DesktopCounts.getDesktopCounts().Queues)"
+      location="DesktopQueuedActivities()"/>
+    <LocationRef
+      icon="&quot;calendar_nav&quot;"
+      iconType="svgFileName"
+      location="DesktopCalendarGroup()"/>
+    <LocationRef
+      icon="&quot;bulk_invloices&quot;"
+      iconType="svgFileName"
+      location="BulkPay()"/>
+  </LocationGroup>
+</PCF>

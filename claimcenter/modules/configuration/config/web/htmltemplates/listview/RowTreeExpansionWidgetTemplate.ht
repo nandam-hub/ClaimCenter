@@ -1,0 +1,5 @@
+<div :for="depthMarkerAsBoolean" :in="depthMarkers" class="gw-marker ${depthMarkerAsBoolean ? 'gw-ancestor-line'}" aria-hidden="true"></div>
+<div :unless="isLeaf" id="${rowTreeExpansionId}" role="button" aria-labelledby="${ariaLabelledby}" aria-expanded="${isExpanded ? 'true' : 'false'}" class="gw-marker gw-toggle-icon ${isExpanded ? 'gw-expanded'} ${isLastChild ? 'gw-last-child'}" data-gw-click="?{rowTreeExpansionId} fireEvent id:^">
+    <div class="gw-icon"></div>
+</div>
+<div :if="isLeaf" class="gw-marker gw-leaf ${isLastChild ? 'gw-last-child'}" aria-hidden="true"></div>

@@ -1,0 +1,81 @@
+//--------------Title Bar Widgets at the top of the screen
+// Position to other widgets
+$gw-app--TitleBar--heading-level-1--spacing-widget-top-rem: null !default;
+$gw-app--TitleBar--heading-level-1--spacing-widget-left-rem: null !default;
+$gw-app--TitleBar--heading-level-1--spacing-widget-right-rem: $gw-app--SPACING-rem-M !default;
+$gw-app--TitleBar--heading-level-1--spacing-widget-bottom-rem: null !default;
+
+// Internal padding
+$gw-app--TitleBar--heading-level-1--spacing-inner-top-rem: $gw-app--SPACING-rem-XS !default;
+$gw-app--TitleBar--heading-level-1--spacing-inner-left-rem: $gw-app--SPACING-rem-M !default;
+$gw-app--TitleBar--heading-level-1--spacing-inner-right-rem: $gw-app--SPACING-rem-M !default;
+$gw-app--TitleBar--heading-level-1--spacing-inner-bottom-rem: $gw-app--SPACING-rem-XS !default;
+
+//Other
+$gw-app--TitleBar--screen--col: null !default;
+$gw-app--TitleBar--screen--bg: transparent !default; //makes the title bar a solid bar across the screen
+
+$gw-app--TitleBar--screen--border-col: $gw-app--border--col !default;
+$gw-app--TitleBar--screen--use-alternate-breadcrumb-ux: false !default;
+$gw-app--TitleBar--screen--drop-shadow: gw-pxFixed(1) gw-pxFixed(1) gw-pxFixed(3) $gw-app--palette--shadow-col !default;
+
+
+//------------Title Bar Widgets nested in panels
+$gw-app--TitleBar--heading-level-2--spacing-widget-top-rem: $gw-app--SPACING-rem-M !default;
+$gw-app--TitleBar--heading-level-2--spacing-widget-left-rem: null !default;
+$gw-app--TitleBar--heading-level-2--spacing-widget-right-rem: null !default;
+$gw-app--TitleBar--heading-level-2--spacing-widget-bottom-rem: null !default;
+
+$gw-app--TitleBar--heading-level-2--spacing-inner-top-rem: $gw-app--SPACING-rem-XS !default;
+$gw-app--TitleBar--heading-level-2--spacing-inner-left-rem: $gw-app--SPACING-rem-M !default;
+$gw-app--TitleBar--heading-level-2--spacing-inner-right-rem: $gw-app--SPACING-rem-M !default;
+$gw-app--TitleBar--heading-level-2--spacing-inner-bottom-rem: $gw-app--SPACING-rem-S !default;
+
+$gw-app--TitleBar--heading-level-3--spacing-widget-top-rem: $gw-app--SPACING-rem-M !default;
+$gw-app--TitleBar--heading-level-3--spacing-widget-left-rem: null !default;
+$gw-app--TitleBar--heading-level-3--spacing-widget-right-rem: null !default;
+$gw-app--TitleBar--heading-level-3--spacing-widget-bottom-rem: null !default;
+
+$gw-app--TitleBar--heading-level-3--spacing-inner-top-rem: $gw-app--SPACING-rem-XS !default;
+$gw-app--TitleBar--heading-level-3--spacing-inner-left-rem: $gw-app--SPACING-rem-M !default;
+$gw-app--TitleBar--heading-level-3--spacing-inner-right-rem: $gw-app--SPACING-rem-M !default;
+$gw-app--TitleBar--heading-level-3--spacing-inner-bottom-rem: $gw-app--SPACING-rem-XS !default;
+
+//Other
+$gw-app--TitleBar--panel--col: null !default;
+$gw-app--TitleBar--panel--bg: transparent !default;
+$gw-app--TitleBar--panel--border-bottom--col: $gw-app--border--col-lighter !default;
+
+//Heading 1
+$gw-app--TitleBar--heading-level-1--font-size-em: gw-emFixed(1.7) !default;
+$gw-app--TitleBar--heading-level-1--subtitle--font-size-em: gw-emFixed(1.2) !default;
+$gw-app--TitleBar--heading-level-1--font-family: null !default; //defaults to app font, but this can be changed to any font family
+$gw-app--TitleBar--heading-level-1--subtitle--pad-top-rem: 0 !default;
+$gw-app--TitleBar--heading-level-1--font-weight: null !default;
+$gw-app--TitleBar--heading-level-1--subtitle-font-weight: null !default;
+$gw-app--TitleBar--heading-level-1--icon-size: $gw-app--TitleBar--heading-level-1--font-size-em !default;
+$gw-app--TitleBar--heading-level-1--icon-margin-right-rem: $gw-app--SPACING-rem-L !default;
+
+//Heading 2
+$gw-app--TitleBar--heading-level-2--font-size-em: gw-emFixed(1.3) !default;
+$gw-app--TitleBar--heading-level-2--subtitle--font-size-em: gw-emFixed(1) !default;
+$gw-app--TitleBar--heading-level-2--font-family: null !default;
+$gw-app--TitleBar--heading-level-2--subtitle--pad-top-rem: 0 !default;
+$gw-app--TitleBar--heading-level-2--icon-margin-right-rem: $gw-app--SPACING-rem-M !default;
+$gw-app--TitleBar--heading-level-2--font-weight: null !default;
+$gw-app--TitleBar--heading-level-2--icon-size: $gw-app--TitleBar--heading-level-2--font-size-em !default;
+$gw-app--TitleBar--heading-level-2--subtitle-font-weight: null !default;
+
+//Heading 3
+$gw-app--TitleBar--heading-level-3--font-size-em: gw-emFixed(1) !default;
+$gw-app--TitleBar--heading-level-3--subtitle--font-size-em: $gw-app--font-size--smaller-px !default;
+$gw-app--TitleBar--heading-level-3--font-family: null !default;
+$gw-app--TitleBar--heading-level-3--subtitle--pad-top-rem: 0 !default;
+$gw-app--TitleBar--heading-level-3--icon-margin-right-rem: $gw-app--SPACING-rem-M !default;
+$gw-app--TitleBar--heading-level-3--font-weight: gw-weight(bold) !default;
+$gw-app--TitleBar--heading-level-3--icon-size: $gw-app--TitleBar--heading-level-3--font-size-em !default;
+$gw-app--TitleBar--heading-level-3--subtitle-font-weight: null !default;
+
+
+
+

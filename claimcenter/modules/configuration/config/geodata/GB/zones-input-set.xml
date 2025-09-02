@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- GB -->
+<ZonesInputSet xmlns="http://guidewire.com/zones-input-set">
+  <ZonesInput screenType="BusinessWeek">
+    <ZoneTypes>
+      <ZoneType code="city" selectionType="shuttleList"/>
+      <ZoneType code="country" selectionType="shuttleList"/>
+      <ZoneType code="postcoderegion" selectionType="shuttleList"/>
+    </ZoneTypes>
+  </ZonesInput>
+
+  <ZonesInput screenType="Holiday">
+    <ZoneTypes>
+      <ZoneType code="city" selectionType="shuttleList"/>
+      <ZoneType code="country" selectionType="shuttleList"/>
+      <ZoneType code="postcoderegion" selectionType="shuttleList"/>
+    </ZoneTypes>
+  </ZonesInput>
+
+  <ZonesInput screenType="Region">
+    <ZoneTypes>
+      <ZoneType code="city" selectionType="shuttleList"/>
+      <ZoneType code="country" selectionType="shuttleList"/>
+      <ZoneType code="postcoderegion" selectionType="shuttleList"/>
+    </ZoneTypes>
+  </ZonesInput>
+
+  <ZonesInput screenType="Catastrophe">
+    <ZoneTypes>
+      <ZoneType code="city" selectionType="shuttleList"/>
+      <ZoneType code="country" selectionType="shuttleList"/>
+      <ZoneType code="postcoderegion" selectionType="shuttleList"/>
+    </ZoneTypes>
+  </ZonesInput>
+
+</ZonesInputSet>

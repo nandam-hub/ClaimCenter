@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<plugin
+  interface="IRestDispatchPlugin"
+  name="IRestDispatchPlugin">
+  <plugin-gosu
+    gosuclass="gw.api.rest.DefaultCloudDispatchPlugin"/>
+</plugin>

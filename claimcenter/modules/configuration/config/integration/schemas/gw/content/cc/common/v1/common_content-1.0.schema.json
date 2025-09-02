@@ -1,0 +1,54 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "x-gw-combine": [
+    "gw.core.cc.common.v1.common_core-1.0"
+  ],
+  "definitions": {
+    "Address": {
+      "type": "object",
+      "properties": {
+        // France
+        "CEDEX": {
+          "title": "CEDEX",
+          "description": "The CEDEX bureau of the address. Only applicable in certain countries.",
+          "type": "string",
+          "x-gw-nullable": true,
+          "maxLength": 2,
+          "x-gw-extensions": {
+            "countryRestricted": true
+          }
+        },
+        // Japan-only Kanji field
+        "addressLine1Kanji": {
+          "title": "Address line 1 kanji",
+          "description": "The kanji version of the first line of the address. Only applicable in certain countries.",
+          "type": "string",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "countryRestricted": true
+          }
+        },
+        // Japan-only Kanji field
+        "addressLine2Kanji": {
+          "title": "Address line 2 kanji",
+          "description": "The kanji version of the second line of the address. Only applicable in certain countries.",
+          "type": "string",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "countryRestricted": true
+          }
+        },
+        // Japan-only Kanji field
+        "cityKanji": {
+          "title": "City kanji",
+          "description": "The kanji version of the city of the address. Only applicable in certain countries.",
+          "type": "string",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "countryRestricted": true
+          }
+        }
+      }
+    }
+  }
+}

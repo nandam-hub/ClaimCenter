@@ -1,0 +1,4 @@
+<div class="gw-WestPanelWidget--drag" data-gw-draggable="gwWestPanel" role="separator">
+  <div class="gw-WestPanelWidget--drag-inner"></div>
+  <div class="gw-WestPanelWidget--drag-inner"></div>
+</div>

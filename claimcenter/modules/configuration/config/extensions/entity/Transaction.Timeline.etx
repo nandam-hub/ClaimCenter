@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<extension xmlns="http://guidewire.com/datamodel" entityName="Transaction">
+  <onetoone
+    desc="TransactionOnset join entity pointing to this Transaction as an onset"
+    fkentity="TransactionOnset"
+    linkField="Onset"
+    name="OriginTransactionOnset_SP"
+    nullok="true"/>
+</extension>

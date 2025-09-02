@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    canEdit="perm.System.editclaimpaymentpreapprovals &amp;&amp; perm.Claim.createreserve(Claim)"
+    canVisit="perm.Claim.view(Claim) and perm.System.viewfinsum and perm.Claim.viewtransactiondetails(Claim) and perm.System.viewclaimpaymentpreapprovals and gw.api.feature.ClaimSpecificPaymentPreapprovalsFeatureInfo.isEnabled()"
+    id="ClaimSpecificPaymentPreapprovals"
+    title="DisplayKey.get(&quot;Web.ClaimFinancials.Financials.ClaimSpecificPaymentPreapprovals&quot;)">
+    <LocationEntryPoint
+      signature="ClaimSpecificPaymentPreapprovals(Claim : Claim)"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <Screen>
+      <PanelRef
+        def="ClaimSpecificPaymentPreapprovalsLV(Claim)">
+        <Toolbar>
+          <EditButtons/>
+          <IteratorButtons
+            addVisible="CurrentLocation.InEditMode"
+            id="iteratorButton"
+            iterator="ClaimSpecificPaymentPreapprovalsLV.ClaimSpecificPaymentPreapprovalsLV"
+            removeVisible="CurrentLocation.InEditMode"/>
+        </Toolbar>
+      </PanelRef>
+    </Screen>
+  </Page></PCF>

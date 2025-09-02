@@ -1,0 +1,516 @@
+<?xml version="1.0"?>
+<wsdl:definitions targetNamespace="http://guidewire.com/bc/ws/gw/surepath/bc/configuration/activitymanagement/api/BCActivityAPI" name="BCActivityAPI" xmlns:gwsoap="http://guidewire.com/ws/soapheaders" xmlns:gwwsdl="http://guidewire.com/pl/wsdl" xmlns:pogo="http://guidewire.com/bc/ws/gw/surepath/bc/configuration/activitymanagement/dto/ActivityDTO" xmlns:soap11="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:tns="http://guidewire.com/bc/ws/gw/surepath/bc/configuration/activitymanagement/api/BCActivityAPI" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xs:schema targetNamespace="http://guidewire.com/bc/ws/gw/surepath/bc/configuration/activitymanagement/api/BCActivityAPI" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://guidewire.com/ws/soapheaders" schemaLocation="soapheaders.xsd"/>
+      <xs:import namespace="http://guidewire.com/bc/ws/gw/surepath/bc/configuration/activitymanagement/dto/ActivityDTO"/>
+      <xs:element name="createCrossAppActPattern">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="patternCode" type="xs:string" minOccurs="0"/>
+            <xs:element name="patternDisplayName" type="xs:string" minOccurs="0"/>
+            <xs:element name="destApplication" type="xs:string" minOccurs="0"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="createCrossAppActPatternResponse">
+        <xs:complexType/>
+      </xs:element>
+      <xs:element name="DisplayableException">
+        <xs:complexType/>
+      </xs:element>
+      <xs:element name="WsiAuthenticationException">
+        <xs:complexType/>
+      </xs:element>
+      <xs:element name="updateCrossAppActPattern">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="patternCode" type="xs:string" minOccurs="0"/>
+            <xs:element name="patternDisplayName" type="xs:string" minOccurs="0"/>
+            <xs:element name="destApplication" type="xs:string" minOccurs="0"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="updateCrossAppActPatternResponse">
+        <xs:complexType/>
+      </xs:element>
+      <xs:element name="removeCrossAppActPattern">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="patternCode" type="xs:string" minOccurs="0"/>
+            <xs:element name="destApplication" type="xs:string" minOccurs="0"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="removeCrossAppActPatternResponse">
+        <xs:complexType/>
+      </xs:element>
+      <xs:element name="correspondingActivityPatternExists">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="patternCode" type="xs:string" minOccurs="0"/>
+            <xs:element name="patternDisplayName" type="xs:string" minOccurs="0"/>
+            <xs:element name="sourceApplication" type="xs:string" minOccurs="0"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="correspondingActivityPatternExistsResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="return" type="xs:boolean"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="createLocalActivityFromAccount">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="patternCode" type="xs:string" minOccurs="0"/>
+            <xs:element name="approvalIssue" type="xs:string" minOccurs="0"/>
+            <xs:element name="description" type="xs:string" minOccurs="0"/>
+            <xs:element name="accountNumber" type="xs:string" minOccurs="0"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="createLocalActivityFromAccountResponse">
+        <xs:complexType/>
+      </xs:element>
+      <xs:element name="createLocalActivityFromPolicyPeriod">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="patternCode" type="xs:string" minOccurs="0"/>
+            <xs:element name="approvalIssue" type="xs:string" minOccurs="0"/>
+            <xs:element name="description" type="xs:string" minOccurs="0"/>
+            <xs:element name="policyNumber" type="xs:string" minOccurs="0"/>
+            <xs:element name="termNumber" type="xs:string" minOccurs="0"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="createLocalActivityFromPolicyPeriodResponse">
+        <xs:complexType/>
+      </xs:element>
+      <xs:element name="retrieveLocalOpenActivitiesForLoggedInUser">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="username" type="xs:string" minOccurs="0"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="retrieveLocalOpenActivitiesForLoggedInUserResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="return" minOccurs="0" gw:viewas="array" xmlns:gw="http://guidewire.com/xsd">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="Entry" type="pogo:ActivityDTO" minOccurs="0" maxOccurs="unbounded" nillable="true"/>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+    <xs:schema targetNamespace="http://guidewire.com/bc/ws/gw/surepath/bc/configuration/activitymanagement/dto/ActivityDTO" elementFormDefault="qualified" xmlns:gw="http://guidewire.com/xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:complexType name="ActivityDTO">
+        <xs:sequence>
+          <xs:element name="ActivityStatus" type="xs:string" minOccurs="0"/>
+          <xs:element name="ActivityType" type="xs:string" minOccurs="0"/>
+          <xs:element name="Description" type="xs:string" minOccurs="0"/>
+          <xs:element name="DueDate" type="xs:dateTime" minOccurs="0" gw:type="java.util.Date"/>
+          <xs:element name="EscalationDate" type="xs:dateTime" minOccurs="0" gw:type="java.util.Date"/>
+          <xs:element name="PatternCode" type="xs:string" minOccurs="0"/>
+          <xs:element name="Priority" type="xs:string" minOccurs="0"/>
+          <xs:element name="Subject" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:portType name="BCActivityAPIPortType">
+    <wsdl:operation name="createCrossAppActPattern">
+      <wsdl:input name="createCrossAppActPattern" message="tns:createCrossAppActPattern"/>
+      <wsdl:output name="createCrossAppActPatternResponse" message="tns:createCrossAppActPatternResponse"/>
+      <wsdl:fault name="DisplayableException" message="tns:DisplayableException"/>
+      <wsdl:fault name="WsiAuthenticationException" message="tns:WsiAuthenticationException"/>
+    </wsdl:operation>
+    <wsdl:operation name="updateCrossAppActPattern">
+      <wsdl:input name="updateCrossAppActPattern" message="tns:updateCrossAppActPattern"/>
+      <wsdl:output name="updateCrossAppActPatternResponse" message="tns:updateCrossAppActPatternResponse"/>
+      <wsdl:fault name="DisplayableException" message="tns:DisplayableException"/>
+      <wsdl:fault name="WsiAuthenticationException" message="tns:WsiAuthenticationException"/>
+    </wsdl:operation>
+    <wsdl:operation name="removeCrossAppActPattern">
+      <wsdl:input name="removeCrossAppActPattern" message="tns:removeCrossAppActPattern"/>
+      <wsdl:output name="removeCrossAppActPatternResponse" message="tns:removeCrossAppActPatternResponse"/>
+      <wsdl:fault name="DisplayableException" message="tns:DisplayableException"/>
+      <wsdl:fault name="WsiAuthenticationException" message="tns:WsiAuthenticationException"/>
+    </wsdl:operation>
+    <wsdl:operation name="correspondingActivityPatternExists">
+      <wsdl:input name="correspondingActivityPatternExists" message="tns:correspondingActivityPatternExists"/>
+      <wsdl:output name="correspondingActivityPatternExistsResponse" message="tns:correspondingActivityPatternExistsResponse"/>
+      <wsdl:fault name="DisplayableException" message="tns:DisplayableException"/>
+      <wsdl:fault name="WsiAuthenticationException" message="tns:WsiAuthenticationException"/>
+    </wsdl:operation>
+    <wsdl:operation name="createLocalActivityFromAccount">
+      <wsdl:input name="createLocalActivityFromAccount" message="tns:createLocalActivityFromAccount"/>
+      <wsdl:output name="createLocalActivityFromAccountResponse" message="tns:createLocalActivityFromAccountResponse"/>
+      <wsdl:fault name="DisplayableException" message="tns:DisplayableException"/>
+      <wsdl:fault name="WsiAuthenticationException" message="tns:WsiAuthenticationException"/>
+    </wsdl:operation>
+    <wsdl:operation name="createLocalActivityFromPolicyPeriod">
+      <wsdl:input name="createLocalActivityFromPolicyPeriod" message="tns:createLocalActivityFromPolicyPeriod"/>
+      <wsdl:output name="createLocalActivityFromPolicyPeriodResponse" message="tns:createLocalActivityFromPolicyPeriodResponse"/>
+      <wsdl:fault name="DisplayableException" message="tns:DisplayableException"/>
+      <wsdl:fault name="WsiAuthenticationException" message="tns:WsiAuthenticationException"/>
+    </wsdl:operation>
+    <wsdl:operation name="retrieveLocalOpenActivitiesForLoggedInUser">
+      <wsdl:input name="retrieveLocalOpenActivitiesForLoggedInUser" message="tns:retrieveLocalOpenActivitiesForLoggedInUser"/>
+      <wsdl:output name="retrieveLocalOpenActivitiesForLoggedInUserResponse" message="tns:retrieveLocalOpenActivitiesForLoggedInUserResponse"/>
+      <wsdl:fault name="DisplayableException" message="tns:DisplayableException"/>
+      <wsdl:fault name="WsiAuthenticationException" message="tns:WsiAuthenticationException"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BCActivityAPISoap12Binding" type="tns:BCActivityAPIPortType">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+    <wsdl:operation name="createCrossAppActPattern">
+      <soap12:operation soapActionRequired="false" style="document"/>
+      <wsdl:input name="createCrossAppActPattern">
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap12:header message="tns:gw-language-only" part="gw-language-only" use="literal"/>
+        <soap12:header message="tns:gw-locale-only" part="gw-locale-only" use="literal"/>
+        <soap12:header message="tns:gw-traceability-id" part="gw-traceability-id" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="createCrossAppActPatternResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="DisplayableException">
+        <soap12:fault name="DisplayableException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap12:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="updateCrossAppActPattern">
+      <soap12:operation soapActionRequired="false" style="document"/>
+      <wsdl:input name="updateCrossAppActPattern">
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap12:header message="tns:gw-language-only" part="gw-language-only" use="literal"/>
+        <soap12:header message="tns:gw-locale-only" part="gw-locale-only" use="literal"/>
+        <soap12:header message="tns:gw-traceability-id" part="gw-traceability-id" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="updateCrossAppActPatternResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="DisplayableException">
+        <soap12:fault name="DisplayableException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap12:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="removeCrossAppActPattern">
+      <soap12:operation soapActionRequired="false" style="document"/>
+      <wsdl:input name="removeCrossAppActPattern">
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap12:header message="tns:gw-language-only" part="gw-language-only" use="literal"/>
+        <soap12:header message="tns:gw-locale-only" part="gw-locale-only" use="literal"/>
+        <soap12:header message="tns:gw-traceability-id" part="gw-traceability-id" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="removeCrossAppActPatternResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="DisplayableException">
+        <soap12:fault name="DisplayableException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap12:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="correspondingActivityPatternExists">
+      <soap12:operation soapActionRequired="false" style="document"/>
+      <wsdl:input name="correspondingActivityPatternExists">
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap12:header message="tns:gw-language-only" part="gw-language-only" use="literal"/>
+        <soap12:header message="tns:gw-locale-only" part="gw-locale-only" use="literal"/>
+        <soap12:header message="tns:gw-traceability-id" part="gw-traceability-id" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="correspondingActivityPatternExistsResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="DisplayableException">
+        <soap12:fault name="DisplayableException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap12:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="createLocalActivityFromAccount">
+      <soap12:operation soapActionRequired="false" style="document"/>
+      <wsdl:input name="createLocalActivityFromAccount">
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap12:header message="tns:gw-language-only" part="gw-language-only" use="literal"/>
+        <soap12:header message="tns:gw-locale-only" part="gw-locale-only" use="literal"/>
+        <soap12:header message="tns:gw-traceability-id" part="gw-traceability-id" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="createLocalActivityFromAccountResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="DisplayableException">
+        <soap12:fault name="DisplayableException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap12:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="createLocalActivityFromPolicyPeriod">
+      <soap12:operation soapActionRequired="false" style="document"/>
+      <wsdl:input name="createLocalActivityFromPolicyPeriod">
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap12:header message="tns:gw-language-only" part="gw-language-only" use="literal"/>
+        <soap12:header message="tns:gw-locale-only" part="gw-locale-only" use="literal"/>
+        <soap12:header message="tns:gw-traceability-id" part="gw-traceability-id" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="createLocalActivityFromPolicyPeriodResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="DisplayableException">
+        <soap12:fault name="DisplayableException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap12:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="retrieveLocalOpenActivitiesForLoggedInUser">
+      <soap12:operation soapActionRequired="false" style="document"/>
+      <wsdl:input name="retrieveLocalOpenActivitiesForLoggedInUser">
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap12:header message="tns:gw-language-only" part="gw-language-only" use="literal"/>
+        <soap12:header message="tns:gw-locale-only" part="gw-locale-only" use="literal"/>
+        <soap12:header message="tns:gw-traceability-id" part="gw-traceability-id" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="retrieveLocalOpenActivitiesForLoggedInUserResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="DisplayableException">
+        <soap12:fault name="DisplayableException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap12:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="BCActivityAPISoap11Binding" type="tns:BCActivityAPIPortType">
+    <soap11:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+    <wsdl:operation name="createCrossAppActPattern">
+      <soap11:operation style="document"/>
+      <wsdl:input name="createCrossAppActPattern">
+        <soap11:body use="literal"/>
+        <soap11:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap11:header message="tns:gw-language-only" part="gw-language-only" use="literal"/>
+        <soap11:header message="tns:gw-locale-only" part="gw-locale-only" use="literal"/>
+        <soap11:header message="tns:gw-traceability-id" part="gw-traceability-id" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="createCrossAppActPatternResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="DisplayableException">
+        <soap11:fault name="DisplayableException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap11:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="updateCrossAppActPattern">
+      <soap11:operation style="document"/>
+      <wsdl:input name="updateCrossAppActPattern">
+        <soap11:body use="literal"/>
+        <soap11:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap11:header message="tns:gw-language-only" part="gw-language-only" use="literal"/>
+        <soap11:header message="tns:gw-locale-only" part="gw-locale-only" use="literal"/>
+        <soap11:header message="tns:gw-traceability-id" part="gw-traceability-id" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="updateCrossAppActPatternResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="DisplayableException">
+        <soap11:fault name="DisplayableException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap11:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="removeCrossAppActPattern">
+      <soap11:operation style="document"/>
+      <wsdl:input name="removeCrossAppActPattern">
+        <soap11:body use="literal"/>
+        <soap11:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap11:header message="tns:gw-language-only" part="gw-language-only" use="literal"/>
+        <soap11:header message="tns:gw-locale-only" part="gw-locale-only" use="literal"/>
+        <soap11:header message="tns:gw-traceability-id" part="gw-traceability-id" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="removeCrossAppActPatternResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="DisplayableException">
+        <soap11:fault name="DisplayableException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap11:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="correspondingActivityPatternExists">
+      <soap11:operation style="document"/>
+      <wsdl:input name="correspondingActivityPatternExists">
+        <soap11:body use="literal"/>
+        <soap11:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap11:header message="tns:gw-language-only" part="gw-language-only" use="literal"/>
+        <soap11:header message="tns:gw-locale-only" part="gw-locale-only" use="literal"/>
+        <soap11:header message="tns:gw-traceability-id" part="gw-traceability-id" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="correspondingActivityPatternExistsResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="DisplayableException">
+        <soap11:fault name="DisplayableException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap11:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="createLocalActivityFromAccount">
+      <soap11:operation style="document"/>
+      <wsdl:input name="createLocalActivityFromAccount">
+        <soap11:body use="literal"/>
+        <soap11:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap11:header message="tns:gw-language-only" part="gw-language-only" use="literal"/>
+        <soap11:header message="tns:gw-locale-only" part="gw-locale-only" use="literal"/>
+        <soap11:header message="tns:gw-traceability-id" part="gw-traceability-id" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="createLocalActivityFromAccountResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="DisplayableException">
+        <soap11:fault name="DisplayableException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap11:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="createLocalActivityFromPolicyPeriod">
+      <soap11:operation style="document"/>
+      <wsdl:input name="createLocalActivityFromPolicyPeriod">
+        <soap11:body use="literal"/>
+        <soap11:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap11:header message="tns:gw-language-only" part="gw-language-only" use="literal"/>
+        <soap11:header message="tns:gw-locale-only" part="gw-locale-only" use="literal"/>
+        <soap11:header message="tns:gw-traceability-id" part="gw-traceability-id" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="createLocalActivityFromPolicyPeriodResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="DisplayableException">
+        <soap11:fault name="DisplayableException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap11:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="retrieveLocalOpenActivitiesForLoggedInUser">
+      <soap11:operation style="document"/>
+      <wsdl:input name="retrieveLocalOpenActivitiesForLoggedInUser">
+        <soap11:body use="literal"/>
+        <soap11:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap11:header message="tns:gw-language-only" part="gw-language-only" use="literal"/>
+        <soap11:header message="tns:gw-locale-only" part="gw-locale-only" use="literal"/>
+        <soap11:header message="tns:gw-traceability-id" part="gw-traceability-id" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="retrieveLocalOpenActivitiesForLoggedInUserResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="DisplayableException">
+        <soap11:fault name="DisplayableException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap11:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="BCActivityAPI">
+    <wsdl:port name="BCActivityAPISoap12Port" binding="tns:BCActivityAPISoap12Binding">
+      <soap12:address location="http://localhost:8580/bc/ws/gw/surepath/bc/configuration/activitymanagement/api/BCActivityAPI"/>
+      <gwwsdl:address location="${bc}/ws/gw/surepath/bc/configuration/activitymanagement/api/BCActivityAPI"/>
+    </wsdl:port>
+    <wsdl:port name="BCActivityAPISoap11Port" binding="tns:BCActivityAPISoap11Binding">
+      <soap11:address location="http://localhost:8580/bc/ws/gw/surepath/bc/configuration/activitymanagement/api/BCActivityAPI/soap11"/>
+      <gwwsdl:address location="${bc}/ws/gw/surepath/bc/configuration/activitymanagement/api/BCActivityAPI/soap11"/>
+    </wsdl:port>
+  </wsdl:service>
+  <wsdl:message name="createCrossAppActPattern">
+    <wsdl:part name="parameters" element="tns:createCrossAppActPattern"/>
+  </wsdl:message>
+  <wsdl:message name="createCrossAppActPatternResponse">
+    <wsdl:part name="parameters" element="tns:createCrossAppActPatternResponse"/>
+  </wsdl:message>
+  <wsdl:message name="DisplayableException">
+    <wsdl:part name="DisplayableException" element="tns:DisplayableException"/>
+  </wsdl:message>
+  <wsdl:message name="WsiAuthenticationException">
+    <wsdl:part name="WsiAuthenticationException" element="tns:WsiAuthenticationException"/>
+  </wsdl:message>
+  <wsdl:message name="updateCrossAppActPattern">
+    <wsdl:part name="parameters" element="tns:updateCrossAppActPattern"/>
+  </wsdl:message>
+  <wsdl:message name="updateCrossAppActPatternResponse">
+    <wsdl:part name="parameters" element="tns:updateCrossAppActPatternResponse"/>
+  </wsdl:message>
+  <wsdl:message name="removeCrossAppActPattern">
+    <wsdl:part name="parameters" element="tns:removeCrossAppActPattern"/>
+  </wsdl:message>
+  <wsdl:message name="removeCrossAppActPatternResponse">
+    <wsdl:part name="parameters" element="tns:removeCrossAppActPatternResponse"/>
+  </wsdl:message>
+  <wsdl:message name="correspondingActivityPatternExists">
+    <wsdl:part name="parameters" element="tns:correspondingActivityPatternExists"/>
+  </wsdl:message>
+  <wsdl:message name="correspondingActivityPatternExistsResponse">
+    <wsdl:part name="parameters" element="tns:correspondingActivityPatternExistsResponse"/>
+  </wsdl:message>
+  <wsdl:message name="createLocalActivityFromAccount">
+    <wsdl:part name="parameters" element="tns:createLocalActivityFromAccount"/>
+  </wsdl:message>
+  <wsdl:message name="createLocalActivityFromAccountResponse">
+    <wsdl:part name="parameters" element="tns:createLocalActivityFromAccountResponse"/>
+  </wsdl:message>
+  <wsdl:message name="createLocalActivityFromPolicyPeriod">
+    <wsdl:part name="parameters" element="tns:createLocalActivityFromPolicyPeriod"/>
+  </wsdl:message>
+  <wsdl:message name="createLocalActivityFromPolicyPeriodResponse">
+    <wsdl:part name="parameters" element="tns:createLocalActivityFromPolicyPeriodResponse"/>
+  </wsdl:message>
+  <wsdl:message name="retrieveLocalOpenActivitiesForLoggedInUser">
+    <wsdl:part name="parameters" element="tns:retrieveLocalOpenActivitiesForLoggedInUser"/>
+  </wsdl:message>
+  <wsdl:message name="retrieveLocalOpenActivitiesForLoggedInUserResponse">
+    <wsdl:part name="parameters" element="tns:retrieveLocalOpenActivitiesForLoggedInUserResponse"/>
+  </wsdl:message>
+  <wsdl:message name="gw-authentication">
+    <wsdl:part name="gw-authentication" element="gwsoap:authentication"/>
+  </wsdl:message>
+  <wsdl:message name="gw-locale-only">
+    <wsdl:part name="gw-locale-only" element="gwsoap:gw_locale"/>
+  </wsdl:message>
+  <wsdl:message name="gw-language-only">
+    <wsdl:part name="gw-language-only" element="gwsoap:gw_language"/>
+  </wsdl:message>
+  <wsdl:message name="gw-transaction-id">
+    <wsdl:part name="gw-transaction-id" element="gwsoap:transaction_id"/>
+  </wsdl:message>
+  <wsdl:message name="gw-traceability-id">
+    <wsdl:part name="gw-traceability-id" element="gwsoap:traceability_id"/>
+  </wsdl:message>
+</wsdl:definitions>

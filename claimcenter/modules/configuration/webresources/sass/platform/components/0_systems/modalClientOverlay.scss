@@ -1,0 +1,53 @@
+#gw-ModalClientOverlay {
+  display: inline-flex;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  @include gw-z-index(modalClientOverlay);
+  background-color: rgba(0, 0, 0, .8);
+  justify-content: center;
+  padding: gw-emFixed(5);
+
+  overflow: auto;
+
+  #gw-ModalClientOverlay-img-wrapper {
+    &.gw-loading {
+      display: inline-block;
+      @include gw-loader-dots-white();
+      min-width: 160px;
+      min-height: 90px;
+      background-color: black;
+      @include gw-borderRadius();
+
+      img {
+        display: none;
+      }
+    }
+
+    .gw-modal-image {
+      box-shadow: 4px 4px 5px 0px rgba(0,0,0,0.75);
+      object-fit: contain;
+    }
+  }
+
+  #gw-ModalClientOverlay--close {
+    position: absolute;
+    display: inline-block;
+    height: gw-emFixed(5);
+    width: gw-emFixed(5);
+    top: gw-emFixed(6);
+    right: gw-emFixed(6);
+    border-radius: 50%;
+    background-color: transparent;
+    text-shadow: 4px 4px rgba(0, 0, 0, .4);
+    @include gw-iconAfter("times-circle-solid", 5em, $gw-app--palette--white-for-dark-backgrounds, $width: 1em, $height: 1em, $line-height: 1);
+
+    &:hover {
+      background-color: $gw-app--buttons--hover--bg;
+      cursor: pointer;
+    }
+  }
+}

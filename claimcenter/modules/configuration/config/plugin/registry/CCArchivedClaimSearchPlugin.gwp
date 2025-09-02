@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<plugin
+  interface="ISolrEntitySearchPlugin"
+  name="CCArchivedClaimSearchPlugin">
+  <plugin-gosu
+    gosuclass="gw.solr.CCArchivedClaimSearchPlugin">
+    <param
+      name="debug"
+      value="false"/>
+    <param
+      name="fetchSize"
+      value="15"/>
+    <param
+      name="chunkSize"
+      value="15"/>
+    <param
+      name="pageIteratorCacheTimeout"
+      value="300"/>
+  </plugin-gosu>
+</plugin>

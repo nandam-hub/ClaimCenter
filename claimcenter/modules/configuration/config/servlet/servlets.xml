@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<servlets
+  xmlns="http://guidewire.com/servlet">
+  <servlet
+    class="gw.database.ReportViewServlet"/>
+  <servlet
+    class="gw.api.logging.LogViewerServlet"/>
+  <servlet
+    class="gw.api.about.AboutServlet"/>
+  <servlet
+    class="com.guidewire.pl.system.servlet.InfoServlet"
+    info-description="This servlet will dump the information about its state and its servlets it presents. If ExposeDetails it will also dump the parameters"
+    info-path="info">
+    <param
+      name="ExposeDetails"
+      value="false"/>
+    <param
+      name="ExposeInProduction"
+      value="false"/>
+  </servlet>
+  <servlet
+    class="gw.api.web.DisplayKeyValuesServlet"/>
+  <servlet
+    class="gw.xml.ws.Wsdl2GosuTestServlet"/>
+  <!-- Servlet for delegating SSO and authentication requests to gw.plugin.security.AuthenticationServicePlugin -->
+  <servlet
+    class="gw.servlet.CustomAuthServlet"/>
+  <servlet
+    class="gw.bizrules.contexthelp.BizRulesContextHelpServlet"/>
+  <!-- GAR START: config/servlet/servlets.xml [/opt/teamcity/agent/work/45c3a2f1b8ee4237/gpm-generator/downloads/edge/backend/xcenter-config/xcenter-utils/cc-utils/../../../Platform/src/main] -->
+  <servlet
+    class="edge.servlet.jsonrpc.JsonRpcServlet"/>
+  <servlet
+    class="edge.servlet.jsonrpc.JsonRpcUnauthenticatedServlet"/>
+  <servlet
+    class="edge.di.servlet.HandlerStatusServlet"/>
+  <servlet
+    class="edge.di.servlet.DIConfigReloadServlet"/>
+  <!-- GAR END -->
+  <!-- GAR START: config/servlet/servlets.xml [/opt/teamcity/agent/work/45c3a2f1b8ee4237/gpm-generator/downloads/edge/backend/xcenter-config/xcenter-utils/cc-utils/../../../Shared/claim-shared/src/main] -->
+  <servlet
+    class="edge.servlet.DocumentDownloadServlet"/>
+  <!-- GAR END -->
+  <!-- SurePath Content for Claim Timeline -->
+  <servlet
+    class="gw.surepath.cc.configuration.timeline.creation.TimelineServlet"/>
+</servlets>

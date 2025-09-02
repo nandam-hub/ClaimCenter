@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--
+ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ !!! DO NOT DELETE OR MODIFY THIS FILE. IMPORTANT FOR UNSAVED WORK PLUGIN !!!
+ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+-->
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <ExitPoint
+    id="MultiClusterNavigation"
+    isMultiClusterNav="true"
+    url="{exitUrl}">
+    <LocationEntryPoint
+      signature="MultiClusterNavigation(url : String)"/>
+    <ExitPointParameter
+      locationParam="url"
+      type="String"
+      urlParam="exitUrl"/>
+  </ExitPoint>
+</PCF>

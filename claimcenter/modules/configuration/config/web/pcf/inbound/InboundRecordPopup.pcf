@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Popup
+    beforeCommit="updateChanges()"
+    canEdit="perm.System.editinboundfiles"
+    canVisit="perm.System.viewinboundfiles"
+    id="InboundRecordPopup"
+    title="bean typeis InboundRecord ? DisplayKey.get(&quot;InboundFile.Edit.Record.Title&quot;) : DisplayKey.get(&quot;InboundFile.Edit.Subrecord.Title&quot;) ">
+    <LocationEntryPoint
+      signature="InboundRecordPopup(bean : KeyableBean)"/>
+    <Variable
+      name="bean"
+      type="KeyableBean"/>
+    <Variable
+      initialValue="bean typeis InboundRecord ? bean.isEditable() : (bean as InboundSubRecord).isEditable()"
+      name="editable"
+      type="boolean"/>
+    <Screen>
+      <PanelRef
+        def="InboundRecordDV(bean)"
+        mode="bean.IntrinsicType.RelativeName">
+        <Toolbar>
+          <EditButtons/>
+          <ToolbarButton
+            action="CurrentLocation.startEditing(); (bean as InboundRecord).Status = InboundRecordStatus.TC_SKIPPED; CurrentLocation.commit()"
+            available="bean typeis InboundRecord and (bean as InboundRecord).Status == InboundRecordStatus.TC_ERROR"
+            confirmMessage="DisplayKey.get(&quot;InboundFile.Skip.ConfirmationMessage&quot;)"
+            id="InboundRecordPopupSkipButton"
+            label="DisplayKey.get(&quot;InboundFile.Skip&quot;)"
+            visible="bean typeis InboundRecord and not CurrentLocation.InEditMode"/>
+        </Toolbar>
+      </PanelRef>
+    </Screen>
+    <Code>
+function updateChanges() {
+  if (bean.isFieldChanged("Content")) {
+    if (bean typeis InboundRecord) {
+      bean.Status = InboundRecordStatus.TC_PENDING
+    }
+	else if(bean typeis InboundSubRecord) {
+      bean.InboundRecord.Status = InboundRecordStatus.TC_PENDING
+    }
+  }
+}
+    </Code>
+  </Popup>
+</PCF>

@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<plugin
+  interface="MessageTransport"
+  name="EventMessageTransport">
+  <plugin-java
+    javaclass="com.guidewire.events.system.integration.messaging.EventMessageTransport"/>
+</plugin>

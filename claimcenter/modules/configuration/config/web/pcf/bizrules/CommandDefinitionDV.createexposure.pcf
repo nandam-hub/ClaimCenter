@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="CommandDefinitionDV"
+    mode="createexposure">
+    <Require
+      name="commandDefinition"
+      type="gw.bizrules.pcf.RuleCommandDefinitionHolder"/>
+    <Variable
+      initialValue="new gw.bizrules.ruleaction.createexposure.ExposureCommandDefinitionState(commandDefinition)"
+      name="state"
+      recalculateOnRefresh="true"
+      type="gw.bizrules.ruleaction.createexposure.ExposureCommandDefinitionState"/>
+    <Variable
+      initialValue="gw.bizrules.ruleaction.createexposure.config.ExposureCommandParameterSet.Config"
+      name="config"
+      type="gw.bizrules.ruleaction.createexposure.config.ExposureCommandParameterConfig"/>
+    <InputColumn>
+      <RangeInput
+        editable="true"
+        id="CoverageType"
+        label="DisplayKey.get('Web.ExposureRules.Action.CreateExposure.CoverageType')"
+        optionLabel="VALUE.DisplayName"
+        required="true"
+        value="state.CoverageType"
+        valueRange="state.AvailableCoverageTypes"
+        valueType="typekey.CoverageType">
+        <PostOnChange
+          deferUpdate="false"/>
+      </RangeInput>
+      <RangeInput
+        editable="true"
+        id="CoverageSubtype"
+        label="DisplayKey.get('Web.ExposureRules.Action.CreateExposure.CoverageSubtype')"
+        optionLabel="VALUE.DisplayName"
+        required="true"
+        value="state.CoverageSubtype"
+        valueRange="state.AvailableCoverageSubtypes"
+        valueType="typekey.CoverageSubtype">
+      </RangeInput>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

@@ -1,0 +1,47 @@
+<div
+        class="gw-radioDiv--radio-group" aria-labelledby="${inputLabelAriaId}"
+        role="radiogroup">
+    <:control
+            :for="option"
+            :in="range">
+        <:control
+                :if="option.value">
+            <div
+                    id="${renderId}_${option.idx}"
+                    data-gw-no-tab-index
+                    data-gw-active-with-negative-tabindex
+                    tabindex="${option.radioTabIndex}"
+                    role="radio"
+                    class="gw-radioDiv ${noTrack ? 'gw-noTrack'} ${option.selected ? 'gw-checked'} ${option.retired ? 'gw-retired'}"
+                    data-gw-click="gwRadioDiv.onRadioDivClick"
+                    aria-checked="${option.selected ? 'true' : 'false'}"
+                    aria-required="${required ? 'true' : 'false'}"
+                    aria-invalid="${invalid ? 'true' : 'false'}"
+                    aria-disabled="${disabled ? 'true' : 'false'}"
+                    aria-label="${option.label}"
+                    aria-setsize="${setsize}"
+                    aria-posinset="${option.idxPlusOne}">
+                <div
+                        class="gw-radioDiv--inner"></div>
+                <input
+                        data-gw-uses-radio-div
+                        aria-hidden="true"
+                        disabled="${disabled}"
+                        type="radio"
+                        name="${renderId}"
+                        value="${option.value}"
+                        class="${noTrack ? 'gw-noTrack'} gw-hidden"
+                        checked="${option.selected}"/>
+                <span
+                        :if="option.icon"
+                        class="gw-radioDiv--icon">${option.icon}
+                </span>
+                <span
+                        aria-hidden="true"
+                        class="gw-radioDiv--label">${option.label}
+                </span>
+            </div>
+        </:control>
+    </:control>
+</div>
+

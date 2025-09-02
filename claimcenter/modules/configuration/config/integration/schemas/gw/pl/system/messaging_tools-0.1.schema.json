@@ -1,0 +1,172 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "definitions": {
+    "Acknowledgement": {
+      "type": "object",
+      "description": "Acknowledgement contains information to be returned to ClaimCenter about processing of a message by an external system",
+      "properties": {
+        "messageId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "ID of the message to which this acknowledgement refers"
+        },
+        "customEvents": {
+          "type": "array",
+          "description": "Custom events",
+          "items": {
+            "$ref": "#/definitions/CustomEvents"
+          }
+        },
+        "fieldChanges": {
+          "type": "array",
+          "description": "field changes",
+          "items": {
+            "$ref": "#/definitions/FieldChanges"
+          }
+        },
+        "ackCode": {
+          "type": "string",
+          "description": "acknowledgement code to store with the message"
+        },
+        "error": {
+          "type": "boolean",
+          "description": "The acknowledgement is an error if it is a duplicate or has an error description"
+        },
+        "errorDescription": {
+          "type": "string",
+          "description": "Error description"
+        },
+        "retryable": {
+          "type": "boolean",
+          "description": "A retryable error may be corrected by resending the original message"
+        },
+        "duplicate": {
+          "type": "boolean",
+          "description": "Is the error duplicate"
+        }
+      }
+    },
+    "CustomEvents": {
+      "type": "object",
+      "description": "Custom events to fire on an object as part of an acknowledgement",
+      "properties": {
+        "events": {
+          "type": "array",
+          "description": "Events to fire for an object",
+          "items": {
+            "type": "string"
+          }
+        },
+        "objectKey": {
+          "type": "string",
+          "description": "Object key for the object that has custom events"
+        }
+      }
+    },
+    "DestinationConfig": {
+      "type": "object",
+      "description": "Configuration information from the current destination owner to the client",
+      "properties": {
+        "retryBackoffMultiplier": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "initialRetryInterval": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "maxRetries": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "pollInterval": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "numSenderThreads": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "chunkSize": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "shutdownTimeout": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "singleThreadOnNonSafeOrderedMessages": {
+          "type": "boolean"
+        },
+        "multiThreadNonSafeOrderedMessages": {
+          "type": "boolean"
+        }
+      }
+    },
+    "DestinationStatistics": {
+      "type": "object",
+      "description": "Statistics for messages for a given safe ordered object",
+      "properties": {
+        "failed": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of messages that failed"
+        },
+        "retry": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of failed messages that can be retried"
+        },
+        "inflight": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of messages that are in flight"
+        },
+        "unsent": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of messages that are not sent yet"
+        }
+      }
+    },
+    "DestinationStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "FieldChanges": {
+      "type": "object",
+      "properties": {
+        "fieldValues": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FieldChangeValue"
+          }
+        },
+        "objectKey":{
+          "type": "string"
+        }
+      }
+    },
+    "FieldChangeValue": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

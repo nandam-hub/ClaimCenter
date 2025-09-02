@@ -1,0 +1,19 @@
+$gw-app--PanelRef--collapsed--title-bg: $gw-app--panels--bg !default;
+$gw-app--PanelRef--collapsed--title-col: $gw-app--panels--col !default;
+$gw-app--PanelRef--open--title-bg: $gw-app--panels--bg !default;
+$gw-app--PanelRef--open--title-col: $gw-app--panels--col !default;
+
+$gw-app--PanelRef--open--box-shadow: $gw-app--menus--shadow !default;
+$gw-app--PanelRef--collapsed--box-shadow: null !default;
+
+$gw-app--PanelRef--title--min-height: 2.8em !default;
+$gw-app--PanelRef--title--focus-outline-col: $gw-app--default-focus-outline-col !default;
+$gw-app--PanelRef--title--focus-outline-offset: -3px !default;
+
+$gw-app--PanelRef--title-area--padding: $gw-app--SPACING-rem-XS $gw-app--SPACING-rem-XS $gw-app--SPACING-rem-XS $gw-app--SPACING-rem-XS !default;
+
+$gw-app--PanelRef--toggle-icon-col: $gw-app--palette--gray-5 !default;
+$gw-app--PanelRef--toggle-icon-size: 1.8em !default;
+$gw-app--PanelRef--toggle-icon-collapsed: "caret-right" !default;
+$gw-app--PanelRef--toggle-icon-opened: "caret-down" !default;
+$gw-app--PanelRef--toggle-icon-left-indent: .1em !default;

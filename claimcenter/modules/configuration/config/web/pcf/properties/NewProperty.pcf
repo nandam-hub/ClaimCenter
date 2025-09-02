@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../../pcf.xsd">
+  <Page
+    afterCancel="Properties.go()"
+    afterCommit="Properties.go()"
+    canEdit="true"
+    canVisit="perm.System.editproperties"
+    id="NewProperty"
+    parent="Properties()"
+    showUpLink="true"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;RuntimeProperties.Property.New.Property&quot;)">
+    <LocationEntryPoint
+      signature="NewProperty()"/>
+    <Variable
+      initialValue="new RuntimeProperty()"
+      name="runtimeProperty"
+      type="RuntimeProperty"/>
+    <ScreenRef
+      def="PropertyDetailScreen(runtimeProperty, true)"/>
+  </Page>
+</PCF>

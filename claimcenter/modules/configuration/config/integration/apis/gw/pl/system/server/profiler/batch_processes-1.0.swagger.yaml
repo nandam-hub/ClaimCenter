@@ -1,0 +1,205 @@
+swagger: '2.0'
+x-gw-runlevel: maintenance
+x-gw-schema-import:
+  batch: gw.pl.system.server.profiler.batch_processes-1.0
+  base: gw.pl.system.server.profiler.base-1.0
+  linking: gw.pl.framework.linking-1.0
+x-gw-combine:
+- gw.pl.system.server.profiler.base-1.0
+x-gw-apihandlers:
+- gw.api.rest.pl.system.v1.server.profiler.BatchProcessesAPIHandler
+paths:
+  /batchprocesses/entrypoints:
+    get:
+      operationId: getBatchProcessEntryPoints
+      summary: "Get all batch process entry points"
+      description: |
+        - no named filters
+        - the supported properties are:
+        -- entrypoint, a string, with the entry point name.  Since it is a string pattern match (pm) and contains (cn) operator are supported
+      parameters:
+        - $ref: "#/parameters/profilingEnabled"
+        - $ref: "#/parameters/filter"
+        - $ref: "#/parameters/pageSize100"
+        - $ref: "#/parameters/pageToken"
+        - $ref: "#/parameters/includeTotalCount"
+      produces:
+        - application/json
+      x-gw-permissions:
+        - toolsProfilerview
+      responses:
+        '200':
+          description: "Returns all entry points based on specified criteria"
+          schema:
+            $ref: "base#/definitions/EntryPointPage"
+  /batchprocesses/entrypoints/{entrypoint}/config:
+    get:
+      summary: "Get configuration for entry point"
+      description: "Get configuration for entry point"
+      operationId: getConfigurationForBatchProcessEntryPoint
+      parameters:
+        - $ref: "#/parameters/entrypoint"
+      produces:
+        - application/json
+      x-gw-permissions:
+        - toolsProfilerview
+      responses:
+        '200':
+          description: "Returns configuration"
+          schema:
+            $ref: "base#/definitions/EntryPointConfig"
+    patch:
+      summary: "Sets configuration for entry point"
+      operationId: updateConfigurationForBatchProcessEntryPoint
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      x-gw-permissions:
+        - toolsProfileredit
+      parameters:
+        - $ref: "#/parameters/entrypoint"
+        - name: body
+          in: body
+          schema:
+            $ref: "base#/definitions/EntryPointConfig"
+          required: true
+      responses:
+        '200':
+          description: "Updates configuration for entry point and returns updated configuration"
+          schema:
+            $ref: "base#/definitions/EntryPointConfig"
+  /batchprocesses/entrypoints/{entrypoint}/history:
+    get:
+      summary: "Get history for this entry point"
+      description: |
+        - no named filters
+        - the supported properties are:
+        -- complete, a date, the completed time, use 8601 value or ('now' for today) with offset (example use -P1W for last week)
+        -- start, a date, the started time, use 8601 value or ('now' for today) with offset (example use -P1W for last week)
+        -- description, a string, with the description
+        -- server, a string, the name of the server that this profile was collected on
+        -- successful, a boolean, whether the batch job was successful (use true or false)
+        - any of these can be used as sort columns as well
+      operationId: getOccurrencesForBatchProcessEntryPoint
+      produces:
+        - application/json
+      x-gw-permissions:
+        - toolsProfilerview
+      parameters:
+        - $ref: "#/parameters/entrypoint"
+        - $ref: "#/parameters/filter"
+        - $ref: "#/parameters/sort"
+        - $ref: "#/parameters/pageSize100"
+        - $ref: "#/parameters/pageToken"
+        - $ref: "#/parameters/includeTotalCount"
+      responses:
+        '200':
+          description: "Returns history"
+          schema:
+              $ref: "batch#/definitions/BatchHistoryPage"
+    delete:
+      summary: "Delete batch process profiling history for specified entry point (with optional time-range)"
+      description: |
+        - no named filters
+        - the supported properties are:
+        -- name, a string, actually the batch process type code (this is the same as entrypoint but permits other operations besides eq)
+        -- complete, a date, the completed time, use 8601 value or ('now' for today) with offset (example use -P1W for last week)
+        -- start, a date, the started time, use 8601 value or ('now' for today) with offset (example use -P1W for last week)
+        -- server, a string, the name of the server that this profile was collected on
+        -- description, a string, with the description
+        -- successful, a boolean, whether the batch job was successful (use true or false)
+      operationId: deleteProfilerAnalysisForBatchProcessEntryPoint
+      parameters:
+      - $ref: "#/parameters/entrypoint"
+      - $ref: "#/parameters/filter"
+      - $ref: "#/parameters/force"
+      produces:
+      - application/json
+      x-gw-permissions:
+      - toolsProfileredit
+      responses:
+        '200':
+          description: "Operation successful"
+          schema:
+            $ref: "base#/definitions/DeleteHistoryOccurrencesResult"
+  /batchprocesses/history/{occurrenceId}:
+    get:
+      summary: "Download profiler analysis for this occurrence"
+      operationId: getProfilerAnalysisForBatchProcessOccurrence
+      parameters:
+        - $ref: "#/parameters/occurrenceId"
+      produces:
+        - application/x-gzip
+      x-gw-permissions:
+        - toolsProfilerview
+      responses:
+        '200':
+          description: "Download profiler analysis"
+    delete:
+      summary: "Delete specified batch process profiling history occurrence"
+      operationId: deleteProfilerAnalysisForBatchProcessOccurrence
+      parameters:
+        - $ref: "#/parameters/occurrenceId"
+        - $ref: "#/parameters/force"
+      x-gw-permissions:
+        - toolsProfileredit
+      responses:
+        '204':
+          description: "Profiler history occurrence deleted"
+  /batchprocesses/history:
+    get:
+      summary: "Get history for all entry points"
+      description: |
+        - no named filters
+        - the supported properties are:
+        -- name, a string, actually the batch process type code (this is the same as entrypoint but permits other operations besides eq)
+        -- complete, a date, the completed time, use 8601 value or ('now' for today) with offset (example use -P1W for last week)
+        -- start, a date, the started time, use 8601 value or ('now' for today) with offset (example use -P1W for last week)
+        -- server, a string, the name of the server that this profile was collected on
+        -- description, a string, with the description
+        -- successful, a boolean, whether the batch job was successful (use true or false)
+        - any of these can be used as sort columns as well
+        -- name sorts in the order specified for BatchProcessTypes
+      operationId: getOccurrencesForAllBatchProcessEntryPoints
+      parameters:
+      - $ref: "#/parameters/entrypointCode"
+      - $ref: "#/parameters/filter"
+      - $ref: "#/parameters/sort"
+      - $ref: "#/parameters/pageSize100"
+      - $ref: "#/parameters/pageToken"
+      - $ref: "#/parameters/includeTotalCount"
+      produces:
+        - application/json
+      x-gw-permissions:
+        - toolsProfilerview
+      responses:
+        '200':
+          description: "Returns history"
+          schema:
+              $ref: "batch#/definitions/BatchHistoryPage"
+    delete:
+      summary: "Delete batch process profiling history for all entry points (with optional time-range and entry point)"
+      description: |
+        - no named filters
+        - the supported properties are:
+        -- name, a string, actually the batch process type code (this is the same as entrypoint but permits other operations besides eq)
+        -- complete, a date, the completed time, use 8601 value or ('now' for today) with offset (example use -P1W for last week)
+        -- start, a date, the started time, use 8601 value or ('now' for today) with offset (example use -P1W for last week)
+        -- server, a string, the name of the server that this profile was collected on
+        -- description, a string, with the description
+        -- successful, a boolean, whether the batch job was successful (use true or false)
+      operationId: deleteProfilerAnalysisForAllBatchProcessEntryPoints
+      parameters:
+      - $ref: "#/parameters/filter"
+      - $ref: "#/parameters/entrypointCode"
+      - $ref: "#/parameters/force"
+      produces:
+      - application/json
+      x-gw-permissions:
+      - toolsProfileredit
+      responses:
+        '200':
+          description: "Operation successful"
+          schema:
+            $ref: "base#/definitions/DeleteHistoryOccurrencesResult"

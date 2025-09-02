@@ -1,0 +1,3 @@
+# GAR START: config/portal/capabilities/locale.gwproperties [/opt/teamcity/agent/work/45c3a2f1b8ee4237/gpm-generator/downloads/edge/backend/xcenter-config/xcenter-utils/cc-utils/../../../Shared/claim-shared/src/main]
+handlers.locale=edge.capabilities.locale.LocaleHandler
+# GAR END

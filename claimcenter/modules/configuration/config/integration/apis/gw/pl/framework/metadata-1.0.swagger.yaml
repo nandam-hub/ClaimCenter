@@ -1,0 +1,70 @@
+swagger: '2.0'
+info:
+  description: "Dynamically present metadata from within the application."
+  version: '1.0'
+  title: "Metadata"
+x-gw-permissions:
+- integadmin
+x-gw-runlevel: maintenance
+x-gw-schema-import:
+  metadata : gw.pl.framework.metadata-1.0
+x-gw-apihandlers:
+- gw.api.rest.framework.v1.MetadataHandler
+x-gw-combine:
+- gw.pl.framework.paging_definitions-1.0
+- gw.pl.framework.query_definitions-1.0
+basePath: /metadata
+paths:
+  /typelists/{typelist}:
+    get:
+      summary: "Returns a list of type list values."
+      description: |
+       Returns a list of matching typelist values that match the supplied query parameters.
+       Any filters.
+        * Supported named filters -- there are no named filters
+        * Sortable properties are 'name', 'code', 'retired', and 'priority'
+        * Supported filter properties are:
+          - 'retired' a boolean property,
+          - 'name' a string property,
+          - 'code' a string property,
+          - 'category' a child property whose value is a typekey in the form of typelist.code
+      operationId: getTypelist
+      parameters:
+      - name: typelist
+        in: path
+        description: "the name of the type list"
+        required: true
+        type: string
+      - $ref: "#/parameters/filter"
+      - $ref: "#/parameters/sort"
+      - $ref: "#/parameters/pageSize100"
+      - $ref: "#/parameters/pageToken"
+      - $ref: "#/parameters/includeTotalCount"
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: "Successful operation"
+          schema:
+             $ref: "metadata#/definitions/TypeKeyList"
+      x-gw-extensions : {
+         fetchLimit : 1000
+      }
+  /displaykeys/{displaykey}:
+    get:
+      summary: "Returns the display key in the current locale."
+      description: "Returns the raw value (without any argument substitution) of the given display key in the current locale."
+      operationId: getRawDisplayKey
+      parameters:
+      - name: displaykey
+        in: path
+        description: "the name of the display key."
+        required: true
+        type: string
+      produces:
+      - text/plain
+      responses:
+        '200':
+          description: "successful operation"
+          schema:
+            type: string

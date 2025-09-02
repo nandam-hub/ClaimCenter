@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+<CountryCodeToRegionCode xmlns="http://guidewire.com/phone">
+  <country_code id="1">
+    <region_code code="US"/>
+    <region_code code="BB"/>
+    <region_code code="BS"/>
+    <region_code code="CA"/>
+  </country_code>
+  <country_code id="7">
+    <region_code code="RU"/>
+  </country_code>
+  <country_code id="33">
+    <region_code code="FR"/>
+  </country_code>
+  <country_code id="36">
+    <region_code code="HU"/>
+  </country_code>
+  <country_code id="39">
+    <region_code code="IT"/>
+  </country_code>
+  <country_code id="44">
+    <region_code code="GB"/>
+    <region_code code="GG"/>
+  </country_code>
+  <country_code id="46">
+    <region_code code="SE"/>
+  </country_code>
+  <country_code id="48">
+    <region_code code="PL"/>
+  </country_code>
+  <country_code id="49">
+    <region_code code="DE"/>
+  </country_code>
+  <country_code id="52">
+    <region_code code="MX"/>
+  </country_code>
+  <country_code id="54">
+    <region_code code="AR"/>
+  </country_code>
+  <country_code id="55">
+    <region_code code="BR"/>
+  </country_code>
+  <country_code id="61">
+    <region_code code="AU"/>
+    <region_code code="CC"/>
+    <region_code code="CX"/>
+  </country_code>
+  <country_code id="64">
+    <region_code code="NZ"/>
+  </country_code>
+  <country_code id="65">
+    <region_code code="SG"/>
+  </country_code>
+  <country_code id="81">
+    <region_code code="JP"/>
+  </country_code>
+  <country_code id="82">
+    <region_code code="KR"/>
+  </country_code>
+  <country_code id="86">
+    <region_code code="CN"/>
+  </country_code>
+  <country_code id="244">
+    <region_code code="AO"/>
+  </country_code>
+  <country_code id="262">
+    <region_code code="RE"/>
+    <region_code code="YT"/>
+  </country_code>
+  <country_code id="290">
+    <region_code code="TA"/>
+  </country_code>
+  <country_code id="374">
+    <region_code code="AM"/>
+  </country_code>
+  <country_code id="375">
+    <region_code code="BY"/>
+  </country_code>
+  <country_code id="376">
+    <region_code code="AD"/>
+  </country_code>
+  <country_code id="800">
+    <region_code code="001"/>
+  </country_code>
+  <country_code id="882">
+    <region_code code="001"/>
+  </country_code>
+  <country_code id="971">
+    <region_code code="AE"/>
+  </country_code>
+  <country_code id="979">
+    <region_code code="001"/>
+  </country_code>
+  <country_code id="998">
+    <region_code code="UZ"/>
+  </country_code>
+</CountryCodeToRegionCode>

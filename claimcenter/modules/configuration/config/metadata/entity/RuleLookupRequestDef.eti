@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<entity
+  platform="true"
+  xmlns="http://guidewire.com/datamodel"
+  entity="RuleLookupRequestDef"
+  desc="Lookup Request defintion is used for  querying lookup value from the Lookup Table"
+  table="rulelookuprequestdef"
+  loadable="false"
+  type="versionable">
+  <implementsEntity
+    name="RuleVersionDependent"/>
+  <implementsInterface
+    iface="gw.bizrules.domain.RuleVersionDependent"
+    impl="com.guidewire.bizrules.domain.RuleLookupRequestDefImpl"/>
+  <column
+    desc="Lookup Table Identifier "
+    name="TableID"
+    nullok="false"
+    type="shorttext"/>
+  <array
+    arrayentity="RuleLookupParameterDef"
+    desc="Lookup's Input parameters"
+    name="ParametersDefinition"
+    owner="true"/>
+  <onetoone
+    desc="Holds the Lookup Table Value definition"
+    fkentity="RuleLookupValueDef"
+    name="ValueDefinition"
+    nullok="false"/>
+  <column
+    name="Description"
+    nullok="true"
+    type="mediumtext"/>
+  <array
+    arrayentity="LookupExpressionFragment"
+    name="LookupExpressionFragments"/>
+</entity>

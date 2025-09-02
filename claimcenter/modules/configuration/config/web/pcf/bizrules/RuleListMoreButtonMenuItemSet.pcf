@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <MenuItemSet
+    id="RuleListMoreButtonMenuItemSet">
+    <Require
+      name="navigationSupport"
+      type="gw.bizrules.pcf.BizRulesPageNavigationSupport"/>
+    <Require
+      name="checkedValuesAccessor"
+      type="gw.bizrules.pcf.RuleListPageHelper.IteratorCheckedValuesRuleVersionAccessor"/>
+    <Require
+      name="allQuery"
+      type="gw.api.database.Query&lt;RuleVersion&gt;"/>
+    <Require
+      name="ruleTypeReference"
+      type="gw.pl.persistence.type.EntityTypeReference&lt;Rule&gt;"/>
+    <Require
+      name="pageHelper"
+      type="gw.bizrules.pcf.RuleListPageHelper"/>
+    <Require
+      name="uiConfig"
+      type="Map&lt;RuleActionKey, gw.bizrules.pcf.CommandDefinitionUIConfig&gt;"/>
+    <MenuItem
+      action="StartRuleImportPopup.push(navigationSupport)"
+      id="Import"
+      label="DisplayKey.get('BizRules.RuleExportImportMenuItemSet.ImportFromFile')"
+      tooltip="DisplayKey.get('BizRules.RuleExportImportMenuItemSet.ImportTooltip')"
+      visible="gw.bizrules.pcf.RulePermissionUIHelper.canImportRule(ruleTypeReference.get())"/>
+    <MenuItem
+      action="gw.bizrules.pcf.RuleExportPageHelper.exportSelected(navigationSupport, ruleTypeReference, checkedValuesAccessor.RuleVersions)"
+      id="ExportSelected"
+      label="DisplayKey.get('BizRules.RuleExportImportMenuItemSet.ExportSelected')"
+      tooltip="DisplayKey.get('BizRules.RuleExportImportMenuItemSet.ExportSelectedTooltip')"/>
+    <MenuItem
+      action="gw.bizrules.pcf.RuleExportPageHelper.exportAll(navigationSupport, ruleTypeReference, allQuery)"
+      id="ExportAll"
+      label="DisplayKey.get('BizRules.RuleExportImportMenuItemSet.ExportAll')"
+      tooltip="DisplayKey.get('BizRules.RuleExportImportMenuItemSet.ExportAllTooltip')"/>
+    <MenuItemDivider/>
+    <MenuItem
+      action="pageHelper.toggleEnableDisableSelectedRules(navigationSupport, uiConfig, CurrentLocation, checkedValuesAccessor.RuleVersions, true);"
+      confirmMessage="pageHelper.getConfirmationMessageToEnableDisableMultipleRules(true)"
+      id="EnableSelectedRules"
+      label="DisplayKey.get('BizRules.RulesPage.EnableSelected')"
+      tooltip="DisplayKey.get('BizRules.RulesPage.EnableSelectedTooltip')"
+      visible="(not pageHelper.VersionController.DeploymentEnabled) and gw.bizrules.pcf.RulePermissionUIHelper.canEditRule(ruleTypeReference.get())"/>
+    <MenuItem
+      action="pageHelper.toggleEnableDisableSelectedRules(navigationSupport, uiConfig, CurrentLocation, checkedValuesAccessor.RuleVersions, false);"
+      confirmMessage="pageHelper.getConfirmationMessageToEnableDisableMultipleRules(false)"
+      id="DisableSelectedRules"
+      label="DisplayKey.get('BizRules.RulesPage.DisableSelected')"
+      tooltip="DisplayKey.get('BizRules.RulesPage.DisableSelectedTooltip')"
+      visible="(not pageHelper.VersionController.DeploymentEnabled) and gw.bizrules.pcf.RulePermissionUIHelper.canEditRule(ruleTypeReference.get())"/>
+  </MenuItemSet>
+</PCF>

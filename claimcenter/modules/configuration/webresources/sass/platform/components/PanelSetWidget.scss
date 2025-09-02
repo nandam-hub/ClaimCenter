@@ -1,0 +1,29 @@
+.gw-PanelSetWidget {
+  @include gw-layoutPanelInnerSpacing();
+  @include gw-layoutPanelOuterSpacing();
+  @include gw-widgetStyles();
+
+  .gw-paging-widget-section {
+    display: flex;
+    align-items: center;
+    padding-top: $gw-app--tables--cell--pad-v-rem;
+    padding-bottom: $gw-app--tables--cell--pad-v-rem;
+  }
+
+  .gw-tableLayout--table--row > .gw-tableLayout--table--cell {
+    vertical-align: top;
+  }
+
+  &.gw-childrenHaveBorders {
+    .gw-tableLayout--table--row {
+      .gw-tableLayout--table--cell:not(.gw-panel-divider-td) {
+        border: $gw-app--PanelSetAndIterator--child--border;
+        padding: $gw-app--tables--cell--pad-v-rem $gw-app--tables--cell--pad-h-rem;
+      }
+    }
+  }
+
+  .gw-panel-divider-td {
+    //Not used, as the panel divider handles the visuals itself, but just here for reference
+  }
+}

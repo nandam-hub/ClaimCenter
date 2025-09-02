@@ -1,0 +1,1 @@
+<%@ params( email: String, portalURL: String, code: String ) %>Bonjour ${email},<br /> Ouvrez l’URL suivante pour réinitialiser votre mot de passe: <br /> <a href="${portalURL}?token=${code}">Réinitialiser le mot de passe</a><br /><br /> Sincèrement,  

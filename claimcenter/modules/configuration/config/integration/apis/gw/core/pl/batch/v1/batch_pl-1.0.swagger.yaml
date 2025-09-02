@@ -1,0 +1,34 @@
+swagger: "2.0"
+consumes:
+- application/json
+produces:
+- application/json
+x-gw-schema-import:
+  batch: gw.core.pl.batch.v1.batch_pl-1.0
+paths:
+  /batch:
+    post:
+      summary: "Issue multiple requests at once as a non-transactional batch"
+      description: "Post a list of subrequests to make against this endpoint. Subrequests will be executed serially, in the order they are specified in the \"requests\" property of the input. Responses to each subrequest will then be batched up and returned all together. Subrequests inherit the headers from the main request, with the exception of the GW-Checksum header, but headers can be specified on the subrequest and will override any headers from the main request."
+      operationId: batchRequest
+      x-gw-apihandler: gw.rest.core.pl.batch.v1.BatchRequestApiHandler
+      parameters:
+      - name: includeResponseHeaders
+        in: query
+        description: "Controls what response headers, if any, are included for subresponses. If unspecified, or set to the value \"*all\", all headers for subresponses will be returned. If set to the value \"*none\", no headers for subresponses will be returned. Otherwise, this parameter can consist of a comma-separated list of the names of headers that should be included on subresponses."
+        required: false
+        type: array
+        items:
+          type: string
+      - name: body
+        in: body
+        description: "The body of the batch request"
+        required: true
+        schema:
+          $ref: "batch#/definitions/BatchRequest"
+      responses:
+        "200":
+          description: "The batch request itself was well-formed; individual subrequests may have succeeded or failed"
+          schema:
+            $ref: "batch#/definitions/BatchResponse"
+x-gw-localizationKeyPrefix: batch.v1

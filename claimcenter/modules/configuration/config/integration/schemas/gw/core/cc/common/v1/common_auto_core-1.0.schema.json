@@ -1,0 +1,31 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "x-gw-combine": [
+    "gw.core.cc.common.v1.common_core-1.0"
+  ],
+  "definitions": {
+    "Contact": {
+      "properties": {
+        "licenseNumber": {
+          "title": "Driver's license number",
+          "description": "The person's driver's license number. Only applicable for a `Contact` that represents a person.",
+          "type": "string",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "entitySubtype": "Person"
+          }
+        },
+        "licenseState": {
+          "title": "Driver's license state",
+          "description": "The person's driver's license state. Only applicable for a `Contact` that represents a person.",
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "entitySubtype": "Person",
+            "typelist": "Jurisdiction"
+          }
+        }
+      }
+    }
+  }
+}

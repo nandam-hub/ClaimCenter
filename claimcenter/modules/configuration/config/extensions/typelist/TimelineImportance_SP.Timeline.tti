@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="TimelineImportance_SP"
+  name="TimelineImportance_SP">
+  <typecode
+    code="high"
+    desc="High"
+    name="High"
+    priority="2"/>
+  <typecode
+    code="medium"
+    desc="Medium"
+    name="Medium"
+    priority="1"/>
+  <typecode
+    code="low"
+    desc="Low"
+    name="Low"
+    priority="0"/>
+</typelist>

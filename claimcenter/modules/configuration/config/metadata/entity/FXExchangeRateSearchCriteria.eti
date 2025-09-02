@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<nonPersistentEntity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Search criteria used for foreign exchange rates."
+  entity="FXExchangeRateSearchCriteria"
+  extendable="true"
+  platform="true">
+  <implementsInterface
+    iface="com.guidewire.pl.domain.exchangerates.FXExchangeRateSearchCriteriaPublicMethods"
+    impl="com.guidewire.pl.domain.exchangerates.FXExchangeRateSearchCriteriaImpl"/>
+  <implementsInterface
+    iface="java.io.Serializable"
+    impl="com.guidewire.pl.domain.exchangerates.FXExchangeRateSearchCriteriaImpl"/>
+  <typekey
+    desc="The base currency used to convert from."
+    name="BaseCurrency"
+    nullok="false"
+    typelist="Currency"/>
+  <typekey
+    desc="ThThe base currency used to convert to."
+    name="PriceCurrency"
+    nullok="true"
+    typelist="Currency"/>
+  <typekey
+    desc="Rate type."
+    name="RateType"
+    nullok="false"
+    typelist="FXRateMarket"/>
+  <column
+    desc="Effective date lower bound."
+    name="DateFrom"
+    nullok="false"
+    type="datetime"/>
+  <column
+    desc="Effective date upper bound."
+    name="DateTo"
+    nullok="true"
+    type="datetime"/>
+  <column
+    default="false"
+    desc="If the search have to be performed automatically when entering a page."
+    name="SearchOnEnter"
+    nullok="false"
+    type="bit"/>
+  <column
+    default="true"
+    desc="If time have to be ignored during search rounding DateFrom and DateTo to midnight."
+    name="SearchIgnoringTime"
+    nullok="false"
+    type="bit"/>
+</nonPersistentEntity>

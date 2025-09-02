@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <InputSet
+    desc="Encapsulates a label and input iterator for reuse in the the comparison rule variables section."
+    id="RuleComparisonVariablesSectionInputSet">
+    <Require
+      name="controller"
+      type="gw.bizrules.pcf.RuleVersionComparisonController"/>
+    <InputSetRef
+      def="RuleComparisonSectionLabelInputSet(controller, DisplayKey.get(&quot;BizRules.Import.Comparison.RuleVariables&quot;))"
+      id="RuleVariablesSectionLabel"/>
+    <InputIterator
+      elementName="variableDiff"
+      id="RuleVariables"
+      type="gw.bizrules.diff.RuleMatchableDiffPair&lt;RuleVariable&gt;"
+      value="controller.VariableDiffs"
+      valueType="List&lt;gw.bizrules.diff.RuleMatchableDiffPair&gt;">
+      <InputSetRef
+        def="RuleComparisonVariableInputSet(controller, variableDiff)"/>
+    </InputIterator>
+  </InputSet>
+</PCF>

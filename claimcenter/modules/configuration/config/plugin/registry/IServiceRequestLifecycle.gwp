@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<plugin
+  interface="IServiceRequestLifecycle"
+  name="IServiceRequestLifecycle">
+  <plugin-gosu
+    gosuclass="gw.plugin.vendormanagement.ServiceRequestLifecycleImpl"/>
+</plugin>

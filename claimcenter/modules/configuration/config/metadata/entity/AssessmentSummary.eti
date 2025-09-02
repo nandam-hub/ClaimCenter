@@ -1,0 +1,172 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  entity="AssessmentSummary"
+  desc="Analytic assessment summary"
+  table="assessmentsummary"
+  type="retireable"
+  exportable="true"
+  final="false">
+  <implementsEntity
+    name="Extractable"/>
+  <implementsEntity
+    name="Validatable"/>
+  <foreignkey
+    columnName="ClaimID"
+    desc="The claim this assessment relates to"
+    fkentity="Claim"
+    name="Claim"
+    nullok="false"/>
+  <foreignkey
+    columnName="ExposureID"
+    desc="The exposure this assessment relates to"
+    fkentity="Exposure"
+    name="Exposure"
+    nullok="true"/>
+  <column
+    desc="Name of the specific assessment service, model, or solution that generated this assessment summary"
+    name="Name"
+    nullok="true"
+    type="shorttext">
+    <localization
+      nullok="true"
+      extractable="true"
+      tableName="assessmentsum_name_l10n"/>
+  </column>
+  <column
+    desc="Assessment provider name"
+    name="TapID"
+    nullok="false"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="256"/>
+  </column>
+  <column
+    desc="Assessment subtype, for example: fraud"
+    name="TapSubtypeID"
+    nullok="false"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="256"/>
+  </column>
+  <column
+    desc="Reference to the raw assessment stored in the Flexistore"
+    name="RawAssessmentReferenceID"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="256"/>
+  </column>
+  <column
+    desc="The date / time the external system scored the claim or exposure. The date / time is provided by the external system."
+    name="ScoreDate"
+    nullok="false"
+    type="datetime"/>
+  <column
+    name="Score"
+    nullok="true"
+    type="decimal">
+    <columnParam
+      name="scale"
+      value="4"/>
+    <columnParam
+      name="precision"
+      value="20"/>
+  </column>
+  <column
+    desc="The categorization of the score. For example, a fraud system may use: low_risk, medium_risk, high_risk. A total loss evaluation system may use: repairable, total_loss."
+    name="Category"
+    nullok="false"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="256"/>
+  </column>
+  <column
+    desc="A code corresponding to the recommended action. This code could be used in business rules. Examples: request_witness_statement, block_payment, initiate_recovery, offer_cash_settlement."
+    name="RecommendedActionCode"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="256"/>
+  </column>
+  <column
+    desc='A human readable description of the recommended action. For example, "Take a recorded statement from the witness".'
+    name="RecommendedActionDescription"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="256"/>
+  </column>
+  <column
+    desc="A value 0-100, corresponding to where the score lies in the distribution of scores, as determined by the external system."
+    name="ScorePercentile"
+    nullok="true"
+    type="decimal">
+    <columnParam
+      name="scale"
+      value="4"/>
+    <columnParam
+      name="precision"
+      value="20"/>
+  </column>
+  <column
+    desc="The raw score mapped into the range 0-100. For example, a raw score of 320 out of 400, could map on a normalized score of 80."
+    name="NormalizedScore"
+    nullok="true"
+    type="decimal">
+  <columnParam
+    name="scale"
+    value="4"/>
+  <columnParam
+    name="precision"
+    value="20"/>
+  </column>
+  <column
+    desc="The external system may optionally provide a conclusion code, which summarizes the assessment conclusion. The conclusion code can be used in business rules."
+    name="ConclusionCode"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="256"/>
+  </column>
+  <column
+    desc="The external system may optionally provide a ConclusionDescription. The ConclusionDescription is human-readable."
+    name="ConclusionDescription"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="256"/>
+  </column>
+  <column
+    desc="If an assessment has an estimate associated with it, it will be represented in this field"
+    name="Estimate"
+    nullok="true"
+    type="decimal">
+    <columnParam
+      name="scale"
+      value="4"/>
+    <columnParam
+      name="precision"
+      value="20"/>
+  </column>
+  <column
+    desc="Recommended actions may be optionally parameterized. For example, if there is a rate increase, the RecommendedValue would provide the factor for the increase."
+    name="RecommendedValue"
+    nullok="true"
+    type="decimal">
+    <columnParam
+      name="scale"
+      value="4"/>
+    <columnParam
+      name="precision"
+      value="20"/>
+  </column>
+</entity>

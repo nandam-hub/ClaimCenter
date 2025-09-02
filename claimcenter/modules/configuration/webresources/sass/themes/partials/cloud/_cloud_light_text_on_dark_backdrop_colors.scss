@@ -1,0 +1,272 @@
+@import "../platform_colors_base";
+
+// Dark
+// Global Hex Colors
+$gw-app--palette--black: #ffffff;
+$gw-app--palette--offblack: #f8f9fa;
+$gw-app--palette--gray-5: #D9DDE1;
+$gw-app--palette--gray-7: #C8C8C8;
+$gw-app--palette--gray-8: #B7BABC;
+$gw-app--palette--gray-9: #A1A8B4;
+$gw-app--palette--gray-A: #969696;
+$gw-app--palette--gray-B: #8c8c8c;
+$gw-app--palette--gray-C: #7b7b7b;
+$gw-app--palette--gray-D: #545C67;
+$gw-app--palette--gray-E: #303030;
+$gw-app--palette--offwhite: #1F1F1F;
+$gw-app--palette--white: #000000;
+
+$gw-app--palette--blue-hint: #384b69;
+$gw-app--palette--blue-light: #5EB5DA;
+$gw-app--palette--blue: #6C87B6;
+$gw-app--palette--blue-dark: #7086A2;
+$gw-app--palette--blue-highlight: #4d555f;
+
+$gw-app--palette--yellow: #f7f0b5;
+
+$gw-app--palette--green: #AFC468; // just progress bar low
+$gw-app--palette--green-dark: #4D8C6C;
+
+$gw-app--palette--red: #DF675A;
+$gw-app--palette--red-dark: #AC6969;
+
+$gw-app--palette--orange-light: #E0B246;
+$gw-app--palette--orange-medium: #eea355;
+$gw-app--palette--orange: #EB9C4A; // only input column required
+$gw-app--palette--orange-dark: #D2845C; // only input column required
+
+$gw-app--palette--beige: #a59385; // only for input changed colors
+$gw-app--palette--beige-dark: #a79b8c; // only for input changed shadow
+
+$gw-app--palette--purple: #907DAB; // none
+$gw-app--palette--purple-dark: #463945;
+
+$gw-app--palette--pink: #D089B9;
+
+$gw-app--dark-theme--bg: #333333; //#303030
+$gw-app--dark-theme--bg-alt: #3b3b3b;
+
+$gw-app--WestPanel--button--bg: #363636;
+$gw-app--WestPanel--button--hover--bg: #454545;
+$gw-app--WestPanel--button--active--bg: #454545;
+
+$gw-app--dark-theme--bg-highlight: lighten($gw-app--dark-theme--bg, 12%); //#545454
+$gw-app--dark-theme--card: $gw-app--dark-theme--bg-alt;
+$gw-app--dark-theme--card-highlight: lighten($gw-app--dark-theme--card, 12%);
+
+
+$gw-app--dark-theme--top-nav-bar: rgb(45, 45, 45); //
+$gw-app--dark-theme--top-nav-bar-highlight: lighten($gw-app--dark-theme--top-nav-bar, 12%);
+$gw-app--dark-theme--west-panel: #212121; //#212121
+$gw-app--dark-theme--west-panel-highlight: lighten($gw-app--dark-theme--west-panel, 10%); //#464A4D
+
+//$gw-app--dark-theme--listview-header-bg: #38404A; //new
+//$gw-app--dark-theme--listview-header-bg-highlight: lighten($gw-app--dark-theme--listview-header-bg, 10%);
+
+$gw-app--dark-theme--col: #ffffff;
+$gw-app--dark-theme--col-secondary: #dddddd;
+$gw-app--dark-theme--col-hint: rgba(255, 255, 255, .5);
+
+$gw-app--palette--left-nav--bg: $gw-app--dark-theme--west-panel;
+$gw-app--palette--left-nav--col: $gw-app--dark-theme--col-secondary;
+$gw-app--palette--left-nav--bg-highlight: $gw-app--dark-theme--west-panel-highlight;
+$gw-app--palette--left-nav--bg-lighter: $gw-app--dark-theme--bg-highlight;
+$gw-app--palette--left-nav--wizard-bg: $gw-app--WestPanel--button--bg;
+
+$gw-app--dark-theme--bg: $gw-app--dark-theme--bg;
+
+// Sections
+$gw-app--bg: $gw-app--dark-theme--bg;
+$gw-app--col: $gw-app--dark-theme--col;
+
+$gw-app--divider--col: $gw-app--palette--gray-D;
+$gw-app--border--col: $gw-app--divider--col;
+$gw-app--border--col-lighter: $gw-app--border--col;
+
+$gw-app--panels--icon-col: $gw-app--dark-theme--col;
+
+$gw-app--use-text-shadow: true; //TODO: revisit
+
+$gw-app--section-primary--bg: $gw-app--dark-theme--bg-alt;
+$gw-app--section-primary--col: $gw-app--dark-theme--col-secondary;
+$gw-app--section-primary--hover-bg: $gw-app--dark-theme--top-nav-bar-highlight;
+$gw-app--section-primary--hover-col: $gw-app--dark-theme--col-secondary;
+$gw-app--section-primary--divider-col: $gw-app--border--col;
+
+$gw-app--section-callout--bg: $gw-app--dark-theme--bg-alt;
+
+$gw-app--palette--left-nav--bg: $gw-app--palette--left-nav--bg;
+$gw-app--palette--left-nav--col: $gw-app--palette--left-nav--col;
+$gw-app--palette--left-nav--border-col: $gw-app--dark-theme--top-nav-bar;
+
+$gw-app--widget-style--bg--highlight: #706950;
+$gw-app--panels--warning--bg: #8e5543;
+$gw-app--panels--warning--border-col: $gw-app--panels--warning--bg;
+
+// North Panel
+$gw-app--NorthPanel--bg: $gw-app--dark-theme--top-nav-bar;
+
+// Menus
+$gw-app--menus--bg: $gw-app--bg;
+$gw-app--menus--col: $gw-app--col;
+$gw-app--menus--hover--bg: $gw-app--dark-theme--card-highlight;
+$gw-app--menus--hover--col: $gw-app--col;
+$gw-app--menus--active--bg: $gw-app--menus--hover--bg;
+$gw-app--menus--active--col: $gw-app--menus--hover--col;
+$gw-app--menus--expand-divider-col: $gw-app--palette--gray-B;
+$gw-app--menus--border-color: $gw-app--border--col-lighter;
+$gw-app--menus--divider-col: $gw-app--menus--border-color;
+$gw-app--menus--shadow: rgba(0, 0, 0, 0.26) 0px 1px 8px 0px, rgba(0, 0, 0, 0.18) 0px 3px 4px 0px, rgba(0, 0, 0, 0.16) 0px 3px 3px -2px;
+
+// Buttons
+$gw-app--buttons--col: $gw-app--dark-theme--col;
+$gw-app--buttons--bg: #3a688c; //#00739D
+$gw-app--buttons--active--col: $gw-app--buttons--col;
+$gw-app--buttons--active--bg: lighten($gw-app--buttons--bg, 12%);
+$gw-app--buttons--hover--col: $gw-app--buttons--col;
+$gw-app--buttons--hover--bg: lighten($gw-app--buttons--bg, 12%);
+$gw-app--buttons--disabled-bg: $gw-app--palette--gray-E;
+$gw-app--buttons--disabled-col: $gw-app--palette--gray-9;
+$gw-app--buttons--border-darken-percent: 5%;
+$gw-app--buttons--shadow: 1px 1px 2px 0px rgba(0, 0, 0, 0.4); 
+$gw-app--buttons--disabled-shadow: inset 0px 0px 2px 2px rgba(0, 0, 0, 0.3); 
+
+$gw-app--buttons--secondary--col: $gw-app--col;
+$gw-app--buttons--secondary--bg: $gw-app--bg;
+$gw-app--buttons--secondary--active--col: $gw-app--buttons--active--col;
+$gw-app--buttons--secondary--active--bg: $gw-app--buttons--active--bg;
+$gw-app--buttons--secondary--hover--col: $gw-app--buttons--hover--col;
+$gw-app--buttons--secondary--hover--bg: $gw-app--buttons--hover--bg;
+$gw-app--buttons--secondary--border-col: $gw-app--buttons--bg;
+$gw-app--buttons--secondary--hover--border-col: darken($gw-app--buttons--secondary--hover--bg, $gw-app--buttons--border-darken-percent);
+$gw-app--buttons--secondary--active--border-col: darken($gw-app--buttons--secondary--active--bg, $gw-app--buttons--border-darken-percent);
+
+// Links
+$gw-app--links--col: #66D2FF; //$gw-app--palette--blue
+$gw-app--links--hover--col: $gw-app--links--col;
+$gw-app--links--disabled-col: null;
+
+// Inputs
+$gw-app--inputs--bg: $gw-app--dark-theme--card;
+$gw-app--inputs--col: $gw-app--col;
+$gw-app--inputs--placeholder--col: $gw-app--dark-theme--col-hint;
+$gw-app--inputs--border--col: $gw-app--palette--blue-highlight;
+$gw-app--inputs--disabled-bg: null;
+$gw-app--inputs--disabled-col: null;
+$gw-app--inputs--checkbox-checked-col: $gw-app--inputs--col;
+$gw-app--inputs--checkbox-checked-bg: $gw-app--inputs--bg;
+$gw-app--inputs--radio-checked-col: $gw-app--inputs--col;
+$gw-app--inputs--radio-checked-bg: $gw-app--inputs--bg;
+$gw-app--inputs--changed--bg: $gw-app--palette--purple-dark;
+$gw-app--inputs--changed--col: $gw-app--inputs--col;
+$gw-app--inputs--changed--small-input-box-shadow: 0 0 0 gw-pxFixed(2) transparentize($gw-app--palette--purple, .3);
+$gw-app--inputs--editable-inner-shadow: inset 1px 1px 5px 0px rgba(0, 0, 0, .74); 
+$gw-app--inputs--select-bg: $gw-app--palette--blue-highlight;
+$gw-app--inputs--select-col: $gw-app--dark-theme--col;
+$gw-app--inputs--select-hover-bg: $gw-app--buttons--hover--bg;
+$gw-app--inputs--select-hover-col: $gw-app--inputs--select-col;
+
+$gw-app--inputs--error--bg: $gw-app--palette--red-dark;
+
+$gw-app--inputs--select--behave-like-secondary: false;
+
+// Panels
+$gw-app--panels--bg: $gw-app--section-primary--bg;
+$gw-app--panels--col: $gw-app--section-primary--col;
+$gw-app--panels--border-col: $gw-app--section-primary--divider-col;
+
+
+// Tables
+$gw-app--tables--rows--odd: $gw-app--dark-theme--bg-alt;
+$gw-app--tables--rows--even: $gw-app--dark-theme--bg-alt;
+$gw-app--tables--group--hover--bg: $gw-app--menus--hover--bg;
+$gw-app--tables--group--hover--col: $gw-app--menus--hover--col;
+
+$gw-app--HeaderCell--drag--bg: $gw-app--palette--blue-highlight;
+$gw-app--ListView-top-UI-section--bg: $gw-app--dark-theme--bg-alt;
+$gw-app--ListView--cell--hover: $gw-app--dark-theme--bg-highlight;
+$gw-app--ListView--row--highlighted-style--bg: #1E7EB0;
+$gw-app--HeaderCell--sort--generic--col: #008fff; //$gw-app--buttons--bg
+
+// Other
+$gw-app--palette--shadow-col: rgba(0, 0, 0, .44);
+
+// Cards
+$gw-app--Card--bg: $gw-app--bg;
+$gw-app--CardTab--standard--inactive-bg: $gw-app--panels--bg;
+$gw-app--CardTab--standard--inactive-col: $gw-app--panels--col;
+$gw-app--CardTab--standard--active-bg: $gw-app--Card--bg;
+$gw-app--CardTab--standard--active-col: $gw-app--col;
+
+// Label Widget
+$gw-app--LabelWidget--color: $gw-app--dark-theme--col;
+
+//Tile Widget
+$gw-app--TileWidget--border-color: $gw-app--border--col;
+
+// Top Center
+$gw-app--CenterPanel-topsection--bg: $gw-app--dark-theme--bg;
+$gw-app--TitleBar--screen--border-col: $gw-app--border--col;
+$gw-app--InfoBar--info-bar-bg: #191919;
+$gw-app--InfoBar--info-bar-border-bottom: 1px solid transparent;
+
+
+// West Panel
+$gw-app--WestPanel--border-right--col: $gw-app--border--col;
+$gw-app--WestPanel--disabled--col: darken($gw-app--palette--left-nav--col, 40%);
+$gw-app--WestPanel--button--active--border--col: $gw-app--dark-theme--col;
+
+
+//$gw-app--WestPanel--submenu--button--bg: $gw-app--WestPanel--bg-darker;
+//$gw-app--WestPanel--submenu--button--col: $gw-app--palette--left-nav--col;
+//$gw-app--WestPanel--submenu--button--active--bg: $gw-app--WestPanel--submenu--button--bg;
+//$gw-app--WestPanel--submenu--button--active--col: $gw-app--WestPanel--button--active--col;
+//$gw-app--WestPanel--submenu--button--hover--bg: $gw-app--WestPanel--bg-darkest;
+//$gw-app--WestPanel--submenu--button--hover--col: $gw-app--WestPanel--button--hover--col;
+//$gw-app--WestPanel--submenu--button--topborder: $gw-app--border-width-px solid $gw-app--WestPanel--submenu--button--bg;
+//$gw-app--WestPanel--submenu--button--bottomborder: $gw-app--border-width-px solid $gw-app--WestPanel--button--bg;
+//$gw-app--WestPanel--submenu--button--active--border--col: $gw-app--palette--active;
+
+$gw-app--wizards--step-button-graphics--channel-bg: black;
+//$gw-app--wizards--step-button-graphics--visited-col: lightpink;
+
+// Progress Bars
+$gw-app--progress-bar--in-bar-label-col: $gw-app--palette--white-for-dark-backgrounds;
+$gw-app--progress-bar--outside-bar-label-col: $gw-app--palette--white-for-dark-backgrounds;
+
+//Input Group
+$gw-app--InputGroup--bg: $gw-app--palette--blue-highlight;
+
+//Dashboard
+$gw-app--DashboardScreen--bg: $gw-app--bg;
+
+//Messages Widget
+$gw-app--MessagesWidget--bg-hover: $gw-app--menus--hover--bg;
+
+//
+$gw-app--widget-style--bg--error: $gw-app--palette--red-dark;
+$gw-app--widget-style--text-overlay-col--error: $gw-app--col;
+
+$gw-app--widget-style--bg--new: $gw-app--palette--green-dark;
+$gw-app--widget-style--text-overlay-col--new: $gw-app--col;
+
+$gw-app--widget-style--bg--info: $gw-app--palette--blue-dark;
+$gw-app--widget-style--text-overlay-col--info: $gw-app--col;
+
+$gw-app--widget-style--bg--warning: $gw-app--palette--orange-dark;
+$gw-app--widget-style--text-overlay-col--warning: $gw-app--col;
+
+$gw-app--widget-style--bg--highlight: #484433;
+$gw-app--widget-style--text-overlay-col--highlight: $gw-app--col;
+
+$gw-app--widget-style--bg--highlightalt: #5a5335;
+$gw-app--widget-style--text-overlay-col--highlightalt: $gw-app--col;
+
+$gw-app--widget-style--bg--callout: $gw-app--palette--purple-dark;
+$gw-app--widget-style--text-overlay-col--callout: $gw-app--col;
+
+$gw-app--widget-style--bg--calloutalt: $gw-app--palette--purple;
+$gw-app--widget-style--text-overlay-col--calloutalt: $gw-app--col;
+
+// Color math
+$gw-app--use-relative-luminance-when-calculating-overlay-text-and-shadow-colors: false;

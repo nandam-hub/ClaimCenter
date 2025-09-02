@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  entity="CCRule"
+  abstract="true"
+  supertype="Rule">
+  <array
+    arrayentity="AppCritLossType"
+    name="LossTypes"
+    owner="true"/>
+  <array
+    arrayentity="AppCritPolicyType"
+    name="PolicyTypes"
+    owner="true"/>
+  <array
+    arrayentity="AppCritJurisdiction"
+    name="Jurisdictions"
+    owner="true"/>
+</subtype>

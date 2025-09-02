@@ -1,0 +1,31 @@
+Subject: [PATCH] Account Number Policy Search
+
+---
+ .../gsrc/gw/plugin/pcintegration/pc5000/PolicySearchConverter.gs | 1 +
+ .../gsrc/wsi/remote/gw/webservice/pc/pc5000/entities.xsd         | 1 +
+ 2 files changed, 2 insertions(+)
+
+diff --git a/modules/configuration/gsrc/gw/plugin/pcintegration/pc5000/PolicySearchConverter.gs b/modules/configuration/gsrc/gw/plugin/pcintegration/pc5000/PolicySearchConverter.gs
+index d41e8293..69456883 100644
+--- a/modules/configuration/gsrc/gw/plugin/pcintegration/pc5000/PolicySearchConverter.gs
++++ b/modules/configuration/gsrc/gw/plugin/pcintegration/pc5000/PolicySearchConverter.gs
+@@ -46,6 +46,7 @@
+     pcCriteria.PrimaryInsuredPostalCode = ccCriteria.InsuredAddress.PostalCode
+     pcCriteria.PrimaryInsuredCountry = ccCriteria.InsuredAddress.Country.Code
+     pcCriteria.IncludeArchived = ccCriteria.IncludeArchived
++    pcCriteria.AccountNumber = ccCriteria.AccountNumber
+ /* Other potentially useful fields
+     ccCriteria.Vin
+     ccCriteria.PropertyAddress
+diff --git a/modules/configuration/gsrc/wsi/remote/gw/webservice/pc/pc5000/entities.xsd b/modules/configuration/gsrc/wsi/remote/gw/webservice/pc/pc5000/entities.xsd
+index f0223ac7..6cbd96be 100644
+--- a/modules/configuration/gsrc/wsi/remote/gw/webservice/pc/pc5000/entities.xsd
++++ b/modules/configuration/gsrc/wsi/remote/gw/webservice/pc/pc5000/entities.xsd
+@@ -587,6 +587,7 @@
+     <xs:attribute name="ProducerCode" type="xs:string" use="optional"/>
+     <xs:attribute name="State" type="xs:string" use="optional"/>
+     <xs:attribute name="Status" type="xs:string" use="optional"/>
++    <xs:attribute name="AccountNumber" type="xs:string" use="optional"/>
+   </xs:complexType>
+   <xs:complexType name="PolicyLocationInfo">
+     <xs:sequence>

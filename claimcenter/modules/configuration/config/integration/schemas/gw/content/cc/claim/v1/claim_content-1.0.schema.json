@@ -1,0 +1,510 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "x-gw-combine": [
+    "gw.content.cc.common.v1.common_content-1.0",
+    "gw.core.cc.claim.v1.claim_core-1.0"
+  ],
+  "definitions": {
+    "BaggageIncident": {
+      "properties": {
+        "incidentOwner": {
+          "title": "Incident owner",
+          "description": "A reference to the `ClaimContact` that represents the owner of this incident",
+          "$ref": "#/definitions/UpdatablePolicyObjectReference",
+          "x-gw-sinceVersion": "1.7.0",
+          "x-gw-extensions": {
+            "resourceType": "ClaimContact"
+          }
+        }
+      }
+    },
+    "Claim": {
+      "properties": {
+        "insured": {
+          "title": "Insured",
+          "description": "A reference to the `ClaimContact` that represents the insured",
+          "$ref": "#/definitions/UpdatablePolicyObjectReference",
+          "readOnly": true,
+          "x-gw-extensions": {
+            "resourceType": "ClaimContact"
+          }
+        },
+        "mainContact": {
+          "title": "Main contact",
+          "description": "A reference to the `ClaimContact` that represents the main contact for this claim",
+          "$ref": "#/definitions/UpdatablePolicyObjectReference",
+          "x-gw-extensions": {
+            "resourceType": "ClaimContact"
+          }
+        },
+        "reporter": {
+          "title": "Main contact",
+          "description": "A reference to the `ClaimContact` that represents the person who reported this claim",
+          "$ref": "#/definitions/UpdatablePolicyObjectReference",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "resourceType": "ClaimContact"
+          }
+        },
+        "witnesses": {
+          "title": "Witnesses",
+          "description": "A list of witnesses relevant to this claim",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Witness"
+          }
+        }
+      }
+    },
+    "ClaimAddress": {
+      "type": "object",
+      "properties": {
+        // France
+        "CEDEX": {
+          "title": "CEDEX",
+          "description": "The CEDEX bureau of the address. Only applicable in certain countries.",
+          "type": "string",
+          "x-gw-nullable": true,
+          "maxLength": 2,
+          "x-gw-sinceVersion": "1.5.0",
+          "x-gw-extensions": {
+            "countryRestricted": true
+          }
+        },
+        // Japan-only Kanji field
+        "addressLine1Kanji": {
+          "title": "Address line 1 kanji",
+          "description": "The kanji version of the first line of the address. Only applicable in certain countries.",
+          "type": "string",
+          "x-gw-nullable": true,
+          "x-gw-sinceVersion": "1.5.0",
+          "x-gw-extensions": {
+            "countryRestricted": true
+          }
+        },
+        // Japan-only Kanji field
+        "addressLine2Kanji": {
+          "title": "Address line 2 kanji",
+          "description": "The kanji version of the second line of the address. Only applicable in certain countries.",
+          "type": "string",
+          "x-gw-nullable": true,
+          "x-gw-sinceVersion": "1.5.0",
+          "x-gw-extensions": {
+            "countryRestricted": true
+          }
+        },
+        // Japan-only Kanji field
+        "cityKanji": {
+          "title": "City kanji",
+          "description": "The kanji version of the city of the address. Only applicable in certain countries.",
+          "type": "string",
+          "x-gw-nullable": true,
+          "x-gw-sinceVersion": "1.5.0",
+          "x-gw-extensions": {
+            "countryRestricted": true
+          }
+        }
+      }
+    },
+    "ClaimContact": {
+      "properties": {
+        "companyNameKanji": {
+          "title": "Company name kanji",
+          "description": "The kanji version of the name of the company represented by this `ClaimContact`. Only applicable for a `ClaimContact` that represents a company.",
+          "type": "string",
+          "x-gw-extensions": {
+            "entitySubtype": "Company"
+          }
+        },
+        "doctorSpecialty": {
+          "title": "Doctor specialty",
+          "description": "The doctor's specialty. Only applicable for a `ClaimContact` that represent a doctor.",
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "entitySubtype": "Doctor",
+            "typelist": "SpecialtyType"
+          }
+        },
+        "firstNameKanji": {
+          "title": "First name kanji",
+          "description": "The kanji version of the first name of the person represented by this `ClaimContact`. Only applicable for a `ClaimContact` that represents a person.",
+          "type": "string",
+          "x-gw-nullable": true,
+          "x-gw-sinceVersion": "1.5.0",
+          "x-gw-extensions": {
+            "entitySubtype": "Person"
+          }
+        },
+        "lastNameKanji": {
+          "title": "Last name kanji",
+          "description": "The kanji version of the last name of the person represented by this `ClaimContact`. Only applicable for a `ClaimContact` that represents a person.",
+          "type": "string",
+          "x-gw-nullable": true,
+          "x-gw-sinceVersion": "1.5.0",
+          "x-gw-extensions": {
+            "entitySubtype": "Person"
+          }
+        },
+        "medicalLicense": {
+          "title": "Medical license",
+          "description": "The doctor's medical license number. Only applicable for a `ClaimContact` that represent a doctor.",
+          "type": "string",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "entitySubtype": "Doctor"
+          }
+        },
+        "particle": {
+          "title": "Particle",
+          "description": "The particle portion of the name of the person represented by this `ClaimContact`. Only applicable for a `ClaimContact` that represents a person.",
+          "type": "string",
+          "x-gw-nullable": true,
+          "x-gw-sinceVersion": "1.5.0",
+          "x-gw-extensions": {
+            "entitySubtype": "Person"
+          }
+        }
+      }
+    },
+    "CovTerm": {
+      "properties": {
+        "covTermOrder": {
+          "title": "Coverage term order",
+          "description": "The order of this coverage term relative to other terms on the same coverage. Used to present the terms in sorted order.",
+          "type": "integer",
+          "x-gw-nullable": true
+        },
+        "covTermPattern": {
+          "title": "Coverage term pattern",
+          "description": "The specific pattern for this term. The pattern defines the type of value that the term carries.",
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "typelist": "CovTermPattern"
+          }
+        },
+        "modelAggregation": {
+          "title": "Model aggregation",
+          "description": "Describes how aggregate limits are determined for this coverage term",
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "typelist": "CovTermModelAgg"
+          }
+        },
+        "modelRestriction": {
+          "title": "Model restriction",
+          "description": "A sub-categorization of the term that further refines what the model type on the `covTermPattern` applies to in the context of this term",
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "typelist": "CovTermModelRest"
+          }
+        },
+        "value": {
+          "title": "Value",
+          "description": "The value of this term",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Exposure": {
+      "properties": {
+        "claimant": {
+          "title": "Claimant",
+          "description": "A reference to the `ClaimContact` that represents the claimant for this exposure",
+          "$ref": "#/definitions/UpdatablePolicyObjectReference",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "resourceType": "ClaimContact"
+          }
+        }
+      }
+    },
+    "FixedPropertyIncident": {
+      "properties": {
+        "incidentOwner": {
+          "title": "Incident owner",
+          "description": "A reference to the `ClaimContact` that represents the owner of the incident",
+          "$ref": "#/definitions/UpdatablePolicyObjectReference",
+          "x-gw-nullable": true,
+          "x-gw-sinceVersion": "1.7.0",
+          "x-gw-extensions": {
+            "resourceType": "ClaimContact"
+          }
+        }
+      }
+    },
+    "GeneralIncident": {
+      "properties": {
+        "incidentOwner": {
+          "title": "Incident owner",
+          "description": "A reference to the `ClaimContact` that represents the owner of the incident",
+          "$ref": "#/definitions/UpdatablePolicyObjectReference",
+          "x-gw-nullable": true,
+          "x-gw-sinceVersion": "1.7.0",
+          "x-gw-extensions": {
+            "resourceType": "ClaimContact"
+          }
+        }
+      }
+    },
+    "InjuryIncident": {
+      "properties": {
+        "injuredPerson": {
+          "title": "Injured person",
+          "description": "A reference to the `ClaimContact` that represents the injured person",
+          "$ref": "#/definitions/UpdatablePolicyObjectReference",
+          "x-gw-extensions": {
+            "resourceType": "ClaimContact"
+          }
+        },
+        "primaryDoctor": {
+          "title": "Primary doctor",
+          "description": "A reference to the `ClaimContact` that represents the primary doctor that treated the injury",
+          "$ref": "#/definitions/SimpleReference",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "resourceType": "ClaimContact"
+          }
+        }
+      }
+    },
+    "OtherStructureIncident": {
+      "properties": {
+        "incidentOwner": {
+          "title": "Incident owner",
+          "description": "A reference to the `ClaimContact` that represents the owner of this incident",
+          "$ref": "#/definitions/UpdatablePolicyObjectReference",
+          "x-gw-sinceVersion": "1.7.0",
+          "x-gw-extensions": {
+            "resourceType": "ClaimContact"
+          }
+        }
+      }
+    },
+    "Policy": {
+      "properties": {
+        "agent": {
+          "title": "Agent",
+          "description": "A reference to the `ClaimContact` that represents the agent for this policy",
+          "$ref": "#/definitions/UpdatablePolicyObjectReference",
+          "x-gw-sinceVersion": "1.2.0",
+          "x-gw-extensions": {
+            "resourceType": "ClaimContact"
+          }
+        },
+        "coveredParties": {
+          "title": "Covered parties",
+          "description": "A list of references to `ClaimContact` elements that represent covered parties on this policy",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UpdatablePolicyObjectReference",
+            "x-gw-extensions": {
+              "resourceType": "ClaimContact"
+            }
+          },
+          "x-gw-sinceVersion": "1.2.0"
+        },
+        "excludedParties": {
+          "title": "Excluded parties",
+          "description": "A list of references to `ClaimContact` elements that represent excluded parties on this policy",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UpdatablePolicyObjectReference",
+            "x-gw-extensions": {
+              "resourceType": "ClaimContact"
+            }
+          },
+          "x-gw-sinceVersion": "1.2.0"
+        },
+        "insured": {
+          "title": "Insured",
+          "description": "A reference to the `ClaimContact` that represents the primary insured party for this policy",
+          "$ref": "#/definitions/UpdatablePolicyObjectReference",
+          "x-gw-sinceVersion": "1.2.0",
+          "x-gw-extensions": {
+            "resourceType": "ClaimContact"
+          }
+        }
+      }
+    },
+    "PropertyContentsIncident": {
+      "properties": {
+        "incidentOwner": {
+          "title": "Incident owner",
+          "description": "A reference to the `ClaimContact` that represents the owner of this incident",
+          "$ref": "#/definitions/UpdatablePolicyObjectReference",
+          "x-gw-sinceVersion": "1.7.0",
+          "x-gw-extensions": {
+            "resourceType": "ClaimContact"
+          }
+        }
+      }
+    },
+    "TripIncident": {
+      "properties": {
+        "incidentOwner": {
+          "title": "Incident owner",
+          "description": "A reference to the `ClaimContact` that represents the owner of this incident",
+          "$ref": "#/definitions/UpdatablePolicyObjectReference",
+          "x-gw-sinceVersion": "1.7.0",
+          "x-gw-extensions": {
+            "resourceType": "ClaimContact"
+          }
+        }
+      }
+    },
+    "VehicleIncident": {
+      "properties": {
+        "airbagsDeployed": {
+          "title": "Airbags deployed",
+          "description": "A `true` value indicates that the vehicle's airbags were deployed",
+          "type": "boolean"
+        },
+        "collision": {
+          "title": "Collision",
+          "description": "A `true` value indicates that the vehicle was involved in a collision",
+          "type": "boolean"
+        },
+        "collisionPoint": {
+          "title": "Collision point",
+          "description": "The point of first impact during the collision",
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-extensions": {
+            "typelist": "CollisionPoint"
+          }
+        },
+        "driver": {
+          "title": "Driver",
+          "description": "A reference to the `ClaimContact` that represents the driver of the vehicle",
+          "$ref": "#/definitions/UpdatablePolicyObjectReference",
+          "x-gw-extensions": {
+            "resourceType": "ClaimContact"
+          }
+        },
+        "equipmentFailure": {
+          "title": "Equipment failure",
+          "description": "A `true` value indicates that equipment failure was involved in this loss",
+          "type": "boolean"
+        },
+        "incidentOwner": {
+          "title": "Incident owner",
+          "description": "A reference to the `ClaimContact` that represents the owner of the vehicle, if this incident represents a third-party loss",
+          "$ref": "#/definitions/UpdatablePolicyObjectReference",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "resourceType": "ClaimContact"
+          }
+        },
+        "passengers": {
+          "title": "Excluded parties",
+          "description": "A list of references to `ClaimContact` elements that represent passengers in the vehicle",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UpdatablePolicyObjectReference",
+            "x-gw-extensions": {
+              "resourceType": "ClaimContact"
+            }
+          }
+        },
+        "propertyDamageDescription": {
+          "title": "Property description",
+          "description": "A description of the property that was damaged",
+          "type": "string"
+        },
+        "safeToDrive": {
+          "title": "Operable",
+          "description": "A `true` value indicates that the vehicle is still operable",
+          "type": "boolean"
+        },
+        "theft": {
+          "title": "Theft",
+          "description": "A `true` value indicates that the vehicle was stolen",
+          "type": "boolean"
+        },
+        "totalLoss": {
+          "title": "Total loss",
+          "description": "A `true` value indicates that the vehicle is a total loss",
+          "type": "boolean",
+          "x-gw-nullable": true
+        },
+        "vehicleDirection": {
+          "title": "Vehicle direction",
+          "description": "The direction the vehicle was traveling at impact",
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "typelist": "VehicleDirection"
+          }
+        },
+        "vehicleParked": {
+          "title": "Vehicle parked",
+          "description": "A `true` value indicates that the vehicle was parked at the time of the incident",
+          "type": "boolean",
+          "x-gw-nullable": true
+        },
+        "vehicleType": {
+          "title": "Vehicle type",
+          "description": "A description of the type of possession of the vehicle, such as `owned`, `leased`, or `rented`",
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "typelist": "VehicleType"
+          }
+        },
+        "vehicleUseReason": {
+          "title": "Vehicle use reason",
+          "description": "The reason for the vehicle's use",
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-nullable": true,
+          "x-gw-sinceVersion": "1.2.0",
+          "x-gw-extensions": {
+            "typelist": "ReasonForUse"
+          }
+        }
+      }
+    },
+    "Witness": {
+      "title": "Witness",
+      "description": "Details of the contact who witnessed an incident",
+      "type": "object",
+      "required": [
+        "contact"
+      ],
+      "properties": {
+        "contact": {
+          "title": "Contact",
+          "description": "A reference to the `ClaimContact` that represents the person who witnessed the loss",
+          "$ref": "#/definitions/UpdatablePolicyObjectReference",
+          "x-gw-extensions": {
+            "resourceType": "ClaimContact"
+          }
+        },
+        "perspective": {
+          "title": "Perspective",
+          "description": "Details of the perspective that the witness observed the loss from",
+          "type": "string"
+        },
+        "position": {
+          "title": "Position",
+          "description": "Where the witness was when the loss occurred",
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-extensions": {
+            "typelist": "WitnessPosition"
+          }
+        },
+        "statementObtained": {
+          "title": "Statement obtained",
+          "description": "A `true` value indicates that a statement was obtained from the witness",
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-extensions": {
+            "typelist": "YesNo"
+          }
+        }
+      }
+    }
+  }
+}

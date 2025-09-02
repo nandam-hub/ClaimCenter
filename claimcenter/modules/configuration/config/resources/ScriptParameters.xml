@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<serialization
+  xmlns="http://guidewire.com/xml"
+  xmlns:tns="http://guidewire.com/xml"
+  xmlns:xsd="http://www.w3.org/1999/XMLSchema"
+  xmlns:xsi="http://www.w3.org/1999/XMLSchema-instance">
+  <script-parameters>
+	<ScriptParameterPack ParamName="DefaultRootGroup_SP" ParamType="varchar">
+      <ResourceContexts length="0"/>
+      <ParamValue>Default Root Group</ParamValue>
+    </ScriptParameterPack>
+    <ScriptParameterPack
+      ParamName="InitialReserve_AutoMediumVehicleDamageInspection"
+      ParamType="integer">
+      <ResourceContexts
+        length="0"/>
+      <ParamValue>500</ParamValue>
+    </ScriptParameterPack>
+    <ScriptParameterPack
+      ParamName="InitialReserve_AutoMediumVehicleDamageBody"
+      ParamType="integer">
+      <ResourceContexts
+        length="0"/>
+      <ParamValue>2500</ParamValue>
+    </ScriptParameterPack>
+    <ScriptParameterPack
+      ParamName="InitialReserve_AutoMinorVehicleDamageBody"
+      ParamType="integer">
+      <ResourceContexts
+        length="0"/>
+      <ParamValue>1000</ParamValue>
+    </ScriptParameterPack>
+    <ScriptParameterPack
+      ParamName="InitialReserve_AutoMajorVehicleDamageBody"
+      ParamType="integer">
+      <ResourceContexts
+        length="0"/>
+      <ParamValue>10000</ParamValue>
+    </ScriptParameterPack>
+    <ScriptParameterPack
+      ParamName="InitialReserve_AutoMajorVehicleDamageInspection"
+      ParamType="integer">
+      <ResourceContexts
+        length="0"/>
+      <ParamValue>1000</ParamValue>
+    </ScriptParameterPack>
+    <ScriptParameterPack
+      ParamName="InitialReserve_AutoGlassVehicleDamage"
+      ParamType="integer">
+      <ResourceContexts
+        length="0"/>
+      <ParamValue>500</ParamValue>
+    </ScriptParameterPack>
+    <ScriptParameterPack
+      ParamName="SpecialInvestigation_CreateActivityForSupervisorThreshold"
+      ParamType="integer">
+      <ResourceContexts
+        length="1">
+        <item-0>si</item-0>
+      </ResourceContexts>
+      <ParamValue>5</ParamValue>
+    </ScriptParameterPack>
+    <ScriptParameterPack
+      ParamName="UtilizeMatterBudget"
+      ParamType="bit">
+      <ResourceContexts
+        length="0"/>
+      <ParamValue>false</ParamValue>
+    </ScriptParameterPack>
+    <ScriptParameterPack
+      ParamName="InitialReserve_TravelBaggageLoss"
+      ParamType="integer">
+      <ResourceContexts
+        length="0"/>
+      <ParamValue>2500</ParamValue>
+    </ScriptParameterPack>
+    <!-- GAR START: config/resources/granite_on_cloud-ScriptParameters.xml [/opt/teamcity/agent/work/45c3a2f1b8ee4237/gpm-generator/downloads/edge/backend/xcenter-config/xcenter-utils/cc-utils/../../../Platform/src/main] -->
+    <ScriptParameterPack
+      ParamName="CaptchaSecret"
+      ParamType="varchar">
+      <ParamValue/>
+    </ScriptParameterPack>
+    <ScriptParameterPack
+      ParamName="AuthServerUrl"
+      ParamType="varchar">
+      <ParamValue>http://localhost:7777</ParamValue>
+    </ScriptParameterPack>
+    <ScriptParameterPack
+      ParamName="AuthServerPublicKeysEndpoint"
+      ParamType="varchar">
+      <ParamValue>/token_keys</ParamValue>
+    </ScriptParameterPack>
+    <ScriptParameterPack
+      ParamName="OktaApplicationId"
+      ParamType="varchar">
+      <ParamValue>enterIdHere</ParamValue>
+    </ScriptParameterPack>
+    <ScriptParameterPack
+      ParamName="EnablePortalSingleSignOff"
+      ParamType="bit">
+      <ParamValue>false</ParamValue>
+    </ScriptParameterPack>
+    <!-- Allowed values for the url in the Reset Password requests (java RegEx) -->
+    <ScriptParameterPack
+      ParamName="AllowedResetPasswordUrls"
+      ParamType="varchar">
+      <!-- *** NOTICE ***
+        Make sure you keep the ^ symbol at the beginning of the RegEx
+        so that you will match the URL from the start.
+
+        Also make sure you retain the ending / character otherwise
+        some urls can be created to trick your setup
+        if your parameter was ^https?://my.good.domain.com
+        it could match https://my.good.domain.com.evildomain.com
+
+        Examples of valid patterns:
+          <ParamValue>^https?://localhost/</ParamValue>
+          <ParamValue>^https?://mydomain.com/</ParamValue> -->
+      <ParamValue>^https?://localhost(:[0-9]+)?/</ParamValue>
+    </ScriptParameterPack>
+    <!-- Allowed redirect urls for DocumentRetrievalHandler -->
+    <ScriptParameterPack
+      ParamName="AllowedDocumentRetrievalRedirectUrls"
+      ParamType="varchar">
+      <!-- *** NOTICE ***
+        Make sure you keep the ^ symbol at the beginning of the RegEx
+        so that you will match the URL from the start.
+
+        Also make sure you retain the ending / character otherwise
+        some urls can be created to trick your setup
+        if your parameter was ^https?://my.good.domain.com
+        it could match https://my.good.domain.com.evildomain.com
+
+        Examples of valid patterns:
+          <ParamValue>^https?://localhost/</ParamValue>
+          <ParamValue>^https?://mydomain.com/</ParamValue> -->
+      <ParamValue>^https?://localhost(:[0-9]+)?/</ParamValue>
+    </ScriptParameterPack>
+    <!-- GAR END -->
+    <!-- GAR START: config/resources/granite_on_cloud-ScriptParameters.xml [/opt/teamcity/agent/work/45c3a2f1b8ee4237/gpm-generator/downloads/edge/backend/xcenter-config/xcenter-utils/cc-utils/../../../Shared/extuser-mgmt/src/main] -->
+    <ScriptParameterPack
+      ParamName="EnableUaaPortalAuthConsole"
+      ParamType="bit">
+      <ParamValue>true</ParamValue>
+    </ScriptParameterPack>
+    <ScriptParameterPack
+      ParamName="EnableRoundRobinSimilarExposures_Ext"
+      ParamType="bit">
+      <ParamValue>true</ParamValue>
+    </ScriptParameterPack>
+    <ScriptParameterPack
+      ParamName="EnableRoundRobinForExposures_Ext"
+      ParamType="bit">
+      <ParamValue>true</ParamValue>
+    </ScriptParameterPack>
+    <ScriptParameterPack
+      ParamName="EnableWeightedWorkload_Ext"
+      ParamType="bit">
+      <ParamValue>true</ParamValue>
+    </ScriptParameterPack>
+    <!-- GAR END -->
+    <!-- GAR START: config/resources/ScriptParameters.xml [/opt/teamcity/agent/work/45c3a2f1b8ee4237/gpm-generator/downloads/edge/backend/xcenter-config/xcenter-utils/cc-utils/../../../Shared/maintenance/src/main] -->
+    <ScriptParameterPack
+      ParamName="EnableEdgeMaintenanceMode"
+      ParamType="bit">
+      <ParamValue>false</ParamValue>
+    </ScriptParameterPack>
+    <!-- GAR END -->
+  </script-parameters>
+</serialization>

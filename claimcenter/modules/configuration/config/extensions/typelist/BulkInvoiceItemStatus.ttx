@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<typelistextension xmlns="http://guidewire.com/typelists" name="BulkInvoiceItemStatus" desc="Possible statuses for BulkInvoiceItem entities">
+  <typefilter
+    desc="Statuses that can be used for list view filtering"
+    name="BulkInvoiceItemFilterSet" >
+    <include
+      code="approved"/>
+    <include
+      code="awaitingsubmission"/>
+    <include
+      code="checkpendingapproval"/>
+    <include
+      code="draft"/>
+    <include
+      code="inreview"/>
+    <include
+      code="notvalid"/>
+    <include
+      code="rejected"/>
+  </typefilter>
+</typelistextension>

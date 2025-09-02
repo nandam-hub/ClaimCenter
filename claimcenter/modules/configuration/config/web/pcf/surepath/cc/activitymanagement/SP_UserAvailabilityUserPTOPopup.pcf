@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Popup
+    canEdit="canEdit"
+    id="SP_UserAvailabilityUserPTOPopup"
+    returnType="UserPTO_SP"
+    startInEditMode="canEdit"
+    title="DisplayKey.get(&quot;SP.ActivityManagement.UserAvailability.Web.Admin.UserPTODV.Title&quot;)">
+    <LocationEntryPoint
+      signature="SP_UserAvailabilityUserPTOPopup(user:User)"/>
+    <LocationEntryPoint
+      signature="SP_UserAvailabilityUserPTOPopup(pto:UserPTO_SP,canEdit:boolean)"/>
+    <Variable
+      initialValue="null == pto.PublicID"
+      name="canEdit"
+      type="boolean"/>
+    <Variable
+      initialValue="new UserPTO_SP()"
+      name="pto"
+      type="UserPTO_SP"/>
+    <Variable
+      initialValue="pto.User"
+      name="user"
+      type="User"/>
+    <Screen>
+      <Toolbar>
+        <EditButtons
+          pickValue="pto"/>
+      </Toolbar>
+      <DetailViewPanel>
+        <InputColumn>
+          <TypeKeyInput
+            editable="true"
+            id="PTOType"
+            label="DisplayKey.get(&quot;SP.ActivityManagement.UserAvailability.Web.Admin.UserPTODV.PTOType&quot;)"
+            required="true"
+            value="pto.PTOType"
+            valueType="UserPTOType_SP"/>
+          <DateInput
+            editable="true"
+            id="BeginDate"
+            label="DisplayKey.get(&quot;SP.ActivityManagement.UserAvailability.Web.Admin.UserPTODV.StartDate&quot;)"
+            required="true"
+            value="pto.BeginDate"/>
+          <DateInput
+            editable="true"
+            id="EndDate"
+            label="DisplayKey.get(&quot;SP.ActivityManagement.UserAvailability.Web.Admin.UserPTODV.EndDate&quot;)"
+            required="true"
+            subMenuOnDemand="true"
+            validationExpression="(null != pto.BeginDate and gw.api.util.DateUtil.compareIgnoreTime(pto.EndDate, pto.BeginDate) &lt; 0 ) ? DisplayKey.get(&quot;SP.ActivityManagement.UserAvailability.Web.Admin.UserPTODV.DateRangeError&quot;) : null"
+            value="pto.EndDate"/>
+        </InputColumn>
+      </DetailViewPanel>
+    </Screen>
+  </Popup>
+</PCF>

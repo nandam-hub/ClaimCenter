@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <InputSet
+    id="RuleComparisonCommandParametersInputSet"
+    mode="createreserve">
+    <Require
+      name="controller"
+      type="gw.bizrules.pcf.RuleVersionComparisonController"/>
+    <Require
+      name="commandDefinitionDiff"
+      type="gw.bizrules.diff.RuleMatchableDiffPair&lt;RuleCommandDefinition&gt;"/>
+    <InputSetRef
+      def="RuleComparisonRowStringInputSet(commandDefinitionDiff.getRow(gw.bizrules.ruleaction.createreserve.config.ReserveCommandParameterSet.Config.COST_TYPE.Name))"
+      id="costtype"/>
+    <InputSetRef
+      def="RuleComparisonRowStringInputSet(commandDefinitionDiff.getRow(gw.bizrules.ruleaction.createreserve.config.ReserveCommandParameterSet.Config.COST_CATEGORY.Name))"
+      id="costcategory"/>
+    <InputSetRef
+      def="RuleComparisonRowStringInputSet(commandDefinitionDiff.getRow(gw.bizrules.ruleaction.createreserve.config.ReserveCommandParameterSet.Config.RESPECT_FINANCIAL_HOLDS.Name))"
+      id="respectfinancialholds"/>
+    <InputSetRef
+      def="RuleComparisonRowStringInputSet(commandDefinitionDiff.getRow(gw.bizrules.ruleaction.createreserve.config.ReserveCommandParameterSet.Config.AMOUNT.Name))"
+      id="amount"/>
+    <InputSetRef
+      def="RuleComparisonRowStringInputSet(commandDefinitionDiff.getRow(gw.bizrules.ruleaction.createreserve.config.ReserveCommandParameterSet.Config.CURRENCY.Name))"
+      id="currency"/>
+    <InputSetRef
+      def="RuleComparisonRowStringInputSet(commandDefinitionDiff.getRow(gw.bizrules.ruleaction.createreserve.config.ReserveCommandParameterSet.Config.COMMENTS.Name))"
+      id="comments"/>
+  </InputSet>
+</PCF>

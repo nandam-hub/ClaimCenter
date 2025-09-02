@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <ListViewPanel
+    id="ClaimPolicyCovTermsLV"
+    stretch="true">
+    <Require
+      name="Coverage"
+      type="Coverage"/>
+    <ExposeIterator
+      valueType="entity.CovTerm"
+      widget="ClaimPolicyCovTermsLV"/>
+    <RowIterator
+      editable="!Coverage.Policy.Verified"
+      elementName="covTerm"
+      hideCheckBoxesIfReadOnly="true"
+      toRemove="Coverage.removeFromCovTerms(covTerm)"
+      value="Coverage.CovTerms"
+      valueType="entity.CovTerm[]">
+      <IteratorSort
+        sortBy="covTerm.CovTermOrder"
+        sortOrder="1"/>
+      <Row>
+        <TypeKeyCell
+          action="CovTermPopup.push(covTerm, CurrentLocation.InEditMode)"
+          grow="true"
+          id="CovTermPattern"
+          label="DisplayKey.get(&quot;LV.Policy.CovTerms.Subject&quot;)"
+          sortOrder="2"
+          value="covTerm.CovTermPattern"
+          valueType="typekey.CovTermPattern"/>
+        <TypeKeyCell
+          id="ModelRestriction"
+          label="DisplayKey.get(&quot;LV.Policy.CovTerms.ApplicableTo&quot;)"
+          sortOrder="3"
+          value="covTerm.ModelRestriction"
+          valueType="typekey.CovTermModelRest"
+          wrap="false"/>
+        <ModalCellRef
+          def="CovTermAmount(covTerm)"
+          label="DisplayKey.get(&quot;LV.Policy.CovTerms.Amount&quot;)"
+          mode="covTerm.CovTermMode"/>
+        <TextCell
+          id="CovTermUnits"
+          label="DisplayKey.get(&quot;Web.ClaimPolicy.CovTerm.Units&quot;)"
+          value="covTerm typeis NumericCovTerm ? (covTerm as NumericCovTerm).Units.DisplayName : covTerm.DisplayName"
+          valueVisible="covTerm typeis NumericCovTerm"/>
+        <TypeKeyCell
+          id="ModelAggregation"
+          label="DisplayKey.get(&quot;LV.Policy.CovTerms.Per&quot;)"
+          value="covTerm.ModelAggregation"
+          valueType="typekey.CovTermModelAgg"
+          wrap="false"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

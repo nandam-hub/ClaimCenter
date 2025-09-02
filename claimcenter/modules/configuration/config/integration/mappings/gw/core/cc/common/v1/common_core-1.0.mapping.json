@@ -1,0 +1,172 @@
+{
+  "schemaName": "gw.core.cc.common.v1.common_core-1.0",
+  "combine": [
+    "gw.core.cc.framework.v1.framework_core-1.0",
+    "gw.core.pl.common.v1.common_pl-1.0"
+  ],
+  "mappers": {
+    "Activity": {
+      "schemaDefinition": "Activity",
+      "root": "entity.Activity",
+      "properties": {
+        "autopilotHandlingDecision": {
+          "path": "Activity.AutopilotHandlingDecision",
+          "mapper": "#/mappers/TypeKeyReference"
+        },
+        "autopilotId": {
+          "path": "Activity.AutopilotId"
+        },
+        "autopilotPurpose": {
+          "path": "Activity.AutopilotPurpose",
+          "mapper": "#/mappers/TypeKeyReference"
+        },
+        "coverageIssues": {
+          "path": "Activity.OrderedCoverageIssues",
+          "mapper": "#/mappers/CoverageIssue",
+          // This just reflects the CoverageIssues array on the Activity, which both propagates events to the Activity and is an owned array
+          "eventSafe": true
+        },
+        "importance": {
+          "path": "Activity.Importance",
+          "mapper": "#/mappers/TypeKeyReference"
+        },
+        "relatedTo": {
+          "path": "(Activity.RestV1.RelatedTo as KeyableBean).RestV1_AsClaimCenterReference",
+          "mapper": "#/mappers/GenericRelationResource",
+          // The related entity is stored as a foreignkey directly on the Activity
+          "eventSafe": true
+        }
+      }
+    },
+    "ActivityPattern": {
+      "schemaDefinition": "ActivityPattern",
+      "root": "entity.ActivityPattern",
+      "properties": {
+        "availableForClosedClaims": {
+          "path": "ActivityPattern.ClosedClaimAvlble"
+        },
+        "claimLossType": {
+          "path": "ActivityPattern.ClaimLossType",
+          "mapper": "#/mappers/TypeKeyReference"
+        },
+        "externallyOwned": {
+          "path": "ActivityPattern.ExternallyOwned"
+        },
+        "importance": {
+          "path": "ActivityPattern.Importance",
+          "mapper": "#/mappers/TypeKeyReference"
+        }
+      }
+    },
+    "Assignee": {
+      "schemaDefinition": "Assignee",
+      "root": "gw.api.assignment.Assignee",
+      "properties": {
+        "assigneeId": {
+          "path": "Assignee.RestV1_CCAssigneeId"
+        },
+        "claimOwner": {
+          "path": "Assignee.RestV1_ClaimOwner"
+        },
+        "id": {
+          "path": "Assignee.RestV1_CCAssigneeId"
+        }
+      }
+    },
+    "Contact": {
+      "schemaDefinition": "Contact",
+      "root": "entity.Contact",
+      "properties": {
+        "doctorSpecialty": {
+          "path": "null as SpecialtyType",
+          "mapper": "#/mappers/TypeKeyReference"
+        },
+        "medicalLicense": {
+          "path": "null as String"
+        },
+        "policySystemId": {
+          "path": "Contact.PolicySystemId"
+        },
+        "roles": {
+          "path": "null as ClaimContactRole[]",
+          "mapper": "#/mappers/ContactRole",
+          "predicate": "false"
+        }
+      }
+    },
+    "ContactRole": {
+      "schemaDefinition": "ContactRole",
+      "root": "entity.ClaimContactRole",
+      "properties": {
+        "active": {
+          "path": "ClaimContactRole.Active"
+        },
+        "comments": {
+          "path": "ClaimContactRole.Comments"
+        },
+        "relatedTo": {
+          "path": "ClaimContactRole.Owner.RestV1_AsClaimCenterReference",
+          "mapper": "#/mappers/GenericRelationResource"
+        },
+        "role": {
+          "path": "ClaimContactRole.Role",
+          "mapper": "#/mappers/TypeKeyReference"
+        }
+      }
+    },
+    "CoverageIssue": {
+      "schemaDefinition": "CoverageIssue",
+      "root": "entity.CoverageIssue",
+      "properties": {
+        "coverageSubtype": {
+          "path": "CoverageIssue.CoverageSubtype",
+          "mapper": "#/mappers/TypeKeyReference"
+        },
+        "id": {
+          "path": "CoverageIssue.RestId"
+        },
+        "reason": {
+          "path": "CoverageIssue.Reason"
+        },
+        "severity": {
+          "path": "CoverageIssue.Severity",
+          "mapper": "#/mappers/TypeKeyReference"
+        }
+      }
+    },
+    "Document": {
+      "schemaDefinition": "Document",
+      "root": "entity.Document",
+      "properties": {
+        "relatedTo": {
+          "path": "(Document.RestV1.RelatedTo as KeyableBean).RestV1_AsClaimCenterReference",
+          "mapper": "#/mappers/GenericRelationResource",
+          // The foreign keys to determine the related entity are stored directly on the Document
+          "eventSafe": true
+        }
+      }
+    },
+    "HistoryEvent": {
+      "schemaDefinition": "HistoryEvent",
+      "root": "entity.History",
+      "properties": {
+        "claim": {
+          "path": "History.Claim.RestV1_AsReference",
+          "mapper": "#/mappers/ResourceReference"
+        }
+      }
+    },
+    "Note": {
+      "schemaDefinition": "Note",
+      "root": "entity.Note",
+      "properties": {
+        "relatedTo": {
+          "path": "(Note.RestV1.RelatedTo as KeyableBean).RestV1_AsClaimCenterReference",
+          "mapper": "#/mappers/GenericRelationResource",
+          // The foreign keys to determine the related entity are stored directly on the Note
+          "eventSafe": true
+        }
+      }
+    }
+  }
+}

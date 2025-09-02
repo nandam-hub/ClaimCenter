@@ -1,0 +1,280 @@
+#gw-TabBarWidget--multiTabInfo {
+  position: relative;
+
+  .gw-action--outer + .gw-action--outer {
+    border-top: 1px solid $gw-app--menus--border-color;
+  }
+
+  // Magic triangle fakery to prevent a slightly angled mouse movement into the submenu
+  // from triggering the sibling top level menu
+  &.gw-hasOpenSubMenu {
+    & > .gw-action--inner {
+      overflow: visible !important;
+
+      &:before {
+        content: " ";
+        position: absolute;
+        bottom: -3px;
+        width: calc(100% + 20px);
+        height: 16px;
+        left: -10px;
+        background-color: transparent;
+        border-top-left-radius: 100%;
+        border-top-right-radius: 100%;
+        z-index: 9999;
+        pointer-events: all;
+      }
+    }
+  }
+
+  &:after {
+    pointer-events: none;
+    content: attr(data-gw-content);
+    position: absolute;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    right: 1px;
+    bottom: 1px;
+    background-color: $gw-app--NorthPanel--bg;
+    color: $gw-app--NorthPanel--col;
+    border-radius: 100%;
+    padding: 1px;
+    font-size: 1em;
+    font-family: Courier Next, courier, monospace;
+    width: 1em;
+    height: 1em;
+    box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, .23);
+  }
+
+  .gw-menu-header {
+    padding: 4px 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: $gw-app--menus--bg;
+    color: $gw-app--menus--col;
+    font-weight: bold;
+    border-bottom: 1px solid $gw-app--menus--divider-col;
+
+    & + #gw-MultiTabNewContextButton {
+      border-top: none;
+    }
+  }
+
+  .gw-multi-tab-warning {
+    border-bottom: 1px solid $gw-app--menus--divider-col;
+    padding: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .warning-text {
+      display: flex;
+      padding: 4px 6px;
+      background-color: $gw-app--multiTab--warning-bg;
+      color: $gw-app--multiTab--warning-col;
+      font-size: .8em;
+      border-radius: 10px;
+    }
+
+  }
+
+  &.gw-multi-tab-has-warning {
+    &:after {
+      pointer-events: none;
+      content: "!";
+      position: absolute;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      right: 1px;
+      bottom: 1px;
+      background-color: $gw-app--multiTab--warning-bg;
+      color: $gw-app--multiTab--warning-col;
+      border-radius: 100%;
+      padding: 1px;
+      font-size: 1em;
+      font-family: Courier Next, courier, monospace;
+      width: 1em;
+      height: 1em;
+      box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, .23);
+    }
+  }
+
+  .gw-MultiTabMenuItem {
+    display: flex !important;
+    flex-direction: column !important;
+    flex-wrap: nowrap !important;
+    align-items: stretch;
+    justify-content: start;
+    gap: 4px;
+
+    .top-section {
+      display: flex;
+      align-items: center;
+      justify-content: start;
+      flex-grow: 1;
+      gap: 6px;
+
+      .open-tab-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 0;
+        min-width: 0;
+        width: 1em;
+        height: 1em;
+        position: relative;
+
+        &:after {
+          @include iconGlyph("external-link-square-alt");
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          width: 1em;
+          height: 1em;
+        }
+      }
+
+      .title {
+        flex-grow: 1;
+      }
+
+      .open-label {
+        display: none;
+        font-size: .8em;
+      }
+    }
+
+    .sub-label, .unsaved-work {
+      display: flex;
+      align-items: center;
+      justify-content: start;
+      font-size: .8em;
+      gap: 2px;
+      padding-left: 12px;
+    }
+
+    .group-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 0;
+      min-width: 0;
+      width: 1em;
+      height: 1em;
+      position: relative;
+      margin-right: 2px;
+
+      &:after {
+        @include iconGlyph($gw-app--multiTab--group-location-glyph);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 1em;
+        height: 1em;
+      }
+    }
+
+    .unsaved-work-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 0;
+      min-width: 0;
+      width: 1em;
+      height: 1em;
+      position: relative;
+      margin-right: 2px;
+
+      &:after {
+        @include iconGlyph($gw-app--NorthPanel--unsaved-work-glyph);
+        color: $gw-app--NorthPanel--unsaved-work-active-color;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 1em;
+        height: 1em;
+      }
+    }
+  }
+
+  #gw-MultiTabNewContextButton {
+    display: flex !important;
+    align-items: center;
+    justify-content: start;
+    gap: 6px;
+    border-top: 1px solid $gw-app--menus--divider-col;
+
+    .gw-action--inner {
+      display: flex !important;
+      flex-grow: 1;
+      align-items: center !important;
+    }
+
+    .gw-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 0;
+      min-width: 0;
+      position: relative;
+      line-height: 1em;
+
+      &:before {
+        @include iconGlyph("plus");
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 1em;
+        height: 1em;
+        line-height: 1em;
+      }
+    }
+  }
+}
+
+#gwMultiTabDialogue {
+  display: flex;
+  min-width: 0px;
+  align-self: stretch;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  bottom: 2px;
+  left: 2px;
+  right: 2px;
+  background-color: $gw-app--multiTab--warning-bg;
+  color: $gw-app--multiTab--warning-col;
+  border: none;
+  padding: 2px 6px 2px 6px;
+  border-radius: 10px;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, .23);
+  font-size: $gw-app--font-size--smaller-px;
+  cursor: pointer;
+
+  &.removed {
+    opacity: 0;
+    transition: opacity 1s;
+    pointer-events: none;
+  }
+
+  .gw-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    $size: gw-roundRemToNearestPixel(1em); //em-allowed
+    vertical-align: top;
+    width: $size;
+    height: $size;
+    margin-right: gw-remScaled(.25);
+    @include gw-icon("exclamation-circle", $size, $width: auto, $height: auto, $display: inline-flex, $v-align: middle, $h-align: middle, $position: relative);
+  }
+
+  .gw-text {
+    display: flex;
+    flex-wrap: wrap;
+    min-width: 0px;
+  }
+}

@@ -1,0 +1,21 @@
+package rules.EventMessage.EventFired_dir
+
+uses gw.surepath.cc.configuration.activitymanagement.plugin.CrossAppActivityTransport
+uses gw.surepath.cc.configuration.activitymanagement.util.ActivityManagementProperties
+
+@gw.rules.RuleName("EFRS09000CrossAppActivities")
+internal class EFRS09000CrossAppActivities {
+  static function doCondition(messageContext : entity.MessageContext) : boolean {
+/*start00rule*/
+return messageContext.DestID == CrossAppActivityTransport.DEST_ID and
+    ActivityManagementProperties.INSTANCE.FeatureEnabled and
+    ActivityManagementProperties.INSTANCE.SharedActivitiesEnabled
+/*end00rule*/
+}
+
+  static function doAction(messageContext : entity.MessageContext, actions : gw.rules.Action) {
+/*start00rule*/
+messageContext.createMessage("${messageContext.EventName} - ${messageContext.Root}")
+/*end00rule*/
+  }
+}

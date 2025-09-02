@@ -1,0 +1,455 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "x-gw-combine": [
+    "gw.core.cc.claim.v1.claim_core-1.0"
+  ],
+  "definitions": {
+    "Building": {
+      "title": "Building",
+      "description": "A building on a policy or claim",
+      "type": "object",
+      "properties": {
+        "buildingNumber": {
+          "title": "Building number",
+          "description": "The alphanumeric number assigned to this building",
+          "type": "string"
+        },
+        "id": {
+          "title": "ID",
+          "description": "The unique identifier of this element",
+          "type": "string"
+        },
+        "notes": {
+          "title": "Notes",
+          "description": "Any comments regarding this building",
+          "type": "string"
+        },
+        "policySystemId": {
+          "title": "ID",
+          "description": "The unique identifier of this element within the policy system",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Claim": {
+      "properties": {
+        "arson": {
+          "title": "Arson",
+          "description": "A `true` value indicates that this claim involves arson",
+          "type": "boolean",
+          "x-gw-nullable": true
+        },
+        "fireDepartmentResponded": {
+          "title": "Fire department responded",
+          "description": "A `true` value indicates that the fire department responded to the damage",
+          "type": "boolean",
+          "x-gw-nullable": true
+        },
+        "fireSource": {
+          "title": "Fire source",
+          "description": "A description of the source of the fire that caused this claim",
+          "type": "string",
+          "x-gw-nullable": true
+        },
+        "hasWaterBeenTurnedOff": {
+          "title": "Has the water been turned off",
+          "description": "A `true` value indicates that the water to the house or room affected by water damage has been turned off",
+          "type": "boolean",
+          "x-gw-nullable": true
+        },
+        "howWasFireDiscovered": {
+          "title": "How was fire discovered",
+          "description": "A description of how the fire that caused this claim was discovered",
+          "type": "string",
+          "x-gw-nullable": true
+        },
+        "isAnyoneInjured": {
+          "title": "Is anyone injured",
+          "description": "A `true` value indicates that someone was injured as a result of the loss",
+          "type": "boolean",
+          "x-gw-nullable": true
+        },
+        "isHomeHabitable": {
+          "title": "Is the home habitable",
+          "description": "A `true` value indicates that the home is still habitable. Used only for claims involving damage to the insured's home.",
+          "type": "boolean",
+          "x-gw-nullable": true
+        },
+        "isHomeSecure": {
+          "title": "Is the home secure",
+          "description": "A `true` value indicates that the home is still secure. Used only for claims involving damage to the insured's home.",
+          "type": "boolean",
+          "x-gw-nullable": true
+        },
+        "isRoofProtected": {
+          "title": "Is the roof protected",
+          "description": "A `true` value indicates that water damage to the roof is covered",
+          "type": "boolean",
+          "x-gw-nullable": true
+        },
+        "smokeDamageOnly": {
+          "title": "Smoke damage only",
+          "description": "A `true` value indicates that damage was caused only by smoke and not by fire",
+          "type": "boolean",
+          "x-gw-nullable": true
+        },
+        "waterSource": {
+          "title": "Water source",
+          "description": "The source of the water that is entering the damaged property",
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "typelist": "WaterSource"
+          }
+        }
+      }
+    },
+    "DwellingIncident": {
+      "title": "Dwelling incident",
+      "description": "A loss involving fixed property used for dwelling, such as a home or condominium",
+      "type": "object",
+      "properties": {
+        "automationPath": {
+          "title": "Automation path",
+          "description": "The path taken by the automated system that created this incident. Only intended for use by automated systems.",
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-nullable": true,
+          "x-gw-sinceVersion": "1.3.0",
+          "x-gw-extensions": {
+            "typelist": "AutomationPath"
+          }
+        },
+        "damagedAreaSize": {
+          "title": "Damaged area size",
+          "description": "The size of the damaged area in square feet, square meters, or other units of measurement",
+          "type": "integer",
+          "x-gw-nullable": true,
+          "minimum": 1
+        },
+        "description": {
+          "title": "Description",
+          "description": "A general description of the incident",
+          "type": "string",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "sortable": true
+          }
+        },
+        "dwellingRoomDamages": {
+          "title": "Dwelling room damages",
+          "description": "A list of types of rooms that were damaged by this incident",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DwellingRoomDamage"
+          }
+        },
+        "fireProtectionAvailable": {
+          "title": "Fire protection available",
+          "description": "A `true` value indicates that fire protection is available",
+          "type": "boolean",
+          "x-gw-nullable": true
+        },
+        "id": {
+          "title": "ID",
+          "description": "The unique identifier of this element",
+          "type": "string",
+          "readOnly": true
+        },
+        "location": {
+          "title": "Location",
+          "description": "The location of the property",
+          "$ref": "#/definitions/PolicyLocation",
+          "x-gw-nullable": true
+        },
+        "lossParty": {
+          "title": "Loss party",
+          "description": "The type of loss party, generally either the insured or a third party",
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "typelist": "LossPartyType"
+          }
+        },
+        "materialsDamaged": {
+          "title": "Materials damaged",
+          "description": "A description of materials that were damaged, such as floors or walls",
+          "type": "string",
+          "x-gw-nullable": true
+        },
+        "numberOfPeopleOnPolicy": {
+          "title": "Number of people on policy",
+          "description": "The number of people on the policy",
+          "type": "integer",
+          "x-gw-nullable": true,
+          "minimum": 0
+        },
+        "occupancyType": {
+          "title": "Occupancy type",
+          "description": "Indicates the occupancy status of the property that was affected",
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "sortable": true,
+            "typelist": "OccupancyType"
+          }
+        },
+        "propertySize": {
+          "title": "Property size",
+          "description": "The size of the property in square feet, square meters, or other units of measurement",
+          "type": "integer",
+          "x-gw-nullable": true,
+          "minimum": 1
+        },
+        "severity": {
+          "title": "Severity",
+          "description": "The severity of the loss",
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "typelist": "SeverityType"
+          }
+        },
+        "yearBuilt": {
+          "title": "Year built",
+          "description": "The year in which the property was built",
+          "type": "string",
+          "format": "date-time",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "before": "now"
+          }
+        },
+        "yearsInHome": {
+          "title": "Years in home",
+          "description": "The number of years the insured has lived in the home",
+          "type": "integer",
+          "x-gw-nullable": true,
+          "minimum": 0
+        }
+      }
+    },
+    "DwellingRoomDamage": {
+      "title": "Dwelling room damage",
+      "description": "Details of damage to a specific room or type of room",
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "ID",
+          "description": "The unique identifier of this element",
+          "type": "string"
+        },
+        "numberOfRooms": {
+          "title": "Number of rooms",
+          "description": "The number of rooms of this type that were affected by the loss",
+          "type": "integer",
+          "x-gw-nullable": true,
+          "minimum": 1
+        },
+        "roomType": {
+          "title": "Room type",
+          "description": "The type of room that was damaged",
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "typelist": "RoomType"
+          }
+        }
+      }
+    },
+    "Exposure": {
+      "properties": {
+        "dwellingIncident": {
+          "title": "Dwelling incident",
+          "description": "A reference to the `DwellingIncident` associated with this exposure",
+          "$ref": "#/definitions/SimpleReference",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "resourceType": "DwellingIncident"
+          }
+        },
+        "livingExpensesIncident": {
+          "title": "Living expenses incident",
+          "description": "A reference to the `LivingExpensesIncident` associated with this exposure",
+          "$ref": "#/definitions/SimpleReference",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "resourceType": "LivingExpensesIncident"
+          }
+        }
+      }
+    },
+    "LivingExpensesIncident": {
+      "title": "Living expenses incident",
+      "description": "A report of expenses incurred due to the loss of use of a property",
+      "type": "object",
+      "properties": {
+        "automationPath": {
+          "title": "Automation path",
+          "description": "The path taken by the automated system that created this incident. Only intended for use by automated systems.",
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-nullable": true,
+          "x-gw-sinceVersion": "1.3.0",
+          "x-gw-extensions": {
+            "typelist": "AutomationPath"
+          }
+        },
+        "description": {
+          "title": "Description",
+          "description": "A general description of this incident",
+          "type": "string",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "sortable": true
+          }
+        },
+        "id": {
+          "title": "ID",
+          "description": "The unique identifier of this element",
+          "type": "string"
+        },
+        "lossParty": {
+          "title": "Loss party",
+          "description": "The type of loss party, generally either the insured or a third party",
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "typelist": "LossPartyType"
+          }
+        },
+        "startDate": {
+          "title": "Start date",
+          "description": "The date when the affected party began their stay with a lodging provider",
+          "type": "string",
+          "format": "date-time",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "sortable": true
+          }
+        }
+      }
+    },
+    "LocationBasedRiskUnit": {
+      "title": "Location risk unit",
+      "description": "A risk unit that includes a location",
+      "type": "object",
+      "properties": {
+        "RUNumber": {
+          "title": "Risk unit number",
+          "description": "The assigned to this risk unit",
+          "type": "integer",
+          "readOnly": true,
+          "x-gw-extensions": {
+            "filterable": true,
+            "sortable": true
+          }
+        },
+        "building": {
+          "title": "Building",
+          "description": "Details of the building at this location",
+          "$ref": "#/definitions/Building",
+          "x-gw-nullable": true
+        },
+        "coverages": {
+          "title": "Coverages",
+          "description": "The list of coverages that apply to this risk unit",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Coverage"
+          },
+          "readOnly": true,
+          "x-gw-extensions": {
+            "defaultViews": [
+              "detail"
+            ]
+          }
+        },
+        "description": {
+          "title": "Description",
+          "description": "A description of the risk unit",
+          "type": "string",
+          "x-gw-nullable": true
+        },
+        "id": {
+          "title": "ID",
+          "description": "The unique identifier of this element",
+          "type": "string",
+          "readOnly": true
+        },
+        "locationId": {
+          "title": "Location ID",
+          "description": "The unique identifier of the location",
+          "type": "string",
+          "readOnly": true
+        },
+        "otherRiskType": {
+          "title": "Other risk type",
+          "description": "The risk type for a location-based miscellaneous risk. Only applicable if `subtype` is `LocationMiscRU`.",
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "entitySubtype": "LocationMiscRU",
+            "typelist": "OtherRiskType"
+          }
+        },
+        "policyLocation": {
+          "title": "Policy location",
+          "description": "Details of the location",
+          "$ref": "#/definitions/PolicyLocation"
+        },
+        "policySystemId": {
+          "title": "Policy system ID",
+          "description": "The unique identifier of this element in the policy administration system",
+          "type": "string",
+          "readOnly": true
+        },
+        "subtype": {
+          "title": "Subtype",
+          "description": "The specific subtype of risk unit",
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-extensions": {
+            "createOnly": true,
+            "filterable": true,
+            "requiredForCreate": true,
+            "sortable": true,
+            "typelist": "RiskUnit"
+          }
+        }
+      }
+    },
+    "PolicyLocation": {
+      "properties": {
+        "buildings": {
+          "title": "Buildings",
+          "description": "A list of buildings at this location",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Building"
+          },
+          "x-gw-extensions": {
+            "defaultViews": [
+              "detail"
+            ]
+          }
+        }
+      }
+    },
+    "UnverifiedPolicyLocation": {
+      "properties": {
+        "buildings": {
+          "title": "Buildings",
+          "description": "A list of buildings at this location",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Building"
+          },
+          "x-gw-extensions": {
+            "defaultViews": [
+              "detail"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

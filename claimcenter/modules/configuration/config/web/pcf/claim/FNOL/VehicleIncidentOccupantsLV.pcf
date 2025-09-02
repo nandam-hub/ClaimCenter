@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <ListViewPanel
+    id="VehicleIncidentOccupantsLV"
+    stretch="true">
+    <Require
+      name="vehicleOccupants"
+      type="ArrayList&lt;Person&gt;"/>
+    <Require
+      name="vehicleIncident"
+      type="entity.VehicleIncident"/>
+    <Require
+      name="wizard"
+      type="gw.api.claim.NewClaimWizardInfo"/>
+    <Variable
+      initialValue="new gw.api.claim.VehicleIncidentUIHelper(vehicleIncident)"
+      name="vehicleIncidentHelper"
+      type="gw.api.claim.VehicleIncidentUIHelper"/>
+    <Variable
+      initialValue="vehicleIncident.Claim"
+      name="claim"
+      type="entity.Claim"/>
+    <RowIterator
+      editable="false"
+      elementName="occupant"
+      value="vehicleOccupants"
+      valueType="java.util.ArrayList&lt;Person&gt;">
+      <Row>
+        <BooleanRadioCell
+          icon="vehicleIncidentHelper.getOccupantSeverityIcon(wizard.getInjurySeverity(claim.getClaimContact(occupant)))"
+          iconLabel="vehicleIncidentHelper.getOccupantSeverityIconTooltip(wizard.getInjurySeverity(claim.getClaimContact(occupant)))"
+          iconType="svgFileName"
+          id="occupantInjuredSeverityIcon"
+          showHeaderIcon="false"
+          value="wizard.isInjured(claim.getClaimContact(occupant))"/>
+        <BooleanRadioCell
+          icon="vehicleIncidentHelper.getOccupantIcon(occupant)"
+          iconLabel="vehicleIncidentHelper.getOccupantIconTooltip(occupant)"
+          iconType="svgFileName"
+          id="occupantTypeIcon"
+          showHeaderIcon="false"
+          value="true"
+          valueType="boolean"/>
+        <TextCell
+          action="FNOLContactPopup.push(claim, claim.getClaimContact( occupant ), vehicleIncidentHelper.getOccupantRole(occupant), vehicleIncident, wizard)"
+          grow="true"
+          id="occupant"
+          value="occupant.DisplayName"
+          wrap="true"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

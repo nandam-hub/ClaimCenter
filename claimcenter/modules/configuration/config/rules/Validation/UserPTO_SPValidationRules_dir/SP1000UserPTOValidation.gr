@@ -1,0 +1,19 @@
+package rules.Validation.UserPTO_SPValidationRules_dir
+
+@gw.rules.RuleName("SP1000UserPTOValidation")
+internal class SP1000UserPTOValidation {
+  static function doCondition(userPTO_SP : entity.UserPTO_SP) : boolean {
+/*start00rule*/
+return true
+/*end00rule*/
+}
+
+  static function doAction(userPTO_SP : entity.UserPTO_SP, actions : gw.rules.Action) {
+/*start00rule*/
+userPTO_SP.validateActiveStatusForNewRecords()
+userPTO_SP.validateBatchProcessDateForNewRecords()
+userPTO_SP.validateDateRange()
+userPTO_SP.validateDateRangeAganistRelatedRecords()
+/*end00rule*/
+  }
+}

@@ -1,0 +1,246 @@
+{
+  "schemaName": "gw.core.cc.claim.v1.claim_property_core-1.0",
+  "combine": [
+    "gw.core.cc.claim.v1.claim_core-1.0"
+  ],
+  "mappers": {
+    "Building": {
+      "schemaDefinition": "Building",
+      "root": "entity.Building",
+      "properties": {
+        "buildingNumber": {
+          "path": "Building.BuildingNumber"
+        },
+        "id": {
+          "path": "Building.RestId"
+        },
+        "notes": {
+          "path": "Building.Notes"
+        },
+        "policySystemId": {
+          "path": "Building.PolicySystemId"
+        }
+      }
+    },
+    "Claim": {
+      "schemaDefinition": "Claim",
+      "root": "entity.Claim",
+      "properties": {
+        "arson": {
+          "path": "Claim.PropertyFireDamage.Arson"
+        },
+        "fireDepartmentResponded": {
+          "path": "Claim.PropertyFireDamage.FireDeptResponded"
+        },
+        "fireSource": {
+          "path": "Claim.PropertyFireDamage.FireSource"
+        },
+        "hasWaterBeenTurnedOff": {
+          "path": "Claim.PropertyWaterDamage.HasWaterBeenTurnedOff"
+        },
+        "howWasFireDiscovered": {
+          "path": "Claim.PropertyFireDamage.HowWasFireDiscovered"
+        },
+        "isAnyoneInjured": {
+          "path": "Claim.PropertyFireDamage.IsAnyoneInjured"
+        },
+        "isHomeHabitable": {
+          "path": "Claim.PropertyFireDamage.IsHomeHabitable"
+        },
+        "isHomeSecure": {
+          "path": "Claim.PropertyFireDamage.IsHomeSecure"
+        },
+        "isRoofProtected": {
+          "path": "Claim.PropertyWaterDamage.IsRoofProtected"
+        },
+        "smokeDamageOnly": {
+          "path": "Claim.PropertyFireDamage.SmokeDamageOnly"
+        },
+        "waterSource": {
+          "path": "Claim.PropertyWaterDamage.WaterSource",
+          "mapper": "#/mappers/TypeKeyReference"
+        }
+      }
+    },
+    "DwellingIncident": {
+      "schemaDefinition": "DwellingIncident",
+      "root": "entity.DwellingIncident",
+      "properties": {
+        "automationPath": {
+          "path": "DwellingIncident.AutomationPath",
+          "mapper": "#/mappers/TypeKeyReference"
+        },
+        "damagedAreaSize": {
+          "path": "DwellingIncident.DamagedAreaSize"
+        },
+        "description": {
+          "path": "DwellingIncident.Description"
+        },
+        "dwellingRoomDamages": {
+          "path": "DwellingIncident.DwellingRoomDamages.orderBy(\\d -> d.RoomType.Code).thenBy(\\d -> d.RestId)",
+          "mapper": "#/mappers/DwellingRoomDamage",
+          // The underlying DwellingRoomDamages array is safe because DwellingRoomDamage does not generate events. (Sorting is irrelevant to App Events.)
+          "eventSafe": true
+        },
+        "fireProtectionAvailable": {
+          "path": "DwellingIncident.FireProtectionAvailable"
+        },
+        "id": {
+          "path": "DwellingIncident.RestId"
+        },
+        "location": {
+          "path": "DwellingIncident.Property",
+          "mapper": "#/mappers/PolicyLocation"
+        },
+        "lossParty": {
+          "path": "DwellingIncident.LossParty",
+          "mapper": "#/mappers/TypeKeyReference"
+        },
+        "materialsDamaged": {
+          "path": "DwellingIncident.MaterialsDamaged"
+        },
+        "numberOfPeopleOnPolicy": {
+          "path": "DwellingIncident.NumberOfPeopleOnPolicy"
+        },
+        "occupancyType": {
+          "path": "DwellingIncident.OccupancyType",
+          "mapper": "#/mappers/TypeKeyReference"
+        },
+        "propertySize": {
+          "path": "DwellingIncident.PropertySize"
+        },
+        "severity": {
+          "path": "DwellingIncident.Severity",
+          "mapper": "#/mappers/TypeKeyReference"
+        },
+        "yearBuilt": {
+          "path": "DwellingIncident.YearBuilt"
+        },
+        "yearsInHome": {
+          "path": "DwellingIncident.YearsInHome"
+        }
+      }
+    },
+    "DwellingRoomDamage": {
+      "schemaDefinition": "DwellingRoomDamage",
+      "root": "entity.DwellingRoomDamage",
+      "properties": {
+        "id": {
+          "path": "DwellingRoomDamage.RestId"
+        },
+        "numberOfRooms": {
+          "path": "DwellingRoomDamage.NumberOfRooms"
+        },
+        "roomType": {
+          "path": "DwellingRoomDamage.RoomType",
+          "mapper": "#/mappers/TypeKeyReference"
+        }
+      }
+    },
+    "Exposure": {
+      "schemaDefinition": "Exposure",
+      "root": "entity.Exposure",
+      "properties": {
+        "dwellingIncident": {
+          "path": "(Exposure.getTypedIncident('DwellingIncident') as DwellingIncident).RestV1_AsReference",
+          "mapper": "#/mappers/ResourceReference"
+        },
+        "livingExpensesIncident": {
+          "path": "(Exposure.getTypedIncident('LivingExpensesIncident') as LivingExpensesIncident).RestV1_AsReference",
+          "mapper": "#/mappers/ResourceReference"
+        }
+      }
+    },
+    "LivingExpensesIncident": {
+      "schemaDefinition": "LivingExpensesIncident",
+      "root": "entity.LivingExpensesIncident",
+      "properties": {
+        "automationPath": {
+          "path": "LivingExpensesIncident.AutomationPath",
+          "mapper": "#/mappers/TypeKeyReference"
+        },
+        "description": {
+          "path": "LivingExpensesIncident.Description"
+        },
+        "id": {
+          "path": "LivingExpensesIncident.RestId"
+        },
+        "lossParty": {
+          "path": "LivingExpensesIncident.LossParty",
+          "mapper": "#/mappers/TypeKeyReference"
+        },
+        "startDate": {
+          "path": "LivingExpensesIncident.StartDate"
+        }
+      }
+    },
+    "LocationBasedRiskUnit": {
+      "schemaDefinition": "LocationBasedRiskUnit",
+      "root": "entity.LocationBasedRU",
+      "properties": {
+        "RUNumber": {
+          "path": "LocationBasedRU.RUNumber"
+        },
+        "building": {
+          "path": "LocationBasedRU.Building",
+          "mapper": "#/mappers/Building"
+        },
+        "coverages": {
+          "path": "LocationBasedRU.Coverages.sortBy(\\cov -> cov.Type)",
+          "mapper": "#/mappers/Coverage",
+          // The underlying Coverages array is safe because it is an owned array. (Sorting is irrelevant to App Events.)
+          "eventSafe": true
+        },
+        "description": {
+          "path": "LocationBasedRU.Description"
+        },
+        "id": {
+          "path": "LocationBasedRU.RestId"
+        },
+        "locationId": {
+          "path": "LocationBasedRU.PolicyLocation.RestId",
+          // RestId is immutable
+          "eventSafe": true
+        },
+        "otherRiskType": {
+          "path": "(LocationBasedRU as LocationMiscRU).OtherRiskType",
+          "mapper": "#/mappers/TypeKeyReference",
+          "predicate": "LocationBasedRU typeis LocationMiscRU"
+        },
+        "policyLocation": {
+          "path": "LocationBasedRU.PolicyLocation",
+          "mapper": "#/mappers/PolicyLocation",
+          // This not safe because it is a foreign key on LocationBasedRU that has an associated array
+          "eventSafe": false
+        },
+        "policySystemId": {
+          "path": "LocationBasedRU.PolicySystemId"
+        },
+        "subtype": {
+          "path": "LocationBasedRU.Subtype",
+          "mapper": "#/mappers/TypeKeyReference"
+        }
+      }
+    },
+    "PolicyLocation": {
+      "schemaDefinition": "PolicyLocation",
+      "root": "entity.PolicyLocation",
+      "properties": {
+        "buildings": {
+          "path": "PolicyLocation.RestV1.BuildingsOrdered",
+          "mapper": "#/mappers/Building",
+          // The underlying Buildings array is safe because it is an owned array. (Sorting is irrelevant to App Events.)
+          "eventSafe": true
+        }
+      }
+    },
+    "UnverifiedPolicyLocation": {
+      "properties": {
+        "buildings": {
+          "path": "PolicyLocation.RestV1.BuildingsOrdered",
+          "mapper": "#/mappers/Building"
+        }
+      }
+    }
+  }
+}

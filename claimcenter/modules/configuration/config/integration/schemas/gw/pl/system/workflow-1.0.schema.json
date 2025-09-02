@@ -1,0 +1,243 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "x-gw-import": {
+    "linking": "gw.pl.framework.linking-1.0"
+  },
+  "definitions": {
+    "WorkflowType": {
+      "type": "object",
+      "description": "Workflow type",
+      "properties": {
+        "workflowType": {
+          "type": "string",
+          "description": "Type of workflow"
+        },
+        "versions": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "WorkflowExecution": {
+      "type": "object",
+      "description": "Workflow details",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "workflowType": {
+          "type": "string"
+        },
+        "version": {
+          "type": "integer"
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updateTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "children": {
+          "type": "integer"
+        },
+        "currentStep": {
+          "type": "string"
+        },
+        "previousStep": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "x-gw-type": "typekey.WorkflowState",
+          "x-gw-export-enumeration": true
+        },
+        "currentAction": {
+          "type": "string"
+        },
+        "activeState": {
+          "type": "string",
+          "x-gw-type": "typekey.WorkflowActiveState",
+          "x-gw-export-enumeration": true
+        },
+        "workItem": {
+          "type": "string"
+        },
+        "timeoutTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "logs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LogEntry"
+          }
+        }
+      }
+    },
+    "LogEntry": {
+      "type": "object",
+      "properties": {
+        "logEntryType": {
+          "type": "string"
+        },
+        "date": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "localizeMessage": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "summary": {
+          "type": "string"
+        },
+        "user": {
+          "type": "string"
+        },
+        "action": {
+          "type": "string"
+        },
+        "stepId": {
+          "type": "string"
+        }
+      }
+    },
+    "WorkflowLogsPage": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LogEntry"
+          }
+        },
+        "_links": {
+          "$ref": "linking#/definitions/Links"
+        },
+        "count": {
+          "type": "integer"
+        },
+        "totalCount": {
+          "type": "integer"
+        }
+      }
+    },
+    "WorkflowExecutionPage": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WorkflowExecutionPageRow"
+          }
+        },
+        "_links": {
+          "$ref": "linking#/definitions/Links"
+        },
+        "count": {
+          "type": "integer"
+        },
+        "totalCount": {
+          "type": "integer"
+        }
+      }
+    },
+    "WorkflowExecutionPageRow": {
+      "type": "object",
+      "properties": {
+        "workflowExecution": {
+          "$ref": "#/definitions/WorkflowExecution"
+        },
+        "_links": {
+          "$ref": "linking#/definitions/Links"
+        }
+      }
+    },
+    "WorkflowExecutionStatistics": {
+      "type": "object",
+      "properties": {
+        "workflowType": {
+          "type": "string"
+        },
+        "step": {
+          "type": "string"
+        },
+        "minimumExecutionTime": {
+          "type": "string"
+        },
+        "maximumExecutionTime": {
+          "type": "string"
+        },
+        "meanExecutionTime": {
+          "type": "string"
+        },
+        "standardDeviationExecutionTime": {
+          "type": "string"
+        },
+        "minimumElapsedTime": {
+          "type": "string"
+        },
+        "maximumElapsedTime": {
+          "type": "string"
+        },
+        "meanElapsedTime": {
+          "type": "string"
+        },
+        "standardDeviationElapsedTime": {
+          "type": "string"
+        },
+        "executionsCount": {
+          "type": "integer"
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "WorkflowExecutionStatisticsPage": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WorkflowExecutionStatistics"
+          }
+        },
+        "_links": {
+          "$ref": "linking#/definitions/Links"
+        },
+        "count": {
+          "type": "integer"
+        },
+        "totalCount": {
+          "type": "integer"
+        }
+      }
+    },
+    "BulkworkflowActionInput": {
+      "type": "object",
+      "properties": {
+        "all": {
+          "type": "boolean"
+        },
+        "ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

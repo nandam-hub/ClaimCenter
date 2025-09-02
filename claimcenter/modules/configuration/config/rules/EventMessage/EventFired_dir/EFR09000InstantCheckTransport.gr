@@ -1,0 +1,18 @@
+package rules.EventMessage.EventFired_dir
+
+uses gw.api.system.CCConfigParameters
+
+@gw.rules.RuleName("EFR09000 - Instant Check Transport")
+internal class EFR09000InstantCheckTransport {
+  static function doCondition(messageContext : entity.MessageContext) : boolean {
+/*start00rule*/
+    return CCConfigParameters.InstantPaymentIntegrationEnabled.Value && messageContext.DestID == 71
+/*end00rule*/
+  }
+
+  static function doAction(messageContext : entity.MessageContext, actions : gw.rules.Action) {
+/*start00rule*/
+
+/*end00rule*/
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "x-gw-combine": [
+    "gw.content.cc.claim.v1.claim_content-1.0",
+    "gw.content.cc.claim.v1.claim_auto_content-1.0",
+    "gw.content.cc.claim.v1.claim_property_content-1.0",
+    "gw.content.cc.common.v1.common_content-1.0",
+    "gw.core.cc.claim.v1.claim_graph_core-1.0"
+  ],
+  "definitions": { }
+}

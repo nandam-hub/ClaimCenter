@@ -1,0 +1,342 @@
+name: "Integration Admin"
+endpoints:
+- endpoint: /async/v1/openapi.json
+  methods:
+  - GET
+- endpoint: "/async/v1/requests/*"
+  methods:
+  - GET
+- endpoint: "/async/v1/requests/*/response"
+  methods:
+  - GET
+- endpoint: /claim/v1/claim-graph
+  methods:
+  - GET
+- endpoint: /claim/v1/claim-infos
+  methods:
+  - GET
+- endpoint: "/claim/v1/claim-infos/*"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claim-infos/*/retrieve"
+  methods:
+  - POST
+- endpoint: /claim/v1/claims
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/activities"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/baggage-incidents"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/baggage-incidents/*"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/baggage-incidents/*/assessment-content-items"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/baggage-incidents/*/assessment-content-items/*"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/checks"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/checks/*"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/contacts"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/contacts/*"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/documents"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/documents/*"
+  methods:
+  - GET
+  - PATCH
+- endpoint: "/claim/v1/claims/*/documents/*/content"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/dwelling-incidents"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/dwelling-incidents/*"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/exposures"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/exposures/*"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/exposures/*/validate"
+  methods:
+  - POST
+- endpoint: "/claim/v1/claims/*/fixed-property-incidents"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/fixed-property-incidents/*"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/general-incidents"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/general-incidents/*"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/general-incidents/*/assessment-content-items"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/general-incidents/*/assessment-content-items/*"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/injury-incidents"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/injury-incidents/*"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/living-expenses-incidents"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/living-expenses-incidents/*"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/matters/"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/matters/*"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/notes"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/other-structure-incidents"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/other-structure-incidents/*"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/payments"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/payments/*"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/policy"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/policy/coverages"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/policy/coverages/*"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/policy/endorsements"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/policy/endorsements/*"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/policy/location-based-risk-units"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/policy/location-based-risk-units/*"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/policy/location-based-risk-units/*/coverages"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/policy/location-based-risk-units/*/coverages/*"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/policy/locations"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/policy/locations/*"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/policy/locations/*/property-items"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/policy/locations/*/property-items/*"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/policy/trip-risk-units"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/policy/trip-risk-units/*"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/policy/trip-risk-units/*/coverages"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/policy/trip-risk-units/*/coverages/*"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/policy/vehicle-risk-units"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/policy/vehicle-risk-units/*"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/policy/vehicle-risk-units/*/coverages"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/policy/vehicle-risk-units/*/coverages/*"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/property-contents-incidents"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/property-contents-incidents/*"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/property-contents-incidents/*/assessment-content-items"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/property-contents-incidents/*/assessment-content-items/*"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/property-contents-incidents/*/scheduled-items"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/property-contents-incidents/*/scheduled-items/*"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/recoveries"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/recoveries/*"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/recovery-reserve-sets"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/recovery-reserve-sets/*"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/recovery-sets"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/recovery-sets/*"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/recovery-reserves"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/recovery-reserves/*"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/related-objects"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/reserve-sets"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/reserve-sets/*"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/reserves"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/reserves/*"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/service-requests"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/service-requests/*"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/service-requests/*/invoices"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/service-requests/*/invoices/*"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/trip-incidents"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/trip-incidents/*"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/trip-incidents/*/trip-accommodations"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/trip-incidents/*/trip-accommodations/*"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/trip-incidents/*/trip-segments"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/trip-incidents/*/trip-segments/*"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/vehicle-incidents"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/vehicle-incidents/*"
+  methods:
+  - GET
+- endpoint: /claim/v1/openapi.json
+  methods:
+  - GET
+- endpoint: /claim/v1/role-constraints
+  methods:
+  - GET
+- endpoint: "/claim/v1/role-constraints/*"
+  methods:
+  - GET
+- endpoint: /claim/v1/search/claims
+  methods:
+  - POST
+- endpoint: /claim/v1/search/claims-freetext
+  methods:
+  - POST
+- endpoint: /claim/v1/search/claims-v2
+  methods:
+  - POST
+- endpoint: /claim/v1/service-requests
+  methods:
+  - GET
+- endpoint: /common/v1/activities
+  methods:
+  - GET
+- endpoint: "/common/v1/activities/*"
+  methods:
+  - GET
+- endpoint: "/common/v1/activities/*/notes"
+  methods:
+  - GET
+- endpoint: "/common/v1/documents/*"
+  methods:
+  - GET
+  - PATCH
+- endpoint: "/common/v1/documents/*/content"
+  methods:
+  - GET
+- endpoint: "/common/v1/notes/*"
+  methods:
+  - GET
+  - DELETE
+- endpoint: /common/v1/openapi.json
+  methods:
+  - GET
+- endpoint: /composite/v1/composite
+  methods:
+  - POST
+- endpoint: /composite/v1/openapi.json
+  methods:
+  - GET
+accessibleFields:
+  "*":
+    edit: "*"
+    view: "*"

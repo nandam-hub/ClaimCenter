@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<internaltypelistextension
+  xmlns="http://guidewire.com/typelists"
+  desc="Key to a RuleAction"
+  name="RuleActionKey">
+  <typecode
+    code="GenerateActivity"
+    desc="Generate Activity"
+    name="Generate Activity">
+    <category
+      code="ActivityRule"
+      typelist="Rule"/>
+  </typecode>
+  <typecode
+    code="GenerateHistoryEvent"
+    desc="Generate History Event"
+    name="Generate History Event">
+    <category
+      code="ActivityRule"
+      typelist="Rule"/>
+  </typecode>
+  <typecode
+    code="SetField"
+    desc="Set Field"
+    name="Set Field">
+    <category
+      code="ActivityRule"
+      typelist="Rule"/>
+  </typecode>
+  <typecode
+    code="CreateExposure"
+    desc="Create Exposure"
+    name="Create Exposure">
+    <category
+      code="ExposureRule"
+      typelist="Rule"/>
+  </typecode>
+  <typecode
+    code="CreateReserve"
+    desc="Create Reserve"
+    name="Create Reserve">
+    <category
+      code="ReserveRule"
+      typelist="Rule"/>
+  </typecode>
+</internaltypelistextension>

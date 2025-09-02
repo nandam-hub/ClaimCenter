@@ -1,0 +1,961 @@
+# International Address configuration by country:
+# addressFields - The list of valid address fields (in the order they would appear on a mailing address), constants omitted
+# addressRequire - The fields required for a valid address
+#
+# NOTE:
+#  1. Certain fields (such as sortingCode, dependentLocality) are not supported OOTB and must be added to the datamodel
+#     via extension fields on the Address.etx file, added to the common_ext-<version>.schema.json, then mapped in the
+#     common_ext-<version>.mapping.json file and in the common_ext-<version>.updater.json.
+#  2. CEDEX codes are sorting codes, but are handled separately from "sortingCode".
+#  3. Administrative divisions (state, province, emirate, etc.) are mapped to Address.State and typekeys must be added to State.ttx for
+#     supported countries.
+#  4. In countries where "county" is an administrative division, this field is not mapped to Address.State but to Address.County.
+countries:
+  AD:
+    name: Andorra
+    addressFields: addressLine1, addressLine2, addressLine3, postalCode, city
+    addressRequire: addressLine1, city
+  AE:
+    name: United Arab Emirates
+    addressFields: addressLine1, addressLine2, addressLine3, emirate
+    addressRequire: addressLine1, emirate
+  AF:
+    name: Afghanistan
+    addressFields: addressLine1, addressLine2, addressLine3, city, postalCode
+    addressRequire: addressLine1, city
+  AG:
+    name: Antigua And Barbuda
+    addressFields: addressLine1, addressLine2, addressLine3, city
+    addressRequire: addressLine1
+  AI:
+    name: Anguilla
+    addressFields: addressLine1, addressLine2, addressLine3, city, postalCode
+    addressRequire: addressLine1, city
+  AL:
+    name: Albania
+    addressFields: addressLine1, addressLine2, addressLine3, postalCode, city
+    addressRequire: addressLine1, city
+  AM:
+    name: Armenia
+    addressFields: addressLine1, addressLine2, addressLine3, postalCode, city, province
+    addressRequire: addressLine1, city
+  AO:
+    name: Angola
+    addressFields: addressLine1, addressLine2, addressLine3, city
+    addressRequire: addressLine1, city
+  AQ:
+    name: Antarctica
+    addressFields: addressLine1, addressLine2, addressLine3, city
+    addressRequire: addressLine1, city
+  AR:
+    name: Argentina
+    addressFields: addressLine1, addressLine2, addressLine3, postalCode, city, province
+    addressRequire: addressLine1, city
+  AS:
+    name: American Samoa
+    addressFields: addressLine1, addressLine2, addressLine3, city, state, postalCode
+    addressRequire: addressLine1, city, state, postalCode
+  AT:
+    name: Austria
+    addressFields: addressLine1, addressLine2, addressLine3, postalCode, city
+    addressRequire: addressLine1, city, postalCode
+  AU:
+    name: Australia
+    addressFields: addressLine1, addressLine2, addressLine3, city, state, postalCode
+    addressRequire: addressLine1, city, state, postalCode
+  AW:
+    name: Aruba
+    addressFields: addressLine1, addressLine2, addressLine3, city
+    addressRequire: addressLine1, city
+  AZ:
+    name: Azerbaijan
+    addressFields: addressLine1, addressLine2, addressLine3, postalCode, city
+    addressRequire: addressLine1, city
+  BA:
+    name: Bosnia And Herzegovina
+    addressFields: addressLine1, addressLine2, addressLine3, postalCode, city
+    addressRequire: addressLine1, city
+  BB:
+    name: Barbados
+    addressFields: addressLine1, addressLine2, addressLine3, city, parish, postalCode
+    addressRequire: addressLine1, city
+  BD:
+    name: Bangladesh
+    addressFields: addressLine1, addressLine2, addressLine3, city, postalCode
+    addressRequire: addressLine1, city
+  BE:
+    name: Belgium
+    addressFields: addressLine1, addressLine2, addressLine3, postalCode, city
+    addressRequire: addressLine1, city, postalCode
+  BF:
+    name: Burkina Faso
+    addressFields: addressLine1, addressLine2, addressLine3, city, sortingCode
+    addressRequire: addressLine1, city
+  BG:
+    name: Bulgaria (rep.)
+    addressFields: addressLine1, addressLine2, addressLine3, postalCode, city
+    addressRequire: addressLine1, city
+  BH:
+    name: Bahrain
+    addressFields: addressLine1, addressLine2, addressLine3, city, postalCode
+    addressRequire: addressLine1, city
+  BI:
+    name: Burundi
+    addressFields: addressLine1, addressLine2, addressLine3, city
+    addressRequire: addressLine1, city
+  BJ:
+    name: Benin
+    addressFields: addressLine1, addressLine2, addressLine3, city
+    addressRequire: addressLine1, city
+  BL:
+    name: Saint Barthelemy
+    addressFields: addressLine1, addressLine2, addressLine3, postalCode, city, sortingCode
+    addressRequire: addressLine1, city, postalCode
+  BM:
+    name: Bermuda
+    addressFields: addressLine1, addressLine2, addressLine3, city, postalCode
+    addressRequire: addressLine1, city
+  BN:
+    name: Brunei Darussalam
+    addressFields: addressLine1, addressLine2, addressLine3, city, postalCode
+    addressRequire: addressLine1, city
+  BO:
+    name: Bolivia
+    addressFields: addressLine1, addressLine2, addressLine3, city
+    addressRequire: addressLine1, city
+  BR:
+    name: Brazil
+    addressFields: addressLine1, addressLine2, addressLine3, dependentLocality, city, state, postalCode
+    addressRequire: addressLine1, state, city, postalCode
+  BS:
+    name: Bahamas
+    addressFields: addressLine1, addressLine2, addressLine3, city, island
+    addressRequire: addressLine1, city
+  BT:
+    name: Bhutan
+    addressFields: addressLine1, addressLine2, addressLine3, city, postalCode
+    addressRequire: addressLine1, city
+  BV:
+    name: Bouvet Island
+    addressFields: addressLine1, addressLine2, addressLine3, city
+    addressRequire: addressLine1, city
+  BW:
+    name: Botswana
+    addressFields: addressLine1, addressLine2, addressLine3, city
+    addressRequire: addressLine1, city
+  BY:
+    name: Belarus
+    addressFields: province, postalCode, city, addressLine1, addressLine2, addressLine3
+    addressRequire: addressLine1, city
+  BZ:
+    name: Belize
+    addressFields: addressLine1, addressLine2, addressLine3, city
+    addressRequire: addressLine1, city
+  CA:
+    name: Canada
+    addressFields: addressLine1, addressLine2, addressLine3, city, county, province, postalCode
+    addressRequire: addressLine1, city, province, postalCode
+  CC:
+    name: Cocos (keeling) Islands
+    addressFields: addressLine1, addressLine2, addressLine3, city, province, postalCode
+    addressRequire: addressLine1, city
+  CD:
+    name: Congo (dem. Rep.)
+    addressFields: addressLine1, addressLine2, addressLine3, city
+    addressRequire: addressLine1, city
+  CF:
+    name: Central African Republic
+    addressFields: addressLine1, addressLine2, addressLine3, city
+    addressRequire: addressLine1, city
+  CG:
+    name: Congo (rep.)
+    addressFields: addressLine1, addressLine2, addressLine3, city
+    addressRequire: addressLine1, city
+  CH:
+    name: Switzerland
+    addressFields: addressLine1, addressLine2, addressLine3, postalCode, city
+    addressRequire: addressLine1, city, postalCode
+  CI:
+    name: Cote D'ivoire
+    addressFields: sortingCode, addressLine1, addressLine2, addressLine3, city
+    addressRequire: addressLine1, city
+  CK:
+    name: Cook Islands
+    addressFields: addressLine1, addressLine2, addressLine3, city
+    addressRequire: addressLine1, city
+  CL:
+    name: Chile
+    addressFields: addressLine1, addressLine2, addressLine3, postalCode, city, province
+    addressRequire: addressLine1, city
+  CM:
+    name: Cameroon
+    addressFields: addressLine1, addressLine2, addressLine3, city
+    addressRequire: addressLine1, city
+  CN:
+    name: China
+    addressFields: addressLine1, addressLine2, addressLine3, dependentLocality, city, province, postalCode
+    addressRequire: addressLine1, city, province, postalCode
+  CO:
+    name: Colombia
+    addressFields: addressLine1, addressLine2, addressLine3, city, department, postalCode
+    addressRequire: addressLine1, department
+  CR:
+    name: Costa Rica
+    addressFields: addressLine1, addressLine2, addressLine3, province, city, postalCode
+    addressRequire: addressLine1, city, province
+  CV:
+    name: Cape Verde
+    addressFields: addressLine1, addressLine2, addressLine3, postalCode, city, island
+    addressRequire: addressLine1, city
+  CX:
+    name: Christmas Island
+    addressFields: addressLine1, addressLine2, addressLine3, city, province, postalCode
+    addressRequire: addressLine1, city
+  CY:
+    name: Cyprus
+    addressFields: addressLine1, addressLine2, addressLine3, postalCode, city
+    addressRequire: addressLine1, city
+  CZ:
+    name: Czech Rep.
+    addressFields: addressLine1, addressLine2, addressLine3, postalCode, city
+    addressRequire: addressLine1, city
+  DE:
+    name: Germany
+    addressFields: addressLine1, addressLine2, addressLine3, postalCode, city
+    addressRequire: addressLine1, city, postalCode
+  DJ:
+    name: Djibouti
+    addressFields: addressLine1, addressLine2, addressLine3, city
+    addressRequire: addressLine1, city
+  DK:
+    name: Denmark
+    addressFields: addressLine1, addressLine2, addressLine3, postalCode, city
+    addressRequire: addressLine1, city, postalCode
+  DM:
+    name: Dominica
+    addressFields: addressLine1, addressLine2, addressLine3, city
+    addressRequire: addressLine1, city
+  DO:
+    name: Dominican Rep.
+    addressFields: addressLine1, addressLine2, addressLine3, postalCode, city
+    addressRequire: addressLine1, city
+  DZ:
+    name: Algeria
+    addressFields: addressLine1, addressLine2, addressLine3, postalCode, city
+    addressRequire: addressLine1, city
+  EC:
+    name: Ecuador
+    addressFields: addressLine1, addressLine2, addressLine3, postalCode, city
+    addressRequire: addressLine1, city
+  EE:
+    name: Estonia
+    addressFields: addressLine1, addressLine2, addressLine3, postalCode, city
+    addressRequire: addressLine1, city
+  EG:
+    name: Egypt
+    addressFields: addressLine1, addressLine2, addressLine3, city, province, postalCode
+    addressRequire: addressLine1, city
+  EH:
+    name: Western Sahara
+    addressFields: addressLine1, addressLine2, addressLine3, postalCode, city
+    addressRequire: addressLine1, city
+  ER:
+    name: Eritrea
+    addressFields: addressLine1, addressLine2, addressLine3, city
+    addressRequire: addressLine1, city
+  ES:
+    name: Spain
+    addressFields: addressLine1, addressLine2, addressLine3, postalCode, city, province
+    addressRequire: addressLine1, city, province, postalCode
+  ET:
+    name: Ethiopia
+    addressFields: addressLine1, addressLine2, addressLine3, postalCode, city
+    addressRequire: addressLine1, city
+  FI:
+    name: Finland
+    addressFields: addressLine1, addressLine2, addressLine3, postalCode, city
+    addressRequire: addressLine1, city, postalCode
+  FJ:
+    name: Fiji
+    addressFields: addressLine1, addressLine2, addressLine3, city
+    addressRequire: addressLine1, city
+  FK:
+    name: Falkland Islands (malvinas)
+    addressFields: addressLine1, addressLine2, addressLine3, city, postalCode
+    addressRequire: addressLine1, city, postalCode
+  FM:
+    name: Micronesia (federated State Of)
+    addressFields: addressLine1, addressLine2, addressLine3, city, state, postalCode
+    addressRequire: addressLine1, city, state, postalCode
+  FO:
+    name: Faroe Islands
+    addressFields: addressLine1, addressLine2, addressLine3, postalCode, city
+    addressRequire: addressLine1, city
+  FR:
+    name: France
+    addressFields: addressLine1, addressLine2, addressLine3, postalCode, city, CEDEX
+    addressRequire: addressLine1, city, postalCode
+  GA:
+    name: Gabon
+    addressFields: addressLine1, addressLine2, addressLine3, city
+    addressRequire: addressLine1, city
+  GB:
+    name: United Kingdom
+    addressFields: addressLine1, addressLine2, addressLine3, city, postalCode
+    addressRequire: addressLine1, city, postalCode
+  GD:
+    name: Grenada (west Indies)
+    addressFields: addressLine1, addressLine2, addressLine3, city
+    addressRequire: addressLine1, city
+  GE:
+    name: Georgia
+    addressFields: addressLine1, addressLine2, addressLine3, postalCode, city
+    addressRequire: addressLine1, city
+  GF:
+    name: French Guiana
+    addressFields: addressLine1, addressLine2, addressLine3, postalCode, city, sortingCode
+    addressRequire: addressLine1, city, postalCode
+  GH:
+    name: Ghana
+    addressFields: addressLine1, addressLine2, addressLine3, city
+    addressRequire: addressLine1, city
+  GI:
+    name: Gibraltar
+    addressFields: addressLine1, addressLine2, addressLine3, postalCode
+    addressRequire: addressLine1
+  GL:
+    name: Greenland
+    addressFields: addressLine1, addressLine2, addressLine3, postalCode, city
+    addressRequire: addressLine1, city, postalCode
+  GM:
+    name: Gambia
+    addressFields: addressLine1, addressLine2, addressLine3, city
+    addressRequire: addressLine1, city
+  GN:
+    name: Guinea
+    addressFields: postalCode, addressLine1, addressLine2, addressLine3, city
+    addressRequire: addressLine1, city
+  GP:
+    name: Guadeloupe
+    addressFields: addressLine1, addressLine2, addressLine3, postalCode, city, sortingCode
+    addressRequire: addressLine1, city, postalCode
+  GQ:
+    name: Equatorial Guinea
+    addressFields: addressLine1, addressLine2, addressLine3, city
+    addressRequire: addressLine1, city
+  GR:
+    name: Greece
+    addressFields: addressLine1, addressLine2, addressLine3, postalCode, city
+    addressRequire: addressLine1, city, postalCode
+  GS:
+    name: South Georgia
+    addressFields: addressLine1, addressLine2, addressLine3, city, postalCode
+    addressRequire: addressLine1, city, postalCode
+  GT:
+    name: Guatemala
+    addressFields: addressLine1, addressLine2, addressLine3, postalCode, city
+    addressRequire: addressLine1, city
+  GU:
+    name: Guam
+    addressFields: addressLine1, addressLine2, addressLine3, city, state, postalCode
+    addressRequire: addressLine1, city, state, postalCode
+  GW:
+    name: Guinea-bissau
+    addressFields: addressLine1, addressLine2, addressLine3, postalCode, city
+    addressRequire: addressLine1, city
+  GY:
+    name: Guyana
+    addressFields: addressLine1, addressLine2, addressLine3, city
+    addressRequire: addressLine1, city
+  HK:
+    name: Hong Kong
+    addressFields: addressLine1, addressLine2, addressLine3, city, area
+    addressRequire: addressLine1, area
+  HM:
+    name: Heard And Mcdonald Islands
+    addressFields: addressLine1, addressLine2, addressLine3, city, province, postalCode
+    addressRequire: addressLine1, city
+  HN:
+    name: Honduras
+    addressFields: addressLine1, addressLine2, addressLine3, city, province, postalCode
+    addressRequire: addressLine1, city, province
+  HR:
+    name: Croatia
+    addressFields: addressLine1, addressLine2, addressLine3, postalCode, city
+    addressRequire: addressLine1, city
+  HT:
+    name: Haiti
+    addressFields: addressLine1, addressLine2, addressLine3, postalCode, city
+    addressRequire: addressLine1, city
+  HU:
+    name: Hungary (rep.)
+    addressFields: city, addressLine1, addressLine2, addressLine3, postalCode
+    addressRequire: addressLine1, city, postalCode
+  ID:
+    name: Indonesia
+    addressFields: addressLine1, addressLine2, addressLine3, city, province, postalCode
+    addressRequire: addressLine1, province
+  IE:
+    name: Ireland
+    addressFields: addressLine1, addressLine2, addressLine3, dependentLocality, city, county, postalCode
+    addressRequire: addressLine1, city
+  IL:
+    name: Israel
+    addressFields: addressLine1, addressLine2, addressLine3, city, postalCode
+    addressRequire: addressLine1, city
+  IN:
+    name: India
+    addressFields: addressLine1, addressLine2, addressLine3, city, postalCode, state
+    addressRequire: addressLine1, city, state, postalCode
+  IO:
+    name: British Indian Ocean Territory
+    addressFields: addressLine1, addressLine2, addressLine3, city, postalCode
+    addressRequire: addressLine1, city, postalCode
+  IQ:
+    name: Iraq
+    addressFields: addressLine1, addressLine2, addressLine3, city, province, postalCode
+    addressRequire: addressLine1, city, province
+  IR:
+    name: Iran
+    addressFields: province, city, dependentLocality, addressLine1, addressLine2, addressLine3, postalCode
+    addressRequire: addressLine1, city
+  IS:
+    name: Iceland
+    addressFields: addressLine1, addressLine2, addressLine3, postalCode, city
+    addressRequire: addressLine1, city
+  IT:
+    name: Italy
+    addressFields: addressLine1, addressLine2, addressLine3, postalCode, city, province
+    addressRequire: addressLine1, city, province, postalCode
+  JM:
+    name: Jamaica
+    addressFields: addressLine1, addressLine2, addressLine3, city, parish, sortingCode
+    addressRequire: addressLine1, city, parish
+  JO:
+    name: Jordan
+    addressFields: addressLine1, addressLine2, addressLine3, city, postalCode
+    addressRequire: addressLine1, city
+  JP:
+    name: Japan
+    addressFields: addressLine1, addressLine1Kanji, addressLine2, addressLine2Kanji, addressLine3, city, cityKanji, prefecture, postalCode
+    addressRequire: addressLine1, city, prefecture, postalCode
+  KE:
+    name: Kenya
+    addressFields: addressLine1, addressLine2, addressLine3, city, postalCode
+    addressRequire: addressLine1, city
+  KG:
+    name: Kyrgyzstan
+    addressFields: addressLine1, addressLine2, addressLine3, postalCode, city
+    addressRequire: addressLine1, city
+  KH:
+    name: Cambodia
+    addressFields: addressLine1, addressLine2, addressLine3, city, postalCode
+    addressRequire: addressLine1, city
+  KI:
+    name: Kiribati
+    addressFields: addressLine1, addressLine2, addressLine3, island, city
+    addressRequire: addressLine1, city
+  KM:
+    name: Comoros
+    addressFields: addressLine1, addressLine2, addressLine3, city
+    addressRequire: addressLine1, city
+  KN:
+    name: Saint Kitts And Nevis
+    addressFields: addressLine1, addressLine2, addressLine3, city, island
+    addressRequire: addressLine1, city, island
+  KR:
+    name: South Korea
+    addressFields: addressLine1, addressLine2, addressLine3, dependentLocality, city, do_si, postalCode
+    addressRequire: addressLine1, city, do_si, postalCode
+  KW:
+    name: Kuwait
+    addressFields: addressLine1, addressLine2, addressLine3, postalCode, city
+    addressRequire: addressLine1, city
+  KY:
+    name: Cayman Islands
+    addressFields: addressLine1, addressLine2, addressLine3, island, postalCode
+    addressRequire: addressLine1, island
+  KZ:
+    name: Kazakhstan
+    addressFields: postalCode, province, city, addressLine1, addressLine2, addressLine3
+    addressRequire: addressLine1, city
+  LA:
+    name: Lao (people's Dem. Rep.)
+    addressFields: addressLine1, addressLine2, addressLine3, postalCode, city
+    addressRequire: addressLine1, city
+  LB:
+    name: Lebanon
+    addressFields: addressLine1, addressLine2, addressLine3, city, postalCode
+    addressRequire: addressLine1, city
+  LC:
+    name: Saint Lucia
+    addressFields: addressLine1, addressLine2, addressLine3, city
+    addressRequire: addressLine1, city
+  LI:
+    name: Liechtenstein
+    addressFields: addressLine1, addressLine2, addressLine3, postalCode, city
+    addressRequire: addressLine1, city, postalCode
+  LK:
+    name: Sri Lanka
+    addressFields: addressLine1, addressLine2, addressLine3, city, postalCode
+    addressRequire: addressLine1, city
+  LR:
+    name: Liberia
+    addressFields: addressLine1, addressLine2, addressLine3, postalCode, city
+    addressRequire: addressLine1, city
+  LS:
+    name: Lesotho
+    addressFields: addressLine1, addressLine2, addressLine3, city, postalCode
+    addressRequire: addressLine1, city
+  LT:
+    name: Lithuania
+    addressFields: addressLine1, addressLine2, addressLine3, postalCode, city
+    addressRequire: addressLine1, city
+  LU:
+    name: Luxembourg
+    addressFields: addressLine1, addressLine2, addressLine3, postalCode, city
+    addressRequire: addressLine1, city, postalCode
+  LV:
+    name: Latvia
+    addressFields: addressLine1, addressLine2, addressLine3, city, postalCode
+    addressRequire: addressLine1, city
+  LY:
+    name: Libya
+    addressFields: addressLine1, addressLine2, addressLine3, city
+    addressRequire: addressLine1, city
+  MA:
+    name: Morocco
+    addressFields: addressLine1, addressLine2, addressLine3, postalCode, city
+    addressRequire: addressLine1, city
+  MC:
+    name: Monaco
+    addressFields: addressLine1, addressLine2, addressLine3, postalCode, city, CEDEX
+    addressRequire: addressLine1, city
+  MD:
+    name: Rep. Moldova
+    addressFields: addressLine1, addressLine2, addressLine3, postalCode, city
+    addressRequire: addressLine1, city
+  ME:
+    name: Montenegro
+    addressFields: addressLine1, addressLine2, addressLine3, postalCode, city
+    addressRequire: addressLine1, city
+  MF:
+    name: Saint Martin
+    addressFields: addressLine1, addressLine2, addressLine3, postalCode, city, sortingCode
+    addressRequire: addressLine1, city, postalCode
+  MG:
+    name: Madagascar
+    addressFields: addressLine1, addressLine2, addressLine3, postalCode, city
+    addressRequire: addressLine1, city
+  MH:
+    name: Marshall Islands
+    addressFields: addressLine1, addressLine2, addressLine3, city, state, postalCode
+    addressRequire: addressLine1, city, state, postalCode
+  MK:
+    name: Macedonia
+    addressFields: addressLine1, addressLine2, addressLine3, postalCode, city
+    addressRequire: addressLine1, city
+  ML:
+    name: Mali
+    addressFields: addressLine1, addressLine2, addressLine3, city
+    addressRequire: addressLine1, city
+  MM:
+    name: Myanmar
+    addressFields: addressLine1, addressLine2, addressLine3, city, postalCode
+    addressRequire: addressLine1, city
+  MN:
+    name: Mongolia
+    addressFields: addressLine1, addressLine2, addressLine3, city, province, postalCode
+    addressRequire: addressLine1, city
+  MO:
+    name: Macao
+    addressFields: addressLine1, addressLine2, addressLine3
+    addressRequire: addressLine1
+  MP:
+    name: Northern Mariana Islands
+    addressFields: addressLine1, addressLine2, addressLine3, city, state, postalCode
+    addressRequire: addressLine1, city, state, postalCode
+  MQ:
+    name: Martinique
+    addressFields: addressLine1, addressLine2, addressLine3, postalCode, city, sortingCode
+    addressRequire: addressLine1, city, postalCode
+  MR:
+    name: Mauritania
+    addressFields: addressLine1, addressLine2, addressLine3, city
+    addressRequire: addressLine1, city
+  MS:
+    name: Montserrat
+    addressFields: addressLine1, addressLine2, addressLine3, city
+    addressRequire: addressLine1, city
+  MT:
+    name: Malta
+    addressFields: addressLine1, addressLine2, addressLine3, city, postalCode
+    addressRequire: addressLine1, city
+  MU:
+    name: Mauritius
+    addressFields: addressLine1, addressLine2, addressLine3, postalCode, city
+    addressRequire: addressLine1, city
+  MV:
+    name: Maldives
+    addressFields: addressLine1, addressLine2, addressLine3, city, postalCode
+    addressRequire: addressLine1, city
+  MW:
+    name: Malawi
+    addressFields: addressLine1, addressLine2, addressLine3, city, sortingCode
+    addressRequire: addressLine1, city
+  MX:
+    name: Mexico
+    addressFields: addressLine1, addressLine2, addressLine3, dependentLocality, postalCode, city, state
+    addressRequire: addressLine1, city, postalCode
+  MY:
+    name: Malaysia
+    addressFields: addressLine1, addressLine2, addressLine3, dependentLocality, postalCode, city, state
+    addressRequire: addressLine1, city, postalCode
+  MZ:
+    name: Mozambique
+    addressFields: addressLine1, addressLine2, addressLine3, postalCode, city
+    addressRequire: addressLine1, city
+  NA:
+    name: Namibia
+    addressFields: addressLine1, addressLine2, addressLine3, city
+    addressRequire: addressLine1, city
+  NC:
+    name: New Caledonia
+    addressFields: addressLine1, addressLine2, addressLine3, postalCode, city, sortingCode
+    addressRequire: addressLine1, city, postalCode
+  NE:
+    name: Niger
+    addressFields: addressLine1, addressLine2, addressLine3, postalCode, city
+    addressRequire: addressLine1, city
+  NF:
+    name: Norfolk Island
+    addressFields: addressLine1, addressLine2, addressLine3, city, province, postalCode
+    addressRequire: addressLine1, city
+  NG:
+    name: Nigeria
+    addressFields: addressLine1, addressLine2, addressLine3, city, postalCode, state
+    addressRequire: addressLine1, city
+  NI:
+    name: Nicaragua
+    addressFields: addressLine1, addressLine2, addressLine3, postalCode, city, department
+    addressRequire: addressLine1, city
+  NL:
+    name: Netherlands
+    addressFields: addressLine1, addressLine2, addressLine3, postalCode, city
+    addressRequire: addressLine1, city, postalCode
+  "NO":
+    name: Norway
+    addressFields: addressLine1, addressLine2, addressLine3, postalCode, city
+    addressRequire: addressLine1, city, postalCode
+  NP:
+    name: Nepal
+    addressFields: addressLine1, addressLine2, addressLine3, city, postalCode
+    addressRequire: addressLine1, city
+  NR:
+    name: Nauru Central Pacific
+    addressFields: addressLine1, addressLine2, addressLine3, district
+    addressRequire: addressLine1, district
+  NU:
+    name: Niue
+    addressFields: addressLine1, addressLine2, addressLine3, city
+    addressRequire: addressLine1, city
+  NZ:
+    name: New Zealand
+    addressFields: addressLine1, addressLine2, addressLine3, dependentLocality, city, postalCode
+    addressRequire: addressLine1, city, postalCode
+  OM:
+    name: Oman
+    addressFields: addressLine1, addressLine2, addressLine3, postalCode, city
+    addressRequire: addressLine1, city
+  PA:
+    name: Panama (rep.)
+    addressFields: addressLine1, addressLine2, addressLine3, city, province
+    addressRequire: addressLine1, city
+  PE:
+    name: Peru
+    addressFields: addressLine1, addressLine2, addressLine3, city, postalCode, province
+    addressRequire: addressLine1, city
+  PF:
+    name: French Polynesia
+    addressFields: addressLine1, addressLine2, addressLine3, postalCode, city, island
+    addressRequire: addressLine1, city, island, postalCode
+  PG:
+    name: Papua New Guinea
+    addressFields: addressLine1, addressLine2, addressLine3, city, postalCode, province
+    addressRequire: addressLine1, city, province
+  PH:
+    name: Philippines
+    addressFields: addressLine1, addressLine2, addressLine3, dependentLocality, city, postalCode, province
+    addressRequire: addressLine1, city
+  PK:
+    name: Pakistan
+    addressFields: addressLine1, addressLine2, addressLine3, city, postalCode
+    addressRequire: addressLine1, city
+  PL:
+    name: Poland
+    addressFields: addressLine1, addressLine2, addressLine3, postalCode, city
+    addressRequire: addressLine1, city, postalCode
+  PM:
+    name: St. Pierre And Miquelon
+    addressFields: addressLine1, addressLine2, addressLine3, postalCode, city, sortingCode
+    addressRequire: addressLine1, city, postalCode
+  PN:
+    name: Pitcairn
+    addressFields: addressLine1, addressLine2, addressLine3, city, postalCode
+    addressRequire: addressLine1, city, postalCode
+  PR:
+    name: Puerto Rico
+    addressFields: addressLine1, addressLine2, addressLine3, city, postalCode
+    addressRequire: addressLine1, city, postalCode
+  PS:
+    name: Palestinian Territory
+    addressFields: addressLine1, addressLine2, addressLine3, city
+    addressRequire: addressLine1, city
+  PT:
+    name: Portugal
+    addressFields: addressLine1, addressLine2, addressLine3, postalCode, city
+    addressRequire: addressLine1, city, postalCode
+  PW:
+    name: Palau
+    addressFields: addressLine1, addressLine2, addressLine3, city, state, postalCode
+    addressRequire: addressLine1, city, state, postalCode
+  PY:
+    name: Paraguay
+    addressFields: addressLine1, addressLine2, addressLine3, postalCode, city
+    addressRequire: addressLine1, city
+  QA:
+    name: Qatar
+    addressFields: addressLine1, addressLine2, addressLine3, city
+    addressRequire: addressLine1, city
+  RE:
+    name: Reunion
+    addressFields: addressLine1, addressLine2, addressLine3, postalCode, city, sortingCode
+    addressRequire: addressLine1, city, postalCode
+  RO:
+    name: Romania
+    addressFields: addressLine1, addressLine2, addressLine3, postalCode, city
+    addressRequire: addressLine1, city
+  RS:
+    name: Republic Of Serbia
+    addressFields: addressLine1, addressLine2, addressLine3, postalCode, city
+    addressRequire: addressLine1, city
+  RU:
+    name: Russian Federation
+    addressFields: addressLine1, addressLine2, addressLine3, city, oblast, postalCode
+    addressRequire: addressLine1, city, oblast, postalCode
+  RW:
+    name: Rwanda
+    addressFields: addressLine1, addressLine2, addressLine3, city
+    addressRequire: addressLine1, city
+  SA:
+    name: Saudi Arabia
+    addressFields: addressLine1, addressLine2, addressLine3, city, postalCode
+    addressRequire: addressLine1, city
+  SB:
+    name: Solomon Islands
+    addressFields: addressLine1, addressLine2, addressLine3, city
+    addressRequire: addressLine1, city
+  SC:
+    name: Seychelles
+    addressFields: addressLine1, addressLine2, addressLine3, city, island
+    addressRequire: addressLine1, city
+  SE:
+    name: Sweden
+    addressFields: addressLine1, addressLine2, addressLine3, postalCode, city
+    addressRequire: addressLine1, city, postalCode
+  SG:
+    name: Rep. Of Singapore
+    addressFields: addressLine1, addressLine2, addressLine3, postalCode
+    addressRequire: addressLine1, postalCode
+  SH:
+    name: Saint Helena
+    addressFields: addressLine1, addressLine2, addressLine3, city, postalCode
+    addressRequire: addressLine1, city, postalCode
+  SI:
+    name: Slovenia
+    addressFields: addressLine1, addressLine2, addressLine3, postalCode, city
+    addressRequire: addressLine1, city
+  SJ:
+    name: Svalbard And Jan Mayen Islands
+    addressFields: addressLine1, addressLine2, addressLine3, postalCode, city
+    addressRequire: addressLine1, city, postalCode
+  SK:
+    name: Slovakia
+    addressFields: addressLine1, addressLine2, addressLine3, postalCode, city
+    addressRequire: addressLine1, city
+  SL:
+    name: Sierra Leone
+    addressFields: addressLine1, addressLine2, addressLine3, city
+    addressRequire: addressLine1, city
+  SM:
+    name: San Marino
+    addressFields: addressLine1, addressLine2, addressLine3, postalCode, city
+    addressRequire: addressLine1, postalCode
+  SN:
+    name: Senegal
+    addressFields: addressLine1, addressLine2, addressLine3, postalCode, city
+    addressRequire: addressLine1, city
+  SO:
+    name: Somalia
+    addressFields: addressLine1, addressLine2, addressLine3, city, province, postalCode
+    addressRequire: addressLine1, city, province
+  SR:
+    name: Suriname
+    addressFields: addressLine1, addressLine2, addressLine3, city, province
+    addressRequire: addressLine1, city
+  ST:
+    name: Sao Tome And Principe
+    addressFields: addressLine1, addressLine2, addressLine3, city
+    addressRequire: addressLine1, city
+  SV:
+    name: El Salvador
+    addressFields: addressLine1, addressLine2, addressLine3, postalCode, city, province
+    addressRequire: addressLine1, city, province
+  SZ:
+    name: Swaziland
+    addressFields: addressLine1, addressLine2, addressLine3, city, postalCode
+    addressRequire: addressLine1, city
+  TC:
+    name: Turks And Caicos Islands
+    addressFields: addressLine1, addressLine2, addressLine3, city, postalCode
+    addressRequire: addressLine1, city, postalCode
+  TD:
+    name: Chad
+    addressFields: addressLine1, addressLine2, addressLine3, city
+    addressRequire: addressLine1, city
+  TF:
+    name: French Southern Territories
+    addressFields: addressLine1, addressLine2, addressLine3, city
+    addressRequire: addressLine1, city
+  TG:
+    name: Togo
+    addressFields: addressLine1, addressLine2, addressLine3, city
+    addressRequire: addressLine1, city
+  TH:
+    name: Thailand
+    addressFields: addressLine1, addressLine2, addressLine3, dependentLocality, city, province, postalCode
+    addressRequire: addressLine1, city
+  TJ:
+    name: Tajikistan
+    addressFields: addressLine1, addressLine2, addressLine3, postalCode, city
+    addressRequire: addressLine1, city
+  TK:
+    name: Tokelau
+    addressFields: addressLine1, addressLine2, addressLine3, city
+    addressRequire: addressLine1, city
+  TL:
+    name: Timor-leste
+    addressFields: addressLine1, addressLine2, addressLine3, city
+    addressRequire: addressLine1, city
+  TM:
+    name: Turkmenistan
+    addressFields: addressLine1, addressLine2, addressLine3, postalCode, city
+    addressRequire: addressLine1, city
+  TN:
+    name: Tunisia
+    addressFields: addressLine1, addressLine2, addressLine3, postalCode, city
+    addressRequire: addressLine1, city
+  TO:
+    name: Tonga
+    addressFields: addressLine1, addressLine2, addressLine3, city
+    addressRequire: addressLine1, city
+  TR:
+    name: Turkey
+    addressFields: addressLine1, addressLine2, addressLine3, postalCode, city, province
+    addressRequire: addressLine1, city, postalCode
+  TT:
+    name: Trinidad And Tobago
+    addressFields: addressLine1, addressLine2, addressLine3, city
+    addressRequire: addressLine1, city
+  TV:
+    name: Tuvalu
+    addressFields: addressLine1, addressLine2, addressLine3, city, island
+    addressRequire: addressLine1, city
+  TW:
+    name: Taiwan
+    addressFields: addressLine1, addressLine2, addressLine3, city, county, postalCode
+    addressRequire: addressLine1, city, county, postalCode
+  TZ:
+    name: Tanzania (united Rep.)
+    addressFields: addressLine1, addressLine2, addressLine3, postalCode, city
+    addressRequire: addressLine1, city
+  UA:
+    name: Ukraine
+    addressFields: addressLine1, addressLine2, addressLine3, city, oblast, postalCode
+    addressRequire: addressLine1, city, oblast, postalCode
+  UG:
+    name: Uganda
+    addressFields: addressLine1, addressLine2, addressLine3, city
+    addressRequire: addressLine1, city
+  UM:
+    name: United States Minor Outlying Islands
+    addressFields: addressLine1, addressLine2, addressLine3, city, state, postalCode
+    addressRequire: addressLine1, city, state
+  US:
+    name: United States
+    addressFields: addressLine1, addressLine2, addressLine3, city, county, state, postalCode
+    addressRequire: addressLine1, city, state, postalCode
+  UY:
+    name: Uruguay
+    addressFields: addressLine1, addressLine2, addressLine3, postalCode, city, province
+    addressRequire: addressLine1, city
+  UZ:
+    name: Uzbekistan
+    addressFields: addressLine1, addressLine2, addressLine3, postalCode, city, province
+    addressRequire: addressLine1, city
+  VA:
+    name: Vatican
+    addressFields: addressLine1, addressLine2, addressLine3, postalCode, city
+    addressRequire: addressLine1, city
+  VC:
+    name: Saint Vincent And The Grenadines (antilles)
+    addressFields: addressLine1, addressLine2, addressLine3, city, postalCode
+    addressRequire: addressLine1, city
+  VE:
+    name: Venezuela
+    addressFields: addressLine1, addressLine2, addressLine3, city, postalCode, state
+    addressRequire: addressLine1, city, state
+  VG:
+    name: Virgin Islands (british)
+    addressFields: addressLine1, addressLine2, addressLine3, city, postalCode
+    addressRequire: addressLine1
+  VI:
+    name: Virgin Islands (u.s.)
+    addressFields: addressLine1, addressLine2, addressLine3, city, state, postalCode
+    addressRequire: addressLine1, city, state, postalCode
+  VN:
+    name: Viet Nam
+    addressFields: addressLine1, addressLine2, addressLine3, city, province, postalCode
+    addressRequire: addressLine1, city
+  VU:
+    name: Vanuatu
+    addressFields: addressLine1, addressLine2, addressLine3, city
+    addressRequire: addressLine1, city
+  WF:
+    name: Wallis And Futuna Islands
+    addressFields: addressLine1, addressLine2, addressLine3, postalCode, city, sortingCode
+    addressRequire: addressLine1, city, postalCode
+  WS:
+    name: Samoa
+    addressFields: addressLine1, addressLine2, addressLine3, city
+    addressRequire: addressLine1, city
+  YE:
+    name: Yemen
+    addressFields: addressLine1, addressLine2, addressLine3, city
+    addressRequire: addressLine1, city
+  YT:
+    name: Mayotte
+    addressFields: addressLine1, addressLine2, addressLine3, postalCode, city, sortingCode
+    addressRequire: addressLine1, city, postalCode
+  ZA:
+    name: South Africa
+    addressFields: addressLine1, addressLine2, addressLine3, dependentLocality, city, postalCode
+    addressRequire: addressLine1, city, postalCode
+  ZM:
+    name: Zambia
+    addressFields: addressLine1, addressLine2, addressLine3, postalCode, city
+    addressRequire: addressLine1, city
+  ZW:
+    name: Zimbabwe
+    addressFields: addressLine1, addressLine2, addressLine3, city
+    addressRequire: addressLine1, city

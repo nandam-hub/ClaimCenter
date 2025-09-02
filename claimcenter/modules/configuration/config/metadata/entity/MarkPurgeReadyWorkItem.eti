@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Workitem for items to be marked as PurgeReady."
+  entity="MarkPurgeReadyWorkItem"
+  extendable="false"
+  final="true"
+  loadable="false"
+  platform="true"
+  table="markpurgereadyworkitem"
+  type="keyable">
+  <implementsEntity
+    name="WorkItem"/>
+  <fulldescription><![CDATA[Represents a unit of work pending for marking PurgeReady.]]></fulldescription>
+  <column
+    columnName="Item"
+    desc="Soft foreign key to the item to be processed for marking PurgeReady."
+    name="Item"
+    nullok="false"
+    type="softentityreference"/>
+</entity>

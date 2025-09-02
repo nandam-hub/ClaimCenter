@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<plugin
+  interface="IRestSchemaWriterPlugin"
+  name="IRestSchemaWriterPlugin">
+  <plugin-java
+    javaclass="com.guidewire.pl.modules.rest.framework.v1.plugin.config.EntityMetadataWriterPlugin"/>
+</plugin>

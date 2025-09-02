@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../../../pcf.xsd">
+  <Forward
+    desc="Forward used by the ClaimMetrics entry point to go to the claim key metrics for the claim with the given number"
+    id="SP_TimelineForward">
+    <LocationEntryPoint
+      signature="SP_TimelineForward(claimNumber : String, publicID : String, type : String, arbitraryLink : String)"/>
+    <Variable
+      name="type"
+      type="String"/>
+    <Variable
+      name="publicID"
+      type="String"/>
+    <Variable
+      name="claimNumber"
+      type="String"/>
+    <Variable
+      initialValue="gw.surepath.cc.configuration.timeline.creation.ui.TimelineUIUtil.retrieveClaimFromClaimNumber(claimNumber)"
+      name="claim"
+      type="entity.Claim"/>
+    <Variable
+      name="arbitraryLink"
+      type="String"/>
+    <ForwardCondition
+      action="gw.surepath.cc.configuration.timeline.creation.TimelineArbitraryLinkEnum.valueOf(arbitraryLink).goToPage(claim, gw.surepath.cc.configuration.timeline.creation.TimelineUtil.findByPublicId(gw.lang.reflect.TypeSystem.getByFullNameIfValid(type) as gw.entity.IEntityType, publicID) as KeyableBean)"
+      condition="return ((arbitraryLink != &quot;null&quot;) &amp;&amp; (gw.surepath.cc.configuration.timeline.creation.TimelineArbitraryLinkEnum.valueOf(arbitraryLink) != null))"/>
+    <ForwardCondition
+      action="pcf.EditNote.go(gw.surepath.cc.configuration.timeline.creation.TimelineUtil.findByPublicId(gw.lang.reflect.TypeSystem.getByFullNameIfValid(type) as gw.entity.IEntityType, publicID) as Note, claim)"
+      condition="Note.Type.isAssignableFrom(gw.lang.reflect.TypeSystem.getByFullNameIfValid(type))"/>
+    <ForwardCondition
+      action="pcf.ClaimUsers.go(claim, gw.surepath.cc.configuration.timeline.creation.TimelineUtil.findByPublicId(gw.lang.reflect.TypeSystem.getByFullNameIfValid(type) as gw.entity.IEntityType, publicID) as User)"
+      condition="User.Type.isAssignableFrom(gw.lang.reflect.TypeSystem.getByFullNameIfValid(type))"/>
+    <ForwardCondition
+      action="pcf.ClaimContacts.go(claim, gw.surepath.cc.configuration.timeline.creation.TimelineUtil.findByPublicId(gw.lang.reflect.TypeSystem.getByFullNameIfValid(type) as gw.entity.IEntityType, publicID) as Contact)"
+      condition="Contact.Type.isAssignableFrom(gw.lang.reflect.TypeSystem.getByFullNameIfValid(type))"/>
+    <ForwardCondition
+      action="ClaimWorkplan.go(claim); ActivityDetailForward.goInWorkspace(claim, gw.surepath.cc.configuration.timeline.creation.TimelineUtil.findByPublicId(gw.lang.reflect.TypeSystem.getByFullNameIfValid(type) as gw.entity.IEntityType, publicID) as Activity);"
+      condition="Activity.Type.isAssignableFrom(gw.lang.reflect.TypeSystem.getByFullNameIfValid(type))"/>
+    <ForwardCondition
+      action="gw.surepath.cc.configuration.timeline.creation.ui.TimelineForwardHelper.doServiceRequestQuoteForward(publicID, type, claim)"
+      condition="ServiceRequestQuote.Type.isAssignableFrom(gw.lang.reflect.TypeSystem.getByFullNameIfValid(type))"/>
+    <ForwardCondition
+      action="gw.surepath.cc.configuration.timeline.creation.ui.TimelineForwardHelper.doServiceRequestInvoiceForward(publicID, type, claim)"
+      condition="ServiceRequestInvoice.Type.isAssignableFrom(gw.lang.reflect.TypeSystem.getByFullNameIfValid(type))"/>
+    <ForwardCondition
+      action="pcf.ClaimServiceRequests.go(claim, gw.surepath.cc.configuration.timeline.creation.TimelineUtil.findByPublicId(gw.lang.reflect.TypeSystem.getByFullNameIfValid(type) as gw.entity.IEntityType, publicID) as ServiceRequest)"
+      condition="ServiceRequest.Type.isAssignableFrom(gw.lang.reflect.TypeSystem.getByFullNameIfValid(type))"/>
+    <ForwardCondition
+      action="pcf.ExposureDetail.go(gw.surepath.cc.configuration.timeline.creation.TimelineUtil.findByPublicId(gw.lang.reflect.TypeSystem.getByFullNameIfValid(type) as gw.entity.IEntityType, publicID) as Exposure)"
+      condition="Exposure.Type.isAssignableFrom(gw.lang.reflect.TypeSystem.getByFullNameIfValid(type))"/>
+    <ForwardCondition
+      action="ClaimFinancialsChecksDetail.go(claim, gw.surepath.cc.configuration.timeline.creation.TimelineUtil.findByPublicId(gw.lang.reflect.TypeSystem.getByFullNameIfValid(type) as gw.entity.IEntityType, publicID) as Check)"
+      condition="Check.Type.isAssignableFrom(gw.lang.reflect.TypeSystem.getByFullNameIfValid(type))"/>
+    <ForwardCondition
+      action="ClaimSummary.go(gw.surepath.cc.configuration.timeline.creation.TimelineUtil.findByPublicId(gw.lang.reflect.TypeSystem.getByFullNameIfValid(type) as gw.entity.IEntityType, publicID) as Claim)"
+      condition="entity.Claim.Type.isAssignableFrom(gw.lang.reflect.TypeSystem.getByFullNameIfValid(type))"/>
+    <ForwardCondition
+      action="ClaimFinancialsTransactionsDetail.go(claim, gw.surepath.cc.configuration.timeline.creation.TimelineUtil.findByPublicId(gw.lang.reflect.TypeSystem.getByFullNameIfValid(type) as gw.entity.IEntityType, publicID) as Transaction)"
+      condition="Transaction.Type.isAssignableFrom(gw.lang.reflect.TypeSystem.getByFullNameIfValid(type))"/>
+    <ForwardCondition
+      action="pcf.ClaimDocuments.go(claim)"
+      condition="entity.Document.Type.isAssignableFrom(gw.lang.reflect.TypeSystem.getByFullNameIfValid(type))"/>
+    <ForwardCondition
+      action="pcf.ClaimSummary.go(claim)"/>
+  </Forward>
+</PCF>

@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <MenuTree
+    height="300"
+    id="TeamMenuTree">
+    <TreeView
+      elementLabel="element"
+      elementName="element"
+      elementType="gw.api.web.team.CCTeamTreeViewModel"
+      id="TeamMenuTree"
+      onClickElement="element.treeElementClicked(CurrentLocation)"
+      preserveExpansionStateOnRefresh="true"
+      value="new gw.api.web.team.CCTeamTreeViewRootModel()"/>
+  </MenuTree>
+</PCF>

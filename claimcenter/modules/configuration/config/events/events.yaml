@@ -1,0 +1,18 @@
+version: '2.0'
+apiConfigs:
+- ext.claim.v1.claim_combined_ext-1.0
+- ext.common.v1.common_ext-1.0
+viewExcludedEventPatterns:
+- .*Removed
+entityViews:
+  "VehicleRU": "VehicleRiskUnit"
+  "LocationBasedRU": "LocationBasedRiskUnit"
+  Incident: GeneralIncident
+  TripRU: TripRiskUnit
+crossPrimaryEntities:
+- BulkInvoice
+- Catastrophe
+- ClaimAssociation
+destinationIds:
+- 500
+adminEventDestinationId: 599

@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<internaltypelistextension xmlns="http://guidewire.com/typelists" name="BatchProcessType" desc="Types of batch processes">
+  <typecode
+    code="EventDataStoragePurge"
+    desc="Purges App Events EventDataStorage"
+    name="EventDataStorage Purge">
+    <category
+      code="UIRunnable"
+      typelist="BatchProcessTypeUsage"/>
+    <category
+      code="Schedulable"
+      typelist="BatchProcessTypeUsage"/>
+    <category
+      code="APIRunnable"
+      typelist="BatchProcessTypeUsage"/>
+  </typecode>
+  <typecode
+    code="SyncAdminAppEvents"
+    desc="Synchronize all registered Admin entities with App Events"
+    name="Synchronize Admin Entities with App Events">
+    <category
+      code="UIRunnable"
+      typelist="BatchProcessTypeUsage"/>
+    <category
+      code="APIRunnable"
+      typelist="BatchProcessTypeUsage"/>
+  </typecode>
+</internaltypelistextension>

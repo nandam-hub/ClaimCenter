@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Popup
+    canEdit="true"
+    canVisit="pageHelper.CsvButtonsAvailable"
+    countsAsWork="false"
+    id="StartRuleCsvImportPopup"
+    returnType="RuleImportTask"
+    startInEditMode="true"
+    title="DisplayKey.get('Web.BizRules.Rule.ImportFromCsv')">
+    <LocationEntryPoint
+      signature="StartRuleCsvImportPopup(context: gw.bizrules.CCRulesNavigationContext, pageHelper: gw.bizrules.CCRulesListPageHelper)"/>
+    <Variable
+      name="context"
+      type="gw.bizrules.CCRulesNavigationContext"/>    
+    <Variable
+      name="pageHelper"
+      type="gw.bizrules.CCRulesListPageHelper"/>
+    <Variable
+      name="csvUploaderFactory"
+      type="gw.bizrules.csv.CsvFileUploaderFactory"
+      initialValue="new gw.bizrules.csv.CsvFileUploaderFactory(context, CurrentLocation)" />
+    <Variable
+      name="csvUploader"
+      type="gw.bizrules.csv.CsvFileUploader"
+      initialValue="csvUploaderFactory.createUploader()"/>
+    <Variable
+      initialValue="new gw.bizrules.csv.UploadSummary()"
+      name="uploadSummary"
+      type="gw.bizrules.csv.UploadSummary"/>
+    <Variable
+      name="file"
+      type="gw.api.web.WebFile"/>
+    <Screen>
+      <Toolbar>
+        <ToolbarButton
+          action="csvUploader.upload(file, uploadSummary);"
+          available="file != null"
+          id="ImportButton"
+          label="DisplayKey.get('Web.BizRules.Rule.ImportFromCsv.Load')"/>
+        <ToolbarButton
+          action="CurrentLocation.cancel()"
+          id="CancelButton"
+          label="DisplayKey.get('Button.Cancel')"/>
+      </Toolbar>
+      <AlertBar
+        id="UploadSummaryAlert"
+        label="uploadSummary.Message"
+        action="uploadSummary.reset()"
+        visible="uploadSummary.Finished"/>
+      <DetailViewPanel>
+        <InputColumn>
+          <InputSet>
+            <TextInput
+              id="fileLabel"
+              labelAbove="true"
+              value="DisplayKey.get('Web.BizRules.Rule.ImportFromCsv.Description')"/>
+            <FileInput
+              editable="true"
+              id="File"
+              labelAbove="true"
+              required="true"
+              value="file"/>
+          </InputSet>
+        </InputColumn>
+      </DetailViewPanel>
+    </Screen>
+  </Popup>
+</PCF>

@@ -1,0 +1,17 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "definitions": {
+    "DocumentSummary" : {
+      "type" : "object",
+      "properties" : {
+        "HighLevelSummary" : {
+          "type" : "string"
+        },
+        "DetailedSummary" : {
+          "type" : "string"
+        }
+      },
+      "required": ["DetailedSummary"]
+    }
+  }
+}

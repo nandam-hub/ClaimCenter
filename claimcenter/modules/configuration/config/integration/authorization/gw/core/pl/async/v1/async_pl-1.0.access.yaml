@@ -1,0 +1,10 @@
+resources:
+  AsyncOpenApiSchema:
+    permissions:
+      view: true
+  AsyncRequest:
+    permissions:
+      view: true
+  AsyncRequestResponse:
+    permissions:
+      view: true

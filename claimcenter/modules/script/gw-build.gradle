@@ -1,0 +1,308 @@
+apply plugin: 'base'
+apply plugin: 'com.guidewire.application'
+apply plugin: 'com.guidewire.cust-dist-studio'
+apply plugin: 'com.guidewire.cust-dist-root-tasks'
+apply plugin: 'com.guidewire.jdbc-drivers'
+
+def currentJDKVersion = JavaVersion.current()
+
+if (currentJDKVersion != JavaVersion.VERSION_21) {
+  throw new IllegalStateException("JDK version 21 is required, but current JDK version is ${currentJDKVersion}.")
+}
+
+allprojects {
+  repositories {
+    maven { url rootProject.file('repository') }
+  }
+
+  apply plugin: 'com.guidewire.dependencies'
+  apply plugin: 'com.guidewire.idea'
+}
+
+Map<String, String> pomProperties = [:]
+
+dependencyManagement {
+  pomProperties = importPom 'com.guidewire.cc:cc-parent:50.14.0'
+}
+
+jdbcDrivers {
+  fromMap(pomProperties)
+}
+
+app {
+  appCode = 'cc'
+  appName = pomProperties['appName']
+  port = System.getProperty('gw.port', pomProperties['port']) as int
+}
+
+studio {
+  appCode = app.appCode
+  ijMajorVersion = '241'
+  ijMinorVersion = '18968'
+  ijPatchVersion = '26'
+  gosuVersion = '1.18.4'
+  codegenAntTasks = pomProperties.findAll { k, v -> k.endsWith('-codegen') }.values()
+}
+
+idea {
+  buildProcessHeapSize = custDistStudioBuildProcessHeapSize as Integer
+}
+
+tasks.studio {
+  dependsOn { file('.idea').isDirectory() ? [] : allprojects*.tasks*.idea }
+  dependsOn { file('modules/configuration/generated/com/guidewire').isDirectory() ? [] : codegen }
+}
+
+tasks.studio.maxHeapSize = custDistStudioMaxHeapSize
+
+allprojects {
+  if (!project?.parent?.parent) {
+    tasks.ideaModule.enabled = false
+  }
+
+  // TODO: Remove jvmArg 'java.locale.providers' after upgrading to JDK23.
+  tasks.withType(JavaExec) { JavaExec task ->
+    task.jvmArgs += ["--add-opens=java.base/sun.reflect.annotation=ALL-UNNAMED", "-Djava.locale.providers=COMPAT"]
+    task.maxHeapSize = custDistJavaExecMaxHeapSize
+  }
+
+  plugins.withId('com.guidewire.codegen-base', {
+    codegen {
+      pomProperties
+          .findAll { k, v -> k.endsWith('-codegen') }
+          .each { codegenName, gav -> gradleExecutor(codegenName, gav) }
+    }
+  })
+
+  project.configurations.maybeCreate('osgiPlugins')
+
+  project.configurations.maybeCreate('schemajars')
+
+  plugins.withId('com.guidewire.codegen-xml', {
+    tasks.genXmlSources {
+      additionalMappedTypes = pomProperties['xmlCodegenMappedTypes'].split(',')
+      displayPropertiesFilePath = project.file("config/locale")
+      additionalSchemaJars = project.configurations.schemajars
+    }
+    tasks.genSchemaSources {
+      additionalMappedTypes = pomProperties['xmlCodegenMappedTypes'].split(',')
+      displayPropertiesFilePath = project.file("config/locale")
+      additionalSchemaJars = project.configurations.schemajars
+    }
+    tasks.genWsdlSources {
+      additionalMappedTypes = pomProperties['xmlCodegenMappedTypes'].split(',')
+      displayPropertiesFilePath = project.file("config/locale")
+      additionalSchemaJars = project.configurations.schemajars
+    }
+  })
+
+  plugins.withId('com.guidewire.codegen.xml.schema-jar', {
+    tasks.genSchemaSources {
+      additionalMappedTypes = pomProperties['xmlCodegenMappedTypes'].split(',')
+    }
+    tasks.genWsdlSources {
+      additionalMappedTypes = pomProperties['xmlCodegenMappedTypes'].split(',')
+    }
+  })
+
+  version = '50.14.0'
+
+  if (name == 'configuration') {
+    System.setProperty('compiler.type', 'gw')
+
+    apply plugin: 'com.guidewire.cust-dist-dev-tasks'
+    apply plugin: 'com.guidewire.cust-dist-upgrade'
+    apply plugin: 'com.guidewire.cust-dist-webapp'
+    apply plugin: 'com.guidewire.cust-dist-java-api'
+    apply plugin: 'com.guidewire.customer-dist-test'
+    apply plugin: 'com.guidewire.web.utilities'
+
+    apply plugin: 'com.guidewire.codegen-entity'
+    tasks.genEntitySources.setMinHeapSize(custDistEntityCodegenMinHeapSize)
+    tasks.genEntitySources.setMaxHeapSize(custDistEntityCodegenMaxHeapSize)
+
+    apply plugin: 'com.guidewire.codegen-localization'
+    apply plugin: 'com.guidewire.codegen-permission'
+
+    apply plugin: 'com.guidewire.codegen-pcf'
+    tasks.genPcfSources.setMinHeapSize(custDistPcfCodegenMinHeapSize)
+    tasks.genPcfSources.setMaxHeapSize(custDistPcfCodegenMaxHeapSize)
+    tasks.genPcfSources.setPcfTestCodegen(Boolean.parseBoolean(isPcfTestCodegenEnabled))
+
+    apply plugin: 'com.guidewire.cust-dist-gosu'
+    def pluginConfig = project.configurations.maybeCreate('plugin')
+    def compileGosuOutput = project.plugins.getPlugin('com.guidewire.cust-dist-gosu').gosuOutputDir
+    def compileGosuResourcesDir = project.plugins.getPlugin('com.guidewire.cust-dist-gosu').gosuResourcesDir
+    def compileIdeaGosuOutput = project.file('plugins/Gosu/idea-gclasses')
+
+    apply plugin: 'com.guidewire.parallel-clean'
+    parallelCleanExt {
+      def rootProjCleanDirs = ['dist', 'java-api', 'webapps'].collect { project.rootProject.file(it) }
+      def confModCleanDirs = [project.buildDir, project.file('generated'), project.file('generated_classes'),
+          compileGosuOutput, compileGosuResourcesDir, compileIdeaGosuOutput]
+      deleteDirs.addAll(rootProjCleanDirs)
+      deleteDirs.addAll(confModCleanDirs)
+    }
+
+    apply plugin: 'com.guidewire.codegen-xml'
+    tasks.genXmlSources.setMinHeapSize(custDistXmlCodegenMinHeapSize)
+    tasks.genXmlSources.setMaxHeapSize(custDistXmlCodegenMaxHeapSize)
+    tasks.genSchemaSources.setMinHeapSize(custDistXmlCodegenMinHeapSize)
+    tasks.genSchemaSources.setMaxHeapSize(custDistXmlCodegenMaxHeapSize)
+    tasks.genWsdlSources.setMinHeapSize(custDistXmlCodegenMinHeapSize)
+    tasks.genWsdlSources.setMaxHeapSize(custDistXmlCodegenMaxHeapSize)
+
+    project.ext.set('awsJavaSdkVersion', pomProperties['awsJavaSdkVersion'])
+
+    idea {
+      module {
+        downloadJavadoc = true
+        excludeDirs += file('deploy/resources/javascript')
+        excludeDirs += compileGosuOutput
+        excludeDirs += compileIdeaGosuOutput
+        sourceDirs += file('config') // add config directory as a source root
+        testSources.from(file('gtest')) // add gtest as testSources
+        downloadJavadoc = true // attach javadoc
+
+        iml {
+          whenMerged { module ->
+            project.idea.genSpecialFileDependencies(project, module, 'PROVIDED', pluginConfig.dependencies)
+          }
+        }
+      }
+      ideaResources += file('res') // treat res as resource directory in generated idea project
+
+      configureIdeaProject {
+        templateDir = file('etc')
+
+        def runConfigParams = [
+            'jettyPort' : pomProperties['port'],
+            'maxHeap' : custDistJavaExecMaxHeapSize
+        ]
+        // note: there really should be no overlap between this and templates in IdeaPlugin#configureDefaultProjectTemplates
+        templates['workspace.xml'] = xml({ runConfigParams })
+        templates['runConfigurations/Server.xml'] = xml({ runConfigParams })
+        templates['runConfigurations/DropDB.xml'] = xml({ runConfigParams })
+        templates['runConfigurations/TestServer.xml'] = xml({ runConfigParams })
+        templates['codeStyleSettings.xml'] = xml()
+      }
+    }
+
+    webapp {
+      deployTemplates = project.rootProject.file('modules/script/deploy-templates')
+      warIncludes['modules/configuration/plugins'] = [file('plugins'), ['Gosu/idea-gclasses']]
+
+      excludedLibs.get('*:*').add('cc-tools-*')
+      excludedLibs.get('*:*').add('pl-tools-*')
+      // exclude unique dependencies of pl-tools
+      excludedLibs.get('*:*').add('failsafe-*')
+    }
+
+    def webappDir = System.getProperty("gw.webapp.dir", "webapp")
+
+    webUtilities {
+      webSourcesRoot = project.layout.projectDirectory.dir("webresources")
+      cssOutputDirs.add(project.layout.projectDirectory.dir('deploy/resources/css/gen/'))
+      jsOutputDirs.add(project.layout.projectDirectory.dir('deploy/resources/js/gen/'))
+    }
+
+    task(syncWebResources, type: Copy) {
+      from (new File(project.projectDir, 'webresources')) {
+        exclude "js/**"
+        exclude "sass/**"
+        exclude "ts/**"
+        into 'resources'
+      }
+      destinationDir = project.file("deploy")
+    }
+
+    tasks.webResources {
+      dependsOn syncWebResources
+      finalizedBy tasks.syncWebapp
+    }
+
+    prepareWebapp.dependsOn(tasks.webResources)
+
+    tasks.compileJava.options.with {
+      compilerArgs << '-parameters'
+      forkOptions.with {
+        javaHome = new File(System.getProperty('java.home'))
+        memoryInitialSize = custDistJavaCompileMinHeapSize
+        memoryMaximumSize = custDistJavaCompileMaxHeapSize
+      }
+      // Disable incremental java builds until supported by code generation / shadowing
+      incremental = false
+    }
+
+    tasks.copyGosuResources.dependsOn tasks.genXmlSources
+    tasks.copyGosuResources.dependsOn tasks.genEntitySources
+    tasks.syncWebResources.dependsOn tasks.npmPrep
+
+    dependencies {
+      plugin files('plugins/Gosu/classes')
+      plugin fileTree(dir: 'plugins/Gosu/lib', include: '*.jar')
+      plugin files('plugins/Gosu/basic/classes')
+      plugin fileTree(dir: 'plugins/Gosu/basic/lib', include: '*.jar')
+      plugin files('plugins/shared/classes')
+      plugin fileTree(dir: 'plugins/shared/lib', include: '*.jar')
+      plugin files('plugins/shared/basic/classes')
+      plugin fileTree(dir: 'plugins/shared/basic/lib', include: '*.jar')
+
+      api 'com.guidewire.cc:cc-gunit'
+      api 'com.guidewire.pl.logging:log4j2-deps'
+      runtimeOnly ('com.guidewire.cc:cc-tools') {
+        exclude group: 'com.guidewire.cc', module: 'cc-gunit-content'
+      }
+
+      webappTemplate 'com.guidewire.pl:webapp-template'
+
+      osgiPlugins 'org.osgi:osgi.cmpn'
+
+      junitAntTask ("org.apache.ant:ant-junit:1.10.14") {
+        transitive = false
+      }
+    }
+
+    jar {
+      manifest {
+        attributes("Contains-Sources": "true")
+      }
+      zip64 = true
+    }
+
+    project.rootProject.tasks.studio {
+      dependsOn tasks.syncUpgradePlugins
+    }
+
+    pcf {
+      displayPropertiesFilePath = project.file("config/locale")
+    }
+  }
+}
+
+project.rootProject.rootTasks {
+  deprecatedTask('regen-gosu-api', 'gosudoc')
+}
+
+
+// mergeModule CC-specific task
+def configurationProject = project(':modules:configuration')
+
+rootTasks {
+  deprecatedTask('merge-module', 'mergeModule')
+}
+
+configurationProject.apply plugin: 'com.guidewire.codegen-entity-role-constraints'
+
+allprojects {
+  if (name == 'configuration') {
+    apply plugin: 'com.guidewire.solr-cust-dist-task'
+    solr {
+      appCode = rootProject.app.appCode
+      isCustomerBuild = true
+    }
+  }
+}
+project.rootProject.rootTasks {
+  deprecatedTask('solr', 'packageSolr')
+}

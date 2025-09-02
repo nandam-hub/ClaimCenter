@@ -1,0 +1,17 @@
+{
+  "schemaName": "idp.documentsummary_ext-1.0",
+  "mappers": {
+    "DocumentSummary" : {
+      "schemaDefinition" : "DocumentSummary",
+      "root" : "gw.idp.DocumentSummary",
+      "properties" : {
+        "HighLevelSummary" : {
+          "path" : "DocumentSummary.HighLevelSummary"
+        },
+        "DetailedSummary" : {
+          "path" : "DocumentSummary.DetailedSummary"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,12 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="CC API Extension Bundles Codegen - skt.json" type="Application" factoryName="Application">
+    <option name="MAIN_CLASS_NAME" value="com.guidewire.tools.apiextensionbundles.ApiExtensionBundleCodeGeneratorToolMain" />
+    <module name="cc-tools" />
+    <option name="PROGRAM_PARAMETERS" value="-m app-cc/cc-api-extension-bundles-example -f skt.json" />
+    <option name="VM_PARAMETERS" value="-Xmx2g -Djava.awt.headless=true -ea -Dgw.webapp.dir=idea/webapp -Dgw.classpath.jar=true -Dgw.plugins.gclasses.dir=idea-gclasses -DgosuInit.supportDiscretePackages=true -Djava.locale.providers=COMPAT --add-opens=java.base/sun.reflect.annotation=ALL-UNNAMED" />
+    <extension name="SmokeTestRunConfigurationExtension">false,false,false</extension>
+    <method v="2">
+      <option name="MakeIncludingOSGi" enabled="true" />
+    </method>
+  </configuration>
+</component>

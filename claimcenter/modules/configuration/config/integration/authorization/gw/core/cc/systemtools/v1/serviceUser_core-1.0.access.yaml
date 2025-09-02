@@ -1,0 +1,51 @@
+resources:
+  ApiRole:
+    permissions:
+      view: true
+  ApiRoles:
+    permissions:
+      view: true
+  BatchProcess:
+    permissions:
+      view: true
+      edit: true
+      start: true
+      stop: true
+  BatchProcesses:
+    permissions:
+      view: true
+  DatabaseConsistencyCheck:
+    permissions:
+      view: true
+  DatabaseConsistencyCheckReport:
+    permissions:
+      view: true
+  DatabaseConsistencyChecks:
+    permissions:
+      view: true
+    filter: __noFilter
+  DesignApiExtensionBundle:
+    permissions:
+      view: true
+      edit: true
+      delete: true
+  DesignApiExtensionBundles:
+    permissions:
+      view: true
+      create: true
+  InstalledApiExtensionBundle:
+    permissions:
+      view: true
+  InstalledApiExtensionBundles:
+    permissions:
+      view: true
+  ProcessHistories:
+    permissions:
+      view: true
+    filter: __noFilter
+  ProcessHistory:
+    permissions:
+      view: true
+  SystemToolsOpenApiSchema:
+    permissions:
+      view: true

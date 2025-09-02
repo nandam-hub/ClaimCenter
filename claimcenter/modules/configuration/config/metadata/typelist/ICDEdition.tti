@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<typelist 
+  xmlns="http://guidewire.com/typelists" 
+  name="ICDEdition" 
+  desc="The ICD edition that a given ICD code belongs to">
+  <typecode
+    code="ICD10"
+    desc="ICD10"
+    name="ICD10"
+    priority="1"/>
+</typelist>

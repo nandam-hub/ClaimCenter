@@ -1,0 +1,22 @@
+package rules.EventMessage.EventFired_dir.EFRSP09000DataAudit_dir
+
+uses gw.api.json.JsonConfigAccess
+uses gw.surepath.cc.configuration.adminaudit.util.DataAuditorProperties
+
+@gw.rules.RuleName("EFRSP09100 - Data Audit Added")
+internal class EFRSP09100DataAuditAdded {
+  static function doCondition(messageContext : entity.MessageContext) : boolean {
+/*start00rule*/
+return messageContext.Root typeis entity.DataAudit_SP and DataAuditorProperties.INSTANCE.SendToExternalSystem
+/*end00rule*/
+}
+
+  static function doAction(messageContext : entity.MessageContext, actions : gw.rules.Action) {
+/*start00rule*/
+var dataAudit = messageContext.Root as entity.DataAudit_SP
+var mapper = JsonConfigAccess.getMapper("gw.surepath.cc.adminaudit.dataaudit_sp-1.0", "DataAudit_SP")
+var transformResult = mapper.transformObject(dataAudit)
+messageContext.createMessage(transformResult.toXmlString())
+/*end00rule*/
+  }
+}

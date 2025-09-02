@@ -1,0 +1,17 @@
+//See ToolbarWidget for spacing
+.gw-ToolbarButtonWidget {
+
+  &.gw-secondary-toolbar-button {
+    @include gw-button--asMenuItem($is-secondary: true);
+  }
+
+  &:not(.gw-secondary-toolbar-button) {
+    @include gw-button--asMenuItem();
+  }
+
+  & > .gw-action--inner {
+    display: flex;
+    align-items: center;
+  }
+
+}

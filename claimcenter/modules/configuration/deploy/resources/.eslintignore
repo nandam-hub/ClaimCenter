@@ -1,0 +1,18 @@
+# ESLint always ignores files in /node_modules/*
+node_modules/
+
+# coverage reports
+coverage
+
+# distribution
+dist/
+
+# build
+build/
+
+# test reports
+reports/
+
+tmp/
+
+.eslintrc.js

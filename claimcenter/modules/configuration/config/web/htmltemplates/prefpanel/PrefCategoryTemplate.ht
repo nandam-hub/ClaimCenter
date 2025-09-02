@@ -1,0 +1,4 @@
+<div id="gw-PrefCategory--${categoryName}" class="gw-Pref--category" aria-labelledby="${id}">
+    <div id="${id}" class="gw-Pref--category-label" role="heading" aria-level="2">${categoryLabel}</div>
+    ${:children}
+</div>

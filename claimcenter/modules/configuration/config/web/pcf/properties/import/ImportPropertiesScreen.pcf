@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../../pcf.xsd">
+  <Screen
+    id="ImportPropertiesScreen">
+    <Require
+      name="importData"
+      type="gw.api.properties.PropertyImportData"/>
+    <Toolbar>
+      <ToolbarButton
+        action="importData.clear(); Properties.go()"
+        available="true"
+        id="ImportPropertiesScreenCancelButton"
+        label="DisplayKey.get(&quot;RuntimeProperties.Property.Import.Cancel&quot;)"/>
+      <ToolbarButton
+        action="gw.api.properties.PropertyLoader.importProperties(importData)"
+        available="perm.System.importproperties &amp;&amp; importData.isValid() &amp;&amp; !importData.DisplayMessage"
+        id="ImportPropertiesScreenImportButton"
+        label="DisplayKey.get(&quot;RuntimeProperties.Property.Import.Button&quot;)"/>
+    </Toolbar>
+    <Verbatim
+      id="ImportPropertiesScreenMessage"
+      label="DisplayKey.get(&quot;RuntimeProperties.Property.Import.Message&quot;, importData.NumberRead, importData.NumberImported)"
+      visible="importData.DisplayMessage"
+      warning="false"/>
+    <PanelRef
+      def="ImportPropertiesDV(importData)"
+      visible="!importData.DisplayMessage"/>
+  </Screen>
+</PCF>

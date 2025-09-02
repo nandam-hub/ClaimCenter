@@ -1,0 +1,36 @@
+#apis:                                     # this list of apis to publish
+# - name: gw.pl.system.cluster_tools-1.0   # the yaml file of an api to published - required
+# env: dev                                 # the environment that this yaml file will be published - optional
+# template: dev-1.0                        # the template to use as a template for this api - optional and should almost always be left to the default
+#defaultTemplate:                          # default template for these published APIs
+# - name: gw.pl.framework.dev_template-1.0 # a yaml file with some standard declarations
+# env: dev,test                            # the environments that these APIs will be published - optional
+apis:
+  - name: gw.event.cc.event-1.0
+  - name: gw.pl.framework.api_list-1.0
+  - name: gw.pl.system.cluster_tools-1.0
+  - name: gw.pl.system.db_tools-0.1
+  - name: gw.pl.system.maintenance_tools-1.0
+  - name: gw.pl.system.messaging_tools-0.1
+  - name: gw.pl.system.server_profiler-1.0
+  - name: gw.pl.system.server_tools-1.0
+  - name: gw.pl.system.workflow-1.0
+  - name: ext.admin.v1.admin_ext-1.0
+    template: gw.core.cc.framework.v1.dev_template-1.0
+  - name: ext.claim.v1.claim_combined_ext-1.0
+    template: gw.core.cc.framework.v1.dev_template-1.0
+  - name: ext.common.v1.common_ext-1.0
+    template: gw.core.cc.framework.v1.dev_template-1.0
+  - name: gw.core.cc.composite.v1.composite_core-1.0
+    template: gw.core.cc.framework.v1.dev_template-1.0
+  - name: ext.testutil.v1.testutil_ext-1.0
+    template: gw.core.cc.framework.v1.dev_template-1.0
+    published: ${PUBLISHEDAPIS_testutil_publish:false}
+  - name: gw.core.cc.async.v1.async_core-1.0
+    template: gw.core.cc.framework.v1.dev_template-1.0
+  - name: ext.systemtools.v1.systemtools_ext-1.0
+    template: gw.core.cc.framework.v1.dev_template-1.0
+  - name: idp.documentsummary_ext-1.0
+  - name: ext.claim.v1.claim_timeline_ext-1.0
+defaultTemplate:
+  - name: gw.pl.framework.dev_template-1.0

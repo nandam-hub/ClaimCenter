@@ -1,0 +1,24 @@
+.gw-LinkCellWidget {
+  &.gw-stacked {
+    .gw-multi-content-cell {
+      & > div + div {
+        margin-top: $gw-app--SPACING-rem-S;
+      }
+    }
+  }
+
+  &:not(.gw-stacked) {
+    .gw-multi-content-cell {
+      & > div {
+        flex-shrink: 0;
+      }
+      & > div + div {
+        // Default spacing between link cell contents
+        margin-left: $gw-app--SPACING-rem-M;
+      }
+      & > div + .gw-nospace-link {
+        margin-left: 0;
+      }
+    }
+  }
+}

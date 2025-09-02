@@ -1,0 +1,23 @@
+{
+    "schemaName": "gw.surepath.cc.adminaudit.dataauditfieldrecord_sp-1.0",
+    
+    "import" : {
+    },
+	"mappers": {
+        "DataAuditFieldRecord_SP" : {
+            "schemaDefinition" : "DataAuditFieldRecord_SP",
+            "root" : "entity.DataAuditFieldRecord_SP",
+            "properties" : {
+                "AuditableBeanChangedField" : {
+                    "path" : "DataAuditFieldRecord_SP.AuditableBeanChangedField"
+                },
+				"OriginalValue" : {
+                    "path" : "DataAuditFieldRecord_SP.OriginalValue"
+                },
+				"NewValue" : {
+                    "path" : "DataAuditFieldRecord_SP.NewValue"
+                }
+            }
+        }
+    }
+}

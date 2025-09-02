@@ -1,0 +1,198 @@
+<?xml version="1.0"?>
+<typelistextension
+  xmlns="http://guidewire.com/typelists"
+  desc="Line of business"
+  name="LOBCode">
+  <typecode
+    code="GLLine"
+    desc="General Liability"
+    identifierCode="GLLine"
+    name="General Liability Line">
+    <category
+      code="CommercialPackage"
+      typelist="PolicyType"/>
+    <category
+      code="GeneralLiability"
+      typelist="PolicyType"/>
+    <category
+      code="GL"
+      typelist="LossType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="CPLine"
+    desc="Commercial Property"
+    identifierCode="CPLine"
+    name="Commercial Property Line">
+    <category
+      code="CommercialPackage"
+      typelist="PolicyType"/>
+    <category
+      code="CommercialProperty"
+      typelist="PolicyType"/>
+    <category
+      code="PR"
+      typelist="LossType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PersonalAutoLine"
+    desc="Personal Auto"
+    identifierCode="PersonalAutoLine"
+    name="Personal Auto Line">
+    <category
+      code="PersonalAuto"
+      typelist="PolicyType"/>
+    <category
+      code="AUTO"
+      typelist="LossType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="IMLine"
+    desc="Inland Marine Line"
+    identifierCode="IMLine"
+    name="Inland Marine Line">
+    <category
+      code="CommercialPackage"
+      typelist="PolicyType"/>
+    <category
+      code="InlandMarine"
+      typelist="PolicyType"/>
+    <category
+      code="PR"
+      typelist="LossType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="WorkersCompLine"
+    desc="Workers' Comp"
+    identifierCode="WorkersCompLine"
+    name="Workers' Comp Line">
+    <category
+      code="WorkersComp"
+      typelist="PolicyType"/>
+    <category
+      code="WC"
+      typelist="LossType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPLine"
+    desc="BusinessOwners"
+    identifierCode="BOPLine"
+    name="Businessowners Line">
+    <category
+      code="BusinessOwners"
+      typelist="PolicyType"/>
+    <category
+      code="GL"
+      typelist="LossType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="HOPLine"
+    desc="Homeowners Line"
+    identifierCode="HOPLine"
+    name="Homeowners Line">
+    <category
+      code="HOPHomeowners"
+      typelist="PolicyType"/>
+    <category
+      code="PR"
+      typelist="LossType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BusinessAutoLine"
+    desc="Commercial Auto Line"
+    identifierCode="BusinessAutoLine"
+    name="Commercial Auto Line">
+    <category
+      code="BusinessAuto"
+      typelist="PolicyType"/>
+    <category
+      code="AUTO"
+      typelist="LossType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PersonalUmbrellaLine_PUE"
+    desc="Personal Umbrella Line"
+    name="Personal Umbrella Line">
+    <category
+      code="PersonalUmbrella"
+      typelist="PolicyType"/>
+    <category
+      code="GL"
+      typelist="LossType"/>
+    <category
+      code="PC-PEL"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="other_liab"
+    desc="Other Liability"
+    name="Other Liability">
+    <category
+      code="GL"
+      typelist="LossType"/>
+    <category
+      code="prof_liability"
+      typelist="PolicyType"/>
+    <category
+      code="farmowners"
+      typelist="PolicyType"/>
+  </typecode>
+  <typecode
+    code="travel"
+    desc="Travel line"
+    name="Travel">
+    <category
+      code="TRAV"
+      typelist="LossType"/>
+    <category
+      code="travel_per"
+      typelist="PolicyType"/>
+  </typecode>
+  <!-- Cyber Line - Start -->
+  <typecode
+    code="CyberLine"
+    desc="Cyber Line"
+    name="Cyber Line">
+    <category
+      code="GL"
+      typelist="LossType"/>
+    <category
+      code="Cyber"
+      typelist="PolicyType"/>
+  </typecode>
+  <typecode
+    code="Crop_ParametircLine"
+    desc="Specialty Crop Parametrice"
+    name="Specialty Crop Parametric">
+    <category
+      code="PR"
+      typelist="LossType"/>
+    <category
+      code="USParametirc"
+      typelist="PolicyType"/>
+  </typecode>
+  <!-- Cyber Line - End -->
+</typelistextension>

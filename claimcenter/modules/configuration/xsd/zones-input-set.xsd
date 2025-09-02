@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<xsd:schema
+  targetNamespace="http://guidewire.com/zones-input-set"
+  elementFormDefault="qualified"
+  xmlns="http://guidewire.com/zones-input-set"
+  xmlns:mstns="http://guidewire.com/zones-input-set"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+>
+
+  <xsd:element name="ZonesInputSet">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="ZonesInput" minOccurs="0" maxOccurs="unbounded"/>
+      </xsd:sequence>
+    </xsd:complexType>
+    <xsd:unique name="ScreenTypeUnique">
+      <xsd:selector xpath="mstns:ZonesInput"/>
+      <xsd:field xpath="@screenType"/>
+    </xsd:unique>
+  </xsd:element>
+
+  <xsd:element name="ZonesInput">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="ZoneTypes"/>
+      </xsd:sequence>
+      <xsd:attribute name="screenType" type="xsd:string"/>
+    </xsd:complexType>
+  </xsd:element>
+
+  <xsd:element name="ZoneTypes">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="ZoneType" minOccurs="0" maxOccurs="unbounded"/>
+      </xsd:sequence>
+    </xsd:complexType>
+    <xsd:unique name="ZoneTypeCodeUnique">
+      <xsd:selector xpath="mstns:ZoneType"/>
+      <xsd:field xpath="@code"/>
+    </xsd:unique>
+  </xsd:element>
+
+  <xsd:simpleType name="SelectionType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="shuttleList"/>
+      <xsd:enumeration value="listView"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:element name="ZoneType">
+    <xsd:complexType>
+      <xsd:attribute name="code" type="xsd:string"/>
+      <xsd:attribute name="selectionType" type="SelectionType"/>
+      <xsd:attribute name="filterBy" type="xsd:string"/>
+    </xsd:complexType>
+  </xsd:element>
+
+</xsd:schema>

@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    canEdit="perm.Document.edit(DocumentParam)"
+    afterCommit="DocumentDetailsPopup.push(DocumentParam, editMetadata)"
+    id="DocumentDetailsPopup"
+    title="DisplayKey.get(&quot;Web.DocumentDetails.Title&quot;)">
+    <LocationEntryPoint
+      signature="DocumentDetailsPopup(DocumentParam : Document)"/>
+    <LocationEntryPoint
+      signature="DocumentDetailsPopup(DocumentParam : Document, editMetadata: boolean)"/>
+    <Variable
+      name="DocumentParam"
+      type="Document"/>
+    <Variable
+      initialValue="new gw.document.DocumentsActionsUIHelper()"
+      name="documentsActionsHelper"
+      type="gw.document.DocumentsActionsUIHelper"/>
+    <Variable
+      initialValue="true"
+      name="editMetadata"
+      type="boolean"/>
+    <Screen
+      id="DocumentDetailsScreen">
+      <AlertBar
+        id="ContentlessNoActionsText"
+        label="DisplayKey.get(&quot;Web.DocumentDetails.ContentActionsDisabled&quot;)"
+        visible="!DocumentParam.DMS"/>
+      <PanelRef>
+        <Toolbar>
+          <EditButtons
+            editVisible="editMetadata and documentsActionsHelper.isEditDocumentDetailsVisible(DocumentParam)"/>
+        </Toolbar>
+        <DetailViewPanel>
+          <InputColumn>
+            <ContentInput
+              labelAbove="true">
+              <Link
+                action="DocumentParam.downloadContent()"
+                available="documentsActionsHelper.isDocumentContentActionsAvailableInDocumentProperties(CurrentLocation.InEditMode, DocumentParam)"
+                download="attachment"
+                icon="&quot;document_download&quot;"
+                iconType="svgFileName"
+                id="DownloadLink"
+                styleClass="none"
+                tooltip="documentsActionsHelper.DownloadDocumentContentTooltip"
+                visible="editMetadata and documentsActionsHelper.isDownloadDocumentContentVisibleInDocumentProperties(CurrentLocation.InEditMode, DocumentParam)"/>
+              <Link
+                action="UploadDocumentContentPopup.push(DocumentParam)"
+                available="documentsActionsHelper.isDocumentContentActionsAvailableInDocumentProperties(CurrentLocation.InEditMode, DocumentParam)"
+                icon="&quot;document_upload&quot;"
+                iconType="svgFileName"
+                id="UploadLink"
+                styleClass="none"
+                tooltip="documentsActionsHelper.UploadDocumentContentTooltip"
+                visible="editMetadata and documentsActionsHelper.isUploadDocumentContentVisibleInDocumentProperties(CurrentLocation.InEditMode, DocumentParam)"/>
+            </ContentInput>
+          </InputColumn>
+        </DetailViewPanel>
+      </PanelRef>
+      <DetailViewPanel>
+        <InputColumn>
+          <InputSetRef
+            def="DocumentDetailsEditInputSet(new gw.document.DocumentDetailsCCHelper(DocumentParam, false, \docLink -&gt; docLink.Unlinkable), false)"
+            mode="DocumentParam.Type"/>
+          <InputSetRef
+            def="DocumentDetailsEditSupplementalInputSet(DocumentParam)"/>
+        </InputColumn>
+      </DetailViewPanel>
+    </Screen>
+  </Popup>
+</PCF>

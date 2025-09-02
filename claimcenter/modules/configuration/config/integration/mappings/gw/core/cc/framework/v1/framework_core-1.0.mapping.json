@@ -1,0 +1,7 @@
+{
+  "schemaName": "gw.core.cc.framework.v1.framework_core-1.0",
+  "combine": [
+    "gw.core.pl.framework.v1.framework_pl-1.0"
+  ],
+  "mappers": { }
+}

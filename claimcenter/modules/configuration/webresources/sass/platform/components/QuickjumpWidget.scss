@@ -1,0 +1,40 @@
+.gw-QuickjumpWidget.gw-styleTag--CenterPanelWidget {
+  flex-basis: auto;
+  flex-grow: 0;
+  flex-shrink: 0;
+  position: relative;
+
+  // Position to other widgets
+  margin-top: $gw-app--Quickjump--spacing-widget-top-rem;
+  margin-left: $gw-app--Quickjump--spacing-widget-left-rem;
+  margin-right: $gw-app--Quickjump--spacing-widget-right-rem;
+  margin-bottom: $gw-app--Quickjump--spacing-widget-bottom-rem;
+
+  
+  .gw-QuickjumpWidget--input {
+    @include gw-borderRadius();
+    width: $gw-app--Quickjump--width-em;
+    // Internal padding
+    padding-top: $gw-app--Quickjump--spacing-inner-top-rem;
+    padding-left: $gw-app--Quickjump--spacing-inner-left-rem;
+    padding-right: $gw-app--Quickjump--spacing-inner-right-rem;
+    padding-bottom: $gw-app--Quickjump--spacing-inner-bottom-rem;
+  }
+}
+
+.gw-QuickjumpWidget.gw-styleTag--TabBarWidget {
+  flex-basis: auto;
+  flex-grow: 0;
+  flex-shrink: 0;
+  position: relative;
+  padding: $gw-app--menus--pad-h-rem $gw-app--menus--pad-v-rem;
+  border-top: 1px solid $gw-app--border--col;
+  border-bottom: 1px solid $gw-app--border--col;
+
+  .gw-QuickjumpWidget--input {
+    @include gw-borderRadius();
+    min-width: $gw-app--Quickjump--width-em;
+    width: 100%;
+    padding: $gw-app--inputs--pad-h-rem $gw-app--inputs--pad-v-rem;
+  }
+}

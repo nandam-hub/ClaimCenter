@@ -1,0 +1,29 @@
+package rules.Validation.TransactionSetValidationRules_dir
+
+uses gw.api.locale.DisplayKey
+
+@gw.rules.RuleName("TXV22000 - Disallow Payments With Deductibles Without Matching Currency")
+internal class TXV22000DisallowPaymentsWithDeductiblesWithoutMatchingCurrency {
+  static function doCondition(transactionSet: entity.TransactionSet): boolean {
+/*start00rule*/
+    return transactionSet typeis CheckSet
+/*end00rule*/
+  }
+
+  static function doAction(transactionSet: entity.TransactionSet, actions: gw.rules.Action) {
+/*start00rule*/
+    for (var transaction in transactionSet.Transactions) {
+      if (transaction typeis Payment) {
+        for (var tli in transaction.LineItems) {
+          if (tli.LinkedToDeductible and !transaction.HasDeductibleApplicableCurrency) {
+            transactionSet.reject(ValidationLevel.TC_PAYMENT,
+                DisplayKey.get("Web.NewCheckWizard.NewPaymentDetail.DeductibleCurrencyNotApplicable"),
+                null,
+                null)
+          }
+        }
+      }
+    }
+/*end00rule*/
+  }
+}

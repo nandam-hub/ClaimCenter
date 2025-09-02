@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <InputSet
+    id="CCRuleApplicabilityCriteriaComparisonInputSet"
+    mode="ActivityRule">
+    <Require
+      name="controller"
+      type="gw.bizrules.pcf.RuleVersionComparisonController"/>
+    <Variable
+      initialValue="new gw.bizrules.RuleVersionComparisonHelper&lt;ActivityRule&gt;(controller.RuleVersions)"
+      name="helper"
+      type="gw.bizrules.RuleVersionComparisonHelper&lt;ActivityRule&gt;"/>
+    <InputSetRef
+      def="RuleComparisonSectionLabelInputSet(controller, DisplayKey.get(&quot;Web.BizRules.Rule.ApplicabilityCriteria&quot;))"
+      id="ApplicabilityCriteriaSectionLabel"/>
+    <InputSetRef
+      def="RuleComparisonRowStringInputSet(helper.LossTypeRow)"
+      id="LossType"/>
+    <InputSetRef
+      def="RuleComparisonRowStringInputSet(helper.PolicyTypeRow)"
+      id="PolicyType"/>
+    <InputSetRef
+      def="RuleComparisonRowStringInputSet(helper.JurisdictionRow)"
+      id="Jurisdiction"/>
+  </InputSet>
+</PCF>

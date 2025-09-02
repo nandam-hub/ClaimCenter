@@ -1,0 +1,23 @@
+package rules.Workplan.ExposureWorkplan_dir
+
+uses gw.config.LOBAbstraction
+
+@gw.rules.RuleDisabled
+@gw.rules.RuleName("EXW07000 -  Homeowners Policy")
+internal class EXW07000HomeownersPolicy {
+  static function doCondition(exposure : entity.Exposure) : boolean {
+    
+/*start00rule*/
+return LOBAbstraction.ForPolicy.isHomeownersPolicy(exposure.Claim.Policy)
+/*end00rule*/
+
+  }
+
+  static function doAction(exposure : entity.Exposure, actions : gw.rules.Action) {
+
+/*start00rule*/
+
+/*end00rule*/
+
+  }
+}

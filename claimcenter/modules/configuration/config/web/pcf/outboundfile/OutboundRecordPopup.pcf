@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../../pcf.xsd">
+  <Popup
+    beforeCommit="updateChanges()"
+    canEdit="perm.System.editoutboundfiles"
+    canVisit="perm.System.viewoutboundfiles"
+    id="OutboundRecordPopup"
+    title="DisplayKey.get(&quot;OutboundRecord.Edit.Record.Title&quot;)">
+    <LocationEntryPoint
+      signature="OutboundRecordPopup(bean : OutboundRecord)"/>
+    <Variable
+      name="bean"
+      type="OutboundRecord"/>
+    <Screen>
+      <PanelRef
+        def="OutboundRecordDV(bean)">
+        <Toolbar>
+          <EditButtons/>
+          <ToolbarButton
+            action="CurrentLocation.startEditing(); bean.Status = OutboundRecordStatus.TC_SKIPPED; bean.PurgeDate = gw.api.util.DateUtil.currentDate().addWeeks(1) CurrentLocation.commit()"
+            available="(bean as OutboundRecord).Status == OutboundRecordStatus.TC_ERROR &amp;&amp; perm.System.outboundfiles"
+            confirmMessage="DisplayKey.get(&quot;OutboundRecord.Skip.ConfirmationMessage&quot;, gw.api.util.DateUtil.currentDate().addWeeks(1).formatDate(gw.i18n.DateTimeFormat.MEDIUM))"
+            id="OutboundRecordPopupSkipButton"
+            label="DisplayKey.get(&quot;OutboundRecord.Skip&quot;)"
+            visible="bean typeis OutboundRecord and not CurrentLocation.InEditMode"/>
+        </Toolbar>
+      </PanelRef>
+    </Screen>
+    <Code>
+    function updateChanges() {
+      if (bean.isFieldChanged("Content")) {
+          bean.Status = OutboundRecordStatus.TC_PENDING
+        }
+      }
+    </Code>
+  </Popup>
+</PCF>

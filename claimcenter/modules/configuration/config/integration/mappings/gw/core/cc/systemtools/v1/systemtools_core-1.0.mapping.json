@@ -1,0 +1,44 @@
+{
+  "schemaName": "gw.core.cc.systemtools.v1.systemtools_core-1.0",
+  "combine": [
+    "gw.core.pl.systemtools.v1.systemtools_pl-1.0",
+    "gw.core.cc.framework.v1.framework_core-1.0"
+  ],
+  "mappers": {
+    // Suppress warnings
+    "AggLimitCalcArguments": {
+      "schemaDefinition": "AggLimitCalcArguments",
+      "root": "java.lang.Object",
+      "properties": {
+        "rebuildAll": {
+          "path": "false"
+        }
+      }
+    },
+    // Suppress warnings
+    "BatchProcessArguments": {
+      "schemaDefinition": "BatchProcessArguments",
+      "root": "java.lang.Object",
+      "properties": {
+        "agglimitcalc": {
+          "path": "null as Object",
+          "mapper": "#/mappers/AggLimitCalcArguments"
+        },
+        "financialscalc": {
+          "path": "null as Object",
+          "mapper": "#/mappers/FinancialsCalcArguments"
+        }
+      }
+    },
+    // Suppress warnings
+    "FinancialsCalcArguments": {
+      "schemaDefinition": "FinancialsCalcArguments",
+      "root": "java.lang.Object",
+      "properties": {
+        "claimNumbers": {
+          "path": "null as String[]"
+        }
+      }
+    }
+  }
+}

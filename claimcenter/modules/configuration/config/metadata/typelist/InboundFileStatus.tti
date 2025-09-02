@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<typelist xmlns="http://guidewire.com/typelists" name="InboundFileStatus" desc="The status of an inbound file.">
+  <typecode
+    code="loading"
+    desc="The file is being loaded. Failure to fully load will also set ErrorMessage."
+    name="Loading"/>
+  <typecode
+    code="loaded"
+    desc="The file has been successfully loaded."
+    name="Loaded"/>
+  <typecode
+    code="duplicate"
+    desc="The file was detected as a duplicate."
+    name="Duplicate"/>
+  <typecode
+    code="error"
+    desc="An error occurred while loading the file."
+    name="Error"/>
+</typelist>

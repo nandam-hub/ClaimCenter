@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Popup
+    countsAsWork="false"
+    id="RDMDatasetSearchPopup"
+    returnType="java.lang.String"
+    title="DisplayKey.get(&quot;Web.Plugin.ReferenceData.SetSearchPopup.Title&quot;)">
+    <LocationEntryPoint
+      signature="RDMDatasetSearchPopup()"/>
+    <Variable
+      initialValue="gw.plugin.referencedata.ReferenceDataPluginProvider.get().getAllDatasets(&quot;&quot;) /*Need to put filter here*/"
+      name="RDMDatasets"
+      recalculateOnRefresh="true"
+      type="java.util.List&lt;gw.plugin.referencedata.RDMDataset &gt;"/>
+    <Screen
+      id="RDMDatasetSearchScreen">
+      <PanelRef>
+          <TitleBar
+            title="DisplayKey.get(&quot;Web.Search.Results&quot;)"/>
+          <Toolbar/>
+          <ListViewPanel
+            id="ReferenceDataSearchResultsLV">
+            <RowIterator
+              appendPageInfo="true"
+              editable="false"
+              elementName="foundRDMDataset"
+              pickValue="foundRDMDataset.DatasetId"
+              type="gw.plugin.referencedata.RDMDataset"
+              value="RDMDatasets"
+              valueType="java.util.List&lt;gw.plugin.referencedata.RDMDataset &gt;">
+              <Row>
+                <TextCell
+                  id="DataSetId"
+                  label="DisplayKey.get(&quot;Web.Plugin.ReferenceData.SetSearchPopup.DatasetId&quot;)"
+                  value="foundRDMDataset.DatasetId"
+                  wrap="false"/>
+              </Row>
+            </RowIterator>
+          </ListViewPanel>
+        </PanelRef>
+    </Screen>
+  </Popup>
+</PCF>

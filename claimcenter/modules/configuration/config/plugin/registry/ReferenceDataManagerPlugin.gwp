@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<plugin
+  interface="IReferenceDataManagerPlugin"
+  name="ReferenceDataManagerPlugin">
+  <plugin-java
+    disabled="${rdata.disabled:true}"
+    javaclass="com.guidewire.pl.plugin.referencedata.ReferenceDataManagerPlugin">
+    <param
+      name="baseUrl"
+      value="${rdata.baseUrl}"/>
+  </plugin-java>
+</plugin>

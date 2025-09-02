@@ -1,0 +1,12 @@
+swagger: "2.0"
+consumes:
+- application/json
+produces:
+- application/json
+x-gw-combine:
+- gw.content.cc.common.v1.common_content-1.0
+x-gw-schema-import:
+  common: ext.common.v1.common_ext-1.0
+x-gw-apihandlers:
+- gw.rest.ext.cc.common.v1.CommonApiExtHandler
+paths: {}

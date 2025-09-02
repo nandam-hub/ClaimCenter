@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Screen
+    id="FNOLWizard_ServicesScreen"
+    mode="Auto">
+    <Require
+      name="Claim"
+      type="Claim"/>
+    <Require
+      name="Wizard"
+      type="gw.api.claim.NewClaimWizardInfo"/>
+    <Variable
+      initialValue="Claim.ServiceRequests.where(\ sr -&gt; sr.IncidentGw == null or sr.IncidentGw.Subtype != typekey.Incident.TC_VEHICLEINCIDENT).toSet()"
+      name="nonVehicleIncidentServiceRequests"
+      recalculateOnRefresh="true"
+      type="java.util.Set&lt;entity.ServiceRequest&gt;"/>
+    <Toolbar>
+      <WizardButtons/>
+    </Toolbar>
+    <PanelRef>
+      <TitleBar
+        title="DisplayKey.get(&quot;Web.ServicesScreen.InvolvedVehiclesLabel&quot;)"/>
+      <DetailViewPanel>
+        <InputColumn>
+          <TextInput
+            id="ServiceRequestSubmitMessage"
+            labelAbove="true"
+            value="DisplayKey.get(&quot;Web.ServiceRequest.FNOL.SubmitMessage&quot;)"/>
+        </InputColumn>
+      </DetailViewPanel>
+    </PanelRef>
+    <PanelIterator
+      elementName="VehicleIncident"
+      id="VehiclesPanelIterator"
+      value="Claim.VehicleIncidentsOnly"
+      valueType="entity.VehicleIncident[]">
+      <IteratorSort
+        sortBy="VehicleIncident.LossParty"
+        sortOrder="1"/>
+      <PanelRow>
+        <PanelColumn>
+          <DetailViewPanel
+            inline="true">
+            <InputColumn>
+              <Label
+                icon="VehicleIncident.PanelIcon"
+                iconType="svgFileName"
+                id="VehicleName"
+                label="VehicleIncident.Vehicle.ShortDisplayName == DisplayKey.get(&quot;Java.DisplayName.NewlyCreated&quot;) ? DisplayKey.get(&quot;Web.NewLossDetailsScreen.VehicleIncidentIterator.UnknownVehicle.Value&quot;) : VehicleIncident.Vehicle.ShortDisplayName"/>
+              <TextAreaInput
+                id="VehicleIncidentDetail"
+                labelAbove="true"
+                value="VehicleIncident.Description"
+                visible="VehicleIncident.Description != null"/>
+            </InputColumn>
+          </DetailViewPanel>
+        </PanelColumn>
+        <PanelColumn>
+          <PanelRef
+            def="VehicleIncidentPanelSet(VehicleIncident, Wizard.UnusedServiceRequests, Wizard.VehicleIncidentOtherServiceRequests)"/>
+        </PanelColumn>
+      </PanelRow>
+      <PanelDivider/>
+    </PanelIterator>
+    <DetailViewPanel>
+      <InputColumn>
+        <InputSetRef
+          def="OtherServicesLVInputGroupInputSet(Claim, null, nonVehicleIncidentServiceRequests, Wizard.VehicleIncidentOtherServiceRequests, Wizard.UnusedServiceRequests, Claim.VehicleIncidentsOnly.toSet())"/>
+      </InputColumn>
+    </DetailViewPanel>
+  </Screen>
+</PCF>

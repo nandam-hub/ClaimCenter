@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <InputSet
+    id="LocalizedCommandDefinitionParameterInputSet"
+    visible="state.ActivityPatternSelected">
+    <Require
+      name="state"
+      type="gw.bizrules.ruleaction.generateactivity.GenerateActivityCommandDefinitionState"/>
+    <Require
+      name="defaultLocaleCommandParameter"
+      type="gw.bizrules.ruleaction.config.CCLocalizedCommandParameterDefinition"/>
+    <Variable
+      initialValue="state.localizedPropertyAccessors(defaultLocaleCommandParameter)"
+      name="accessors"
+      recalculateOnRefresh="true"
+      type="gw.bizrules.ruleaction.generateactivity.DynamicLocalizedPropertyAccessor[]"/>
+    <Variable
+      initialValue="accessors.first()"
+      name="baseAccessor"
+      recalculateOnRefresh="true"
+      type="gw.bizrules.ruleaction.generateactivity.DynamicLocalizedPropertyAccessor"/>
+    <TextInput
+      available="true"
+      editable="true"
+      helpText="DisplayKey.get(&quot;Web.BizRules.ActivityRule.RuleDetailsPage.ResetField&quot;)"
+      id="soleLocale"
+      label="baseAccessor.Label"
+      required="baseAccessor.Required"
+      value="baseAccessor.Value"
+      visible="accessors.length == 1">
+      <MenuItem
+        action="baseAccessor.Value = baseAccessor.DefaultValue"
+        available="!baseAccessor.UseDefault"
+        hideIfDisabled="false"
+        id="setToDefaultValue"
+        label="DisplayKey.get(&quot;BizRules.RuleDetailsPage.SetToDefault&quot;)"/>
+      <PostOnChange/>
+    </TextInput>
+    <InputSet
+      id="multipleLocales"
+      visible="accessors.length &gt; 1">
+      <Variable
+        initialValue="java.util.stream.Stream.of(accessors).filter(\prop -&gt; !prop.UseDefault).map(\prop -&gt; prop.Language.DisplayName).collect(java.util.stream.Collectors.joining(&quot;, &quot;))"
+        name="overrides"
+        recalculateOnRefresh="true"
+        type="String"/>
+      <Variable
+        initialValue="overrides.HasContent ? DisplayKey.get(&quot;BizRules.RuleDetailsPage.OverridesExist&quot;, overrides) : DisplayKey.get(&quot;BizRules.RuleDetailsPage.NoOverridesExist&quot;)"
+        name="overridesMessage"
+        recalculateOnRefresh="true"
+        type="String"/>
+      <ContentInput
+        label="baseAccessor.Label">
+        <Link
+          id="currentLocale"
+          label="baseAccessor.Value"/>
+        <Link
+          action="CommandDefinitionParameterLocalizationsPopup.push(baseAccessor.Label, state.localizedPropertyAccessors(defaultLocaleCommandParameter), CurrentLocation.InEditMode)"
+          icon="&quot;globe-solid&quot;"
+          iconType="gwFontGlyph"
+          id="localesPopup"
+          styleClass="miniButton"
+          tooltip="DisplayKey.get(&quot;Web.BizRules.Rule.Parameters.Localized.Tooltip&quot;, gw.api.util.LocaleUtil.CurrentLanguageLabel)"/>
+        </ContentInput>
+      <TextInput
+        boldLabel="false"
+        id="overridesMessage"
+        value="overridesMessage"/>
+    </InputSet>
+  </InputSet>
+</PCF>

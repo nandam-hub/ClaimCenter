@@ -1,0 +1,492 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "x-gw-combine": [
+    "gw.core.cc.claim.v1.claim_combined_core-1.0"
+  ],
+  "definitions": {
+    "BaggageIncident": {
+      "properties": {
+        "assessmentContentItems": {
+          "title": "Assessment content items",
+          "description": "The collection of assessment content items on this incident",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AssessmentContentItem"
+          }
+        }
+      }
+    },
+    "Claim": {
+      "properties": {
+        "activities": {
+          "title": "Activities",
+          "description": "The list of activities on this claim",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Activity"
+          }
+        },
+        "assessmentSummaries": {
+          "title": "Assessment summaries",
+          "description": "The collection of assessment summaries on this claim",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AssessmentSummary"
+          }
+        },
+        "baggageIncidents": {
+          "title": "Baggage incidents",
+          "description": "The collection of baggage incidents on this claim",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BaggageIncident"
+          },
+          "x-gw-sinceVersion": "1.5.0"
+        },
+        "checkSets": {
+          "title": "Check sets",
+          "description": "The list of check sets on this claim",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CheckSet"
+          }
+        },
+        "checks": {
+          "title": "Checks",
+          "description": "The list of checks on this claim",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Check"
+          }
+        },
+        "contacts": {
+          "title": "Contacts",
+          "description": "The list of contacts on this claim",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ClaimContact"
+          },
+          "x-gw-extensions": {
+            "graphUpdateOrder": 0
+          }
+        },
+        "documents": {
+          "title": "Documents",
+          "description": "The list of documents on this claim",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Document"
+          }
+        },
+        "dwellingIncidents": {
+          "title": "Dwelling incidents",
+          "description": "The list of dwelling incidents on this claim",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DwellingIncident"
+          }
+        },
+        "exposures": {
+          "title": "Exposures",
+          "description": "The list of exposures on this claim",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Exposure"
+          }
+        },
+        "fixedPropertyIncidents": {
+          "title": "Fixed property incidents",
+          "description": "The list of fixed property incidents on this claim",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FixedPropertyIncident"
+          }
+        },
+        "generalIncidents": {
+          "title": "General incidents",
+          "description": "The collection of general incidents on this claim",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GeneralIncident"
+          },
+          "x-gw-sinceVersion": "1.5.0"
+        },
+        "historyEvents": {
+          "title": "History events",
+          "description": "The collection of history events on this claim",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HistoryEvent"
+          },
+          "x-gw-sinceVersion": "1.11.0"
+        },
+        "injuryIncidents": {
+          "title": "Injury incidents",
+          "description": "The list of injury incidents on this claim",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InjuryIncident"
+          }
+        },
+        "intakeInteractions": {
+          "title": "Intake interactions",
+          "description": "The list of intake interactions on this claim",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IntakeInteraction"
+          }
+        },
+        "internalId": {
+          "title": "Internal ID",
+          "description": "An internal identifier used for integrations",
+          "type": "string",
+          "readOnly": true
+        },
+        "livingExpensesIncidents": {
+          "title": "Living expenses incidents",
+          "description": "The list of living expenses incidents on this claim",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LivingExpensesIncident"
+          }
+        },
+        "matters": {
+          "title": "Matters",
+          "description": "The list of matters on this claim",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Matter"
+          }
+        },
+        "medicalTreatments": {
+          "title": "Medical treatments",
+          "description": "The collection of medical treatments on this claim",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MedicalTreatment"
+          }
+        },
+        "notes": {
+          "title": "Notes",
+          "description": "The list of notes on this claim",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Note"
+          }
+        },
+        "otherStructureIncidents": {
+          "title": "Other structure incidents",
+          "description": "The collection of other structure incidents on this claim",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OtherStructureIncident"
+          }
+        },
+        "payments": {
+          "title": "Payments",
+          "description": "The list of payments on this claim",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Transaction"
+          }
+        },
+        "policy": {
+          "title": "Policy",
+          "description": "The policy for this claim",
+          "$ref": "#/definitions/Policy"
+        },
+        "propertyContentsIncidents": {
+          "title": "Property contents incidents",
+          "description": "The collection of property contents incidents on this claim",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PropertyContentsIncident"
+          }
+        },
+        "recoveries": {
+          "title": "Recoveries",
+          "description": "The list of recoveries on this claim",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Transaction"
+          }
+        },
+        "recoveryReserveSets": {
+          "title": "Recovery reserve sets",
+          "description": "The list of recovery reserve sets on this claim",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RecoveryReserveSet"
+          }
+        },
+        "recoveryReserves": {
+          "title": "Recovery reserves",
+          "description": "The list of recovery reserves on this claim",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Transaction"
+          }
+        },
+        "recoverySets": {
+          "title": "Recovery sets",
+          "description": "The list of recovery sets on this claim",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RecoverySet"
+          }
+        },
+        "reserveSets": {
+          "title": "Reserve sets",
+          "description": "The list of reserve sets on this claim",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ReserveSet"
+          }
+        },
+        "reserves": {
+          "title": "Reserves",
+          "description": "The list of reserves on this claim",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Transaction"
+          }
+        },
+        "serviceRequests": {
+          "title": "Service requests",
+          "description": "The list of service requests on this claim",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServiceRequest"
+          }
+        },
+        "subrogationSummaries": {
+          "title": "Subrogation summaries",
+          "description": "The collection of subrogation summaries on this claim",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SubrogationSummary"
+          }
+        },
+        "tripIncidents": {
+          "title": "Trip incidents",
+          "description": "The collection of trip incidents on this claim",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TripIncident"
+          }
+        },
+        "vehicleIncidents": {
+          "title": "Vehicle incidents",
+          "description": "The list of vehicle incidents on this claim",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VehicleIncident"
+          }
+        }
+      }
+    },
+    "Exposure": {
+      "properties": {
+        "internalId": {
+          "title": "Internal ID",
+          "description": "An internal identifier used for integrations",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "GeneralIncident": {
+      "properties": {
+        "assessmentContentItems": {
+          "title": "Assessment content items",
+          "description": "The collection of assessment content items on this incident",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AssessmentContentItem"
+          }
+        }
+      }
+    },
+    "InjuryIncident": {
+      "properties": {
+        "bodilyInjuryPoints": {
+          "title": "Bodily injury points",
+          "description": "The collection of bodily injury points on this injury incident",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BodilyInjuryPoint"
+          }
+        },
+        "medicalDiagnoses": {
+          "title": "Medical diagnoses",
+          "description": "The collection of medical diagnoses on this injury incident",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MedicalDiagnosis"
+          }
+        }
+      }
+    },
+    "Policy": {
+      "properties": {
+        "contacts": {
+          "title": "Contacts",
+          "description": "The list of contacts associated with the policy",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ClaimContact"
+          }
+        },
+        "coverages": {
+          "title": "Coverages",
+          "description": "The list of coverages on this policy",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Coverage"
+          }
+        },
+        "endorsements": {
+          "title": "Endorsements",
+          "description": "The list of endorsements on this policy",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Endorsement"
+          }
+        },
+        "locationBasedRiskUnits": {
+          "title": "Location-based risk units",
+          "description": "The list of location-based risk units on this policy",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LocationBasedRiskUnit"
+          }
+        },
+        "locations": {
+          "title": "Policy locations",
+          "description": "A list of references to `PolicyLocation` elements that represent locations that appear on this policy",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PolicyLocation"
+          },
+          "x-gw-extensions": {
+            "graphUpdateOrder": 1
+          }
+        },
+        "tripRiskUnits": {
+          "title": "Trip risk units",
+          "description": "The list of trip risk units on this policy",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TripRiskUnit"
+          },
+          "x-gw-sinceVersion": "1.5.0"
+        },
+        "vehicleRiskUnits": {
+          "title": "Vehicle risk units",
+          "description": "The list of vehicle risk units on this policy",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VehicleRiskUnit"
+          }
+        }
+      }
+    },
+    "PolicyLocation": {
+      "properties": {
+        "propertyItems": {
+          "title": "Property items",
+          "description": "The collection of property items on this policy location",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PropertyItem"
+          }
+        }
+      }
+    },
+    "PropertyContentsIncident": {
+      "properties": {
+        "assessmentContentItems": {
+          "title": "Assessment content items",
+          "description": "The collection of assessment content items on this property contents incident",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AssessmentContentItem"
+          }
+        },
+        "propertyContentsScheduledItems": {
+          "title": "Property contents scheduled items",
+          "description": "The collection of property contents scheduled items on this property contents incident",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PropertyContentsScheduledItem"
+          }
+        }
+      }
+    },
+    "ServiceRequest": {
+      "properties": {
+        "invoices": {
+          "title": "Invoices",
+          "description": "The list of invoices on this service request",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServiceRequestStatement"
+          }
+        },
+        "serviceRequestHistories": {
+          "title": "Service request histories",
+          "description": "The collection of service request histories on this service request",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServiceRequestHistory"
+          }
+        },
+        "serviceRequestMessages": {
+          "title": "Service request messages",
+          "description": "The collection of service request messages on this service request",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServiceRequestMessage"
+          }
+        }
+      }
+    },
+    "SubrogationSummary": {
+      "properties": {
+        "subrogations": {
+          "title": "Subrogations",
+          "description": "The collection of subrogations on this subrogation summary",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Subrogation"
+          }
+        }
+      }
+    },
+    "TripRiskUnit": {
+      "properties": {
+        "coverages": {
+          "title": "Coverages",
+          "description": "The list of coverages that apply to this risk unit",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Coverage"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "VehicleIncident": {
+      "properties": {
+        "vehicleDamagePoints": {
+          "title": "Vehicle damage points",
+          "description": "The collection of vehicle damage points on this vehicle incident",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VehicleDamagePoint"
+          }
+        }
+      }
+    }
+  }
+}

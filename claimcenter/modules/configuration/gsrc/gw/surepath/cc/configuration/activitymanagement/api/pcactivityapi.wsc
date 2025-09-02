@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<webservice-collection xmlns="http://guidewire.com/config/webservicecollection">
+  <resources>
+    <resource>
+      <url>${pc}/ws/gw/surepath/pc/configuration/activitymanagement/api/PCActivityAPI?WSDL</url>
+    </resource>
+  </resources>
+  <settings>
+    <configuration-provider>
+      <type-name>wsi.remote.gw.webservice.pc.PCConfigurationProvider</type-name>
+    </configuration-provider>
+    <configuration-provider>
+      <env/>
+      <server/>
+      <type-name>gw.wsi.pl.GWLanguageConfigProvider</type-name>
+    </configuration-provider>
+  </settings>
+</webservice-collection>

@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <ModalCell
+    id="ExpressionFragCell"
+    mode="formula">
+    <Require
+      name="fragHolder"
+      type="gw.bizrules.pcf.ExpressionFragmentHolder"/>
+    <Require
+      name="lineHolder"
+      type="gw.bizrules.pcf.RuleConditionLineHolder"/>
+    <Variable
+      initialValue="fragHolder as gw.bizrules.pcf.TextExpressionFragmentHolder"
+      name="codeFragHolder"
+      type="gw.bizrules.pcf.TextExpressionFragmentHolder"/>
+    <TextCell
+      autoComplete="codeFragHolder.AutocompleteHandler"
+      enableAutoCompleteMarkup="true"
+      editable="true"
+      enableSort="false"
+      hideChildrenIfReadOnly="false"
+      id="Expression"
+      inputConversion="codeFragHolder.inputConversion(VALUE)"
+      outputConversion="codeFragHolder.outputConversion()"
+      value="codeFragHolder.FragmentProp"
+      valueType="entity.ExpressionFragment">
+      <PostOnChange/>
+      <MenuItemSetRef
+        def="ConditionBuilderExpressionMenuItemSet(fragHolder, lineHolder)"/>
+    </TextCell>
+  </ModalCell>
+</PCF>

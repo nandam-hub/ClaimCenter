@@ -1,0 +1,5 @@
+# This role is used to grant additional access to the CAF Integration Gateway
+name: igcafintegration_ext
+# Add any additional endpoints to this list in order to allow CAF Integration Gateway to access them
+endpoints: []
+accessibleFields: {}

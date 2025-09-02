@@ -1,0 +1,54 @@
+@function gw-makeBlendedBorderColor($bg, $blend-col) {
+  @return mix($bg, $blend-col, 20%);
+}
+
+// =====================================
+// == CONVERTED TO BG FOR WIDGET STYLE
+// =====================================
+$gw-app--widget-style--bg--new: $gw-app--palette--green-light !default;
+
+$gw-app--widget-style--bg--highlight: $gw-app--palette--yellow !default;
+$gw-app--widget-style--bg--highlightalt: $gw-app--palette--yellow-dark !default;
+
+$gw-app--widget-style--bg--callout: $gw-app--palette--blue-highlight !default;
+$gw-app--widget-style--bg--calloutalt: $gw-app--palette--blue-highlight_alt !default;
+
+$gw-app--widget-style--bg--info: $gw-app--palette--blue-highlight !default;
+$gw-app--widget-style--bg--error: $gw-app--palette--red-very-light !default;
+$gw-app--widget-style--bg--warning: $gw-app--palette--orange-medium !default;
+
+$gw-app--widget-style--bg--customer: inherit !default;
+
+// =====================================
+// == TEXT FOR BG FOR WIDGET STYLE
+// =====================================
+$gw-app--widget-style--text-overlay-col--new: getTextColorBasedOnBackgroundLuminance($gw-app--widget-style--bg--new) !default;
+
+$gw-app--widget-style--text-overlay-col--highlight: getTextColorBasedOnBackgroundLuminance($gw-app--widget-style--bg--highlight) !default;
+$gw-app--widget-style--text-overlay-col--highlightalt: getTextColorBasedOnBackgroundLuminance($gw-app--widget-style--bg--highlightalt) !default;
+
+$gw-app--widget-style--text-overlay-col--callout: getTextColorBasedOnBackgroundLuminance($gw-app--widget-style--bg--callout) !default;
+$gw-app--widget-style--text-overlay-col--calloutalt: getTextColorBasedOnBackgroundLuminance($gw-app--widget-style--bg--calloutalt) !default;
+
+$gw-app--widget-style--text-overlay-col--info: getTextColorBasedOnBackgroundLuminance($gw-app--widget-style--bg--info) !default;
+$gw-app--widget-style--text-overlay-col--error: getTextColorBasedOnBackgroundLuminance($gw-app--widget-style--bg--error) !default;
+$gw-app--widget-style--text-overlay-col--warning: getTextColorBasedOnBackgroundLuminance($gw-app--widget-style--bg--warning) !default;
+
+$gw-app--widget-style--text-overlay-col--customer: inherit !default;
+
+// =====================================
+// == BORDERS
+// =====================================
+$gw-app--widget-style--border--new: gw-makeBlendedBorderColor($gw-app--widget-style--bg--new, $gw-app--widget-style--text-overlay-col--new) !default;
+
+$gw-app--widget-style--border--highlight: gw-makeBlendedBorderColor($gw-app--widget-style--bg--highlight, $gw-app--widget-style--text-overlay-col--highlight) !default;
+$gw-app--widget-style--border--highlightalt: gw-makeBlendedBorderColor($gw-app--widget-style--bg--highlightalt, $gw-app--widget-style--text-overlay-col--highlightalt) !default;
+
+$gw-app--widget-style--border--callout: gw-makeBlendedBorderColor($gw-app--widget-style--bg--callout, $gw-app--widget-style--text-overlay-col--callout) !default;
+$gw-app--widget-style--border--calloutalt: gw-makeBlendedBorderColor($gw-app--widget-style--bg--calloutalt, $gw-app--widget-style--text-overlay-col--calloutalt) !default;
+
+$gw-app--widget-style--border--info: gw-makeBlendedBorderColor($gw-app--widget-style--bg--info, $gw-app--widget-style--text-overlay-col--info) !default;
+$gw-app--widget-style--border--error: gw-makeBlendedBorderColor($gw-app--widget-style--bg--error, $gw-app--widget-style--text-overlay-col--error) !default;
+$gw-app--widget-style--border--warning: gw-makeBlendedBorderColor($gw-app--widget-style--bg--warning, $gw-app--widget-style--text-overlay-col--warning) !default;
+
+$gw-app--widget-style--border--customer: inherit !default;

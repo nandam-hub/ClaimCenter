@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="The sex assigned at birth"
+  name="SexAssignedAtBirthType"
+  platform="true">
+  <typecode
+    code="male"
+    desc="Male"
+    name="Male"/>
+  <typecode
+    code="female"
+    desc="Female"
+    name="Female"/>
+</typelist>

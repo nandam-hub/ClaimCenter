@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<entity
+  desc="LossParty Type Applicability Criteria"
+  loadable="false"
+  xmlns="http://guidewire.com/datamodel"
+  entity="AppCritLossPartyType"
+  table="appcritLossPartytype"
+  type="versionable">
+  <typekey
+    desc="Loss Party Type in a rule availability criteria"
+    name="LossPartyType"
+    nullok="false"
+    typelist="LossPartyType"/>
+  <foreignkey
+    columnName="RuleID"
+    desc="The associated rule"
+    fkentity="CCRule"
+    name="Rule"
+    nullok="false"/>
+  <implementsEntity
+    name="RuleVersionDependent"/>
+  <implementsInterface
+    iface="gw.bizrules.domain.RuleVersionDependent"
+    impl="com.guidewire.cc.domain.bizrules.AppCritLossPartyTypeImpl"/>
+  <index
+    desc="Enforce uniqueness per lossPartyType/rule combo"
+    name="UniqueEntryIndex"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="RuleID"/>
+    <indexcol
+      keyposition="2"
+      name="LossPartyType"/>
+  </index>
+</entity>

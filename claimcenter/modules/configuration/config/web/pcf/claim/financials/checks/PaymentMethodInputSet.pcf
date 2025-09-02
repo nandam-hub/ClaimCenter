@@ -1,0 +1,102 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <InputSet
+    id="PaymentMethodInputSet">
+    <Require
+      name="owner"
+      type="entity.BulkInvoice"/>
+    <Require
+      name="helper"
+      type="gw.api.financials.PaymentMethodHelper"/>
+    <Require
+      name="isPayeeChangeable"
+      type="boolean"/>
+    <Require
+      name="showAddressFields"
+      type="org.apache.commons.lang3.mutable.MutableBoolean"/>
+    <Variable
+      initialValue="helper.SelectedEFTData"
+      name="eft"
+      recalculateOnRefresh="true"
+      type="entity.EFTData"/>
+    <Variable
+      initialValue="gw.api.contact.AddressBookUtil.newAddressBookContactSource()"
+      name="externalContactSource"
+      type="gw.api.contact.ExternalContactSource"/>
+    <AddressBookContactInput
+      allowEditContact="false"
+      editable="isPayeeChangeable"
+      id="Payee"
+      label="DisplayKey.get(&quot;Web.Financials.BulkPay.Invoice.Payee&quot;)"
+      onPick="showAddressFields.Value = owner.updatePayeeFields(helper)"
+      required="true"
+      value="owner.Payee"
+      visible="helper != null"/>
+    <TypeKeyRadioInput
+      editable="isPayeeChangeable"
+      filter="VALUE != PaymentMethod.TC_MANUAL &amp;&amp; VALUE != PaymentMethod.TC_INSTANT"
+      id="PaymentMethod"
+      label="DisplayKey.get(&quot;Web.Financials.BulkPay.Invoice.PaymentMethod&quot;)"
+      required="true"
+      value="owner.PaymentMethod"
+      valueType="typekey.PaymentMethod">
+      <PostOnChange
+        onChange="showAddressFields.Value = owner.updatePayeeFields(helper)"/>
+    </TypeKeyRadioInput>
+    <InputSet
+      visible="owner.PaymentMethod == PaymentMethod.TC_CHECK">
+      <TextAreaInput
+        editable="isPayeeChangeable"
+        id="PayTo"
+        label="DisplayKey.get(&quot;Web.Financials.BulkPay.Invoice.PayTo&quot;)"
+        numRows="2"
+        required="true"
+        value="owner.PayTo"/>
+      <TextInput
+        editable="true"
+        id="CheckNumber"
+        label="DisplayKey.get(&quot;Web.Financials.BulkPay.Invoice.CheckNumber&quot;)"
+        value="owner.CheckNumber"/>
+      <TypeKeyInput
+        editable="true"
+        id="DeliveryMethod"
+        label="DisplayKey.get(&quot;Web.Financials.BulkPay.Invoice.DeliveryMethod&quot;)"
+        value="owner.DeliveryMethod"
+        valueType="typekey.DeliveryMethod"/>
+      <TextInput
+        editable="isPayeeChangeable"
+        id="MailTo"
+        label="DisplayKey.get(&quot;Web.Financials.BulkPay.Invoice.MailToContact&quot;)"
+        required="true"
+        value="owner.MailTo"/>
+      <TextInput
+        id="OldMailingAddress"
+        label="DisplayKey.get(&quot;Web.Financials.BulkPay.Invoice.OldMailToAddress&quot;)"
+        value="owner.OldMailToAddress"
+        visible="owner.OldMailToAddress != null and CurrentLocation.InEditMode"/>
+      <TextInput
+        id="MailingAddress"
+        label="DisplayKey.get(&quot;Web.Financials.BulkPay.Invoice.MailingAddress&quot;)"
+        value="owner.FormatAddressSummary(true)"/>
+    </InputSet>
+    <CheckBoxInput
+      editable="true"
+      id="ToggleAddressEdit"
+      value="showAddressFields.Value"
+      valueLabel="DisplayKey.get(&quot;Web.Financials.BulkPay.Invoice.EditMailingAddress&quot;)"
+      visible="owner.PaymentMethod == PaymentMethod.TC_CHECK and owner.Payee != null and CurrentLocation.InEditMode">
+      <PostOnChange
+        deferUpdate="false"/>
+    </CheckBoxInput>
+    <InputSetRef
+      def="CCAddressInputSet(owner.AddressOwner)"
+      id="MailingAddressInput"
+      visible="return owner.PaymentMethod == PaymentMethod.TC_CHECK and owner.Payee != null and showAddressFields.Value and CurrentLocation.InEditMode"/>
+    <InputSetRef
+      def="BulkInvoiceEFTDataInputSet(owner, helper, isPayeeChangeable, eft)"
+      mode="gw.api.web.PCFModeConfig.getMode(&quot;BulkInvoiceEFTDataInputSet&quot;)"
+      visible="owner.PaymentMethod == PaymentMethod.TC_EFT"/>
+  </InputSet>
+</PCF>

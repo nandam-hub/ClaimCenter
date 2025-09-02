@@ -1,0 +1,163 @@
+swagger: '2.0'
+x-gw-runlevel: maintenance
+x-gw-schema-import:
+  base: gw.pl.system.server.profiler.base-1.0
+x-gw-combine:
+- gw.pl.system.server.profiler.base-1.0
+x-gw-apihandlers:
+- gw.api.rest.pl.system.v1.server.profiler.StartableServicesAPIHandler
+paths:
+  /startableservices/entrypoints:
+    get:
+      summary: "Get all startable service entry points"
+      description: "Get all startable service entry points"
+      operationId: getStartableServiceEntryPoints
+      parameters:
+        - $ref: "#/parameters/filter"
+        - $ref: "#/parameters/profilingEnabled"
+        - $ref: "#/parameters/pageSize100"
+        - $ref: "#/parameters/pageToken"
+        - $ref: "#/parameters/includeTotalCount"
+      produces:
+        - application/json
+      x-gw-permissions:
+        - toolsProfilerview
+      responses:
+        '200':
+          description: "Returns all entry points based on specified criteria"
+          schema:
+            $ref: "base#/definitions/EntryPointPage"
+  /startableservices/entrypoints/{entrypoint}/config:
+    get:
+      summary: "Get configuration for entry point"
+      description: "Get configuration for entry point"
+      operationId: getConfigurationForStartableServiceEntryPoint
+      parameters:
+        - $ref: "#/parameters/entrypoint"
+      produces:
+        - application/json
+      x-gw-permissions:
+        - toolsProfilerview
+      responses:
+        '200':
+          description: "Returns configuration"
+          schema:
+            $ref: "base#/definitions/EntryPointConfig"
+    patch:
+      summary: "Sets configuration for entry point"
+      operationId: updateConfigurationForStartableServiceEntryPoint
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      x-gw-permissions:
+        - toolsProfileredit
+      parameters:
+        - $ref: "#/parameters/entrypoint"
+        - name: body
+          in: body
+          schema:
+            $ref: "base#/definitions/EntryPointConfig"
+          required: true
+      responses:
+        '200':
+          description: "Updates configuration for entry point and returns updated configuration"
+          schema:
+            $ref: "base#/definitions/EntryPointConfig"
+  /startableservices/entrypoints/{entrypoint}/history:
+    get:
+      summary: "Get history for this entry point"
+      operationId: getOccurrencesForStartableServiceEntryPoint
+      produces:
+        - application/json
+      x-gw-permissions:
+        - toolsProfilerview
+      parameters:
+        - $ref: "#/parameters/entrypoint"
+        - $ref: "#/parameters/filter"
+        - $ref: "#/parameters/sort"
+        - $ref: "#/parameters/pageSize100"
+        - $ref: "#/parameters/pageToken"
+        - $ref: "#/parameters/includeTotalCount"
+      responses:
+        '200':
+          description: "Returns history"
+          schema:
+            $ref: "base#/definitions/HistoryPage"
+    delete:
+      summary: "Delete startable service profiling history for specified entry point (with optional time-range)"
+      operationId: deleteProfilerAnalysisForStartableServiceEntryPoint
+      parameters:
+      - $ref: "#/parameters/entrypoint"
+      - $ref: "#/parameters/filter"
+      - $ref: "#/parameters/force"
+      produces:
+      - application/json
+      x-gw-permissions:
+      - toolsProfileredit
+      responses:
+        '200':
+          description: "Operation successful"
+          schema:
+            $ref: "base#/definitions/DeleteHistoryOccurrencesResult"
+  /startableservices/history/{occurrenceId}:
+      get:
+        summary: "Download profiler analysis for this occurrence"
+        operationId: getProfilerAnalysisForStartableServiceOccurrence
+        parameters:
+          - $ref: "#/parameters/occurrenceId"
+        produces:
+          - application/x-gzip
+        x-gw-permissions:
+          - toolsProfilerview
+        responses:
+          '200':
+            description: "Download profiler analysis"
+      delete:
+        summary: "Delete startable service profiling history occurrence"
+        operationId: deleteProfilerAnalysisForStartableServiceOccurrence
+        parameters:
+          - $ref: "#/parameters/occurrenceId"
+          - $ref: "#/parameters/filter"
+          - $ref: "#/parameters/force"
+        x-gw-permissions:
+          - toolsProfileredit
+        responses:
+          '204':
+            description: "Profiler history occurrence deleted"
+  /startableservices/history:
+    get:
+      summary: "Get history for all entry points"
+      operationId: getOccurrencesForAllStartableServiceEntryPoints
+      parameters:
+      - $ref: "#/parameters/filter"
+      - $ref: "#/parameters/sort"
+      - $ref: "#/parameters/pageSize100"
+      - $ref: "#/parameters/pageToken"
+      - $ref: "#/parameters/includeTotalCount"
+      - $ref: "#/parameters/entrypointCode"
+      produces:
+        - application/json
+      x-gw-permissions:
+        - toolsProfilerview
+      responses:
+        '200':
+          description: "Returns history"
+          schema:
+            $ref: "base#/definitions/HistoryPage"
+    delete:
+      summary: "Delete startable service profiling history for all entry points (with optional time-range and entry point)"
+      operationId: deleteProfilerAnalysisForAllStartableServiceEntryPoints
+      parameters:
+      - $ref: "#/parameters/filter"
+      - $ref: "#/parameters/entrypointCode"
+      - $ref: "#/parameters/force"
+      produces:
+      - application/json
+      x-gw-permissions:
+      - toolsProfileredit
+      responses:
+        '200':
+          description: "Operation successful"
+          schema:
+            $ref: "base#/definitions/DeleteHistoryOccurrencesResult"

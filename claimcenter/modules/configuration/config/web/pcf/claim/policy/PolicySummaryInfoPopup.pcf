@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    canEdit="false"
+    canVisit="perm.System.viewpolicy"
+    id="PolicySummaryInfoPopup"
+    title="DisplayKey.get(&quot;JSP.PolicyDetail.Policy&quot;)">
+    <LocationEntryPoint
+      signature="PolicySummaryInfoPopup(PolicySummary : PolicySummary)"/>
+    <Variable
+      name="PolicySummary"
+      type="PolicySummary"/>
+    <Variable
+      initialValue="gw.api.policy.PolicyTypeUtil.getLossTypeForPolicyType(PolicySummary.PolicyType)"
+      name="policyType"
+      type="LossType"/>
+    <Variable
+      initialValue="PolicySummary.APDRiskUnits.partition(\apdRiskUnit -&gt; apdRiskUnit.Code)"
+      name="apdRiskUnitMap"
+      type="Map&lt;String, List&lt;entity.PolicySummaryAPDRiskUnit&gt;&gt;"/>
+    <Variable
+      initialValue="apdRiskUnitMap != null and !apdRiskUnitMap.isEmpty()"
+      name="showApdRiskUnitProps"
+      type="Boolean"/>
+    <Screen
+      id="PolicySummaryInfoScreen">
+      <Toolbar>
+        <ToolbarButton
+          action="CurrentLocation.cancel()"
+          id="PolicySummaryInfoPopup_CloseButton"
+          label="DisplayKey.get(&quot;Button.Close&quot;)"
+          shortcut="C"/>
+      </Toolbar>
+      <PanelRef
+        def="PolicySummaryGeneralDV(PolicySummary)"
+        mode="policyType"/>
+      <PanelRef
+        def="PolicySummaryVehicleLV( PolicySummary, false, false )"
+        id="PolicySummaryRiskUnitPanel"
+        visible="PolicySummary.isVehiclePolicyType() and !showApdRiskUnitProps">
+        <TitleBar
+          title="DisplayKey.get(&quot;LV.Policy.PolicyVehicles.Title&quot;)"/>
+        <Toolbar/>
+      </PanelRef>
+      <PanelRef
+        def="PolicySummaryPropertyLV( PolicySummary, false, false )"
+        id="PolicySummaryPropertyPanel"
+        visible="!showApdRiskUnitProps and PolicySummary.isPropertyPolicyType()">
+        <TitleBar
+          title="DisplayKey.get(&quot;LV.Policy.PolicyProperties.Title&quot;)"/>
+        <Toolbar/>
+      </PanelRef>
+      <PanelRow
+        visible="showApdRiskUnitProps">
+        <PanelIterator
+          elementName="riskUnitCode"
+          value="apdRiskUnitMap.Keys.toTypedArray()"
+          valueType="String[]">
+          <PanelRef
+            def="PolicySummaryAPDRiskUnitLV(apdRiskUnitMap.get(riskUnitCode), false, false)"
+            id="PolicySummaryAPDRiskUnitPanel">
+            <TitleBar
+              title="gw.apd.web.PolicySummaryHelper.getDisplayKeyValueOrDefault(&quot;Web.APD.&quot; + riskUnitCode, riskUnitCode)"/>
+            <Toolbar/>
+          </PanelRef>
+        </PanelIterator>
+      </PanelRow>
+    </Screen>
+  </Popup>
+</PCF>

@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<entity
+  loadable="false"
+  xmlns="http://guidewire.com/datamodel"
+  entity="OutboundRecord"
+  desc="An outbound file record."
+  table="outboundrecord"
+  type="editable"
+  platform="true"
+  replicable="false">
+  <foreignkey
+    desc="The name of the outbound file config."
+    fkentity="OutboundFileConfig"
+    name="Config"
+    nullok="false"/>
+  <column
+    desc="A unique batch ID."
+    name="BatchID"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="256"/>
+  </column>
+  <column
+    desc="The date and time that the record was created."
+    name="CreateDate"
+    nullok="false"
+    type="datetime"/>
+  <typekey
+    desc="The status of the record."
+    name="Status"
+    nullok="false"
+    typelist="OutboundRecordStatus"/>
+  <column
+    desc="The content of the record."
+    name="Content"
+    nullok="false"
+    type="text">
+    <columnParam
+      name="trimwhitespace"
+      value="false"/>
+  </column>
+  <column
+    desc="A message describing any errors that may have occurred when processing this record."
+    name="ErrorMessage"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="512"/>
+  </column>
+  <foreignkey
+    desc="The Outbound File this record was processed with."
+    fkentity="OutboundFile"
+    name="OutboundFile"
+    nullok="true"/>
+  <index
+    desc="Support query for pending records by configuration."
+    name="OutRecPndIx">
+    <indexcol
+      keyposition="1"
+      name="Config"/>
+  </index>
+  <index
+    desc="Support search for batch ID."
+    name="OutRecBatchIx">
+    <indexcol
+      keyposition="1"
+      name="BatchID"/>
+  </index>
+  <index
+    desc="Support query for Outbound File."
+    name="OutRecFileIx">
+    <indexcol
+      keyposition="1"
+      name="OutboundFile"/>
+  </index>
+  <column
+    desc="Date eligible to be purged, used by skipped records"
+    name="PurgeDate"
+    nullok="true"
+    type="dateonly"/>
+</entity>

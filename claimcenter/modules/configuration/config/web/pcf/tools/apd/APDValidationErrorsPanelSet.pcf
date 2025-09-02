@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <PanelSet
+    id="APDValidationErrorsPanelSet">
+    <Require
+      name="generationHelper"
+      type="gw.apd.model.generate.GenerationHelper"/>
+    <Variable
+      name="helper"
+      type="gw.apd.web.ProductManagementHelper"
+      initialValue="new gw.apd.web.ProductManagementHelper()"
+    />
+    <Verbatim
+      label="DisplayKey.get(&quot;Web.APDProduct.GenerateSourceCode.ValidationErrors.Description&quot;, generationHelper.getGenerator().Name)"/>
+    <ListViewPanel
+      id="ProductTree_LV">
+      <RowTree
+        id="ProductTree"
+        contentType="gw.xml.XMLNode"
+        elementName="item"
+        value="helper.buildValidationTree(generationHelper)">
+        <Row>
+          <TextCell
+            id="ElementName"
+            label="DisplayKey.get(&quot;Web.APD.ProductGenerationTree.ElementType&quot;)"
+            value="{&quot;WARNING&quot;,&quot;ERROR&quot;}.contains(item.ElementName) ? &quot;&quot; : item.getAttributeValue(&quot;Type&quot;)"/>
+          <BooleanRadioCell
+            enableSort="false"
+            icon="helper.getValidityIcon(item).First"
+            iconColor="helper.getValidityIcon(item).Second"
+            iconType="svgFileName"
+            id="ValidityIcon"
+            showHeaderIcon="false"
+            value="true"/>
+          <TextCell
+            id="Description"
+            label="DisplayKey.get(&quot;Web.APD.ProductGenerationTree.Description&quot;)"
+            value="item.getAttributeValue(&quot;Name&quot;)"/>
+        </Row>
+      </RowTree>
+    </ListViewPanel>
+  </PanelSet>
+</PCF>

@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="Service message type"
+  name="ServiceRequestMessageType">
+  <typecode
+    code="info"
+    desc="Message that is informational"
+    name="Information"
+    priority="1"/>
+  <typecode
+    code="question"
+    desc="Message that requires a response answer"
+    name="Question"
+    priority="2"/>
+</typelist>

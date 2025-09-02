@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="The different types of available exposure screens, filtered by coverage type and coverage subtype"
+  final="false"
+  name="ExposureType">
+  <typecode
+    code="APDDamage"
+    desc="Exposure for an Advanced Product Designer coverage"
+    name="APD Exposure">
+    <category
+      code="APDIncident"
+      typelist="Incident"/>
+  </typecode>
+  <typefilter
+    desc="When initializing the Incident on the Exposure, will reuse an existing Incident if possible"
+    name="IncidentFromCoverage"/>
+  <typefilter
+    desc="When initializing the Incident on the Exposure, will always create a new Incident"
+    name="IncidentAlwaysNew"/>
+</typelist>

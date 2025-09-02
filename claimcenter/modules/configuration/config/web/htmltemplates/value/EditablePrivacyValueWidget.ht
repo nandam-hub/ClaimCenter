@@ -1,0 +1,4 @@
+<input type="text" name="${renderId}" value="${currentValue}"
+       aria-labelledby="${inputLabelAriaId}" disabled="${disabled || encrypted}"
+       aria-required="${required ? 'true' : 'false'}" aria-invalid="${invalid ? 'true' : 'false'}"
+       placeholder="${placeholder}" class="gw-PrivacyValueWidget--valueField ${noTrack ? 'gw-noTrack'}"/>

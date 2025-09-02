@@ -1,0 +1,12 @@
+<input type="text"
+       name="${renderId}"
+       class="gw-picker-input ${noTrack ? 'gw-noTrack'}"
+       aria-labelledby="${inputLabelAriaId}"
+       disabled="${disabled}"
+       aria-required="${required ? 'true' : 'false'}"
+       aria-invalid="${invalid ? 'true' : 'false'}"
+       value="${currentValue}"
+       maxlength="${maxlength}"
+       readonly="${freeInputDisabled}"
+       data-gw-readonly-focusable
+       placeholder="${placeholder}"/>

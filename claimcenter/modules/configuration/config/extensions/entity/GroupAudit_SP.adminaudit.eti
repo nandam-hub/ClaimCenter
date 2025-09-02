@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  entity="GroupAudit_SP"
+  supertype="DataAudit_SP">
+  <foreignkey
+    columnName="GroupID"
+    fkentity="Group"
+    name="Group"
+    nullok="true"/>
+</subtype>

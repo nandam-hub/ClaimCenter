@@ -1,0 +1,10 @@
+## List of non-compatible resources patterns can be provided here
+## allow-* means supported by blue/green upgrade, _not_ rolling upgrade
+## supported rules: allow-adds, allow-removals, allow-changes
+#
+## any entropy to this folder or it's children require a full upgrade
+#- glob:**/config/super-important-stuff/**:
+#
+## additions allowed, changes and removals require full upgrade
+#- glob:**/config/important-stuff.txt:
+#  - allow-adds

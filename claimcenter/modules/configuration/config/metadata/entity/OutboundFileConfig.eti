@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<entity
+  abstract="true"
+  final="false"
+  loadable="false"
+  xmlns="http://guidewire.com/datamodel"
+  entity="OutboundFileConfig"
+  desc="Used for storing info related to file handler"
+  table="outboundfileconfig"
+  type="editable"
+  platform="true"
+  replicable="false">
+  <column
+    desc="Name of the outbound file handler source."
+    name="Name"
+    nullok="false"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="40"/>
+  </column>
+  <column
+    desc="Valid file path to the temporary directory."
+    name="TemporaryDirectory"
+    nullok="false"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="512"/>
+  </column>
+  <column
+    desc="Prefix used for the batch identifier and the output file name."
+    name="Prefix"
+    nullok="false"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="10"/>
+  </column>
+  <column
+    desc="Extension for the output file."
+    name="Extension"
+    nullok="false"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="10"/>
+  </column>
+  <column
+    desc="Fully qualified class name of the outbound file handler."
+    name="FileHandlerClass"
+    nullok="false"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="512"/>
+  </column>
+  <column
+    desc="The number of days to wait before purging outbound files."
+    name="DaysTillPurge"
+    nullok="false"
+    type="integer"/>
+  <index
+    desc="Unique index for the Name"
+    name="outbnddstnameindx"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="Name"/>
+  </index>
+  <implementsInterface
+    iface="com.guidewire.outboundfile.config.OutboundFileConfigMethods"
+    impl="com.guidewire.outboundfile.config.OutboundFileConfigImpl"/>
+</entity>

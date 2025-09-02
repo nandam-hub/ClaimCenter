@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<internaltypelistextension xmlns="http://guidewire.com/typelists" name="SystemPermissionType" desc="Defines all permissions that can be granted to users via privileges and roles">
+  <typecode
+    code="editinboundfiles"
+    desc="Permission to edit inbound files and records"
+    name="Edit Inbound Files"/>
+  <typecode
+    code="viewinboundfiles"
+    desc="Permission to view inbound files and records"
+    name="View Inbound Files"/>
+</internaltypelistextension>

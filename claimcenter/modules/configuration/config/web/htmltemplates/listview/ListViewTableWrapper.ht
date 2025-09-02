@@ -1,0 +1,5 @@
+<div class="gw-ListView--table-wrapper" ${tableWrapperStyling} role="group">
+  <table class="gw-ListViewWidget--table gw-table" aria-labelledby="${labelRenderId}" aria-describedby="${emptyTableCaptionId}">
+    ${:children}
+  </table>
+</div>

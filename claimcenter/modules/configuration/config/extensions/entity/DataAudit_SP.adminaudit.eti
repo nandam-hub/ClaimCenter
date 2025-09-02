@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<entity
+  abstract="true"
+  xmlns="http://guidewire.com/datamodel"
+  entity="DataAudit_SP"
+  desc="An entity representing auditable administrative data chnages"
+  table="dataaudit_sp"
+  type="retireable"
+  exportable="true"
+  final="false">
+  <column
+    desc="The date on which this auditable change occurred"
+    name="OccurrenceDate"
+    nullok="false"
+    type="datetime"/>
+  <foreignkey
+    desc="The user performing this auditable change"
+    fkentity="User"
+    name="PerformingUser"
+    nullok="false"/>
+  <typekey
+    desc="Typecode value indicating whether the entity instance impacted by this auditable change was inserted, updated, or removed"
+    name="AuditableBeanStatus"
+    nullok="false"
+    typelist="BeanStatus_SP"/>
+  <column
+    desc="Display name of the entity instance impacted by this auditable change"
+    name="AuditableBeanDisplayName"
+    nullok="false"
+    type="mediumtext"/>
+  <column
+    desc="Display name of the type of entity whose instance triggered this data audit record"
+    name="AuditableBeanEntityType"
+    nullok="false"
+    type="mediumtext"/>
+  <column
+    desc="Display name of the parent for the type of entity whose instance triggered this data audit record - this is set when generating the admin data audit record based upon the foreign key to which we are pointing the audit record itself"
+    name="AuditBeanParentEntityType"
+    nullok="false"
+    type="mediumtext"/>
+  <array
+    arrayentity="DataAuditFieldRecord_SP"
+    desc="If populated, represents the fields changed for a given data audit record, in the context of an updated bean"
+    name="FieldRecords"/>
+  <implementsEntity
+    name="EventAware"/>
+  <column
+    desc="If non-null, this refers to the public ID of the audit bean parent entity that has since been retired or removed. When set, we set this on all prior audit records as well"
+    name="RemovedAuditBeanID"
+    nullok="true"
+    type="publicid"/>
+</entity>

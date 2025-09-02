@@ -1,0 +1,363 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Popup
+    canVisit="gw.bizrules.pcf.RulePermissionUIHelper.canImportRule(importTask.getRuleType().getEntityType())"
+    id="RuleImportDetailsPopup"
+    title="completed ? DisplayKey.get('BizRules.RuleImportDetailsPopup.ReviewImport') : DisplayKey.get('BizRules.RuleImportDetailsPopup.CompleteImport')">
+    <LocationEntryPoint
+      signature="RuleImportDetailsPopup(navigationSupport: gw.bizrules.pcf.BizRulesPageNavigationSupport, importTask: RuleImportTask, completed: boolean)"/>
+    <Variable
+      name="navigationSupport"
+      type="gw.bizrules.pcf.BizRulesPageNavigationSupport"/>
+    <Variable
+      name="importTask"
+      type="RuleImportTask"/>
+    <Variable
+      name="completed"
+      type="boolean"/>
+    <Variable
+      initialValue="gw.bizrules.pcf.ImportingRulesDisposition.create(navigationSupport.VersionController.ExportImportController, importTask)"
+      name="rulesDisposition"
+      recalculateOnRefresh="true"
+      type="gw.bizrules.pcf.ImportingRulesDisposition"/>
+    <Variable
+      initialValue="new gw.bizrules.pcf.RuleExportImportPageHelper(navigationSupport.VersionController.ExportImportController)"
+      name="pageHelper"
+      type="gw.bizrules.pcf.RuleExportImportPageHelper"/>
+    <Variable
+      initialValue="new gw.bizrules.pcf.RuleVersionController(navigationSupport)"
+      name="ruleVersionController"
+      type="gw.bizrules.pcf.RuleVersionController"/>
+    <Variable
+      initialValue="pageHelper.onImportDetailsPopupRefresh(importTask); return null"
+      name="ignore"
+      recalculateOnRefresh="true"
+      type="java.lang.Void"/>
+    <Screen>
+      <AlertBar
+        action="navigationSupport.goToRulesListPage(importTask.getRuleType())"
+        allowDismiss="false"
+        available="gw.bizrules.pcf.RulePermissionUIHelper.canViewRule(importTask.getRuleType().getEntityType())"
+        id="ImportCompletedAlert"
+        label="gw.bizrules.pcf.RulePermissionUIHelper.canViewRule(importTask.getRuleType().getEntityType()) ? DisplayKey.get(&quot;BizRules.RuleImportDetailsPopup.Alert.ImportCompleted.WithReturnToRules&quot;): DisplayKey.get(&quot;BizRules.RuleImportDetailsPopup.Alert.ImportCompleted&quot;)"
+        visible="rulesDisposition.Outstanding == 0"/>
+      <DetailViewPanel
+        editable="false">
+        <InputColumn>
+          <TextInput
+            id="SourceName"
+            label="DisplayKey.get('BizRules.RuleImportDetailsPopup.SourceName')"
+            value="importTask.SourceName"/>
+        </InputColumn>
+      </DetailViewPanel>
+      <PanelRef>
+        <TitleBar
+          title="rulesDisposition.Total == 1 ? DisplayKey.get('BizRules.RuleImportDetailsPopup.Disposition', rulesDisposition.Total) : DisplayKey.get('BizRules.RuleImportDetailsPopup.DispositionPlural', rulesDisposition.Total)"/>
+        <ListViewPanel
+          id="DispositionLV"
+          stretch="true">
+          <Row
+            renderAsSmartHeader="true"
+            useTitleStyle="false">
+            <TextCell
+              align="center"
+              colspan="4"
+              grow="true"
+              id="OutstandingCountHeader"
+              value="DisplayKey.get('BizRules.RuleImportDetailsPopup.StatusWithCount', DisplayKey.get('BizRules.Import.Disposition.Outstanding'), rulesDisposition.Outstanding)"/>
+            <TextCell
+              align="center"
+              id="ImportedHeader"
+              value="DisplayKey.get('BizRules.Import.Disposition.Imported')"/>
+            <TextCell
+              align="center"
+              id="DiscardedHeader"
+              value="RuleImportStatus.TC_DISCARDED.DisplayName"/>
+            <TextCell
+              align="center"
+              id="EditedHeader"
+              value="DisplayKey.get('BizRules.Import.Disposition.Edited')"/>
+            <TextCell
+              align="center"
+              id="NoActionHeader"
+              value="RuleImportStatus.TC_NOACTION.Name"/>
+          </Row>
+          <Row
+            useSubHeaderStyle="true"
+            useTitleStyle="false">
+            <TextCell
+              align="center"
+              bold="true"
+              id="NewCountHeader"
+              value="RuleImportStatus.TC_NEW.DisplayName"/>
+            <TextCell
+              align="center"
+              bold="true"
+              id="NoConflictCountHeader"
+              value="RuleImportStatus.TC_NOCONFLICT.DisplayName"/>
+            <TextCell
+              align="center"
+              bold="true"
+              id="DeployedCountHeader"
+              value="RuleImportStatus.TC_DEPLOYED.DisplayName"/>
+            <TextCell
+              align="center"
+              bold="true"
+              id="ConflictCountHeader"
+              value="RuleImportStatus.TC_CONFLICT.DisplayName"/>
+            <TextCell
+              align="center"
+              id="ImportedCountSubHeader"/>
+            <TextCell
+              align="center"
+              id="DiscardedCountSubHeader"/>
+            <TextCell
+              align="center"
+              id="EditedCountSubHeader"/>
+            <TextCell
+              align="center"
+              id="NoActionCountSubHeader"/>
+          </Row>
+          <Row>
+            <TextCell
+              align="center"
+              id="NewCount"
+              value="rulesDisposition.getRulesWithStatus(TC_NEW)"
+              valueType="java.lang.Integer"/>
+            <TextCell
+              align="center"
+              id="NoConflictCount"
+              value="rulesDisposition.getRulesWithStatus(TC_NOCONFLICT)"
+              valueType="java.lang.Integer"/>
+            <TextCell
+              align="center"
+              id="DeployedCount"
+              value="rulesDisposition.getRulesWithStatus(TC_DEPLOYED)"
+              valueType="java.lang.Integer"/>
+            <TextCell
+              align="center"
+              id="ConflictCount"
+              value="rulesDisposition.AllConflict"
+              valueType="java.lang.Integer"/>
+            <TextCell
+              align="center"
+              enableSort="false"
+              id="ImportedCount"
+              value="rulesDisposition.AllImported"
+              valueType="java.lang.Integer"/>
+            <TextCell
+              align="center"
+              id="DiscardedCount"
+              value="rulesDisposition.getRulesWithStatus(TC_DISCARDED)"
+              valueType="java.lang.Integer"/>
+            <TextCell
+              align="center"
+              id="EditedCount"
+              value="rulesDisposition.getRulesWithStatus(TC_IMPORTEDEDITEDCONFLICT)"
+              valueType="java.lang.Integer"/>
+            <TextCell
+              align="center"
+              id="NoActionCount"
+              value="rulesDisposition.AllNoAction"
+              valueType="java.lang.Integer"/>
+          </Row>
+        </ListViewPanel>
+      </PanelRef>
+      <PanelRef>
+        <TitleBar
+          title="DisplayKey.get('BizRules.RuleImportDetailsPopup.ManageSynchronization')"/>
+        <Toolbar>
+          <CheckedValuesToolbarButton
+            allCheckedRowsAction="pageHelper.importRules(CheckedValues.toList())"
+            confirmMessage="DisplayKey.get('BizRules.RuleImportDetailsPopup.ApplySelected.Confirmation')"
+            flags="all importable"
+            id="ImportSelected"
+            iterator="EntriesIterator"
+            label="DisplayKey.get('BizRules.RuleImportDetailsPopup.ApplySelected')"
+            tooltip="DisplayKey.get('BizRules.RuleImportDetailsPopup.ApplySelectedTooltip')"
+            visible="gw.bizrules.pcf.RulePermissionUIHelper.canImportRule(importTask.getRuleType().getEntityType())"/>
+          <CheckedValuesToolbarButton
+            allCheckedRowsAction="pageHelper.discardRules(CheckedValues.toList())"
+            confirmMessage="DisplayKey.get('BizRules.RuleImportDetailsPopup.DiscardSelected.Confirmation')"
+            id="DiscardSelected"
+            iterator="EntriesIterator"
+            label="DisplayKey.get('BizRules.RuleImportDetailsPopup.DiscardSelected')"
+            tooltip="DisplayKey.get('BizRules.RuleImportDetailsPopup.DiscardSelectedTooltip')"
+            visible="gw.bizrules.pcf.RulePermissionUIHelper.canImportRule(importTask.getRuleType().getEntityType())"/>
+          <ToolbarDivider/>
+          <ToolbarButton
+            action="RuleImportAllPopup.push(pageHelper, importTask)"
+            available="rulesDisposition.Outstanding &gt; 0 and pageHelper.isAllConflictsResolved(importTask)"
+            id="ImportAllRemaining"
+            label="DisplayKey.get('BizRules.RuleImportDetailsPopup.ApplyAllRemaining')"
+            tooltip="DisplayKey.get('BizRules.RuleImportDetailsPopup.ApplyAllTooltip')"
+            visible="gw.bizrules.pcf.RulePermissionUIHelper.canImportRule(importTask.getRuleType().getEntityType())"/>
+          <ToolbarButton
+            action="pageHelper.discardAllRemainingRules(importTask)"
+            available="rulesDisposition.Outstanding &gt; 0"
+            confirmMessage="DisplayKey.get('BizRules.RuleImportDetailsPopup.DiscardAllRemaining.Confirmation', rulesDisposition.Outstanding)"
+            id="DiscardAllRemaining"
+            label="DisplayKey.get('BizRules.RuleImportDetailsPopup.DiscardAllRemaining')"
+            tooltip="DisplayKey.get('BizRules.RuleImportDetailsPopup.DiscardAllTooltip')"
+            visible="gw.bizrules.pcf.RulePermissionUIHelper.canImportRule(importTask.getRuleType().getEntityType())"/>
+          <ToolbarDivider/>
+          <ToolbarFilter
+            iterator="EntriesIterator"
+            name="EntriesFilter">
+            <ToolbarFilterOption
+              filter="gw.bizrules.pcf.ImportingRulesDisposition.createOutstandingFilter()"/>
+            <ToolbarFilterOption
+              filter="gw.bizrules.pcf.ImportingRulesDisposition.createAllImportedFilter()"/>
+            <ToolbarFilterOption
+              filter="gw.bizrules.pcf.ImportingRulesDisposition.createFilterByStatus(TC_DISCARDED)"/>
+            <ToolbarFilterOption
+              filter="gw.bizrules.pcf.ImportingRulesDisposition.createAllEditedFilter()"/>
+            <ToolbarFilterOption
+              filter="gw.bizrules.pcf.ImportingRulesDisposition.createAllNoActionFilter()"/>
+            <ToolbarFilterOption
+              filter="new gw.api.util.CoreFilters.AllFilter()"
+              selectOnEnter="true"/>
+          </ToolbarFilter>
+        </Toolbar>
+        <ListViewPanel
+          stretch="true">
+          <RowIterator
+            checkBoxVisible="pending"
+            editable="true"
+            elementName="entry"
+            hasCheckBoxes="true"
+            id="EntriesIterator"
+            value="navigationSupport.VersionController.ExportImportController.createImportTaskEntriesQuery(importTask).select()"
+            valueType="gw.api.database.IQueryBeanResult&lt;RuleImportTaskEntry&gt;">
+            <Variable
+              initialValue="!entry.Status.Final"
+              name="pending"
+              type="boolean"/>
+            <ToolbarFlag
+              condition="entry.NewHeadVersion != null"
+              name="importable"/>
+            <Row>
+              <ModalCellRef
+                align="left"
+                def="RuleValidationInfoCell(entry.NewHeadVersion.Rule)"
+                id="RuleValidationInfo"
+                label="DisplayKey.get('BizRules.RulesPage.LV.ValidationStatus')"
+                mode="navigationSupport.ValidationInfoMode"/>
+              <LinkCell
+                align="left"
+                grow="true"
+                id="NameContainer"
+                label="DisplayKey.get('BizRules.RuleImportDetailsPopup.LV.RuleName')"
+                sortBy="entry.RuleName"
+                sortOrder="1">
+                <Link
+                  id="Name"
+                  label="entry.RuleName"/>
+                <Link
+                  id="NameGap"
+                  label="&quot; &quot;"/>
+                <Link
+                  action="ruleVersionController.pushRulesWithSameNamePopup(entry.ImportedVersion)"
+                  id="AnotherRuleWithSameNameLink"
+                  label="DisplayKey.get('BizRules.RuleImportDetailsPopup.LV.DuplicatedRuleName')"
+                  visible="!ruleVersionController.isRuleNameUnique(entry.ImportedVersion)"/>
+              </LinkCell>
+              <LinkCell
+                align="left"
+                grow="true"
+                label="DisplayKey.get('BizRules.RuleImportDetailsPopup.LV.Status')">
+                <Link
+                  id="Status"
+                  label="entry.Status.Name"
+                  tooltip="entry.Status.Description"/>
+              </LinkCell>
+              <LinkCell
+                align="left"
+                available="gw.bizrules.pcf.RulePermissionUIHelper.canImportRule(importTask.getRuleType().getEntityType())"
+                grow="true"
+                label="DisplayKey.get('BizRules.RuleImportDetailsPopup.LV.AvailableActions')">
+                <Link
+                  id="AvailableActionTextLink"
+                  label="pageHelper.getAvailableActionText(entry)"/>
+                <Link
+                  id="EditedVersionLinkSeparator"
+                  label="DisplayKey.get('BizRules.SeparatorWithSpaces')"
+                  visible="entry.Status == RuleImportStatus.TC_EDITEDRESOLVEDCONFLICT"/>
+                <Link
+                  action="pageHelper.actionEditedVersionLink(navigationSupport, entry, pending)"
+                  id="EditedVersionLink"
+                  label="pageHelper.getLabelForEditedVersionLink(navigationSupport, entry)"
+                  visible="entry.Status == RuleImportStatus.TC_EDITEDRESOLVEDCONFLICT"/>
+                <Link
+                  icon="&quot;biz_rule_import_no&quot;"
+                  iconType="svgFileName"
+                  id="ChooseExistingRadioIcon"
+                  action="pageHelper.resolveConflict(entry, TC_EXISTING)"
+                  visible="entry.Status.Conflict and entry.ChosenSide != TC_EXISTING"/>
+                <Link
+                  icon="&quot;biz_rule_import_yes&quot;"
+                  iconType="svgFileName"
+                  id="ChooseExistingSelectedRadioIcon"
+                  action="pageHelper.resolveConflict(entry, TC_EXISTING)"
+                  visible="entry.Status.Conflict and entry.ChosenSide == TC_EXISTING"/>
+                <Link
+                  action="pageHelper.resolveConflict(entry, TC_EXISTING)"
+                  id="ChooseExistingLink"
+                  label="DisplayKey.get('BizRules.RuleImportDetailsPopup.LV.ExistingVersion')"
+                  tooltip="DisplayKey.get('BizRules.Import.Comparison.KeepExistingTooltip')"
+                  visible="entry.Status.Conflict"/>
+                <Link
+                  icon="&quot;biz_rule_import_no&quot;"
+                  iconType="svgFileName"
+                  id="ChooseImportingRadioIcon"
+                  action="pageHelper.resolveConflict(entry, TC_IMPORTING)"
+                  visible="entry.Status.Conflict and entry.ChosenSide != TC_IMPORTING"/>
+                <Link
+                  icon="&quot;biz_rule_import_yes&quot;"
+                  iconType="svgFileName"
+                  id="ChooseImportingSelectedRadioIcon"
+                  action="pageHelper.resolveConflict(entry, TC_IMPORTING)"
+                  visible="entry.Status.Conflict and entry.ChosenSide == TC_IMPORTING"/>
+                <Link
+                  action="pageHelper.resolveConflict(entry, TC_IMPORTING)"
+                  id="ChooseImportingLink"
+                  label="DisplayKey.get('BizRules.RuleImportDetailsPopup.LV.ImportingVersion')"
+                  tooltip="DisplayKey.get('BizRules.Import.Comparison.ReplaceWithNewTooltip')"
+                  visible="entry.Status.Conflict"/>
+                <Link
+                  id="CompareSeparator"
+                  label="DisplayKey.get('BizRules.SeparatorWithSpaces')"
+                  visible="entry.Status.Conflict or entry.Status == TC_NOCONFLICT"/>
+                <Link
+                  action="navigationSupport.pushRuleComparisonPopup(entry, pageHelper)"
+                  id="CompareVersions"
+                  label="DisplayKey.get('BizRules.RuleImportDetailsPopup.LV.Compare')"
+                  tooltip="DisplayKey.get('BizRules.RuleImportDetailsPopup.LV.Compare.Tooltip')"
+                  visible="entry.Status.Conflict or entry.Status == TC_NOCONFLICT"/>
+              </LinkCell>
+              <TextCell
+                action="pageHelper.actionExistingVersionLink(navigationSupport,entry)"
+                actionAvailable="gw.bizrules.pcf.RulePermissionUIHelper.canViewRule(importTask.getRuleType().getEntityType())"
+                align="left"
+                enableSort="false"
+                id="ExistingVersion"
+                label="DisplayKey.get('BizRules.RuleImportDetailsPopup.LV.ExistingVersion')"
+                value="pageHelper.getLabelForExistingVersionLink(navigationSupport,entry)"
+                valueVisible="entry.ExistingVersion != null"/>
+              <TextCell
+                action="pageHelper.actionImportingVersionLink(navigationSupport,entry,pending)"
+                actionAvailable="gw.bizrules.pcf.RulePermissionUIHelper.canViewRule(importTask.getRuleType().getEntityType())"
+                align="left"
+                enableSort="false"
+                id="ImportingVersion"
+                label="DisplayKey.get('BizRules.RuleImportDetailsPopup.LV.ImportingVersion')"
+                value="pageHelper.getLabelForImportingVersionLink(navigationSupport,entry)"/>
+            </Row>
+          </RowIterator>
+        </ListViewPanel>
+      </PanelRef>
+    </Screen>
+  </Popup>
+</PCF>

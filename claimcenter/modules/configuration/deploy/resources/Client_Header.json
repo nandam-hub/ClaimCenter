@@ -1,0 +1,16 @@
+{
+  "meta": [
+    {
+      "http-equiv": "X-UA-Compatible",
+      "content": "IE=edge"
+    },
+    {
+      "name": "viewport",
+      "content": "width=1280"
+    }
+  ],
+  "link": [
+  ],
+  "script": [
+  ]
+}

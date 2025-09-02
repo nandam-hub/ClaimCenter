@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="ApplicabilityCriteriaDV"
+    mode="ExposureRule">
+    <Require
+      name="context"
+      type="gw.bizrules.CCRulesNavigationContext"/>
+    <Require
+      name="version"
+      type="RuleVersion"/>
+    <Variable
+      initialValue="new gw.bizrules.ExposureRules.ExposureRulePanelSetHelper(version.Rule as ExposureRule, CurrentLocation)"
+      name="helper"
+      recalculateOnRefresh="true"
+      type="gw.bizrules.ExposureRules.ExposureRulePanelSetHelper"/>
+    <InputColumn>
+      <InputSetRef
+        def="ApplicabilityCriteriaSingleSelectInputSet(helper.PolicyTypesBundle, true)"
+        id="PolicyTypes"/>
+      <InputSetRef
+        def="ApplicabilityCriteriaSingleSelectInputSet(helper.IncidentTypesBundle, true)"
+        id="IncidentTypes"/>
+      <InputSetRef
+        def="ApplicabilityCriteriaMultiSelectInputSet(helper.LossCausesBundle)"
+        id="LossCauses"/>
+    </InputColumn>
+    <InputColumn>
+      <InputSetRef
+        def="ApplicabilityCriteriaSingleSelectInputSet(helper.LossPartyTypesBundle, false)"
+        id="LossPartyTypes"/>
+      <InputSetRef
+        def="ApplicabilityCriteriaSingleSelectInputSet(helper.LossTypesBundle, false)"
+        id="LossTypes"/>
+      <InputSetRef
+        def="ApplicabilityCriteriaMultiSelectInputSet(helper.JurisdictionsBundle)"
+        id="Jurisdictions"/>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

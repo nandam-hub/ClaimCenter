@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../../pcf.xsd">
+  <Page
+    canVisit="perm.System.viewDataAuditHistory_sp and gw.surepath.cc.configuration.adminaudit.util.DataAuditorProperties.INSTANCE.FeatureEnabled"
+    id="SP_DataAuditPage"
+    title="DisplayKey.get(&quot;SP.AdminAudit.Admin.Audit.PageTitle&quot;)">
+    <Screen
+      editable="true">
+      <Toolbar/>
+      <SearchPanel
+        criteriaName="searchCriteria"
+        resultsName="adminAuditSearchResultArray"
+        search="gw.surepath.cc.configuration.adminaudit.util.DataAuditSearchUtil.executeSearch(searchCriteria)"
+        searchCriteria="new gw.surepath.cc.configuration.adminaudit.util.DataAuditSearchCriteria()"
+        searchCriteriaType="gw.surepath.cc.configuration.adminaudit.util.DataAuditSearchCriteria"
+        searchResultsType="gw.api.database.IQueryBeanResult&lt;DataAudit_SP&gt;">
+        <PanelRef
+          def="SP_DataAuditSearchDV(searchCriteria)"
+          editable="true">
+          <TitleBar
+            title="DisplayKey.get(&quot;SP.AdminAudit.Admin.Audit.SearchTitleBar&quot;)"/>
+        </PanelRef>
+        <PanelRef
+          def="SP_DataAuditEntriesLV(adminAuditSearchResultArray)">
+          <TitleBar
+            title="DisplayKey.get(&quot;SP.AdminAudit.Admin.Audit.SearchResultsTitle&quot;)"/>
+        </PanelRef>
+      </SearchPanel>
+    </Screen>
+  </Page>
+</PCF>

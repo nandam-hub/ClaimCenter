@@ -1,0 +1,1110 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "x-gw-combine": [
+    "gw.core.cc.common.v1.common_core-1.0"
+  ],
+  "definitions": {
+    "TestUtilBuilding": {
+      "type": "object",
+      "properties": {
+        "buildingNumber": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string",
+          "readOnly": true
+        },
+        "notes": {
+          "type": "string"
+        },
+        "policySystemId": {
+          "type": "string"
+        }
+      }
+    },
+    "TestUtilContact": {
+      "type": "object",
+      "properties": {
+        "addressBookUID": {
+          "type": "string",
+          "x-gw-nullable": true
+        },
+        "authorizationId": {
+          "type": "string",
+          "x-gw-sinceVersion": "1.8.0"
+        },
+        "cellPhone": {
+          "$ref": "#/definitions/PhoneNumber",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "entitySubtype": "Person"
+          }
+        },
+        "companyName": {
+          "type": "string",
+          "x-gw-extensions": {
+            "entitySubtype": "Company"
+          }
+        },
+        "dateOfBirth": {
+          "type": "string",
+          "format": "date",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "before": "now",
+            "entitySubtype": "Person"
+          }
+        },
+        "displayName": {
+          "type": "string",
+          "readOnly": true,
+          "x-gw-nullable": true
+        },
+        "doctorSpecialty": {
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "typelist": "SpecialtyType"
+          }
+        },
+        "emailAddress1": {
+          "type": "string",
+          "x-gw-nullable": true
+        },
+        "emailAddress2": {
+          "type": "string",
+          "x-gw-nullable": true
+        },
+        "firstName": {
+          "type": "string",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "entitySubtype": "Person"
+          }
+        },
+        "gender": {
+          "title": "Gender type",
+          "description": "The type of the contact's gender, such as `female` or `male`. Only applicable for a `Contact` that represents a person.",
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-nullable": true,
+          "x-gw-sinceVersion": "1.10.0",
+          "x-gw-extensions": {
+            "entitySubtype": "Person",
+            "typelist": "GenderType"
+          }
+        },
+        "homePhone": {
+          "$ref": "#/definitions/PhoneNumber",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "entitySubtype": "Person"
+          }
+        },
+        "id": {
+          "type": "string",
+          "readOnly": true
+        },
+        "lastName": {
+          "type": "string",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "entitySubtype": "Person"
+          }
+        },
+        "licenseNumber": {
+          "type": "string",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "entitySubtype": "Person"
+          }
+        },
+        "licenseState": {
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "entitySubtype": "Person",
+            "typelist": "Jurisdiction"
+          }
+        },
+        "medicalLicense": {
+          "type": "string",
+          "x-gw-nullable": true
+        },
+        "policySystemId": {
+          "type": "string",
+          "x-gw-nullable": true
+        },
+        "primaryAddress": {
+          "$ref": "#/definitions/Address",
+          "x-gw-extensions": {
+            "defaultViews": [
+              "detail"
+            ]
+          }
+        },
+        "primaryLanguage": {
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "typelist": "LanguageType"
+          }
+        },
+        "primaryLocale": {
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "typelist": "LocaleType"
+          }
+        },
+        "primaryPhone": {
+          "type": "string",
+          "readOnly": true
+        },
+        "primaryPhoneType": {
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "typelist": "PrimaryPhoneType"
+          }
+        },
+        "pronounAggregate": {
+          "title": "Pronoun aggregate type",
+          "description": "The type of the contact's aggregate pronoun, such as `she/her/hers` or `self-identify`. Only applicable for a `Contact` that represents a person.",
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-nullable": true,
+          "x-gw-sinceVersion": "1.10.0",
+          "x-gw-extensions": {
+            "entitySubtype": "Person",
+            "typelist": "PronounAggregateType"
+          }
+        },
+        "pronounAggregateDisplay": {
+          "title": "Pronoun aggregate display",
+          "description": "A formatted representation of the pronoun aggregate for this `Person`",
+          "type": "string",
+          "readOnly": true,
+          "x-gw-sinceVersion": "1.10.0"
+        },
+        "pronounObjective": {
+          "title": "Pronoun objective",
+          "description": "The contact's objective pronoun. Only applicable for a `Contact` that represents a person.",
+          "type": "string",
+          "x-gw-nullable": true,
+          "x-gw-sinceVersion": "1.10.0",
+          "x-gw-extensions": {
+            "entitySubtype": "Person"
+          }
+        },
+        "pronounPossessive": {
+          "title": "Pronoun possessive",
+          "description": "The contact's possessive pronoun. Only applicable for a `Contact` that represents a person.",
+          "type": "string",
+          "x-gw-nullable": true,
+          "x-gw-sinceVersion": "1.10.0",
+          "x-gw-extensions": {
+            "entitySubtype": "Person"
+          }
+        },
+        "pronounSubjective": {
+          "title": "Pronoun subjective",
+          "description": "The contact's subjective pronoun. Only applicable for a `Contact` that represents a person.",
+          "type": "string",
+          "x-gw-nullable": true,
+          "x-gw-sinceVersion": "1.10.0",
+          "x-gw-extensions": {
+            "entitySubtype": "Person"
+          }
+        },
+        "sexAssignedAtBirth": {
+          "title": "Sex assigned at birth type",
+          "description": "The type of the contact's sex assigned at birth, such as `female` or `male`. Only applicable for a `Contact` that represents a person.",
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-nullable": true,
+          "x-gw-sinceVersion": "1.10.0",
+          "x-gw-extensions": {
+            "entitySubtype": "Person",
+            "typelist": "SexAssignedAtBirthType"
+          }
+        },
+        "subtype": {
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "createOnly": true,
+            "requiredForCreate": true,
+            "typelist": "Contact"
+          }
+        },
+        "taxId": {
+          "type": "string"
+        },
+        "workPhone": {
+          "$ref": "#/definitions/PhoneNumber",
+          "x-gw-nullable": true
+        }
+      }
+    },
+    "TestUtilCovTerm": {
+      "title": "Coverage term",
+      "description": "A term on a coverage, condition, or exclusion",
+      "type": "object",
+      "properties": {
+        "code": {
+          "title": "Code",
+          "description": "The classification code value for the term. Only applicable if `covTermSubtype` is `ClassificationCovTerm`.",
+          "type": "string",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "entitySubtype": "ClassificationCovTerm"
+          }
+        },
+        "covTermSubtype": {
+          "title": "Coverage term subtype",
+          "description": "The specific subtype of coverage term. This field determines what other fields are available.",
+          "type": "string",
+          "x-gw-type": "typekey.CovTerm",
+          "x-gw-extensions": {
+            "createOnly": true,
+            "requiredForCreate": true
+          }
+        },
+        "description": {
+          "title": "Description",
+          "description": "A description of the classification code value for the term. Only applicable if `covTermSubtype` is `ClassificationCovTerm`.",
+          "type": "string",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "entitySubtype": "ClassificationCovTerm"
+          }
+        },
+        "financialAmount": {
+          "title": "Financial amount",
+          "description": "The value of the coverage term as a monetary amount. Only applicable if `covTermSubtype` is `FinancialCovTerm`.",
+          "$ref": "#/definitions/MonetaryAmount",
+          "x-gw-extensions": {
+            "entitySubtype": "FinancialCovTerm",
+            "requiredForCreate": true
+          }
+        },
+        "id": {
+          "title": "ID",
+          "description": "The unique identifier of this element",
+          "type": "string"
+        },
+        "numericValue": {
+          "title": "Numeric value",
+          "description": "The value of the coverage term as a decimal. Only applicable if `covTermSubtype` is `NumericCovTerm`.",
+          "type": "string",
+          "format": "gw-bigdecimal",
+          "x-gw-extensions": {
+            "entitySubtype": "NumericCovTerm",
+            "requiredForCreate": true
+          }
+        },
+        "policySystemId": {
+          "title": "Policy system ID",
+          "description": "The unique identifier of this element within the policy system",
+          "type": "string"
+        },
+        "units": {
+          "title": "Units",
+          "description": "The type of units that apply to the `numericValue` of this coverage term. Only applicable if `covTermSubtype` is `NumericCovTerm`.",
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "entitySubtype": "NumericCovTerm",
+            "typelist": "CovTermModelVal"
+          }
+        }
+      }
+    },
+    "TestUtilCoverage": {
+      "title": "Coverage",
+      "description": "A coverage, condition, or exclusion on an insurance policy",
+      "type": "object",
+      "properties": {
+        "claimAggLimit": {
+          "title": "PIP claim aggregate limit",
+          "description": "The per-claim limit of PIP coverage. Only applicable to PIP vehicle coverages.",
+          "$ref": "#/definitions/MonetaryAmount",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "entitySubtype": "VehicleCoverage"
+          }
+        },
+        "coinsurance": {
+          "title": "Coinsurance",
+          "description": "The coinsurance percentage. Only applicable to property coverages.",
+          "type": "string",
+          "format": "gw-bigdecimal",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "entitySubtype": "PropertyCoverage"
+          }
+        },
+        "covTerms": {
+          "title": "Coverage terms",
+          "description": "The list of terms for this coverage",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TestUtilCovTerm"
+          }
+        },
+        "coverageBasis": {
+          "title": "Coverage basis",
+          "description": "The method used for determining the coverage value for damaged property. Only applicable to property coverages.",
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "entitySubtype": "PropertyCoverage",
+            "typelist": "CoverageBasis"
+          }
+        },
+        "coverageSubtype": {
+          "title": "Coverage subtype",
+          "description": "If the coverage is a risk unit coverage, the type of coverage to create, such as `VehicleCoverage` or `RUCoverage`. If null uses a coverage type that matches the parent risk unit.",
+          "type": "string",
+          "x-gw-type": "typekey.Coverage",
+          "x-gw-sinceVersion": "1.5.0",
+          "x-gw-extensions": {
+            "createOnly": true,
+            "entitySubtype": "RUCoverage"
+          }
+        },
+        "coverageType": {
+          "title": "Coverage type",
+          "description": "The specific type of coverage represented by this element. The `coverageType` corresponds to the particular coverage code within the policy system.",
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-extensions": {
+            "filterable": true,
+            "requiredForCreate": true,
+            "sortable": true,
+            "typelist": "CoverageType"
+          }
+        },
+        "currency": {
+          "title": "Currency",
+          "description": "The currency of the coverage",
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-extensions": {
+            "typelist": "Currency"
+          }
+        },
+        "effectiveDate": {
+          "title": "Effective date",
+          "description": "The date and time when this coverage became effective",
+          "type": "string",
+          "format": "date-time",
+          "x-gw-nullable": true
+        },
+        "expirationDate": {
+          "title": "Expiration date",
+          "description": "The date and time when this coverage ceased being effective",
+          "type": "string",
+          "format": "date-time",
+          "x-gw-nullable": true
+        },
+        "exposureLimit": {
+          "title": "Exposure limit",
+          "description": "The coverage limit per exposure",
+          "$ref": "#/definitions/MonetaryAmount",
+          "x-gw-nullable": true
+        },
+        "id": {
+          "title": "ID",
+          "description": "The unique identifier of this element",
+          "type": "string",
+          "readOnly": true
+        },
+        "incidentLimit": {
+          "title": "Incident limit",
+          "description": "The coverage limit per incident",
+          "$ref": "#/definitions/MonetaryAmount",
+          "x-gw-nullable": true
+        },
+        "limitsIndicator": {
+          "title": "Limits indicator",
+          "description": "Indicates whether the coverage limits are part of a combined single limit",
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "typelist": "LimitsIndicator"
+          }
+        },
+        "nonmedAggLimit": {
+          "title": "PIP non-medical aggregate limit",
+          "description": "The aggregate limit for non-medical PIP coverage. Only applicable to PIP vehicle coverages.",
+          "$ref": "#/definitions/MonetaryAmount",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "entitySubtype": "VehicleCoverage"
+          }
+        },
+        "notes": {
+          "title": "Notes",
+          "description": "Additional comments about this coverage",
+          "type": "string",
+          "x-gw-nullable": true
+        },
+        "personAggLimit": {
+          "title": "PIP per-person aggregate limit",
+          "description": "The aggregate limit per-person for PIP coverage. Only applicable to PIP vehicle coverages.",
+          "$ref": "#/definitions/MonetaryAmount",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "entitySubtype": "VehicleCoverage"
+          }
+        },
+        "policySystemId": {
+          "title": "Policy system ID",
+          "description": "The unique identifier of this element within the policy system",
+          "type": "string"
+        },
+        "replaceAggLimit": {
+          "title": "PIP replacement aggregate limit",
+          "description": "The aggregate limit for PIP lost wage and replacement services coverage. Only applicable to PIP vehicle coverages.",
+          "$ref": "#/definitions/MonetaryAmount",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "entitySubtype": "VehicleCoverage"
+          }
+        },
+        "state": {
+          "title": "State",
+          "description": "The state that this coverage is applicable, if the coverage is state-specific",
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "typelist": "State"
+          }
+        }
+      }
+    },
+    "TestUtilEndorsement": {
+      "title": "Endorsement",
+      "description": "Represents an endorsement form applied to a policy that makes some modification to it",
+      "type": "object",
+      "properties": {
+        "comments": {
+          "title": "Comments",
+          "description": "Additional notes about the endorsement",
+          "type": "string",
+          "x-gw-nullable": true
+        },
+        "description": {
+          "title": "Description",
+          "description": "A description of the endorsement and what it alters",
+          "type": "string",
+          "x-gw-nullable": true
+        },
+        "effectiveDate": {
+          "title": "Effective date",
+          "description": "The date and time when the endorsement becomes effective",
+          "type": "string",
+          "format": "date-time",
+          "x-gw-nullable": true
+        },
+        "expirationDate": {
+          "title": "Expiration date",
+          "description": "The date and time when the endorsement ceases to be effective",
+          "type": "string",
+          "format": "date-time",
+          "x-gw-nullable": true
+        },
+        "formNumber": {
+          "title": "Form number",
+          "description": "The code for the endorsement form",
+          "type": "string",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "sortable": true
+          }
+        },
+        "id": {
+          "title": "ID",
+          "description": "The unique identifier of this element",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "TestUtilGroup": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true
+        },
+        "loadFactor": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string",
+          "x-gw-extensions": {
+            "requiredForCreate": true
+          }
+        },
+        "organization": {
+          "type": "string"
+        },
+        "parent": {
+          "$ref": "#/definitions/SimpleReference",
+          "x-gw-extensions": {
+            "resourceType": "TestUtilGroup"
+          }
+        },
+        "securityZone": {
+          "type": "string",
+          "readOnly": true
+        },
+        "supervisor": {
+          "$ref": "#/definitions/SimpleReference",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "resourceType": "TestUtilUser"
+          }
+        },
+        "type": {
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-extensions": {
+            "typelist": "GroupType"
+          }
+        }
+      }
+    },
+    "TestUtilLocationBasedRiskUnit": {
+      "type": "object",
+      "properties": {
+        "RUNumber": {
+          "type": "integer"
+        },
+        "building": {
+          "$ref": "#/definitions/TestUtilBuilding"
+        },
+        "coverages": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TestUtilCoverage"
+          },
+          "x-gw-extensions": {
+            "defaultViews": [
+              "detail"
+            ]
+          }
+        },
+        "description": {
+          "type": "string",
+          "x-gw-nullable": true
+        },
+        "id": {
+          "type": "string",
+          "readOnly": true
+        },
+        "otherRiskType": {
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-extensions": {
+            "entitySubtype": "LocationMiscRU",
+            "typelist": "OtherRiskType"
+          }
+        },
+        "policySystemId": {
+          "type": "string"
+        },
+        "subtype": {
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "createOnly": true,
+            "typelist": "RiskUnit"
+          }
+        }
+      }
+    },
+    "TestUtilPolicy": {
+      "type": "object",
+      "properties": {
+        "accountNumber": {
+          "type": "string"
+        },
+        "cancellationDate": {
+          "type": "string",
+          "format": "date-time",
+          "x-gw-nullable": true
+        },
+        "currency": {
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-extensions": {
+            "typelist": "Currency"
+          }
+        },
+        "effectiveDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "endorsements": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TestUtilEndorsement"
+          }
+        },
+        "expirationDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "id": {
+          "type": "string",
+          "readOnly": true
+        },
+        "originalEffectiveDate": {
+          "type": "string",
+          "format": "date-time",
+          "x-gw-nullable": true
+        },
+        "policyContacts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TestUtilPolicyContact"
+          }
+        },
+        "policyCoverages": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TestUtilCoverage"
+          }
+        },
+        "policyLocations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TestUtilPolicyLocation"
+          }
+        },
+        "policyNumber": {
+          "type": "string"
+        },
+        "policyType": {
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-extensions": {
+            "typelist": "PolicyType"
+          }
+        },
+        "producerCode": {
+          "type": "string"
+        },
+        "producerCodeOfService": {
+          "type": "string",
+          "x-gw-sinceVersion": "1.7.0"
+        },
+        "status": {
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-extensions": {
+            "typelist": "PolicyStatus"
+          }
+        },
+        "tripRiskUnits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TestUtilTripRiskUnit"
+          },
+          "x-gw-sinceVersion": "1.5.0"
+        },
+        "underwritingCo": {
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "typelist": "UnderwritingCompanyType"
+          }
+        },
+        "underwritingGroup": {
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "typelist": "UnderwritingGroupType"
+          }
+        },
+        "vehicleRiskUnits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TestUtilVehicleRiskUnit"
+          }
+        },
+        "verifiedPolicy": {
+          "type": "boolean"
+        }
+      }
+    },
+    "TestUtilPolicyContact": {
+      "type": "object",
+      "required": [
+        "contact",
+        "roles"
+      ],
+      "properties": {
+        "contact": {
+          "$ref": "#/definitions/SimpleReference"
+        },
+        "roles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TypeKeyReference",
+            "x-gw-extensions": {
+              "typelist": "ContactRole"
+            }
+          }
+        }
+      }
+    },
+    "TestUtilPolicyLocation": {
+      "type": "object",
+      "properties": {
+        "address": {
+          "$ref": "#/definitions/Address"
+        },
+        "displayName": {
+          "type": "string",
+          "readOnly": true
+        },
+        "id": {
+          "type": "string"
+        },
+        "locationBasedRiskUnits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TestUtilLocationBasedRiskUnit"
+          }
+        },
+        "locationNumber": {
+          "type": "string",
+          "x-gw-extensions": {
+            "filterable": true,
+            "sortable": true
+          }
+        },
+        "notes": {
+          "type": "string"
+        },
+        "policySystemId": {
+          "type": "string"
+        },
+        "primaryLocation": {
+          "type": "boolean",
+          "x-gw-extensions": {
+            "filterable": true,
+            "sortable": true
+          }
+        },
+        "propertyItems": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TestUtilPropertyItem"
+          },
+          "x-gw-sinceVersion": "1.7.0"
+        }
+      }
+    },
+    "TestUtilPropertyItem": {
+      "title": "Property item",
+      "description": "Property item",
+      "type": "object",
+      "x-gw-sinceVersion": "1.7.0",
+      "properties": {
+        "appraisedValue": {
+          "$ref": "#/definitions/MonetaryAmount",
+          "x-gw-nullable": true
+        },
+        "description": {
+          "type": "string",
+          "x-gw-nullable": true
+        },
+        "id": {
+          "type": "string",
+          "readOnly": true
+        },
+        "policySystemId": {
+          "type": "string"
+        }
+      }
+    },
+    "TestUtilSpecialistService": {
+      "type": "object",
+      "properties": {
+        "active": {
+          "type": "boolean",
+          "x-gw-extensions": {
+            "createOnly": true,
+            "requiredForCreate": true
+          }
+        },
+        "code": {
+          "type": "string",
+          "x-gw-extensions": {
+            "createOnly": true,
+            "filterable": true,
+            "requiredForCreate": true
+          }
+        },
+        "compatibleIncidentTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "compatibleKinds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "description": {
+          "type": "string",
+          "x-gw-extensions": {
+            "createOnly": true
+          }
+        },
+        "id": {
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "x-gw-extensions": {
+            "createOnly": true,
+            "requiredForCreate": true
+          }
+        },
+        "parent": {
+          "type": "string",
+          "x-gw-extensions": {
+            "createOnly": true,
+            "x-gw-nullable": true
+          }
+        }
+      }
+    },
+    "TestUtilTripRiskUnit": {
+      "type": "object",
+      "x-gw-sinceVersion": "1.5.0",
+      "properties": {
+        "RUNumber": {
+          "type": "integer",
+          "x-gw-extensions": {
+            "sortable": true
+          }
+        },
+        "coverages": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TestUtilCoverage"
+          },
+          "x-gw-extensions": {
+            "defaultViews": [
+              "detail"
+            ]
+          }
+        },
+        "description": {
+          "type": "string",
+          "x-gw-nullable": true
+        },
+        "endDate": {
+          "title": "End date",
+          "description": "The date this trip will end",
+          "type": "string",
+          "format": "date-time",
+          "x-gw-nullable": true
+        },
+        "geographicalRegion": {
+          "title": "geographicalRegion",
+          "description": "Geographical region for travel",
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "typelist": "GeographicalRegion"
+          }
+        },
+        "id": {
+          "type": "string"
+        },
+        "policySystemId": {
+          "type": "string"
+        },
+        "startDate": {
+          "title": "Start date",
+          "description": "The date this trip will start",
+          "type": "string",
+          "format": "date-time",
+          "x-gw-nullable": true
+        },
+        "tripDescription": {
+          "title": "Trip Description",
+          "description": "A brief description of the trip",
+          "type": "string",
+          "x-gw-nullable": true
+        }
+      }
+    },
+    "TestUtilUser": {
+      "type": "object",
+      "properties": {
+        "authorityProfile": {
+          "type": "string",
+          "x-gw-nullable": true
+        },
+        "groups": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SimpleReference",
+            "x-gw-extensions": {
+              "resourceType": "TestUtilGroup"
+            }
+          }
+        },
+        "id": {
+          "type": "string",
+          "readOnly": true
+        },
+        "roles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "username": {
+          "type": "string"
+        }
+      }
+    },
+    "TestUtilVehicle": {
+      "title": "Vehicle",
+      "description": "A vehicle",
+      "type": "object",
+      "properties": {
+        "color": {
+          "title": "Color",
+          "description": "The color of this vehicle",
+          "type": "string",
+          "x-gw-nullable": true
+        },
+        "displayName": {
+          "title": "Display name",
+          "description": "The formatted name of this vehicle",
+          "type": "string",
+          "readOnly": true
+        },
+        "id": {
+          "title": "ID",
+          "description": "The unique identifier of this element",
+          "type": "string"
+        },
+        "licensePlate": {
+          "title": "License plate",
+          "description": "The license plate number of this vehicle",
+          "type": "string",
+          "x-gw-nullable": true
+        },
+        "make": {
+          "title": "Make",
+          "description": "The make of this vehicle",
+          "type": "string",
+          "x-gw-nullable": true
+        },
+        "manufacturer": {
+          "title": "Manufacturer",
+          "description": "The manufacturer of this vehicle",
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "typelist": "VehicleManufacturer"
+          }
+        },
+        "model": {
+          "title": "Model",
+          "description": "The model of this vehicle",
+          "type": "string",
+          "x-gw-nullable": true
+        },
+        "policySystemId": {
+          "title": "Policy system ID",
+          "description": "The unique identifier of this element within the policy system",
+          "type": "string"
+        },
+        "state": {
+          "title": "State",
+          "description": "The jurisdiction in which this vehicle is registered",
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "typelist": "Jurisdiction"
+          }
+        },
+        "style": {
+          "title": "Style",
+          "description": "The style of this vehicle",
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "typelist": "VehicleStyle"
+          }
+        },
+        "vin": {
+          "title": "VIN",
+          "description": "The Vehicle Identification Number of this vehicle",
+          "type": "string",
+          "x-gw-nullable": true
+        },
+        "year": {
+          "title": "Year",
+          "description": "The model year of this vehicle",
+          "type": "integer",
+          "x-gw-nullable": true
+        }
+      }
+    },
+    "TestUtilVehicleRiskUnit": {
+      "type": "object",
+      "properties": {
+        "RUNumber": {
+          "type": "integer",
+          "x-gw-extensions": {
+            "sortable": true
+          }
+        },
+        "coverages": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TestUtilCoverage"
+          },
+          "x-gw-extensions": {
+            "defaultViews": [
+              "detail"
+            ]
+          }
+        },
+        "description": {
+          "type": "string",
+          "x-gw-nullable": true
+        },
+        "id": {
+          "type": "string"
+        },
+        "policySystemId": {
+          "type": "string"
+        },
+        "vehicle": {
+          "$ref": "#/definitions/TestUtilVehicle",
+          "x-gw-extensions": {
+            "defaultViews": [
+              "detail"
+            ]
+          }
+        },
+        "vehicleId": {
+          "type": "string",
+          "readOnly": true
+        },
+        "vehicleLocation": {
+          "$ref": "#/definitions/TestUtilPolicyLocation"
+        }
+      }
+    }
+  }
+}

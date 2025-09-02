@@ -1,0 +1,9 @@
+<div id="${renderId}" ${outerClasses} ${outerStyles} ${outerAttributes}>
+    <div class="gw-radio-wrapper">
+        <div role="radio" aria-labelledby="${inputLabelAriaId}" aria-required="${required ? 'true' : 'false'}" aria-invalid="${invalid ? 'true' : 'false'}"
+             id="${renderId}_radio" tabindex="0" data-gw-radio-group="${name}" aria-checked="${checked ? 'true' : 'false'}" class="gw-radio-button ${checked ? 'gw-checked'}"
+             disabled="${disabled}" data-gw-click="gwRadioButtonGroup.radioButtonSelect"></div>
+        <input aria-hidden="true" class="gw-hidden" type="checkbox" name="${name}" value="${renderId}" disabled="${disabled}"
+               checked="${checked}"/>
+    </div>
+</div>

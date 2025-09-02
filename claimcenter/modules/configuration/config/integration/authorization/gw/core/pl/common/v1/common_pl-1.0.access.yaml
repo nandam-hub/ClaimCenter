@@ -1,0 +1,66 @@
+resources:
+  Activities:
+    permissions:
+      view: perm.System.actview
+    filter: gw.rest.core.pl.common.v1.activities.AssignedActivitiesFilter
+  Activity:
+    permissions:
+      view: "perm.Activity.view(resource.Activity)"
+      edit: "perm.Activity.edit(resource.Activity)"
+      approve: "gw.rest.core.pl.util.v1.ActivityInternalPermissionUtil.canApprove(resource.Activity)"
+      assign: "gw.rest.core.pl.util.v1.ActivityInternalPermissionUtil.canAssign(resource.Activity)"
+      complete: __inherit
+      reject: "gw.rest.core.pl.util.v1.ActivityInternalPermissionUtil.canReject(resource.Activity)"
+      skip: __inherit
+  ActivityAssignees:
+    permissions:
+      view:
+      - __inherit
+      - "gw.rest.core.pl.util.v1.ActivityInternalPermissionUtil.canAssign(resource.Activity)"
+  ActivityNotes:
+    permissions:
+      view: __inherit
+      create: __inherit
+    filter: __noFilter
+  ActivityPattern:
+    permissions:
+      view: true
+  Assignee:
+    permissions:
+      view: true
+  CommonOpenApiSchema:
+    permissions:
+      view: true
+  Document:
+    permissions:
+      view: "perm.Document.view(resource.Document)"
+      edit: "perm.Document.edit(resource.Document)"
+      delete: "perm.Document.delete(resource.Document)"
+  DocumentContent:
+    permissions:
+      view: __inherit
+  GeographicZone:
+    permissions:
+      view: false
+  GeographicZones:
+    permissions:
+      view: false
+    filter: __noFilter
+  HistoryEvent:
+    permissions:
+      view: __inherit
+  HistoryEvents:
+    permissions:
+      view: true
+    filter: __noFilter
+  Note:
+    permissions:
+      view: "perm.Note.view(resource.Note)"
+      edit: "perm.Note.edit(resource.Note)"
+      delete: "perm.Note.delete(resource.Note)"
+  TypeList:
+    permissions:
+      view: true
+  TypeLists:
+    permissions:
+      view: true

@@ -1,0 +1,51 @@
+resources:
+  ApiRole:
+    permissions:
+      view: false
+  ApiRoles:
+    permissions:
+      view: false
+  BatchProcess:
+    permissions:
+      view: false
+      edit: false
+      start: false
+      stop: false
+  BatchProcesses:
+    permissions:
+      view: false
+  DatabaseConsistencyCheck:
+    permissions:
+      view: false
+  DatabaseConsistencyCheckReport:
+    permissions:
+      view: false
+  DatabaseConsistencyChecks:
+    permissions:
+      view: false
+    filter: gw.rest.core.cc.security.NoPermissionsQueryFilter
+  DesignApiExtensionBundle:
+    permissions:
+      view: false
+      edit: false
+      delete: false
+  DesignApiExtensionBundles:
+    permissions:
+      view: false
+      create: false
+  InstalledApiExtensionBundle:
+    permissions:
+      view: false
+  InstalledApiExtensionBundles:
+    permissions:
+      view: false
+  ProcessHistories:
+    permissions:
+      view: false
+    filter: gw.rest.core.cc.security.NoPermissionsQueryFilter
+  ProcessHistory:
+    permissions:
+      view: false
+  SystemToolsOpenApiSchema:
+    permissions:
+      view: true

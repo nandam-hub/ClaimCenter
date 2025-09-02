@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<plugin
+  interface="IIntegrationConfigSourcePlugin"
+  name="ApiExtensionBundlesRestConfigSourcePlugin">
+  <plugin-java
+    additionalInterfaces="gw.api.modules.rest.framework.v1.plugin.config.RestConfigSourcePlugin"
+    javaclass="gw.plugin.apiextensionbundles.ApiExtensionBundlesRestConfigSourcePlugin"/>
+</plugin>

@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<plugin
+  interface="IStartablePlugin"
+  name="InboundConfigPlugin">
+  <plugin-gosu
+    gosuclass="gw.plugin.inboundfile.ManagedS3InboundConfigPlugin"
+    additionalInterfaces="gw.plugin.inboundfile.IManagedS3InboundConfig">
+    <param
+      name="externalConfigFileLocation"
+      value="/tmp/guidewire/inbound/config/InboundFileConfiguration.xml"/>
+    <param
+      name="updateExisting"
+      value="false"/>
+    <param
+      name="s3BucketName"
+      value="${PLUGIN_S3_BUCKET_NAME}"/>
+    <param
+      name="s3InputPrefix"
+      value="${PLUGIN_INBOUND_S3_INPUT_PREFIX}"/>
+    <param
+      name="s3ArchivePrefix"
+      value="${PLUGIN_INBOUND_S3_ARCHIVE_PREFIX}"/>
+  </plugin-gosu>
+</plugin>

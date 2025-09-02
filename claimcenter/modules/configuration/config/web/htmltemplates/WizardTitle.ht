@@ -1,0 +1,8 @@
+<div class="gw-Wizard--titles" role="group">
+  <div :if="title" class="gw-Wizard--Title" role="heading" aria-level="2">
+    ${title}
+  </div>
+  <div :if="subTitle" class="gw-Wizard--SubTitle">
+    ${subTitle}
+  </div>
+</div>

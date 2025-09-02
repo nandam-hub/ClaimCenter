@@ -1,0 +1,40 @@
+package rules.Preupdate.ClaimPreupdate_dir
+
+uses com.guidewire.pl.system.logging.PLLoggerCategory
+uses gw.api.geocode.GeocodeUtils
+uses gw.api.locale.DisplayKey
+uses gw.api.system.CCLoggerCategory
+
+@gw.rules.RuleName("CPU19000 - Geocode Catastrophe Claims")
+internal class CPU19000GeocodeCatastropheClaims {
+  static function doCondition(claim : entity.Claim) : boolean {
+    
+/*start00rule*/
+return claim.Catastrophe != null 
+and claim.LossLocation.NeverGeocoded
+and GeocodeUtils.isPluginEnabled()
+/*end00rule*/
+
+  }
+
+  static function doAction(claim : entity.Claim, actions : gw.rules.Action) {
+
+/*start00rule*/
+
+var address : Address
+try {
+  address = claim.LossLocation.geocodeSynchronously()
+  CCLoggerCategory.GEODATA.debug("Geocoded successfully for bean '" + address + "' with " + address.SpatialPoint.WellKnownText)
+} catch (e : RuntimeException) {
+  if (address.GeocodeStatus == GeocodeStatus.TC_FAILURE) {
+    CCLoggerCategory.GEODATA.error("Geocode process returned FAILED for bean '" + address + "': " + e.Message, e)
+  } else if (e typeis GeocodeUtils.GeocodePluginNotStartedException) {
+    CCLoggerCategory.GEODATA.error(DisplayKey.get("Java.Geocode.Plugin.Not.Started"), e)
+  } else {
+    CCLoggerCategory.GEODATA.error("Error in geocoding bean '" + address + "': " + e.getMessage(), e);
+  }
+}
+/*end00rule*/
+
+  }
+}

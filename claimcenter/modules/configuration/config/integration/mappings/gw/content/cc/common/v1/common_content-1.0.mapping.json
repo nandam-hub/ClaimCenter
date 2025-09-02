@@ -1,0 +1,26 @@
+{
+  "schemaName": "gw.content.cc.common.v1.common_content-1.0",
+  "combine": [
+    "gw.core.cc.common.v1.common_core-1.0"
+  ],
+  "mappers": {
+    "Address": {
+      "schemaDefinition": "Address",
+      "root": "entity.Address",
+      "properties": {
+        "CEDEX": {
+          "path": "Address.CEDEXCode"
+        },
+        "addressLine1Kanji": {
+          "path": "Address.AddressLine1Kanji"
+        },
+        "addressLine2Kanji": {
+          "path": "Address.AddressLine2Kanji"
+        },
+        "cityKanji": {
+          "path": "Address.CityKanji"
+        }
+      }
+    }
+  }
+}

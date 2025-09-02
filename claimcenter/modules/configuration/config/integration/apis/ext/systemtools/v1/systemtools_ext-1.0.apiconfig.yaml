@@ -1,0 +1,36 @@
+combine:
+- gw.content.cc.systemtools.v1.systemtools_content-1.0
+resources:
+  BatchProcess:
+    resource: gw.rest.ext.cc.systemtools.v1.batch.BatchProcessExtResource
+  BatchProcesses:
+    resource: gw.rest.ext.cc.systemtools.v1.batch.BatchProcessesExtResource
+  DatabaseConsistencyCheck:
+    resource: gw.rest.ext.cc.systemtools.v1.dbcc.DatabaseConsistencyCheckExtResource
+  DatabaseConsistencyCheckReport:
+    resource: gw.rest.ext.cc.systemtools.v1.dbcc.DatabaseConsistencyCheckReportExtResource
+  DatabaseConsistencyChecks:
+    resource: gw.rest.ext.cc.systemtools.v1.dbcc.DatabaseConsistencyChecksExtResource
+  ProcessHistories:
+    resource: gw.rest.ext.cc.systemtools.v1.batch.processhistory.ProcessHistoriesExtResource
+  ProcessHistory:
+    resource: gw.rest.ext.cc.systemtools.v1.batch.processhistory.ProcessHistoryExtResource
+  ApiRole:
+    resource: gw.rest.ext.cc.systemtools.v1.apirole.ApiRoleExtResource
+  ApiRoles:
+    resource: gw.rest.ext.cc.systemtools.v1.apirole.ApiRolesExtResource
+resourceAccess:
+  contactAuthorizationIds:
+    yaml: ext.systemtools.v1.contactAuthorizationIds_ext-1.0
+  gwabuid:
+    yaml: ext.systemtools.v1.gwabuid_ext-1.0
+  internal:
+    yaml: ext.systemtools.v1.internal_ext-1.0
+  policyNumbers:
+    yaml: ext.systemtools.v1.policyNumbers_ext-1.0
+  producerCodes:
+    yaml: ext.systemtools.v1.producerCodes_ext-1.0
+  service:
+    yaml: ext.systemtools.v1.serviceUser_ext-1.0
+  unauthenticated:
+    yaml: ext.systemtools.v1.unauthenticatedUser_ext-1.0

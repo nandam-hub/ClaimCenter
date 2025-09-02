@@ -1,0 +1,27 @@
+<div class="gw-MediaUploader--ui">
+    <div class="gw-MediaUploader--ui-left">
+        <div :if="title" class="gw-title">${title}</div>
+    </div>
+    <div class="gw-MediaUploader--ui-right">
+        <input class="gw-paste-target gw-noTrack gw-noForm" data-gw-input="gwMediaUploader.input" data-gw-paste="gwMediaUploader.filesPasted" placeholder="${pasteFiles}">
+        <div class="gw-MediaUploader--import">
+            <label class="gw-MediaUploader--choose-label" for="${renderId}_choose"><span class="gw-icon"></span><span class="gw-label-span">${importFiles}</span></label>
+            <input id="${renderId}_choose" class="gw-MediaUploader--choose gw-noTrack gw-noForm" type="file" accept="image/*" data-gw-change="gwMediaUploader.chooserChanged" multiple="multiple">
+        </div>
+        <div class="gw-divider"></div>
+        <div id="${renderId}_upload" class="gw-MediaUploader--upload" aria-disabled="true" data-gw-click="gwMediaUploader.upload id:${valueWidgetId}"><div class="gw-icon"></div><div class="gw-label">${uploadFiles}</div></div>
+    </div>
+    <div class="gw-MediaUploader--files-header-ui">
+        <div class="gw-header-delete" aria-disabled="true" data-gw-tooltip="${clearFiles}" data-gw-click="gwMediaUploader.clear" data-gw-confirm="${confirmClearFiles}"><div class="gw-icon"></div></div>
+        <div class="gw-header-filename">${localizedFilename}</div>
+        <div class="gw-header-preview">${localizedPreview}</div>
+        <div class="gw-header-file-size">${localizedFileSize}</div>
+        <div class="gw-header-mod-date">${localizedLastModified}</div>
+        <div class="gw-header-exif-data">${localizedExifData}</div>
+        <div :if="hasInformationInput" class="gw-header-info-label">${localizedInformation}</div>
+    </div>
+</div>
+<div class="gw-MediaUploader--files">
+    <div class="gw-no-files-selected">${noFilesSelected}</div>
+    <div class="gw-MediaUploader--files--inner"></div>
+</div>

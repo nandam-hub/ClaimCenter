@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="The possessive pronoun type"
+  name="PronounPossessiveType"
+  platform="true">
+  <typecode
+    code="his"
+    desc="His"
+    name="His"
+    priority="1"/>
+  <typecode
+    code="hers"
+    desc="Hers"
+    name="Hers"
+    priority="2"/>
+</typelist>

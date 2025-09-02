@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            ${title}
+        </title>
+        <script>
+            var logFileURI = "${logFileURI}";
+            function requestLogLines() {
+              setInterval(function() {
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                  if (xhttp.readyState === 4 && xhttp.status === 200 && xhttp.responseText) {
+                    var elem = document.createElement("PRE");
+                    var text = document.createTextNode(xhttp.responseText);
+                    elem.appendChild(text);
+                    document.body.appendChild(elem);
+                    window.scrollTo(0, document.body.scrollHeight);
+                  }
+                };
+                xhttp.open("GET", logFileURI);
+                xhttp.send();
+              }, ${interval});
+            }
+        </script>
+    </head>
+    <body onload="requestLogLines()"></body>
+</html>

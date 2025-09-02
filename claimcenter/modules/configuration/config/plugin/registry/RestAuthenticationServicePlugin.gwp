@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<plugin
+  interface="AuthenticationServicePlugin"
+  name="RestAuthenticationServicePlugin">
+  <plugin-gosu
+    gosuclass="gw.api.modules.rest.framework.v1.plugin.security.RestAuthenticationServicePlugin"/>
+</plugin>

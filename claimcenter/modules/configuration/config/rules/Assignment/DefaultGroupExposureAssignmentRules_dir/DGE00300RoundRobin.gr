@@ -1,0 +1,62 @@
+package rules.Assignment.DefaultGroupExposureAssignmentRules_dir
+uses gw.api.locale.DisplayKey
+uses gw.api.system.CCLoggerCategory
+uses gw.assignment.AssignExposureSameCoverageImpl
+@gw.rules.RuleName("DGE00300 - Round Robin")
+internal class DGE00300RoundRobin {
+  static function doCondition(exposure : entity.Exposure) : boolean {
+/*start00rule*/
+    return AssignExposureSameCoverageImpl.EnableRoundRobinForExposures_Ext
+/*end00rule*/
+}
+
+  static function doAction(exposure : entity.Exposure, actions : gw.rules.Action) {
+/*start00rule*/
+    var logger = CCLoggerCategory.ASSIGNMENT
+    logger.info("##### DGE00300: Rule triggered for Exposure ID: " + exposure.ID)
+
+    var originalGroup = exposure.AssignedGroup
+
+    if (originalGroup == null and exposure.Claim.AssignedGroup != null) {
+      // Assign from Claim if exposure group is null
+      exposure.assignGroup(exposure.Claim.AssignedGroup)
+      logger.info("##### DGE00300: AssignedGroup set from Claim: " + exposure.AssignedGroup)
+
+      // Walk up to root group
+      var rootGroup = exposure.AssignedGroup
+      while (rootGroup.Parent != null) {
+        rootGroup = rootGroup.Parent
+      }
+
+      logger.info("##### DGE00300: Using RootGroup (Claim) for RR: " + rootGroup)
+
+      var success = exposure.assignUserByRoundRobin(true, rootGroup)
+
+      if (success) {
+        logger.info("##### DGE00300: Successfully assigned user: " + exposure.AssignedUser)
+        actions.exit()
+      } else {
+        logger.warn("##### DGE00300: Fallback RR failed from root group — going to next rule")
+      }
+
+    } else if (originalGroup != null) {
+      // If group was already assigned, use it directly (do not walk up)
+      logger.info("##### DGE00300: Using Existing AssignedGroup (no walk-up): " + originalGroup)
+
+      var success = exposure.assignUserByRoundRobin(true, originalGroup)
+
+      if (success) {
+        logger.info("##### DGE00300: Successfully assigned user: " + exposure.AssignedUser)
+        actions.exit()
+      } else {
+        logger.warn("##### DGE00300: Fallback RR failed from existing group — going to next rule")
+      }
+
+    } else {
+      // Exposure and claim have no group
+      logger.info("##### DGE00300: AssignedGroup is null — exiting rule.")
+      actions.exit()
+    }
+/*end00rule*/
+  }
+}

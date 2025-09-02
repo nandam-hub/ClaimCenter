@@ -1,0 +1,301 @@
+swagger: '2.0'
+info:
+  title: "System tools server API"
+  description: |
+               This API is related to system server resources.
+  # TODO - AP - This should replace (and deprecate) gosu servlets gw.api.LogViewerSErvlet, AboutServlet, DisplayKeyValuesServlet
+  version: '1.0'
+basePath: /system/v1/server
+x-gw-permissions:
+- integadmin
+x-gw-runlevel: maintenance
+x-gw-schema-import:
+  server: gw.pl.system.server_tools-1.0
+x-gw-apihandlers:
+- gw.api.rest.pl.system.v1.ServerToolsAPIHandler
+paths:
+  /info:
+    get:
+      summary: "Get server info"
+      description: |
+                   Use this instead of individually looking for id, version, roles.
+      operationId: getServerInfo
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: |
+                       Successful operation
+          schema:
+            $ref: "server#/definitions/ServerInfo"
+  /info/id:
+    get:
+      summary: "Get server id"
+      description: |
+                   Get the server id of the server at this address and port.
+      operationId: getServerId
+      produces:
+      - text/plain
+      responses:
+        '200':
+          description: |
+                       Successful operation
+          schema:
+            type: string
+  /info/version:
+    get:
+      summary: "Get server version"
+      description: |
+                   Get the version of the server, including application version and schema version.
+                   The application version is in the format: <tt>[major].[minor].[build]</tt>.
+                   The schema version is in the format: <tt>[base].[vertical]</tt>
+      operationId: getVersion
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: |
+                       Successful operation
+          schema:
+            $ref: "server#/definitions/ServerVersion"
+  /info/roles:
+    get:
+      summary: "Get server roles"
+      description: |
+                   Get a list of roles that are supported by this server.
+      operationId: getServerRoles
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: |
+                       Successful operation
+          schema:
+            $ref: "server#/definitions/ServerRoles"
+  /session/data:
+    get:
+      summary: "Get active session data"
+      description: |
+                   Returns all server session information.
+                   The session information is returned as an array of SessionData objects, each of which contains the user's name, ID and session ID for a session that's currently open.
+      operationId: getActiveSessionData
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: |
+                       Successful operation
+          schema:
+            $ref: "server#/definitions/SessionData"
+  /runlevel:
+    get:
+      summary: "Get runlevel for this server"
+      description: |
+                   Gets the runlevel of the server.
+                   * maintenance
+                   * daemons
+                   * multiuser
+      operationId: getRunlevel
+      produces:
+      - text/plain
+      responses:
+        '200':
+          description: "successful operation"
+          schema:
+            type: string
+    post:
+      summary: "Set runlevel of the server"
+      description: |
+                   Sets the runlevel of this specific server.
+                   If the server is currently undergoing a runlevel change, this method will block until that level change has completed.
+                   The valid run levels that the server can be set to through this method are
+                   * maintenance
+                   * daemons
+                   * multiuser
+      operationId: setRunlevel
+      parameters:
+      - name: level
+        in: query
+        description: |
+                      Supports setting:
+                      * maintenance
+                      * daemons
+                      * multiuser
+        required: true
+        type: string
+        enum:
+          - maintenance
+          - daemons
+          - multiuser
+      responses:
+        '200':
+          description: |
+                       Successful operation
+  /loggers:
+    get:
+      summary: "Get map of loggers with their corresponding Log level"
+      description: |
+                   Get a list of all of the logger categories available in the system.
+                   These can be used directly in log4j2.xml.
+      operationId: getLoggingCategories
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: |
+                       Successful operation
+          schema:
+            $ref: "server#/definitions/Loggers"
+    patch:
+      summary: "Update log level for loggers passed in the body"
+      description: |
+                   Update log level for loggers passed in the body if parameter reload is set to false.
+                   If parameter reload is set to true, the logging config will get reloaded and the contents in body will be ignored.
+      operationId: updateLoggingLevel
+      consumes:
+      - application/json
+      produces:
+      - text/plain
+      parameters:
+      - name: reload
+        in: query
+        description: |
+                     Reload the logging config if true, default is false.
+        required: false
+        type: boolean
+        default: false
+      - name: body
+        in: body
+        required: false
+        schema:
+          $ref: "server#/definitions/Loggers"
+      responses:
+        '200':
+          description: |
+                       Successful operation
+
+  /intentionallogging/config:
+    get:
+      summary: "Get Intentional Logging global configuration"
+      description: |
+                   Get Intentional Logging global configuration
+      operationId: getIntentionalLoggingConfiguration
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: |
+                       Successful operation
+          schema:
+            $ref: "server#/definitions/ILConfig"
+    put:
+      summary: "Update Intentional Logging global configuration"
+      description: |
+                   Update Intentional Logging global configuration
+      operationId: updateIntentionalLoggingConfiguration
+      consumes:
+      - application/json
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: "server#/definitions/ILConfig"
+      responses:
+        '204':
+          description: |
+                       Successful operation
+
+  /intentionallogging/elements:
+    get:
+      summary: "Get map of Intentional Logging configuration elements"
+      description: |
+                   Get map of Intentional Logging configuration elements
+      operationId: getIntentionalLoggingElements
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: |
+                       Successful operation
+          schema:
+            $ref: "server#/definitions/ILElementConfigs"
+    patch:
+      summary: "Update Intentional Logging element configurations"
+      description: |
+                   Update Intentional Logging element configurations
+      operationId:   updateIntentionalLoggingElements
+
+      consumes:
+      - application/json
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: "server#/definitions/ILElementConfigs"
+      responses:
+        '204':
+          description: |
+                       Successful operation
+
+  /health/startup:
+    get:
+      summary: "Check whether or not the application has started"
+      description: |
+                   Get startup state of application
+      operationId: getServerStartupState
+      x-gw-permissions: []
+      x-gw-authenticated: false
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: |
+                       Server has started
+          schema:
+            $ref: "server#/definitions/StartupProbeResponse"
+        '503':
+          description: |
+                       Server has not completed startup
+
+  /health/ready:
+    get:
+      summary: "Check whether or not the application is ready"
+      description: |
+                   Get whether or not the application is ready to service requests
+      operationId: getServerReadinessState
+      x-gw-extensions:
+        doNotLogSuccess: true
+      x-gw-permissions: []
+      x-gw-authenticated: false
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: |
+                       Server is ready
+          schema:
+            $ref: "server#/definitions/ReadinessProbeResponse"
+        '503':
+          description: |
+                       Server is not ready
+
+  /health/live:
+    get:
+      summary: "Check whether or not the application is live"
+      description: |
+                   Get liveness state of application
+      operationId: getServerLivenessState
+      x-gw-extensions:
+        doNotLogSuccess: true
+      x-gw-permissions: []
+      x-gw-authenticated: false
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: |
+                       Server is live
+          schema:
+            $ref: "server#/definitions/LivenessProbeResponse"

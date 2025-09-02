@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <InputSet
+    editable="true"
+    id="RuleFilterCriteriaRuleActionInputSet"
+    mode="ActivityRule">
+    <Require
+      name="filterCriteria"
+      type="gw.bizrules.CCRuleFilterCriteriaBase"/>
+    <Variable
+      initialValue="filterCriteria as gw.bizrules.ActivityRules.ActivityRuleFilterCriteria"
+      name="ruleFilterCriteria"
+      type="gw.bizrules.ActivityRules.ActivityRuleFilterCriteria"/>
+    <TypeKeyInput
+      filter="ruleFilterCriteria.relevantActionsIn(VALUES)"
+      id="ActionTypeFilter"
+      label="DisplayKey.get('Web.BizRules.Rule.RuleActionKey')"
+      noneSelectedLabel="DisplayKey.get('Web.BizRules.Rule.Any')"
+      value="ruleFilterCriteria.RuleActionKey"
+      valueType="RuleActionKey"
+      editable="true">
+    <PostOnChange
+        deferUpdate="false"/>
+    </TypeKeyInput>
+    <RangeInput
+      editable="true"
+      id="ActivityPattern"
+      label="DisplayKey.get('Web.ActivityRules.Action.GenerateActivity.ActivityPattern')"
+      noneSelectedLabel="DisplayKey.get('Web.BizRules.Rule.Any')"
+      value="ruleFilterCriteria.ActivityPattern"
+      valueRange="gw.api.database.Query.make(entity.ActivityPattern).select().map(\elt -&gt; elt.Code).toTypedArray()"
+      valueType="java.lang.String"
+      visible="ruleFilterCriteria.RuleActionKey == RuleActionKey.TC_GENERATEACTIVITY">
+    </RangeInput>
+    <RangeInput
+      editable="true"
+      id="HistoryEventType"
+      label="DisplayKey.get('Web.ActivityRules.Action.GenerateHistoryEvent.Type')"
+      noneSelectedLabel="DisplayKey.get('Web.BizRules.Rule.Any')"
+      value="ruleFilterCriteria.HistoryEventType"
+      valueRange="gw.bizrules.ruleaction.generatehistoryevent.HistoryTypeWrapper.PossibleValues"
+      valueType="gw.bizrules.ruleaction.generatehistoryevent.HistoryTypeWrapper"
+      visible="ruleFilterCriteria.RuleActionKey == RuleActionKey.TC_GENERATEHISTORYEVENT">
+    </RangeInput>
+    <TextInput
+      editable="true"
+      id="Expression"
+      label="DisplayKey.get('Web.ActivityRules.Action.SetField.Expression')"
+      value="ruleFilterCriteria.Expression"
+      valueType="String"
+      visible="ruleFilterCriteria.RuleActionKey == RuleActionKey.TC_SETFIELD">
+    </TextInput>
+  </InputSet>
+</PCF>

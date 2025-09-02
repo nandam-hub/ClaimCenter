@@ -1,0 +1,150 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Page
+    afterReturnFromPopup="reloadList()"
+    canEdit="true"
+    canVisit="ScriptParameters.EnableUaaPortalAuthConsole"
+    countsAsWork="false"
+    id="PortalAuthorizationAdminPage"
+    parent="UsersAndSecurity()"
+    showUpLink="true"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Edge.Web.AuthAdminConsole.PortalAuthorizationAdminPage.Title&quot;)">
+    <Variable
+      initialValue="injectUAAHandler()"
+      name="handler"
+      type="edge.capabilities.extusermgmt.authadminconsole.UAAAdministrationHandler"/>
+    <Variable
+          initialValue="getUsers()"
+          name="users"
+          type="edge.uaaoperations.dto.ScimUserDTO[]"/>
+        <Variable
+          initialValue="users"
+          name="filteredUsers"
+          type="edge.uaaoperations.dto.ScimUserDTO[]"/>
+        <Variable
+          initialValue="new edge.uaaoperations.dto.ScimUserDTO(&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;)"
+          name="filterUser"
+          type="edge.uaaoperations.dto.ScimUserDTO"/>
+
+    <Screen
+          id="PortalAuthAdminScreen">
+          <TitleBar
+            title="DisplayKey.get(&quot;Edge.Web.AuthAdminConsole.PortalAuthAdminScreen.Title&quot;)"/>
+          <DetailViewPanel
+            border="true"
+            editable="true"
+            id="PortalUserSearchFieldsDV">
+            <InputColumn>
+              <InputSet
+                editable="true">
+                <TextInput
+                  editable="true"
+                  id="SearchUsersUserNameInput"
+                  label="DisplayKey.get(&quot;Edge.Web.AuthAdminConsole.UserSearch.UserName&quot;)"
+                  value="filterUser.UserName"/>
+                <TextInput
+                  editable="true"
+                  id="SearchUsersFirstNameInput"
+                  label="DisplayKey.get(&quot;Edge.Web.AuthAdminConsole.UserSearch.FirstName&quot;)"
+                  value="filterUser.Name.GivenName"/>
+              </InputSet>
+            </InputColumn>
+            <InputColumn>
+                    <InputSet
+                      editable="true"/>
+                    <TextInput
+                      editable="true"
+                      id="SearchUsersSurameInput"
+                      label="DisplayKey.get(&quot;Edge.Web.AuthAdminConsole.UserSearch.LastName&quot;)"
+                      value="filterUser.Name.FamilyName"/>
+            </InputColumn>
+          </DetailViewPanel>
+          <PanelRef>
+            <Toolbar>
+              <ToolbarButton
+                action="filterUserList()"
+                id="ToolbarButton"
+                label="DisplayKey.get(&quot;Edge.Web.AuthAdminConsole.PortalAuthAdminScreen.SearchButton&quot;)"/>
+              <ToolbarButton
+                action="PortalAuthUserCreatePopup.push()"
+                id="ToolbarButtonCreate"
+                label="DisplayKey.get(&quot;Edge.Web.AuthAdminConsole.PortalAuthAdminScreen.CreateButton&quot;)"/>
+              <CheckedValuesToolbarButton
+                allCheckedRowsAction="deleteUsers(CheckedValues)"
+                confirmMessage="DisplayKey.get(&quot;Edge.Web.AuthAdminConsole.PortalAuthAdminScreen.DeleteConfirmation&quot;)"
+                id="UserDeleteButton"
+                iterator="PortalAuthUsersLV"
+                label="DisplayKey.get(&quot;Edge.Web.AuthAdminConsole.PortalAuthAdminScreen.DeleteButton&quot;)"/>
+            </Toolbar>
+            <ListViewPanel
+              id="PortalAuthUsersLV">
+              <RowIterator
+                checkBoxVisible="true"
+                editable="false"
+                elementName="user"
+                hasCheckBoxes="true"
+                value="filteredUsers"
+                valueType="edge.uaaoperations.dto.ScimUserDTO[]">
+                <Row>
+                  <TextCell
+                    action="PortalAuthUserDetailPopup.push(user)"
+                    id="UserNameCell"
+                    label="DisplayKey.get(&quot;Edge.Web.AuthAdminConsole.PortalAuthUsersLV.UserName&quot;)"
+                    value="user.UserName"/>
+                  <TextCell
+                    id="FirstNameCell"
+                    label="DisplayKey.get(&quot;Edge.Web.AuthAdminConsole.PortalAuthUsersLV.FirstName&quot;)"
+                    value="user.Name.GivenName"/>
+                  <TextCell
+                    id="LastNameCell"
+                    label="DisplayKey.get(&quot;Edge.Web.AuthAdminConsole.PortalAuthUsersLV.LastName&quot;)"
+                    value="user.Name.FamilyName"/>
+                  <TextCell
+                    id="EmailCell"
+                    label="DisplayKey.get(&quot;Edge.Web.AuthAdminConsole.PortalAuthUsersLV.EmailAddress&quot;)"
+                    value="user.Emails.first().Value"/>
+                </Row>
+              </RowIterator>
+            </ListViewPanel>
+          </PanelRef>
+        </Screen>
+        <Code><![CDATA[uses edge.capabilities.extusermgmt.authadminconsole.UAAAdministrationHandler
+uses edge.uaaoperations.dto.ScimUserDTO
+uses edge.di.CapabilityAndPath
+uses edge.di.Path
+uses java.lang.RuntimeException
+
+function injectUAAHandler(): UAAAdministrationHandler {
+  var handlerEither = edge.di.boot.Bootstrap.createNode(new CapabilityAndPath("extusermgmt", Path.parse("handlers.uaaadministration")), UAAAdministrationHandler)
+  if (handlerEither.isRight) {
+    return handlerEither.right as UAAAdministrationHandler
+  } else {
+    throw new RuntimeException("Failed to initialise UAAAdministrationHandler")
+  }
+}
+
+function getUsers(): ScimUserDTO[] {
+  return handler.getUsers().Resources
+}
+
+function filterUserList() {
+  filteredUsers = handler.searchUsers(filterUser, null).Resources
+}
+
+function reloadList() {
+  users = getUsers()
+  filterUser = new edge.uaaoperations.dto.ScimUserDTO("", "", "", "")
+  filterUserList()
+}
+
+function deleteUsers(usersToDelete : ScimUserDTO[]) {
+  for (user in usersToDelete){
+    handler.deleteUser(user.UserName)
+  }
+  reloadList()
+}]]></Code>
+  </Page>
+</PCF>

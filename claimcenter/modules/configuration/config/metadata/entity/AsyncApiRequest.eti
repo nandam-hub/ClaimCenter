@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+<entity
+  desc="Represents a REST API request that has been made asynchronously. Tracks basic metadata about the request, its current status, and stores the response once the request has completed."
+  xmlns="http://guidewire.com/datamodel"
+  entity="AsyncApiRequest"
+  table="asyncapirequest"
+  type="keyable"
+  extendable="false"
+  loadable="false"
+  platform="true"
+  replicable="false">
+  <column
+    desc="The unique ID of this async request"
+    name="RequestID"
+    nullok="false"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="128"/>
+  </column>  
+  <typekey
+    name="Status"
+    nullok="false"
+    typelist="AsyncApiRequestStatus"/>
+  <column
+    desc="The timestamp for when the request was accepted for processing"
+    name="RequestAcceptedTime"
+    nullok="false"
+    type="datetime"/>
+  <column
+    desc="The timestamp for when the processing of the request began"
+    name="RequestStartTime"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="The timestamp for when processing for the request was completed"
+    name="RequestCompletionTime"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="The path the request was made to"
+    name="RequestPath"
+    nullok="false"
+    type="mediumtext"/>
+  <column
+    desc="The HTTP method of the associated API request"
+    name="RequestMethod"
+    nullok="false"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="16"/>
+  </column>
+  <column
+    desc="The query string for the request, if any"
+    name="RequestQueryString"
+    nullok="true"
+    type="mediumtext"/>
+  <column
+    desc="The HTTP code of the response, if the request has been completed"
+    name="ResponseStatus"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="The bytes of the response body, if the request has completed and has a body"
+    name="ResponseBody"
+    nullok="true"
+    type="blob"/>
+  <column
+    desc="Headers returned with the response, stored as a JSON object mapping header names to arrays of values"
+    name="ResponseHeaders"
+    nullok="true"
+    type="text">
+    <columnParam
+      name="logicalSize"
+      value="65000"/>
+  </column>
+  <index
+    desc="Unique index for looking up requests by RequestID"
+    name="asyncapirequestu1"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="RequestID"/>
+  </index>
+</entity>

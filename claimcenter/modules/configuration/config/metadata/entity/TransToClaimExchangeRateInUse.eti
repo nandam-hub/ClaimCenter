@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  entity="TransToClaimExchangeRateInUse"
+  table="transtoclaimxriu"
+  type="versionable">
+  <implementsEntity
+    name="Extractable"/>
+  <implementsEntity
+    name="ExchangeRateInUseDelegate"/>
+  <implementsInterface
+    iface="gw.cc.financials.entity.TransactionRelatedExchangeRateInUse"
+    impl="com.guidewire.cc.domain.financials.impl.TransToClaimExchangeRateInUseImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.InsertCallback"
+    impl="com.guidewire.cc.domain.financials.impl.TransToClaimExchangeRateInUseImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.UpdateCallback"
+    impl="com.guidewire.cc.domain.financials.impl.TransToClaimExchangeRateInUseImpl"/>
+  <foreignkey
+    columnName="TransactionID"
+    fkentity="Transaction"
+    name="Transaction"
+    nullok="false"/>
+</entity>

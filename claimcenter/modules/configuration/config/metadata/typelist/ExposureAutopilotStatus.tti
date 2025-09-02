@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<typelist
+  final="false"
+  xmlns="http://guidewire.com/typelists" name="ExposureAutopilotStatus" desc="The Autopilot status of an exposure">
+  <typecode
+    code="never_processed"
+    desc="Exposure has not been examined or changed by Autopilot"
+    name="Never Processed"/>
+  <typecode
+    code="previously_processed"
+    desc="Exposure has been processed by Autopilot in the past but is not currently under Autopilot control"
+    name="Previously Processed"
+    retired="true"/>
+  <typecode
+    code="currently_processing"
+    desc="Exposure is currently being processed by Autopilot"
+    name="Currently Processing"/>
+  <typecode
+    code="cannot_process"
+    desc="Exposure has been examined, and possibly partially processed, by Autopilot but cannot be processed any further"
+    name="Cannot Process"/>
+</typelist>

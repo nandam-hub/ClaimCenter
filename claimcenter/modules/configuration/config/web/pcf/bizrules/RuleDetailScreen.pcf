@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Screen
+    id="RuleDetailScreen">
+    <Require
+      name="context"
+      type="gw.bizrules.CCRulesNavigationContext"/>
+    <Require
+      name="stateHolder"
+      type="gw.bizrules.CCRulesDetailsStateHolder"/>
+    <Require
+      name="head"
+      type="RuleHead"/>
+    <Toolbar>
+      <ToolbarButtonSetRef
+        toolbarButtonSet="StatusTransitionToolbarButtonSet(stateHolder)"/>
+      <ToolbarButtonSetRef
+        toolbarButtonSet="ConditionValidationToolbarButtonSet(stateHolder.RulePageController)"
+        visible="stateHolder.doesHeadExist()"/>
+      <ToolbarDivider/>
+      <ToolbarRangeInput
+        available="!CurrentLocation.InEditMode"
+        id="Version"
+        label="DisplayKey.get('Web.BizRules.Rule.Version')"
+        optionLabel="stateHolder.formatVersion(VALUE)"
+        required="true"
+        sortValueRange="false"
+        value="stateHolder.SelectedVersion"
+        valueRange="stateHolder.History"
+        valueType="entity.RuleVersion"
+        visible="stateHolder.doesHeadExist()">
+        <PostOnChange/>
+      </ToolbarRangeInput>
+    </Toolbar>
+    <AlertBar
+      allowDismiss="false"
+      id="RollingUpgradeAlert"
+      label="DisplayKey.get('BizRules.RulesPage.Alert.RollingUpgradeInProgress')"
+      visible="gw.bizrules.management.BizRulesRollingUpgradeManager.Instance.RollingUpgradeProcessStartedInDB and stateHolder.DeploymentEnabled and gw.bizrules.pcf.RulePermissionUIHelper.canDeployRule(stateHolder.getSelectedVersion())"/>
+    <AlertBar
+      action="stateHolder.SelectedVersion = stateHolder.Head.HeadVersion"
+      allowDismiss="false"
+      hideIfEditable="true"
+      id="NotLatestAlert"
+      label="DisplayKey.get('Web.BizRules.Rule.NewerVersionAvailable')"
+      visible="stateHolder.NotLatestVersionSelected"/>
+    <AlertBar
+      allowDismiss="false"
+      available="!stateHolder.ImportInProgress and perm.Rule.edit(stateHolder.SelectedVersion.Rule)"
+      hideIfEditable="true"
+      id="UnavailableToRunAlert"
+      label="DisplayKey.get('BizRules.RuleDetailsPage.Alert.UnavailableToRun')"
+      visible="stateHolder.LatestVersionSelected and !stateHolder.SelectedVersion.Rule.AvailableToRun"/>
+    <AlertBar
+      action="RuleImportDetailsPopup.push(stateHolder.NavigationSupport, stateHolder.Head.InProgressImportTaskEntry.Task, false)"
+      allowDismiss="false"
+      id="PendingImportAlert"
+      label="DisplayKey.get('BizRules.RuleDetailsPage.Alert.PendingImport')"
+      visible="stateHolder.ImportInProgress"/>
+    <AlertBar
+      action="stateHolder.VersionController.pushRulesWithSameNamePopup(head.HeadVersion)"
+      allowDismiss="false"
+      id="DuplicatedNameAlertBar"
+      label="DisplayKey.get('BizRules.RuleDetailsPage.Alert.DuplicatedName')"
+      visible="stateHolder.LatestVersionSelected &amp;&amp; !stateHolder.VersionController.isRuleNameUnique(stateHolder.SelectedVersion)"/>
+    <AlertBar
+      action="context.goToRulesListPage()"
+      allowDismiss="false"
+      hideIfEditable="true"
+      id="RuleDeletedByAnotherUserAlert"
+      label="DisplayKey.get('BizRules.RuleDetailsPage.Alert.DeletedByAnotherUser')"
+      visible="!stateHolder.doesHeadExist()"/>
+    <PanelRef
+      def="RuleDetailPanelSet(context, stateHolder.SelectedVersion, false, stateHolder.RulePageController, stateHolder.RulePageController.Rule.RuleCondition.Type)"
+      mode="stateHolder.SelectedVersion.Rule.Subtype.Code"
+      visible="stateHolder.SelectedVersion != null"/>
+  </Screen>
+</PCF>

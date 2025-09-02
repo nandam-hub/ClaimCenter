@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="The pronoun aggregate type"
+  name="PronounAggregateType">
+  <typecode
+    code="sheherhers"
+    desc="She/Her/Hers"
+    name="She/Her/Hers"
+    priority="2">
+    <category
+      code="she"
+      typelist="PronounSubjectiveType"/>
+    <category
+      code="her"
+      typelist="PronounObjectiveType"/>
+    <category
+      code="hers"
+      typelist="PronounPossessiveType"/>
+  </typecode>
+  <typecode
+    code="hehimhis"
+    desc="He/Him/His"
+    name="He/Him/His"
+    priority="1">
+    <category
+      code="he"
+      typelist="PronounSubjectiveType"/>
+    <category
+      code="him"
+      typelist="PronounObjectiveType"/>
+    <category
+      code="his"
+      typelist="PronounPossessiveType"/>
+  </typecode>
+  <typecode
+    code="selfidentify"
+    desc="Self-Identify"
+    name="Self-Identify"
+    priority="5"/>
+</typelist>

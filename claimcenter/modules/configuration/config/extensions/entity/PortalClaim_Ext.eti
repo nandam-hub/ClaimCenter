@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Reference table for claims to be used by Guidewire portals."
+  entity="PortalClaim_Ext"
+  table="portalclaim_ext"
+  type="retireable">
+  <foreignkey
+    columnName="Claim"
+    desc="Reference to Claim"
+    fkentity="ClaimInfo"
+    name="ClaimInfo"
+    nullok="false"/>
+  <column
+    desc="The date the claim was last viewed in the Guidewire portal."
+    name="ViewedDate"
+    nullok="false"
+    type="datetime"/>
+  <foreignkey
+    columnName="PortalRecentlyViewed"
+    desc="Reference to PortalRecentlyViewed_Ext entity. Allows array of PortalClaim_Ext to exist on PortalRecentlyViewed_Ext"
+    fkentity="PortalRecentlyViewed_Ext"
+    name="PortalRecentlyViewed"
+    nullok="true"/>
+</entity>

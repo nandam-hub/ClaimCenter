@@ -1,0 +1,389 @@
+{
+  "schemaName": "gw.core.cc.claim.v1.claim_graph_core-1.0",
+  "combine": [
+    "gw.core.cc.claim.v1.claim_combined_core-1.0"
+  ],
+  "mappers": {
+    "BaggageIncident": {
+      "schemaDefinition": "BaggageIncident",
+      "root": "entity.BaggageIncident",
+      "properties": {
+        "assessmentContentItems": {
+          "path": "BaggageIncident.OrderedContentItemLine",
+          "mapper": "#/mappers/AssessmentContentItem",
+          // Changes to the linked AssessmentContentItem will not generate a changed event on the BaggageIncident
+          "eventSafe": false
+        }
+      }
+    },
+    "Claim": {
+      "schemaDefinition": "Claim",
+      "root": "entity.Claim",
+      "properties": {
+        "activities": {
+          "path": "Claim.RestV1.ActivitiesSorted",
+          "mapper": "#/mappers/Activity",
+          // Activity generates events for App Events. (Sorting is irrelevant to App Events.)
+          "eventSafe": true
+        },
+        "assessmentSummaries": {
+          "path": "Claim.RestV1.AssessmentSummariesSorted",
+          "mapper": "#/mappers/AssessmentSummary",
+          // Changes to the linked AssessmentSummary will not generate a changed event on the Claim
+          "eventSafe": false
+        },
+        "baggageIncidents": {
+          "path": "Claim.RestV1.BaggageIncidentsSorted",
+          "mapper": "#/mappers/BaggageIncident",
+          // BaggageIncident generates events for App Events. (Sorting is irrelevant to App Events.)
+          "eventSafe": true
+        },
+        "checkSets": {
+          "path": "Claim.RestV1.CheckSetsSorted",
+          "mapper": "#/mappers/CheckSet",
+          // CheckSet generates events for App Events. (Sorting is irrelevant to App Events.)
+          "eventSafe": true
+        },
+        "checks": {
+          "path": "Claim.RestV1.ChecksSorted",
+          "mapper": "#/mappers/Check",
+          // Check generates events for App Events. (Sorting is irrelevant to App Events.)
+          "eventSafe": true
+        },
+        "contacts": {
+          "path": "Claim.RestV1.ContactsSorted",
+          "mapper": "#/mappers/ClaimContact",
+          // ClaimContact generates events for App Events. (Sorting is irrelevant to App Events.)
+          "eventSafe": true
+        },
+        "documents": {
+          "path": "Claim.RestV1.DocumentsSorted",
+          "mapper": "#/mappers/Document",
+          // Document generates events for App Events. (Sorting is irrelevant to App Events.)
+          "eventSafe": true
+        },
+        "dwellingIncidents": {
+          "path": "Claim.RestV1.DwellingIncidentsSorted",
+          "mapper": "#/mappers/DwellingIncident",
+          // DwellingIncident generates events for App Events. (Sorting is irrelevant to App Events.)
+          "eventSafe": true
+        },
+        "exposures": {
+          "path": "Claim.RestV1.ExposuresSorted",
+          "mapper": "#/mappers/Exposure",
+          // Exposure generates events for App Events. (Sorting is irrelevant to App Events.)
+          "eventSafe": true
+        },
+        "fixedPropertyIncidents": {
+          "path": "Claim.RestV1.FixedPropertyIncidentsSorted",
+          "mapper": "#/mappers/FixedPropertyIncident",
+          // FixedPropertyIncident generates events for App Events. (Sorting is irrelevant to App Events.)
+          "eventSafe": true
+        },
+        "generalIncidents": {
+          "path": "Claim.RestV1.GeneralIncidentsSorted",
+          "mapper": "#/mappers/GeneralIncident",
+          // Incident generates events (as GeneralIncident) for App Events. (Sorting is irrelevant to App Events.)
+          "eventSafe": true
+        },
+        "historyEvents": {
+          "path": "Claim.RestV1.HistoryEventsSorted",
+          "mapper": "#/mappers/HistoryEvent",
+          "eventSafe": false
+        },
+        "injuryIncidents": {
+          "path": "Claim.RestV1.InjuryIncidentsSorted",
+          "mapper": "#/mappers/InjuryIncident",
+          // InjuryIncident generates events for App Events. (Sorting is irrelevant to App Events.)
+          "eventSafe": true
+        },
+        "intakeInteractions": {
+          "path": "Claim.IntakeInteractions",
+          "mapper": "#/mappers/IntakeInteraction",
+          // IntakeInteraction generates events for App Events
+          "eventSafe": true
+        },
+        "internalId": {
+          "path": "Claim.RestV1_TypeIDString",
+          "eventSafe": false
+        },
+        "livingExpensesIncidents": {
+          "path": "Claim.RestV1.LivingExpensesIncidentsSorted",
+          "mapper": "#/mappers/LivingExpensesIncident",
+          // LivingExpensesIncident generates events for App Events. (Sorting is irrelevant to App Events.)
+          "eventSafe": true
+        },
+        "matters": {
+          "path": "Claim.RestV1.MattersSorted",
+          "mapper": "#/mappers/Matter",
+          // Matter generates events for App Events. (Sorting is irrelevant to App Events.)
+          "eventSafe": true
+        },
+        "medicalTreatments": {
+          "path": "Claim.MedicalTreatments",
+          "mapper": "#/mappers/MedicalTreatment",
+          "eventSafe": false
+        },
+        "notes": {
+          "path": "Claim.RestV1.NotesSorted",
+          "mapper": "#/mappers/Note",
+          // Note generates events for App Events. (Sorting is irrelevant to App Events.)
+          "eventSafe": true
+        },
+        "otherStructureIncidents": {
+          "path": "Claim.RestV1.OtherStructureIncidentsSorted",
+          "mapper": "#/mappers/OtherStructureIncident",
+          // OtherStructureIncident generates events for App Events. (Sorting is irrelevant to App Events.)
+          "eventSafe": true
+        },
+        "payments": {
+          "path": "Claim.RestV1.PaymentsSorted",
+          "mapper": "#/mappers/Transaction",
+          // Transaction generates events for App Events. (Sorting is irrelevant to App Events.)
+          "eventSafe": true
+        },
+        "policy": {
+          "path": "Claim.Policy",
+          "mapper": "#/mappers/Policy",
+          // Policy generates events for App Events. (Sorting is irrelevant to App Events.)
+          "eventSafe": true
+        },
+        "propertyContentsIncidents": {
+          "path": "Claim.RestV1.PropertyContentsIncidentsSorted",
+          "mapper": "#/mappers/PropertyContentsIncident",
+          // PropertyContentsIncident generates events for App Events. (Sorting is irrelevant to App Events.)
+          "eventSafe": true
+        },
+        "recoveries": {
+          "path": "Claim.RestV1.RecoveriesSorted",
+          "mapper": "#/mappers/Transaction",
+          // Transaction generates events for App Events. (Sorting is irrelevant to App Events.)
+          "eventSafe": true
+        },
+        "recoveryReserveSets": {
+          "path": "Claim.RestV1.RecoveryReserveSetsSorted",
+          "mapper": "#/mappers/RecoveryReserveSet",
+          // RecoveryReserveSet generates events for App Events. (Sorting is irrelevant to App Events.)
+          "eventSafe": true
+        },
+        "recoveryReserves": {
+          "path": "Claim.RestV1.RecoveryReservesSorted",
+          "mapper": "#/mappers/Transaction",
+          // Transaction generates events for App Events. (Sorting is irrelevant to App Events.)
+          "eventSafe": true
+        },
+        "recoverySets": {
+          "path": "Claim.RestV1.RecoverySetsSorted",
+          "mapper": "#/mappers/RecoverySet",
+          // RecoverySet generates events for App Events. (Sorting is irrelevant to App Events.)
+          "eventSafe": true
+        },
+        "reserveSets": {
+          "path": "Claim.RestV1.ReserveSetsSorted",
+          "mapper": "#/mappers/ReserveSet",
+          // ReserveSet generates events for App Events. (Sorting is irrelevant to App Events.)
+          "eventSafe": true
+        },
+        "reserves": {
+          "path": "Claim.RestV1.ReservesSorted",
+          "mapper": "#/mappers/Transaction",
+          // Transaction generates events for App Events. (Sorting is irrelevant to App Events.)
+          "eventSafe": true
+        },
+        "serviceRequests": {
+          "path": "Claim.RestV1.ServiceRequestsSorted",
+          "mapper": "#/mappers/ServiceRequest",
+          // ServiceRequest generates events for App Events. (Sorting is irrelevant to App Events.)
+          "eventSafe": true
+        },
+        "subrogationSummaries": {
+          "path": "{Claim.SubrogationSummary}",
+          "mapper": "#/mappers/SubrogationSummary",
+          "eventSafe": false
+        },
+        "tripIncidents": {
+          "path": "Claim.RestV1.TripIncidentsSorted",
+          "mapper": "#/mappers/TripIncident",
+          // TripIncident generates events for App Events. (Sorting is irrelevant to App Events.)
+          "eventSafe": true
+        },
+        "vehicleIncidents": {
+          "path": "Claim.RestV1.VehicleIncidentsSorted",
+          "mapper": "#/mappers/VehicleIncident",
+          // VehicleIncident generates events for App Events. (Sorting is irrelevant to App Events.)
+          "eventSafe": true
+        }
+      }
+    },
+    "Exposure": {
+      "schemaDefinition": "Exposure",
+      "root": "entity.Exposure",
+      "properties": {
+        "internalId": {
+          "path": "Exposure.RestV1_TypeIDString",
+          "eventSafe": false
+        }
+      }
+    },
+    "GeneralIncident": {
+      "schemaDefinition": "GeneralIncident",
+      "root": "entity.Incident",
+      "properties": {
+        "assessmentContentItems": {
+          "path": "Incident.OrderedContentItemLine",
+          "mapper": "#/mappers/AssessmentContentItem",
+          // Changes to the linked AssessmentContentItem will not generate a changed event on the GeneralIncident
+          "eventSafe": false
+        }
+      }
+    },
+    "InjuryIncident": {
+      "schemaDefinition": "InjuryIncident",
+      "root": "entity.InjuryIncident",
+      "properties": {
+        "bodilyInjuryPoints": {
+          "path": "InjuryIncident.InjuryPoints",
+          "mapper": "#/mappers/BodilyInjuryPoint",
+          "eventSafe": false
+        },
+        "medicalDiagnoses": {
+          "path": "InjuryIncident.InjuryDiagnoses",
+          "mapper": "#/mappers/MedicalDiagnosis",
+          "eventSafe": false
+        }
+      }
+    },
+    "Policy": {
+      "schemaDefinition": "Policy",
+      "root": "entity.Policy",
+      "properties": {
+        "contacts": {
+          "path": "Policy.RestV1.ContactsSorted",
+          "mapper": "#/mappers/ClaimContact"
+        },
+        "coverages": {
+          "path": "Policy.RestV1.CoveragesSorted",
+          "mapper": "#/mappers/Coverage",
+          // Coverage generates events for App Events. (Sorting is irrelevant to App Events.)
+          "eventSafe": true
+        },
+        "endorsements": {
+          "path": "Policy.RestV1.EndorsementsSorted",
+          "mapper": "#/mappers/Endorsement",
+          // Endorsement generates events for App Events. (Sorting is irrelevant to App Events.)
+          "eventSafe": true
+        },
+        "locationBasedRiskUnits": {
+          "path": "Policy.RestV1.LocationBasedRiskUnitsSorted",
+          "mapper": "#/mappers/LocationBasedRiskUnit",
+          // LocationBasedRiskUnit generates events for App Events. (Sorting is irrelevant to App Events.)
+          "eventSafe": true
+        },
+        "locations": {
+          "path": "Policy.RestV1.PolicyLocationsOrdered",
+          "mapper": "#/mappers/PolicyLocation",
+          // Locations generates events (as PolicyLocation) for App Events. (Sorting is irrelevant to App Events.)
+          "eventSafe": true
+        },
+        "tripRiskUnits": {
+          "path": "Policy.RestV1.TripRiskUnitsSorted",
+          "mapper": "#/mappers/TripRiskUnit",
+          // TripRU generates events (as TripRiskUnit) for App Events. (Sorting is irrelevant to App Events.)
+          "eventSafe": true
+        },
+        "vehicleRiskUnits": {
+          "path": "Policy.RestV1.VehicleRiskUnitsSorted",
+          "mapper": "#/mappers/VehicleRiskUnit",
+          // VehicleRiskUnit generates events for App Events. (Sorting is irrelevant to App Events.)
+          "eventSafe": true
+        }
+      }
+    },
+    "PolicyLocation": {
+      "schemaDefinition": "PolicyLocation",
+      "root": "entity.PolicyLocation",
+      "properties": {
+        "propertyItems": {
+          "path": "PolicyLocation.RestV1.PropertyItemsOrdered",
+          "mapper": "#/mappers/PropertyItem",
+          // This is not safe because PolicyLocation is not graphed
+          "eventSafe": false
+        }
+      }
+    },
+    "PropertyContentsIncident": {
+      "schemaDefinition": "PropertyContentsIncident",
+      "root": "entity.PropertyContentsIncident",
+      "properties": {
+        "assessmentContentItems": {
+          "path": "PropertyContentsIncident.OrderedContentItemLine",
+          "mapper": "#/mappers/AssessmentContentItem",
+          // Changes to the linked AssessmentContentItem will not generate a changed event on the PropertyContentsIncident
+          "eventSafe": false
+        },
+        "propertyContentsScheduledItems": {
+          "path": "PropertyContentsIncident.OrderedPropertyContentsScheduledItems",
+          "mapper": "#/mappers/PropertyContentsScheduledItem",
+          // Changes to the linked PropertyContentsScheduledItems will not generate a changed event on the PropertyContentsIncident
+          "eventSafe": false
+        }
+      }
+    },
+    "ServiceRequest": {
+      "schemaDefinition": "ServiceRequest",
+      "root": "entity.ServiceRequest",
+      "properties": {
+        "invoices": {
+          "path": "ServiceRequest.RestV1.InvoicesSorted",
+          "mapper": "#/mappers/ServiceRequestStatement",
+          // ServiceRequest generates events for App Events. (Sorting is irrelevant to App Events.)
+          "eventSafe": true
+        },
+        "serviceRequestHistories": {
+          "path": "ServiceRequest.RestV1.HistoriesSorted",
+          "mapper": "#/mappers/ServiceRequestHistory",
+          "eventSafe": false
+        },
+        "serviceRequestMessages": {
+          "path": "ServiceRequest.RestV1.MessagesSorted",
+          "mapper": "#/mappers/ServiceRequestMessage",
+          "eventSafe": true
+        }
+      }
+    },
+    "SubrogationSummary": {
+      "schemaDefinition": "SubrogationSummary",
+      "root": "entity.SubrogationSummary",
+      "properties": {
+        "subrogations": {
+          "path": "SubrogationSummary.Subrogations",
+          "mapper": "#/mappers/Subrogation",
+          "eventSafe": false
+        }
+      }
+    },
+    "TripRiskUnit": {
+      "schemaDefinition": "TripRiskUnit",
+      "root": "entity.TripRU",
+      "properties": {
+        "coverages": {
+          "path": "TripRU.RiskUnitRestV1.CoveragesSorted",
+          "mapper": "#/mappers/Coverage",
+          // Coverage generates events for App Events. (Sorting is irrelevant to App Events.)
+          "eventSafe": true
+        }
+      }
+    },
+    "VehicleIncident": {
+      "schemaDefinition": "VehicleIncident",
+      "root": "entity.VehicleIncident",
+      "properties": {
+        "vehicleDamagePoints": {
+          "path": "VehicleIncident.DamagePoints",
+          "mapper": "#/mappers/VehicleDamagePoint",
+          "eventSafe": false
+        }
+      }
+    }
+  }
+}

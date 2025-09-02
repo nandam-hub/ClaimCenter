@@ -1,0 +1,20 @@
+package rules.Closed.MatterClosed_dir
+
+@gw.rules.RuleName("CMC01000 - Set Litigation Status")
+internal class CMC01000SetLitigationStatus {
+  static function doCondition(matter : entity.Matter) : boolean {
+    
+/*start00rule*/
+return not matter.Claim.Matters.hasMatch(\ m -> m.Closed==false)
+/*end00rule*/
+
+  }
+
+  static function doAction(matter : entity.Matter, actions : gw.rules.Action) {
+
+/*start00rule*/
+matter.Claim.LitigationStatus = TC_COMPLETE
+/*end00rule*/
+
+  }
+}

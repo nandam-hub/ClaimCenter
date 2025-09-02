@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<typelist xmlns="http://guidewire.com/typelists" name="IntakeInteractionStatus" desc="Status of an IntakeInteraction">
+  <typecode
+    code="open"
+    desc="The data request is in progress"
+    name="Open"/>
+  <typecode
+    code="completed"
+    desc="The requested data has been provided and stored in the IntakeResults field"
+    name="Completed"/>
+  <typecode
+    code="closed"
+    desc="Intake data has been processed and saved to the claim"
+    name="Closed"/>
+  <typecode
+    code="refused"
+    desc="The contact declined to provide the requested data"
+    name="Refused"/>
+  <typecode
+    code="error"
+    desc="An error occurred which meant the data could not be collected, or saved to the claim"
+    name="Error"/>
+  <typecode
+    code="withdrawn"
+    desc="The requester (such as Autopilot) or adjuster withdrew the request for data"
+    name="Withdrawn"/>
+  <typefilter
+    desc="Statuses for an incomplete Interaction Request. Data was not collected."
+    name="incomplete">
+    <include
+      code="refused"/>
+    <include
+      code="error"/>
+    <include
+      code="withdrawn"/>
+  </typefilter>
+  <typefilter
+    desc="Finished statuses. Closed or one of the incomplete statuses."
+    name="finished">
+    <exclude
+      code="open"/>
+    <exclude
+      code="completed"/>
+  </typefilter>
+</typelist>

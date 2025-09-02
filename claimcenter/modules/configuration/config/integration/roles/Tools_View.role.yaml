@@ -1,0 +1,6 @@
+name: "Tools View"
+endpoints: []
+accessibleFields:
+  "*":
+    edit: "*"
+    view: "*"

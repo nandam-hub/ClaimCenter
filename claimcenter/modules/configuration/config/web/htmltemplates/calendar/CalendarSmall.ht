@@ -1,0 +1,15 @@
+<div class="gw-CalendarSmall--title-row gw-row">
+    <div class="gw-label">${headerTitle}</div>
+</div>
+<div :for="week" :in="weeks" class="gw-row" role="row" aria-label="${smallCalendarWeekAriaLabel}">
+    <div :for="cell" :in="week.cells" class="gw-CalendarSmall--cell">
+        <div :for="day" :in="cell.days" class="${day.weekend ? 'gw-CalendarSmall--weekend' : 'gw-CalendarSmall--weekday'} ${day.notPartOfMonth ? 'gw-CalendarSmall--notMonth'} ${day.selected ? 'gw-CalendarSmall--selected'} ${day.inSelectedWeek ? 'gw-CalendarSmall--selectedWeek'}">
+            <div id="${prefixId}${day.id}" data-gw-click="calendar.day id:${calendarId} ${day.buttonArgs}" class="gw-CalendarSmall--day--status-wrap ${day.today ? 'gw-CalendarSmall--today'}" role="link">
+                <div class="gw-CalendarSmall--day-small ${day.critical ? 'gw-critical'}">
+                    <div :if="day.critical" class="gw-CalendarSmall--urgent-number">${day.weekend ? '' : day.numCriticalEvents}</div>
+                    <div class="gw-CalendarSmall--day-number">${day.dayOfMonth}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

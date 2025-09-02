@@ -1,0 +1,25 @@
+package.json
+package-lock.json
+build.json
+
+i18n/
+
+# distribution
+dist/
+
+# build
+build/
+
+# test reports
+reports/
+
+tmp/
+
+# Tranlsations
+**/i18n/*.json
+
+# Generated message files
+*.messages.json
+
+# Generated metadata files
+*.metadata.json

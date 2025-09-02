@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <PanelSet
+    id="FNOLWizard_BasicInfoPolicyPanelSet"
+    mode="Homeowners">
+    <Require
+      name="claim"
+      type="Claim"/>
+    <Require
+      name="wizard"
+      type="gw.api.claim.NewClaimWizardInfo"/>
+    <Variable
+      initialValue="claim.Policy.getOrderedPrimaryLocationCoverages({wizard.HomeownersHelper.DwellingCoverageType, wizard.HomeownersHelper.OtherStructuresCoverageType, wizard.HomeownersHelper.PersonalPropertyCoverageType, wizard.HomeownersHelper.LossOfUseCoverageType, wizard.HomeownersHelper.PersonalLiabilityCoverageType})"
+      name="coverages"
+      type="entity.PropertyCoverage[]"/>
+    <Variable
+      initialValue="claim.Policy.Endorsements.sortBy(\ e -&gt; e.FormNumber)"
+      name="endorsements"
+      type="entity.Endorsement[]"/>
+    <DetailViewPanel>
+      <InputColumn>
+        <InputSet
+          id="AddressInputSet"
+          visible="claim.Policy.PrimaryLocation != null">
+          <Label
+            label="DisplayKey.get(&quot;Web.BasicInfoScreen.Homeowners.AddressOnPolicy&quot;)"/>
+          <TextInput
+            id="PropertyAddress"
+            labelAbove="true"
+            value="claim.Policy.PrimaryLocation.Address.DisplayName"/>
+        </InputSet>
+      </InputColumn>
+    </DetailViewPanel>
+    <DetailViewPanel
+      id="endorsementDV"
+      visible="!endorsements.IsEmpty">
+      <InputColumn>
+        <Label
+          label="DisplayKey.get(&quot;Web.BasicInfoScreen.Homeowners.Endorsements&quot;)"/>
+        <InputIterator
+          elementName="endorsement"
+          value="endorsements"
+          valueType="entity.Endorsement[]">
+          <TextInput
+            id="endorsement"
+            label="endorsement.FormNumber"
+            value="endorsement.Description"/>
+        </InputIterator>
+      </InputColumn>
+    </DetailViewPanel>
+  </PanelSet>
+</PCF>

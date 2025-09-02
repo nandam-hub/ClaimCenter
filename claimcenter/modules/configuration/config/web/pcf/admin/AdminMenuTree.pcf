@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <MenuTree
+    height="300"
+    id="AdminMenuTree"
+    visible="perm.Group.viewtree">
+    <TreeView
+      elementLabel="element"
+      elementName="element"
+      id="AdminMenuTree"
+      onClickElement="if(element typeis User) {UserDetailPage.go(element)} else if(element typeis Group) {GroupDetailPage.go(element)} else if(element typeis Organization) {OrganizationDetail.go(element)}"
+      preserveExpansionStateOnRefresh="true"
+      value="new gw.api.admin.CCOrganizationTreeNode()"/>
+  </MenuTree>
+</PCF>

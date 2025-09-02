@@ -1,0 +1,1 @@
+<%@ params( email: String, portalURL: String, code: String ) %> Hallo ${email}, <br /> öffnen Sie bitte die folgende URL-Adresse, um Ihr Kennwort zurückzusetzen: <br /> <a href="${portalURL}?token=${code}">Kennwort zurücksetzen</a><br /><br /> Mit freundlichen Grüßen,  

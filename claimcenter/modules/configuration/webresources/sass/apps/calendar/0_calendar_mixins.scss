@@ -1,0 +1,75 @@
+@mixin gw-Calendar--button($glyph, $buttonNormalArgs...) {
+  @include gw-button--normal($buttonNormalArgs...);
+  position: relative;
+  .gw-icon {
+    @include gw-icon($glyph);
+  }
+}
+
+@mixin gw-Calendar--monthButton-event-toggle($glyph) {
+  @include gw-icon($glyph);
+  background-color: $gw-app--CalendarWidget--Week--event-toggle-bg;
+  color: $gw-app--CalendarWidget--Week--event-toggle-col;
+}
+
+@mixin gw-Calendar--weekButton-event-toggle($glyph) {
+  @include gw-icon($glyph);
+  background-color: $gw-app--CalendarWidget--Week--event-toggle-bg;
+  color: $gw-app--CalendarWidget--Week--event-toggle-col;
+}
+
+@mixin gw-Calendar--titleButton($glyph) {
+  @include gw-Calendar--button($glyph,
+    $bg: $gw-app--CalendarWidget--Title--prev-next-bg,
+    $col: $gw-app--CalendarWidget--Title--prev-next-col,
+    $hover-bg: $gw-app--CalendarWidget--Title--button-hover-bg,
+    $hover-col: $gw-app--CalendarWidget--Title--prev-next-col,
+    $use-button-shadows: false,
+    $is-square: false);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: $gw-app--CalendarWidget--Title--prev-next-height;
+  width: $gw-app--CalendarWidget--Title--prev-next-height;
+  border-radius: $gw-app--border-radius-px;
+  border: gw-border(transparent);
+}
+
+@mixin gw-Calendar--selectWrapper($top: null, $right: null, $bottom: null, $left: null) {
+  position: relative;
+  display: inline-block;
+
+  @include gw-borderCap($top, $right, $bottom, $left);
+
+  .gw-icon {
+    color: $gw-app--buttons--col;
+    pointer-events: none;
+    @include gw-iconFloatRight($gw-app--CalendarWidget--select-glyph, $gw-app--buttons--pad-h);
+    @include gw-z-index(cardTab);
+  }
+
+  select {
+    appearance: none;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    @include gw-Calendar--button("chevron-circle-down");
+    @include gw-borderCap($top, $right, $bottom, $left, true);
+  }
+
+  select::-ms-expand {
+    display: none;
+  }
+}
+
+@mixin gw-Calendar--criticalText() {
+  background-color: $gw-app--CalendarWidget--critical-base-color;
+  color: $gw-app--CalendarWidget--critical-text-color;
+}
+
+@mixin gw-Calendar--criticalIcon($col: $gw-app--CalendarWidget--critical-text-color) {
+  @include gw-icon($gw-app--CalendarWidget--critical-glyph);
+  color: $col;
+}

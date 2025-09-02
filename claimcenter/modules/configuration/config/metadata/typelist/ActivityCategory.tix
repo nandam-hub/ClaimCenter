@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<internaltypelistextension xmlns="http://guidewire.com/typelists" name="ActivityCategory" desc="All available categories of activities">
+  <typecode
+    code="autopilot"
+    desc="Autopilot"
+    name="Autopilot">
+    <category
+      code="general"
+      typelist="ActivityType"/>
+  </typecode>
+</internaltypelistextension>

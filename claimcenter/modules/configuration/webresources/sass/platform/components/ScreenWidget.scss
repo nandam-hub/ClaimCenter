@@ -1,0 +1,164 @@
+.gw-ScreenWidget {
+  display: inline-block;
+  position: relative;
+  min-width: $gw-app--Screen--min-width;
+  flex-shrink: 1;
+  flex-grow: 1;
+  padding-top: $gw-app--Screen--spacing-inner-top-rem;
+  padding-left: $gw-app--Screen--spacing-inner-left-rem;
+  padding-right: $gw-app--Screen--spacing-inner-right-rem;
+  padding-bottom: $gw-app--Screen--spacing-inner-bottom-rem;
+
+  &.gw-flexContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    height: 100%; //NOTE: this is one of those finicky fill situations in flex boxes where min-height behaves differently than height
+    padding: $gw-app--Screen--flex-container-padding !important;
+  }
+
+  .gw-fileUploadArea:not([data-gw-dragover]) {
+    display: none;
+  }
+
+  .gw-fileUploadArea[data-gw-dragover] {
+    display: flex;
+    padding: $gw-app--SPACING-rem-M;
+    max-width: $gw-app--Screen--file-drop-area--max-width;
+    .gw-fileUploadArea--inner {
+      flex-shrink: 1;
+      flex-grow: 2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: $gw-app--Screen--file-drop-area--height;
+      @include gw-borderRadius();
+      border: $gw-app--Screen--file-drop-area--border;
+      background-color: $gw-app--Screen--file-drop-area--bg;
+      color: $gw-app--Screen--file-drop-area--col;
+      padding: $gw-app--SPACING-rem-L;
+      margin-right: $gw-app--SPACING-rem-L;
+
+      &.gw-drag-hover {
+        border: $gw-app--Screen--file-drop-area--hover-border;
+        background-color: $gw-app--Screen--file-drop-area--hover-bg;
+        color: $gw-app--Screen--file-drop-area--hover-col;
+      }
+
+      .gw-label {
+        pointer-events: none;
+        font-size: $gw-app--Screen--file-drop-area--font-size;
+        padding-right: $gw-app--SPACING-rem-M;
+      }
+    }
+  }
+}
+
+@if ($gw-app--Screen--file-area--user-alternative-layout) {
+  .gw-ScreenWidget {
+    .gw-fileUploadArea[data-gw-dragover] {
+
+      .gw-fileUploadArea--inner {
+        padding: $gw-app--SPACING-rem-M $gw-app--SPACING-rem-M $gw-app--SPACING-rem-M $gw-app--SPACING-rem-M;
+        @include gw-icon("cloud-upload-alt", 5em, $width: 2em, $v-align: middle);
+        &:before {
+          flex-grow: 0;
+        }
+
+        .gw-label {
+          text-align: center;
+        }
+      }
+
+      .gw-fileUploadArea--right {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: $gw-app--Screen--file-drop-area--bg;
+        border: $gw-app--Screen--file-paste-area--border;
+        @include gw-borderRadius();
+        color: $gw-app--Screen--file-drop-area--col;
+        padding: $gw-app--SPACING-rem-M $gw-app--SPACING-rem-M $gw-app--SPACING-rem-M $gw-app--SPACING-rem-M;
+        flex-grow: 0;
+
+        @include gw-icon("paste", 3em);
+
+        .gw-paste-title {
+          display: none;
+        }
+
+        .gw-paste-input {
+          margin-top: $gw-app--SPACING-rem-S;
+          margin-bottom: $gw-app--SPACING-rem-S;
+          text-align: center;
+          height: 2.5em;
+        }
+
+        .gw-paste-subtitle {
+          display: none;
+        }
+      }
+    }
+  }
+} @else {
+  .gw-ScreenWidget {
+    .gw-fileUploadArea[data-gw-dragover] {
+      .gw-fileUploadArea--right {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: $gw-app--Screen--file-drop-area--bg;
+        border: $gw-app--Screen--file-paste-area--border;
+        @include gw-borderRadius();
+        color: $gw-app--Screen--file-drop-area--col;
+        padding: $gw-app--SPACING-rem-L;
+        flex-grow: 1;
+
+        .gw-paste-title {
+          font-size: $gw-app--Screen--file-drop-area--font-size;
+        }
+
+        .gw-paste-input {
+          margin-top: $gw-app--SPACING-rem-S;
+          margin-bottom: $gw-app--SPACING-rem-S;
+          // Hide the placeholder text
+          width: 100px;
+          height: 24px;
+
+          &:-ms-input-placeholder {
+            color: $gw-app--inputs--bg;
+          }
+
+          &::-moz-placeholder {
+            color: $gw-app--inputs--bg;
+          }
+
+          &::-webkit-input-placeholder   {
+            color: $gw-app--inputs--bg;
+          }
+
+          &::placeholder {
+            color: $gw-app--inputs--bg;
+          }
+        }
+
+        .gw-paste-subtitle {
+          font-size: .8em;
+        }
+      }
+    }
+  }
+}
+
+#gw-south-panel {
+  .gw-ScreenWidget {
+    .gw-fileUploadArea[data-gw-dragover] {
+      .gw-fileUploadArea--inner {
+        min-height: $gw-app--Screen--in-South-Panel--file-drop-area--height;
+      }
+    }
+  }
+}

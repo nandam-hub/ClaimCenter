@@ -1,0 +1,7 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "x-gw-combine": [
+    "gw.core.cc.framework.v1.framework_core-1.0"
+  ],
+  "definitions": { }
+}

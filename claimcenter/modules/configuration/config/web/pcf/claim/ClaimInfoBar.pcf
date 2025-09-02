@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <InfoBar
+    id="ClaimInfoBar">
+    <Require
+      name="Claim"
+      type="Claim"/>
+    <InfoBarElement
+      icon="Claim.Closed ? &quot;closed&quot; : &quot;circle&quot;"
+      iconColor="Claim.Closed ? null : gw.api.web.color.GWColor.THEME_ALERT_INFO"
+      iconType="svgFileName"
+      id="ClaimOpenCloseIcon"
+      tooltip="Claim.State.DisplayName"/>
+    <InfoBarElement
+      icon="Claim.LitigationClaimIndicator.Icon"
+      iconType="svgFileName"
+      id="LitigationClaimIndicator"
+      tooltip="Claim.LitigationClaimIndicator.HoverText"
+      visible="Claim.LitigationClaimIndicator.IsOn"/>
+    <InfoBarElement
+      icon="Claim.FatalityClaimIndicator.Icon"
+      iconType="svgFileName"
+      id="FatalityClaimIndicator"
+      tooltip="Claim.FatalityClaimIndicator.HoverText"
+      visible="Claim.FatalityClaimIndicator.IsOn"/>
+    <InfoBarElement
+      icon="Claim.LargeLossClaimIndicator.Icon"
+      iconType="svgFileName"
+      id="LargeLossClaimIndicator"
+      tooltip="Claim.LargeLossClaimIndicator.HoverText"
+      visible="Claim.LargeLossClaimIndicator.IsOn"/>
+    <InfoBarElement
+      icon="Claim.CoverageInQuestionClaimIndicator.Icon"
+      iconType="svgFileName"
+      id="CoverageInQuestionClaimIndicator"
+      tooltip="Claim.CoverageInQuestionClaimIndicator.HoverText"
+      visible="Claim.CoverageInQuestionClaimIndicator.IsOn"/>
+    <InfoBarElement
+      icon="Claim.SIUClaimIndicator.Icon"
+      iconType="svgFileName"
+      id="SIUClaimIndicator"
+      tooltip="Claim.SIUClaimIndicator.HoverText"
+      visible="Claim.SIUClaimIndicator.IsOn"/>
+    <InfoBarElement
+      icon="Claim.FlagClaimIndicator.Icon"
+      iconColor="gw.api.web.color.GWColor.THEME_ALERT_ERROR"
+      iconType="svgFileName"
+      id="FlagClaimIndicator"
+      tooltip="Claim.FlagClaimIndicator.HoverText"
+      visible="Claim.FlagClaimIndicator.IsOn"/>
+    <InfoBarElement
+      icon="Claim.SubrogationClaimIndicator.Icon"
+      iconType="svgFileName"
+      id="SubrogationClaimIndicator"
+      tooltip="Claim.SubrogationClaimIndicator.HoverText"
+      visible="Claim.SubrogationClaimIndicator.IsOn"/>
+    <InfoBarElement
+      icon="Claim.Policy.PolicyType.Icon"
+      iconType="svgFileName"
+      id="PolicyIcon"
+      tooltip="Claim.Policy.PolicyType == null ? &quot;&quot; : Claim.Policy.PolicyType.DisplayName"/>
+    <InfoBarElement
+      id="PolicyNumber"
+      label="DisplayKey.get(&quot;Web.ClaimInfoBar.PolicyNumber&quot;)"
+      value="Claim.Policy.PolicyNumber"/>
+    <InfoBarElement
+      id="Insured"
+      label="DisplayKey.get(&quot;Web.ClaimInfoBar.Insured&quot;)"
+      value="Claim.InsuredDenorm.DisplayName"/>
+    <InfoBarElement
+      id="Claimant"
+      label="DisplayKey.get(&quot;Web.ClaimInfoBar.Claimant&quot;)"
+      value="Claim.ClaimantDenorm.DisplayName"
+      visible="gw.config.LOBAbstraction.ForClaim.ForLossType.isWorkComp(Claim)"/>
+    <InfoBarElement
+      id="LossDate"
+      label="DisplayKey.get(&quot;Web.ClaimInfoBar.LossDate&quot;)"
+      value="gw.api.util.StringUtil.formatDate( Claim.LossDate, &quot;short&quot; ) "/>
+    <InfoBarElement
+      id="Adjuster"
+      label="DisplayKey.get(&quot;Web.ClaimInfoBar.Adjuster&quot;)"
+      value="Claim.AssigneeAndGroupDisplayString"
+      visible="Claim.State != TC_DRAFT"/>
+  </InfoBar>
+</PCF>

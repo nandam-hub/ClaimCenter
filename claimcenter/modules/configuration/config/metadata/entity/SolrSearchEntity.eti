@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<nonPersistentEntity
+  xmlns="http://guidewire.com/datamodel"
+  desc="desc"
+  entity="SolrSearchEntity"
+  exportable="false"
+  final="false">
+  <fulldescription><![CDATA[
+        Supports the efficient creation of entity lists returned through Solr search function. This is a virtual
+        entity and is not stored in the database.
+  ]]></fulldescription>
+  <column
+    name="Rank"
+    nullok="true"
+    type="integer"/>
+  <column
+    name="Score"
+    nullok="true"
+    type="decimal">
+    <columnParam
+      name="precision"
+      value="16"/>
+    <columnParam
+      name="scale"
+      value="12"/>
+  </column>
+  <column
+    name="Urn"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="100"/>
+  </column>
+</nonPersistentEntity>

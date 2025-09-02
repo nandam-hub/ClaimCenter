@@ -1,0 +1,32 @@
+<!--JIC ERA SELECT-->
+<input :if="isJIC" readonly placeholder="${eraPlaceholder}" class="gw-DateValueWidget--era gw-input-prefix ${noTrack ? 'gw-noTrack'}" id="${renderId}_era"
+       name="${renderId}_era"
+       aria-label="${ariaLabelEra}"
+       data-gw-readonly-focusable
+       data-gw-click="gwJic.showDatePicker id:${renderId}" disabled="${disabled}"
+       aria-required="${required ? 'true' : 'false'}" aria-invalid="${invalid ? 'true' : 'false'}"
+       value="${selectedEra.name}" tabindex="-1"/>
+<!-- -->
+<input type="text" class="${!hasDate ? 'gw-hidden'} ${!hasDate ? 'gw-timeOnly'} gw-min-visible gw-DateValueWidget--dateInput ${noTrack ? 'gw-noTrack'}" data-gw-jic="${isJIC}"
+       name="${renderId}" disabled="${disabled}"
+       aria-required="${required ? 'true' : 'false'}" aria-invalid="${invalid ? 'true' : 'false'}"
+       value="${dateValue}" placeholder="${datePlaceholder}" aria-label="${ariaLabelDate}"/>
+<div :if="hasDate" id="${renderId}_dateIcon" role="button" class="gw-min-visible gw-date-icon" aria-expanded="false" aria-haspopup="dialog" aria-disabled="${disabled ? 'true' : 'false'}"
+     data-gw-click="gwDateValue.dateIconClicked id:${renderId}" data-gw-readonly-focusable aria-haspopup="true" aria-label="${ariaLabelToggleDatePicker}">
+    <div class="gw-date-liveregion" aria-live="polite"></div>
+</div>
+<input :if="hasTime" type="text" class="gw-DateValueWidget--timeInput ${isUse12HourClock ? 'gw-is12Hour'} ${noTrack ? 'gw-noTrack'}"
+       name="${renderId}_time" disabled="${disabled}"
+       value="${timeValue}" placeholder="${timePlaceholder}"/>
+<input :if="hasTime && isUse12HourClock" type="button"
+       name="${renderId}_ampm-button"
+       class="gw-DateValueWidget--ampm-button ${noTrack ? 'gw-noTrack'}"
+       aria-label="${selectedAmPm ? selectedAmPm : meridianPlaceholder}" value="${selectedAmPm ? selectedAmPm : meridianPlaceholder}"
+       disabled="${disabled}"
+       data-gw-click="gwDateValue.clickedOnAmPmInput id:^"
+       data-gw-confirm="${confirm}"
+       />
+<input :if="hasTime && isUse12HourClock" type="hidden"
+       class="gw-DateValueWidget--ampm gw-input-suffix"
+       name="${renderId}_ampm" value="${selectedAmPm}"
+       />

@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<internaltypelistextension xmlns="http://guidewire.com/typelists" name="SystemPermissionType" desc="Defines all permissions that can be granted to users via privileges and roles">
+  <typecode
+    code="viewproperties"
+    desc="Permission to view Runtime Properties screen"
+    name="View Runtime Properties screen"/>
+  <typecode
+    code="editproperties"
+    desc="Permission to edit Runtime Properties"
+    name="Edit Runtime Properties"/>
+  <typecode
+    code="deleteproperties"
+    desc="Permission to delete Runtime Properties"
+    name="Delete Runtime Properties"/>
+  <typecode
+    code="importproperties"
+    desc="Permission to import Runtime Properties"
+    name="Import Runtime Properties"/>
+  <typecode
+    code="exportproperties"
+    desc="Permission to export Runtime Properties"
+    name="Export Runtime Properties"/>
+</internaltypelistextension>

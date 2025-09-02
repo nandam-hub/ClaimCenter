@@ -1,0 +1,5 @@
+<tr id="gw-RowGroup-${groupIndex}" class="gw-RowGroup gw-RowGroup--expanded" aria-expanded="true" role="button" data-gw-click="gwListView.toggleRowGroup">
+  <td class="gw-RowGroup--inner" colspan="${colspan}">
+    <div class="gw-RowGroup--icon"></div><div class="gw-RowGroup--label">${groupingLabel}</div>
+  </td>
+</tr>

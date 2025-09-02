@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<plugin
+  interface="IStartablePlugin"
+  name="TimelineEventLoaderPlugin_SP">
+  <plugin-gosu
+    gosuclass="gw.surepath.cc.configuration.timeline.plugin.TimelineEventLoaderPlugin_SP"/>
+</plugin>

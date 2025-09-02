@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<typelist xmlns="http://guidewire.com/typelists" name="RuntimePropertyGroup" desc="Grouping for RuntimeProperty entities">
+  <typecode
+    code="configuration"
+    desc="General configuration properties."
+    name="Configuration"/>
+  <typecode
+    code="integration"
+    desc="General integration properties."
+    name="Integration"/>
+</typelist>

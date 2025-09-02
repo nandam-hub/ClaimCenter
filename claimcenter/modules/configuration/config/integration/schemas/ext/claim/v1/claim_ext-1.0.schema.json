@@ -1,0 +1,8 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "x-gw-combine": [
+    "ext.common.v1.common_ext-1.0",
+    "gw.content.cc.claim.v1.claim_content-1.0"
+  ],
+  "definitions": { }
+}

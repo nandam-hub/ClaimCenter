@@ -1,0 +1,40 @@
+swagger: '2.0'
+info:
+  description: "This exposes session management"
+  version: '1.0'
+  title: "Session API"
+basePath: /session
+x-gw-apihandlers:
+- gw.api.rest.framework.v1.SessionHandler
+paths:
+  /:
+    post:
+      summary: "Creates an http session, if one doesn't already exist"
+      description: "This may create an http session, if one was not created before.\
+        \ It will link the Guidewire session to that http session.\
+        \ The actual available authentication methods are configured in the template yamls,\
+        \ see published-apis.yaml#defaultTemplate."
+      operationId: createSession
+      x-gw-authenticated: true
+      responses:
+        '204':
+          description: "Successful session creation."
+    delete:
+      summary: "Destroy the current http session, and log out the user"
+      description: "This will invalidate the current Guidewire session, which will log the user out.\
+        \ It will also invalidate the http session."
+      operationId: logoutSession
+      x-gw-authenticated: false
+      responses:
+        '204':
+          description: "Successful logout."
+    patch:
+      summary: "Update the last access timestamp"
+      description: "Update the last access timestamp of the Guidewire session, if there was one.\
+        \ It will also set the http session timeout value to match the Guidewire session timeout.\
+        \ It will return an error if there was a session that has now expired."
+      operationId: touchSession
+      x-gw-authenticated: false
+      responses:
+        '204':
+          description: "Successful update of timestamp."

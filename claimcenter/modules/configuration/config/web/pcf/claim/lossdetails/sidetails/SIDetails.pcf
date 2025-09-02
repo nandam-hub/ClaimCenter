@@ -1,0 +1,116 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Page
+    canEdit="perm.Claim.edit(Claim)"
+    canVisit="perm.Claim.view(Claim) and perm.System.viewclaimbasics"
+    id="SIDetails"
+    title="DisplayKey.get(&quot;Web.Claim.SIDetails&quot;)">
+    <LocationEntryPoint
+      signature="SIDetails(Claim : Claim)"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <Variable
+      initialValue="Claim.getQuestionSets(util.QuestionUtils.getAppropriateQuestionSet(Claim))"
+      name="QuestionSets"
+      type="QuestionSet[]"/>
+    <Screen
+      id="SIDetailsScreen">
+      <Toolbar>
+        <EditButtons/>
+      </Toolbar>
+      <PanelRow
+        id="SectionOne">
+        <PanelColumn
+          maxWidth="1024px">
+          <PanelRef
+            def="SItriggersLV(Claim)">
+            <TitleBar
+              title="DisplayKey.get(&quot;NVV.Claim.SubView.SItriggers&quot;)"/>
+          </PanelRef>
+          <DetailViewPanel>
+            <InputColumn>
+              <TextInput
+                boldLabel="true"
+                id="SIinfo_SIscore"
+                label="DisplayKey.get(&quot;NVV.Claim.SubView.SIinfo.SIscore&quot;)"
+                value="Claim.SIScore"
+                valueType="java.lang.Integer"/>
+            </InputColumn>
+          </DetailViewPanel>
+          <PanelDivider/>
+        </PanelColumn>
+      </PanelRow>
+      <PanelRow
+        id="SectionTwo">
+        <PanelColumn
+          maxWidth="1024px">
+          <PanelIterator
+            elementName="QuestionSet"
+            id="SIUQuestionSetIterator"
+            value="QuestionSets"
+            valueType="entity.QuestionSet[]">
+            <PanelRef
+              def="QuestionSetLV(QuestionSet, Claim)">
+              <TitleBar
+                id="QuestionSetTitle"
+                title="DisplayKey.get(&quot;NVV.Claim.SubView.Questionnaire&quot;, QuestionSet.Name)"/>
+            </PanelRef>
+          </PanelIterator>
+          <DetailViewPanel>
+            <InputColumn>
+              <TextInput
+                boldLabel="true"
+                id="SIUQuestionSetTotalScore"
+                label="DisplayKey.get(&quot;NVV.Claim.SubView.SITriggersScore&quot;)"
+                value="util.QuestionUtils.getQuestionSetTotalScore(Claim, QuestionSets)"
+                valueType="java.lang.Integer"/>
+            </InputColumn>
+          </DetailViewPanel>
+          <PanelDivider/>
+        </PanelColumn>
+      </PanelRow>
+      <PanelRow
+        id="SIUTotalScore">
+        <PanelColumn
+          maxWidth="1024px">
+          <DetailViewPanel>
+            <InputColumn>
+              <TextInput
+                boldLabel="true"
+                id="SIinfo_SITotalScore"
+                label="DisplayKey.get(&quot;NVV.Claim.SubView.SIinfo.SITotalScore&quot;, ScriptParameters.SpecialInvestigation_CreateActivityForSupervisorThreshold)"
+                value="util.SIUTotalScore.getSIUTotalScore(Claim)"
+                valueType="java.lang.Integer"/>
+              <Label
+                id="SIInfo_SupervisorSection"
+                label="DisplayKey.get(&quot;NVV.Claim.SubView.SIinfo.SupervisorSection&quot;)"/>
+              <TypeKeyInput
+                editable="perm.System.editSensSIUdetails and Claim.SIEscalateSIU == TC_NO "
+                id="SIinfo_SIescalateSIU"
+                label="DisplayKey.get(&quot;NVV.Claim.SubView.SIinfo.SIescalateSIU&quot;)"
+                value="Claim.SIEscalateSIU"
+                valueType="typekey.YesNo">
+                <PostOnChange/>
+              </TypeKeyInput>
+              <DateInput
+                id="SIinfo_SIescalateSIUdate"
+                label="DisplayKey.get(&quot;NVV.Claim.SubView.SIinfo.SIescalateSIUdate&quot;)"
+                value="Claim.SIEscalateSIUdate"
+                visible=" Claim.SIEscalateSIU == TC_YES "/>
+              <TextInput
+                editable="perm.System.editSensSIUdetails"
+                id="SIinfo_SIEscalateSIUNote"
+                label="DisplayKey.get(&quot;NVV.Claim.SubView.SIinfo.SIEscalateSIUNote&quot;)"
+                required="true"
+                value="Claim.SIEscalateSIUNote"
+                visible=" Claim.SIEscalateSIU == TC_YES "/>
+            </InputColumn>
+          </DetailViewPanel>
+        </PanelColumn>
+      </PanelRow>
+    </Screen>
+  </Page>
+</PCF>

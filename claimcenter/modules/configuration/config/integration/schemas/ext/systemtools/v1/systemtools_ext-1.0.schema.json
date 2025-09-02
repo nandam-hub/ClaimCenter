@@ -1,0 +1,8 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "x-gw-combine": [
+    "gw.content.cc.systemtools.v1.systemtools_content-1.0",
+    "ext.framework.v1.framework_ext-1.0"
+  ],
+  "definitions": { }
+}

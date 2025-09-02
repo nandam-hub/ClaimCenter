@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<internaltypelistextension
+  desc="Types of special system users"
+  name="SystemUserType"
+  xmlns="http://guidewire.com/typelists">
+  <typecode
+    code="autoprocessor"
+    desc="An automated user that handles supported claims"
+    name="Claims Autopilot"/>
+</internaltypelistextension>

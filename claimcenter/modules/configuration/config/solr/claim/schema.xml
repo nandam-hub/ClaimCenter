@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<schema name="claim" version="1.6">
+
+  <!-- Start of required nested document fields -->
+  <field name="urn" type="gw_unanalyzed" indexed="true" stored="true"/>
+  <field name="_root_" type="gw_unanalyzed" indexed="true" stored="true"/>
+  <field name="_nest_path_" type="nest_path" indexed="true" stored="true"/>
+  <field name="_nest_parent_" type="gw_unanalyzed" indexed="true" stored="true"/>
+  <field name="contentType" type="gw_analyzed" indexed="true" stored="true"/>
+  <!-- End of required nested document fields -->
+
+  <!-- Start of parent claim fields -->
+  <field name="claimNumber" type="gw_unanalyzed" indexed="true" stored="true"/>
+  <field name="policyNumber" type="gw_unanalyzed" indexed="false" stored="true"/>
+  <field name="catastrophe" type="gw_analyzed" indexed="true" stored="true"/>
+  <field name="jurisdiction" type="gw_analyzed" indexed="true" stored="true"/>
+  <field name="lineOfBusiness"  type="gw_analyzed" indexed="true" stored="true"/>
+  <field name="lossType"  type="gw_analyzed" indexed="true" stored="true"/>
+  <field name="litigationStatus"  type="gw_analyzed" indexed="true" stored="true"/>
+  <field name="reinsuranceReportable"  type="boolean" indexed="true" stored="true"/>
+  <field name="incidentReport"  type="boolean" indexed="true" stored="true"/>
+  <field name="coverageInQuestion"  type="boolean" indexed="true" stored="true"/>
+  <field name="lossDate"  type="gw_date" indexed="true" stored="true"/>
+  <field name="reportedDate"  type="gw_date" indexed="true" stored="true"/>
+  <field name="closeDate"  type="gw_date" indexed="true" stored="true"/>
+  <field name="createTime"  type="gw_date" indexed="true" stored="true"/>
+  <field name="userIds" type="plong" indexed="true" stored="true" required="false" multiValued="true"/>
+  <field name="groupIds" type="plong" indexed="true" stored="true" required="false" multiValued="true"/>
+  <field name="securityZoneIds" type="plong" indexed="true" stored="true" required="false" multiValued="true"/>
+  <field name="anyone" type="boolean" indexed="true" stored="true"/>
+  <field name="_version_" type="plong" indexed="true" stored="true"/> <!-- required for SolrCloud server -->
+  <!-- Start of parent claim fields -->
+
+  <!-- Start of child contact fields -->
+  <field name="contactRoles" type="gw_analyzed" indexed="true" stored="true" multiValued="true"/>
+  <field name="contactName" type="gw_analyzed" indexed="true" stored="true"/>
+  <field name="contactTaxId" type="gw_analyzed" indexed="true" stored="true"/>
+  <field name="contactCity" type="gw_analyzed" indexed="true" stored="true"/>
+  <field name="contactState" type="gw_analyzed" indexed="true" stored="true"/>
+  <field name="contactCountry" type="gw_analyzed" indexed="true" stored="true"/>
+  <field name="contactPostalCode" type="gw_analyzed" indexed="true" stored="true"/>
+  <field name="contactNotes" type="gw_analyzed" indexed="true" stored="true"/>
+  <!-- End of child contact fields -->
+
+  <!-- Field to use to determine and enforce document uniqueness.
+       Unless this field is marked with required="false", it will be a required field
+    -->
+  <uniqueKey>urn</uniqueKey>
+
+  <!-- Guidewire field types -->
+  <fieldType name="gw_unanalyzed" class="solr.StrField" sortMissingLast="true" omitNorms="true" omitTermFreqAndPositions="false"/>
+  <fieldType name="gw_analyzed" class="solr.TextField" sortMissingLast="true" omitNorms="true" omitTermFreqAndPositions="false">
+    <analyzer type="index">
+      <tokenizer name="standard"/>
+      <filter name="asciiFolding"/>
+      <filter name="lowercase"/>
+    </analyzer>
+    <analyzer type="query">
+      <tokenizer name="standard"/>
+      <filter name="asciiFolding"/>
+      <filter name="lowercase"/>
+    </analyzer>
+  </fieldType>
+  <fieldType name="gw_date" class="solr.DatePointField" omitNorms="true" omitTermFreqAndPositions="false" />
+
+  <!-- Native field types -->
+  <fieldType name="nest_path" class="solr.NestPathField" />
+  <fieldType name="boolean" class="solr.BoolField" sortMissingLast="true"/>
+  <fieldType name="plong" class="solr.LongPointField" docValues="true"/>
+</schema>

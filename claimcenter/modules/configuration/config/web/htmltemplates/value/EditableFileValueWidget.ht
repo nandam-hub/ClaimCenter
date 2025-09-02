@@ -1,0 +1,7 @@
+<input type="file"
+       id="${renderId}--file"
+       style="display: none" disabled="${disabled}" multiple="${multiple}"
+       aria-required="${required ? 'true' : 'false'}" aria-invalid="${invalid ? 'true' : 'false'}"
+       data-gw-postOnChange="${onChange}"/>
+<input :if="valueDisplayed" class="gw-displayed-value" type="text" id="${renderId}--text" readonly value="${currentValue}"/>
+<div id="${renderId}--browseButton" role="button" data-gw-click="gwFileValue.browseHandler id:${renderId}" class="gw-FileInputWidget--button ${valueDisplayed ? 'gw-value-displayed' : ''}">${buttonText}</div>

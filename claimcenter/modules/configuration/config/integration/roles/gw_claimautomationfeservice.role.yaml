@@ -1,0 +1,15 @@
+name: gw_claimautomationfeservice
+endpoints:
+- endpoint: /claim/v1/openapi.json
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/intake-interactions"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/intake-interactions/*"
+  methods:
+  - GET
+accessibleFields:
+  "*":
+    edit: "*"
+    view: "*"

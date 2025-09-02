@@ -1,0 +1,5 @@
+name: gw_appeventsprovisioner
+endpoints:
+  - endpoint: "/event/v1/status/test"
+    methods:
+      - POST

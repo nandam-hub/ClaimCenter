@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<internaltypelistextension xmlns="http://guidewire.com/typelists" name="SystemPermissionType" desc="Defines all permissions that can be granted to users via privileges and roles">
+  <typecode
+    code="ruleedit"
+    desc="Permission to edit a rule"
+    name="Edit Rule"/>
+  <typecode
+    code="ruleview"
+    desc="Permission to view a rule"
+    name="View Rule"/>
+  <typecode
+    code="ruleapprove"
+    desc="Permission to approve a rule"
+    name="Approve Rule"/>
+  <typecode
+    code="ruledeploy"
+    desc="Permission to deploy a rule"
+    name="Deploy Rule"/>
+  <typecode
+    code="ruleimport"
+    desc="Permission to import a rule"
+    name="Import Rule"/>
+</internaltypelistextension>

@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="Condition of child safety seat"
+  final="false"
+  name="ChildSafetySeatStatus">
+  <typecode
+    code="none"
+    desc="No child seat"
+    name="No child seat"/>
+  <typecode
+    code="occupied"
+    desc="Occupied child seat"
+    name="Occupied child seat"/>
+  <typecode
+    code="damagedunoccupied"
+    desc="Unoccupied and damaged child seat"
+    name="Unoccupied and damaged child seat"/>
+  <typecode
+    code="undamagedunoccupied"
+    desc="Unoccupied and undamaged child seat"
+    name="Unoccupied and undamaged child seat"/>
+</typelist>

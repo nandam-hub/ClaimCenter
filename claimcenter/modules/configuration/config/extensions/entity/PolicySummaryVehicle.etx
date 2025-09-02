@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<extension xmlns="http://guidewire.com/datamodel" entityName="PolicySummaryVehicle">
+  <!--GAR START: Entities/PolicySummaryVehicle.etx [/opt/teamcity/agent/work/45c3a2f1b8ee4237/gpm-generator/downloads/edge/backend/xcenter-config/xcenter-utils/cc-utils/../../../Shared/claim-shared/src/main]-->
+    
+  <column desc="Year of the vehicle's manufacture." name="Year" nullok="true" type="year"/>
+  
+  <!--GAR END-->
+</extension>

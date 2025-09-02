@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    autosaveable="false"
+    canEdit="true"
+    startInEditMode="true"
+    countsAsWork="false"
+    id="LogConfiguration"
+    canVisit="perm.User.EditLog or perm.User.DevAllAccess"
+    parent="InfoPages()"
+    title="DisplayKey.get(&quot;Web.InternalTools.InfoPages.LogConfiguration.InfoPage&quot;)">
+    <Screen>
+      <Variable
+        initialValue="new gw.api.tools.LogConfigurationPageHelper()"
+        name="PageHelper"
+        type="gw.api.tools.LogConfigurationPageHelper"/>
+      <Variable
+        initialValue="PageHelper.canEnableLogSource()"
+        name="canEnableLogSource"
+        type="boolean"/>
+      <Variable
+        initialValue="PageHelper.MaxTimeToEnableLogSourceMin"
+        name="maxTimeToEnableLogSourceMin"
+        type="int"/>
+      <Variable
+        initialValue="10"
+        name="minutesEnableLogSourceFor"
+        type="int"/>
+      <Verbatim
+        id="ClassInfoPerfWarning"
+        label="DisplayKey.get(&quot;Web.InternalTools.InfoPages.LogConfiguration.LogSourceWarning&quot;)"
+        warning="true"/>
+      <Verbatim
+        id="ClassInfoEnabledWarning"
+        label="DisplayKey.get(&quot;Web.InternalTools.InfoPages.LogConfiguration.LogSourceEnabled&quot;)"
+        visible="PageHelper.isLogSourceEnabled()"
+        warning="true"/>
+      <DetailViewPanel>
+        <InputColumn>
+          <TextInput
+            editable="true"
+            id="MinutesEnableLogSourceFor"
+            label="DisplayKey.get(&quot;Web.InternalTools.InfoPages.LogConfiguration.MinutesEnableLogSourceFor&quot;)"
+            requestValidationExpression="VALUE &gt; 0 and VALUE &lt;= maxTimeToEnableLogSourceMin ? null : DisplayKey.get(&quot;Web.InternalTools.InfoPages.LogConfiguration.MinutesEnableLogSourceForIncorrect&quot;, maxTimeToEnableLogSourceMin)"
+            value="minutesEnableLogSourceFor"
+            valueType="java.lang.Integer"
+            visible="!PageHelper.isLogSourceEnabled()"/>
+          <ButtonInput
+            action="PageHelper.enableLogSource(minutesEnableLogSourceFor)"
+            align="center"
+            available="!PageHelper.LogSourceEnabled and canEnableLogSource"
+            id="EnableLogSource"
+            value="DisplayKey.get(&quot;Button.Enable&quot;)"/>
+          <ButtonInput
+            action="PageHelper.disableLogSource()"
+            align="center"
+            available="PageHelper.LogSourceEnabled"
+            id="DisableLogSource"
+            value="DisplayKey.get(&quot;Button.Disable&quot;)"/>
+        </InputColumn>
+      </DetailViewPanel>
+    </Screen>
+  </Page>
+</PCF>

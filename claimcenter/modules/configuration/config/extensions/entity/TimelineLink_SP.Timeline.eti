@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="An external link from a timeline entry"
+  entity="TimelineLink_SP"
+  table="timelinelink_sp"
+  type="retireable">
+  <column
+    name="BeanID"
+    nullok="false"
+    type="publicid"/>
+  <column
+    name="BeanType"
+    nullok="false"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="255"/>
+  </column>
+  <foreignkey
+    fkentity="TimelineEntry_SP"
+    name="TimelineEntry"
+    nullok="false"/>
+  <implementsInterface
+    iface="gw.surepath.cc.configuration.timeline.creation.TimelineLinkInterface"
+    impl="gw.surepath.cc.configuration.timeline.creation.TimelineLinkImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <column
+    desc="Order that timeline links are inserted in the TimelineEntry summary"
+    name="Sequence"
+    nullok="true"
+    type="integer"/>
+  <column
+    name="ArbitraryLinkEnum"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="255"/>
+  </column>
+</entity>

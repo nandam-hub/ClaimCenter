@@ -1,0 +1,283 @@
+@import "./partials/cloud/cloud_general";
+@import "./partials/platform_colors_base";
+@import "./partials/cloud/cloud_spacing";
+
+@import "partials/jutro/index";
+
+// APP
+$gw-app--Logo--app--uri: url($gw-logo--path + "AppLogo.svg");
+$gw-app--default-focus-outline-col: $JUTRO--FOCUS-COLOR;
+$gw-app--border-width-px: 1px;
+$gw-app--border-width-thick-px: 1px;
+$gw-jutro--override--universal-border-col: lightgray;
+$gw-app--base-font-size--in-px: 14px;
+$gw-app--font-size--smaller-px: 13px;
+$gw-app--font-size--tiny-px: 12px;
+$gw-app--div--default-to-vertical-align-top: true;
+
+
+$gw-app--divider--col: $gw-jutro--override--universal-border-col;
+$gw-app--border--col: $gw-jutro--override--universal-border-col;
+$gw-app--border--col-lighter: $gw-jutro--override--universal-border-col;
+
+$gw-app--palette--error: $JUTRO--COLOR-ERROR;
+$gw-app--palette--error--text-overlay-col: $JUTRO--COLOR-INFO-CONTRAST;
+$gw-app--palette--info: $JUTRO--COLOR-INFO;
+$gw-app--palette--info--text-overlay-col: $JUTRO--COLOR-INFO-CONTRAST;
+$gw-app--palette--new: $JUTRO--COLOR-SUCCESS;
+$gw-app--palette--new--text-overlay-col: $JUTRO--COLOR-SUCCESS-CONTRAST;
+$gw-app--palette--warning: $JUTRO--COLOR-WARNING;
+$gw-app--palette--warning--text-overlay-col: $JUTRO--COLOR-WARNING-CONTRAST;
+
+$gw-app--palette--tier4: $gw-app--palette--bronze;
+$gw-app--palette--tier3: $gw-app--palette--silver;
+$gw-app--palette--tier2: $gw-app--palette--gold;
+$gw-app--palette--tier1: $gw-app--palette--platinum;
+
+$gw-app--palette--highlight: $JUTRO--HIGHLIGHT-COLOR-1;
+$gw-app--palette--highlightalt: $JUTRO--HIGHLIGHT-COLOR-2;
+
+$gw-app--palette--callout: $gw-app--palette--blue-highlight;
+$gw-app--palette--calloutalt: $gw-app--palette--blue-highlight-alt;
+
+$gw-app--bg: $JUTRO--BACKGROUND-COLOR; //$JUTRO--BACKGROUND-COLOR-BODY
+$gw-app--col: $JUTRO--TEXT-COLOR-1;
+
+$gw-app--palette--left-nav--bg: $JUTRO--BACKGROUND-COLOR;
+$gw-app--palette--left-nav--col: $JUTRO--SIDE-NAV-COLOR;
+$gw-app--palette--left-nav--bg-highlight: $JUTRO--SIDE-NAV-ITEM-BACKGROUND-COLOR-ACTIVE;
+$gw-app--palette--left-nav--bg-lighter: $JUTRO--SIDE-NAV-ITEM-BACKGROUND-COLOR-HOVER;
+$gw-app--palette--left-nav--border-col: $gw-app--border--col;
+
+$gw-app--panels--warning--bg: $gw-app--palette--warning;
+$gw-app--AlertBar--bg: $gw-app--panels--warning--bg;
+$gw-app--AlertBar--col: $gw-app--palette--warning--text-overlay-col;
+$gw-app--AlertBar--icon-col: $gw-app--AlertBar--col;
+
+// Buttons
+$gw-app--buttons--col: $JUTRO--BUTTON-FILLED-COLOR;
+$gw-app--buttons--bg: $JUTRO--BUTTON-FILLED-BACKGROUND-COLOR; //rgb(0, 134, 182)
+$gw-app--buttons--active--col: $JUTRO--BUTTON-FILLED-COLOR; // NO JUTRO VAR
+$gw-app--buttons--active--bg: $JUTRO--BUTTON-FILLED-BACKGROUND-COLOR-ACTIVE;
+$gw-app--buttons--hover--col: $JUTRO--BUTTON-FILLED-COLOR; // NO JUTRO VAR
+$gw-app--buttons--hover--bg: $JUTRO--BUTTON-FILLED-BACKGROUND-COLOR-HOVER;
+
+$gw-app--buttons--secondary--col: $JUTRO--BUTTON-OUTLINED-COLOR;
+$gw-app--buttons--secondary--bg: $JUTRO--BUTTON-OUTLINED-BACKGROUND-COLOR;
+$gw-app--buttons--secondary--active--col: $JUTRO--BUTTON-OUTLINED-COLOR; // NO JUTRO VAR
+$gw-app--buttons--secondary--active--bg: $JUTRO--BUTTON-OUTLINED-BACKGROUND-COLOR-ACTIVE;
+$gw-app--buttons--secondary--hover--col: $JUTRO--BUTTON-OUTLINED-COLOR-HOVER; // NO JUTRO VAR
+$gw-app--buttons--secondary--hover--bg: $JUTRO--BUTTON-OUTLINED-BACKGROUND-COLOR-HOVER;
+$gw-app--buttons--secondary--border-col: $JUTRO--BUTTON-OUTLINED-BORDER-COLOR;
+$gw-app--buttons--secondary--border-width-px: 1px;
+
+$gw-app--buttons--disabled-shadow: none;
+$gw-app--buttons--border-darken-percent: 0%;
+$gw-app--buttons--disabled-bg: null;
+$gw-app--buttons--disabled-col: null;
+$gw-app--buttons--have-borders: false;
+
+$gw-app--menus--expand-divider-col: $gw-jutro--override--universal-border-col;
+// MENUS
+$gw-app--menus--active--col: $JUTRO--TOP-NAV-ITEM-COLOR-ACTIVE;
+$gw-app--menus--hover--col: $JUTRO--TOP-NAV-ITEM-COLOR; //NO JUTRO VAR
+
+// NORTH PANEL
+$gw-app--NorthPanel--active-tab-has-bottom-bar: true;
+$gw-app--NorthPanel--active-tab-bottom-bar-height: $JUTRO--TOP-NAV-ITEM-UNDERLINE-WIDTH;
+$gw-app--NorthPanel--active-tab-bottom-bar-bg: $JUTRO--TOP-NAV-ITEM-FOCUS-OUTLINE-COLOR ; //JUTRO VARIABLE IS SET INCORRECTLY $JUTRO--TOP-NAV-ITEM-COLOR-ACTIVE
+$gw-app--NorthPanel--active-tab-bottom-bar-height: $JUTRO--TOP-NAV-ITEM-UNDERLINE-WIDTH;
+$gw-app--NorthPanel--border--width-px: 1px;
+$gw-app--NorthPanel--border--col: $gw-app--border--col;
+
+$gw-app--NorthPanel--bg: $JUTRO--TOP-NAV-BACKGROUND-COLOR;
+$gw-app--NorthPanel--button--bg: $JUTRO--TOP-NAV-ITEM-BACKGROUND-COLOR;
+$gw-app--NorthPanel--button--col: $JUTRO--TOP-NAV-ITEM-COLOR;
+$gw-app--NorthPanel--button--active--col: $JUTRO--TOP-NAV-ITEM-COLOR-ACTIVE;
+$gw-app--NorthPanel--button--active--bg: $JUTRO--TOP-NAV-ITEM-BACKGROUND-COLOR-ACTIVE;
+$gw-app--NorthPanel--button--hover--col: $JUTRO--TOP-NAV-ITEM-COLOR; //NO JUTRO VAR
+$gw-app--NorthPanel--button--hover--bg: $JUTRO--TOP-NAV-ITEM-BACKGROUND-COLOR-HOVER;
+
+$gw-app--NorthPanel--tab-expand-glyph: "angle-down";
+$gw-app--NorthPanel--unsaved-work-active-color: $JUTRO--COLOR-SUCCESS;
+
+$gw-app--collapse-level-all--hamburger-right-margin: 1.2rem;
+$gw-app--collapse-level-all--toolbar-overflow-right-margin: 1.85rem;
+
+// West Panel Color
+$gw-app--WestPanel--bg: $gw-app--palette--left-nav--bg;
+$gw-app--WestPanel--bg-darker: $gw-app--palette--left-nav--bg;
+$gw-app--WestPanel--bg-darkest: $gw-app--palette--left-nav--bg;
+$gw-app--WestPanel--bg-lighter: $gw-app--palette--left-nav--bg;
+$gw-app--WestPanel--bg-lightest: $gw-app--palette--left-nav--bg;
+
+$gw-app--WestPanel--button--bg: $JUTRO--SIDE-NAV-ITEM-BACKGROUND-COLOR;
+$gw-app--WestPanel--button--col: $JUTRO--SIDE-NAV-ITEM-COLOR;
+$gw-app--WestPanel--button--active--bg: $JUTRO--SIDE-NAV-ITEM-BACKGROUND-COLOR-ACTIVE; //#D3DDED
+$gw-app--WestPanel--button--active--col: $JUTRO--SIDE-NAV-ITEM-COLOR-ACTIVE;
+$gw-app--WestPanel--button--hover--bg: $JUTRO--SIDE-NAV-ITEM-BACKGROUND-COLOR-HOVER;
+$gw-app--WestPanel--button--hover--col: $JUTRO--SIDE-NAV-ITEM-COLOR-HOVER;
+$gw-app--WestPanel--button-active-border-width-px: 4px;
+$gw-app--WestPanel--button--active--border--col: $JUTRO--SIDE-NAV-BORDER-COLOR-SELECTED;
+$gw-app--WestPanel--button--topborder: 0px solid transparent;
+$gw-app--WestPanel--button--bottomborder:  0px solid transparent;
+
+$gw-app--WestPanel--submenu--button--bg: darken($gw-app--WestPanel--button--bg, 3%); //#F8F9FA
+$gw-app--WestPanel--submenu--button--col: $gw-app--WestPanel--button--col;
+$gw-app--WestPanel--submenu--button--active--bg: $gw-app--WestPanel--button--active--bg;
+$gw-app--WestPanel--submenu--button--active--col: $gw-app--WestPanel--button--active--col;
+$gw-app--WestPanel--submenu--button--hover--bg: $JUTRO--SIDE-NAV-SUB-ITEM-BACKGROUND-COLOR-HOVER;
+$gw-app--WestPanel--submenu--button--hover--col: $gw-app--WestPanel--button--hover--col;
+$gw-app--WestPanel--submenu--button-active-border-width-px: $gw-app--WestPanel--button-active-border-width-px;
+$gw-app--WestPanel--submenu--button--active--border--col: $gw-app--WestPanel--button--active--border--col;
+$gw-app--WestPanel--submenu--button--topborder:  0px solid transparent;
+$gw-app--WestPanel--submenu--button--bottomborder:  0px solid transparent;
+
+//As Button
+$gw-app--MenuActionsWidget--spacing-widget-top-rem: .3rem;
+$gw-app--MenuActionsWidget--spacing-widget-left-rem: 1.3rem;
+$gw-app--MenuActionsWidget--spacing-widget-right-rem: 1.3rem;
+$gw-app--MenuActionsWidget--spacing-widget-bottom-rem: .4rem;
+
+$gw-app--MenuActionsWidget--spacing-inner-top-rem: .4rem;
+$gw-app--MenuActionsWidget--spacing-inner-left-rem: 1rem;
+$gw-app--MenuActionsWidget--spacing-inner-right-rem: 1rem;
+$gw-app--MenuActionsWidget--spacing-inner-bottom-rem: .4rem;
+
+$gw-app--MenuActionsWidget--minimized-pad-h-rem: 1rem;
+$gw-app--MenuActionsWidget--minimized-margin-h-rem: 0rem;
+
+$gw-app--MenuActionsWidget--has-button-appearance: true;
+
+//West Panel Other
+$gw-app--WestPanel--top-section-border-col-if-action-has-button-style: $gw-app--border--col;
+$gw-app--WestPanel--border-right-width-px: 1px;
+$gw-app--WestPanel--border-right--col: $gw-app--border--col;
+$gw-app--WestPanel--default-width-em: $JUTRO--SIDE-NAV-WIDTH;
+$gw-app--WestPanel--button--pad-h-rem: $gw-app--SPACING-rem-XL;
+$gw-app--WestPanel--button--pad-v-rem: .75rem;
+$gw-app--WestPanel--spacing-inner-top-rem: 0rem;
+
+$gw-app--WestPanel--submenu--button--pad-h-rem: $gw-app--WestPanel--button--pad-h-rem;
+$gw-app--WestPanel--submenu--button--pad-v-rem: .65rem;
+
+
+$gw-app--WestPanel--item-spacing-v-rem: 0rem;
+$gw-app--WestPanel--padding-h-rem: 0rem;
+
+$gw-app--WestPanel--minmax-open-glyph: "angle-double-right";
+$gw-app--WestPanel--minmax-close-glyph: "angle-double-left";
+
+$gw-app--WestPanel--button--glyph-open: "angle-down";
+$gw-app--WestPanel--button--glyph-close: "angle-up";
+
+$gw-app--palette--left-nav--wizard-bg: $gw-app--palette--left-nav--bg;
+$gw-app--wizards--title-area--pad-h-rem: $gw-app--SPACING-rem-L;
+$gw-app--wizards--title-area--pad-v-rem: $gw-app--SPACING-rem-M;
+$gw-app--wizards--title--font-weight: gw-weight(light);
+$gw-app--wizards--step-button--active--col: $gw-app--palette--left-nav--col;
+$gw-app--wizards--step-button-graphics--channel-bg: $gw-app--border--col;
+$gw-app--wizards--step-button-graphics--not-visited-col: $gw-app--palette--left-nav--wizard-bg;
+$gw-app--wizards--step-button-graphics--visited-col: $gw-app--wizards--step-button-graphics--channel-bg;
+$gw-app--wizards--step-button-graphics--active-col: $gw-app--WestPanel--button--active--border--col;
+
+$gw-app--WestPanel--shadow: none;
+
+// CENTER PANEL
+$gw-app--TitleBar--screen--drop-shadow: 0 4px 5px -3px rgba(0, 0, 0, .24);
+
+//SOUTH PANEL
+$gw-app--SouthPanel--floatToggle--bg: $gw-app--palette--gray-C;
+$gw-app--SouthPanel--floatToggle--col: $gw-app--palette--gray-5;
+
+//APP LOGO
+$gw-app--Logo--spacing-inner-left-rem: 20px;
+$gw-app--Logo--width-em: 210px;
+$gw-app--Logo--height-em: 40px; //TODO
+$gw-app--Logo--top: 0rem;
+
+// FROM CLOUD
+// Progress Bar
+$gw-app--progress-bar--holder-inset-shadow: none;
+$gw-app--progress-bar--holder-outset-shadow: none;
+$gw-app--progress-bar--bar-inset-shadow: none;
+$gw-app--progress-bar--bar-outset-shadow: none;
+
+$gw-app--progress-bar--empty-bar-bg: $gw-app--palette--gray-E;
+
+//Dashboards
+$gw-app--DashboardScreen--bg: transparent;
+
+$gw-app--tooltips--bg: black;
+$gw-app--tooltips--col: white;
+$gw-app--tooltips--border-col: black;
+
+$gw-app--CenterPanel-topsection--bg: $JUTRO--BACKGROUND-COLOR;
+$gw-app--TitleBar--screen--border-col: $gw-jutro--override--universal-border-col;
+
+// Inputs
+$gw-app--inputs--changed--col: $gw-app--col;
+$gw-app--inputs--editable-inner-shadow: none;
+$gw-app--inputs--select--behave-like-secondary: false;
+
+$gw-app--InputDivider--spacing-widget-top-rem: $gw-app--SPACING-rem-L;
+$gw-app--InputDivider--spacing-widget-bottom-rem: $gw-app--SPACING-rem-L;
+
+$gw-app--Screen--file-paste-area--border: 0px solid transparent;
+
+
+//InfoBar
+$gw-app--InfoBar--info-bar-border-bottom: 1px solid $gw-app--border--col;
+$gw-app--InfoBar--info-bar-bg: $JUTRO--BACKGROUND-COLOR;
+$gw-app--InfoBar--info-bar-col: $gw-app--col;
+
+// Alert Bar
+$gw-app--AlertBar--border-col: transparent;
+
+$gw-app--panels--bg: $gw-app--bg;
+$gw-app--panels--col: $gw-app--col;
+
+// LV
+$gw-app--ListView--columns-button-icon: "th";
+$gw-app--ListView--row--highlighted-style--bg: $gw-app--palette--orange-light; //TODO
+
+$gw-app--ListView-top-UI-section--bg: $JUTRO--BACKGROUND-COLOR;
+$gw-app--ListView--row-even--bg: $JUTRO--DATA-TABLE-ROW-EVEN-BACKGROUND-COLOR;
+$gw-app--ListView--row-odd--bg: $JUTRO--DATA-TABLE-ROW-ODD-BACKGROUND-COLOR;
+$gw-app--ListView--use-border: false;
+$gw-app--HeaderCell--sort--generic--col: $gw-app--default-focus-outline-col;
+$gw-app--ListView--show-resize-bar-on-full-cell-hover: false;
+$gw-app--ListView--footer-visible-when-empty: false;
+$gw-app--ListView--use-minimal-column-button-when-floating: true;
+$gw-app--ListView--use-floating-column-button-if-header-is-empty: false;
+
+$gw-app--RowTree--show-ancestor-lines: false;
+
+// =====================================
+// == INPUT COLUMN
+// =====================================
+$gw-app--InputColumn--bg: transparent;
+$gw-app--InputGroup--bg: $JUTRO--BACKGROUND-COLOR-BODY;
+
+// =====================================
+// == CARD
+// =====================================
+$gw-app--Card--bg: $JUTRO--BACKGROUND-COLOR;
+$gw-app--CardTab--standard--active-col: $JUTRO--TAB-BAR-HEADING-COLOR-HOVER;
+$gw-app--CardTab--use-top-active-border: true;
+$gw-app--CardTab--top-active-border-col: $JUTRO--TAB-BAR-HEADING-BORDER-COLOR-ACTIVE;
+$gw-app--section-primary--bg: $JUTRO--BACKGROUND-COLOR;
+$gw-app--CardTab--first-and-last-border-radius: 0px;
+$gw-app--Card--has-full-borders: true;
+
+$gw-app--TileWidget--bg: $JUTRO--BACKGROUND-COLOR;
+$gw-app--TileWidget--border-color: $gw-app--border--col;
+
+// Labels
+$gw-app--LabelWidget--color: #171921; //NO JUTRO EQUIV
+$gw-app--LabelWidget--spacing-inner-top-rem: 2.5rem;
+
+$gw-app--MessagesWidget--border-col: $gw-app--border--col;
+$gw-app--MessagesWidget--bg: $gw-app--bg;
+$gw-app--MessagesWidget--has-drop-shadow: false;
+

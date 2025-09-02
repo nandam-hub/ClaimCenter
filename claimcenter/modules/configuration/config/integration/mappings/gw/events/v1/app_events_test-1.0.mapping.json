@@ -1,0 +1,11 @@
+{
+  "schemaName" : "gw.events.v1.app_events_test-1.0",
+  "mappers" : {
+    "AppEventsTest": {
+      "schemaDefinition": "AppEventsTest",
+      "root": "entity.AppEventsTest",
+      "properties": {
+      }
+    }
+  }
+}

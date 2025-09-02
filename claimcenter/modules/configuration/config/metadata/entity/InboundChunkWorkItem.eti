@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<entity
+  desc="Custom work item for processing inbound chunk."
+  loadable="false"
+  xmlns="http://guidewire.com/datamodel"
+  entity="InboundChunkWorkItem"
+  table="inboundchunkworkitem"
+  type="keyable"
+  platform="true"
+  replicable="false">
+  <implementsEntity
+    name="WorkItem"/>
+  <foreignkey
+    desc="Reference to Inbound Records."
+    fkentity="InboundChunk"
+    name="InboundRecords"
+    nullok="true"/>
+</entity>

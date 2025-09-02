@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  entity="IntakeInteraction"
+  table="intakeinteraction"
+  type="retireable"
+  extendable="false">
+  <fulldescription><![CDATA[
+    Initiates and tracks progress of a request for more data by way of a Claim Intake secondary
+    flow, primarily from the insured or a claimant. May also hold data gathered during an Intake FNOL.
+    ]]></fulldescription>
+  <implementsEntity
+    name="Extractable"/>
+  <implementsInterface
+    iface="gw.cc.claim.entity.IntakeInteraction"
+    impl="com.guidewire.cc.domain.claimautomation.impl.IntakeInteractionImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.InsertCallback"
+    impl="com.guidewire.cc.domain.claimautomation.impl.IntakeInteractionImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.UpdateCallback"
+    impl="com.guidewire.cc.domain.claimautomation.impl.IntakeInteractionImpl"/>
+  <foreignkey
+    columnName="ClaimID"
+    desc="Claim to which this incident is related."
+    exportable="false"
+    fkentity="Claim"
+    name="Claim"
+    nullok="false"/>
+  <foreignkey
+    columnName="ClaimContactID"
+    desc="Claim Contact from whom the data is being requested. Usually the Insured or a Claimant."
+    exportable="false"
+    fkentity="ClaimContact"
+    name="ClaimContact"
+    nullok="false"/>
+  <column
+    desc="The UI intake flow to use to gather the data."
+    name="IntakeId"
+    nullok="false"
+    required="true"
+    type="shorttext"/>
+  <column
+    name="Description"
+    nullok="true"
+    type="mediumtext"/>
+  <typekey
+    default="open"
+    name="Status"
+    nullok="false"
+    typelist="IntakeInteractionStatus"/>
+  <column
+    desc="PublicID of the entity where the requested data will be stored, such as an Incident or Exposure. null value implies the Claim."
+    name="RelatedEntityPublicID"
+    nullok="true"
+    type="publicid"/>
+  <column
+    desc="Type of the entity where the requested data will be stored. Relative typename such as 'Exposure' or 'Incident'. null implies 'Claim'"
+    name="RelatedEntityType"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="URL to the claim snapshot from the AppEvents service before the interaction was initiated. Provides context data from the claim."
+    name="ClaimSnapshotURL"
+    nullok="false"
+    type="mediumtext"/>
+  <column
+    desc="A JSON string that contains intake inputs for use by the secondary flow UI"
+    name="IntakeInputs"
+    nullok="true"
+    type="longtext"/>
+  <column
+    desc="A JSON string that contains the payload of intake answers"
+    name="IntakeResults"
+    nullok="true"
+    type="longtext"/>
+  <events>
+    <event
+      description="The data request was opened."
+      name="IntakeInteractionOpened"/>
+    <event
+      description="The requested data was provided and stored in the IntakeResults field."
+      name="IntakeInteractionCompleted"/>
+    <event
+      description="The requested data was processed and saved to the claim."
+      name="IntakeInteractionClosed"/>
+    <event
+      description="The data request was refused."
+      name="IntakeInteractionRefused"/>
+    <event
+      description="An error occurred which meant the data could not be collected, or saved to the claim."
+      name="IntakeInteractionError"/>
+    <event
+      description="The data request was withdrawn."
+      name="IntakeInteractionWithdrawn"/>
+  </events>
+</entity>

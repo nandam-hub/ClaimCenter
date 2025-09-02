@@ -1,0 +1,86 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "x-gw-localizationKeyPrefix": "batch.v1",
+  "definitions": {
+    "HeaderMap": {
+      "title": "A map of HTTP headers",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "PreloadRequest": {
+      "title": "Preload request",
+      "description": "A request to execute during REST servlet preload",
+      "required": [
+        "method",
+        "path"
+      ],
+      "properties": {
+        "asUser": {
+          "title": "As user",
+          "description": "The public-id of the User to authenticate as when executing this preload request. If not specified, it will default to the configured super user.",
+          "type": "string"
+        },
+        "body": {
+          "title": "Body",
+          "description": "The body of the request",
+          "type": "object"
+        },
+        "description": {
+          "title": "Description",
+          "description": "An optional description of what this preload request is doing",
+          "type": "string"
+        },
+        "headers": {
+          "title": "Headers",
+          "description": "Headers that will be included as part of the request",
+          "$ref": "#/definitions/HeaderMap"
+        },
+        "id": {
+          "title": "Id",
+          "description": "An optional id for the preload request, which will be used in log messages. If not specified, the preload request's file name will be used as the default id for logging purposes.",
+          "type": "string"
+        },
+        "iterations": {
+          "title": "Iterations",
+          "description": "The number of times to evaluate this same preload request. In some cases, it may be helpful to evaluate the same preload request multiple times to trigger JIT optimizations in the JVM.",
+          "type": "integer",
+          "default": 1
+        },
+        "method": {
+          "title": "Method",
+          "description": "The HTTP method for the subrequest",
+          "type": "string",
+          "enum": [
+            "delete",
+            "DELETE",
+            "head",
+            "HEAD",
+            "get",
+            "GET",
+            "options",
+            "OPTIONS",
+            "patch",
+            "PATCH",
+            "post",
+            "POST",
+            "put",
+            "PUT"
+          ]
+        },
+        "path": {
+          "title": "Path",
+          "description": "The path for the request. This path should start with a '/' character and be relative to the REST servlet root, i.e. '/admin/v1/users' rather than '/rest/admin/v1/users'.",
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^/[\\S]*$"
+        },
+        "query": {
+          "title": "Query",
+          "description": "The query string to use for the request",
+          "type": "string"
+        }
+      }
+    }
+  }
+}

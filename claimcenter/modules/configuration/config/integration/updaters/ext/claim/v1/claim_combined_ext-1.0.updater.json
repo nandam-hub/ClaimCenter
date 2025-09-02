@@ -1,0 +1,8 @@
+{
+  "schemaName": "ext.claim.v1.claim_combined_ext-1.0",
+  "combine": [
+    "ext.claim.v1.claim_auto_ext-1.0",
+    "ext.claim.v1.claim_property_ext-1.0",
+    "ext.claim.v1.claim_ext-1.0"
+  ]
+}

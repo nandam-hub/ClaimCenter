@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Represents a bulk restore request of a group of entities"
+  entity="BulkRestoreRecord"
+  loadable="false"
+  table="bulkrestorerecord"
+  type="retireable">
+  <fulldescription><![CDATA[
+A typed record for bulk restore entities record.
+<p>
+This base entity contains common attributes of the record only : Title and description of the bulk restore request record.
+<p>  
+The relationship between the restore record and the entity in applications (PC, BC or CC) is N-M; in other
+words, each entity may be referenced by multiple bulk restore records, and each bulk restore record references multiple entities.
+The entity for keeping this relationship are defined in applications and in which a reference to this entity are defined.
+<p>
+The restore record is independent of individual entity restore results and can be deleted without any impact to the entity itself.
+    ]]></fulldescription>
+  <column
+    desc="A brief title for the bulk restore request."
+    name="Title"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="64"/>
+  </column>
+  <column
+    desc="Description of the bulk restore request."
+    name="Description"
+    nullok="true"
+    type="mediumtext"/>
+  <events/>
+  <array
+    arrayentity="EntityInRestoreRecord"
+    desc="The entity belonging to this bulk restore record."
+    name="Entities"/>
+</entity>

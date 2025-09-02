@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="HolidayDetailDV"
+    mode="default">
+    <Require
+      name="Holiday"
+      type="Holiday"/>
+    <InputColumn>
+      <TextAreaInput
+        editable="true"
+        hideIfEditable="true"
+        id="Zones"
+        label="DisplayKey.get(&quot;Web.Admin.HolidayDetailDV.Zones&quot;)"
+        numRows="5"
+        value="Holiday.Zones"
+        visible="!Holiday.AppliesToAllZones"/>
+      <InputSetRef
+        def="ZonesInputSet(Holiday, Holiday.IntrinsicType.RelativeName)"
+        visible="!Holiday.AppliesToAllZones"/>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

@@ -1,0 +1,22 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  
+    "x-gw-import" : {
+    },
+	"definitions": {
+    "DataAuditFieldRecord_SP" : {
+        "type" : "object",
+        "properties" : {
+			"AuditableBeanChangedField" : {
+				"type" : "string"
+			},
+			"OriginalValue" : {
+				"type" : "string"
+			},
+			"NewValue" : {
+				"type" : "string"
+			}
+        }
+    }
+  }
+}

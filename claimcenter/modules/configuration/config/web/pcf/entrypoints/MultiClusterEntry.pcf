@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <EntryPoint
+    id="MultiClusterEntry"
+    location="MultiClusterForward(locationKey, Boolean.valueOf(goToGroup))">
+    <EntryPointParameter
+      locationParam="locationKey"
+      type="String"
+      urlParam="locationKey"/>
+    <EntryPointParameter
+      locationParam="goToGroup"
+      type="String"
+      urlParam="goToGroup"/>
+  </EntryPoint>
+</PCF>

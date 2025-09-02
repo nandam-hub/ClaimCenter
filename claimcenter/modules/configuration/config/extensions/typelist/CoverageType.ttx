@@ -1,0 +1,5053 @@
+<?xml version="1.0"?>
+<!-- The product model generator (PMG) creates default entries in four typelist files (CoverageType.ttx, CoverageSubType.ttx, 
+ExposureType.ttx and LossPartyType.ttx) based on the product model as defined in PolicyCenter. They associate every Coverage with an ExposureType."
+
+If you want to disallow exposure creation against a specific Coverage, you should comment out the related entries in 
+all three files for that Coverage. Do not just delete these entries, because then future runs of the PMG will recreate them. -->
+<typelistextension
+  xmlns="http://guidewire.com/typelists"
+  desc="Type of coverage"
+  name="CoverageType">
+  <typecode
+    code="GLCGLCov"
+    desc="Comprehensive General Liability"
+    identifierCode="GLCGLCov"
+    name="General Liability">
+    <category
+      code="CommercialPackage"
+      typelist="PolicyType"/>
+    <category
+      code="GeneralLiability"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="GLCGLCov_ops_bi"
+      typelist="CoverageSubtype"/>
+    <category
+      code="GLCGLCov_ops_pd"
+      typelist="CoverageSubtype"/>
+    <category
+      code="GLCGLCov_ops_mp"
+      typelist="CoverageSubtype"/>
+    <category
+      code="GLCGLCov_ops_gd"
+      typelist="CoverageSubtype"/>
+    <category
+      code="GLCGLCov_prod_bi"
+      typelist="CoverageSubtype"/>
+    <category
+      code="GLCGLCov_prod_pd"
+      typelist="CoverageSubtype"/>
+    <category
+      code="GLCGLCov_prod_mp"
+      typelist="CoverageSubtype"/>
+    <category
+      code="GLCGLCov_prod_gd"
+      typelist="CoverageSubtype"/>
+    <category
+      code="GLCGLCov_adv_gd"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="GLDeductible"
+    desc="GL Deductible"
+    identifierCode="GLDeductible"
+    name="GL Deductible">
+    <category
+      code="CommercialPackage"
+      typelist="PolicyType"/>
+    <category
+      code="GeneralLiability"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="GLDeductible-BI"
+      typelist="CoverageSubtype"/>
+    <category
+      code="GLDeductible-PD"
+      typelist="CoverageSubtype"/>
+    <category
+      code="GLDeductible-GEN"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="GLPollutionDesignatedCov"
+    desc="Coverage for Designated Pollutants"
+    identifierCode="GLPollutionDesignatedCov"
+    name="Designated Pollutants">
+    <category
+      code="CommercialPackage"
+      typelist="PolicyType"/>
+    <category
+      code="GeneralLiability"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="GLPollutionDesignatedCovBI"
+      typelist="CoverageSubtype"/>
+    <category
+      code="GLPollutionDesignatedCovPD"
+      typelist="CoverageSubtype"/>
+    <category
+      code="GLPollutionDesignatedCovGEN"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="GLPollutionShortTermCov"
+    desc="Short Term Pollution Coverage"
+    identifierCode="GLPollutionShortTermCov"
+    name="Short Term Pollution Coverage">
+    <category
+      code="CommercialPackage"
+      typelist="PolicyType"/>
+    <category
+      code="GeneralLiability"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="GLPollutionShortTermCovBI"
+      typelist="CoverageSubtype"/>
+    <category
+      code="GLPollutionShortTermCovPD"
+      typelist="CoverageSubtype"/>
+    <category
+      code="GLPollutionShortTermCovGEN"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="PollutionBroadLimited"
+    desc="Pollution Coverage"
+    identifierCode="PollutionBroadLimited"
+    name="Pollution Coverage">
+    <category
+      code="CommercialPackage"
+      typelist="PolicyType"/>
+    <category
+      code="GeneralLiability"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="GLPollutionBI"
+      typelist="CoverageSubtype"/>
+    <category
+      code="GLPollutionPD"
+      typelist="CoverageSubtype"/>
+    <category
+      code="GLPollutionGEN"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="GLLiquorEndorsement"
+    desc="Liquor Liability Endorsement"
+    identifierCode="GLLiquorEndorsement"
+    name="Liquor Liability Endorsement">
+    <category
+      code="CommercialPackage"
+      typelist="PolicyType"/>
+    <category
+      code="GeneralLiability"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="GLLiquorLiabilityCovBI"
+      typelist="CoverageSubtype"/>
+    <category
+      code="GLLiquorLiabilityCovPD"
+      typelist="CoverageSubtype"/>
+    <category
+      code="GLLiquorLiabilityCovGEN"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="GLContractualLiabRR"
+    desc="Contractual Liability - Railroads"
+    identifierCode="GLContractualLiabRR"
+    name="Contractual Liability - Railroads">
+    <category
+      code="CommercialPackage"
+      typelist="PolicyType"/>
+    <category
+      code="GeneralLiability"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="GLContractLiabRRBI"
+      typelist="CoverageSubtype"/>
+    <category
+      code="GLContracdtLiabRRPD"
+      typelist="CoverageSubtype"/>
+    <category
+      code="ContractLiabRRGEN"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="GLLimitedPAandInjuryCov"
+    desc="Ltd Contractual Liab for Personal and Advertising"
+    identifierCode="GLLimitedPAandInjuryCov"
+    name="Ltd Contractual Liab for Personal and Advertising">
+    <category
+      code="CommercialPackage"
+      typelist="PolicyType"/>
+    <category
+      code="GeneralLiability"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="GLLimitedPAandInjuryCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="GLAddCondoCov"
+    desc="Condominiums"
+    identifierCode="GLAddCondoCov"
+    name="Condominiums">
+    <category
+      code="CommercialPackage"
+      typelist="PolicyType"/>
+    <category
+      code="GeneralLiability"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="GLAddCondoCovBI"
+      typelist="CoverageSubtype"/>
+    <category
+      code="GLAddCondoCovPD"
+      typelist="CoverageSubtype"/>
+    <category
+      code="GLAddCondoCovGEN"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="GLElectronicDataLiability"
+    desc="Electronic Data Liability"
+    identifierCode="GLElectronicDataLiability"
+    name="Electronic Data Liability">
+    <category
+      code="CommercialPackage"
+      typelist="PolicyType"/>
+    <category
+      code="GeneralLiability"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="GLElectronicDataLiability"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="GLGovSubdivisions"
+    desc="Governmental Subdivisions"
+    identifierCode="GLGovSubdivisions"
+    name="Governmental Subdivisions">
+    <category
+      code="CommercialPackage"
+      typelist="PolicyType"/>
+    <category
+      code="GeneralLiability"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="GLGovSubdivisionsBI"
+      typelist="CoverageSubtype"/>
+    <category
+      code="GLGovSubdivisionsPD"
+      typelist="CoverageSubtype"/>
+    <category
+      code="GLGovSubdivisionsGEN"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="GLLawnCare"
+    desc="Lawn Care Services"
+    identifierCode="GLLawnCare"
+    name="Lawn Care Services">
+    <category
+      code="CommercialPackage"
+      typelist="PolicyType"/>
+    <category
+      code="GeneralLiability"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="GLLawnCareBI"
+      typelist="CoverageSubtype"/>
+    <category
+      code="GLLawnCarePD"
+      typelist="CoverageSubtype"/>
+    <category
+      code="GLLawnCareGEN"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="GLLtdFungiBacteriaCov"
+    desc="Limited Fungi or Bacteria Coverage"
+    identifierCode="GLLtdFungiBacteriaCov"
+    name="Limited Fungi or Bacteria Coverage">
+    <category
+      code="CommercialPackage"
+      typelist="PolicyType"/>
+    <category
+      code="GeneralLiability"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="GLLtdFungiCovBI"
+      typelist="CoverageSubtype"/>
+    <category
+      code="GLLtdFungiCovPD"
+      typelist="CoverageSubtype"/>
+    <category
+      code="GLLtdFungiCovGEN"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="GLPestHerbicideApplicatorSchedule"
+    desc="Pesticide Or Herbicide Applicator Coverage"
+    identifierCode="GLPestHerbicideApplicatorSchedule"
+    name="Pesticide Or Herbicide Applicator Coverage">
+    <category
+      code="CommercialPackage"
+      typelist="PolicyType"/>
+    <category
+      code="GeneralLiability"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="GLPestHerbicideApplicatorSchedule"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="GLUndergroundResourceCov"
+    desc="Underground Resources And Equip Coverage"
+    identifierCode="GLUndergroundResourceCov"
+    name="Underground Resources And Equip Coverage">
+    <category
+      code="CommercialPackage"
+      typelist="PolicyType"/>
+    <category
+      code="GeneralLiability"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="GLUGResourcesCovBI"
+      typelist="CoverageSubtype"/>
+    <category
+      code="GLUGResourcesCovPD"
+      typelist="CoverageSubtype"/>
+    <category
+      code="GLUGResourcesCovGEN"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="ProductWithdrawalLtd"
+    desc="Limited Coverage for Product Withdrawal"
+    identifierCode="ProductWithdrawalLtd"
+    name="Product Withdrawal - Limited">
+    <category
+      code="CommercialPackage"
+      typelist="PolicyType"/>
+    <category
+      code="GeneralLiability"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="ProductWithdrawalLtd"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="GLAddInjuryLeasedWorkers"
+    desc="Coverage for Injury to Leased Workers"
+    identifierCode="GLAddInjuryLeasedWorkers"
+    name="Coverage for Injury to Leased Workers">
+    <category
+      code="CommercialPackage"
+      typelist="PolicyType"/>
+    <category
+      code="GeneralLiability"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="GLAddInjuryLeasedWorkers"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="GLEmpBenefitsLiabilityCov"
+    desc="Employee Benefits Liability"
+    identifierCode="GLEmpBenefitsLiabilityCov"
+    name="Employee Benefits Liability">
+    <category
+      code="CommercialPackage"
+      typelist="PolicyType"/>
+    <category
+      code="GeneralLiability"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="GLEmpBenefitsLiabilityCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="Y2KLimitedCov"
+    desc="Y2K / Computer Limited Coverage"
+    identifierCode="Y2KLimitedCov"
+    name="Y2K/Computer - Limited">
+    <category
+      code="CommercialPackage"
+      typelist="PolicyType"/>
+    <category
+      code="GeneralLiability"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="Y2KLimitedCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="XCUSpecified"
+    desc="XCU - Specified Locations, Operation, Hazard"
+    identifierCode="XCUSpecified"
+    name="XCU - Specified">
+    <category
+      code="CommercialPackage"
+      typelist="PolicyType"/>
+    <category
+      code="GeneralLiability"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="XCUSpecifiedBI"
+      typelist="CoverageSubtype"/>
+    <category
+      code="XCUSpecifiedPD"
+      typelist="CoverageSubtype"/>
+    <category
+      code="XCUSpecifiedGEN"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="CPBldgCov"
+    desc="Building Coverage"
+    identifierCode="CPBldgCov"
+    name="Building Coverage">
+    <category
+      code="CommercialPackage"
+      typelist="PolicyType"/>
+    <category
+      code="CommercialProperty"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="CPBldgCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="CPBPPCov"
+    desc="Business Personal Property Coverage"
+    identifierCode="CPBPPCov"
+    name="Business Personal Property Coverage">
+    <category
+      code="CommercialPackage"
+      typelist="PolicyType"/>
+    <category
+      code="CommercialProperty"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="CPBPPCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="CPBldgBusIncomeCov"
+    desc="Business Income Coverage"
+    identifierCode="CPBldgBusIncomeCov"
+    name="Business Income Coverage">
+    <category
+      code="CommercialPackage"
+      typelist="PolicyType"/>
+    <category
+      code="CommercialProperty"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="CPBldgBusIncomeCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="CPBldgExtraExpenseCov"
+    desc="Extra Expense Coverage"
+    identifierCode="CPBldgExtraExpenseCov"
+    name="Extra Expense Coverage">
+    <category
+      code="CommercialPackage"
+      typelist="PolicyType"/>
+    <category
+      code="CommercialProperty"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="CPBldgExtraExpenseCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="CPBldgStockCov"
+    desc="Business Personal Property - Separation of Coverage (Stock)"
+    identifierCode="CPBldgStockCov"
+    name="Business Personal Property - Separation of Coverage (Stock)">
+    <category
+      code="CommercialPackage"
+      typelist="PolicyType"/>
+    <category
+      code="CommercialProperty"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="CPBldgStockCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="CPBlanketCov"
+    desc="CPBlanket Coverage"
+    identifierCode="CPBlanketCov"
+    name="CPBlanket Coverage">
+    <category
+      code="CommercialPackage"
+      typelist="PolicyType"/>
+    <category
+      code="CommercialProperty"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="CPBlanketCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="PAExcessElectronicsCov"
+    desc="Excess Electronic Equipment"
+    identifierCode="PAExcessElectronicsCov"
+    name="Electronic Equipment">
+    <category
+      code="PersonalAuto"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PAExcessElectronicsCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="PALossOfUseCov"
+    desc="Rental Car Loss of Use"
+    identifierCode="PALossOfUseCov"
+    name="Rental Car Loss of Use">
+    <category
+      code="PersonalAuto"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PALossOfUseCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="PATapeDiscMediaCov"
+    desc="Tape / Disc Media"
+    identifierCode="PATapeDiscMediaCov"
+    name="Tape / Disc Media">
+    <category
+      code="PersonalAuto"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PATapeDiscMediaCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="PALiabilityCov"
+    desc="Liability - Bodily Injury and Property Damage"
+    identifierCode="PALiabilityCov"
+    name="Liability - Bodily Injury and Property Damage">
+    <category
+      code="PersonalAuto"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PALiabilityCov_vd"
+      typelist="CoverageSubtype"/>
+    <category
+      code="PALiabilityCov_pd"
+      typelist="CoverageSubtype"/>
+    <category
+      code="PALiabilityCov_bi"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="PALimitedMexicoCov"
+    desc="Mexico Coverage - Limited"
+    identifierCode="PALimitedMexicoCov"
+    name="Mexico Coverage - Limited">
+    <category
+      code="PersonalAuto"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PAMexicoCovBI"
+      typelist="CoverageSubtype"/>
+    <category
+      code="PAMexicoCovPD"
+      typelist="CoverageSubtype"/>
+    <category
+      code="PAMexicoCovVEH"
+      typelist="CoverageSubtype"/>
+    <category
+      code="PAMexicoCovGEN"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="PAMedPayCov"
+    desc="Medical Payments"
+    identifierCode="PAMedPayCov"
+    name="Medical Payments">
+    <category
+      code="PersonalAuto"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PAMedPayCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="PAPropProtectionCov"
+    desc="Property Protection Insurance"
+    identifierCode="PAPropProtectionCov"
+    name="Property Protection Insurance">
+    <category
+      code="PersonalAuto"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PAPropProtectionCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="PAUIMBICov"
+    desc="Underinsured Motorist - Bodily Injury"
+    identifierCode="PAUIMBICov"
+    name="Underinsured Motorist - Bodily Injury">
+    <category
+      code="PersonalAuto"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PAUIMBICov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="PAUIMPDCov"
+    desc="Underinsured Motorist - Property Damage"
+    identifierCode="PAUIMPDCov"
+    name="Underinsured Motorist - Property Damage">
+    <category
+      code="PersonalAuto"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PAUIMPDCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="PAUMBICov"
+    desc="Uninsured Motorist - Bodily Injury"
+    identifierCode="PAUMBICov"
+    name="Uninsured Motorist - Bodily Injury">
+    <category
+      code="PersonalAuto"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PAUMBICov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="PAUMPDCov"
+    desc="Uninsured Motorist - Property Damage"
+    identifierCode="PAUMPDCov"
+    name="Uninsured Motorist - Property Damage">
+    <category
+      code="PersonalAuto"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PAUMPDCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="PACollisionCov"
+    desc="Collision"
+    identifierCode="PACollisionCov"
+    name="Collision">
+    <category
+      code="PersonalAuto"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PACollisionCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="PACollision_MA_MI_Limited"
+    desc="Collision - Limited Coverage"
+    identifierCode="PACollision_MA_MI_Limited"
+    name="Collision - Limited Coverage">
+    <category
+      code="PersonalAuto"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PACollision_MA_MI_Limited"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="PAComprehensiveCov"
+    desc="Comprehensive"
+    identifierCode="PAComprehensiveCov"
+    name="Comprehensive">
+    <category
+      code="PersonalAuto"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PAComprehensiveCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="PARentalCov"
+    desc="Rental Reimbursement"
+    identifierCode="PARentalCov"
+    name="Rental Reimbursement">
+    <category
+      code="PersonalAuto"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PARentalCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="PATowingLaborCov"
+    desc="Towing and Labor"
+    identifierCode="PATowingLaborCov"
+    name="Towing and Labor">
+    <category
+      code="PersonalAuto"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PATowingLaborCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="PADeathDisabilityCov"
+    desc="Death &amp; Disability Benefit"
+    identifierCode="PADeathDisabilityCov"
+    name="Death &amp; Disability Benefit">
+    <category
+      code="PersonalAuto"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PADeathDisabilityCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="PAPIP_AR"
+    desc="PIP - Arkansas"
+    identifierCode="PAPIP_AR"
+    name="PIP - Arkansas">
+    <category
+      code="PersonalAuto"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PAPIP_AR"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="PAPIP_DC"
+    desc="PIP - District of Columbia"
+    identifierCode="PAPIP_DC"
+    name="PIP - District of Columbia">
+    <category
+      code="PersonalAuto"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PAPIP_DC"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="PAPIP_DE"
+    desc="PIP - Delaware"
+    identifierCode="PAPIP_DE"
+    name="PIP - Delaware">
+    <category
+      code="PersonalAuto"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PAPIP_DE"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="PAPIP_FL"
+    desc="PIP - Florida"
+    identifierCode="PAPIP_FL"
+    name="PIP - Florida">
+    <category
+      code="PersonalAuto"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PAPIP_FL"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="PAPIP_HI"
+    desc="PIP - Hawaii"
+    identifierCode="PAPIP_HI"
+    name="PIP - Hawaii">
+    <category
+      code="PersonalAuto"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PAPIP_HI"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="PAPIP_KS"
+    desc="PIP - Kansas"
+    identifierCode="PAPIP_KS"
+    name="PIP - Kansas">
+    <category
+      code="PersonalAuto"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PAPIP_KS"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="PAPIP_KY"
+    desc="PIP - Kentucky"
+    identifierCode="PAPIP_KY"
+    name="PIP - Kentucky">
+    <category
+      code="PersonalAuto"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PAPIP_KY"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="PAPIP_MA"
+    desc="PIP - Massachusetts"
+    identifierCode="PAPIP_MA"
+    name="PIP - Massachusetts">
+    <category
+      code="PersonalAuto"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PAPIP_MA"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="PAPIP_MD"
+    desc="PIP - Maryland"
+    identifierCode="PAPIP_MD"
+    name="PIP - Maryland">
+    <category
+      code="PersonalAuto"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PAPIP_MD"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="PAPIP_MI"
+    desc="PIP - Michigan"
+    identifierCode="PAPIP_MI"
+    name="PIP - Michigan">
+    <category
+      code="PersonalAuto"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PAPIP_MI"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="PAPIP_MN"
+    desc="PIP - Minnesota"
+    identifierCode="PAPIP_MN"
+    name="PIP - Minnesota">
+    <category
+      code="PersonalAuto"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PAPIP_MN"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="PAPIP_ND"
+    desc="PIP - North Dakota"
+    identifierCode="PAPIP_ND"
+    name="PIP - North Dakota">
+    <category
+      code="PersonalAuto"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PAPIP_ND"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="PAPIP_NJ"
+    desc="PIP - New Jersey"
+    identifierCode="PAPIP_NJ"
+    name="PIP - New Jersey">
+    <category
+      code="PersonalAuto"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PAPIP_NJ"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="PAPIP_NY"
+    desc="PIP - New York"
+    identifierCode="PAPIP_NY"
+    name="PIP - New York">
+    <category
+      code="PersonalAuto"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PAPIP_NY"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="PAPIP_OR"
+    desc="PIP - Oregon"
+    identifierCode="PAPIP_OR"
+    name="PIP - Oregon">
+    <category
+      code="PersonalAuto"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PAPIP_OR"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="PAPIP_PA"
+    desc="PIP - Pennsylvania"
+    identifierCode="PAPIP_PA"
+    name="PIP - Pennsylvania">
+    <category
+      code="PersonalAuto"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PAPIP_PA"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="PAPIP_TX"
+    desc="PIP - Texas"
+    identifierCode="PAPIP_TX"
+    name="PIP - Texas">
+    <category
+      code="PersonalAuto"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PAPIP_TX"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="PAPIP_UT"
+    desc="PIP - Utah"
+    identifierCode="PAPIP_UT"
+    name="PIP - Utah">
+    <category
+      code="PersonalAuto"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PAPIP_UT"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="PAPIP_WA"
+    desc="PIP - Washington"
+    identifierCode="PAPIP_WA"
+    name="PIP - Washington">
+    <category
+      code="PersonalAuto"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PAPIP_WA"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="IMSignCov"
+    desc="Inland Marine Sign"
+    identifierCode="IMSignCov"
+    name="Inland Marine Sign">
+    <category
+      code="CommercialPackage"
+      typelist="PolicyType"/>
+    <category
+      code="InlandMarine"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="IMSignCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="ContractorsEquipSchedCov"
+    desc="Contractors Scheduled Equipment"
+    identifierCode="ContractorsEquipSchedCov"
+    name="Contractors Scheduled Equipment">
+    <category
+      code="CommercialPackage"
+      typelist="PolicyType"/>
+    <category
+      code="InlandMarine"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="ContractorsEquipSchedCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="ContractorsEquipAdditionallyAcquiredProperty"
+    desc="Contractors Equipment - Additional Acquired Property"
+    identifierCode="ContractorsEquipAdditionallyAcquiredProperty"
+    name="Contractors Equipment - Additional Acquired Property">
+    <category
+      code="CommercialPackage"
+      typelist="PolicyType"/>
+    <category
+      code="InlandMarine"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="ContractorsEquipAdditionallyAcquiredProperty"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="ContractorsEquipDebrisRemoval"
+    desc="Contractors Equipment - Debris Removal"
+    identifierCode="ContractorsEquipDebrisRemoval"
+    name="Contractors Equipment - Debris Removal">
+    <category
+      code="CommercialPackage"
+      typelist="PolicyType"/>
+    <category
+      code="InlandMarine"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="ContractorsEquipDebrisRemoval"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="ContractorsEquipPollutionCleanup"
+    desc="Contractors Equipment - Pollution Cleanup"
+    identifierCode="ContractorsEquipPollutionCleanup"
+    name="Contractors Equipment - Pollution Cleanup">
+    <category
+      code="CommercialPackage"
+      typelist="PolicyType"/>
+    <category
+      code="InlandMarine"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="ContractorsEquipPollutionCleanup"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="ContractorsEquipPreservationOfProperty"
+    desc="Contractors Equipment - Preservation of Property"
+    identifierCode="ContractorsEquipPreservationOfProperty"
+    name="Contractors Equipment - Preservation of Property">
+    <category
+      code="CommercialPackage"
+      typelist="PolicyType"/>
+    <category
+      code="InlandMarine"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="ContractorsEquipPreservationOfProperty"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="ContractorsEquipRentalReibursement"
+    desc="Contractors Rental Reimbursement"
+    identifierCode="ContractorsEquipRentalReibursement"
+    name="Contractors Rental Reimbursement">
+    <category
+      code="CommercialPackage"
+      typelist="PolicyType"/>
+    <category
+      code="InlandMarine"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="ContractorsEquipRentalReibursement"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="ContractorsEquipRentedEquipment"
+    desc="Contractors Rented Equipment"
+    identifierCode="ContractorsEquipRentedEquipment"
+    name="Contractors Rented Equipment">
+    <category
+      code="CommercialPackage"
+      typelist="PolicyType"/>
+    <category
+      code="InlandMarine"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="ContractorsEquipRentedEquipment"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="ContractorsEquipEmployeesTools"
+    desc="Employees Tools - per occurrence"
+    identifierCode="ContractorsEquipEmployeesTools"
+    name="Contractors Equipment - Employees Tools">
+    <category
+      code="CommercialPackage"
+      typelist="PolicyType"/>
+    <category
+      code="InlandMarine"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="ContractorsEquipEmployeesTools"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="ContractorsEquipMiscUnscheduledCov"
+    desc="Misc Unscheduled Items - per occurrence"
+    identifierCode="ContractorsEquipMiscUnscheduledCov"
+    name="Contractors Equipment - Misc. Items">
+    <category
+      code="CommercialPackage"
+      typelist="PolicyType"/>
+    <category
+      code="InlandMarine"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="ContractorsEquipMiscUnscheduledCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="AccountsRecOffPremisesProperty"
+    desc="Accts Receivable - Off Premises Property"
+    identifierCode="AccountsRecOffPremisesProperty"
+    name="Accts Receivable - Off Premises Property">
+    <category
+      code="CommercialPackage"
+      typelist="PolicyType"/>
+    <category
+      code="InlandMarine"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="AccountsRecOffPremisesProperty"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="IMAccountReceivableCov"
+    desc="Accounts Receivable"
+    identifierCode="IMAccountReceivableCov"
+    name="Accounts Receivable">
+    <category
+      code="CommercialPackage"
+      typelist="PolicyType"/>
+    <category
+      code="InlandMarine"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="IMAccountReceivableCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="WCFedEmpLiabCov"
+    desc="Federal Employer's Liability"
+    identifierCode="WCFedEmpLiabCov"
+    name="Federal Employer's Liability">
+    <category
+      code="WorkersComp"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="WCFedEmpLiabCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="WCEmpLiabCov"
+    desc="Workers' Comp Employer's Liability"
+    identifierCode="WCEmpLiabCov"
+    name="Workers' Comp Employer's Liability">
+    <category
+      code="WorkersComp"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="WCEmpLiabCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="WCOtherStatesInsurance"
+    desc="Other States Insurance"
+    identifierCode="WCOtherStatesInsurance"
+    name="Other States Insurance">
+    <category
+      code="WorkersComp"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="WCOtherStatesMED"
+      typelist="CoverageSubtype"/>
+    <category
+      code="WCOtherStatesWAGES"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="WCWorkersCompCov"
+    desc="Statutory Workers' Comp"
+    identifierCode="WCWorkersCompCov"
+    name="Statutory Workers' Comp">
+    <category
+      code="WorkersComp"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="WCWorkersCompMED"
+      typelist="CoverageSubtype"/>
+    <category
+      code="WCWorkersCompWAGES"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="WCWorkCompDeductCov"
+    desc="Workers' Comp State-Specific Deductible"
+    identifierCode="WCWorkCompDeductCov"
+    name="Workers' Comp State-Specific Deductible">
+    <category
+      code="WorkersComp"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="WCWorkCompDeductMED"
+      typelist="CoverageSubtype"/>
+    <category
+      code="WCWorkCompDeductNOTMED"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BOPBuildingCov"
+    desc="Building"
+    identifierCode="BOPBuildingCov"
+    name="Building">
+    <category
+      code="BusinessOwners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BOPBuildingCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BOPOrdinanceCov"
+    desc="Ordinance or Law"
+    identifierCode="BOPOrdinanceCov"
+    name="Ordinance or Law">
+    <category
+      code="BusinessOwners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BOPOrdinanceCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BOPPersonalPropCov"
+    desc="Business Personal Property"
+    identifierCode="BOPPersonalPropCov"
+    name="Business Personal Property">
+    <category
+      code="BusinessOwners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BOPPersonalPropCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BOPReceivablesCov"
+    desc="Accounts Receivable"
+    identifierCode="BOPReceivablesCov"
+    name="Accounts Receivable">
+    <category
+      code="BusinessOwners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BOPReceivablesCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BOPValuablePapersCov"
+    desc="Valuable Papers"
+    identifierCode="BOPValuablePapersCov"
+    name="Valuable Papers">
+    <category
+      code="BusinessOwners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BOPValuablePapersCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BOPCondoUnitOwnCov"
+    desc="Condo Unit Owner"
+    identifierCode="BOPCondoUnitOwnCov"
+    name="Condo Unit Owner">
+    <category
+      code="BusinessOwners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BOPCondoUnitOwnCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BOPElectricalSchedCov"
+    desc="Electrical Equipment - Scheduled"
+    identifierCode="BOPElectricalSchedCov"
+    name="Electrical Equipment - Scheduled">
+    <category
+      code="BusinessOwners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BOPElectricalSchedCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BOPFuncPerPropCov"
+    desc="Functional Business Personal Property"
+    identifierCode="BOPFuncPerPropCov"
+    name="Functional Business Personal Property">
+    <category
+      code="BusinessOwners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BOPFuncPerPropCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BOPTenantsLiabilityCov"
+    desc="Tenants Liability"
+    identifierCode="BOPTenantsLiabilityCov"
+    name="Tenants Liability">
+    <category
+      code="BusinessOwners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BOPTenantsLiabilityCovPD"
+      typelist="CoverageSubtype"/>
+    <category
+      code="BOPTenantsLiabilityCovGEN"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BOPVacancyChangeCov"
+    desc="Vacancy Changes/Conditions"
+    identifierCode="BOPVacancyChangeCov"
+    name="Vacancy Change Coverage">
+    <category
+      code="BusinessOwners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BOPVacancyChangeCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BOPVacancyCov"
+    desc="Vacancy Permit"
+    identifierCode="BOPVacancyCov"
+    name="Vacancy Permit">
+    <category
+      code="BusinessOwners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BOPVacancyCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BOPMechBreakdownCov"
+    desc="Mechanical Breakdown"
+    identifierCode="BOPMechBreakdownCov"
+    name="Mechanical Breakdown">
+    <category
+      code="BusinessOwners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BOPMechBreakdownCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BOPUtilDirectCov"
+    desc="Utilities - Direct Damage"
+    identifierCode="BOPUtilDirectCov"
+    name="Utilities - Direct Damage">
+    <category
+      code="BusinessOwners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BOPUtilDirectCovPD"
+      typelist="CoverageSubtype"/>
+    <category
+      code="BOPUtilDirectCovCON"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BOPUtilTimeCov"
+    desc="Utilities - Time Element"
+    identifierCode="BOPUtilTimeCov"
+    name="Utilities - Time Element">
+    <category
+      code="BusinessOwners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BOPUtilTimeCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BOPAggLimitProjCov"
+    desc="Aggregate Limits of Insurance - Projects"
+    identifierCode="BOPAggLimitProjCov"
+    name="Aggregate Limits of Insurance - Projects">
+    <category
+      code="BusinessOwners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BOPAggLimitProjCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BOPDesigPremProj"
+    desc="Designated Premises or Project Limitation"
+    identifierCode="BOPDesigPremProj"
+    name="Designated Premises or Project Limitation">
+    <category
+      code="BusinessOwners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BOPDesigPremProj"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BOPPesticideApplicatorCov"
+    desc="Pesticide Applicator Coverage"
+    identifierCode="BOPPesticideApplicatorCov"
+    name="Pesticide Applicator Coverage">
+    <category
+      code="BusinessOwners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BOPPesticideApplicaorCovBI"
+      typelist="CoverageSubtype"/>
+    <category
+      code="BOPPesticideApplicatorCovGEN"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BOPToolsSchedCov"
+    desc="Contractors Tools - Scheduled"
+    identifierCode="BOPToolsSchedCov"
+    name="Contractors Tools - Scheduled">
+    <category
+      code="BusinessOwners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BOPToolsSchedCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BOPBurgRobCov"
+    desc="Burglary and Robbery"
+    identifierCode="BOPBurgRobCov"
+    name="Burglary and Robbery">
+    <category
+      code="BusinessOwners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BOPBurgRobCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BOPComputerFraudCov"
+    desc="Computer/Funds Transfer Fraud"
+    identifierCode="BOPComputerFraudCov"
+    name="Computer/Funds Transfer Fraud">
+    <category
+      code="BusinessOwners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BOPComputerFraudCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BOPForgeAltCov"
+    desc="Forgery and Alteration"
+    identifierCode="BOPForgeAltCov"
+    name="Forgery and Alteration">
+    <category
+      code="BusinessOwners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BOPForgeAltCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BOPMoneySecCov"
+    desc="Money and Securities"
+    identifierCode="BOPMoneySecCov"
+    name="Money and Securities">
+    <category
+      code="BusinessOwners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BOPMoneySecCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BOPBusIncDepPrpCov"
+    desc="Business Income - Dependent Prop"
+    identifierCode="BOPBusIncDepPrpCov"
+    name="Business Income - Dependent Property">
+    <category
+      code="BusinessOwners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BOPBusIncDepPrpCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BOPBusIncExtCov"
+    desc="Business Income - Extended Period"
+    identifierCode="BOPBusIncExtCov"
+    name="Business Income - Extended Period">
+    <category
+      code="BusinessOwners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BOPBusIncExtCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BOPBusIncPayrollCov"
+    desc="BOP Business Income - Ordinary Payroll"
+    identifierCode="BOPBusIncPayrollCov"
+    name="Business Income - Ordinary Payroll">
+    <category
+      code="BusinessOwners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BOPBusIncPayrollCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BOPY2KIncomeExpenseCov"
+    desc="Income/Expense - Electronic Equip."
+    identifierCode="BOPY2KIncomeExpenseCov"
+    name="Income/Expense - Electronic Equip.">
+    <category
+      code="BusinessOwners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BOPY2KIncomeExpenseCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BOPAdditionalCov"
+    desc="Special Coverage Packages"
+    identifierCode="BOPAdditionalCov"
+    name="Special Coverage Packages">
+    <category
+      code="BusinessOwners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BOPAdditionalCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BOPLiabilityCov"
+    desc="Liability"
+    identifierCode="BOPLiabilityCov"
+    name="Liability">
+    <category
+      code="BusinessOwners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BOPLiabilityBI"
+      typelist="CoverageSubtype"/>
+    <category
+      code="BOPLiabilityPD"
+      typelist="CoverageSubtype"/>
+    <category
+      code="BOPLiabilityGEN"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BOPMedExpCov"
+    desc="Premises Medical Expense"
+    identifierCode="BOPMedExpCov"
+    name="Premises Medical Expense">
+    <category
+      code="BusinessOwners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BOPMedExpCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BOPPersAdvertInj"
+    desc="Personal and Advertising Injury"
+    identifierCode="BOPPersAdvertInj"
+    name="Personal and Advertising Injury">
+    <category
+      code="BusinessOwners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BOPPersAdvertInj"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BOPTenantFireCov"
+    desc="Tenants Fire Liability"
+    identifierCode="BOPTenantFireCov"
+    name="Tenants Fire Liability">
+    <category
+      code="BusinessOwners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BOPTenantFireCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BOPEmpBenefits"
+    desc="Employee Benefits Liability"
+    identifierCode="BOPEmpBenefits"
+    name="Employee Benefits Liability">
+    <category
+      code="BusinessOwners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BOPEmpBenefits"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BOPEmpBenExtRpting"
+    desc="Employee Benefits Extended Reporting"
+    identifierCode="BOPEmpBenExtRpting"
+    name="Employee Benefits Extended Reporting">
+    <category
+      code="BusinessOwners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BOPEmpBenExtRpting"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BOPLeasedWorkerInjCov"
+    desc="Leased Workers - Injury Coverage"
+    identifierCode="BOPLeasedWorkerInjCov"
+    name="Leased Workers - Injury Coverage">
+    <category
+      code="BusinessOwners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BOPLeasedWorkerInjBI"
+      typelist="CoverageSubtype"/>
+    <category
+      code="BOPLeasedWorkerInjCovGEN"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BOPPollutionCov"
+    desc="Limited Pollution Liability Extension"
+    identifierCode="BOPPollutionCov"
+    name="Pollution - Limited Liability Extension">
+    <category
+      code="BusinessOwners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BOPPollutionCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BOPY2KLimitedCov"
+    desc="Computer Limited Liability Coverage"
+    identifierCode="BOPY2KLimitedCov"
+    name="Computer Limited Liability Coverage">
+    <category
+      code="BusinessOwners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BOPY2KLimitedCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BOPY2KPremOnlyCov"
+    desc="Computer Liability-Premises Only"
+    identifierCode="BOPY2KPremOnlyCov"
+    name="Computer Liability-Premises Only">
+    <category
+      code="BusinessOwners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BOPY2KPremOnlyCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BOPFDService"
+    desc="FD Service Contract"
+    identifierCode="BOPFDService"
+    name="FD Service Contract">
+    <category
+      code="BusinessOwners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BOPFDService"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BOPFoodContamCov"
+    desc="Food Contamination Coverage"
+    identifierCode="BOPFoodContamCov"
+    name="Food Contamination Coverage">
+    <category
+      code="BusinessOwners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BOPFoodContamCovINCOME"
+      typelist="CoverageSubtype"/>
+    <category
+      code="BOPFoodContamCovGEN"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BOPFungiPropCov"
+    desc="Limited Fungi Coverage (Property)"
+    identifierCode="BOPFungiPropCov"
+    name="Limited Fungi Coverage (Property)">
+    <category
+      code="BusinessOwners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BOPFungiPropCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BOPNewAcquiredOrgCov"
+    desc="Newly Acquired Organization Coverage"
+    identifierCode="BOPNewAcquiredOrgCov"
+    name="Newly Acquired Organization Coverage">
+    <category
+      code="BusinessOwners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BOPNewAcquiredOrgCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BusIncChangeCov"
+    desc="Bus. Inc. Waiting Period Change"
+    identifierCode="BusIncChangeCov"
+    name="Bus. Inc. Waiting Period Change">
+    <category
+      code="BusinessOwners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BusIncChangeCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BOPLiquorCov"
+    desc="Liquor Liability Coverage"
+    identifierCode="BOPLiquorCov"
+    name="Liquor Liability Coverage">
+    <category
+      code="BusinessOwners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BOPLiquorCovBI"
+      typelist="CoverageSubtype"/>
+    <category
+      code="BOPLiquorCovGEN"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BOPLiquorEvents"
+    desc="Liquor Liability - Event Only"
+    identifierCode="BOPLiquorEvents"
+    name="Liquor Liability - Event Only">
+    <category
+      code="BusinessOwners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BOPLiquorEventsBI"
+      typelist="CoverageSubtype"/>
+    <category
+      code="BOPLiquorEventsGEN"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BOPLiquorRemoveExc"
+    desc="Liquor Liability - Remove Exclusion"
+    identifierCode="BOPLiquorRemoveExc"
+    name="Liquor Liability - Remove Exclusion">
+    <category
+      code="BusinessOwners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BOPLiquorRemoveExc"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BOPLocWindHailCov"
+    desc="Windstorm/Hail"
+    identifierCode="BOPLocWindHailCov"
+    name="Windstorm/Hail">
+    <category
+      code="BusinessOwners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BOPLocWindHailCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BOPOutdoorProp"
+    desc="Outdoor Property"
+    identifierCode="BOPOutdoorProp"
+    name="Outdoor Property">
+    <category
+      code="BusinessOwners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BOPOutdoorProp"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BOPOutSignCov"
+    desc="Outdoor Signs"
+    identifierCode="BOPOutSignCov"
+    name="Outdoor Signs">
+    <category
+      code="BusinessOwners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BOPOutSignCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BOPOverflowCov"
+    desc="Water Backup and Sump Overflow"
+    identifierCode="BOPOverflowCov"
+    name="Water Backup and Sump Overflow">
+    <category
+      code="BusinessOwners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BOPOverflowCovPD"
+      typelist="CoverageSubtype"/>
+    <category
+      code="BOPOverflowCovCON"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BOPPersonalEffects"
+    desc="Personal Effects"
+    identifierCode="BOPPersonalEffects"
+    name="Personal Effects">
+    <category
+      code="BusinessOwners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BOPPersonalEffects"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BOPPersPropOffPrem"
+    desc="Personal Property Off Premises"
+    identifierCode="BOPPersPropOffPrem"
+    name="Personal Property Off Premises">
+    <category
+      code="BusinessOwners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BOPPersPropOffPrem"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BOPSpoilageCov"
+    desc="Spoilage"
+    identifierCode="BOPSpoilageCov"
+    name="Spoilage">
+    <category
+      code="BusinessOwners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BOPSpoilageCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BOPBarberCov"
+    desc="Barber/Beautician Liability"
+    identifierCode="BOPBarberCov"
+    name="Barber/Beautician Liability">
+    <category
+      code="BusinessOwners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BOPBarberCovBI"
+      typelist="CoverageSubtype"/>
+    <category
+      code="BOPBarberCovGEN"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BOPFuneralDirCov"
+    desc="Funeral Director Liability"
+    identifierCode="BOPFuneralDirCov"
+    name="Funeral Director Liability">
+    <category
+      code="BusinessOwners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BOPFuneralDirCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BOPHearingAidCov"
+    desc="Hearing Aid / Optician Liability"
+    identifierCode="BOPHearingAidCov"
+    name="Hearing Aid / Optician Liability">
+    <category
+      code="BusinessOwners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BOPHearingAidCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BOPPharmacistCov"
+    desc="Pharmacist Limited Liability Coverage"
+    identifierCode="BOPPharmacistCov"
+    name="Pharmacist Limited Liability Coverage">
+    <category
+      code="BusinessOwners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BOPPharmacistCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BOPPrinterCov"
+    desc="Printers Errors and Omissions"
+    identifierCode="BOPPrinterCov"
+    name="Printers Errors and Omissions">
+    <category
+      code="BusinessOwners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BOPPrinterCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BOPVetCov"
+    desc="Veterinarian Liability"
+    identifierCode="BOPVetCov"
+    name="Veterinarian Liability">
+    <category
+      code="BusinessOwners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BOPVetCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BOPCondoAssnCov"
+    desc="Condo Association Coverage"
+    identifierCode="BOPCondoAssnCov"
+    name="Condo Association Coverage">
+    <category
+      code="BusinessOwners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BOPCondoAssnCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BOPMotelCov"
+    desc="BOP Motel Coverage"
+    identifierCode="BOPMotelCov"
+    name="Motel Coverage">
+    <category
+      code="BusinessOwners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BOPMotelCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BOPSelfStorCov"
+    desc="Self Storage Coverage"
+    identifierCode="BOPSelfStorCov"
+    name="Self Storage Coverage">
+    <category
+      code="BusinessOwners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BOPSelfStorCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BOPToolsInstallUnschedCov"
+    desc="Contractors Tools/Installation"
+    identifierCode="BOPToolsInstallUnschedCov"
+    name="Contractors Tools/Installation">
+    <category
+      code="BusinessOwners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BOPToolsInstallUnschedCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BOPAlaskaAFGLCov"
+    desc="Alaska Attorney Fees - GL"
+    identifierCode="BOPAlaskaAFGLCov"
+    name="AK - Attorney Fees - GL">
+    <category
+      code="BusinessOwners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BOPAlaskaAFGLCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BOPCAEqBldgRecCov"
+    desc="CA - EQ Reconstruction"
+    identifierCode="BOPCAEqBldgRecCov"
+    name="CA - EQ Reconstruction">
+    <category
+      code="BusinessOwners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BOPCAEqBldgRecCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BOPCAEqBldgSubCov"
+    desc="CA Earthquake - Building Sublimits"
+    identifierCode="BOPCAEqBldgSubCov"
+    name="CA EQ - Building Sublimits">
+    <category
+      code="BusinessOwners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BOPCAEqBldgSubCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BOPMALeadPoisonCov"
+    desc="MA -  Lead Poisoning"
+    identifierCode="BOPMALeadPoisonCov"
+    name="MA - Lead Poisoning">
+    <category
+      code="BusinessOwners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BOPMALeadPoisonCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BOPMATenantReloCov"
+    desc="MA - Apartment Coverage"
+    identifierCode="BOPMATenantReloCov"
+    name="MA - Apartment Coverage">
+    <category
+      code="BusinessOwners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BOPMATenantReloCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BOPCertTerrorCap"
+    desc="Terror - Cap on Cert. Acts"
+    identifierCode="BOPCertTerrorCap"
+    name="Terror - Cap on Cert. Acts">
+    <category
+      code="BusinessOwners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BOPCertTerrorCap"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BOPPropertyCov"
+    desc="Policywide Property Deductible"
+    identifierCode="BOPPropertyCov"
+    name="Policywide Property Deductible">
+    <category
+      code="BusinessOwners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BOPPropertyCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BOPEqBldgCov"
+    desc="Earthquake"
+    identifierCode="BOPEqBldgCov"
+    name="Earthquake">
+    <category
+      code="BusinessOwners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BOPEqBldgCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BOPEqSpBldgCov"
+    desc="Earthquake - Sprinkler Leakage"
+    identifierCode="BOPEqSpBldgCov"
+    name="Earthquake - Sprinkler Leakage">
+    <category
+      code="BusinessOwners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BOPEQSpLeakBuilding"
+      typelist="CoverageSubtype"/>
+    <category
+      code="BOPEQSpLeakBPP"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BOPMineSubCov"
+    desc="Mine Subsidence"
+    identifierCode="BOPMineSubCov"
+    name="Mine Subsidence">
+    <category
+      code="BusinessOwners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BOPMineSubCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BOPEmpDisCov"
+    desc="Employee Dishonesty"
+    identifierCode="BOPEmpDisCov"
+    name="Employee Dishonesty">
+    <category
+      code="BusinessOwners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BOPEmpDisCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BOPHiredAuto"
+    desc="Hired Auto"
+    identifierCode="BOPHiredAuto"
+    name="Hired Auto">
+    <category
+      code="BusinessOwners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BOPHiredAutoBI"
+      typelist="CoverageSubtype"/>
+    <category
+      code="BOPHiredAutoVEH"
+      typelist="CoverageSubtype"/>
+    <category
+      code="BOPHiredAutoGEN"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BOPNonOwnedAutoCov"
+    desc="Non-owned Auto Liability"
+    identifierCode="BOPNonOwnedAutoCov"
+    name="Non-owned Auto Liability">
+    <category
+      code="BusinessOwners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BOPNonOwnedAutoCovBI"
+      typelist="CoverageSubtype"/>
+    <category
+      code="BOPNonOwnedAutoVEH"
+      typelist="CoverageSubtype"/>
+    <category
+      code="BOPNonOwnedAutoCovGEN"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BOPGuestPropCov"
+    desc="Guest's Property Liability"
+    identifierCode="BOPGuestPropCov"
+    name="Guest's Property">
+    <category
+      code="BusinessOwners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BOPGuestPropCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BOPGuestSafeDepCov"
+    desc="Guests Property In Safe Deposit"
+    identifierCode="BOPGuestSafeDepCov"
+    name="Guests Property In Safe Deposit">
+    <category
+      code="BusinessOwners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BOPGuestSafeDepCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="zd7gujr17mccs3puv5jreeu1e59"
+    desc="Personal Liability"
+    identifierCode="HOPCovE"
+    name="Coverage E - Personal Liability">
+    <category
+      code="HOPHomeowners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="zd7gujr17mccs3puv5jreeu1e59GD"
+      typelist="CoverageSubtype"/>
+    <category
+      code="zd7gujr17mccs3puv5jreeu1e59BI"
+      typelist="CoverageSubtype"/>
+    <category
+      code="zd7gujr17mccs3puv5jreeu1e59PD"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="z8tjsluucfmoh3nho364cli3uv8"
+    desc="Medical Payments To Others"
+    identifierCode="HOPCovF"
+    name="Coverage F - Medical Payments To Others">
+    <category
+      code="HOPHomeowners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="z8tjsluucfmoh3nho364cli3uv8"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="zl4i2neakg3g4ecg0t01bj445va"
+    desc="Dwelling"
+    identifierCode="HOPCovA"
+    name="Coverage A - Dwelling">
+    <category
+      code="HOPHomeowners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="zl4i2neakg3g4ecg0t01bj445va"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="z26h4fbq18l81e5n478v5v07mj8"
+    desc="Other Structures"
+    identifierCode="HOPCovB"
+    name="Coverage B - Other Structures">
+    <category
+      code="HOPHomeowners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="z26h4fbq18l81e5n478v5v07mj8"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="zbtjua8nrhpvncl90406b37g2l9"
+    desc="Personal Property"
+    identifierCode="HOPCovC"
+    name="Coverage C - Personal Property">
+    <category
+      code="HOPHomeowners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="zbtjua8nrhpvncl90406b37g2l9"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="zpsii9qu58bma5eju8f5pgi0brb"
+    desc="Loss of Use"
+    identifierCode="HOPCovD"
+    name="Coverage D - Loss of Use">
+    <category
+      code="HOPHomeowners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="zpsii9qu58bma5eju8f5pgi0brb"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="zocji60oon5qu43lr22k8q4o15a"
+    desc="Section I Deductibles"
+    identifierCode="HOPSectionIDeductibles"
+    name="Section I Deductibles">
+    <category
+      code="HOPHomeowners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <!-- <category
+      code="zocji60oon5qu43lr22k8q4o15a"
+      typelist="CoverageSubtype"/> -->
+  </typecode>
+  <typecode
+    code="zu7jmsu26rk141vkaijeq6golm9"
+    desc="Building Additions and Alterations"
+    identifierCode="HOPBuildingAdditions"
+    name="Building Additions and Alterations">
+    <category
+      code="HOPHomeowners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <!-- <category
+      code="zu7jmsu26rk141vkaijeq6golm9"
+      typelist="CoverageSubtype"/>-->
+  </typecode>
+  <typecode
+    code="zdtga636fmshibrnrfu1h5s7cvb"
+    desc="Collapse"
+    identifierCode="HOPCollapse"
+    name="Collapse">
+    <category
+      code="HOPHomeowners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <!-- <category
+      code="zdtga636fmshibrnrfu1h5s7cvb"
+      typelist="CoverageSubtype"/> -->
+  </typecode>
+  <typecode
+    code="z7ui0o2ttovs76h6rtk6q9gbeh8"
+    desc="Construction Permit Increase Costs"
+    identifierCode="HOPConstructionPermitIncreaseCosts"
+    name="Construction Permit Increase Costs">
+    <category
+      code="HOPHomeowners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <!-- <category
+      code="z7ui0o2ttovs76h6rtk6q9gbeh8"
+      typelist="CoverageSubtype"/> -->
+  </typecode>
+  <typecode
+    code="zu4gq88v6fqir3hpdsamf12gu2a"
+    desc="Credit/Debit Card, Forgery and Counterfeit Money"
+    identifierCode="HOPCreditCardProtection"
+    name="Credit/Debit Card, Forgery and Counterfeit Money">
+    <category
+      code="HOPHomeowners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <!-- <category
+      code="zu4gq88v6fqir3hpdsamf12gu2a"
+      typelist="CoverageSubtype"/> -->
+  </typecode>
+  <typecode
+    code="zmpji3fssm9h5emk8uqv9nl6sb8"
+    desc="Damage to Property of Others"
+    identifierCode="HOPDamagePropOthers"
+    name="Damage to Property of Others">
+    <category
+      code="HOPHomeowners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <!-- <category
+      code="zmpji3fssm9h5emk8uqv9nl6sb8"
+      typelist="CoverageSubtype"/> -->
+  </typecode>
+  <typecode
+    code="ztihci8muqm61c3a6vmaeb28a2b"
+    desc="Data and Records"
+    identifierCode="HOPDataAndRecords"
+    name="Data and Records">
+    <category
+      code="HOPHomeowners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <!-- <category
+      code="ztihci8muqm61c3a6vmaeb28a2b"
+      typelist="CoverageSubtype"/> -->
+  </typecode>
+  <typecode
+    code="z2cjsu8d7ldr23ojbnc6es16ti9"
+    desc="Debris Removal"
+    identifierCode="HOPDebrisRemoval"
+    name="Debris Removal">
+    <category
+      code="HOPHomeowners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <!-- <category
+      code="z2cjsu8d7ldr23ojbnc6es16ti9"
+      typelist="CoverageSubtype"/> -->
+  </typecode>
+  <typecode
+    code="zo4iu93mmrrl90ise6f67gqif98"
+    desc="Debris Removal of Trees"
+    identifierCode="HOPDebrisTreeRemoval"
+    name="Debris Removal of Trees">
+    <category
+      code="HOPHomeowners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <!-- <category
+      code="zo4iu93mmrrl90ise6f67gqif98"
+      typelist="CoverageSubtype"/> -->
+  </typecode>
+  <typecode
+    code="zrjhog8dpqkb00hc4dtc7ljrukb"
+    desc="Dwelling Under Construction - Extension of Coverages"
+    identifierCode="HOPDwellingUnderConstruction"
+    name="Dwelling Under Construction - Extension of Coverages">
+    <category
+      code="HOPHomeowners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <!-- <category
+      code="zrjhog8dpqkb00hc4dtc7ljrukb"
+      typelist="CoverageSubtype"/> -->
+  </typecode>
+  <typecode
+    code="zvoiu1bhk3vs48lq0i2ef8fogfa"
+    desc="Emergency Living Expense - Power Interruption Off Premises"
+    identifierCode="HOPEmergencyLivingExpense"
+    name="Emergency Living Expense - Power Interruption Off Premises">
+    <category
+      code="HOPHomeowners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <!-- <category
+      code="zvoiu1bhk3vs48lq0i2ef8fogfa"
+      typelist="CoverageSubtype"/> -->
+  </typecode>
+  <typecode
+    code="z6vgil0u20qn9a8b8h9c24sc6eb"
+    desc="Emergency Removal of Property"
+    identifierCode="HOPEmergencyPropertyRemoval"
+    name="Emergency Removal of Property">
+    <category
+      code="HOPHomeowners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <!-- <category
+      code="z6vgil0u20qn9a8b8h9c24sc6eb"
+      typelist="CoverageSubtype"/> -->
+  </typecode>
+  <typecode
+    code="zk9jol4tjcvk422ctjoib6nm5s9"
+    desc="Fire Department Service Charge"
+    identifierCode="HOPFireDeptCharges"
+    name="Fire Department Service Charge">
+    <category
+      code="HOPHomeowners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <!-- <category
+      code="zk9jol4tjcvk422ctjoib6nm5s9"
+      typelist="CoverageSubtype"/> -->
+  </typecode>
+  <typecode
+    code="z7lhomv5qqndfdnsr9680bb1hq9"
+    desc="Fire Extinguisher Recharge"
+    identifierCode="HOPFireExtinguisherRecharge"
+    name="Fire Extinguisher Recharge">
+    <category
+      code="HOPHomeowners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <!-- <category
+      code="z7lhomv5qqndfdnsr9680bb1hq9"
+      typelist="CoverageSubtype"/> -->
+  </typecode>
+  <typecode
+    code="zeliiv44ls0fd7s7cdln05s05qa"
+    desc="First Aid"
+    identifierCode="HOPFirstAid"
+    name="First Aid">
+    <category
+      code="HOPHomeowners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <!-- <category
+      code="zeliiv44ls0fd7s7cdln05s05qa"
+      typelist="CoverageSubtype"/> -->
+  </typecode>
+  <typecode
+    code="zjjh6939q3g4n4k900psm1l21o9"
+    desc="Fungus &amp; Mold Remediation"
+    identifierCode="HOPFungusMoldRemediation"
+    name="Fungus &amp; Mold Remediation">
+    <category
+      code="HOPHomeowners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="zjjh6939q3g4n4k900psm1l21o9"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="zu6i6rdl89rc2cu7inkfbe38b6b"
+    desc="Glass"
+    identifierCode="HOPGlass"
+    name="Glass">
+    <category
+      code="HOPHomeowners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <!-- <category
+      code="zu6i6rdl89rc2cu7inkfbe38b6b"
+      typelist="CoverageSubtype"/> -->
+  </typecode>
+  <typecode
+    code="ze3gohh5o7209812gfah4cs0ed8"
+    desc="Grave Markers"
+    identifierCode="HOPGraveMarkers"
+    name="Grave Markers">
+    <category
+      code="HOPHomeowners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <!-- <category
+      code="ze3gohh5o7209812gfah4cs0ed8"
+      typelist="CoverageSubtype"/> -->
+  </typecode>
+  <typecode
+    code="z2tgk324p0qk1fq75ei5be8g5gb"
+    desc="Identity Theft Protection"
+    identifierCode="HOPIdTheft"
+    name="Identity Theft Protection">
+    <category
+      code="HOPHomeowners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="z2tgk324p0qk1fq75ei5be8g5gb"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="zk9i4qe1i9ncn6lptuvt85f0439"
+    desc="Inflation Protection"
+    identifierCode="HOPInflationProtection"
+    name="Inflation Protection">
+    <category
+      code="HOPHomeowners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <!-- <category
+      code="zk9i4qe1i9ncn6lptuvt85f0439"
+      typelist="CoverageSubtype"/> -->
+  </typecode>
+  <typecode
+    code="z0ui0qal30ijg7f24ndprcj356b"
+    desc="Landlord's Furnishings"
+    identifierCode="HOPLandlordsFurnishings"
+    name="Landlord's Furnishings">
+    <category
+      code="HOPHomeowners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <!-- <category
+      code="z0ui0qal30ijg7f24ndprcj356b"
+      typelist="CoverageSubtype"/> -->
+  </typecode>
+  <typecode
+    code="z78h4sr6nki8ha99hku55rd4uaa"
+    desc="Lock Replacement"
+    identifierCode="HOPLockReplacement"
+    name="Lock Replacement">
+    <category
+      code="HOPHomeowners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <!-- <category
+      code="z78h4sr6nki8ha99hku55rd4uaa"
+      typelist="CoverageSubtype"/> -->
+  </typecode>
+  <typecode
+    code="zp2g4atrihccn086l4vpbreit28"
+    desc="Loss Assessment"
+    identifierCode="HOPLossAssessment"
+    name="Loss Assessment">
+    <category
+      code="HOPHomeowners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <!-- <category
+      code="zp2g4atrihccn086l4vpbreit28"
+      typelist="CoverageSubtype"/> -->
+  </typecode>
+  <typecode
+    code="zilgk228c95qt3ob6v9s6na08ab"
+    desc="Mortgage Closing Cost Expense"
+    identifierCode="HOPMortgageClosingCostExpense"
+    name="Mortgage Closing Cost Expense">
+    <category
+      code="HOPHomeowners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <!-- <category
+      code="zilgk228c95qt3ob6v9s6na08ab"
+      typelist="CoverageSubtype"/> -->
+  </typecode>
+  <typecode
+    code="zi8gq0ddmt92f4efi0tqik4hgv8"
+    desc="Ordinance Or Law"
+    identifierCode="HOPOrdinanceOrLaw"
+    name="Ordinance Or Law">
+    <category
+      code="HOPHomeowners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <!-- <category
+      code="zi8gq0ddmt92f4efi0tqik4hgv8"
+      typelist="CoverageSubtype"/> -->
+  </typecode>
+  <typecode
+    code="z8oh0o5asbk8g9v4bspvmgpq3k9"
+    desc="Personal Property Off Premises - Earthquake and Flood"
+    identifierCode="HOPPersonalPropertyOffPremises"
+    name="Personal Property Off Premises - Earthquake and Flood">
+    <category
+      code="HOPHomeowners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <!-- <category
+      code="z8oh0o5asbk8g9v4bspvmgpq3k9"
+      typelist="CoverageSubtype"/> -->
+  </typecode>
+  <typecode
+    code="zbags5ei5vefn92sf55g2tielv8"
+    desc="Reasonable Repairs"
+    identifierCode="HOPReasonableRepairs"
+    name="Reasonable Repairs">
+    <category
+      code="HOPHomeowners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <!-- <category
+      code="zbags5ei5vefn92sf55g2tielv8"
+      typelist="CoverageSubtype"/> -->
+  </typecode>
+  <typecode
+    code="zuhiksn15sd0g53anl8v0pu45db"
+    desc="Reward"
+    identifierCode="HOPReward"
+    name="Reward">
+    <category
+      code="HOPHomeowners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <!-- <category
+      code="zuhiksn15sd0g53anl8v0pu45db"
+      typelist="CoverageSubtype"/> -->
+  </typecode>
+  <typecode
+    code="z19ia8ibe31cierblikntvppe68"
+    desc="Trees, Shrubs, Plants &amp; Lawns"
+    identifierCode="HOPTreesShrubsPlantsLawns"
+    name="Trees, Shrubs, Plants &amp; Lawns">
+    <category
+      code="HOPHomeowners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <!-- <category
+      code="z19ia8ibe31cierblikntvppe68"
+      typelist="CoverageSubtype"/> -->
+  </typecode>
+  <typecode
+    code="z1bg07ii0pfa4cj02al1n88sgeb"
+    desc="Volcanic Action"
+    identifierCode="HOPVolcanicAction"
+    name="Volcanic Action">
+    <category
+      code="HOPHomeowners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <!-- <category
+      code="z1bg07ii0pfa4cj02al1n88sgeb"
+      typelist="CoverageSubtype"/> -->
+  </typecode>
+  <typecode
+    code="z4lhib5av546s2ko4naf3s8crf8"
+    desc=""
+    identifierCode="HOPAssistedLivingCare"
+    name="Assisted Living Care">
+    <category
+      code="HOPHomeowners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <!-- <category
+      code="z4lhib5av546s2ko4naf3s8crf8"
+      typelist="CoverageSubtype"/> -->
+  </typecode>
+  <typecode
+    code="z50ikk44122467ads0qitrdqqi8"
+    desc="Backup of Sewers, Drains and Sump Pump"
+    identifierCode="HOPBackupSewersDrainsPump"
+    name="Backup of Sewers, Drains and Sump Pump">
+    <category
+      code="HOPHomeowners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <!-- <category
+      code="z50ikk44122467ads0qitrdqqi8"
+      typelist="CoverageSubtype"/> -->
+  </typecode>
+  <typecode
+    code="zr4gsjbrvihdr6ktd06s5kc87n9"
+    desc="Earthquake"
+    identifierCode="HOPEarthquake"
+    name="Earthquake">
+    <category
+      code="HOPHomeowners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <!-- <category
+      code="zr4gsjbrvihdr6ktd06s5kc87n9"
+      typelist="CoverageSubtype"/> -->
+  </typecode>
+  <typecode
+    code="zb4iiqcl6a21b0grb6aamorc4ca"
+    desc="Escaped Liquid Fuel"
+    identifierCode="HOPEscapedLiquidFuel"
+    name="Escaped Liquid Fuel">
+    <category
+      code="HOPHomeowners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <!-- <category
+      code="zb4iiqcl6a21b0grb6aamorc4ca"
+      typelist="CoverageSubtype"/> -->
+  </typecode>
+  <typecode
+    code="zc9i82cntebm2a97javsujkqk7b"
+    desc="Extended Theft for Residence Rented to Others"
+    identifierCode="HOPExtendedResidenceTheft"
+    name="Extended Residence Theft">
+    <category
+      code="HOPHomeowners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <!-- <category
+      code="zc9i82cntebm2a97javsujkqk7b"
+      typelist="CoverageSubtype"/> -->
+  </typecode>
+  <typecode
+    code="zr3jqmau1bned1g0oe6pqhu7ct8"
+    desc="Foundation Water Damage from Seepage"
+    identifierCode="HOPFoundationWaterDamage"
+    name="Foundation Water Damage from Seepage">
+    <category
+      code="HOPHomeowners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <!-- <category
+      code="zr3jqmau1bned1g0oe6pqhu7ct8"
+      typelist="CoverageSubtype"/> -->
+  </typecode>
+  <typecode
+    code="z39i08pn1407l7i6bv5j2jk2jhb"
+    desc=""
+    identifierCode="HOPGolfCart"
+    name="Golf Cart">
+    <category
+      code="HOPHomeowners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <!-- <category
+      code="z39i08pn1407l7i6bv5j2jk2jhb"
+      typelist="CoverageSubtype"/> -->
+  </typecode>
+  <typecode
+    code="z4bjaqp9ugpiqe79vlsr61jkfb9"
+    desc=""
+    identifierCode="HOPIncLimitOtherStructures"
+    name="Increased Limit - Other Structures">
+    <category
+      code="HOPHomeowners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <!-- <category
+      code="z4bjaqp9ugpiqe79vlsr61jkfb9"
+      typelist="CoverageSubtype"/> -->
+  </typecode>
+  <typecode
+    code="zbkhgt4jvb1i76oglrok2qsnq09"
+    desc="Increased Limits - Personal Property At Other Residences"
+    identifierCode="HOPIncLimitPersPropertyAtOtherResidences"
+    name="Increased Limits - Personal Property At Other Residences">
+    <category
+      code="HOPHomeowners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <!-- <category
+      code="zbkhgt4jvb1i76oglrok2qsnq09"
+      typelist="CoverageSubtype"/> -->
+  </typecode>
+  <typecode
+    code="z6phevqrmj0r38hvvhtbk7pimv8"
+    desc="Limited Fungus And Mold Liability"
+    identifierCode="HOPLimitedFungusAndMold"
+    name="Limited Fungus And Mold Liability">
+    <category
+      code="HOPHomeowners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <!-- <category
+      code="z6phevqrmj0r38hvvhtbk7pimv8"
+      typelist="CoverageSubtype"/> -->
+  </typecode>
+  <typecode
+    code="zntgc6mmauu3hagr0g8ura77549"
+    desc=""
+    identifierCode="HOPPermittedIncidentalOccupancies"
+    name="Permitted Incidental Occupancies">
+    <category
+      code="HOPHomeowners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <!-- <category
+      code="zntgc6mmauu3hagr0g8ura77549"
+      typelist="CoverageSubtype"/> -->
+  </typecode>
+  <typecode
+    code="zqai6drb846ga0qkobutjcleb2a"
+    desc="Refrigerated Contents"
+    identifierCode="HOPRefrigeratedContents"
+    name="Refrigerated Contents">
+    <category
+      code="HOPHomeowners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <!-- <category
+      code="zqai6drb846ga0qkobutjcleb2a"
+      typelist="CoverageSubtype"/> -->
+  </typecode>
+  <typecode
+    code="zs8hqfgnkr1v9396ccjbc8pbki8"
+    desc="Scheduled Landlord's Furnishings"
+    identifierCode="HOPScheduledLandlordsFurnishing"
+    name="Scheduled Landlord's Furnishings">
+    <category
+      code="HOPHomeowners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <!-- <category
+      code="zs8hqfgnkr1v9396ccjbc8pbki8"
+      typelist="CoverageSubtype"/> -->
+  </typecode>
+  <typecode
+    code="zlghejgaimjih96iplkcios7bs9"
+    desc="Scheduled Personal Property"
+    identifierCode="HOPScheduledPersonalProperty"
+    name="Scheduled Personal Property">
+    <category
+      code="HOPHomeowners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="zlghejgaimjih96iplkcios7bs9"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="zdmj42u34b70e98oe73a1ab3u48"
+    desc="Sinkhole Collapse"
+    identifierCode="HOPSinkhole"
+    name="Sinkhole Collapse">
+    <category
+      code="HOPHomeowners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <!-- <category
+      code="zdmj42u34b70e98oe73a1ab3u48"
+      typelist="CoverageSubtype"/> -->
+  </typecode>
+  <typecode
+    code="z74i2o900p9aner9khi3ucsf1pb"
+    desc="Special Computer Coverage"
+    identifierCode="HOPSpecialComputerCoverage"
+    name="Special Computer Coverage">
+    <category
+      code="HOPHomeowners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <!-- <category
+      code="z74i2o900p9aner9khi3ucsf1pb"
+      typelist="CoverageSubtype"/> -->
+  </typecode>
+  <typecode
+    code="zo8jgu75d357q794cno84vh0338"
+    desc="Specific Structures Away From Residence"
+    identifierCode="HOPSpecificStructsAwayFromResidence"
+    name="Specific Structures Away From Residence">
+    <category
+      code="HOPHomeowners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <!-- <category
+      code="zo8jgu75d357q794cno84vh0338"
+      typelist="CoverageSubtype"/> -->
+  </typecode>
+  <typecode
+    code="zpajido164efucetokjge4q45e9"
+    desc="Structures Rented To Others - Residence Premises"
+    identifierCode="HOPStructuresRentedToOthersResidencePremises"
+    name="Structures Rented To Others - Residence Premises">
+    <category
+      code="HOPHomeowners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <!-- <category
+      code="zpajido164efucetokjge4q45e9"
+      typelist="CoverageSubtype"/> -->
+  </typecode>
+  <typecode
+    code="zc1jk38ardj581cfmn0e395i758"
+    desc="Valuable Personal Property"
+    identifierCode="HOPValuablePersonalProperty"
+    name="Valuable Personal Property">
+    <category
+      code="HOPHomeowners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <!-- <category
+      code="zc1jk38ardj581cfmn0e395i758"
+      typelist="CoverageSubtype"/> -->
+  </typecode>
+  <typecode
+    code="zrcjqe5k1gu1ic8sbend4tpb1gb"
+    desc="Workers' Compensation"
+    identifierCode="HOPWorkersCompensation"
+    name="Workers' Compensation">
+    <category
+      code="HOPHomeowners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <!-- <category
+      code="zrcjqe5k1gu1ic8sbend4tpb1gb"
+      typelist="CoverageSubtype"/> -->
+  </typecode>
+  <typecode
+    code="z1gguiuovtplr3j4rucqdv0stra"
+    desc=""
+    identifierCode="HOPAssistedLivingCareItem"
+    name="Assisted Living Care Item">
+    <category
+      code="HOPHomeowners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <!-- <category
+      code="z1gguiuovtplr3j4rucqdv0stra"
+      typelist="CoverageSubtype"/> -->
+  </typecode>
+  <typecode
+    code="zdogeskkpv01dc9p8upk23dne09"
+    desc="Golf Cart Coverage - Schedule Detail"
+    identifierCode="HOPGolfCartItem"
+    name="Golf Cart Item">
+    <category
+      code="HOPHomeowners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <!-- <category
+      code="zdogeskkpv01dc9p8upk23dne09"
+      typelist="CoverageSubtype"/> -->
+  </typecode>
+  <typecode
+    code="z1fhulh3d21qr4o5ktk2e54ndpb"
+    desc="Increased Limit - Other Structures Item"
+    identifierCode="HOPIncLimitOtherStructuresItem"
+    name="Increased Limit - Other Structures Item">
+    <category
+      code="HOPHomeowners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <!-- <category
+      code="z1fhulh3d21qr4o5ktk2e54ndpb"
+      typelist="CoverageSubtype"/> -->
+  </typecode>
+  <typecode
+    code="zm8igrhpt3bfg2lvdnl5lf0iat9"
+    desc="Increased Limits - Personal Property At Other Residences Item"
+    identifierCode="HOPIncLimitPersPropertyAtOtherResidencesItem"
+    name="Increased Limits - Personal Property At Other Residences Item">
+    <category
+      code="HOPHomeowners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <!-- <category
+      code="zm8igrhpt3bfg2lvdnl5lf0iat9"
+      typelist="CoverageSubtype"/> -->
+  </typecode>
+  <typecode
+    code="zrrhqcqhj768sfnjh0uoas3n5d9"
+    desc=""
+    identifierCode="HOPPermittedIncidentalOccupanciesItem"
+    name="Permitted Incidental Occupancies Item">
+    <category
+      code="HOPHomeowners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <!-- <category
+      code="zrrhqcqhj768sfnjh0uoas3n5d9"
+      typelist="CoverageSubtype"/> -->
+  </typecode>
+  <typecode
+    code="zo5h0mvsjli2d8gp47cpa3appfb"
+    desc=""
+    identifierCode="HOPScheduledLandlordsFurnishingItem"
+    name="Scheduled Landlord's Furnishings Item">
+    <category
+      code="HOPHomeowners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <!-- <category
+      code="zo5h0mvsjli2d8gp47cpa3appfb"
+      typelist="CoverageSubtype"/> -->
+  </typecode>
+  <typecode
+    code="zd5joencat3ep2cm32h3e5cdmj9"
+    desc="Scheduled Personal Property Item"
+    identifierCode="HOPScheduledPersonalPropertyItem"
+    name="Scheduled Personal Property Item">
+    <category
+      code="HOPHomeowners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <!-- <category
+      code="zd5joencat3ep2cm32h3e5cdmj9"
+      typelist="CoverageSubtype"/> -->
+  </typecode>
+  <typecode
+    code="zh5j85vgpge8n6saji15tsonl8b"
+    desc=""
+    identifierCode="HOPSpecificStructsAwayFromResidenceItem"
+    name="Specific Structures Away From Residence Item">
+    <category
+      code="HOPHomeowners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <!-- <category
+      code="zh5j85vgpge8n6saji15tsonl8b"
+      typelist="CoverageSubtype"/> -->
+  </typecode>
+  <typecode
+    code="zcgjavp5vcr21558v9bucnfqj0b"
+    desc="Structures Rented To Others - Residence Premises Item"
+    identifierCode="HOPStructuresRentedToOthersResidencePremisesItem"
+    name="Structures Rented To Others - Residence Premises Item">
+    <category
+      code="HOPHomeowners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <!-- <category
+      code="zcgjavp5vcr21558v9bucnfqj0b"
+      typelist="CoverageSubtype"/> -->
+  </typecode>
+  <typecode
+    code="zc9iqhupesj0fbpvo8ltn4526b8"
+    desc="Valuable Personal Property Item"
+    identifierCode="HOPValuablePersonalPropertyItem"
+    name="Valuable Personal Property Item">
+    <category
+      code="HOPHomeowners"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <!-- <category
+      code="zc9iqhupesj0fbpvo8ltn4526b8"
+      typelist="CoverageSubtype"/> -->
+  </typecode>
+  <typecode
+    code="BADOCCollisionCov"
+    desc="Collision for Drive Other Car"
+    identifierCode="BADOCCollisionCov"
+    name="Collision -DOC">
+    <category
+      code="BusinessAuto"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BADOCCollisionCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BADOCCompCov"
+    desc="Comprehensive for Drive Other Car"
+    identifierCode="BADOCCompCov"
+    name="Comprehensive - DOC">
+    <category
+      code="BusinessAuto"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BADOCCompCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BADOCLiabilityCov"
+    desc="Liability - Bodily Injury and Property Damage - DOC"
+    identifierCode="BADOCLiabilityCov"
+    name="Liability - Bodily Injury and Property Damage - DOC">
+    <category
+      code="BusinessAuto"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BADOCLiabilityCovBI"
+      typelist="CoverageSubtype"/>
+    <category
+      code="BADOCLiabilityCovPD"
+      typelist="CoverageSubtype"/>
+    <category
+      code="BADOCLiabilityCovVEH"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BADOCMedPayCov"
+    desc="Medical Payments  for Drive Other Car"
+    identifierCode="BADOCMedPayCov"
+    name="Medical Payments - DOC">
+    <category
+      code="BusinessAuto"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BADOCMedPayCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BADOCUnderinsCov"
+    desc="Underinsured Motorist for Drive Other Car"
+    identifierCode="BADOCUnderinsCov"
+    name="Underinsured Motorist - DOC">
+    <category
+      code="BusinessAuto"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BADOCUnderinsCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BADOCUninsuredCov"
+    desc="Uninsured Motorist for Drive Other Car"
+    identifierCode="BADOCUninsuredCov"
+    name="Uninsured Motorist - DOC">
+    <category
+      code="BusinessAuto"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BADOCUninsuredBI"
+      typelist="CoverageSubtype"/>
+    <category
+      code="BADOCUninsuredPD"
+      typelist="CoverageSubtype"/>
+    <category
+      code="BADOCUninsuredVEH"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BAAudVisDataEqip2Cov"
+    desc="Audio Visual Data Equipment"
+    identifierCode="BAAudVisDataEqip2Cov"
+    name="Audio, Visual, Data Electronic Equipment- Stated Amt.">
+    <category
+      code="BusinessAuto"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BAAudVisDataEqip2Cov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BAFellowEmployeesCov"
+    desc="Fellow Employees"
+    identifierCode="BAFellowEmployeesCov"
+    name="Fellow Employees">
+    <category
+      code="BusinessAuto"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BAFellowEmployeesCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BAHiredCollisionCov"
+    desc="Hired Auto Collision"
+    identifierCode="BAHiredCollisionCov"
+    name="Hired Auto Collision">
+    <category
+      code="BusinessAuto"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BAHiredCollisionCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BAHiredCompCov"
+    desc="Hired Auto Comprehensive"
+    identifierCode="BAHiredCompCov"
+    name="Hired Auto Comprehensive">
+    <category
+      code="BusinessAuto"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BAHiredCompCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BAHiredLiabilityCov"
+    desc="Hired Auto Liability"
+    identifierCode="BAHiredLiabilityCov"
+    name="Hired Auto Liability">
+    <category
+      code="BusinessAuto"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BAHiredLiabilityCovBI"
+      typelist="CoverageSubtype"/>
+    <category
+      code="BAHiredLiabilityCovVEH"
+      typelist="CoverageSubtype"/>
+    <category
+      code="BAHiredLiabilityCovPD"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BAHiredSpecPerilCov"
+    desc="Hired Auto Specified Causes of Loss"
+    identifierCode="BAHiredSpecPerilCov"
+    name="Hired Auto Specified Causes of Loss">
+    <category
+      code="BusinessAuto"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BAHiredSpecPerilCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BAHiredUIMCov"
+    desc="Hired Auto Underinsured Motorist"
+    identifierCode="BAHiredUIMCov"
+    name="Hired Auto Underinsured Motorist">
+    <category
+      code="BusinessAuto"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BAHiredUIMBI"
+      typelist="CoverageSubtype"/>
+    <category
+      code="BAHiredUIMPD"
+      typelist="CoverageSubtype"/>
+    <category
+      code="BAHiredUIMVEH"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BAHiredUMCov"
+    desc="Hired Auto Uninsured Motorist"
+    identifierCode="BAHiredUMCov"
+    name="Hired Auto Uninsured Motorist">
+    <category
+      code="BusinessAuto"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BAHiredUMCovBI"
+      typelist="CoverageSubtype"/>
+    <category
+      code="BAHiredUMCovPD"
+      typelist="CoverageSubtype"/>
+    <category
+      code="BAHiredUMCovVEH"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BALoanLeaseGapCov"
+    desc="Loan Lease Gap"
+    identifierCode="BALoanLeaseGapCov"
+    name="Loan Lease Gap">
+    <category
+      code="BusinessAuto"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BALoanLeaseGapCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BALossOfUseCov"
+    desc="Loss of Use"
+    identifierCode="BALossOfUseCov"
+    name="Loss of Use">
+    <category
+      code="BusinessAuto"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BALossOfUseCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BANonownedLiabCov"
+    desc="Non-Owned Auto Liability"
+    identifierCode="BANonownedLiabCov"
+    name="Non-Owned Auto Liability">
+    <category
+      code="BusinessAuto"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BANonownedLiabCov_bi"
+      typelist="CoverageSubtype"/>
+    <category
+      code="BANonownedLiabCov_pd"
+      typelist="CoverageSubtype"/>
+    <category
+      code="BANonownedLiabCov_vd"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BANonOwndSSExtendCov"
+    desc="Non-Owned Social Services Extended"
+    identifierCode="BANonOwndSSExtendCov"
+    name="Non-Owned Social Services Extended">
+    <category
+      code="BusinessAuto"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BANonOwndSSExtendedBI"
+      typelist="CoverageSubtype"/>
+    <category
+      code="BANonOwndSSExtendedPD"
+      typelist="CoverageSubtype"/>
+    <category
+      code="BANonOwnSSExtendCovVEH"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BABobtailLiabCov"
+    desc="Bobtail Liability"
+    identifierCode="BABobtailLiabCov"
+    name="Bobtail Liability">
+    <category
+      code="BusinessAuto"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BABobtailLiabCov_bi"
+      typelist="CoverageSubtype"/>
+    <category
+      code="BABobtailLiabCov_pd"
+      typelist="CoverageSubtype"/>
+    <category
+      code="BABobtailLiabCov_vd"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BADealerLimitLiabCov"
+    desc="Auto Dealer Limited Liability"
+    identifierCode="BADealerLimitLiabCov"
+    name="Auto Dealer Limited Liability">
+    <category
+      code="BusinessAuto"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BADealerLimitLiabCov_bi"
+      typelist="CoverageSubtype"/>
+    <category
+      code="BADealerLimitLiabCov_pd"
+      typelist="CoverageSubtype"/>
+    <category
+      code="BADealerLimitLiabCov_vd"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BAOwnedLiabilityCov"
+    desc="Liability - Bodily Injury and Property Damage"
+    identifierCode="BAOwnedLiabilityCov"
+    name="Liability">
+    <category
+      code="BusinessAuto"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BAOwnedLiabilityCov_bi"
+      typelist="CoverageSubtype"/>
+    <category
+      code="BAOwnedLiabilityCov_vd"
+      typelist="CoverageSubtype"/>
+    <category
+      code="BAOwnedLiabilityCov_pd"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BAOwnedMedPayCov"
+    desc="Medical Payments"
+    identifierCode="BAOwnedMedPayCov"
+    name="Medical Payments">
+    <category
+      code="BusinessAuto"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BAOwnedMedPayCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BASeasonTrailerLiabCov"
+    desc="Seasonal Trailer Liability"
+    identifierCode="BASeasonTrailerLiabCov"
+    name="Seasonal Trailer Liability">
+    <category
+      code="BusinessAuto"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BASeasonTrailerLiabCov_bi"
+      typelist="CoverageSubtype"/>
+    <category
+      code="BASeasonTrailerLiabCov_pd"
+      typelist="CoverageSubtype"/>
+    <category
+      code="BASeasonTrailerLiabCov_vd"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BACollisionCov"
+    desc="Collision"
+    identifierCode="BACollisionCov"
+    name="Collision">
+    <category
+      code="BusinessAuto"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BACollisionCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BACollisionLimited_MAMI"
+    desc="Collision - Limited Coverage"
+    identifierCode="BACollisionLimited_MAMI"
+    name="Collision - Limited Coverage">
+    <category
+      code="BusinessAuto"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BACollisionLimited_MAMI"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BAComprehensiveCov"
+    desc="Comprehensive"
+    identifierCode="BAComprehensiveCov"
+    name="Comprehensive">
+    <category
+      code="BusinessAuto"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BAComprehensiveCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BASpecCausesLossCov"
+    desc="Specified Causes of Loss"
+    identifierCode="BASpecCausesLossCov"
+    name="Specified Causes of Loss">
+    <category
+      code="BusinessAuto"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BASpecCausesLossCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BATowingLaborCov"
+    desc="Towing and Labor"
+    identifierCode="BATowingLaborCov"
+    name="Towing and Labor">
+    <category
+      code="BusinessAuto"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BATowingLaborCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BAPollutLiabBasicCov"
+    desc="Pollution Liability Basic"
+    identifierCode="BAPollutLiabBasicCov"
+    name="Pollution Liability Basic">
+    <category
+      code="BusinessAuto"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BAPollutLiabBasicBI"
+      typelist="CoverageSubtype"/>
+    <category
+      code="BAPollutLiabBasicPD"
+      typelist="CoverageSubtype"/>
+    <category
+      code="BAPollutLiabBasicGEN"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BAPollutLiabBoardCov"
+    desc="Pollution Liability Broad"
+    identifierCode="BAPollutLiabBoardCov"
+    name="Pollution Liability Broad">
+    <category
+      code="BusinessAuto"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BAPollutLiabBoardBI"
+      typelist="CoverageSubtype"/>
+    <category
+      code="BAPollutLiabBoardGEN"
+      typelist="CoverageSubtype"/>
+    <category
+      code="BAPollutLiabBoardPD"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BARentalCov"
+    desc="Rental Reimbursement"
+    identifierCode="BARentalCov"
+    name="Rental Reimbursement">
+    <category
+      code="BusinessAuto"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BARentalCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BATapeDiscRecordCov"
+    desc="Tape Disc Record"
+    identifierCode="BATapeDiscRecordCov"
+    name="Tape Disc Record">
+    <category
+      code="BusinessAuto"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BATapeDiscRecordCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BALimitedPropDamCov"
+    desc="Limited Property Damage"
+    identifierCode="BALimitedPropDamCov"
+    name="Limited Property Damage">
+    <category
+      code="BusinessAuto"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BALimitedPropDamCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BAOwnedUIMBICov"
+    desc="Underinsured Motorist - Bodily Injury"
+    identifierCode="BAOwnedUIMBICov"
+    name="Underinsured Motorist - Bodily Injury">
+    <category
+      code="BusinessAuto"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BAOwnedUIMBICov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BAOwnedUIMPDCov"
+    desc="Underinsured Motorist - Property Damage"
+    identifierCode="BAOwnedUIMPDCov"
+    name="Underinsured Motorist - Property Damage">
+    <category
+      code="BusinessAuto"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BAOwnedUIMPDCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BAOwnedUMBICov"
+    desc="Uninsured Motorist - Bodily Injury"
+    identifierCode="BAOwnedUMBICov"
+    name="Uninsured Motorist - Bodily Injury">
+    <category
+      code="BusinessAuto"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BAOwnedUMBICov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BAOwnedUMBISuppCov"
+    desc="Uninsured Motorist - Supplemental BI"
+    identifierCode="BAOwnedUMBISuppCov"
+    name="Uninsured Motorist - Supplemental BI">
+    <category
+      code="BusinessAuto"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BAOwnedUMBISuppCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BAOwnedUMPDCov"
+    desc="Uninsured Motorist - Property Damage"
+    identifierCode="BAOwnedUMPDCov"
+    name="Uninsured Motorist - Property Damage">
+    <category
+      code="BusinessAuto"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BAOwnedUMPDCovPD"
+      typelist="CoverageSubtype"/>
+    <category
+      code="BAOwnedUMPDCovVEH"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="BAPropProtectionCov"
+    desc="Property Protection Insurance"
+    identifierCode="BAPropProtectionCov"
+    name="Property Protection Insurance">
+    <category
+      code="BusinessAuto"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BAPropProtectionCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="CADeathDisabilityCov"
+    desc="Death and Disability"
+    identifierCode="CADeathDisabilityCov"
+    name="Death and Disability">
+    <category
+      code="BusinessAuto"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="CADeathDisabilityCov"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="CAPIP_DE"
+    desc="PIP - Delaware"
+    identifierCode="CAPIP_DE"
+    name="PIP - Delaware">
+    <category
+      code="BusinessAuto"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="CAPIP_DE"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="CAPIP_FL"
+    desc="PIP - Florida"
+    identifierCode="CAPIP_FL"
+    name="PIP - Florida">
+    <category
+      code="BusinessAuto"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="CAPIP_FL"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="CAPIP_HI"
+    desc="PIP - Hawaii"
+    identifierCode="CAPIP_HI"
+    name="PIP - Hawaii">
+    <category
+      code="BusinessAuto"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="CAPIP_HI"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="CAPIP_KS"
+    desc="PIP - Kansas"
+    identifierCode="CAPIP_KS"
+    name="PIP - Kansas">
+    <category
+      code="BusinessAuto"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="CAPIP_KS"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="CAPIP_KY"
+    desc="PIP - Kentucky"
+    identifierCode="CAPIP_KY"
+    name="PIP - Kentucky">
+    <category
+      code="BusinessAuto"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="CAPIP_KY"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="CAPIP_MA"
+    desc="PIP - Massachusetts"
+    identifierCode="CAPIP_MA"
+    name="PIP - Massachusetts">
+    <category
+      code="BusinessAuto"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="CAPIP_MA"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="CAPIP_MD"
+    desc="PIP - Maryland"
+    identifierCode="CAPIP_MD"
+    name="PIP - Maryland">
+    <category
+      code="BusinessAuto"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="CAPIP_MD"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="CAPIP_MI"
+    desc="PIP - Michigan"
+    identifierCode="CAPIP_MI"
+    name="PIP - Michigan">
+    <category
+      code="BusinessAuto"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="CAPIP_MI"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="CAPIP_MN"
+    desc="PIP - Minnesota"
+    identifierCode="CAPIP_MN"
+    name="PIP - Minnesota">
+    <category
+      code="BusinessAuto"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="CAPIP_MN"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="CAPIP_ND"
+    desc="PIP - North Dakota"
+    identifierCode="CAPIP_ND"
+    name="PIP - North Dakota">
+    <category
+      code="BusinessAuto"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="CAPIP_ND"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="CAPIP_NJ"
+    desc="PIP - New Jersey"
+    identifierCode="CAPIP_NJ"
+    name="PIP - New Jersey">
+    <category
+      code="BusinessAuto"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="CAPIP_NJ"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="CAPIP_NY"
+    desc="PIP - New York"
+    identifierCode="CAPIP_NY"
+    name="PIP - New York">
+    <category
+      code="BusinessAuto"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="CAPIP_NY"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="CAPIP_OR"
+    desc="PIP - Oregon"
+    identifierCode="CAPIP_OR"
+    name="PIP - Oregon">
+    <category
+      code="BusinessAuto"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="CAPIP_OR"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="CAPIP_PA"
+    desc="PIP - Pennsylvania"
+    identifierCode="CAPIP_PA"
+    name="PIP - Pennsylvania">
+    <category
+      code="BusinessAuto"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="CAPIP_PA"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="CAPIP_TX"
+    desc="PIP - Texas"
+    identifierCode="CAPIP_TX"
+    name="PIP - Texas">
+    <category
+      code="BusinessAuto"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="CAPIP_TX"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="CAPIP_UT"
+    desc="PIP - Utah"
+    identifierCode="CAPIP_UT"
+    name="PIP - Utah">
+    <category
+      code="BusinessAuto"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="CAPIP_UT"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="CAPIP_WA"
+    desc="PIP - Washington"
+    identifierCode="CAPIP_WA"
+    name="PIP - Washington">
+    <category
+      code="BusinessAuto"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="CAPIP_WA"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="CA_PIP_AR"
+    desc="PIP - Arkansas"
+    identifierCode="CA_PIP_AR"
+    name="PIP - Arkansas">
+    <category
+      code="BusinessAuto"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="CA_PIP_AR"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="CA_PIP_DC"
+    desc="PIP - District Of Columbia"
+    identifierCode="CA_PIP_DC"
+    name="PIP - District Of Columbia">
+    <category
+      code="BusinessAuto"
+      typelist="PolicyType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="CA_PIP_DC"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="PUP_Primary_LiabilityCov_PUE"
+    desc="Primary Personal Liability Coverage"
+    name="Primary Personal Liability Coverage">
+    <category
+      code="PersonalUmbrella"
+      typelist="PolicyType"/>
+    <category
+      code="PC-PEL"
+      typelist="SourceSystem"/>
+    <category
+      code="PUPLiabilityPD"
+      typelist="CoverageSubtype"/>
+    <category
+      code="PUPLiabilityBI"
+      typelist="CoverageSubtype"/>
+    <category
+      code="PUPLiabilityGEN"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="PUP_WorldWideCov_PUE"
+    desc="World Wide"
+    name="World Wide">
+    <category
+      code="PersonalUmbrella"
+      typelist="PolicyType"/>
+    <category
+      code="PC-PEL"
+      typelist="SourceSystem"/>
+    <category
+      code="PUPWorldWide"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="EANDO"
+    desc="Errors and omissions"
+    name="Errors and omissions">
+    <category
+      code="gl_gd2"
+      typelist="CoverageSubtype"/>
+    <category
+      code="prof_liability"
+      typelist="PolicyType"/>
+    <category
+      code="eando_gd"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="MALP"
+    desc="Malpractice"
+    name="Malpractice">
+    <category
+      code="prof_liability"
+      typelist="PolicyType"/>
+    <category
+      code="malp_bid"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="DandO"
+    desc="Directors and Officers"
+    name="Directors and Officers">
+    <category
+      code="prof_liability"
+      typelist="PolicyType"/>
+    <category
+      code="dando_gd"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="FARM"
+    desc="Farmowners"
+    name="Farmowners">
+    <category
+      code="farmowners"
+      typelist="PolicyType"/>
+    <category
+      code="farm_pd"
+      typelist="CoverageSubtype"/>
+    <category
+      code="farm_bid"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="baggage"
+    desc="General coverage for baggage including suitcases and contents like personal items, electronics, wallet, passports, etc."
+    name="Baggage">
+    <category
+      code="travel_per"
+      typelist="PolicyType"/>
+    <category
+      code="bag_loss_damg_dly"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="health_travel"
+    desc="Heath coverage"
+    name="Health">
+    <category
+      code="travel_per"
+      typelist="PolicyType"/>
+    <category
+      code="mpay_travel"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="hiredauto_travel"
+    desc="Excesses for hired/rented auto"
+    name="Hired Auto">
+    <category
+      code="travel_per"
+      typelist="PolicyType"/>
+    <category
+      code="hiredauto_dmg_travel"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="liab_travel"
+    desc="3rd party liability"
+    name="Liability">
+    <category
+      code="travel_per"
+      typelist="PolicyType"/>
+    <category
+      code="liab_trav_ad"
+      typelist="CoverageSubtype"/>
+    <category
+      code="liab_trav_bi"
+      typelist="CoverageSubtype"/>
+    <category
+      code="liab_trav_gd"
+      typelist="CoverageSubtype"/>
+    <category
+      code="liab_trav_pr"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="trip"
+    desc="Trip coverage for travel and accommodations"
+    name="Trip">
+    <category
+      code="travel_per"
+      typelist="PolicyType"/>
+    <category
+      code="TripCancelDelay"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <!-- Cyber Line - Start -->
+  <typecode
+    code="ACLCommlCyberLiability"
+    desc="Commercial Cyber Liability"
+    name="Commercial Cyber Liability">
+    <category
+      code="Cyber"
+      typelist="PolicyType"/>
+    <category
+      code="ACLCommlCyberLiability"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="ACLPolicyLiability"
+    desc="Policy Liability"
+    name="Policy Liability">
+    <category
+      code="Cyber"
+      typelist="PolicyType"/>
+    <category
+      code="ACLPolicyLiability"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="ACLSepDefenseLimit"
+    desc="Separate Defense Costs Limit"
+    name="Separate Defense Costs Limit">
+    <category
+      code="Cyber"
+      typelist="PolicyType"/>
+    <category
+      code="ACLSepDefenseLimit"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="ACLAddlInsDesignatedPerson"
+    desc="Additional Insured - Designated Person Or Organization"
+    name="Additional Insured - Designated Person Or Organization">
+    <category
+      code="Cyber"
+      typelist="PolicyType"/>
+    <category
+      code="ACLAddlInsDesignatedPerson"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="ACLAgreedValueBI"
+    desc="Agreed Value For Business Income"
+    name="Agreed Value For Business Income">
+    <category
+      code="Cyber"
+      typelist="PolicyType"/>
+    <category
+      code="ACLAgreedValueBI"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="ACLAmendDefCyberIncident"
+    desc="Amend Definition Of Cyber Incident - Broadened Denial Of Service"
+    name="Amend Definition Of Cyber Incident - Broadened Denial Of Service">
+    <category
+      code="Cyber"
+      typelist="PolicyType"/>
+    <category
+      code="ACLAmendDefCyberIncident"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="ACLEBusinessInterruption"
+    desc="Business Income and Extra Expense"
+    name="Business Income and Extra Expense">
+    <category
+      code="Cyber"
+      typelist="PolicyType"/>
+    <category
+      code="ACLEBusinessInterruption"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="ACLComputerFraud"
+    desc="Computer Fraud"
+    name="Computer Fraud">
+    <category
+      code="Cyber"
+      typelist="PolicyType"/>
+    <category
+      code="ACLComputerFraud"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="ACLTransferFraud"
+    desc="Computer and Funds Transfer Fraud"
+    name="Computer and Funds Transfer Fraud">
+    <category
+      code="Cyber"
+      typelist="PolicyType"/>
+    <category
+      code="ACLTransferFraud"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="ACLUnintentionalEO"
+    desc="Coverage For Unintentional Errors And Ommissions"
+    name="Coverage For Unintentional Errors And Ommissions">
+    <category
+      code="Cyber"
+      typelist="PolicyType"/>
+    <category
+      code="ACLUnintentionalEO"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="ACLEDataRestorationExp"
+    desc="Data Restoration Expense"
+    name="Data Restoration Expense">
+    <category
+      code="Cyber"
+      typelist="PolicyType"/>
+    <category
+      code="ACLEDataRestorationExp"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="ACLEThreatExp"
+    desc="Extortion Threat Expenses"
+    name="Extortion Threat Expenses">
+    <category
+      code="Cyber"
+      typelist="PolicyType"/>
+    <category
+      code="ACLEThreatExp"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="ACLRetroDateSubsid"
+    desc="Include Retroactive Date For Named Subsidiaries"
+    name="Include Retroactive Date For Named Subsidiaries">
+    <category
+      code="Cyber"
+      typelist="PolicyType"/>
+    <category
+      code="ACLRetroDateSubsid"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="ACLInclSpecIndivAsEmpl"
+    desc="Include Specified Individuals As Employees"
+    name="Include Specified Individuals As Employees">
+    <category
+      code="Cyber"
+      typelist="PolicyType"/>
+    <category
+      code="ACLInclSpecIndivAsEmpl"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="ACLMediaLiability"
+    desc="Media Liability"
+    name="Media Liability">
+    <category
+      code="Cyber"
+      typelist="PolicyType"/>
+    <category
+      code="ACLMediaLiability"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="ACLPaymentCardIndustry"
+    desc="Payment Card Industry (PCI) - Provide Coverage For Defense Expenses And Fines Or Penalties"
+    name="Payment Card Industry (PCI) - Provide Coverage For Defense Expenses And Fines Or Penalties">
+    <category
+      code="Cyber"
+      typelist="PolicyType"/>
+    <category
+      code="ACLPaymentCardIndustry"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="ACLPrivacyNotificationExp"
+    desc="Privacy Notification Expenses"
+    name="Privacy Notification Expenses">
+    <category
+      code="Cyber"
+      typelist="PolicyType"/>
+    <category
+      code="ACLPrivacyNotificationExp"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="ACLMProgramEO"
+    desc="Programming Errors And Ommisions Liability"
+    name="Programming Errors And Ommisions Liability">
+    <category
+      code="Cyber"
+      typelist="PolicyType"/>
+    <category
+      code="ACLMProgramEO"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="ACLCovDishonestEmployee"
+    desc="Provide Coverage For Dishonest, Malicious Or Fraudulent Acts Committed By Employees"
+    name="Provide Coverage For Dishonest, Malicious Or Fraudulent Acts Committed By Employees">
+    <category
+      code="Cyber"
+      typelist="PolicyType"/>
+    <category
+      code="ACLCovDishonestEmployee"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="ACLCrisisManagementExp"
+    desc="Public Relations Expenses"
+    name="Public Relations Expenses">
+    <category
+      code="Cyber"
+      typelist="PolicyType"/>
+    <category
+      code="ACLCrisisManagementExp"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="ACLRewardExp"
+    desc="Reward Expenses"
+    name="Reward Expenses">
+    <category
+      code="Cyber"
+      typelist="PolicyType"/>
+    <category
+      code="ACLRewardExp"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="ACLMSecurityBreachExp"
+    desc="Security Breach Expenses"
+    name="Security Breach Expenses">
+    <category
+      code="Cyber"
+      typelist="PolicyType"/>
+    <category
+      code="ACLMSecurityBreachExp"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="ACLMSecurityBreach"
+    desc="Security Breach Liability"
+    name="Security Breach Liability">
+    <category
+      code="Cyber"
+      typelist="PolicyType"/>
+    <category
+      code="ACLMSecurityBreach"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="ACLSupplExtReporting"
+    desc="Supplemental Extended Reporting Period"
+    name="Supplemental Extended Reporting Period">
+    <category
+      code="Cyber"
+      typelist="PolicyType"/>
+    <category
+      code="ACLSupplExtReporting"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="ACLTelephoneToll"
+    desc="Telephone Toll Fraud Coverage"
+    name="Telephone Toll Fraud Coverage">
+    <category
+      code="Cyber"
+      typelist="PolicyType"/>
+    <category
+      code="ACLTelephoneToll"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="ACLEVandalismExp"
+    desc="Vandalism Expenses"
+    name="Vandalism Expenses">
+    <category
+      code="Cyber"
+      typelist="PolicyType"/>
+    <category
+      code="ACLEVandalismExp"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="ACLWebsitePubl"
+    desc="Website Publishing Liability"
+    name="Website Publishing Liability">
+    <category
+      code="Cyber"
+      typelist="PolicyType"/>
+    <category
+      code="ACLWebsitePubl"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <typecode
+    code="ACFPerProperty_Para"
+    desc="Parametric Crop Produce Coverage"
+    name="Parametric Crop Produce Coverage">
+    <category
+      code="USParametirc"
+      typelist="PolicyType"/>
+    <category
+      code="ACFPerPropertyPD_Para"
+      typelist="CoverageSubtype"/>
+  </typecode>
+  <!-- Cyber Line - End -->
+</typelistextension>

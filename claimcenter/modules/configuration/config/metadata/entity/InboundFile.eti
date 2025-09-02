@@ -1,0 +1,91 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  loadable="false"
+  entity="InboundFile"
+  desc="An inbound file that has been loaded into the InsuranceSuite database for processing."
+  table="inboundfile"
+  type="editable"
+  platform="true"
+  replicable="false">
+  <implementsInterface
+    iface="com.guidewire.inboundfile.file.InboundFileMethods"
+    impl="com.guidewire.inboundfile.file.InboundFileImpl"/>
+  <column
+    desc="The name of the inbound file config."
+    name="Config"
+    nullok="false"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="40"/>
+  </column>
+  <typekey
+    desc="The status of the inbound file."
+    name="Status"
+    nullok="false"
+    typelist="InboundFileStatus"/>
+  <column
+    desc="The full path name of the file that was loaded from the file system."
+    name="InputLocation"
+    nullok="false"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="512"/>
+  </column>
+  <column
+    desc="The full path name of the archived file."
+    name="ArchiveLocation"
+    nullok="false"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="512"/>
+  </column>
+  <column
+    desc="The checksum of the file (used for duplicate detection)."
+    name="Checksum"
+    nullok="false"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="256"/>
+  </column>
+  <column
+    desc="A message describing any errors that may have occurred when loading the file."
+    name="ErrorMessage"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="1024"/>
+  </column>
+  <column
+    desc="The date and time that the file was loaded."
+    name="LoadDate"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="The date and time that the file is eligible to be purged."
+    name="PurgeDate"
+    nullok="false"
+    type="datetime"/>
+  <index
+    desc="Support check for duplicate file loading."
+    name="InbndFileDupIx">
+    <indexcol
+      keyposition="1"
+      name="Config"/>
+    <indexcol
+      keyposition="2"
+      name="Checksum"/>
+  </index>
+  <index
+    desc="Support check for purging files."
+    name="InbndFilePrgIx">
+    <indexcol
+      keyposition="1"
+      name="PurgeDate"/>
+  </index>
+</entity>

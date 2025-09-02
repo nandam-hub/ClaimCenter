@@ -1,0 +1,246 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "definitions": {
+    "ClusterState": {
+      "type": "object",
+      "description": "State of the cluster",
+      "properties": {
+        "unassignedComponents": {
+          "type": "array",
+          "description": "Available components",
+          "items": {
+            "$ref": "#/definitions/ComponentInfo"
+          }
+        },
+        "members": {
+          "type": "array",
+          "description": "Cluster members",
+          "items": {
+            "$ref": "#/definitions/ClusterMemberState"
+          }
+        }
+      }
+    },
+    "ClusterMemberState": {
+      "type": "object",
+      "description": "State of a node in the cluster",
+      "properties": {
+        "serverId": {
+          "description": "Id of the server",
+          "type": "string"
+        },
+        "inCluster": {
+          "description": "Server in cluster",
+          "type": "boolean"
+        },
+        "runLevel": {
+          "description": "Server run level",
+          "$ref": "#/definitions/RunLevel"
+        },
+        "roles": {
+          "type": "array",
+          "description": "Server roles",
+          "items": {
+            "type": "string"
+          }
+        },
+        "serverStarted": {
+          "type": "string",
+          "description": "Server started time",
+          "format": "date-time"
+        },
+        "lastUpdatedTime": {
+          "type": "string",
+          "description": "Time when the server updated its status",
+          "format": "date-time"
+        },
+        "plannedShutdownInitiated": {
+          "type": "string",
+          "description": "Time when planned shutdown was initiated",
+          "format": "date-time"
+        },
+        "plannedShutdownTime": {
+          "type": "string",
+          "description": "Time when the server is scheduled to be shutdown",
+          "format": "date-time"
+        },
+        "bgTasksStopped": {
+          "type": "string",
+          "description": "Time when background tasks stopped",
+          "format": "date-time"
+        },
+        "userSessions": {
+          "description": "Number of active user sessions",
+          "type": "integer"
+        },
+        "componentInfo": {
+          "type": "array",
+          "description": "List of owned components",
+          "items": {
+            "$ref": "#/definitions/ComponentInfo"
+          }
+        }
+      }
+    },
+    "RunLevel": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Runlevel name"
+          //supported values "NONE","GUIDEWIRE_STARTUP","SHUTDOWN","NODAEMONS","DAEMONS","MULTIUSER"
+        },
+        "displayValue": {
+          "type": "string",
+          "description": "Runlevel display value"
+          //Display value for Java.Runlevel.GUIDEWIRE_STARTUP, Java.Runlevel.SHUTDOWN, Java.Runlevel.NODAEMONS, Java.Runlevel.DAEMONS, Java.Runlevel.MULTIUSER
+        }
+      }
+    },
+    "ComponentInfo": {
+      "type": "object",
+      "description": "Information about distributed component instance in the cluster",
+      "properties": {
+        "compType": {
+          "type": "string",
+          "description": "This is #/parameters/componenttype in various swagger operations"
+        },
+        "uniqueId": {
+          "type": "string",
+          "description": "This is #/parameters/componentid in various swagger operations"
+        },
+        "code": {
+          "type": "string"
+        },
+        "compName": {
+          "type": "string"
+        },
+        "compState": {
+          "type": "string"
+        },
+        "serverId": {
+          "type": "string",
+          "description": "This is #/parameters/serverid in various swagger operations"
+        },
+        "startRequested": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "started": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "leaseExpiration": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "transferRequested": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "transferTarget": {
+          "type": "string"
+        },
+        "terminateRequested": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "stopped": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "retryFailover": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "replacementId": {
+          "type": "string"
+        }
+      }
+    },
+    "ShutdownOptions": {
+      "type": "object",
+      "properties": {
+        "shutdownMessageDisplayKey": {
+          "type": "string"
+        },
+        "shutdownMessage": {
+          "type": "string"
+        },
+        "shutdownTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "wholeClusterStop": {
+          "type": "boolean"
+        },
+        "terminateBatchProcesses": {
+          "type": "boolean"
+        }
+      }
+    },
+    "SwitchToNormalModeResponse": {
+      "type": "object",
+      "properties": {
+        "readOnly": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "readOnly"
+      ]
+    },
+    "UpgradeResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "NewInstall",
+            "Started",
+            "SchemaReportInProgress",
+            "SchemaReportDone",
+            "DatabaseWorkInProgress",
+            "DatabaseWorkDone",
+            "CanceledNoDatabaseWorkDone",
+            "Completed",
+            "BackedOut"
+          ]
+        },
+        "blueGreenType": {
+          "type": "integer"
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "schemaReportStartTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "schemaReportEndTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "databaseStartTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "databaseEndTime": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    }
+  }
+}

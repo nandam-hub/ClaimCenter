@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<internaltypelistextension
+  xmlns="http://guidewire.com/typelists"
+  name="BatchProcessType"
+  desc="Types of batch processes">
+  <typecode
+    code="OutboundFilePurgeWQ"
+    desc="Custom work queue to purge outbound file records."
+    name="Outbound File Purge Work Queue">
+    <category
+      code="APIRunnable"
+      typelist="BatchProcessTypeUsage"/>
+    <category
+      code="Schedulable"
+      typelist="BatchProcessTypeUsage"/>
+    <category
+      code="UIRunnable"
+      typelist="BatchProcessTypeUsage"/>
+  </typecode>
+  <typecode
+    code="OutboundRecordPurgeWQ"
+    desc="Custom work queue to purge skipped outbound records."
+    name="Outbound Record Purge Work Queue">
+    <category
+      code="APIRunnable"
+      typelist="BatchProcessTypeUsage"/>
+    <category
+      code="Schedulable"
+      typelist="BatchProcessTypeUsage"/>
+    <category
+      code="UIRunnable"
+      typelist="BatchProcessTypeUsage"/>
+  </typecode>
+  <typecode
+    code="OutboundFileBatchProcess"
+    desc="Outbound File Batch Process"
+    name="OutboundFileBatchProcess">
+    <category
+      code="APIRunnable"
+      typelist="BatchProcessTypeUsage"/>
+    <category
+      code="Schedulable"
+      typelist="BatchProcessTypeUsage"/>
+    <category
+      code="UIRunnable"
+      typelist="BatchProcessTypeUsage"/>
+  </typecode>
+</internaltypelistextension>

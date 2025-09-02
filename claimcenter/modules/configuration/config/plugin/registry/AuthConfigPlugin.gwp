@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<plugin
+  interface="IStartablePlugin"
+  name="AuthConfigPlugin">
+  <plugin-gosu
+    gosuclass="gw.auth.gwhub.AuthConfigPlugin"
+    additionalInterfaces="gw.auth.gwhub.IAuthConfigPlugin">
+    <!--    <param name="home-uri" value="http://localhost:8080/cc/ClaimCenter.do"/>-->
+    <!--    <param name="filter-active" value="$${AuthConfigPlugin.active:false}"/>-->
+    <!--    <param name="issuer-uri" value=""/> by default this will use the same auth server as helios -->
+    <!--    <param name="client-id" value=""/>by default this will use the same client id as helios -->
+    <!--    <param name="client-secret" value=""/> by default this will use the same client secret as helios -->
+    <!--    <param name="username-claim" value=""/> default is 'preferred_username' -->
+  </plugin-gosu>
+</plugin>

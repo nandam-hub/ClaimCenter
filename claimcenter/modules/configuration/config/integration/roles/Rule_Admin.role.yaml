@@ -1,0 +1,6 @@
+name: "Rule Admin"
+endpoints: []
+accessibleFields:
+  "*":
+    edit: "*"
+    view: "*"

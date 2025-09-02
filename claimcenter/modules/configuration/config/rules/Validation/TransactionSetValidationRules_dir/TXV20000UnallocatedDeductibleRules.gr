@@ -1,0 +1,18 @@
+package rules.Validation.TransactionSetValidationRules_dir
+
+
+@gw.rules.RuleName("TXV20000 - Unallocated Deductible Rules")
+internal class TXV20000UnallocatedDeductibleRules {
+  static function doCondition(transactionSet   :   entity.TransactionSet) : boolean {
+/*start00rule*/
+return transactionSet typeis CheckSet
+      and transactionSet.ApprovalStatus != ApprovalStatus.TC_REJECTED
+/*end00rule*/
+}
+
+  static function doAction(transactionSet   :   entity.TransactionSet, actions : gw.rules.Action) {
+/*start00rule*/
+ 
+/*end00rule*/
+  }
+}

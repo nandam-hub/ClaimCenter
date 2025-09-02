@@ -1,0 +1,29 @@
+<div
+        role="checkbox"
+        tabindex="0"
+        aria-labelledby="${inputLabelAriaId}"
+        aria-checked="${checked ? 'true' : 'false'}"
+        aria-disabled="${disabled ? 'true' : 'false'}"
+        aria-required="${required ? 'true' : 'false'}"
+        aria-invalid="${invalid ? 'true' : 'false'}"
+        aria-label="${label ? label}"
+        id="${renderId}_checkboxDiv"
+        data-gw-click="gwCheckboxDiv.onCheckboxDivClick"
+        class="gw-checkboxDiv ${noTrack ? 'gw-noTrack'} ${checked ? 'gw-checked'}">
+    <div
+            class="gw-checkboxDiv--inner"></div>
+    <span
+            :if="label"
+            aria-hidden="true"
+            class="gw-checkboxDiv--label">${label}
+    </span>
+    <input
+            aria-hidden="true"
+            type="checkbox"
+            value="true"
+            disabled="${disabled}"
+            class="${noTrack ? 'gw-noTrack'} gw-hidden"
+            data-gw-uses-checkbox-div
+            name="${renderId}"
+            checked="${checked}"/>
+</div>

@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="IncidentAutopilotDV">
+    <Require
+      name="incident"
+      type="Incident"/>
+    <InputColumn>
+      <TypeKeyInput
+        id="IncidentAutomationPath"
+        label="incident.AutomationPath == null ? DisplayKey.get(&quot;Web.Incident.AutopilotCard.AutomationPath.NotSetLabel&quot;) : DisplayKey.get(&quot;Web.Incident.AutopilotCard.AutomationPath.Label&quot;)"
+        value="incident.AutomationPath"
+        valueType="typekey.AutomationPath"/>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

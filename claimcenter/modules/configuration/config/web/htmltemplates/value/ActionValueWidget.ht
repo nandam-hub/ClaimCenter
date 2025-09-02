@@ -1,0 +1,3 @@
+<div role="button" class="gw-ActionValueWidget" id="${renderId}_button" data-gw-click="${action}" data-gw-no-tab-index="${isUnclickable}" aria-hidden="${isUnclickable}">
+  ${currentValue}
+</div>

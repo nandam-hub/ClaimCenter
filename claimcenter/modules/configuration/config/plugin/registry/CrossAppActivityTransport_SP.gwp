@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<plugin
+  interface="MessageTransport"
+  name="CrossAppActivityTransport_SP">
+  <plugin-gosu
+    gosuclass="gw.surepath.cc.configuration.activitymanagement.plugin.CrossAppActivityTransport">
+    <param
+      name="maxRetries"
+      value="3"/>
+    <param
+      name="retryDelayMultiplier"
+      value="5"/>
+  </plugin-gosu>
+</plugin>

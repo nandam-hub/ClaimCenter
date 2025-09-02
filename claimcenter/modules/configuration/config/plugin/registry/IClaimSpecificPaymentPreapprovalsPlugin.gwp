@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<plugin
+  interface="IClaimSpecificPaymentPreapprovalsPlugin"
+  name="IClaimSpecificPaymentPreapprovalsPlugin">
+  <plugin-java
+    javaclass="gw.plugin.claimspecificpaymentpreapprovals.ClaimSpecificPaymentPreapprovalsPluginImpl"/>
+</plugin>

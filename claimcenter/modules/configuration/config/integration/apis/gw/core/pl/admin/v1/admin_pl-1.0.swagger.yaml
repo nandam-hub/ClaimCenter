@@ -1,0 +1,2055 @@
+swagger: "2.0"
+info:
+  description: "APIs for InsuranceSuite administration objects"
+  version: "1.13.0"
+basePath: /admin/v1
+consumes:
+- application/json
+produces:
+- application/json
+x-gw-combine:
+- gw.core.pl.framework.v1.framework_pl-1.0
+- gw.core.pl.batch.v1.batch_pl-1.0
+x-gw-schema-import:
+  admin: gw.core.pl.admin.v1.admin_pl-1.0
+paths:
+  /activity-calendar:
+    get:
+      summary: "Activity calendar endpoint solely for performing date calculations"
+      description: "Activity calendar endpoint solely for performing date calculations"
+      operationId: getActivityCalendar
+      x-gw-sinceVersion: "1.13.0"
+      x-gw-extensions:
+        operationType: get-element
+        resourceType: CalendarDateCalculation
+      responses:
+        "200":
+          description: "Successful response"
+          schema:
+            $ref: "#/definitions/CalendarDateCalculationResponse"
+  /activity-calendar/calculate-date:
+    post:
+      summary: "Performs the requested date calculation using the server's calendar configuration"
+      description: "Performs the requested date calculation using the server's calendar configuration"
+      operationId: calculateActivityCalendarDate
+      x-gw-sinceVersion: "1.13.0"
+      x-gw-extensions:
+        operationType: custom-action
+        resourceType: CalendarDateCalculation
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: "#/definitions/CalendarDateCalculationRequest"
+      x-gw-parameter-sets:
+      - custom-action
+      responses:
+        "200":
+          description: "Returns calculated date"
+          schema:
+            $ref: "#/definitions/CalendarDateCalculationResponse"
+  /attributes:
+    get:
+      summary: "Retrieve a list of attributes"
+      description: "Retrieve a list of attributes"
+      operationId: getAttributes
+      x-gw-sinceVersion: "1.13.0"
+      x-gw-extensions:
+        childResourceType: Attribute
+        operationType: get-collection
+        resourceType: Attributes
+      x-gw-parameter-sets:
+      - get-collection
+      responses:
+        "200":
+          description: "Successful response"
+          schema:
+            $ref: "#/definitions/AttributeList"
+    post:
+      summary: "Create a new attribute"
+      description: "Create a new attribute"
+      operationId: createAttribute
+      x-gw-sinceVersion: "1.13.0"
+      x-gw-extensions:
+        childResourceType: Attribute
+        operationType: post-collection
+        resourceType: Attributes
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: "#/definitions/AttributeRequest"
+      x-gw-parameter-sets:
+      - post-collection
+      responses:
+        "201":
+          description: "Return the details for the newly-created attribute"
+          schema:
+            $ref: "#/definitions/AttributeResponse"
+  "/attributes/{attributeId}":
+    parameters:
+    - $ref: "#/parameters/attributeId"
+    get:
+      summary: "Retrieve an attribute"
+      description: "Retrieve an attribute"
+      operationId: getAttribute
+      x-gw-sinceVersion: "1.13.0"
+      x-gw-extensions:
+        operationType: get-element
+        resourceType: Attribute
+      x-gw-parameter-sets:
+      - get-element
+      responses:
+        "200":
+          description: "Successful response"
+          schema:
+            $ref: "#/definitions/AttributeResponse"
+    patch:
+      summary: "Update an attribute"
+      description: "Update an attribute"
+      operationId: patchAttribute
+      x-gw-sinceVersion: "1.13.0"
+      x-gw-extensions:
+        operationType: patch-element
+        resourceType: Attribute
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: "#/definitions/AttributeRequest"
+      x-gw-parameter-sets:
+      - patch-element
+      responses:
+        "200":
+          description: "Successfully updated"
+          schema:
+            $ref: "#/definitions/AttributeResponse"
+    delete:
+      summary: "Delete an attribute"
+      description: "Delete an attribute"
+      operationId: deleteAttribute
+      x-gw-sinceVersion: "1.13.0"
+      x-gw-extensions:
+        operationType: delete-element
+        resourceType: Attribute
+      x-gw-parameter-sets:
+      - delete-element
+      responses:
+        "204":
+          description: "Successfully deleted an attribute"
+  /geographic-zones:
+    get:
+      summary: "Retrieve a list of geographic zones"
+      description: "Retrieve a list of geographic zones"
+      operationId: getGeographicZones
+      x-gw-sinceVersion: "1.6.0"
+      x-gw-extensions:
+        childResourceType: GeographicZone
+        operationType: get-collection
+        resourceType: GeographicZones
+      x-gw-parameter-sets:
+      - get-collection
+      responses:
+        "200":
+          description: "Successfully returned a list of geographic zones"
+          schema:
+            $ref: "#/definitions/GeographicZoneList"
+  /groups:
+    get:
+      summary: "Retrieve a list of groups"
+      description: "Retrieve a list of groups"
+      operationId: getGroups
+      x-gw-sinceVersion: "1.4.0"
+      x-gw-extensions:
+        childResourceType: Group
+        operationType: get-collection
+        resourceType: Groups
+      x-gw-parameter-sets:
+      - get-collection
+      responses:
+        "200":
+          description: "Successfully returned a list of groups"
+          schema:
+            $ref: "#/definitions/GroupList"
+    post:
+      summary: "Create a new group"
+      description: "Create a new group"
+      operationId: createGroup
+      x-gw-sinceVersion: "1.5.0"
+      x-gw-extensions:
+        childResourceType: Group
+        operationType: post-collection
+        resourceType: Groups
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: "#/definitions/GroupRequest"
+      x-gw-parameter-sets:
+      - post-collection
+      responses:
+        "201":
+          description: "Successfully created the group"
+          schema:
+            $ref: "#/definitions/GroupResponse"
+  "/groups/{groupId}":
+    parameters:
+    - $ref: "#/parameters/groupId"
+    get:
+      summary: "Returns details for a single group"
+      description: "Returns details for a single group"
+      operationId: getGroup
+      x-gw-sinceVersion: "1.4.0"
+      x-gw-extensions:
+        operationType: get-element
+        resourceType: Group
+      x-gw-parameter-sets:
+      - get-element
+      responses:
+        "200":
+          description: "Successfully returned details for a single group"
+          schema:
+            $ref: "#/definitions/GroupResponse"
+    patch:
+      summary: "Update the details of a group"
+      description: "Update the details of a group"
+      operationId: patchGroup
+      x-gw-sinceVersion: "1.5.0"
+      x-gw-extensions:
+        operationType: patch-element
+        resourceType: Group
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: "#/definitions/GroupRequest"
+      x-gw-parameter-sets:
+      - patch-element
+      responses:
+        "200":
+          description: "Successfully updated"
+          schema:
+            $ref: "#/definitions/GroupResponse"
+    delete:
+      summary: "Delete a group"
+      description: "Delete a group"
+      operationId: deleteGroup
+      x-gw-sinceVersion: "1.5.0"
+      x-gw-extensions:
+        operationType: delete-element
+        resourceType: Group
+      x-gw-parameter-sets:
+      - delete-element
+      responses:
+        "204":
+          description: "Successful deletion"
+  "/groups/{groupId}/queues":
+    parameters:
+    - $ref: "#/parameters/groupId"
+    get:
+      summary: "Retrieve the list of assignable queues for the given group"
+      description: "Retrieve the list of assignable queues for the given group"
+      operationId: getQueues
+      x-gw-sinceVersion: "1.5.0"
+      x-gw-extensions:
+        childResourceType: AssignableQueue
+        operationType: get-collection
+        resourceType: AssignableQueues
+      x-gw-parameter-sets:
+      - get-collection
+      responses:
+        "200":
+          description: "Successfully returned a list of assignable queues for the given group"
+          schema:
+            $ref: "#/definitions/AssignableQueueList"
+    post:
+      summary: "Create a new assignable queue for the given group"
+      description: "Create a new assignable queue for the given group"
+      operationId: createQueue
+      x-gw-sinceVersion: "1.5.0"
+      x-gw-extensions:
+        childResourceType: AssignableQueue
+        operationType: post-collection
+        resourceType: AssignableQueues
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: "#/definitions/AssignableQueueRequest"
+      x-gw-parameter-sets:
+      - post-collection
+      responses:
+        "201":
+          description: "Successfully created an assignable queue for the group"
+          schema:
+            $ref: "#/definitions/AssignableQueueResponse"
+  "/groups/{groupId}/queues/{queueId}":
+    parameters:
+    - $ref: "#/parameters/groupId"
+    - $ref: "#/parameters/queueId"
+    get:
+      summary: "Retrieve an assignable queue"
+      description: "Retrieve an assignable queue"
+      operationId: getQueue
+      x-gw-sinceVersion: "1.5.0"
+      x-gw-extensions:
+        operationType: get-element
+        resourceType: AssignableQueue
+      x-gw-parameter-sets:
+      - get-element
+      responses:
+        "200":
+          description: "Successfully returned an assignable queue"
+          schema:
+            $ref: "#/definitions/AssignableQueueResponse"
+    patch:
+      summary: "Update an assignable queue"
+      description: "Update an assignable queue"
+      operationId: patchQueue
+      x-gw-sinceVersion: "1.5.0"
+      x-gw-extensions:
+        operationType: patch-element
+        resourceType: AssignableQueue
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: "#/definitions/AssignableQueueRequest"
+      x-gw-parameter-sets:
+      - patch-element
+      responses:
+        "200":
+          description: "Successfully updated an assignable queue"
+          schema:
+            $ref: "#/definitions/AssignableQueueResponse"
+    delete:
+      summary: "Delete an assignable queue"
+      description: "Delete an assignable queue"
+      operationId: deleteQueue
+      x-gw-sinceVersion: "1.5.0"
+      x-gw-extensions:
+        operationType: delete-element
+        resourceType: AssignableQueue
+      x-gw-parameter-sets:
+      - delete-element
+      responses:
+        "204":
+          description: "Successfully deleted an assignable queue"
+  "/groups/{groupId}/regions":
+    parameters:
+    - $ref: "#/parameters/groupId"
+    get:
+      summary: "Retrieve the regions associated with the given group"
+      description: "Retrieve the regions associated with the given group"
+      operationId: getGroupRegions
+      x-gw-sinceVersion: "1.12.0"
+      x-gw-extensions:
+        childResourceType: GroupRegion
+        operationType: get-collection
+        resourceType: GroupRegions
+      x-gw-parameter-sets: get-collection
+      responses:
+        "200":
+          description: "Successful response"
+          schema:
+            $ref: "#/definitions/GroupRegionList"
+    post:
+      summary: "Add a region to the given group"
+      description: "Add a region to the given group"
+      operationId: createGroupRegion
+      x-gw-sinceVersion: "1.12.0"
+      x-gw-extensions:
+        childResourceType: GroupRegion
+        operationType: post-collection
+        resourceType: GroupRegions
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: "#/definitions/GroupRegionRequest"
+      x-gw-parameter-sets: post-collection
+      responses:
+        "201":
+          description: "Successfully created region for the group"
+          schema:
+            $ref: "#/definitions/GroupRegionResponse"
+  "/groups/{groupId}/regions/{groupRegionId}":
+    parameters:
+    - $ref: "#/parameters/groupId"
+    - $ref: "#/parameters/groupRegionId"
+    get:
+      summary: "Retrieve details of a region associated with the given group"
+      description: "Retrieve details of a region associated with the given group"
+      operationId: getGroupRegion
+      x-gw-sinceVersion: "1.12.0"
+      x-gw-extensions:
+        operationType: get-element
+        resourceType: GroupRegion
+      x-gw-parameter-sets: get-element
+      responses:
+        "200":
+          description: "Successful response"
+          schema:
+            $ref: "#/definitions/GroupRegionResponse"
+    delete:
+      summary: "Remove a region from the given group"
+      description: "Remove a region from the given group"
+      operationId: deleteGroupRegion
+      x-gw-sinceVersion: "1.12.0"
+      x-gw-extensions:
+        operationType: delete-element
+        resourceType: GroupRegion
+      x-gw-parameter-sets: delete-element
+      responses:
+        "204":
+          description: "Successful removal of the region from the given group"
+  "/groups/{groupId}/users":
+    parameters:
+    - $ref: "#/parameters/groupId"
+    get:
+      summary: "Retrieve the users associated with the given group"
+      description: "Retrieve the users associated with the given group"
+      operationId: getGroupUsers
+      x-gw-sinceVersion: "1.4.0"
+      x-gw-extensions:
+        childResourceType: GroupUser
+        operationType: get-collection
+        resourceType: GroupUsers
+      x-gw-parameter-sets: get-collection
+      responses:
+        "200":
+          description: "Successful response"
+          schema:
+            $ref: "#/definitions/GroupUserList"
+    post:
+      summary: "Add a user to the given group"
+      description: "Add a user to the given group"
+      operationId: createGroupUser
+      x-gw-sinceVersion: "1.4.0"
+      x-gw-extensions:
+        childResourceType: GroupUser
+        operationType: post-collection
+        resourceType: GroupUsers
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: "#/definitions/GroupUserRequest"
+      x-gw-parameter-sets: post-collection
+      responses:
+        "201":
+          description: "The newly created details of the user's involvement in the given group"
+          schema:
+            $ref: "#/definitions/GroupUserResponse"
+  "/groups/{groupId}/users/{groupUserId}":
+    parameters:
+    - $ref: "#/parameters/groupId"
+    - $ref: "#/parameters/groupUserId"
+    get:
+      summary: "Retrieve details of a user's involvement in the given group"
+      description: "Retrieve details of a user's involvement in the given group"
+      operationId: getGroupUser
+      x-gw-sinceVersion: "1.4.0"
+      x-gw-extensions:
+        operationType: get-element
+        resourceType: GroupUser
+      x-gw-parameter-sets: get-element
+      responses:
+        "200":
+          description: "Successful response"
+          schema:
+            $ref: "#/definitions/GroupUserResponse"
+    patch:
+      summary: "Update the details of a user's involvement in the given group"
+      description: "Update the details of a user's involvement in the given group"
+      operationId: updateGroupUser
+      x-gw-sinceVersion: "1.4.0"
+      x-gw-extensions:
+        operationType: patch-element
+        resourceType: GroupUser
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: "#/definitions/GroupUserRequest"
+      x-gw-parameter-sets: patch-element
+      responses:
+        "200":
+          description: "Successful response"
+          schema:
+            $ref: "#/definitions/GroupUserResponse"
+    delete:
+      summary: "Remove a user from the given group"
+      description: "Remove a user from the given group"
+      operationId: deleteGroupUser
+      x-gw-sinceVersion: "1.4.0"
+      x-gw-extensions:
+        operationType: delete-element
+        resourceType: GroupUser
+      x-gw-parameter-sets: delete-element
+      responses:
+        "204":
+          description: "Successful removal of the user from the given group"
+  /holidays:
+    get:
+      summary: "Retrieve a list of holidays"
+      description: "Retrieve a list of holidays"
+      operationId: getHolidays
+      x-gw-sinceVersion: "1.12.0"
+      x-gw-extensions:
+        childResourceType: Holiday
+        operationType: get-collection
+        resourceType: Holidays
+      x-gw-parameter-sets:
+      - get-collection
+      responses:
+        "200":
+          description: "Successfully returned a list of holidays"
+          schema:
+            $ref: "#/definitions/HolidayList"
+    post:
+      summary: "Create a new holiday"
+      description: "Create a new holiday"
+      operationId: createHoliday
+      x-gw-sinceVersion: "1.12.0"
+      x-gw-extensions:
+        childResourceType: Holiday
+        operationType: post-collection
+        resourceType: Holidays
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: "#/definitions/HolidayRequest"
+      x-gw-parameter-sets:
+      - post-collection
+      responses:
+        "201":
+          description: "Successfully created the holiday"
+          schema:
+            $ref: "#/definitions/HolidayResponse"
+  "/holidays/{holidayId}":
+    parameters:
+    - $ref: "#/parameters/holidayId"
+    get:
+      summary: "Retrieve a holiday"
+      description: "Retrieve a holiday"
+      operationId: getHoliday
+      x-gw-sinceVersion: "1.12.0"
+      x-gw-extensions:
+        operationType: get-element
+        resourceType: Holiday
+      x-gw-parameter-sets:
+      - get-element
+      responses:
+        "200":
+          description: "Successful response"
+          schema:
+            $ref: "#/definitions/HolidayResponse"
+    patch:
+      summary: "Update a holiday"
+      description: "Update a holiday"
+      operationId: patchHoliday
+      x-gw-sinceVersion: "1.12.0"
+      x-gw-extensions:
+        operationType: patch-element
+        resourceType: Holiday
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: "#/definitions/HolidayRequest"
+      x-gw-parameter-sets:
+      - patch-element
+      responses:
+        "200":
+          description: "Successfully updated"
+          schema:
+            $ref: "#/definitions/HolidayResponse"
+    delete:
+      summary: "Delete a holiday"
+      description: "Delete a holiday"
+      operationId: deleteHoliday
+      x-gw-sinceVersion: "1.12.0"
+      x-gw-extensions:
+        operationType: delete-element
+        resourceType: Holiday
+      x-gw-parameter-sets:
+      - delete-element
+      responses:
+        "204":
+          description: "Successfully deleted a holiday"
+  "/holidays/{holidayId}/geographic-zones":
+    parameters:
+    - $ref: "#/parameters/holidayId"
+    get:
+      summary: "Retrieve a list of holiday zones"
+      description: "Retrieve a list of holiday zones"
+      operationId: getHolidayZones
+      x-gw-sinceVersion: "1.12.0"
+      x-gw-extensions:
+        childResourceType: HolidayZone
+        operationType: get-collection
+        resourceType: HolidayZones
+      x-gw-parameter-sets:
+      - get-collection
+      responses:
+        "200":
+          description: "Successful response"
+          schema:
+            $ref: "#/definitions/HolidayZoneList"
+    post:
+      summary: "Create a new holiday zone"
+      description: "Create a new holiday zone"
+      operationId: createHolidayZone
+      x-gw-sinceVersion: "1.12.0"
+      x-gw-extensions:
+        childResourceType: HolidayZone
+        operationType: post-collection
+        resourceType: HolidayZones
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: "#/definitions/HolidayZoneRequest"
+      x-gw-parameter-sets:
+      - post-collection
+      responses:
+        "201":
+          description: "Return the details for the newly-created holiday zone"
+          schema:
+            $ref: "#/definitions/HolidayZoneResponse"
+  "/holidays/{holidayId}/geographic-zones/{holidayZoneId}":
+    parameters:
+    - $ref: "#/parameters/holidayId"
+    - $ref: "#/parameters/holidayZoneId"
+    get:
+      summary: "Retrieve a holiday zone"
+      description: "Retrieve a holiday zone"
+      operationId: getHolidayZone
+      x-gw-sinceVersion: "1.12.0"
+      x-gw-extensions:
+        operationType: get-element
+        resourceType: HolidayZone
+      x-gw-parameter-sets:
+      - get-element
+      responses:
+        "200":
+          description: "Successfully returned a holiday zone"
+          schema:
+            $ref: "#/definitions/HolidayZoneResponse"
+    delete:
+      summary: "Delete a holiday zone"
+      description: "Delete a holiday zone"
+      operationId: deleteHolidayZone
+      x-gw-sinceVersion: "1.12.0"
+      x-gw-extensions:
+        operationType: delete-element
+        resourceType: HolidayZone
+      x-gw-parameter-sets:
+      - delete-element
+      responses:
+        "204":
+          description: "Successfully deleted a holiday zone"
+  /openapi.json:
+    get:
+      summary: "Return the Open API 3.0 representation of the schema"
+      description: "Return the Open API 3.0 representation of the schema"
+      operationId: getOpenApiSchema
+      x-gw-extensions:
+        operationType: get-element
+        resourceType: AdminOpenApiSchema
+      x-gw-parameter-sets:
+      - openapi
+      responses:
+        "200":
+          description: "Successful response"
+          schema:
+            type: string
+  /regions:
+    get:
+      summary: "Retrieve a list of regions"
+      description: "Retrieve a list of regions"
+      operationId: getRegions
+      x-gw-sinceVersion: "1.12.0"
+      x-gw-extensions:
+        childResourceType: Region
+        operationType: get-collection
+        resourceType: Regions
+      x-gw-parameter-sets:
+      - get-collection
+      responses:
+        "200":
+          description: "Successfully returned a list of regions"
+          schema:
+            $ref: "#/definitions/RegionList"
+    post:
+      summary: "Create a new region"
+      description: "Create a new region"
+      operationId: createRegion
+      x-gw-sinceVersion: "1.12.0"
+      x-gw-extensions:
+        childResourceType: Region
+        operationType: post-collection
+        resourceType: Regions
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: "#/definitions/RegionRequest"
+      x-gw-parameter-sets:
+      - post-collection
+      responses:
+        "201":
+          description: "Return the details for the newly-created region"
+          schema:
+            $ref: "#/definitions/RegionResponse"
+  "/regions/{regionId}":
+    parameters:
+    - $ref: "#/parameters/regionId"
+    get:
+      summary: "Returns details for a single region"
+      description: "Returns details for a single region"
+      operationId: getRegion
+      x-gw-sinceVersion: "1.12.0"
+      x-gw-extensions:
+        operationType: get-element
+        resourceType: Region
+      x-gw-parameter-sets:
+      - get-element
+      responses:
+        "200":
+          description: "Successfully returned details for a single region"
+          schema:
+            $ref: "#/definitions/RegionResponse"
+    patch:
+      summary: "Update a region"
+      description: "Update a region"
+      operationId: patchRegion
+      x-gw-sinceVersion: "1.12.0"
+      x-gw-extensions:
+        operationType: patch-element
+        resourceType: Region
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: "#/definitions/RegionRequest"
+      x-gw-parameter-sets:
+      - patch-element
+      responses:
+        "200":
+          description: "Successfully updated a region"
+          schema:
+            $ref: "#/definitions/RegionResponse"
+    delete:
+      summary: "Delete a region"
+      description: "Delete a region"
+      operationId: deleteRegion
+      x-gw-sinceVersion: "1.12.0"
+      x-gw-extensions:
+        operationType: delete-element
+        resourceType: Region
+      x-gw-parameter-sets:
+      - delete-element
+      responses:
+        "204":
+          description: "Successfully deleted a region"
+  "/regions/{regionId}/region-zones":
+    parameters:
+    - $ref: "#/parameters/regionId"
+    get:
+      summary: "Retrieve the list of zones for the given region"
+      description: "Retrieve the list of zones for the given region"
+      operationId: getRegionZones
+      x-gw-sinceVersion: "1.12.0"
+      x-gw-extensions:
+        childResourceType: RegionZone
+        operationType: get-collection
+        resourceType: RegionZones
+      x-gw-parameter-sets:
+      - get-collection
+      responses:
+        "200":
+          description: "Successfully returned a list of zones for the given region"
+          schema:
+            $ref: "#/definitions/RegionZoneList"
+    post:
+      summary: "Create a new region zone"
+      description: "Create a new region zone"
+      operationId: createRegionZone
+      x-gw-sinceVersion: "1.12.0"
+      x-gw-extensions:
+        childResourceType: RegionZone
+        operationType: post-collection
+        resourceType: RegionZones
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: "#/definitions/RegionZoneRequest"
+      x-gw-parameter-sets:
+      - post-collection
+      responses:
+        "201":
+          description: "Return the details for the newly-created region zone"
+          schema:
+            $ref: "#/definitions/RegionZoneResponse"
+  "/regions/{regionId}/region-zones/{regionZoneId}":
+    parameters:
+    - $ref: "#/parameters/regionId"
+    - $ref: "#/parameters/regionZoneId"
+    get:
+      summary: "Retrieve a region zone"
+      description: "Retrieve a region zone"
+      operationId: getRegionZone
+      x-gw-sinceVersion: "1.12.0"
+      x-gw-extensions:
+        operationType: get-element
+        resourceType: RegionZone
+      x-gw-parameter-sets:
+      - get-element
+      responses:
+        "200":
+          description: "Successfully returned a region zone"
+          schema:
+            $ref: "#/definitions/RegionZoneResponse"
+    delete:
+      summary: "Delete a region zone"
+      description: "Delete a region zone"
+      operationId: deleteRegionZone
+      x-gw-sinceVersion: "1.12.0"
+      x-gw-extensions:
+        operationType: delete-element
+        resourceType: RegionZone
+      x-gw-parameter-sets:
+      - delete-element
+      responses:
+        "204":
+          description: "Successfully deleted a region zone"
+  /roles:
+    get:
+      summary: "Retrieve a list of roles"
+      description: "Retrieve a list of roles"
+      operationId: getRoles
+      x-gw-sinceVersion: "1.3.0"
+      x-gw-extensions:
+        childResourceType: Role
+        operationType: get-collection
+        resourceType: Roles
+      x-gw-parameter-sets:
+      - get-collection
+      responses:
+        "200":
+          description: "Successful response"
+          schema:
+            $ref: "#/definitions/RoleList"
+    post:
+      summary: "Create a new role"
+      description: "Create a new role"
+      operationId: createRole
+      x-gw-sinceVersion: "1.4.0"
+      x-gw-extensions:
+        childResourceType: Role
+        operationType: post-collection
+        resourceType: Roles
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: "#/definitions/RoleRequest"
+      x-gw-parameter-sets:
+      - post-collection
+      responses:
+        "201":
+          description: "Successfully created a role"
+          schema:
+            $ref: "#/definitions/RoleResponse"
+  "/roles/{roleId}":
+    parameters:
+    - $ref: "#/parameters/roleId"
+    get:
+      summary: "Returns details for a single role"
+      description: "Returns details for a single role"
+      operationId: getRole
+      x-gw-sinceVersion: "1.4.0"
+      x-gw-extensions:
+        operationType: get-element
+        resourceType: Role
+      x-gw-parameter-sets:
+      - get-element
+      responses:
+        "200":
+          description: "Successfully returned details for a single role"
+          schema:
+            $ref: "#/definitions/RoleResponse"
+    patch:
+      summary: "Update this role's fields"
+      description: "Update this role's fields"
+      operationId: updateRole
+      x-gw-sinceVersion: "1.4.0"
+      x-gw-extensions:
+        operationType: patch-element
+        resourceType: Role
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: "#/definitions/RoleRequest"
+      x-gw-parameter-sets:
+      - patch-element
+      responses:
+        "200":
+          description: "Successful update"
+          schema:
+            $ref: "#/definitions/RoleResponse"
+    delete:
+      summary: "Delete a role"
+      description: "Delete a role"
+      operationId: deleteRole
+      x-gw-sinceVersion: "1.4.0"
+      x-gw-extensions:
+        operationType: delete-element
+        resourceType: Role
+      x-gw-parameter-sets:
+      - delete-element
+      responses:
+        "204":
+          description: "Successful deletion"
+  "/roles/{roleId}/permissions":
+    parameters:
+    - $ref: "#/parameters/roleId"
+    get:
+      summary: "Retrieve a list of role permissions"
+      description: "Retrieve a list of role permissions"
+      operationId: getRolePermissions
+      x-gw-sinceVersion: "1.4.0"
+      x-gw-extensions:
+        childResourceType: RolePermission
+        operationType: get-collection
+        resourceType: RolePermissions
+      x-gw-parameter-sets:
+      - get-collection
+      responses:
+        "200":
+          description: "Successfully returned a list of role permissions"
+          schema:
+            $ref: "#/definitions/RolePermissionList"
+    post:
+      summary: "Create a new permission on this role"
+      description: "Create a new permission on this role"
+      operationId: createRolePermission
+      x-gw-sinceVersion: "1.4.0"
+      x-gw-extensions:
+        childResourceType: RolePermission
+        operationType: post-collection
+        resourceType: RolePermissions
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: "#/definitions/RolePermissionRequest"
+      x-gw-parameter-sets:
+      - post-collection
+      responses:
+        "201":
+          description: "The details of the newly created role permission`"
+          schema:
+            $ref: "#/definitions/RolePermissionResponse"
+  "/roles/{roleId}/permissions/{permissionId}":
+    parameters:
+    - $ref: "#/parameters/roleId"
+    - $ref: "#/parameters/permissionId"
+    get:
+      summary: "The details of a permission on the given role"
+      description: "The details of a permission on the given role"
+      operationId: getRolePermission
+      x-gw-sinceVersion: "1.4.0"
+      x-gw-extensions:
+        operationType: get-element
+        resourceType: RolePermission
+      x-gw-parameter-sets:
+      - get-element
+      responses:
+        "200":
+          description: "Successfully returned a role permission"
+          schema:
+            $ref: "#/definitions/RolePermissionResponse"
+    delete:
+      summary: "Delete the permission on the given role"
+      description: "Delete the permission on the given role"
+      operationId: deleteRolePermission
+      x-gw-sinceVersion: "1.4.0"
+      x-gw-extensions:
+        operationType: delete-element
+        resourceType: RolePermission
+      x-gw-parameter-sets:
+      - delete-element
+      responses:
+        "204":
+          description: "Successful deletion"
+  /security-zones:
+    get:
+      summary: "Retrieve a list of security zones"
+      description: "Retrieve a list of security zones"
+      operationId: getSecurityZones
+      x-gw-sinceVersion: "1.6.0"
+      x-gw-extensions:
+        childResourceType: SecurityZone
+        operationType: get-collection
+        resourceType: SecurityZones
+      x-gw-parameter-sets:
+      - get-collection
+      responses:
+        "200":
+          description: "Successful response"
+          schema:
+            $ref: "#/definitions/SecurityZoneList"
+    post:
+      summary: "Create a new security zone"
+      description: "Create a new security zone"
+      operationId: createSecurityZone
+      x-gw-sinceVersion: "1.6.0"
+      x-gw-extensions:
+        childResourceType: SecurityZone
+        operationType: post-collection
+        resourceType: SecurityZones
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: "#/definitions/SecurityZoneRequest"
+      x-gw-parameter-sets:
+      - post-collection
+      responses:
+        "201":
+          description: "The details of the newly-created security zone"
+          schema:
+            $ref: "#/definitions/SecurityZoneResponse"
+  "/security-zones/{securityZoneId}":
+    parameters:
+    - $ref: "#/parameters/securityZoneId"
+    get:
+      summary: "Returns details of a security zone"
+      description: "Returns details of a security zone"
+      operationId: getSecurityZone
+      x-gw-sinceVersion: "1.6.0"
+      x-gw-extensions:
+        operationType: get-element
+        resourceType: SecurityZone
+      x-gw-parameter-sets:
+      - get-element
+      responses:
+        "200":
+          description: "Successfully returned details of a security zone"
+          schema:
+            $ref: "#/definitions/SecurityZoneResponse"
+    patch:
+      summary: "Update the details of a security zone"
+      description: "Update the details of a security zone"
+      operationId: patchSecurityZone
+      x-gw-sinceVersion: "1.6.0"
+      x-gw-extensions:
+        operationType: patch-element
+        resourceType: SecurityZone
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: "#/definitions/SecurityZoneRequest"
+      x-gw-parameter-sets:
+      - patch-element
+      responses:
+        "200":
+          description: "Successfully updated"
+          schema:
+            $ref: "#/definitions/SecurityZoneResponse"
+    delete:
+      summary: "Delete a security zone"
+      description: "Delete a security zone"
+      operationId: deleteSecurityZone
+      x-gw-sinceVersion: "1.6.0"
+      x-gw-extensions:
+        operationType: delete-element
+        resourceType: SecurityZone
+      x-gw-parameter-sets:
+      - delete-element
+      responses:
+        "204":
+          description: "Successful deletion"
+  /users:
+    get:
+      summary: "Retrieve a list of users"
+      description: "Retrieve a list of users"
+      operationId: getUsers
+      x-gw-extensions:
+        childResourceType: User
+        operationType: get-collection
+        resourceType: Users
+      x-gw-parameter-sets:
+      - get-collection
+      responses:
+        "200":
+          description: "Successful response"
+          schema:
+            $ref: "#/definitions/UserList"
+    post:
+      summary: "Create a new user"
+      description: "Create a new user"
+      operationId: createUser
+      x-gw-extensions:
+        childResourceType: User
+        operationType: post-collection
+        resourceType: Users
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: "#/definitions/UserRequest"
+      x-gw-parameter-sets:
+      - post-collection
+      responses:
+        "201":
+          description: "The details of the newly-created user"
+          schema:
+            $ref: "#/definitions/UserResponse"
+  "/users/{userId}":
+    parameters:
+    - $ref: "#/parameters/userId"
+    get:
+      summary: "Returns details for a single user"
+      description: "Returns details for a single user"
+      operationId: getUser
+      x-gw-extensions:
+        operationType: get-element
+        resourceType: User
+      x-gw-parameter-sets:
+      - get-element
+      responses:
+        "200":
+          description: "Returns details for a single user"
+          schema:
+            $ref: "#/definitions/UserResponse"
+    patch:
+      summary: "Update this user's fields"
+      description: "Update this user's fields"
+      operationId: updateUser
+      x-gw-extensions:
+        operationType: patch-element
+        resourceType: User
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: "#/definitions/UserRequest"
+      x-gw-parameter-sets:
+      - patch-element
+      responses:
+        "200":
+          description: "Successful update"
+          schema:
+            $ref: "#/definitions/UserResponse"
+    delete:
+      summary: "Delete a user"
+      description: "Delete a user"
+      operationId: deleteUser
+      x-gw-sinceVersion: "1.5.0"
+      x-gw-extensions:
+        operationType: delete-element
+        resourceType: User
+      x-gw-parameter-sets:
+      - delete-element
+      responses:
+        "204":
+          description: "Successful deletion"
+  "/users/{userId}/attributes":
+    parameters:
+    - $ref: "#/parameters/userId"
+    get:
+      summary: "Retrieve the attributes associated with the given user"
+      description: "Retrieve the attributes associated with the given user"
+      operationId: getUserAttributes
+      x-gw-sinceVersion: "1.13.0"
+      x-gw-extensions:
+        childResourceType: UserAttribute
+        operationType: get-collection
+        resourceType: UserAttributes
+      x-gw-parameter-sets:
+      - get-collection
+      responses:
+        "200":
+          description: "Successful response"
+          schema:
+            $ref: "#/definitions/UserAttributeList"
+    post:
+      summary: "Add an attribute to the given user"
+      description: "Add an attribute to the given user"
+      operationId: createUserAttribute
+      x-gw-sinceVersion: "1.13.0"
+      x-gw-extensions:
+        childResourceType: UserAttribute
+        operationType: post-collection
+        resourceType: UserAttributes
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: "#/definitions/UserAttributeRequest"
+      x-gw-parameter-sets: post-collection
+      responses:
+        "201":
+          description: "Successfully added an attribute for the user"
+          schema:
+            $ref: "#/definitions/UserAttributeResponse"
+  "/users/{userId}/attributes/{userAttributeId}":
+    parameters:
+    - $ref: "#/parameters/userAttributeId"
+    - $ref: "#/parameters/userId"
+    get:
+      summary: "Retrieve details of an attribute associated with the given user"
+      description: "Retrieve details of an attribute associated with the given user"
+      operationId: getUserAttribute
+      x-gw-sinceVersion: "1.13.0"
+      x-gw-extensions:
+        operationType: get-element
+        resourceType: UserAttribute
+      x-gw-parameter-sets:
+      - get-element
+      responses:
+        "200":
+          description: "Successful response"
+          schema:
+            $ref: "#/definitions/UserAttributeResponse"
+    patch:
+      summary: "Update an attribute associated with the given user"
+      description: "Update an attribute associated with the given user"
+      operationId: patchUserAttribute
+      x-gw-sinceVersion: "1.13.0"
+      x-gw-extensions:
+        operationType: patch-element
+        resourceType: UserAttribute
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: "#/definitions/UserAttributeRequest"
+      x-gw-parameter-sets:
+      - patch-element
+      responses:
+        "200":
+          description: "Successfully updated"
+          schema:
+            $ref: "#/definitions/UserAttributeResponse"
+    delete:
+      summary: "Remove an attribute from the given user"
+      description: "Remove an attribute from the given user"
+      operationId: deleteUserAttribute
+      x-gw-sinceVersion: "1.13.0"
+      x-gw-extensions:
+        operationType: delete-element
+        resourceType: UserAttribute
+      x-gw-parameter-sets:
+      - delete-element
+      responses:
+        "204":
+          description: "Successful removal of the attribute from the given user"
+  "/users/{userId}/regions":
+    parameters:
+    - $ref: "#/parameters/userId"
+    get:
+      summary: "Retrieve the regions associated with the given user"
+      description: "Retrieve the regions associated with the given user"
+      operationId: getUserRegions
+      x-gw-sinceVersion: "1.12.0"
+      x-gw-extensions:
+        childResourceType: UserRegion
+        operationType: get-collection
+        resourceType: UserRegions
+      x-gw-parameter-sets:
+      - get-collection
+      responses:
+        "200":
+          description: "Successful response"
+          schema:
+            $ref: "#/definitions/UserRegionList"
+    post:
+      summary: "Add a region to the given user"
+      description: "Add a region to the given user"
+      operationId: createUserRegion
+      x-gw-sinceVersion: "1.12.0"
+      x-gw-extensions:
+        childResourceType: UserRegion
+        operationType: post-collection
+        resourceType: UserRegions
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: "#/definitions/UserRegionRequest"
+      x-gw-parameter-sets: post-collection
+      responses:
+        "201":
+          description: "Successfully created region for the user"
+          schema:
+            $ref: "#/definitions/UserRegionResponse"
+  "/users/{userId}/regions/{userRegionId}":
+    parameters:
+    - $ref: "#/parameters/userRegionId"
+    - $ref: "#/parameters/userId"
+    get:
+      summary: "Retrieve details of a region associated with the given user"
+      description: "Retrieve details of a region associated with the given user"
+      operationId: getUserRegion
+      x-gw-sinceVersion: "1.12.0"
+      x-gw-extensions:
+        operationType: get-element
+        resourceType: UserRegion
+      x-gw-parameter-sets:
+      - get-element
+      responses:
+        "200":
+          description: "Successful response"
+          schema:
+            $ref: "#/definitions/UserRegionResponse"
+    delete:
+      summary: "Remove a region from the given user"
+      description: "Remove a region from the given user"
+      operationId: deleteUserRegion
+      x-gw-sinceVersion: "1.12.0"
+      x-gw-extensions:
+        operationType: delete-element
+        resourceType: UserRegion
+      x-gw-parameter-sets:
+      - delete-element
+      responses:
+        "204":
+          description: "Successful removal of the region from the given user"
+parameters:
+  attributeId:
+    name: attributeId
+    in: path
+    description: "The identifier for the attribute"
+    required: true
+    type: string
+    x-gw-sinceVersion: "1.13.0"
+  groupId:
+    name: groupId
+    in: path
+    description: "The REST identifier for the group"
+    required: true
+    type: string
+    x-gw-sinceVersion: "1.4.0"
+  groupRegionId:
+    name: groupRegionId
+    in: path
+    description: "The REST identifier for the group region"
+    required: true
+    type: string
+    x-gw-sinceVersion: "1.12.0"
+  groupUserId:
+    name: groupUserId
+    in: path
+    description: "The REST identifier for the group user"
+    required: true
+    type: string
+    x-gw-sinceVersion: "1.4.0"
+  holidayId:
+    name: holidayId
+    in: path
+    description: "The identifier for holiday"
+    required: true
+    type: string
+    x-gw-sinceVersion: "1.12.0"
+  holidayZoneId:
+    name: holidayZoneId
+    in: path
+    description: "The REST identifier for the holiday zone"
+    required: true
+    type: string
+    x-gw-sinceVersion: "1.12.0"
+  permissionId:
+    name: permissionId
+    in: path
+    description: "The REST identifier for the role permission"
+    required: true
+    type: string
+    x-gw-sinceVersion: "1.4.0"
+  queueId:
+    name: queueId
+    in: path
+    description: "The identifier for the assignableQueue"
+    required: true
+    type: string
+    x-gw-sinceVersion: "1.5.0"
+  regionId:
+    name: regionId
+    in: path
+    description: "The REST identifier for the region"
+    required: true
+    type: string
+    x-gw-sinceVersion: "1.12.0"
+  regionZoneId:
+    name: regionZoneId
+    in: path
+    description: "The REST identifier for the region zone"
+    required: true
+    type: string
+    x-gw-sinceVersion: "1.12.0"
+  roleId:
+    name: roleId
+    in: path
+    description: "The REST identifier for the role"
+    required: true
+    type: string
+    x-gw-sinceVersion: "1.4.0"
+  securityZoneId:
+    name: securityZoneId
+    in: path
+    description: "The REST identifier for the security zone"
+    required: true
+    type: string
+    x-gw-sinceVersion: "1.6.0"
+  userAttributeId:
+    name: userAttributeId
+    in: path
+    description: "The identifier for the user attribute"
+    required: true
+    type: string
+    x-gw-sinceVersion: "1.13.0"
+  userId:
+    name: userId
+    in: path
+    description: "The REST identifier for the user"
+    required: true
+    type: string
+  userRegionId:
+    name: userRegionId
+    in: path
+    description: "The REST identifier for the user region"
+    required: true
+    type: string
+    x-gw-sinceVersion: "1.12.0"
+x-gw-localizationKeyPrefix: admin.v1
+definitions:
+  AdminInclusions:
+    type: object
+    properties:
+      AssignableQueue:
+        type: array
+        items:
+          $ref: "#/definitions/AssignableQueueData"
+      Attribute:
+        type: array
+        items:
+          $ref: "#/definitions/AttributeData"
+      GroupRegion:
+        type: array
+        items:
+          $ref: "#/definitions/GroupRegionData"
+      GroupUser:
+        type: array
+        items:
+          $ref: "#/definitions/GroupUserData"
+      Holiday:
+        type: array
+        items:
+          $ref: "#/definitions/HolidayData"
+      HolidayZone:
+        type: array
+        items:
+          $ref: "#/definitions/HolidayZoneData"
+      Region:
+        type: array
+        items:
+          $ref: "#/definitions/RegionData"
+      RegionZone:
+        type: array
+        items:
+          $ref: "#/definitions/RegionZoneData"
+      RolePermission:
+        type: array
+        items:
+          $ref: "#/definitions/RolePermissionData"
+      UserAttribute:
+        type: array
+        items:
+          $ref: "#/definitions/UserAttributeData"
+      UserRegion:
+        type: array
+        items:
+          $ref: "#/definitions/UserRegionData"
+  AssignableQueueData:
+    x-gw-extend:
+    - "#/definitions/DataEnvelope"
+    required:
+    - attributes
+    properties:
+      attributes:
+        $ref: "admin#/definitions/AssignableQueue"
+  AssignableQueueList:
+    type: object
+    x-gw-extend:
+    - "#/definitions/DataListEnvelope"
+    properties:
+      data:
+        type: array
+        items:
+          $ref: "#/definitions/AssignableQueueData"
+  AssignableQueueRequest:
+    type: object
+    required:
+    - data
+    properties:
+      data:
+        $ref: "#/definitions/AssignableQueueData"
+  AssignableQueueResponse:
+    type: object
+    properties:
+      data:
+        $ref: "#/definitions/AssignableQueueData"
+  AttributeData:
+    type: object
+    x-gw-extend:
+    - "#/definitions/DataEnvelope"
+    required:
+    - attributes
+    properties:
+      attributes:
+        $ref: "admin#/definitions/Attribute"
+  AttributeList:
+    type: object
+    x-gw-extend:
+    - "#/definitions/DataListEnvelope"
+    properties:
+      data:
+        type: array
+        items:
+          $ref: "#/definitions/AttributeData"
+      included:
+        $ref: "#/definitions/AdminInclusions"
+  AttributeRequest:
+    type: object
+    required:
+    - data
+    properties:
+      data:
+        $ref: "#/definitions/AttributeData"
+      included:
+        $ref: "#/definitions/AdminInclusions"
+  AttributeResponse:
+    type: object
+    properties:
+      data:
+        $ref: "#/definitions/AttributeData"
+      included:
+        $ref: "#/definitions/AdminInclusions"
+  CalendarDateCalculationData:
+    type: object
+    x-gw-extend:
+    - "#/definitions/DataEnvelope"
+    required:
+    - attributes
+    properties:
+      attributes:
+        $ref: "admin#/definitions/CalendarDateCalculation"
+  CalendarDateCalculationRequest:
+    type: object
+    required:
+    - data
+    properties:
+      data:
+        $ref: "#/definitions/CalendarDateCalculationData"
+  CalendarDateCalculationResponse:
+    type: object
+    properties:
+      data:
+        $ref: "#/definitions/CalendarDateCalculationData"
+  GeographicZoneData:
+    x-gw-extend:
+    - "#/definitions/DataEnvelope"
+    required:
+    - attributes
+    properties:
+      attributes:
+        $ref: "admin#/definitions/GeographicZone"
+  GeographicZoneList:
+    type: object
+    x-gw-extend:
+    - "#/definitions/DataListEnvelope"
+    properties:
+      data:
+        type: array
+        items:
+          $ref: "#/definitions/GeographicZoneData"
+  GroupData:
+    x-gw-extend:
+    - "#/definitions/DataEnvelope"
+    required:
+    - attributes
+    properties:
+      attributes:
+        $ref: "admin#/definitions/Group"
+  GroupList:
+    type: object
+    x-gw-extend:
+    - "#/definitions/DataListEnvelope"
+    properties:
+      data:
+        type: array
+        items:
+          $ref: "#/definitions/GroupData"
+      included:
+        $ref: "#/definitions/AdminInclusions"
+  GroupRegionData:
+    type: object
+    x-gw-extend:
+    - "#/definitions/DataEnvelope"
+    required:
+    - attributes
+    properties:
+      attributes:
+        $ref: "admin#/definitions/GroupRegion"
+  GroupRegionList:
+    type: object
+    x-gw-extend:
+    - "#/definitions/DataListEnvelope"
+    properties:
+      data:
+        type: array
+        items:
+          $ref: "#/definitions/GroupRegionData"
+      included:
+        $ref: "#/definitions/AdminInclusions"
+  GroupRegionRequest:
+    type: object
+    required:
+    - data
+    properties:
+      data:
+        $ref: "#/definitions/GroupRegionData"
+  GroupRegionResponse:
+    type: object
+    properties:
+      data:
+        $ref: "#/definitions/GroupRegionData"
+      included:
+        $ref: "#/definitions/AdminInclusions"
+  GroupRequest:
+    type: object
+    required:
+    - data
+    properties:
+      data:
+        $ref: "#/definitions/GroupData"
+      included:
+        $ref: "#/definitions/AdminInclusions"
+  GroupResponse:
+    type: object
+    properties:
+      data:
+        $ref: "#/definitions/GroupData"
+      included:
+        $ref: "#/definitions/AdminInclusions"
+  GroupUserData:
+    x-gw-extend:
+    - "#/definitions/DataEnvelope"
+    required:
+    - attributes
+    properties:
+      attributes:
+        $ref: "admin#/definitions/GroupUser"
+  GroupUserList:
+    type: object
+    x-gw-extend:
+    - "#/definitions/DataListEnvelope"
+    properties:
+      data:
+        type: array
+        items:
+          $ref: "#/definitions/GroupUserData"
+  GroupUserRequest:
+    type: object
+    required:
+    - data
+    properties:
+      data:
+        $ref: "#/definitions/GroupUserData"
+  GroupUserResponse:
+    type: object
+    properties:
+      data:
+        $ref: "#/definitions/GroupUserData"
+  HolidayData:
+    x-gw-extend:
+    - "#/definitions/DataEnvelope"
+    required:
+    - attributes
+    properties:
+      attributes:
+        $ref: "admin#/definitions/Holiday"
+  HolidayList:
+    type: object
+    x-gw-extend:
+    - "#/definitions/DataListEnvelope"
+    properties:
+      data:
+        type: array
+        items:
+          $ref: "#/definitions/HolidayData"
+      included:
+        $ref: "#/definitions/AdminInclusions"
+  HolidayRequest:
+    type: object
+    required:
+    - data
+    properties:
+      data:
+        $ref: "#/definitions/HolidayData"
+      included:
+        $ref: "#/definitions/AdminInclusions"
+  HolidayResponse:
+    type: object
+    properties:
+      data:
+        $ref: "#/definitions/HolidayData"
+      included:
+        $ref: "#/definitions/AdminInclusions"
+  HolidayZoneData:
+    x-gw-extend:
+    - "#/definitions/DataEnvelope"
+    required:
+    - attributes
+    properties:
+      attributes:
+        $ref: "admin#/definitions/HolidayZone"
+  HolidayZoneList:
+    type: object
+    x-gw-extend:
+    - "#/definitions/DataListEnvelope"
+    properties:
+      data:
+        type: array
+        items:
+          $ref: "#/definitions/HolidayZoneData"
+  HolidayZoneRequest:
+    type: object
+    required:
+    - data
+    properties:
+      data:
+        $ref: "#/definitions/HolidayZoneData"
+      included:
+        $ref: "#/definitions/AdminInclusions"
+  HolidayZoneResponse:
+    type: object
+    properties:
+      data:
+        $ref: "#/definitions/HolidayZoneData"
+      included:
+        $ref: "#/definitions/AdminInclusions"
+  RegionData:
+    x-gw-extend:
+    - "#/definitions/DataEnvelope"
+    required:
+    - attributes
+    properties:
+      attributes:
+        $ref: "admin#/definitions/Region"
+  RegionList:
+    type: object
+    x-gw-extend:
+    - "#/definitions/DataListEnvelope"
+    properties:
+      data:
+        type: array
+        items:
+          $ref: "#/definitions/RegionData"
+      included:
+        $ref: "#/definitions/AdminInclusions"
+  RegionRequest:
+    type: object
+    required:
+    - data
+    properties:
+      data:
+        $ref: "#/definitions/RegionData"
+      included:
+        $ref: "#/definitions/AdminInclusions"
+  RegionResponse:
+    type: object
+    properties:
+      data:
+        $ref: "#/definitions/RegionData"
+      included:
+        $ref: "#/definitions/AdminInclusions"
+  RegionZoneData:
+    x-gw-extend:
+    - "#/definitions/DataEnvelope"
+    required:
+    - attributes
+    properties:
+      attributes:
+        $ref: "admin#/definitions/RegionZone"
+  RegionZoneList:
+    type: object
+    x-gw-extend:
+    - "#/definitions/DataListEnvelope"
+    properties:
+      data:
+        type: array
+        items:
+          $ref: "#/definitions/RegionZoneData"
+      included:
+        $ref: "#/definitions/AdminInclusions"
+  RegionZoneRequest:
+    type: object
+    required:
+    - data
+    properties:
+      data:
+        $ref: "#/definitions/RegionZoneData"
+      included:
+        $ref: "#/definitions/AdminInclusions"
+  RegionZoneResponse:
+    type: object
+    properties:
+      data:
+        $ref: "#/definitions/RegionZoneData"
+      included:
+        $ref: "#/definitions/AdminInclusions"
+  RoleData:
+    x-gw-extend:
+    - "#/definitions/DataEnvelope"
+    required:
+    - attributes
+    properties:
+      attributes:
+        $ref: "admin#/definitions/Role"
+  RoleList:
+    type: object
+    x-gw-extend:
+    - "#/definitions/DataListEnvelope"
+    properties:
+      data:
+        type: array
+        items:
+          $ref: "#/definitions/RoleData"
+      included:
+        $ref: "#/definitions/AdminInclusions"
+  RolePermissionData:
+    x-gw-extend:
+    - "#/definitions/DataEnvelope"
+    required:
+    - attributes
+    properties:
+      attributes:
+        $ref: "admin#/definitions/RolePermission"
+  RolePermissionList:
+    type: object
+    x-gw-extend:
+    - "#/definitions/DataListEnvelope"
+    properties:
+      data:
+        type: array
+        items:
+          $ref: "#/definitions/RolePermissionData"
+      included:
+        $ref: "#/definitions/AdminInclusions"
+  RolePermissionRequest:
+    type: object
+    required:
+    - data
+    properties:
+      data:
+        $ref: "#/definitions/RolePermissionData"
+      included:
+        $ref: "#/definitions/AdminInclusions"
+  RolePermissionResponse:
+    type: object
+    properties:
+      data:
+        $ref: "#/definitions/RolePermissionData"
+      included:
+        $ref: "#/definitions/AdminInclusions"
+  RoleRequest:
+    type: object
+    required:
+    - data
+    properties:
+      data:
+        $ref: "#/definitions/RoleData"
+      included:
+        $ref: "#/definitions/AdminInclusions"
+  RoleResponse:
+    type: object
+    properties:
+      data:
+        $ref: "#/definitions/RoleData"
+      included:
+        $ref: "#/definitions/AdminInclusions"
+  SecurityZoneData:
+    x-gw-extend:
+    - "#/definitions/DataEnvelope"
+    required:
+    - attributes
+    properties:
+      attributes:
+        $ref: "admin#/definitions/SecurityZone"
+  SecurityZoneList:
+    type: object
+    x-gw-extend:
+    - "#/definitions/DataListEnvelope"
+    properties:
+      data:
+        type: array
+        items:
+          $ref: "#/definitions/SecurityZoneData"
+      included:
+        $ref: "#/definitions/AdminInclusions"
+  SecurityZoneRequest:
+    type: object
+    required:
+    - data
+    properties:
+      data:
+        $ref: "#/definitions/SecurityZoneData"
+      included:
+        $ref: "#/definitions/AdminInclusions"
+  SecurityZoneResponse:
+    type: object
+    properties:
+      data:
+        $ref: "#/definitions/SecurityZoneData"
+      included:
+        $ref: "#/definitions/AdminInclusions"
+  UserAttributeData:
+    type: object
+    x-gw-extend:
+    - "#/definitions/DataEnvelope"
+    required:
+    - attributes
+    properties:
+      attributes:
+        $ref: "admin#/definitions/UserAttribute"
+  UserAttributeList:
+    type: object
+    x-gw-extend:
+    - "#/definitions/DataListEnvelope"
+    properties:
+      data:
+        type: array
+        items:
+          $ref: "#/definitions/UserAttributeData"
+      included:
+        $ref: "#/definitions/AdminInclusions"
+  UserAttributeRequest:
+    type: object
+    required:
+    - data
+    properties:
+      data:
+        $ref: "#/definitions/UserAttributeData"
+      included:
+        $ref: "#/definitions/AdminInclusions"
+  UserAttributeResponse:
+    type: object
+    properties:
+      data:
+        $ref: "#/definitions/UserAttributeData"
+      included:
+        $ref: "#/definitions/AdminInclusions"
+  UserData:
+    x-gw-extend:
+    - "#/definitions/DataEnvelope"
+    required:
+    - attributes
+    properties:
+      attributes:
+        $ref: "admin#/definitions/User"
+  UserList:
+    type: object
+    x-gw-extend:
+    - "#/definitions/DataListEnvelope"
+    properties:
+      data:
+        type: array
+        items:
+          $ref: "#/definitions/UserData"
+      included:
+        $ref: "#/definitions/AdminInclusions"
+  UserRegionData:
+    type: object
+    x-gw-extend:
+    - "#/definitions/DataEnvelope"
+    required:
+    - attributes
+    properties:
+      attributes:
+        $ref: "admin#/definitions/UserRegion"
+  UserRegionList:
+    type: object
+    x-gw-extend:
+    - "#/definitions/DataListEnvelope"
+    properties:
+      data:
+        type: array
+        items:
+          $ref: "#/definitions/UserRegionData"
+      included:
+        $ref: "#/definitions/AdminInclusions"
+  UserRegionRequest:
+    type: object
+    required:
+    - data
+    properties:
+      data:
+        $ref: "#/definitions/UserRegionData"
+  UserRegionResponse:
+    type: object
+    properties:
+      data:
+        $ref: "#/definitions/UserRegionData"
+      included:
+        $ref: "#/definitions/AdminInclusions"
+  UserRequest:
+    type: object
+    required:
+    - data
+    properties:
+      data:
+        $ref: "#/definitions/UserData"
+      included:
+        $ref: "#/definitions/AdminInclusions"
+  UserResponse:
+    type: object
+    properties:
+      data:
+        $ref: "#/definitions/UserData"
+      included:
+        $ref: "#/definitions/AdminInclusions"

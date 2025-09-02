@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<plugin
+  interface="IPreUpdateHandler"
+  name="IPreUpdateHandler">
+  <plugin-gosu
+    gosuclass="gw.surepath.cc.integration.preupdate.CCSurePathPreupdateHandler">
+    <param
+      name="surepath.preupdate.base"
+      value="gw.surepath"/>
+  </plugin-gosu>
+</plugin>

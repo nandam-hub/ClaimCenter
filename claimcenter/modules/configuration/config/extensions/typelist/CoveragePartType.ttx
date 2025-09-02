@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<typelistextension xmlns="http://guidewire.com/typelists" name="CoveragePartType" desc="CoveragePartType">
+  <typecode
+    code="hoprental"
+    desc="Rental"
+    name="Rental"
+    priority="30">
+  </typecode>
+  <typecode
+    code="hopcondo"
+    desc="Condominium"
+    name="Condominium"
+    priority="20">
+  </typecode>
+  <typecode
+    code="hopdwelling"
+    desc="Dwelling"
+    name="Dwelling"
+    priority="10">
+  </typecode>
+  <typefilter
+    desc="HOP coverage part types"
+    name="HOPCoveragePartType">
+    <include
+      code="hoprental"/>
+    <include
+      code="hopcondo"/>
+    <include
+      code="hopdwelling"/>
+  </typefilter>
+</typelistextension>

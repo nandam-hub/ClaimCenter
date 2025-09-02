@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<internalExtension
+  xmlns="http://guidewire.com/datamodel"
+  entityName="Person">
+  <typekey
+    name="ClaimUpdatesViaTextOptIn"
+    nullok="true"
+    typefilter="TextMessage"
+    typelist="PreferredPhoneNumberType"/>
+  <typekey
+    name="ClaimUpdatesViaEmailOptIn"
+    nullok="true"
+    typelist="PreferredEmailType"/>
+</internalExtension>

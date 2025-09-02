@@ -1,0 +1,143 @@
+.gw-TitleBarWidget {
+  // =======================================
+  // ====== NON LOCATION SPECIFIC STYLING
+  // =======================================
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: flex-start;
+  flex-shrink: 1;
+  align-self: stretch;
+
+  &.gw-isScreenTitle {
+    @include gw-widgetStyles($gw-app--TitleBar--screen--bg, $gw-app--TitleBar--screen--col, $gw-app--TitleBar--screen--border-col);
+  }
+
+  &:not(.gw-isScreenTitle) {
+    flex-grow: 1;
+    @include gw-widgetStyles($gw-app--TitleBar--panel--bg, $gw-app--TitleBar--panel--col, $gw-app--TitleBar--panel--border-bottom--col);
+  }
+
+  &:not(.gw-isScreenTitle).gw-styleTag--PanelRefWidget {
+    @if ($gw-app--TitleBar--panel--border-bottom--col != null) {
+      border-bottom: gw-border($gw-app--TitleBar--panel--border-bottom--col);
+    }
+  }
+
+  .gw-TitleBar--titles--container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-end;
+    margin-right: $gw-app--SPACING-rem-L;
+
+    .gw-TitleBar--title {
+      margin-top: $gw-app--border-width-px;
+    }
+  }
+
+  .gw-TitleBar--children {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-start;
+
+    > div {
+      @include gw-wrapNever();
+      margin-top: $gw-app--ToolbarWidget-children--spacing-widget-top-rem;
+      margin-left: $gw-app--ToolbarWidget-children--spacing-widget-left-rem;
+      margin-right: $gw-app--ToolbarWidget-children--spacing-widget-right-rem;
+      margin-bottom: $gw-app--ToolbarWidget-children--spacing-widget-bottom-rem;
+    }
+
+    .gw-BreadcrumbLinkWidget, .gw-UpLinkButtonWidget {
+      @if ($gw-app--TitleBar--screen--use-alternate-breadcrumb-ux) {
+        @include gw-button--secondary($is-small: true);
+      } @else {
+        @include gw-link();
+      }
+    }
+  }
+
+  .gw-TitleBar--icon {
+    position: relative;
+    //height: 100%;
+  }
+
+  @mixin gw-buildTitlebar(
+    $font-fam, $col, $bg,
+    $title-size, $title-weight,
+    $subtitle-size, $subtitle-weight, $subtitle-pad-T,
+    $icon-size, $icon-mar-R
+  ) {
+
+    font-family: $font-fam;
+    color: $col;
+    background-color: $bg;
+
+    .gw-TitleBar--icon {
+      flex-shrink: 0;
+      margin-right: $icon-mar-R;
+      font-size: $icon-size;
+    }
+
+    .gw-TitleBar--titles--container {
+
+      .gw-TitleBar--title {
+        font-weight: $title-weight;
+        font-size: $title-size;
+        @include gw-wrapOnWhiteSpace();
+
+        &.gw-title-is-link {
+          @include gw-link();
+        }
+      }
+
+      .gw-TitleBar--subtitle {
+        font-size: $subtitle-size;
+        padding-top: $subtitle-pad-T;
+        font-weight: $subtitle-weight;
+        @include gw-wrapOnWhiteSpace();
+      }
+    }
+  }
+
+  &.gw-heading-1 {
+    @include gw-inner-spacing($gw-app--TitleBar--heading-level-1--spacing-inner-top-rem, $gw-app--TitleBar--heading-level-1--spacing-inner-right-rem, $gw-app--TitleBar--heading-level-1--spacing-inner-bottom-rem, $gw-app--TitleBar--heading-level-1--spacing-inner-left-rem);
+    @include gw-widgetOuterSpacing($gw-app--TitleBar--heading-level-1--spacing-widget-top-rem, $gw-app--TitleBar--heading-level-1--spacing-widget-right-rem, $gw-app--TitleBar--heading-level-1--spacing-widget-bottom-rem, $gw-app--TitleBar--heading-level-1--spacing-widget-left-rem);
+
+    @include gw-buildTitlebar(
+            $gw-app--TitleBar--heading-level-1--font-family, $gw-app--TitleBar--screen--col, $gw-app--TitleBar--screen--bg,
+            $gw-app--TitleBar--heading-level-1--font-size-em, $gw-app--TitleBar--heading-level-1--font-weight,
+            $gw-app--TitleBar--heading-level-1--subtitle--font-size-em, $gw-app--TitleBar--heading-level-1--subtitle-font-weight, $gw-app--TitleBar--heading-level-1--subtitle--pad-top-rem,
+            $gw-app--TitleBar--heading-level-1--icon-size, $gw-app--TitleBar--heading-level-1--icon-margin-right-rem
+    );
+  }
+
+  &.gw-heading-2 {
+    @include gw-inner-spacing($gw-app--TitleBar--heading-level-2--spacing-inner-top-rem, $gw-app--TitleBar--heading-level-2--spacing-inner-right-rem, $gw-app--TitleBar--heading-level-2--spacing-inner-bottom-rem, $gw-app--TitleBar--heading-level-2--spacing-inner-left-rem);
+    @include gw-widgetOuterSpacing($gw-app--TitleBar--heading-level-2--spacing-widget-top-rem, $gw-app--TitleBar--heading-level-2--spacing-widget-right-rem, $gw-app--TitleBar--heading-level-2--spacing-widget-bottom-rem, $gw-app--TitleBar--heading-level-2--spacing-widget-left-rem);
+
+    @include gw-buildTitlebar(
+                    $gw-app--TitleBar--heading-level-2--font-family, $gw-app--TitleBar--panel--col, $gw-app--TitleBar--panel--bg,
+                    $gw-app--TitleBar--heading-level-2--font-size-em, $gw-app--TitleBar--heading-level-2--font-weight,
+                    $gw-app--TitleBar--heading-level-2--subtitle--font-size-em, $gw-app--TitleBar--heading-level-2--subtitle-font-weight, $gw-app--TitleBar--heading-level-2--subtitle--pad-top-rem,
+                    $gw-app--TitleBar--heading-level-2--icon-size, $gw-app--TitleBar--heading-level-2--icon-margin-right-rem
+    );
+  }
+
+  &.gw-heading-3 {
+    @include gw-inner-spacing($gw-app--TitleBar--heading-level-3--spacing-inner-top-rem, $gw-app--TitleBar--heading-level-3--spacing-inner-right-rem, $gw-app--TitleBar--heading-level-3--spacing-inner-bottom-rem, $gw-app--TitleBar--heading-level-3--spacing-inner-left-rem);
+    @include gw-widgetOuterSpacing($gw-app--TitleBar--heading-level-3--spacing-widget-top-rem, $gw-app--TitleBar--heading-level-3--spacing-widget-right-rem, $gw-app--TitleBar--heading-level-3--spacing-widget-bottom-rem, $gw-app--TitleBar--heading-level-3--spacing-widget-left-rem);
+
+    @include gw-buildTitlebar(
+                    $gw-app--TitleBar--heading-level-3--font-family, $gw-app--TitleBar--panel--col, $gw-app--TitleBar--panel--bg,
+                    $gw-app--TitleBar--heading-level-3--font-size-em, $gw-app--TitleBar--heading-level-3--font-weight,
+                    $gw-app--TitleBar--heading-level-3--subtitle--font-size-em, $gw-app--TitleBar--heading-level-3--subtitle-font-weight, $gw-app--TitleBar--heading-level-3--subtitle--pad-top-rem,
+                    $gw-app--TitleBar--heading-level-3--icon-size, $gw-app--TitleBar--heading-level-3--icon-margin-right-rem
+    );
+  }
+}
+

@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<entity
+  platform="true"
+  xmlns="http://guidewire.com/datamodel"
+  entity="RuleLookupColumnDef"
+  desc="Holds the lookup table column information "
+  table="rulelookupcolumndef"
+  type="versionable"
+  loadable="false"
+  final="false">
+  <column
+    desc="Lookup table input column identifier"
+    name="ColumnID"
+    nullok="false"
+    type="shorttext"/>
+  <column
+    desc="Lookup Column DataType"
+    name="ColumnType"
+    nullok="false"
+    type="shorttext"/>
+  <foreignkey
+    fkentity="RuleLookupRequestDef"
+    name="RuleLookupRequestDef"
+    nullok="false"/>
+</entity>

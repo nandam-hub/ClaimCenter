@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <InputSet
+    id="CatastropheZonesInputSet"
+    mode="default">
+    <Require
+      name="Catastrophe"
+      type="Catastrophe"/>
+    <InputSetRef
+      def="ZonesInputSet(Catastrophe, Catastrophe.IntrinsicType.RelativeName)"/>
+  </InputSet>
+</PCF>

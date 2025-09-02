@@ -1,0 +1,1 @@
+<div class="${isActionableInner ? 'gw-actionable--inner'}">${label}</div>

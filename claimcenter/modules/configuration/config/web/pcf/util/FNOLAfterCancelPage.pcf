@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Forward
+    id="FNOLAfterCancelPage">
+    <LocationEntryPoint
+      signature="FNOLAfterCancelPage(createPolicyFlag : boolean)"/>
+    <Variable
+      name="createPolicyFlag"
+      type="boolean"/>
+    <Variable
+      initialValue="entity.User.util.CurrentUser"
+      name="user"
+      recalculateOnRefresh="true"
+      type="entity.User"/>
+    <ForwardCondition
+      action="FNOLWizard.go(not createPolicyFlag)"
+      condition="user.UserSettings.StartupPage == TC_NEWCLAIM"/>
+    <ForwardCondition
+      action="ClaimCenterStartupPage.go()"/>
+  </Forward>
+</PCF>

@@ -1,0 +1,27 @@
+package rules.Validation.ActivityPatternValidationRules_dir
+
+uses gw.api.locale.DisplayKey
+uses gw.surepath.cc.configuration.activitymanagement.util.ActivityManagementProperties
+
+@gw.rules.RuleName("SP01000_ValidateAssignmentFields")
+internal class SP01000_ValidateAssignmentFields {
+  static function doCondition(activityPattern : entity.ActivityPattern) : boolean {
+/*start00rule*/
+    return ActivityManagementProperties.INSTANCE.FeatureEnabled and
+        User.util.CurrentUser != null or User.util.UnrestrictedUser != null
+/*end00rule*/
+}
+
+  static function doAction(activityPattern : entity.ActivityPattern, actions : gw.rules.Action) {
+/*start00rule*/
+    if (activityPattern.Group_SP == null and activityPattern.AssignableQueue_SP == null) {
+      var errorMessage = DisplayKey.get("SP.ActivityManagement.Validation.ActivityPatternWithNoGroupOrQueue")
+      activityPattern.reject(ValidationLevel.TC_LOADSAVE, errorMessage, null, null)
+    } else if (activityPattern.AssignableQueue_SP != null and activityPattern.Group_SP != null and
+        activityPattern.AssignableQueue_SP.Group != activityPattern.Group_SP) {
+      activityPattern.rejectField(ActivityPattern#Group_SP.PropertyInfo.Name, ValidationLevel.TC_LOADSAVE,
+          DisplayKey.get("SP.ActivityManagement.Validation.ActivityPatternWithMismatchingGroupAndQueue"), null, null)
+    }
+/*end00rule*/
+  }
+}

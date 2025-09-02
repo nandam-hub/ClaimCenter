@@ -1,0 +1,396 @@
+{
+  "schemaName": "gw.core.pl.admin.v1.admin_pl-1.0",
+  "combine": [
+    "gw.core.pl.framework.v1.framework_pl-1.0",
+    "gw.core.pl.common.v1.common_pl-1.0"
+  ],
+  "typeUses": [
+    "gw.rest.core.pl.common.v1.phone.PhoneNumberResolver"
+  ],
+  "updaters": {
+    "AssignableQueue": {
+      "schemaDefinition": "AssignableQueue",
+      "root": "entity.AssignableQueue",
+      "properties": {
+        "description": {
+          "path": "AssignableQueue.Description"
+        },
+        "name": {
+          "path": "AssignableQueue.Name"
+        },
+        "subGroupVisible": {
+          "path": "AssignableQueue.SubGroupVisible"
+        }
+      }
+    },
+    "Attribute": {
+      "schemaDefinition": "Attribute",
+      "root": "entity.Attribute",
+      "properties": {
+        "description": {
+          "path": "Attribute.Description"
+        },
+        "name": {
+          "path": "Attribute.Name"
+        },
+        "type": {
+          "path": "Attribute.Type",
+          "valueResolver": {
+            "typeName": "TypeKeyValueResolver"
+          }
+        }
+      }
+    },
+    "CalendarDateCalculation": {
+      "schemaDefinition": "CalendarDateCalculation",
+      "root": "gw.rest.core.pl.admin.v1.activitycalendar.CalendarDateCalculation",
+      "properties": {
+        "holidayTag": {
+          "path": "CalendarDateCalculation.HolidayTag",
+          "valueResolver": {
+            "typeName": "TypeKeyValueResolver"
+          }
+        },
+        "includeDaysType": {
+          "path": "CalendarDateCalculation.IncludeDaysType",
+          "valueResolver": {
+            "typeName": "TypeKeyValueResolver"
+          }
+        },
+        "location": {
+          "path": "CalendarDateCalculation.Location",
+          "create": "CalendarDateCalculation.createNonPersistantAddress()",
+          "shouldCreate": "currentValue == null",
+          "updaterRef": "#/updaters/Address"
+        },
+        "numberOfDays": {
+          "path": "CalendarDateCalculation.NumberOfDays"
+        },
+        "numberOfHours": {
+          "path": "CalendarDateCalculation.NumberOfHours"
+        },
+        "startDate": {
+          "path": "CalendarDateCalculation.StartDate"
+        }
+      }
+    },
+    "Group": {
+      "schemaDefinition": "Group",
+      "root": "entity.Group",
+      "properties": {
+        "groupType": {
+          "path": "Group.GroupType",
+          "valueResolver": {
+            "typeName": "TypeKeyValueResolver"
+          }
+        },
+        "name": {
+          "path": "Group.Name"
+        },
+        "parent": {
+          "path": "Group.Parent",
+          "valueResolver": {
+            "typeName": "gw.rest.core.pl.admin.v1.group.GroupJsonValueResolver",
+            "setByRefid": false
+          }
+        },
+        "supervisor": {
+          "path": "Group.Supervisor",
+          "valueResolver": {
+            "typeName": "gw.rest.core.pl.admin.v1.group.UserJsonValueResolver",
+            "setByRefid": false
+          }
+        }
+      }
+    },
+    "GroupRegion": {
+      "schemaDefinition": "GroupRegion",
+      "root": "entity.GroupRegion",
+      "properties": {
+        "region": {
+          "path": "GroupRegion.Region",
+          "valueResolver": {
+            "typeName": "gw.rest.core.pl.admin.v1.region.RegionJsonValueResolver",
+            "setByRefid": false
+          }
+        }
+      }
+    },
+    "GroupUser": {
+      "schemaDefinition": "GroupUser",
+      "root": "entity.GroupUser",
+      "updateLast": [
+        "loadFactor"
+      ],
+      "properties": {
+        "loadFactor": {
+          "path": "GroupUser.RestV1_LoadFactor"
+        },
+        "loadFactorType": {
+          "path": "GroupUser.LoadFactorType",
+          "valueResolver": {
+            "typeName": "TypeKeyValueResolver"
+          }
+        },
+        "manager": {
+          "path": "GroupUser.Manager"
+        },
+        "member": {
+          "path": "GroupUser.Member"
+        },
+        "user": {
+          "path": "GroupUser.User",
+          "valueResolver": {
+            "typeName": "gw.rest.core.pl.admin.v1.group.UserJsonValueResolver",
+            "setByRefid": false
+          }
+        }
+      }
+    },
+    "Holiday": {
+      "schemaDefinition": "Holiday",
+      "root": "entity.Holiday",
+      "properties": {
+        "appliesToAllZones": {
+          "path": "Holiday.AppliesToAllZones"
+        },
+        "holidayTags": {
+          "path": "Holiday.HolidayTags*.HolidayTagCode",
+          "items": {
+            "add": "Holiday.addToHolidayTags(new HolidayTag(Holiday){ :HolidayTagCode = value })",
+            "remove": "Holiday.removeFromHolidayTags(Holiday.HolidayTags.firstWhere(\\h-> h.HolidayTagCode == value))",
+            "jsonKey": "jsonValue.get('code')",
+            "valueKey": "value",
+            "valueResolver": {
+              "typeName": "TypeKeyValueResolver"
+            }
+          }
+        },
+        "name": {
+          "path": "Holiday.Name"
+        },
+        "occurrenceDate": {
+          "path": "Holiday.RestV1_OccurrenceDate"
+        }
+      }
+    },
+    "HolidayZone": {
+      "schemaDefinition": "HolidayZone",
+      "root": "entity.HolidayZone",
+      "properties": {
+        "geographicZone": {
+          "path": "HolidayZone.RestV1_HolidayZone",
+          "valueResolver": {
+            "typeName": "gw.rest.core.pl.admin.v1.geographiczone.GeographicZoneJsonValueResolver"
+          }
+        }
+      }
+    },
+    "Region": {
+      "schemaDefinition": "Region",
+      "root": "entity.Region",
+      "properties": {
+        "name": {
+          "path": "Region.Name"
+        }
+      }
+    },
+    "RegionZone": {
+      "schemaDefinition": "RegionZone",
+      "root": "entity.RegionZone",
+      "properties": {
+        "geographicZone": {
+          "path": "RegionZone.RestV1_RegionZone",
+          "valueResolver": {
+            "typeName": "gw.rest.core.pl.admin.v1.geographiczone.GeographicZoneJsonValueResolver"
+          }
+        }
+      }
+    },
+    "Role": {
+      "schemaDefinition": "Role",
+      "root": "entity.Role",
+      "properties": {
+        "carrierInternal": {
+          "path": "Role.CarrierInternalRole"
+        },
+        "description": {
+          "path": "Role.Description"
+        },
+        "name": {
+          "path": "Role.Name"
+        },
+        "roleType": {
+          "path": "Role.RoleType",
+          "valueResolver": {
+            "typeName": "TypeKeyValueResolver"
+          }
+        }
+      }
+    },
+    "RolePermission": {
+      "schemaDefinition": "RolePermission",
+      "root": "entity.RolePrivilege",
+      "properties": {
+        "permission": {
+          "path": "RolePrivilege.Permission",
+          "valueResolver": {
+            "typeName": "TypeKeyValueResolver"
+          }
+        }
+      }
+    },
+    "SecurityZone": {
+      "schemaDefinition": "SecurityZone",
+      "root": "entity.SecurityZone",
+      "properties": {
+        "description": {
+          "path": "SecurityZone.Description"
+        },
+        "name": {
+          "path": "SecurityZone.Name"
+        }
+      }
+    },
+    "User": {
+      "schemaDefinition": "User",
+      "root": "entity.User",
+      "updateFirst": [
+        "pronounAggregate"
+      ],
+      "properties": {
+        "active": {
+          "path": "User.Credential.Active"
+        },
+        "cellPhone": {
+          "path": "User.Contact.RestV1_CellPhone",
+          "setter": "User.Contact.RestV1_setPhoneNumber(Person#CellPhone, value)",
+          "valueResolver": {
+            "typeName": "PhoneNumberResolver"
+          }
+        },
+        "employeeNumber": {
+          "path": "User.Contact.EmployeeNumber"
+        },
+        "externalUser": {
+          "path": "User.ExternalUser"
+        },
+        "firstName": {
+          "path": "User.Contact.FirstName"
+        },
+        "gender": {
+          "path": "User.Contact.Gender",
+          "valueResolver": {
+            "typeName": "TypeKeyValueResolver"
+          }
+        },
+        "homePhone": {
+          "path": "User.Contact.RestV1_HomePhone",
+          "setter": "User.Contact.RestV1_setPhoneNumber(Contact#HomePhone, value)",
+          "valueResolver": {
+            "typeName": "PhoneNumberResolver"
+          }
+        },
+        "lastName": {
+          "path": "User.Contact.LastName"
+        },
+        "pronounAggregate": {
+          "path": "User.Contact.PronounAggregate",
+          "valueResolver": {
+            "typeName": "TypeKeyValueResolver"
+          }
+        },
+        "pronounObjective": {
+          "path": "User.Contact.PronounObjective",
+          "allowed": "User.Contact.RestV1_pronounUpdateAllowed(\"pronounObjective\")"
+        },
+        "pronounPossessive": {
+          "path": "User.Contact.PronounPossessive",
+          "allowed": "User.Contact.RestV1_pronounUpdateAllowed(\"pronounPossessive\")"
+        },
+        "pronounSubjective": {
+          "path": "User.Contact.PronounSubjective",
+          "allowed": "User.Contact.RestV1_pronounUpdateAllowed(\"pronounSubjective\")"
+        },
+        "roles": {
+          "path": "User.Roles*.Role",
+          "items": {
+            "add": "User.addToRoles(new UserRole(User) { :Role = value })",
+            "remove": "User.RestV1_removeFromRoles(value)",
+            "jsonKey": "jsonValue.get('id')",
+            "valueKey": "value.RestId",
+            "valueResolver": {
+              "typeName": "gw.rest.core.pl.framework.v1.refs.KeyableBeanJsonValueResolver",
+              "setByRefid": false
+            }
+          }
+        },
+        "sexAssignedAtBirth": {
+          "path": "User.Contact.SexAssignedAtBirth",
+          "valueResolver": {
+            "typeName": "TypeKeyValueResolver"
+          }
+        },
+        "suffix": {
+          "path": "User.Contact.Suffix",
+          "valueResolver": {
+            "typeName": "TypeKeyValueResolver"
+          }
+        },
+        "username": {
+          "path": "User.Credential.UserName"
+        },
+        "vacationStatus": {
+          "path": "User.VacationStatus",
+          "valueResolver": {
+            "typeName": "TypeKeyValueResolver"
+          }
+        },
+        "workPhone": {
+          "path": "User.Contact.RestV1_WorkPhone",
+          "setter": "User.Contact.RestV1_setPhoneNumber(Contact#WorkPhone, value)",
+          "valueResolver": {
+            "typeName": "PhoneNumberResolver"
+          }
+        }
+      }
+    },
+    "UserAttribute": {
+      "schemaDefinition": "UserAttribute",
+      "root": "entity.AttributeUser",
+      "properties": {
+        "attribute": {
+          "path": "AttributeUser.Attribute",
+          "valueResolver": {
+            "typeName": "gw.rest.core.pl.admin.v1.attribute.AttributeJsonValueResolver"
+          }
+        },
+        "id": {
+          "path": "AttributeUser.RestId"
+        },
+        "state": {
+          "path": "AttributeUser.State",
+          "valueResolver": {
+            "typeName": "TypeKeyValueResolver"
+          }
+        },
+        "value": {
+          "path": "AttributeUser.Value"
+        }
+      }
+    },
+    "UserRegion": {
+      "schemaDefinition": "UserRegion",
+      "root": "entity.UserRegion",
+      "properties": {
+        "region": {
+          "path": "UserRegion.Region",
+          "valueResolver": {
+            "typeName": "gw.rest.core.pl.admin.v1.region.RegionJsonValueResolver",
+            "setByRefid": false
+          }
+        }
+      }
+    }
+  }
+}

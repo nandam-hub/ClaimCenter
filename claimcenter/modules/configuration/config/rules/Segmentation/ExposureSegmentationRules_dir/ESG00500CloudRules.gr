@@ -1,0 +1,19 @@
+package rules.Segmentation.ExposureSegmentationRules_dir
+uses gw.api.cloud.rules.CloudRulesEngine
+
+@gw.rules.RuleName("ESG00500 - Cloud Rules")
+internal class ESG00500CloudRules {
+  static function doCondition(exposure  :  entity.Exposure) : boolean {
+/*start00rule*/
+return true
+/*end00rule*/
+}
+
+  static function doAction(exposure  :  entity.Exposure, actions : gw.rules.Action) {
+/*start00rule*/
+if (CloudRulesEngine.segmentExposureIfEnabled(exposure)) {
+      actions.exit()
+    } 
+/*end00rule*/
+  }
+}

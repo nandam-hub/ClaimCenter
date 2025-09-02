@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  entity="BulkInvoiceExchangeRateInUse"
+  table="bulkinvoicexriu"
+  type="versionable">
+  <implementsInterface
+    iface="gw.cc.financials.bulkpay.entity.BulkInvoiceExchangeRateInUse"
+    impl="com.guidewire.cc.domain.financials.bulkpay.impl.BulkInvoiceExchangeRateInUseImpl"/>
+  <implementsEntity
+    name="ExchangeRateInUseDelegate"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.InsertCallback"
+    impl="com.guidewire.cc.domain.financials.bulkpay.impl.BulkInvoiceExchangeRateInUseImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.UpdateCallback"
+    impl="com.guidewire.cc.domain.financials.bulkpay.impl.BulkInvoiceExchangeRateInUseImpl"/>
+  <foreignkey
+    fkentity="BulkInvoice"
+    name="BulkInvoice"
+    nullok="false"/>
+</entity>

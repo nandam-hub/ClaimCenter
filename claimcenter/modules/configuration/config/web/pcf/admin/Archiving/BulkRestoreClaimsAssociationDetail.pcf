@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!-- Deprecated since 50.3.1. Claim Association is no longer created when submitting a bulk restore request -->
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Page
+    canEdit="false"
+    canVisit="true"
+    id="BulkRestoreClaimsAssociationDetail"
+    parent="BulkRestoreArchivedClaims()"
+    showUpLink="true"
+    title="DisplayKey.get(&quot;Web.Admin.BulkRestoreClaimsAssociationDetail&quot;)">
+    <LocationEntryPoint
+      signature="BulkRestoreClaimsAssociationDetail(bulkRestoreClaimAssociation : entity.ClaimAssociation)"/>
+    <Variable
+      name="bulkRestoreClaimAssociation"
+      recalculateOnRefresh="true"
+      type="entity.ClaimAssociation"/>
+    <Variable
+      initialValue="new gw.api.archiving.BulkRestoreArchivedClaimsHelper()"
+      name="bulkRestoreArchivedClaimsHelper"
+      recalculateOnRefresh="true"
+      type="gw.api.archiving.BulkRestoreArchivedClaimsHelper"/>
+    <Variable
+      name="archiveStateCount"
+      recalculateOnRefresh="true"
+      type="gw.api.archiving.BulkRestoreArchivedClaimsHelper.ArchiveStateCount"
+      initialValue="bulkRestoreArchivedClaimsHelper.getArchiveStateCountFromClaimAssociation(bulkRestoreClaimAssociation)"/>
+    <Screen
+      id="ClaimAssociationDetailScreen">
+      <Toolbar>        
+        <ToolbarButton
+          action="null"
+          hideIfEditable="true"
+          id="RefreshButton"
+          label="DisplayKey.get(&quot;Web.Admin.BulkRestoreClaimsAssociationDetail.Button.Refresh&quot;)"/>
+      </Toolbar>
+      <PanelRef
+        def="BulkRestoreClaimsAssociationDetailDV(bulkRestoreClaimAssociation, archiveStateCount)"/>
+    </Screen>
+  </Page>
+</PCF>

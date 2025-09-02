@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <InputSet
+    id="ValidationPopupErrorsInputSet">
+    <Require
+      name="argsErrors"
+      type="java.lang.String[]"/>
+    <Require
+      name="labelAbove"
+      type="boolean"/>
+    <Variable
+      initialValue="argsErrors.length == 0 ? new String[0] : argsErrors"
+      name="errors"
+      recalculateOnRefresh="true"
+      type="String[]"/>
+    <ContentInput
+      align="left"
+      id="header"
+      labelAbove="labelAbove"
+      visible="not errors.IsEmpty">
+      <Link
+        icon="&quot;alert&quot;"
+        iconType="svgFileName"
+        iconColor="gw.api.web.color.GWColor.THEME_ALERT_ERROR"
+        id="ValidationErrorIcon"/>
+      <Link
+        id="Label"
+        label="DisplayKey.get(&quot;BizRules.Validation.GenericMessage&quot;)"
+        styleClass="bold"/>
+    </ContentInput>
+    <InputIterator
+      elementName="error"
+      type="java.lang.String"
+      value="errors"
+      valueType="java.lang.String[]">
+      <TextInput
+        align="left"
+        id="ValidationError"
+        labelAbove="labelAbove"
+        value="error"></TextInput>
+    </InputIterator>
+  </InputSet>
+</PCF>

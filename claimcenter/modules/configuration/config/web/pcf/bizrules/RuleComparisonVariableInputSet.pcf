@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <InputSet
+    id="RuleComparisonVariableInputSet">
+    <Require
+      name="controller"
+      type="gw.bizrules.pcf.RuleVersionComparisonController"/>
+    <Require
+      name="variableDiff"
+      type="gw.bizrules.diff.RuleMatchableDiffPair&lt;RuleVariable&gt;"/>
+    <InputSetRef
+      def="RuleComparisonCommandLabelInputSet(controller, &quot;&quot;)"/>
+    <InputSetRef
+      def="RuleComparisonRowStringInputSet(variableDiff.NameRow)"
+      id="NameRow"/>
+    <InputSetRef
+      def="RuleComparisonRowTextAreaInputSet(variableDiff.DescriptionRow)"
+      id="DescriptionRow"/>
+    <InputSetRef
+      def="RuleComparisonRowStringInputSet(variableDiff.ExpressionRow)"
+      id="ExpressionRow"/>
+  </InputSet>
+</PCF>

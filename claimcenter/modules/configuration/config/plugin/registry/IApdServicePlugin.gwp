@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<plugin
+  interface="IApdServicePlugin"
+  name="IApdServicePlugin">
+  <plugin-java
+    disabled="${apd.service.disabled:true}"
+    javaclass="com.guidewire.cloud.apd.ApdServicePluginImpl">
+    <param
+      name="baseUrl"
+      value="${apd.service.baseUrl}"/>
+    <param
+      name="scopes"
+      value="apds.products.read"/>
+    <param
+      name="editionsApiCacheSize"
+      value="${apd.service.editionsApiCacheSize}"/>
+    <param
+      name="productsApiCacheSize"
+      value="${apd.service.productsApiCacheSize}"/>
+    <param
+      name="runtimeApiCacheSize"
+      value="${apd.service.runtimeApiCacheSize}"/>
+    <param
+      name="cacheRefreshIntervalSec"
+      value="${apd.service.cacheRefreshIntervalSec}"/>
+  </plugin-java>
+</plugin>

@@ -1,0 +1,23 @@
+package rules.Validation.ClaimValidationRules_dir
+
+uses gw.api.locale.DisplayKey
+
+@gw.rules.RuleName("CLV15000 - Applicable Deductible CovTerm Changed")
+internal class CLV15000ApplicableDeductibleCovTermChanged {
+  static function doCondition(claim: entity.Claim): boolean {
+/*start00rule*/
+    // Loss cause changed, which would have resulted in a different deductible covterm being selected
+    return claim.ApplicableDeductibleCovTermChanged
+/*end00rule*/
+  }
+
+  static function doAction(claim: entity.Claim, actions: gw.rules.Action) {
+/*start00rule*/
+    if (claim.DeductiblesWithNoPaymentsMade.length != 0) {
+      claim.reject(null, null, TC_LOADSAVE, DisplayKey.get("Rules.Validation.Claim.LossCauseChangingDeductibleUpdated"))
+    } else {
+      claim.reject(null, null, TC_NEWLOSS, DisplayKey.get("Rules.Validation.Claim.LossCauseChangingDeductibleNotUpdated"))
+    }
+/*end00rule*/
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "schemaName": "gw.core.cc.claim.v1.claim_combined_core-1.0",
+  "combine": [
+    "gw.core.cc.claim.v1.claim_auto_core-1.0",
+    "gw.core.cc.claim.v1.claim_property_core-1.0",
+    "gw.core.cc.claim.v1.claim_core-1.0"
+  ]
+}

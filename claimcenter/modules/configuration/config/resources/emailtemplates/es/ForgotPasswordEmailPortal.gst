@@ -1,0 +1,1 @@
+<%@ params( email: String, portalURL: String, code: String ) %> Hola, ${email}: <br /> Abra la siguiente URL para restablecer su contraseña: <br /> <a href="${portalURL}?token=${code}">Restablecer contraseña</a><br /><br /> Saludos cordiales,  

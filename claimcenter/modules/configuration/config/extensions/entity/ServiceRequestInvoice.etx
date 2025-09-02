@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<extension
+  xmlns="http://guidewire.com/datamodel"
+  entityName="ServiceRequestInvoice">
+  <implementsInterface
+  iface="gw.core.vendormanagement.IServiceRequestInvoiceCoreMethods"
+  impl="gw.vendormanagement.ServiceRequestInvoiceCoreMethodsImpl"/>
+</extension>

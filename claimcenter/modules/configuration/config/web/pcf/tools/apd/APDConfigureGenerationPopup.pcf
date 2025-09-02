@@ -1,0 +1,216 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    canEdit="true"
+    canVisit="gw.api.feature.ApdForClaimsFeatureInfo.CodegenEnabled"
+    id="APDConfigureGenerationPopup"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.APDConfigureGenerationPopup.Title&quot;, product.Name)">
+    <LocationEntryPoint
+      signature="APDConfigureGenerationPopup(product : gw.apdcloud.client.model.APDProductDTO)"/>
+    <Variable
+      name="product"
+      type="gw.apdcloud.client.model.APDProductDTO"/>
+    <Variable
+      initialValue="gw.api.feature.ApdForClaimsFeatureInfo.CCCodeGenManager.forProduct(product)"
+      name="ccProductCodegenInfo"
+      type="gw.api.feature.ProductCodegenManager"/>
+    <Variable
+      initialValue="gw.api.feature.ApdForClaimsFeatureInfo.CCPICodeGenManager.forProduct(product)"
+      name="ccpiProductCodegenInfo"
+      type="gw.api.feature.ProductCodegenManager"/>
+    <Variable
+      name="productManagementHelper"
+      type="gw.apd.web.ProductManagementHelper"
+      initialValue="new gw.apd.web.ProductManagementHelper()"/>
+    <Variable
+      name="selections"
+      type="java.util.List&lt;gw.apd.web.RiskObjectSelection&gt;"
+      initialValue="productManagementHelper.getProductLineSelections(product)"/>
+    <Variable
+      initialValue="productManagementHelper.getRiskObjectFieldSelections(product)"
+      name="riskObjectFieldSelectionsList"
+      type="List&lt;gw.apd.web.RiskObjectFieldSelections&gt;"/>
+    <Screen>
+      <Toolbar>
+        <EditButtons
+          cancelLabel="DisplayKey.get(&quot;Web.APDProduct.GenerateSourceCode.Cancel&quot;)"
+          updateVisible="false"/>
+        <ToolbarButton
+          action="pushGenerateSourceCodePopup()"
+          available="ccProductCodegenInfo.isActive() or ccpiProductCodegenInfo.isActive()"
+          id="GenerateButton"
+          default="true"
+          label="DisplayKey.get(&quot;Web.APDConfigureGenerationPopup.Generate&quot;)"/>
+      </Toolbar>
+      <PanelColumn
+        visible="gw.api.feature.ApdForClaimsFeatureInfo.CCCodeGenManager.Enabled">
+        <CardViewPanel>
+          <Card
+            id="apdCode"
+            title="DisplayKey.get(&quot;Web.APDProduct.GenerateSourceCode.ClaimCenterProductModel&quot;)">
+            <PanelRef
+              def="APDCodegenEnablementControlsPanelSet(ccProductCodegenInfo)"
+              id="ccCodegenControls"/>
+            <PanelSet
+              visible="ccProductCodegenInfo.Active">
+              <Verbatim
+                id="LossCause"
+                label="DisplayKey.get(&quot;Web.APDConfigureGenerationPopup.LossType.Info&quot;)"/>
+              <ListViewPanel
+                id="RiskObjectsLV">
+                <RowIterator
+                  editable="true"
+                  elementName="RiskObject"
+                  value="selections"
+                  valueType="java.util.List&lt;gw.apd.web.RiskObjectSelection&gt;">
+                  <Row>
+                    <TextCell
+                      id="RiskObjectName"
+                      label="DisplayKey.get(&quot;Web.APDConfigureGenerationPopup.SelectExposureType.RiskObject.Name&quot;)"
+                      value="RiskObject.RiskObject.Name"/>
+                    <TypeKeyCell
+                      id="SelectedLossType"
+                      editable="RiskObject.RiskObject typeis gw.apdcloud.client.model.APDProductLineDTO"
+                      label="DisplayKey.get(&quot;Web.APDConfigureGenerationPopup.SelectLossType.LossType&quot;)"
+                      noneSelectedLabel="DisplayKey.get(&quot;Web.APDConfigureGenerationPopup.SelectExposureType.NoneSelected&quot;)"
+                      value="RiskObject.SelectedLossType"
+                      valueType="typekey.LossType">
+                      <PostOnChange
+                        onChange="productManagementHelper.setLossTypeOnLine(RiskObject.RiskObject, RiskObject.SelectedLossType)"/>
+                    </TypeKeyCell>
+                  </Row>
+                </RowIterator>
+              </ListViewPanel>
+            </PanelSet>
+          </Card>
+        </CardViewPanel>
+      </PanelColumn>
+      <PanelDivider/>
+      <PanelColumn
+        visible="gw.api.feature.ApdForClaimsFeatureInfo.CCPICodeGenManager.Enabled">
+        <CardViewPanel>
+          <Card
+            id="ccpiCode"
+            title="DisplayKey.get(&quot;Web.APDProduct.GenerateSourceCode.CCPIPolicySearch&quot;)">
+            <PanelRef
+              def="APDCodegenEnablementControlsPanelSet(ccpiProductCodegenInfo)"
+              id="ccpiCodegenControls"/>
+            <PanelSet
+              visible="ccpiProductCodegenInfo.Active">
+              <Verbatim
+                id="SelectRiskObjectFields"
+                label="DisplayKey.get(&quot;Web.APDConfigureGenerationPopup.SelectRiskObjectFields.Info&quot;)"/>
+              <ListViewPanel
+                id="SelectedRiskObjectFieldsLV">
+                <RowIterator
+                  editable="true"
+                  elementName="riskObjectFieldSelections"
+                  pageSize="0"
+                  value="riskObjectFieldSelectionsList"
+                  valueType="java.util.List&lt;gw.apd.web.RiskObjectFieldSelections&gt;">
+                  <Row
+                    visible="riskObjectFieldSelections.AllPossibleFields.size() &gt; 0">
+                    <TextCell
+                      bold="true"
+                      colspan="3"
+                      id="RiskObjectLabel"
+                      label="DisplayKey.get(&quot;Web.APDConfigureGenerationPopup.SelectRiskObjectFields.RiskObjectFields&quot;)"
+                      value="riskObjectFieldSelections.RiskObject.Name"/>
+                  </Row>
+                  <Row>
+                    <TextCell
+                      id="spacerCellId1"/>
+                    <TextCell
+                      id="displayNameLabel"
+                      value="DisplayKey.get(&quot;Web.APDConfigureGenerationPopup.SelectRiskObjectFields.DisplayNameLabel&quot;)"/>
+                    <TextCell
+                      id="displayNameFormatLabel"
+                      value="riskObjectFieldSelections.DisplayName.NotBlank ? &quot;\&quot;&quot; + riskObjectFieldSelections.DisplayName + &quot;\&quot;&quot; : &quot;-&quot;"/>
+                  </Row>
+                  <Row
+                    id="riskObjectSelectionField1"
+                    visible="riskObjectFieldSelections.AllPossibleFields.size() &gt; 0">
+                    <TextCell
+                      id="spacerCellId2"/>
+                    <TextCell
+                      id="FieldLabelCellId1"
+                      value="DisplayKey.get(&quot;Web.APDConfigureGenerationPopup.SelectRiskObjectFields.FieldLabel&quot;, 1)"/>
+                    <RangeCell
+                      available="riskObjectFieldSelections.available(0)"
+                      editable="true"
+                      id="selectedField1"
+                      noneSelectedLabel="DisplayKey.get(&quot;Web.APDConfigureGenerationPopup.SelectRiskObjectFields.SelectRiskObjectField.NoneSelected&quot;)"
+                      optionLabel="VALUE.Name + &quot; (&quot; + VALUE.Type.Value.capitalize() + &quot;)&quot;"
+                      value="riskObjectFieldSelections.SelectedFields[0]"
+                      valueRange="riskObjectFieldSelections.getPossibleValues(0)"
+                      valueType="gw.apd.web.SearchField"
+                      valueVisible="true">
+                      <PostOnChange
+                        onChange="riskObjectFieldSelectionsList.forEach(\fieldList -&gt; fieldList.checkAndResetSelections())"/>
+                    </RangeCell>
+                  </Row>
+                  <Row
+                    id="RiskObjectSelectionField2"
+                    visible="riskObjectFieldSelections.AllPossibleFields.size() &gt; 1">
+                    <TextCell
+                      id="spacerCellId3"/>
+                    <TextCell
+                      id="FieldLabelCellId2"
+                      value="DisplayKey.get(&quot;Web.APDConfigureGenerationPopup.SelectRiskObjectFields.FieldLabel&quot;, 2)"/>
+                    <RangeCell
+                      available="riskObjectFieldSelections.available(1)"
+                      editable="true"
+                      id="selectedField2"
+                      noneSelectedLabel="DisplayKey.get(&quot;Web.APDConfigureGenerationPopup.SelectRiskObjectFields.SelectRiskObjectField.NoneSelected&quot;)"
+                      optionLabel="VALUE.Name + &quot; (&quot; + VALUE.Type.Value.capitalize() + &quot;)&quot;"
+                      value="riskObjectFieldSelections.SelectedFields[1]"
+                      valueRange="riskObjectFieldSelections.getPossibleValues(1)"
+                      valueType="gw.apd.web.SearchField"
+                      valueVisible="true">
+                      <PostOnChange
+                        onChange="riskObjectFieldSelectionsList.forEach(\fieldList -&gt; fieldList.checkAndResetSelections())"/>
+                    </RangeCell>
+                  </Row>
+                  <Row
+                    id="RiskObjectSelectionField3"
+                    visible="riskObjectFieldSelections.AllPossibleFields.size() &gt; 2">
+                    <TextCell
+                      id="spacerCellId4"/>
+                    <TextCell
+                      id="FieldLabelCellId3"
+                      value="DisplayKey.get(&quot;Web.APDConfigureGenerationPopup.SelectRiskObjectFields.FieldLabel&quot;, 3)"/>
+                    <RangeCell
+                      available="riskObjectFieldSelections.available(2)"
+                      editable="true"
+                      enableSort="false"
+                      id="selectedField3"
+                      noneSelectedLabel="DisplayKey.get(&quot;Web.APDConfigureGenerationPopup.SelectRiskObjectFields.SelectRiskObjectField.NoneSelected&quot;)"
+                      optionLabel="VALUE.Name + &quot; (&quot; + VALUE.Type.Value.capitalize() + &quot;)&quot;"
+                      value="riskObjectFieldSelections.SelectedFields[2]"
+                      valueRange="riskObjectFieldSelections.getPossibleValues(2)"
+                      valueType="gw.apd.web.SearchField"
+                      valueVisible="true">
+                      <PostOnChange
+                        onChange="riskObjectFieldSelectionsList.forEach(\fieldList -&gt; fieldList.checkAndResetSelections())"/>
+                    </RangeCell>
+                  </Row>
+                </RowIterator>
+              </ListViewPanel>
+            </PanelSet>
+          </Card>
+        </CardViewPanel>
+      </PanelColumn>
+    </Screen>
+    <Code><![CDATA[
+    function pushGenerateSourceCodePopup() {
+      var ccGenerationHelper = ccProductCodegenInfo.isActive() ?
+        productManagementHelper.buildCCGenerationHelper(product, selections) : null
+      var ccpiGenerationHelper = ccpiProductCodegenInfo.isActive() ?
+        productManagementHelper.buildCCPIGenerationHelper(product, selections, riskObjectFieldSelectionsList) : null
+      GenerateSourceCodePopup.push(product, ccGenerationHelper, ccpiGenerationHelper)
+    }]]></Code>
+  </Popup>
+</PCF>

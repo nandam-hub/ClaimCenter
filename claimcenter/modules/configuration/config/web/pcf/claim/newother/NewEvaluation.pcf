@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    afterCancel="ClaimEvaluationForward.go(claim)"
+    afterCommit="ClaimEvaluationForward.go(claim)"
+    canEdit="true"
+    canVisit="perm.Claim.createevaluation(claim)"
+    id="NewEvaluation"
+    parent="Claim(claim)"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.ClaimPlanOfAction.Evaluations.NewEvaluation&quot;)">
+    <LocationEntryPoint
+      signature="NewEvaluation(claim : Claim)"/>
+    <Variable
+      name="claim"
+      type="Claim"/>
+    <Variable
+      initialValue="claim.newEvaluation()"
+      name="Evaluation"
+      type="Evaluation"/>
+    <Screen
+      id="NewEvaluationScreen">
+      <Toolbar>
+        <EditButtons
+          cancelLabel="DisplayKey.get(&quot;Button.Cancel&quot;)"
+          updateLabel="DisplayKey.get(&quot;Button.Update&quot;)"/>
+      </Toolbar>
+      <PanelRef
+        def="NewEvaluationDV(Evaluation)"></PanelRef>
+    </Screen>
+  </Page>
+</PCF>

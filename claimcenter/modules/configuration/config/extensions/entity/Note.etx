@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<extension xmlns="http://guidewire.com/datamodel" entityName="Note">
+  <!--GAR START: Entities/Note.etx [/opt/teamcity/agent/work/45c3a2f1b8ee4237/gpm-generator/downloads/edge/backend/xcenter-config/xcenter-utils/cc-utils/../../../Shared/claim-shared/src/main]-->
+  
+  <column desc="The username of the portal user which created the note" name="PortalAuthorUsername_Ext" nullok="true" type="varchar">
+    	
+    <columnParam name="size" value="45"/>
+    
+  </column>
+  
+  <column desc="The security realm of the portal user which created the note. A realm identifies a collection of users and groups." name="PortalAuthorRealm_Ext" nullok="true" type="varchar">
+    	
+    <columnParam name="size" value="45"/>
+    
+  </column>
+  
+  <!--GAR END-->
+</extension>

@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<subtype
+  displayName="Activity Rule"
+  xmlns="http://guidewire.com/datamodel"
+  entity="ActivityRule"
+  final="true"
+  supertype="CCRule">
+  <implementsInterface
+    iface="gw.bizrules.domain.RuleVersionDependent"
+    impl="com.guidewire.cc.domain.bizrules.ActivityRuleImpl"/>
+  <implementsInterface
+    iface="com.guidewire.bizrules.domain.RuleDomainMethods"
+    impl="com.guidewire.cc.domain.bizrules.ActivityRuleImpl"/>
+</subtype>

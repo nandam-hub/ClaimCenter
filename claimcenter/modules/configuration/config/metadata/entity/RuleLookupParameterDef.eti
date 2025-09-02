@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<subtype
+  platform="true"
+  xmlns="http://guidewire.com/datamodel"
+  entity="RuleLookupParameterDef"
+  desc="RuleLookupParameterDefinition is a subtype of RuleLookupColumnDefinition"
+  supertype="RuleLookupColumnDef">
+  <implementsEntity
+    name="RuleVersionDependent"/>
+  <implementsInterface
+    iface="gw.bizrules.domain.RuleVersionDependent"
+    impl="com.guidewire.bizrules.domain.RuleLookupParameterDefImpl"/>
+  <column
+    name="Symbol"
+    nullok="true"
+    type="mediumtext"/>
+</subtype>

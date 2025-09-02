@@ -1,0 +1,13 @@
+package rules.Purge
+
+@gw.rules.RuleName("ArchivedClaimPurge")
+@gw.rules.RuleSetDescription("Archived Claim Purge")
+class ArchivedClaimPurge extends gw.rules.RuleSetBase {
+  static function invoke(bean : entity.ClaimInfo) : gw.rules.ExecutionSession {
+    return invoke( new gw.rules.ExecutionSession(), bean )
+  }
+
+  static function invoke(exeSession : gw.rules.ExecutionSession, bean : entity.ClaimInfo) : gw.rules.ExecutionSession {
+    return _invoke( exeSession, bean, "ArchivedClaimPurge", ArchivedClaimPurge )
+  }
+}

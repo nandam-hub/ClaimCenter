@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <InputSet
+    id="RuleComparisonCommandParametersInputSet"
+    mode="createexposure">
+    <Require
+      name="controller"
+      type="gw.bizrules.pcf.RuleVersionComparisonController"/>
+    <Require
+      name="commandDefinitionDiff"
+      type="gw.bizrules.diff.RuleMatchableDiffPair&lt;RuleCommandDefinition&gt;"/>
+    <InputSetRef
+      def="RuleComparisonRowStringInputSet(commandDefinitionDiff.getRow(gw.bizrules.ruleaction.createexposure.config.ExposureCommandParameterSet.Config.COVERAGE_TYPE.Name))"
+      id="coveragetype"/>
+    <InputSetRef
+      def="RuleComparisonRowStringInputSet(commandDefinitionDiff.getRow(gw.bizrules.ruleaction.createexposure.config.ExposureCommandParameterSet.Config.COVERAGE_SUBTYPE.Name))"
+      id="coveragesubtype"/>
+  </InputSet>
+</PCF>

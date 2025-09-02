@@ -1,0 +1,39 @@
+<div id="${renderId}" class="${outerClasses} gw-action--outer" role="presentation" aria-disabled="${disabled ? 'true' : 'false'}" data-gw-menu-hover="${hover}" data-gw-no-tab-index ${outerAttributes} ${outerStyles}>
+    <div role="${ariaRole}" class="gw-action--inner ${innerClasses}"
+      aria-label="${ariaLabel}" aria-labelledby="${ariaLabelledby}" aria-describedby="${ariaDescribedby}"
+      aria-haspopup="${hasChildren ? 'true' : 'false'}" aria-disabled="${disabled ? 'true' : 'false'}"
+      aria-expanded="${hasChildren ? (startExpanded ? 'true' : 'false')}"
+      aria-selected="${ariaSelected}" aria-controls="${ariaControlsId}"
+      aria-current="${ariaCurrent}"
+      aria-posinset="${posInSet}" aria-setsize="${setSize}"
+      data-gw-confirm="${confirm}" data-gw-prompt="${promptQuestion}" data-gw-prompt-default="${promptDefault}" ${innerAttrs}>
+        <div :if="hasGraphics" aria-hidden="true" class="gw-graphics"><div class="gw-graphics-inner"></div></div>
+        <div :if="minimizedView" class="gw-minimized-view">${minimizedView}</div>
+        <:control :unless="trailingIcon">
+            ${iconHTML}
+        </:control>
+        <div :if="allowsLabel" class="gw-label ${iconHTML ? 'gw-hasIcon'} ${useFlattenedMenuLabel ? 'gw-flattened-menu-label'}" aria-label="${label}"><:control :if="htmlLabel">${htmlLabel}</:control><:control :unless="htmlLabel">${label}</:control>
+        </div>
+        <:control :if="trailingIcon">
+            ${iconHTML}
+        </:control>
+        <div :if="subLabel" class="gw-subLabel">${subLabel}</div>
+    </div>
+    <:control :if="hasChildren">
+        <div :if="showDivider" class="gw-action--divider">
+            <div role="separator" aria-hidden="true" class="gw-action--divider-inner"></div>
+        </div>
+        <div :if="!hiddenExpander"
+             class="gw-action--expand-button ${!standardClickAction ? 'gw-no-pointer'}"
+             data-gw-click="?{standardClickAction} toggleSubMenu" aria-disabled="${disabledExpander ? 'true' : 'false'}"
+             aria-hidden="true" data-gw-no-tab-index>
+            <div class="gw-icon gw-icon--expand"></div>
+        </div>
+        <div class="gw-subMenu ${onDemand ? 'gw-deferred'} ${startExpanded ? 'gw-open'} ${multiCol ? 'gw-multi-col'}" role="${subMenuRole}" aria-hidden="${startExpanded ? 'false' : 'true'}">
+            <div :if="onDemand" class="gw-deferred-menuItem">
+                <div class="gw-loader"></div>
+            </div>
+            ${:children}
+        </div>
+    </:control>
+</div>

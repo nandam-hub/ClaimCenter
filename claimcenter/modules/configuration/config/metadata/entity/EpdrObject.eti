@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<entity
+  loadable="false"
+  platform="true"
+  xmlns="http://guidewire.com/datamodel"
+  desc="Represents an object in the API Extension Bundle Design Runtime"
+  entity="EpdrObject"
+  table="epdrobject"
+  type="editable"
+  extendable="false">
+  <implementsEntity
+    name="EpdrDataContainer"/>
+  <implementsInterface
+    iface="com.guidewire.pl.domain.apiextensionbundles.EpdrObjectMethods"
+    impl="com.guidewire.pl.domain.apiextensionbundles.EpdrObjectMethodsImpl"/>
+  <column
+    desc="Name of resource this object represents"
+    name="ResourceName"
+    nullok="false"
+    required="true"
+    setterScriptability="hidden"
+    type="shorttext"/>
+  <column
+    desc="The alternate key for this resource, if any"
+    name="AlternateKey"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="1024"/>
+  </column>
+  <column
+    desc="Name of the entity of this object's parent, if any"
+    getterScriptability="hidden"
+    name="ParentEntity"
+    nullok="true"
+    setterScriptability="hidden"
+    type="shorttext"/>
+  <column
+    desc="ID value of this object's parent, if any"
+    getterScriptability="hidden"
+    name="ParentObjectId"
+    nullok="true"
+    setterScriptability="hidden"
+    type="softentityreference"/>
+  <column
+    desc="URI of the parent resource. Used when rendering a reference to this object."
+    name="ParentUri"
+    nullok="true"
+    type="mediumtext"/>
+  <index
+    desc="Index to speed up queries on the alternate key column"
+    name="altKeyPerfIndex">
+    <indexcol
+      keyposition="1"
+      name="AlternateKey"/>
+  </index>
+</entity>

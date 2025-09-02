@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<entity
+  desc="An issue for a coverage."
+  exportable="true"
+  xmlns="http://guidewire.com/datamodel"
+  entity="CoverageIssue"
+  table="coverageissue"
+  type="retireable">
+  <implementsEntity
+    name="Extractable"/>
+  <typekey
+    desc="The type of coverage that the issue is on."
+    name="CoverageSubtype"
+    nullok="true"
+    typelist="CoverageSubtype"/>
+  <typekey
+    desc="The severity of the issue."
+    name="Severity"
+    nullok="false"
+    typelist="CoverageIssueSeverity"/>
+  <column
+    desc="The reason for the issue."
+    name="Reason"
+    nullok="true"
+    type="longtext"/>
+  <foreignkey
+    desc="The activity that holds these coverage issues."
+    fkentity="Activity"
+    name="Activity"
+    columnName="ActivityID"
+    nullok="false"/>
+</entity>

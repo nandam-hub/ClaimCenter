@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="Business Rule Execution Status"
+  name="RuleExecutionStatus"
+  platform="true">
+  <typecode
+    code="Enabled"
+    desc="This rule is running in this environment"
+    name="Enabled"
+    priority="1"/>
+  <typecode
+    code="Invalid"
+    desc="This rule is not running in this environment due to validation errors"
+    name="Invalid"
+    priority="2"/>
+  <typecode
+    code="Disabled"
+    desc="This rule is not running in this environment as it is disabled"
+    name="Disabled"
+    priority="3"/>
+  <typecode
+    code="NotDeployed"
+    desc="This rule is not running in this environment as it has not been deployed"
+    name="Not Deployed"
+    priority="4"/>
+  <typecode
+    code="PrevDisabled"
+    desc="This rule is not running in this environment as the previously deployed version of this rule is not enabled"
+    name="Previous Version Disabled"
+    priority="5"/>
+  <typecode
+    code="PrevEnabled"
+    desc="The previous version of this rule is running in this environment"
+    name="Previous Version Enabled"
+    priority="6"/>
+  <typefilter
+    desc="The rule is not executing in this environment"
+    name="NotExecuting">
+    <include
+      code="Invalid"/>
+    <include
+      code="Disabled"/>
+    <include
+      code="NotDeployed"/>
+    <include
+      code="PrevDisabled"/>
+  </typefilter>
+  <typecode
+    code="Unknown"
+    desc="Validation in progress and run status unknown"
+    name="Unknown"
+    priority="7"/>
+</typelist>

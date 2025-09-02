@@ -1,0 +1,426 @@
+swagger: '2.0'
+x-gw-combine:
+- gw.pl.framework.paging_definitions-1.0
+- gw.pl.framework.query_definitions-1.0
+info:
+  title: "System tools database API"
+  description: |
+                This API is related to system database resources.
+  version: '0.1'
+basePath: /system/v0/database
+x-gw-runlevel: maintenance
+x-gw-schema-import:
+  db: gw.pl.system.db_tools-0.1
+x-gw-apihandlers:
+- gw.api.rest.pl.system.v0.DatabaseToolsAPIHandler
+x-gw-authorizer: gw.api.rest.auth.ApiRoleApiAuthorizer
+paths:
+  /jobs/consistencycheckjob:
+    post:
+      summary: "Run the consistency check job"
+      description: |
+                    Submit the consistency checks batch job on the underlying physical database.
+      operationId: submitDBCCBatchJob
+      consumes:
+      - application/json
+      produces:
+      - text/plain
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: "db#/definitions/DBCCBatch"
+      responses:
+        '200':
+          description: |
+                        successful operation
+          schema:
+            type: string
+  /jobs/consistencycheckjob/status:
+    get:
+      summary: "Get the status of consistency check job"
+      description: |
+                    Returns the state of the consistency checks process.
+                    Only one set of consistency checks can be running at any given moment.
+      operationId: getDBCCState
+      produces:
+      - text/plain
+      responses:
+        '200':
+          description: |
+                        Successful operation
+          schema:
+            type: string
+  /jobs/consistencycheckjob/runs:
+    get:
+      summary: "Get the list of consistency check runs"
+      description: |
+                    Returns a list of consistency check runs, including the reportId which can be used to download the report
+      operationId: getDBCCJobList
+      parameters:
+        - $ref: '#/parameters/filter'
+        - $ref: '#/parameters/sort'
+        - $ref: '#/parameters/pageToken'
+        - $ref: '#/parameters/pageSize100'
+        - $ref: '#/parameters/includeTotalCount'
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: |
+                        Successful operation
+          schema:
+            $ref: "db#/definitions/DBConsistencyCheckRunsPage"
+  /jobs/consistencycheckjob/runs/{id}/report:
+    get:
+      summary: "Get the report for the consistency check run with the given ID"
+      description: |
+                    Returns the report for the consistency check run with the given ID.
+      parameters:
+        - name: id
+          in: path
+          description: |
+                       ID of the consistency check run
+          required: true
+          type: string
+      operationId: getDBCCReport
+      produces:
+      - application/x-gzip
+      responses:
+        '200':
+          description: |
+                        Successful operation
+  /jobs/updatestatsjob:
+    post:
+      summary: "Run the update stats job"
+      description: |
+                    Run the update stats process on the underlying physical database.
+                    Use relative path db/jobs/updatestatsjob/status to check the status of this job.
+      operationId: submitUpdateStats
+      parameters:
+      - name: description
+        in: query
+        description: |
+                      Description for stats job
+        required: false
+        type: string
+      - name: incremental
+        in: query
+        description: |
+                      Run incremental update stats, default is true
+        required: false
+        type: boolean
+        default: true
+      responses:
+        '200':
+          description: |
+                        Successful operation
+    delete:
+      summary: "Cancel the update stats job"
+      description: |
+                    Cancel the update stats process if running.
+                    Use relative path db/jobs/updatestatsjob/status to check the status of this job.
+      operationId: cancelUpdateStats
+      responses:
+        '200':
+          description: |
+                        Successful operation
+  /jobs/updatestatsjob/status:
+    get:
+      summary: "Get the status of update stats job"
+      description: |
+                    Run the update stats process on the underlying physical database.
+      operationId: getUpdateStatsState
+      produces:
+      - text/plain
+      responses:
+        '200':
+          description: |
+                        Successful operation
+          schema:
+            type: string
+  /upgrade:
+    post:
+      summary: "Start database upgrade"
+      description: |
+                    Sets the intention to perform a FULL upgrade.
+                    **Please refer to the docs for more details.**
+      operationId: startFullUpgrade
+      responses:
+        '200':
+          description: |
+                        Successful operation
+  /verifyschema:
+    get:
+      summary: "Verify that the data model matches the physical database"
+      description: |
+                    Verify that the data model matches the physical database.
+      operationId: verifyDatabaseSchema
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: |
+                        Successful operation
+          schema:
+            $ref: "db#/definitions/SchemaDifferences"
+  /updatetablestatssqls:
+    get:
+      summary: "Obtains the set of SQL statements that are required to update database statistics"
+      description: |
+                    Obtains the set of SQL statements that are required to update database statistics.
+      operationId: getUpdateTableStatisticsData
+      produces:
+      - application/json
+      parameters:
+      - name: incremental
+        in: query
+        description: |
+                      Specify incremental=true if you want stats on tables whose modification count exceeds the user specific threshold percent.
+        required: false
+        type: boolean
+        default: true
+      responses:
+        '200':
+          description: |
+                        Successful operation
+          schema:
+            $ref: "db#/definitions/UpdateTableStatisticsSQLTables"
+  /jobs/catalogstatisticsreportjob:
+    post:
+      summary: "Run the update stats job"
+      description: |
+                    Creates a report of the state of the database catalog statistics for all or specified tables.
+      operationId: reportDatabaseCatalogStatistics
+      consumes:
+      - application/json
+      produces:
+      - application/x-gzip
+      parameters:
+      - name: body
+        in: body
+        required: false
+        description: |
+                      Pass tables info in body if partial database catalog statistics are desired.
+                      If body is null or empty, the report will contain database catalog statistics for all tables.
+        schema:
+          $ref: "db#/definitions/ReportCatalogRequestTables"
+      responses:
+        '200':
+          description: |
+                       Successful operation
+          # TODO - AP - TBD : what is the right mapping for this?
+          # schema:
+          #  type: file
+  /sqlserver/querystoreintervals:
+    get:
+      summary: "Get list of recent Query store runtime stats intervals"
+      description: |
+                   Retrieve the latest N SQL Server Query Store runtime stats intervals.
+      operationId: getRecentQueryStoreRuntimeStatsIntervalInfo
+      produces:
+      - application/json
+      parameters:
+      - name: numIntervals
+        in: query
+        description: |
+                     Description for stats job
+        required: false
+        type: integer
+        minimum: 0
+      responses:
+        '200':
+          description: |
+                       Successful operation
+          schema:
+            $ref: "db#/definitions/QueryStoreRuntimeStatsIntervals"
+  /sqlserver/jobs/performancereportjob:
+    post:
+      summary: "Submit sql server performance report job"
+      description: |
+                    Submit the SQL Server DMV Performance Report batch job.
+                    The report will include an analysis of the Query Store statistics only if beginInterval and endInterval are specified.
+      operationId: submitSqlServerPerfReport
+      produces:
+      - text/plain
+      parameters:
+      - name: includeDbStats
+        in: query
+        description: |
+                     Include database statistics
+        required: true
+        type: boolean
+      - name: beginInterval
+        in: query
+        description: |
+                     Begin interval
+        required: false
+        type: integer
+        format: int64
+      - name: endInterval
+        in: query
+        description: |
+                     End interval
+        required: false
+        type: integer
+        format: int64
+      responses:
+        '200':
+          description: |
+                       Successful operation
+          schema:
+            type: string
+  /oracle/jobs/performancereportjob:
+    post:
+      summary: "Submit AWR report batch job"
+      description: |
+                    Submit the Oracle AWR Performance Report batch job with three parameters.
+      operationId: submitAwrReportBatchJob
+      consumes:
+      - application/json
+      produces:
+      - text/plain
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: "db#/definitions/AWRReportUserSettings"
+      responses:
+        '200':
+          description: |
+                       Successful operation
+          schema:
+            type: string
+  /oracle/awrsnapshots:
+    get:
+      summary: "Get list of recent AWR snapshots"
+      description: |
+                   Retrieve the latest N Oracle AWR snapshots
+      operationId: getRecentAWRSnapshotInfo
+      produces:
+      - application/json
+      parameters:
+      - name: snapshots
+        in: query
+        description: |
+                     Number of snapshots
+        required: true
+        type: integer
+        minimum: 0
+      responses:
+        '200':
+          description: |
+                       Successful operation
+          schema:
+            $ref: "db#/definitions/AWRSnapshotInfos"
+  /postgresql/jobs/performancereportjob:
+    post:
+      summary: "Submit PostgreSQL report batch job"
+      description: |
+                    Submit the PostgreSQL Performance Report batch job.
+      operationId: submitPostgreSQLPerfReportBatchJob
+      produces:
+      - text/plain
+      parameters:
+      - name: includeDbStats
+        in: query
+        description: |
+                     Whether to include database statistics
+        required: true
+        type: boolean
+      responses:
+        '200':
+          description: |
+                       Successful operation
+          schema:
+            type: string
+  /database/perfreports:
+    get:
+      summary: "Get list of recent Performance Reports"
+      description: |
+                   Retrieve the information about the latest N Performance Reports
+      operationId: getPerfReportsInfo
+      produces:
+      - application/json
+      parameters:
+      - name: reports
+        in: query
+        description: |
+                     Number of reports
+        required: true
+        type: integer
+        minimum: 0
+      responses:
+        '200':
+          description: |
+                       Successful operation
+          schema:
+            $ref: "db#/definitions/PerformanceReportDownloads"
+  /database/perfreports/{id}/report:
+    get:
+      summary: "Get the report with the given ID"
+      description: |
+                    Returns the report with the given ID.
+      parameters:
+        - name: id
+          in: path
+          description: |
+                       ID of the report
+          required: true
+          type: string
+      operationId: getPerfReport
+      produces:
+      - application/x-gzip
+      responses:
+        '200':
+          description: |
+                        Successful operation
+  /database/loadhistoryreports/{id}/report:
+    get:
+      summary: "Get the report with the given ID"
+      description:
+                    Returns the report with the given ID.
+      parameters:
+        - name: id
+          in: path
+          description:
+                        ID of the report
+          required: true
+          type: string
+      operationId: getLoadHistoryReport
+      produces:
+        - application/x-gzip
+      responses:
+        '200':
+          description:
+                        Successful operation
+  /config/verifier:
+    post:
+      summary: "Checks config represented by set of file name/file digest pairs"
+      description: |
+                   Checks config represented by set of file name/file digest pairs.
+      operationId: verifyConfig
+      produces:
+      - text/plain
+      consumes:
+      - application/json
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: "db#/definitions/VerifierConfig"
+      - name: useRemoteExtCfg
+        in: query
+        description: |
+                     Use Remote External Config, default would be false i.e. do not use remote external config when unspecified.
+        required: false
+        type: boolean
+      responses:
+        '200':
+          description: |
+                       Successful operation
+          schema:
+            type: string

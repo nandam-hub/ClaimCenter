@@ -1,0 +1,39 @@
+<div
+        class="gw-checkboxDiv--checkbox-group">
+    <:control
+            :for="option"
+            :in="range">
+        <div :if="option.value"
+                role="checkbox"
+                tabindex="0"
+                aria-checked="${option.selected ? 'true' : 'false'}"
+                class="gw-checkboxDiv gw-checkboxGroup ${option.selected ? 'gw-checked'} ${option.retired ? 'gw-retired'}"
+                data-gw-click="gwCheckboxDiv.onCheckboxDivClick"
+                aria-required="${required ? 'true' : 'false'}"
+                aria-invalid="${invalid ? 'true' : 'false'}"
+                aria-label="${option.label ? option.label : option.value}"
+                aria-disabled="${disabled ? 'true' : 'false'}"
+                id="${renderId}_checkboxDiv">
+            <div
+                    class="gw-checkboxDiv--inner"></div>
+            <span
+                    :if="option.icon"
+                    class="gw-checkboxDiv--icon">
+                ${option.icon}
+            </span>
+            <span
+                    aria-hidden="true"
+                    class="gw-checkboxDiv--label">${option.label ? option.label : option.value}
+            </span>
+            <input
+                    aria-hidden="true"
+                    type="checkbox"
+                    name="${renderId}"
+                    value="${option.value}"
+                    class="${noTrack ? 'gw-noTrack'} gw-hidden"
+                    disabled="${disabled}"
+                    data-gw-uses-checkbox-div
+                    checked="${option.selected}"/>
+        </div>
+    </:control>
+</div>

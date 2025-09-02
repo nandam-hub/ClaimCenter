@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<extension xmlns="http://guidewire.com/datamodel" entityName="Document">
+  <!--GAR START: Entities/Document.etx [/opt/teamcity/agent/work/45c3a2f1b8ee4237/gpm-generator/downloads/edge/backend/xcenter-config/xcenter-utils/cc-utils/../../../Platform/src/main]-->
+  
+  <column desc="The security realm of the portal user which created the document. A realm identifies a collection of users and groups." name="PortalSecurityRealm_Ext" nullok="true" type="varchar">
+    	
+    <columnParam name="size" value="60"/>
+    
+  </column>
+  <column
+    desc="High Level Summary of a document"
+    name="HighLevelSummary"
+    nullok="true"
+    type="longtext"/>
+  <column
+    desc="Detailed Summary of a document"
+    name="DetailedSummary"
+    nullok="true"
+    type="longtext"/>
+
+  <!--GAR END-->
+</extension>

@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <ModalCell
+    id="CovTermAmount"
+    mode="default">
+    <Require
+      name="covTerm"
+      type="CovTerm"/>
+    <TextCell
+      id="CovTermDisplay"
+      value="covTerm.DisplayName"/>
+  </ModalCell>
+</PCF>

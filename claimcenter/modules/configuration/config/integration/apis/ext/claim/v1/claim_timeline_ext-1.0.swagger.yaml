@@ -1,0 +1,33 @@
+swagger: "2.0"
+info:
+  title: "Claim Timeline API"
+  version: '1.0'
+  description: "Claim Timeline API"
+basePath: /timeline
+consumes:
+- application/json
+produces:
+- application/json
+x-gw-schema-import:
+  claimTimeline: ext.claim.v1.claim_timeline_ext-1.0
+x-gw-apihandlers:
+- gw.rest.ext.cc.claim.timeline.ClaimTimelineApiExtHandler
+
+paths:
+    /claim/{claimID}:
+      parameters:
+        - name: claimID
+          in: path
+          description: "ClaimID for timeline"
+          type: string
+          required: true
+      get:
+        summary: "retrieves a timeline for claimID"
+        description: |
+                      returns timeline for claim
+        operationId: getClaimTimelines
+        responses:
+            "200":
+              description: OK
+              schema:
+                $ref: 'claimTimeline#/definitions/TimeLine_SP'

@@ -1,0 +1,4 @@
+<div class="gw-BulletPointTextValueWidget--inner">
+    <div class="gw-icon" role="img" aria-label="${bulletIconAltText}"></div>
+    <div class="gw-value-wrapper">${currentValue}</div>
+</div>

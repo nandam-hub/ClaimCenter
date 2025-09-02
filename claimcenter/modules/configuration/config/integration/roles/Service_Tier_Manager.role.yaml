@@ -1,0 +1,6 @@
+name: "Service Tier Manager"
+endpoints: []
+accessibleFields:
+  "*":
+    edit: "*"
+    view: "*"

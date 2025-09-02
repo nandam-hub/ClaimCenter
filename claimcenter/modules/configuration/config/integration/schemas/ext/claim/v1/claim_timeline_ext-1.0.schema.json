@@ -1,0 +1,83 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "definitions": {
+    "TimeLine_SP": {
+      "type": "object",
+      "properties": {
+        "RestoreDate": {
+          "type": "string",
+          "format": "date"
+        },
+        "TimelineStatus": {
+          "type": "string",
+          "x-gw-type": "typekey.TimelineStatus_SP"
+        },
+        "TimelineEntries": {
+          "title": "TimelineEntries",
+          "x-gw-nullable": true,
+          "description": "A list of Timeline entries of claim events",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TimelineEntry_SP"
+          }
+        }
+      }
+    },
+    "TimelineEntry_SP": {
+      "title": "TimelineEntry_SP",
+      "description": "Details of the timeline entries",
+      "type": "object",
+      "properties": {
+        "summary": {
+          "title": "Summary",
+          "description": "Summary",
+          "type": "string"
+        },
+        "eventDate": {
+          "title": "EventDate",
+          "description": "Date of the Event",
+          "type": "string",
+          "format": "date-time"
+        },
+        "TimelineCategory": {
+          "type": "string",
+          "x-gw-type": "typekey.TimelineCategory_SP"
+        },
+        "Importance": {
+          "type": "string",
+          "x-gw-type": "typekey.TimelineImportance_SP"
+        },
+        "PossibleDuplicate": {
+          "type": "boolean"
+        },
+        "TimelineLinks": {
+          "title": "TimelineLinks",
+          "description": "A list of Timeline links of claim events",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TimelineLink_SP"
+          }
+        }
+      }
+    },
+    "TimelineLink_SP": {
+      "title": "TimelineLink_SP",
+      "description": "Links of the timeline entries",
+      "type": "object",
+      "properties": {
+        "BeanID": {
+          "type": "string"
+        },
+        "BeanType": {
+          "type" : "string"
+        },
+        "Sequence": {
+          "type" : "integer"
+        },
+        "ArbitraryLinkEnum": {
+          "type" : "string"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,10 @@
+<div class="gw-TileHeader">
+    <div class="gw-TitleSection">
+        <div class="gw-Title" role="heading" aria-level="2"><span class="gw-TitleText">${title}</span><div :if="badge" class="gw-Badge">${badge}</div></div>
+    </div>
+    <div :if="actions" class="gw-Action">${actions}</div>
+</div>
+<div class="gw-TileChartBody">
+${:children}
+</div>
+<div class="gw-TileFooter">${viewMoreLink}</div>

@@ -1,0 +1,510 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="BodilyInjuryPoints"
+  name="BodilyInjuryPoints">
+  <typecode
+    code="bfr_shoulder"
+    desc="Right Shoulder/Upper Arm (Front)"
+    name="Right Shoulder/Upper Arm (Front)"/>
+  <typecode
+    code="bfr_arm"
+    desc="Right Lower Arm (Front)"
+    name="Right Lower Arm (Front)"/>
+  <typecode
+    code="br_hand"
+    desc="Right Hand"
+    name="Right Hand"/>
+  <typecode
+    code="bfr_face"
+    desc="Right Front of Head/Face"
+    name="Right Front of Head/Face"/>
+  <typecode
+    code="bfr_chest"
+    desc="Right Chest"
+    name="Right Chest"/>
+  <typecode
+    code="bfr_abdomen"
+    desc="Abdomen (Right)"
+    name="Abdomen (Right)"/>
+  <typecode
+    code="bfr_pelvis"
+    desc="Right Groin/Pelvis/Hip"
+    name="Right Groin/Pelvis/Hip"/>
+  <typecode
+    code="bfr_thigh"
+    desc="Right Thigh Knee"
+    name="Right Thigh/Knee"/>
+  <typecode
+    code="bfr_shin"
+    desc="Right Shin"
+    name="Right Shin"/>
+  <typecode
+    code="br_foot"
+    desc="Right Foot/Ankle"
+    name="Right Foot/Ankle"/>
+  <typecode
+    code="bfl_face"
+    desc="Left Front of Head/Face"
+    name="Left Front of Head/Face"/>
+  <typecode
+    code="bfl_chest"
+    desc="Left Chest"
+    name="Left Chest"/>
+  <typecode
+    code="bfl_abdomen"
+    desc="Abdomen (Left)"
+    name="Abdomen (Left)"/>
+  <typecode
+    code="bfl_pelvis"
+    desc="Left Groin/Pelvis/Hip"
+    name="Left Groin/Pelvis/Hip"/>
+  <typecode
+    code="bfl_thigh"
+    desc="Left Thigh/Knee"
+    name="Left Thigh/Knee"/>
+  <typecode
+    code="bfl_shin"
+    desc="Left Shin"
+    name="Left Shin"/>
+  <typecode
+    code="bl_foot"
+    desc="Left Foot/Ankle"
+    name="Left Foot/Ankle"/>
+  <typecode
+    code="bfl_shoulder"
+    desc="Left Shoulder/Upper Arm (Front)"
+    name="Left Shoulder/Upper Arm (Front)"/>
+  <typecode
+    code="bfl_arm"
+    desc="Left Lower Arm (Front)"
+    name="Left Lower Arm (Front)"/>
+  <typecode
+    code="bl_hand"
+    desc="Left Hand"
+    name="Left Hand"/>
+  <typecode
+    code="bbl_shoulder"
+    desc="Left Shoulder (Back)"
+    name="Left Shoulder (Back)"/>
+  <typecode
+    code="bbl_arm"
+    desc="Left Lower Arm (Back)"
+    name="Left Lower Arm (Back)"/>
+  <typecode
+    code="bbl_head"
+    desc="Left Back of Head"
+    name="Left Back of Head"/>
+  <typecode
+    code="bbl_upperback"
+    desc="Upper Back (Right)"
+    name="Upper Back (Left)"/>
+  <typecode
+    code="bbl_lowerback"
+    desc="Lower Back (Left)"
+    name="Lower Back (Left)"/>
+  <typecode
+    code="bbl_buttock"
+    desc="Left Buttock"
+    name="Left Buttock"/>
+  <typecode
+    code="bbl_hamstring"
+    desc="Left Hamstring"
+    name="Left Hamstring"/>
+  <typecode
+    code="bbl_calf"
+    desc="Left Calf"
+    name="Left Calf"/>
+  <typecode
+    code="bbl_heel"
+    desc="Left Achilles/Heel"
+    name="Left Achilles/Heel"/>
+  <typecode
+    code="bbr_head"
+    desc="Right Back of Head"
+    name="Right Back of Head"/>
+  <typecode
+    code="bbr_upperback"
+    desc="Upper Back (Right)"
+    name="Upper Back (Right)"/>
+  <typecode
+    code="bbr_lowerback"
+    desc="Lower Back (Right)"
+    name="Lower Back (Right)"/>
+  <typecode
+    code="bbr_buttock"
+    desc="Right Buttock"
+    name="Right Buttock"/>
+  <typecode
+    code="bbr_hamstring"
+    desc="Right Hamstring"
+    name="Right Hamstring"/>
+  <typecode
+    code="bbr_calf"
+    desc="Right Calf"
+    name="Right Calf"/>
+  <typecode
+    code="bbr_heel"
+    desc="Right Achilles/Heel"
+    name="Right Achilles/Heel"/>
+  <typecode
+    code="bbr_shoulder"
+    desc="Right Shoulder (Back)"
+    name="Right Shoulder (Back)"/>
+  <typecode
+    code="bbr_arm"
+    desc="Right Lower Arm (Back)"
+    name="Right Lower Arm (Back)"/>
+  <typecode
+    code="hfr_side"
+    desc="Right Side Head"
+    name="Right Side Head">
+    <category
+      code="bfr_face"
+      typelist="BodilyInjuryPoints"/>
+  </typecode>
+  <typecode
+    code="hfr_ear"
+    desc="Right Ear"
+    name="Right Ear">
+    <category
+      code="bfr_face"
+      typelist="BodilyInjuryPoints"/>
+  </typecode>
+  <typecode
+    code="hfr_top"
+    desc="Top Right Head"
+    name="Top Right Head">
+    <category
+      code="bfr_face"
+      typelist="BodilyInjuryPoints"/>
+  </typecode>
+  <typecode
+    code="hfr_forehead"
+    desc="Right Forehead"
+    name="Right Forehead">
+    <category
+      code="bfr_face"
+      typelist="BodilyInjuryPoints"/>
+  </typecode>
+  <typecode
+    code="hfr_eye"
+    desc="Right Eye"
+    name="Right Eye">
+    <category
+      code="bfr_face"
+      typelist="BodilyInjuryPoints"/>
+  </typecode>
+  <typecode
+    code="hfr_cheek"
+    desc="Right Cheek"
+    name="Right Cheek">
+    <category
+      code="bfr_face"
+      typelist="BodilyInjuryPoints"/>
+  </typecode>
+  <typecode
+    code="hfr_jaw"
+    desc="Right Jaw"
+    name="Right Jaw">
+    <category
+      code="bfr_face"
+      typelist="BodilyInjuryPoints"/>
+  </typecode>
+  <typecode
+    code="hfr_neck"
+    desc="Right Neck/Throat"
+    name="Right Neck/Throat">
+    <category
+      code="bfr_face"
+      typelist="BodilyInjuryPoints"/>
+  </typecode>
+  <typecode
+    code="hf_crown"
+    desc="Crown of Head"
+    name="Crown of Head">
+    <category
+      code="bfr_face"
+      typelist="BodilyInjuryPoints"/>
+  </typecode>
+  <typecode
+    code="hf_forehead"
+    desc="Forehead"
+    name="Forehead">
+    <category
+      code="bfr_face"
+      typelist="BodilyInjuryPoints"/>
+  </typecode>
+  <typecode
+    code="hf_nose"
+    desc="Nose"
+    name="Nose">
+    <category
+      code="bfr_face"
+      typelist="BodilyInjuryPoints"/>
+  </typecode>
+  <typecode
+    code="hf_mouth"
+    desc="Mouth"
+    name="Mouth">
+    <category
+      code="bfr_face"
+      typelist="BodilyInjuryPoints"/>
+  </typecode>
+  <typecode
+    code="hf_chin"
+    desc="Chin"
+    name="Chin">
+    <category
+      code="bfr_face"
+      typelist="BodilyInjuryPoints"/>
+  </typecode>
+  <typecode
+    code="hfl_top"
+    desc="Top Left Head"
+    name="Top Left Head">
+    <category
+      code="bfl_face"
+      typelist="BodilyInjuryPoints"/>
+  </typecode>
+  <typecode
+    code="hfl_forehead"
+    desc="Left Forehead"
+    name="Left Forehead">
+    <category
+      code="bfl_face"
+      typelist="BodilyInjuryPoints"/>
+  </typecode>
+  <typecode
+    code="hfl_eye"
+    desc="Left Eye"
+    name="Left Eye">
+    <category
+      code="bfl_face"
+      typelist="BodilyInjuryPoints"/>
+  </typecode>
+  <typecode
+    code="hfl_cheek"
+    desc="Left Cheek"
+    name="Left Cheek">
+    <category
+      code="bfl_face"
+      typelist="BodilyInjuryPoints"/>
+  </typecode>
+  <typecode
+    code="hfl_jaw"
+    desc="Left Jaw"
+    name="Left Jaw">
+    <category
+      code="bfl_face"
+      typelist="BodilyInjuryPoints"/>
+  </typecode>
+  <typecode
+    code="hfl_neck"
+    desc="Left Neck/Chin"
+    name="Left Neck/Chin">
+    <category
+      code="bfl_face"
+      typelist="BodilyInjuryPoints"/>
+  </typecode>
+  <typecode
+    code="hfl_side"
+    desc="Left Side Head"
+    name="Left Side Head">
+    <category
+      code="bfl_face"
+      typelist="BodilyInjuryPoints"/>
+  </typecode>
+  <typecode
+    code="hfl_ear"
+    desc="Left Ear"
+    name="Left Ear">
+    <category
+      code="bfl_face"
+      typelist="BodilyInjuryPoints"/>
+  </typecode>
+  <typecode
+    code="lh_littlefinger"
+    desc="Left Little Finger"
+    name="Left Little Finger">
+    <category
+      code="bl_hand"
+      typelist="BodilyInjuryPoints"/>
+  </typecode>
+  <typecode
+    code="lh_ringfinger"
+    desc="Left Ring FInger"
+    name="Left Ring Finger">
+    <category
+      code="bl_hand"
+      typelist="BodilyInjuryPoints"/>
+  </typecode>
+  <typecode
+    code="lh_palm"
+    desc="Left Palm"
+    name="Left Palm">
+    <category
+      code="bl_hand"
+      typelist="BodilyInjuryPoints"/>
+  </typecode>
+  <typecode
+    code="lh_middlefinger"
+    desc="Left Middle Finger"
+    name="Left Middle Finger">
+    <category
+      code="bl_hand"
+      typelist="BodilyInjuryPoints"/>
+  </typecode>
+  <typecode
+    code="lh_indexfinger"
+    desc="Left INdex Finger"
+    name="Left Index Finger">
+    <category
+      code="bl_hand"
+      typelist="BodilyInjuryPoints"/>
+  </typecode>
+  <typecode
+    code="lh_thumb"
+    desc="Left Thumb"
+    name="Left Thumb">
+    <category
+      code="bl_hand"
+      typelist="BodilyInjuryPoints"/>
+  </typecode>
+  <typecode
+    code="rh_thumb"
+    desc="Right Thumb"
+    name="Right Thumb">
+    <category
+      code="br_hand"
+      typelist="BodilyInjuryPoints"/>
+  </typecode>
+  <typecode
+    code="rh_indexfinger"
+    desc="Right Index Finger"
+    name="Right Index Finger">
+    <category
+      code="br_hand"
+      typelist="BodilyInjuryPoints"/>
+  </typecode>
+  <typecode
+    code="rh_palm"
+    desc="Right Palm"
+    name="Right Palm">
+    <category
+      code="br_hand"
+      typelist="BodilyInjuryPoints"/>
+  </typecode>
+  <typecode
+    code="rh_middlefinger"
+    desc="Right Middle Finger"
+    name="Right Middle Finger">
+    <category
+      code="br_hand"
+      typelist="BodilyInjuryPoints"/>
+  </typecode>
+  <typecode
+    code="rh_ringfinger"
+    desc="Right Ring Finger"
+    name="Right Ring Finger">
+    <category
+      code="br_hand"
+      typelist="BodilyInjuryPoints"/>
+  </typecode>
+  <typecode
+    code="rh_littlefinger"
+    desc="Right Little Finger"
+    name="Right Little Finger">
+    <category
+      code="br_hand"
+      typelist="BodilyInjuryPoints"/>
+  </typecode>
+  <typecode
+    code="hbl_top"
+    desc="Top Left Back Head"
+    name="Top Left Back Head">
+    <category
+      code="bbl_head"
+      typelist="BodilyInjuryPoints"/>
+  </typecode>
+  <typecode
+    code="hb_top"
+    desc="Top Mid Back Head"
+    name="Top Mid Back Head">
+    <category
+      code="bbl_head"
+      typelist="BodilyInjuryPoints"/>
+  </typecode>
+  <typecode
+    code="hbr_top"
+    desc="Top Right Back Head"
+    name="Top Right Back Head">
+    <category
+      code="bbr_head"
+      typelist="BodilyInjuryPoints"/>
+  </typecode>
+  <typecode
+    code="hbl_center"
+    desc="Center Left Back Head"
+    name="Center Left Back Head">
+    <category
+      code="bbl_head"
+      typelist="BodilyInjuryPoints"/>
+  </typecode>
+  <typecode
+    code="hb_center"
+    desc="Center Mid Back Head"
+    name="Center Mid Back Head">
+    <category
+      code="bbl_head"
+      typelist="BodilyInjuryPoints"/>
+  </typecode>
+  <typecode
+    code="hbr_center"
+    desc="Center Right Back Head"
+    name="Center Right Back Head">
+    <category
+      code="bbr_head"
+      typelist="BodilyInjuryPoints"/>
+  </typecode>
+  <typecode
+    code="hbl_bottom"
+    desc="Bottom Left Back Head"
+    name="Bottom Left Back Head">
+    <category
+      code="bbl_head"
+      typelist="BodilyInjuryPoints"/>
+  </typecode>
+  <typecode
+    code="hb_bottom"
+    desc="Bottom Mid Back Head"
+    name="Bottom Mid Back Head">
+    <category
+      code="bbl_head"
+      typelist="BodilyInjuryPoints"/>
+  </typecode>
+  <typecode
+    code="hbr_bottom"
+    desc="Bottom Right Back Head"
+    name="Bottom Right Back Head">
+    <category
+      code="bbr_head"
+      typelist="BodilyInjuryPoints"/>
+  </typecode>
+  <typecode
+    code="hbl_ear"
+    desc="Left Back Ear"
+    name="Left Back Ear">
+    <category
+      code="bbl_head"
+      typelist="BodilyInjuryPoints"/>
+  </typecode>
+  <typecode
+    code="hbr_ear"
+    desc="Right Back Ear"
+    name="Right Back Ear">
+    <category
+      code="bbr_head"
+      typelist="BodilyInjuryPoints"/>
+  </typecode>
+</typelist>

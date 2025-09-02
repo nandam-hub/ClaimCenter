@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Activity patterns setup for quick-setup instructions"
+  entity="ClaimTemplateActivity_SP"
+  exportable="true"
+  table="claimtemplateactivity_sp"
+  type="retireable">
+  <foreignkey
+    desc="Activity pattern for this activity."
+    fkentity="ActivityPattern"
+    name="ActivityPattern"
+    nullok="false"/>
+  <foreignkey
+    desc="Reference to parent settings."
+    fkentity="ClaimTemplateSettings_SP"
+    name="ClaimTemplateSettings"
+    nullok="false"/>
+  <column
+    desc="# of days until escalation"
+    name="EscalationDays"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="Target # of days."
+    name="TargetDays"
+    nullok="true"
+    type="integer"/>
+</entity>

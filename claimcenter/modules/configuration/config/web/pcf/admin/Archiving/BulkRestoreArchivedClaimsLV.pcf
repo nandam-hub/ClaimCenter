@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<!-- Deprecated since 50.3.1. Claim Association is no longer created when submitting a bulk restore request -->
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <ListViewPanel
+    id="BulkRestoreArchivedClaimsLV">
+    <Variable 
+      initialValue="new gw.api.archiving.BulkRestoreArchivedClaimsHelper()"
+      name="bulkRestoreArchivedClaimsHelper"
+      type="gw.api.archiving.BulkRestoreArchivedClaimsHelper"/>
+    <ExposeIterator
+      valueType="entity.ClaimAssociation"
+      widget="BulkRestoreArchivedClaimsLV"/>
+    <RowIterator
+      checkBoxVisible="true"
+      hasCheckBoxes="true"
+      appendPageInfo="true"
+      editable="false"
+      elementName="BulkRestoreClaimsAssociation"
+      pageSize="15"
+      value="bulkRestoreArchivedClaimsHelper.getBulkRestoreClaimsAssociation()"
+      valueType="gw.api.database.IQueryBeanResult&lt;entity.ClaimAssociation&gt;">
+      <Row>
+        <TextCell
+          action="BulkRestoreClaimsAssociationDetail.drilldown(BulkRestoreClaimsAssociation)"
+          id="Association"
+          label="DisplayKey.get(&quot;LV.Claim.AssociatedClaims.Association&quot;)"
+          sortOrder="2"
+          value="BulkRestoreClaimsAssociation.Title"
+          wrap="false"/>
+        <TypeKeyCell
+          id="Type"
+          label="DisplayKey.get(&quot;LV.Claim.AssociatedClaims.Type&quot;)"
+          sortOrder="3"
+          value="BulkRestoreClaimsAssociation.ClaimAssocType"
+          valueType="typekey.ClaimAssocType"/>
+        <DateCell
+          dateFormat="short"
+          id="CreatedDate"
+          label="DisplayKey.get(&quot;LV.Claim.AssociatedClaims.CreatedDate&quot;)"
+          sortOrder="1"
+          sortDirection="descending"
+          timeFormat="medium"
+          value="BulkRestoreClaimsAssociation.CreateTime"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

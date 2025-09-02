@@ -1,0 +1,4 @@
+# GAR START: config/portal/capabilities/serialization.gwproperties [/opt/teamcity/agent/work/45c3a2f1b8ee4237/gpm-generator/downloads/edge/backend/xcenter-config/xcenter-utils/cc-utils/../../../Platform/src/main]
+handlers.example=edge.servlet.jsonrpc.marshalling.extensions.samplehandler.SampleSerializationExtensionHandler
+deserializers.edge.servlet.jsonrpc.marshalling.extensions.dto.TestExtensionValueDTO=edge.servlet.jsonrpc.marshalling.extensions.deserializer.TestExtensionValueDTODeserializer
+# GAR END

@@ -1,0 +1,1 @@
+handlers.usergen=edge.capabilities.usergen.UsergenHandler

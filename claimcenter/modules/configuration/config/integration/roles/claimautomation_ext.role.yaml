@@ -1,0 +1,5 @@
+# This role is used to grant additional access to the Claims Autopilot service
+name: claimautomation_ext
+# Add any additional endpoints to this list in order to allow Claims Autopilot to access them
+endpoints: []
+accessibleFields: {}

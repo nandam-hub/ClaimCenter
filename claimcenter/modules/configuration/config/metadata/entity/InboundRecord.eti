@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  loadable="false"
+  entity="InboundRecord"
+  desc="An inbound file record."
+  table="inboundrecord"
+  platform="true"
+  type="editable"
+  replicable="false">
+  <column
+    desc="The line number of the record."
+    name="LineNumber"
+    nullok="false"
+    type="positiveinteger"/>
+  <column
+    desc="The name of the inbound file config."
+    name="Config"
+    nullok="false"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="40"/>
+  </column>
+  <typekey
+    desc="The status of the record."
+    name="Status"
+    nullok="false"
+    typelist="InboundRecordStatus"/>
+  <column
+    desc="The content of the record."
+    name="Content"
+    nullok="false"
+    type="text">
+    <columnParam
+      name="trimwhitespace"
+      value="false"/>
+  </column>
+  <column
+    desc="A message describing any errors that may have occurred when processing this record."
+    name="ErrorMessage"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="1024"/>
+  </column>
+  <foreignkey
+    desc="The Inbound File this record belongs to."
+    fkentity="InboundFile"
+    name="InboundFile"
+    nullok="false"/>
+  <foreignkey
+    desc="The Inbound Chunk storing this record."
+    fkentity="InboundChunk"
+    name="InboundChunk"
+    nullok="false"/>
+  <array
+    arrayentity="InboundSubRecord"
+    cascadeDelete="true"
+    desc="An array of sub-records for this record, containing additional processing information."
+    name="SubRecords"
+    owner="true"/>
+  <index
+    desc="Support query for pending records by config."
+    name="InbndRecPndIx">
+    <indexcol
+      keyposition="1"
+      name="Config"/>
+    <indexcol
+      keyposition="2"
+      name="Status"/>
+  </index>
+  <index
+    desc="Support query for Inbound File."
+    name="InbndRecFileIx">
+    <indexcol
+      keyposition="1"
+      name="InboundFile"/>
+  </index>
+  <index
+    desc="Support order by line number."
+    name="InbndRecLnumIx">
+    <indexcol
+      keyposition="1"
+      name="LineNumber"/>
+  </index>
+</entity>

@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<plugin
+  interface="ExternalConfigurationProviderPlugin"
+  name="ExternalConfigurationProviderPlugin">
+  <plugin-java
+    javaclass="com.guidewire.pl.plugin.extconfig.PropertyServiceExternalConfigurationProvider"/>
+</plugin>

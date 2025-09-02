@@ -1,0 +1,27 @@
+<div :if="leftIndented" class="gw-InputColumn--icon-wrapper gw-InputColumn--icon--left-indent">
+    ${iconHtml}
+</div>
+<div class="gw-InputColumn--content">
+    <div :if="displayTitleWrapper" class="gw-InputColumn--title-wrapper">
+        <div :if="leftInline" class="gw-InputColumn--icon-wrapper gw-InputColumn--icon--left-inline">
+            ${iconHtml}
+        </div>
+        <div class="gw-InputColumn--title-and-subtitle">
+            <div :if="title" role="heading" aria-level="2" class="gw-InputColumn--title-text">
+                ${title}
+            </div>
+            <div :if="subtitle" class="gw-InputColumn--subtitle-text">
+                ${subtitle}
+            </div>
+        </div>
+        <div :if="rightInline" class="gw-InputColumn--icon-wrapper gw-InputColumn--icon--right-inline">
+            ${iconHtml}
+        </div>
+    </div>
+    ${:children}
+</div>
+<div :if="rightIndented" class="gw-InputColumn--icon-wrapper gw-InputColumn--icon--right-indent">
+    ${iconHtml}
+</div>
+
+

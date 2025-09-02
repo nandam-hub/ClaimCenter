@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="The subjective pronoun type"
+  name="PronounSubjectiveType"
+  platform="true">
+  <typecode
+    code="he"
+    desc="He"
+    name="He"
+    priority="1"/>
+  <typecode
+    code="she"
+    desc="She"
+    name="She"
+    priority="2"/>
+</typelist>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><PCF xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Popup beforeCommit="authorities.add(authority)" canEdit="true" id="PortalCreateUserGrantedAuthorityVendorPopup" returnType="edge.security.authorization.Authority" startInEditMode="true" title="DisplayKey.get(&quot;Edge.Web.AuthAdminConsole.NewPortalAuthUserGrantedAuthorityPopup.CreateGrantedAuthority&quot;)">
+    <LocationEntryPoint signature="PortalCreateUserGrantedAuthorityVendorPopup(authorities: java.util.List&lt;edge.security.authorization.Authority&gt;)"/>
+    <Variable initialValue="new edge.security.authorization.Authority(edge.security.authorization.AuthorityType.VENDOR,null)" name="authority" type="edge.security.authorization.Authority"/>
+    <Variable name="authorities" type="java.util.List&lt;edge.security.authorization.Authority&gt;"/>
+    <Variable initialValue="new java.util.ArrayList&lt;edge.capabilities.extusermgmt.authadminconsole.vendorlookup.AuthorityTargetLookup&gt;()" name="potentialVendors" type="List&lt;edge.capabilities.extusermgmt.authadminconsole.vendorlookup.AuthorityTargetLookup&gt;"/>
+    <Variable initialValue="new edge.capabilities.extusermgmt.authadminconsole.vendorlookup.VendorSearchCriteriaDTO(){:VendorType = typekey.Contact.TC_COMPANYVENDOR}" name="searchCriteria" type="edge.capabilities.extusermgmt.authadminconsole.vendorlookup.VendorSearchCriteriaDTO"/>
+    <Screen>
+      <Toolbar>
+        <EditButtons pickValue="authority" updateVisible="authority.Target != null"/>
+      </Toolbar>
+      <DetailViewPanel>
+        <InputColumn>
+          <RangeInput editable="true" id="VendorTypeSelect" label="DisplayKey.get(&quot;Edge.Web.AuthAdminConsole.NewPortalAuthUserGrantedAuthorityVendorPopup.Type&quot;)" required="true" value="searchCriteria.VendorType" valueRange="new typekey.Contact[]{typekey.Contact.TC_PERSONVENDOR, typekey.Contact.TC_COMPANYVENDOR}" valueType="typekey.Contact">
+            <PostOnChange/>
+          </RangeInput>
+          <TextInput editable="true" id="authorityTarget" label="DisplayKey.get(&quot;Edge.Web.AuthAdminConsole.NewPortalAuthUserGrantedAuthorityVendorPopup.FirstName&quot;)" required="true" value="searchCriteria.FirstName" visible="searchCriteria.VendorType == typekey.Contact.TC_PERSONVENDOR"/>
+          <TextInput editable="true" id="criteriaLastName" label="DisplayKey.get(&quot;Edge.Web.AuthAdminConsole.NewPortalAuthUserGrantedAuthorityVendorPopup.LastName&quot;)" required="true" value="searchCriteria.LastName" visible="searchCriteria.VendorType == typekey.Contact.TC_PERSONVENDOR"/>
+          <TextInput editable="true" id="criteriaCompany" label="DisplayKey.get(&quot;Edge.Web.AuthAdminConsole.NewPortalAuthUserGrantedAuthorityVendorPopup.Company&quot;)" required="true" value="searchCriteria.Company" visible="searchCriteria.VendorType == typekey.Contact.TC_COMPANYVENDOR"/>
+        </InputColumn>
+      </DetailViewPanel>
+      <DetailViewPanel>
+        <InputColumn>
+          <ButtonInput action="searchForVendors()" id="SearchButton" value="DisplayKey.get(&quot;Edge.Web.AuthAdminConsole.NewPortalAuthUserGrantedAuthorityVendorPopup.Search&quot;)"/>
+        </InputColumn>
+      </DetailViewPanel>
+      <DetailViewPanel>
+        <InputColumn>
+          <PreFormattedTextInput id="HelpText" value="DisplayKey.get(&quot;Edge.Web.AuthAdminConsole.NewPortalAuthUserGrantedAuthorityVendorPopup.SearchFor&quot;)"/>
+        </InputColumn>
+      </DetailViewPanel>
+      <PanelRef id="VendorList">
+        <ListViewPanel>
+          <RowIterator editable="false" elementName="vendor" pickValue="addVendorAuthority(vendor as edge.capabilities.extusermgmt.authadminconsole.vendorlookup.AuthorityTargetLookup)" value="potentialVendors" valueType="List&lt;edge.capabilities.extusermgmt.authadminconsole.vendorlookup.AuthorityTargetLookup&gt;">
+            <Row>
+              <TextCell id="PotentialVendorName" label="DisplayKey.get(&quot;Edge.Web.AuthAdminConsole.NewPortalAuthUserGrantedAuthorityVendorPopup.VendorName&quot;)" value="(vendor as edge.capabilities.extusermgmt.authadminconsole.vendorlookup.AuthorityTargetLookup).Display"/>
+              <TextCell id="PotentialVendorTarget" label="DisplayKey.get(&quot;Edge.Web.AuthAdminConsole.NewPortalAuthUserGrantedAuthorityVendorPopup.VendorId&quot;)" value="(vendor as edge.capabilities.extusermgmt.authadminconsole.vendorlookup.AuthorityTargetLookup).Target"/>
+            </Row>
+          </RowIterator>
+        </ListViewPanel>
+      </PanelRef>
+    </Screen>
+    <Code><![CDATA[uses edge.capabilities.extusermgmt.authadminconsole.vendorlookup.AuthorityTargetLookupHelper
+uses edge.capabilities.extusermgmt.authadminconsole.vendorlookup.AuthorityTargetLookup
+
+function searchForVendors() {
+    var helper = new AuthorityTargetLookupHelper()
+    var list = helper.searchVendorContacts(searchCriteria)
+    potentialVendors = list
+}
+
+function addVendorAuthority(vendor : AuthorityTargetLookup) : edge.security.authorization.Authority {
+  authority.Target = vendor.Target
+  return authority
+}]]></Code>
+  </Popup>
+</PCF>

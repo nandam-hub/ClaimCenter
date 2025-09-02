@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<entity
+  loadable="false"
+  platform="true"
+  xmlns="http://guidewire.com/datamodel"
+  entity="EpdrPackage"
+  desc="API Extension Bundle Design Runtime package"
+  table="epdrpackage"
+  type="editable"
+  extendable="false">
+  <column
+    desc="API Extension Bundle code"
+    name="Code"
+    nullok="false"
+    setterScriptability="hidden"
+    type="shorttext"/>
+  <column
+    desc="API Extension Bundle JSON definition"
+    name="Definition"
+    nullok="false"
+    setterScriptability="hidden"
+    type="text"/>
+  <column
+    desc="API Extension Bundle code generation control definition"
+    name="ControlDefinition"
+    nullok="true"
+    setterScriptability="hidden"
+    type="text"/>
+  <index
+    desc="Alternate key"
+    name="UniqueCode"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="Code"/>
+  </index>
+</entity>

@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <ModalCell
+    id="CovTermAmount"
+    mode="Numeric">
+    <Require
+      name="covTerm"
+      type="CovTerm"/>
+    <TextCell
+      align="left"
+      format="covTerm.NumericFormat"
+      id="CovTermAmount"
+      value="(covTerm as NumericCovTerm).NumericValue"
+      valueType="java.math.BigDecimal"/>
+  </ModalCell>
+</PCF>

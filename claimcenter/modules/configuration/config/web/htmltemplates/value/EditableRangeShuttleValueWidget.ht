@@ -1,0 +1,15 @@
+<select name="${renderId}" multiple class="gw-hidden">
+    <option :for="option" :in="range" value="${option.value}" selected="${option.selected}">${option.label || '&nbsp;'}</option>
+</select>
+<select size="${numRows}" multiple disabled="${disabled}" id="${renderId}_select-left" data-gw-event-barrier
+        class="gw-selection-list" aria-label="${leftAriaLabel}">
+  <option :for="option" :in="notSelectedOptions" value="${option.value}">${option.label || '&nbsp;'}</option>
+</select>
+<div class="gw-button-section">
+    <div class="gw-shuttle-right-button" role="button" aria-label="${addTooltip}" aria-disabled="${disabledRightButton}" id="${renderId}_add" data-gw-tooltip="${addTooltip}" data-gw-click="gwRangeValue.moveRight"><div class="gw-icon"></div></div>
+    <div class="gw-shuttle-left-button" role="button" aria-label="${removeTooltip}" aria-disabled="${disabledLeftButton}" id="${renderId}_remove" data-gw-tooltip="${removeTooltip}" data-gw-click="gwRangeValue.moveLeft"><div class="gw-icon"></div></div>
+</div>
+<select size="${numRows}" multiple disabled="${disabled}" id="${renderId}_select-right" data-gw-event-barrier
+        class="gw-selection-list" aria-label="${rightAriaLabel}">
+  <option :for="option" :in="selectedOptions" value="${option.value}">${option.label || '&nbsp;'}</option>
+</select>

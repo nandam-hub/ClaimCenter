@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<typelist xmlns="http://guidewire.com/typelists" name="CrossAppActivityDest_SP" desc="A typelist of destination applications eligible to receive cross-application activities">
+  <typecode
+    code="policycenter"
+    desc="PolicyCenter"
+    name="PolicyCenter"/>
+  <typecode
+    code="claimcenter"
+    desc="ClaimCenter"
+    name="ClaimCenter"/>
+  <typecode
+    code="billingcenter"
+    desc="BillingCenter"
+    name="BillingCenter"/>
+</typelist>

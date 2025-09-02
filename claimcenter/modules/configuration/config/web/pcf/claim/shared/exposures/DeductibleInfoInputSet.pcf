@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <InputSet
+    id="DeductibleInfoInputSet"
+    visible="claimDeductible != null">
+    <Require
+      name="exposure"
+      type="Exposure"/>
+    <Variable
+      initialValue="exposure.Coverage.ClaimDeductible"
+      name="claimDeductible"
+      recalculateOnRefresh="true"
+      type="Deductible"/>
+    <Variable
+      initialValue="perm.Claim.edit(exposure.Claim) and perm.System.editdeductible and gw.api.financials.FinancialsUtil.isUseDeductibleHandling()"
+      name="canEditDeductible"
+      recalculateOnRefresh="true"
+      type="boolean"/>
+    <Label
+      label="DisplayKey.get(&quot;Deductible&quot;)"/>
+    <BooleanRadioInput
+      editable="claimDeductible.TransactionLineItems.IsEmpty and canEditDeductible"
+      id="DeductibleWaived"
+      label="DisplayKey.get(&quot;Deductible.WaiveDeductible&quot;)"
+      validationExpression="validateDeductibleWaived()"
+      value="claimDeductible.Waived">
+      <PostOnChange
+        onChange="claimDeductible.EditReason = null"/>
+    </BooleanRadioInput>
+    <CurrencyInput
+      editable="claimDeductible.Overridden and !claimDeductible.Waived and canEditDeductible"
+      id="DeductibleAmount"
+      label="DisplayKey.get(&quot;Deductible.DeductibleAmount&quot;)"
+      required="true"
+      validationExpression="validateDeductibleAmount()"
+      value="claimDeductible.Amount"/>
+    <CurrencyInput
+      id="DeductibleAmountApplied"
+      label="DisplayKey.get(&quot;Deductible.DeductibleAmountApplied&quot;)"
+      required="true"
+      validationExpression="validateDeductibleAmount()"
+      value="claimDeductible.AmountApplied_Core"/>
+    <CurrencyInput
+      id="DeductibleAmountRemaining"
+      label="DisplayKey.get(&quot;Deductible.DeductibleAmountRemaining&quot;)"
+      required="true"
+      validationExpression="validateDeductibleAmount()"
+      value="claimDeductible.AmountRemaining_Core"/>
+    <BooleanRadioInput
+      editable="!claimDeductible.Waived and canEditDeductible"
+      id="DeductibleOverridden"
+      label="DisplayKey.get(&quot;Deductible.OverrideDeductible&quot;)"
+      value="claimDeductible.Overridden">
+      <PostOnChange
+        onChange="claimDeductible.recalculateAmount(); claimDeductible.EditReason = null"/>
+    </BooleanRadioInput>
+    <TextInput
+      editable="canEditDeductible"
+      id="DeductibleEditReason"
+      label="DisplayKey.get(&quot;Deductible.EditReason&quot;)"
+      required="true"
+      value="claimDeductible.EditReason"
+      visible="claimDeductible.Overridden or claimDeductible.Waived"/>
+    <Code><![CDATA[
+  function validateDeductibleAmount(): String {
+    return claimDeductible.Amount <= claimDeductible.Coverage.DeductibleAmount
+      ? null
+      : DisplayKey.get("Deductible.AmountCannotExceedOriginal", gw.api.util.CurrencyUtil.renderAsCurrency(claimDeductible.Coverage.DeductibleAmount))
+  }
+
+  function validateDeductibleWaived(): String {
+    if (claimDeductible.Waived) {
+      return validateDeductibleAmount()
+    }
+    return null
+  }
+]]></Code>
+  </InputSet>
+</PCF>

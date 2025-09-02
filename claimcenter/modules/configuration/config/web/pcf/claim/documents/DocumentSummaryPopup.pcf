@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    id="DocumentSummaryPopup"
+    title="DisplayKey.get(&quot;Web.DocumentDetails.Title&quot;)">
+    <LocationEntryPoint
+      signature="DocumentSummaryPopup(DocumentParam : Document)"/>
+    <Variable
+      name="DocumentParam"
+      type="Document"/>
+    <Screen
+      id="DocumentDetailsScreen">
+      <DetailViewPanel>
+        <InputColumn>
+          <TextInput
+            boldLabel="true"
+            id="highlevelsummary"
+            label="DisplayKey.get(&quot;Web.DocumentSummary.HighLevelSummary&quot;)"
+            labelAbove="true"
+            value="DocumentParam.HighLevelSummary"/>
+          <TextAreaInput
+            boldLabel="true"
+            id="detailedsummary"
+            label="DisplayKey.get(&quot;Web.DocumentSummary.DetailedSummary&quot;)"
+            labelAbove="true"
+            numRows="50"
+            value="DocumentParam.DetailedSummary"/>
+        </InputColumn>
+      </DetailViewPanel>
+    </Screen>
+  </Popup>
+</PCF>

@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<subtype
+  displayName="Exposure Rule"
+  xmlns="http://guidewire.com/datamodel"
+  entity="ExposureRule"
+  final="true"
+  supertype="CCRule">
+  <implementsInterface
+    iface="gw.bizrules.domain.RuleVersionDependent"
+    impl="com.guidewire.cc.domain.bizrules.ExposureRuleImpl"/>
+  <implementsInterface
+    iface="com.guidewire.bizrules.domain.RuleDomainMethods"
+    impl="com.guidewire.cc.domain.bizrules.ExposureRuleImpl"/>
+  <array
+    arrayentity="AppCritLossCause"
+    name="LossCauses"
+    owner="true"/>
+  <array
+    arrayentity="AppCritCoverageType"
+    name="CoverageTypes"
+    owner="true"/>
+  <array
+    arrayentity="AppCritIncidentType"
+    name="IncidentTypes"
+    owner="true"/>
+  <array
+    arrayentity="AppCritLossPartyType"
+    name="LossPartyTypes"
+    owner="true"/>
+</subtype>

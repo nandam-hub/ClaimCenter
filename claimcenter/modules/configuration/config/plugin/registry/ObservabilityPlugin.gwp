@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<plugin
+  interface="ObservabilityPlugin"
+  name="ObservabilityPlugin">
+  <plugin-java
+    javaclass="com.guidewire.pl.plugin.observability.internal.ObservabilityPluginImpl"/>
+</plugin>

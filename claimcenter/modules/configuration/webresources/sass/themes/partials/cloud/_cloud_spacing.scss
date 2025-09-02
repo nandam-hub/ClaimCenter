@@ -1,0 +1,151 @@
+$gw-app--WestPanel--item-spacing-v-rem: gw-remScaled(8/15);
+$gw-app--WestPanel--padding-h-rem: gw-remScaled(24/18);
+
+// Global Spacing
+$gw-app--SPACING-rem-XS:gw-remScaled(2/15);
+$gw-app--SPACING-rem-S:gw-remScaled(5/15);
+$gw-app--SPACING-rem-M:gw-remScaled(9/15);
+$gw-app--SPACING-rem-L:gw-remScaled(14/15);
+$gw-app--SPACING-rem-XL:gw-remScaled(18/15);
+$gw-app--SPACING-rem-XXL:gw-remScaled(36/15);
+
+// North
+$gw-app--NorthPanel--button--pad-v-rem: $gw-app--SPACING-rem-M; //TODO: revisit
+$gw-app--NorthPanel--button--pad-h-rem: $gw-app--SPACING-rem-L;
+$gw-app--NorthPanel--button--expand-pad-h-em: .3em;
+
+
+// West
+$gw-app--WestPanel--spacing-inner-top-rem: 2.6rem;
+$gw-app--WestPanel--spacing-inner-left-rem: 0;
+$gw-app--WestPanel--button-active-border-width-px: $gw-app--WestPanel--item-spacing-v-rem;
+
+$gw-app--WestPanel--default-width-em: 300px;
+$gw-app--WestPanel--border-right-width-px: gw-pxFixed(0);
+
+$gw-app--WestPanel--button--topborder: 0px solid transparent;
+$gw-app--WestPanel--button--bottomborder: 0px solid transparent;
+
+$gw-app--WestPanel--button--pad-v-rem: $gw-app--SPACING-rem-M;
+
+$gw-app--MenuActionsWidget--spacing-widget-top-rem: 0; //gw-remScaled(20/15)
+$gw-app--MenuActionsWidget--spacing-widget-left-rem: $gw-app--WestPanel--padding-h-rem;
+$gw-app--MenuActionsWidget--spacing-widget-right-rem: $gw-app--WestPanel--padding-h-rem;
+$gw-app--MenuActionsWidget--spacing-widget-bottom-rem: $gw-app--WestPanel--item-spacing-v-rem;
+
+// Progress Bar
+$gw-app--progress-bar--inner-bar-has-right-border: false;
+$gw-app--progress-bar--label-font-weight: gw-weight(bold);
+$gw-app--progress-bar--label-font-size-em: gw-emFixed(1);
+$gw-app--progress-bar--holder-has-input-border: false;
+
+
+$gw-app--Logo--spacing-inner-left-rem: 24px;
+$gw-app--Logo--width-em: 210px;
+$gw-app--Logo--height-em: 30px;
+$gw-app--Logo--top: -1.4rem;
+
+//OTHER
+$gw-app--BadgeWidget--force-all-badge-styles-to-light-text-with-shadow: false;
+
+$gw-app--InputDivider--spacing-widget-top-rem: $gw-app--SPACING-rem-L;
+$gw-app--InputDivider--spacing-widget-bottom-rem: $gw-app--SPACING-rem-L;
+
+$gw-app--CenterPanel-topsection--spacing-inner-bottom-rem: null;
+$gw-app--CenterPanel-topsection--spacing-inner-right-rem: null;
+$gw-app--CenterPanel-topsection--spacing-inner-left-rem: 0;
+
+// Buttons
+$gw-app--buttons--pad-h-rem: $gw-app--SPACING-rem-L;
+
+// Inputs
+$gw-app--inputs--checkbox-size-em: gw-emFixed(16/15);
+$gw-app--inputs--checkbox-glyph-size-em: gw-emFixed(12/15);
+
+
+$gw-app--InputDivider--spacing-widget-right-rem: $gw-app--SPACING-rem-M;
+$gw-app--InputDivider--spacing-widget-left-rem: $gw-app--SPACING-rem-M;
+
+
+// RowTreeWidget_themeable
+
+
+// ScreenWidget_themeable
+$gw-app--Screen--spacing-inner-left-rem: $gw-app--SPACING-rem-XL;
+$gw-app--Screen--spacing-inner-right-rem: $gw-app--SPACING-rem-M;
+$gw-app--Screen--spacing-inner-bottom-rem: gw-remScaled(40/15);
+
+$gw-app--Screen--file-paste-area--border: 0px solid transparent;
+
+//$gw-app--Screen--min-width: 100%; //TODO: revisit
+
+// SouthPanelWidget_themeable
+$gw-app--SouthPanel--min-height-em:  gw-emFixed(40/15);
+
+
+//TitleBar_themeable
+$gw-app--TitleBar--heading-level-1--subtitle--font-size-em: gw-emFixed(18/15);
+$gw-app--TitleBar--heading-level-1--font-weight:  gw-weight(light);
+
+$gw-app--TitleBar--heading-level-2--font-weight: gw-weight(light);
+$gw-app--TitleBar--heading-level-1--subtitle-font-weight: gw-weight(light);
+$gw-app--TitleBar--heading-level-2--subtitle-font-weight: gw-weight(semi-bold);
+
+$gw-app--TitleBar--heading-level-1--spacing-inner-left-rem: $gw-app--SPACING-rem-XL + $gw-app--SPACING-rem-M;
+$gw-app--TitleBar--heading-level-1--spacing-inner-right-rem: $gw-app--SPACING-rem-XL;
+
+$gw-app--Verbatim--weight: gw-weight(semibold);
+
+// Wizards_themeable
+$gw-app--wizards--step-button--use-shadow-for-depth: false;
+
+
+//InfoBar
+$gw-app--InfoBarElement--value-font-weight: gw-weight(semi-bold);
+$gw-app--InfoBarElement--icon-font-size: 1.42em; // (20/15)
+$gw-app--InfoBar--spacing-inner-right-rem: $gw-app--SPACING-rem-XL;
+$gw-app--InfoBar--spacing-inner-left-rem: $gw-app--SPACING-rem-XL;
+
+// LV
+$gw-app--ListView-top-UI-section--spacing-inner-top-rem: $gw-app--SPACING-rem-S;
+$gw-app--ListView-top-UI-section--spacing-inner-bottom-rem: $gw-app--SPACING-rem-S;
+
+$gw-app--ListView--use-row-list-as-default-styling: true;
+$gw-app--ListView--style-outer-UI-for-all-LVInputs-to-match-standard-InputColumn-label-above: true;
+
+$gw-app--tables--style-list--headers-have-v-borders: false;
+$gw-app--tables--style-list--headers-have-h-borders: true;
+$gw-app--ListView--use-minimal-column-button-when-floating: true;
+
+$gw-app--ListView--table-forced-to-be-at-least-as-wide-as-UI: true; //TODO
+
+$gw-app--HeaderCell--spacing-inner-top-rem: $gw-app--SPACING-rem-L;
+$gw-app--HeaderCell--spacing-inner-bottom-rem: $gw-app--SPACING-rem-M;
+
+$gw-app--ListView-top-UI-section--spacing-inner-left-rem: $gw-app--SPACING-rem-S;
+
+$gw-app--tables--cell--pad-h-rem: $gw-app--SPACING-rem-L;
+$gw-app--tables--cell--pad-v-rem: $gw-app--SPACING-rem-M;
+
+$gw-app--ListView-Title--spacing-widget-left-rem: $gw-app--SPACING-rem-M;
+
+// =====================================
+// == INPUT COLUMN
+// =====================================
+$gw-app--InputWidget-in-InputColumn--spacing-widget-top-rem: $gw-app--SPACING-rem-M;
+$gw-app--InputWidget-in-InputColumn--spacing-widget-bottom-rem: $gw-app--SPACING-rem-M;
+$gw-app--InputWidget-in-InputColumn--spacing-widget-left-rem: $gw-app--SPACING-rem-XL;
+$gw-app--InputWidget-in-InputColumn--spacing-widget-right-rem: $gw-app--SPACING-rem-L;
+
+
+// =====================================
+// == PANEL REF
+// =====================================
+$gw-app--PanelRef--toggle-icon-collapsed: "chevron-down";
+$gw-app--PanelRef--toggle-icon-opened: "chevron-up";
+
+$gw-app--PanelRef--toggle-icon-size: 1;
+$gw-app--PanelRef--toggle-icon-left-indent: 1em;
+
+$gw-app--panel-spacing--outer--top-rem: $gw-app--SPACING-rem-M;
+$gw-app--panel-spacing--inner--top-rem: $gw-app--SPACING-rem-M;

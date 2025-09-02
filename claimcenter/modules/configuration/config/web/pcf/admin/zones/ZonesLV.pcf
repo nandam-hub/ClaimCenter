@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <ListViewPanel
+    id="ZonesLV">
+    <ExposeIterator
+      valueType="Object"
+      widget="ZonesLV"/>
+    <Require
+      name="uiHelper"
+      type="gw.api.zones.ZonesInputSetUIHelper"/>
+    <Require
+      name="country"
+      type="Country"/>
+    <RowIterator
+      canPick="false"
+      editable="true"
+      elementName="zone"
+      hasCheckBoxes="true"
+      hideCheckBoxesIfReadOnly="true"
+      toCreateAndAdd="uiHelper.ZoneContainer.createZone(uiHelper.ZoneContainer.FilterCriteria.ZoneType, country)"
+      toRemove="uiHelper.ZoneContainer.removeFromZones(zone)"
+      value="uiHelper.ZoneContainer.getZonesByZoneType(uiHelper.ZoneContainer.FilterCriteria.ZoneType)"
+      valueType="entity.ZoneDelegate[]">
+      <IteratorSort
+        sortBy="zone.Code"
+        sortOrder="1"/>
+      <Row>
+        <TextCell
+          autoComplete="new gw.api.admin.ZoneAutocompleteHandler(country, uiHelper.ZoneContainer.FilterCriteria.ZoneType)"
+          editable="true"
+          id="ZoneCode"
+          label="DisplayKey.get(&quot;Web.Admin.ZonesInputSet.ZoneCode&quot;)"
+          required="true"
+          unique="true"
+          value="zone.Code"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

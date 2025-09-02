@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  loadable="false"
+  platform="true"
+  entity="RuntimeProperty"
+  extendable="false"
+  desc="General externalized properties supporting runtime modification and environment specific values."
+  table="runtimeproperty"
+  type="editable"
+  replicable="false">
+  <typekey
+    desc="The group this property belongs to"
+    name="PropertyGroup"
+    nullok="false"
+    typelist="RuntimePropertyGroup"/>
+  <column
+    desc="The name of this property"
+    name="Name"
+    nullok="false"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="256"/>
+  </column>
+  <column
+    desc="A description for this property"
+    name="Description"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="1024"/>
+  </column>
+  <column
+    desc="The value for this property"
+    name="Value"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="1024"/>
+  </column>
+  <index name="uniqNamePrprtGrp" unique="true" desc="multi-column, unique index">
+    <indexcol keyposition="1" name="PropertyGroup"/>
+    <indexcol keyposition="2" name="Name"/>
+  </index>
+</entity>

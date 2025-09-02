@@ -1,0 +1,14 @@
+identifier: demo
+displayKey: Web.CCSampleData.Demo.Name
+description: "Example demo sample data for CC"
+priority: 1
+className: CCGosuLoadableSampleDataSet
+dependencies:
+  - admin
+params:
+  dataGroups:
+    - SampleClaims
+    - SampleAggregateLimits
+    - SampleAuthorityLimits
+    - SampleMessages
+    - SampleContacts

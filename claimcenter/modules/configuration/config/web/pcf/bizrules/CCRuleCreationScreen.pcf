@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Screen
+    id="CCRuleCreationScreen">
+    <Require
+      name="context"
+      type="gw.bizrules.CCRulesNavigationContext"/>
+    <Require
+      name="ruleToClone"
+      type="CCRule"/>
+    <Require
+      name="head"
+      type="RuleHead"/>
+    <Variable
+      name="ruleController"
+      type="gw.bizrules.pcf.RulePageController"
+      initialValue="new gw.bizrules.pcf.RulePageController(head.HeadVersion, context.UIConfigs, CurrentLocation, gw.bizrules.CCRulesDetailsStateHolder.SwitchableModes)"/>
+    <Variable
+      name="versionController"
+      type="gw.bizrules.pcf.RuleVersionController"
+      initialValue="new gw.bizrules.pcf.RuleVersionController(context)"/>
+    <Variable
+      initialValue="if (ruleController.ConditionBuilderController.ConditionLineHolders.isEmpty()) {ruleController.ConditionBuilderController.RuleConditionType = context.DefaultRuleConditionType} return ruleController.ConditionBuilderController.RuleConditionType "
+      name="ruleConditionType"
+      type="typekey.RuleConditionType"/>
+    <Toolbar>
+        <EditButtons
+          updateLabel="DisplayKey.get('Web.BizRules.Rule.Save')"/>
+        <ToolbarDivider/>
+        <ToolbarButtonSetRef toolbarButtonSet="ConditionValidationToolbarButtonSet(ruleController)"/>
+      </Toolbar>
+      <AlertBar
+        action="versionController.pushRulesWithSameNamePopup(head.HeadVersion)"
+        allowDismiss="false"
+        id="DuplicatedNameAlertBar"
+        label="DisplayKey.get('BizRules.RuleDetailsPage.Alert.DuplicatedName')"
+        visible="!versionController.isRuleNameUnique(head.HeadVersion)"/>
+      <PanelRef
+        def="RuleDetailPanelSet(context, head.HeadVersion, false, ruleController, ruleConditionType)"/>
+  </Screen>
+</PCF>

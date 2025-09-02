@@ -1,0 +1,6 @@
+<div id="${ariaId}" ${innerCellClasses} ${innerCellStyles}>
+    <div :wrapIf="isMultipleContentCell" class="gw-multi-content-cell">
+        ${:children}
+    </div>
+    <div :if="allowsDragging" class="gw-drag-bar" data-gw-draggable="gwDraggableColumn" role="separator" aria-hidden="true"></div>
+</div>

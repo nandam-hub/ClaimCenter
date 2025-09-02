@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<typelist xmlns="http://guidewire.com/typelists" name="OutboundRecordStatus" desc="The status for an Outbound Record.">
+  <typecode
+    code="pending"
+    desc="The outbound record is ready to be delivered."
+    name="Pending"/>
+  <typecode
+    code="processed"
+    desc="The Outbound Record has been processed and included in an Outbound File."
+    name="Processed"/>
+  <typecode
+  code="error"
+  desc="The Outbound Record resulted in an error when processed."
+  name="Error"/>
+  <typecode
+    code="skipped"
+    desc="The Outbound Record has been skipped and is awaiting purge."
+    name="Skipped"/>
+  <typefilter
+    desc="All status codes for unprocessed records"
+    name="unprocessedrecords">
+    <include
+      code="Pending"/>
+    <include
+      code="Error"/>
+    <include
+      code="Skipped"/>
+  </typefilter>
+</typelist>

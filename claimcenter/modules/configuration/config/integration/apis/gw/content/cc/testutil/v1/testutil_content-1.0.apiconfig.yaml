@@ -1,0 +1,9 @@
+combine:
+- gw.core.cc.testutil.v1.testutil_core-1.0
+resourceAccess:
+  internal:
+    yaml: gw.content.cc.testutil.v1.internal_content-1.0
+  unauthenticated:
+    yaml: gw.content.cc.testutil.v1.unauthenticatedUser_content-1.0
+  service:
+    yaml: gw.content.cc.testutil.v1.serviceUser_content-1.0

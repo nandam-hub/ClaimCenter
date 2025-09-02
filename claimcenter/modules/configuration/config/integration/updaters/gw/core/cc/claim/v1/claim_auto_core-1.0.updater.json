@@ -1,0 +1,51 @@
+{
+  "schemaName": "gw.core.cc.claim.v1.claim_auto_core-1.0",
+  "combine": [
+    "gw.core.cc.claim.v1.claim_core-1.0",
+    "gw.core.cc.common.v1.common_auto_core-1.0"
+  ],
+  "updaters": {
+    "ClaimContact": {
+      "schemaDefinition": "ClaimContact",
+      "root": "entity.ClaimContact",
+      "properties": {
+        "licenseNumber": {
+          "path": "(ClaimContact.Contact as Person).LicenseNumber",
+          "allowed": "ClaimContact.Claim.LossType.equals(LossType.get('AUTO'))"
+        },
+        "licenseState": {
+          "path": "(ClaimContact.Contact as Person).LicenseState",
+          "allowed": "ClaimContact.Claim.LossType.equals(LossType.get('AUTO'))",
+          "valueResolver": {
+            "typeName": "TypeKeyValueResolver"
+          }
+        }
+      }
+    },
+    "VehicleRiskUnit": {
+      "schemaDefinition": "VehicleRiskUnit",
+      "root": "entity.VehicleRU",
+      "properties": {
+        "description": {
+          "path": "VehicleRU.Description"
+        },
+        "policySystemId": {
+          "path": "VehicleRU.PolicySystemId"
+        },
+        "vehicle": {
+          "path": "VehicleRU.RestV1.VehicleWrapper",
+          "setter": "",
+          "create": "VehicleRU.RestV1.VehicleWrapper",
+          "shouldCreate": "VehicleRU.New",
+          "updaterRef": "#/updaters/ClaimVehicle"
+        },
+        "vehicleLocation": {
+          "path": "VehicleRU.VehicleLocation",
+          "valueResolver": {
+            "typeName": "gw.rest.core.cc.claim.property.v1.claims.PolicyLocationJsonValueResolver"
+          }
+        }
+      }
+    }
+  }
+}

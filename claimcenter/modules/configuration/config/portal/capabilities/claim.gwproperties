@@ -1,0 +1,31 @@
+# GAR START: config/portal/capabilities/claim.gwproperties [/opt/teamcity/agent/work/45c3a2f1b8ee4237/gpm-generator/downloads/edge/backend/xcenter-config/xcenter-utils/cc-utils/../../../Capabilities/claim/src/main]
+handlers.claim=edge.capabilities.claim.ClaimHandler
+handlers.activity=edge.capabilities.claim.activity.ActivityHandler
+handlers.docs=edge.capabilities.claim.document.ClaimDocumentHandler
+handlers.docupload=edge.capabilities.claim.document.ClaimDocumentUploadHandler
+
+# LOB START PA
+policy.lob.PersonalAuto=edge.capabilities.claim.lob.impl.personalauto.policy.PAPolicyPlugin
+claimdetails.lob.PersonalAuto=edge.capabilities.claim.lob.impl.personalauto.claimdetail.PAClaimDetailPlugin
+# LOB END PA
+# LOB START CA
+policy.lob.CommercialAuto=edge.capabilities.claim.lob.impl.commercialauto.policy.CAPolicyPlugin
+claimdetails.lob.CommercialAuto=edge.capabilities.claim.lob.impl.commercialauto.claimdetail.CAClaimDetailPlugin
+# LOB END CA
+# LOB START HO
+policy.lob.Homeowner=edge.capabilities.claim.lob.impl.homeowners.policy.HOPolicyPlugin
+claimdetails.lob.Homeowner=edge.capabilities.claim.lob.impl.homeowners.claimdetail.HOClaimDetailPlugin
+# LOB END HO
+# LOB START IM
+claimdetails.lob.InlandMarine=edge.capabilities.claim.lob.impl.inlandmarine.claimdetail.IMClaimDetailPlugin
+# LOB END IM
+# LOB START GL
+claimdetails.lob.GeneralLiability=edge.capabilities.claim.lob.impl.generalliability.claimdetail.GLClaimDetailPlugin
+# LOB END GL
+# LOB START WC
+claimdetails.lob.WorkersComp=edge.capabilities.claim.lob.impl.workerscomp.claimdetail.WCClaimDetailPlugin
+# LOB END WC
+# LOB START CP
+policy.lob.CommercialProperty=edge.capabilities.claim.lob.impl.commercialproperty.policy.CPPolicyPlugin
+# LOB END CP
+# GAR END

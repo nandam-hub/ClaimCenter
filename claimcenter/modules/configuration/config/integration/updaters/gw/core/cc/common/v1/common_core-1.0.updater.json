@@ -1,0 +1,132 @@
+{
+  "schemaName": "gw.core.cc.common.v1.common_core-1.0",
+  "combine": [
+    "gw.core.cc.framework.v1.framework_core-1.0",
+    "gw.core.pl.common.v1.common_pl-1.0"
+  ],
+  "updaters": {
+    "Activity": {
+      "schemaDefinition": "Activity",
+      "root": "entity.Activity",
+      "properties": {
+        "autopilotHandlingDecision": {
+          "path": "Activity.AutopilotHandlingDecision",
+          "valueResolver": {
+            "typeName": "TypeKeyValueResolver"
+          }
+        },
+        "autopilotId": {
+          "path": "Activity.AutopilotId"
+        },
+        "autopilotPurpose": {
+          "path": "Activity.AutopilotPurpose",
+          "valueResolver": {
+            "typeName": "TypeKeyValueResolver"
+          }
+        },
+        "coverageIssues": {
+          "path": "Activity.CoverageIssues",
+          "items": {
+            "add": "Activity.addToCoverageIssues(value)",
+            "create": "new CoverageIssue(Activity)",
+            "updaterRef": "#/updaters/CoverageIssue"
+          }
+        },
+        "importance": {
+          "path": "Activity.Importance",
+          "valueResolver": {
+            "typeName": "TypeKeyValueResolver"
+          }
+        },
+        "relatedTo": {
+          "path": "Activity.RelatedTo",
+          "valueResolver": {
+            "typeName": "gw.rest.core.cc.common.v1.relatedto.RelatedToJsonValueResolver"
+          }
+        }
+      }
+    },
+    "ClaimContactRole": {
+      "schemaDefinition": "ContactRole",
+      "root": "entity.ClaimContactRole",
+      "properties": {
+        "active": {
+          "path": "ClaimContactRole.Active"
+        },
+        "comments": {
+          "path": "ClaimContactRole.Comments"
+        },
+        "relatedTo": {
+          "path": "ClaimContactRole.Owner",
+          "valueResolver": {
+            "typeName": "gw.rest.core.cc.common.v1.contacts.ClaimContactRoleOwnerJsonValueResolver"
+          }
+        },
+        "role": {
+          "path": "ClaimContactRole.Role",
+          "valueResolver": {
+            "typeName": "TypeKeyValueResolver"
+          }
+        }
+      }
+    },
+    "Contact": {
+      "schemaDefinition": "Contact",
+      "root": "entity.Contact",
+      "properties": {
+        "policySystemId": {
+          "ignore": "true"
+        }
+      }
+    },
+    "CoverageIssue": {
+      "schemaDefinition": "CoverageIssue",
+      "root": "entity.CoverageIssue",
+      "properties": {
+        "coverageSubtype": {
+          "path": "CoverageIssue.CoverageSubtype",
+          "valueResolver": {
+            "typeName": "TypeKeyValueResolver"
+          }
+        },
+        "reason": {
+          "path": "CoverageIssue.Reason"
+        },
+        "severity": {
+          "path": "CoverageIssue.Severity",
+          "valueResolver": {
+            "typeName": "TypeKeyValueResolver"
+          }
+        }
+      }
+    },
+    "Document": {
+      "schemaDefinition": "Document",
+      "root": "entity.Document",
+      "properties": {
+        "relatedTo": {
+          "path": "Document.RelatedTo",
+          "valueResolver": {
+            "typeName": "gw.rest.core.cc.common.v1.relatedto.RelatedToJsonValueResolver"
+          }
+        }
+      }
+    },
+    "Note": {
+      "schemaDefinition": "Note",
+      "root": "entity.Note",
+      "properties": {
+        "body": {
+          "path": "Note.Body",
+          "allowed": "Note.BodyEditable ? null : 'This note cannot be edited'"
+        },
+        "relatedTo": {
+          "path": "Note.RelatedTo",
+          "valueResolver": {
+            "typeName": "gw.rest.core.cc.common.v1.relatedto.RelatedToJsonValueResolver"
+          }
+        }
+      }
+    }
+  }
+}

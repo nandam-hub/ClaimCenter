@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<Entity
+  name="FinancialCovTerm">
+  <Columns>
+    <Column
+      beanPath="FinancialCovTerm.FinancialAmount"
+      name="financialAmount"/>
+    <Column
+      beanPath="FinancialCovTerm.Coverage.Currency"
+      name="coverageCurrency"/>
+    <Column
+      beanPath="FinancialCovTerm.CovTermPattern"
+      name="covTermPattern"/>
+  </Columns>
+  <DisplayName><![CDATA[uses gw.api.util.CurrencyUtil
+
+var sb = new StringBuilder()
+if (covTermPattern != null) {
+  sb.append(covTermPattern.DisplayName).append(" ")
+}
+if (financialAmount != null and coverageCurrency != null) {
+  sb.append(CurrencyUtil.renderAsCurrency(financialAmount.Amount, coverageCurrency))
+}
+return sb.toString()
+
+]]></DisplayName>
+</Entity>

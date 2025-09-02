@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.guidewire.pl.integration</groupId>
+  <artifactId>integration</artifactId>
+  <version>11.0.2</version>
+  <packaging>pom</packaging>
+
+  <name>Guidewire Platform Integration Components</name>
+
+  <organization>
+    <name>Guidewire Software Inc.</name>
+    <url>http://guidewire.com</url>
+  </organization>
+  <licenses>
+    <license>
+      <name>Copyright Guidewire Software Inc.</name>
+      <url>http://guidewire.com</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+
+  <scm>
+    <connection>scm:git:ssh://git@stash.guidewire.com/pl/gw-integration.git</connection>
+    <developerConnection>scm:git:ssh://git@stash.guidewire.com/pl/gw-integration.git</developerConnection>
+    <tag>integration-11.0.2</tag>
+  </scm>
+
+  <modules>
+    <module>gw-integration-runtime-api</module>
+    <module>gw-integration-runtime-impl</module>
+    <module>gw-integration-cm-api</module>
+    <module>gw-integration-cm-impl</module>
+    <module>gw-integration-jndi-api</module>
+    <module>gw-integration-jndi-impl</module>
+    <module>gw-integration-execution-api</module>
+    <module>gw-integration-execution-impl</module>
+    <module>gw-integration-inbound-api</module>
+    <module>gw-integration-inbound-impl</module>
+    <module>gw-integration-inbound-plugin-files-api</module>
+    <module>gw-integration-inbound-plugin-files-impl</module>
+    <module>gw-integration-inbound-plugin-jms-api</module>
+    <module>gw-integration-inbound-plugin-jms-impl</module>
+    <module>gw-integration-inbound-plugin-custom</module>
+  </modules>
+
+  <properties>
+
+    <!-- plugins -->
+    <maven.bundle.plugin.version>5.1.9</maven.bundle.plugin.version>
+    <maven.compiler.plugin.version>3.11.0</maven.compiler.plugin.version>
+    <maven.deploy.plugin.version>3.1.1</maven.deploy.plugin.version>
+    <maven.enforcer.plugin.version>3.4.0</maven.enforcer.plugin.version>
+    <maven.javadoc.plugin.version>3.5.0</maven.javadoc.plugin.version>
+    <maven.release.plugin.version>3.0.1</maven.release.plugin.version>
+    <maven.source.plugin.version>3.2.1</maven.source.plugin.version>
+    <versions.maven.plugin.version>2.16.0</versions.maven.plugin.version>
+
+    <!-- Build -->
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <required.maven.version>3.6.0</required.maven.version>
+    <maven.compiler.source>11</maven.compiler.source>
+    <maven.compiler.target>11</maven.compiler.target>
+
+    <!-- Guidewire libraries -->
+    <guidewire.pl.logging-api.version>1.4.2</guidewire.pl.logging-api.version>
+
+    <!-- 3rd party libraries -->
+    <guava.version>33.4.0-jre</guava.version>
+    <jms.version>3.1.0</jms.version>
+    <junit.version>4.13.2</junit.version>
+    <osgi.annotation.bundle.version>1.1.1</osgi.annotation.bundle.version>
+    <osgi.compendium.version>7.0.0</osgi.compendium.version>
+    <osgi.core.version>8.0.0</osgi.core.version>
+    <slf4j.version>1.7.30</slf4j.version>
+  </properties>
+
+  
+
+  
+
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>${junit.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.osgi</groupId>
+      <artifactId>osgi.core</artifactId>
+      <version>${osgi.core.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.osgi</groupId>
+      <artifactId>osgi.cmpn</artifactId>
+      <version>${osgi.compendium.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.osgi</groupId>
+      <artifactId>org.osgi.annotation.bundle</artifactId>
+      <version>${osgi.annotation.bundle.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava</artifactId>
+      <version>${guava.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>${slf4j.version}</version>
+      <scope>provided</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-enforcer-plugin</artifactId>
+          <version>${maven.enforcer.plugin.version}</version>
+          <executions>
+            <execution>
+              <id>enforce-maven</id>
+              <goals>
+                <goal>enforce</goal>
+              </goals>
+              <configuration>
+                <rules>
+                  <requireMavenVersion>
+                    <version>${required.maven.version}</version>
+                  </requireMavenVersion>
+                </rules>
+              </configuration>
+            </execution>
+          </executions>
+        </plugin>
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>versions-maven-plugin</artifactId>
+          <version>${versions.maven.plugin.version}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>${maven.compiler.plugin.version}</version>
+          <configuration>
+            <compilerArgs>
+              <arg>-Xlint:all</arg>
+            </compilerArgs>
+            <showWarnings>true</showWarnings>
+            <showDeprecation>true</showDeprecation>
+          </configuration>
+        </plugin>
+        <plugin>
+          <artifactId>maven-release-plugin</artifactId>
+          <version>${maven.release.plugin.version}</version>
+          <configuration>
+            <arguments>-Dmaven.javadoc.skip=true</arguments>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-deploy-plugin</artifactId>
+          <version>${maven.deploy.plugin.version}</version>
+          <configuration>
+            <deployAtEnd>true</deployAtEnd>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.felix</groupId>
+        <artifactId>maven-bundle-plugin</artifactId>
+        <version>${maven.bundle.plugin.version}</version>
+        <extensions>true</extensions>
+        <configuration>
+          <instructions>
+            <_include>bnd.bnd</_include>
+            <_consumer-policy>$&lt;range;[==,=+)&gt;</_consumer-policy>
+            <_removeheaders>
+              Built-By,
+              Created-By
+            </_removeheaders>
+          </instructions>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <version>${maven.source.plugin.version}</version>
+        <executions>
+          <execution>
+            <id>attach-sources</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>jar-no-fork</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>${maven.javadoc.plugin.version}</version>
+        <executions>
+          <execution>
+            <id>attach-javadocs</id>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+            <configuration>
+              <additionalOptions>
+                <additionalOption>-Xdoclint:none</additionalOption>
+              </additionalOptions>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+  <distributionManagement>
+    <repository>
+      <id>publish.to.repository.id</id>
+      <url>${env.PUBLISH_TO_REPOSITORY_URL}</url>
+    </repository>
+  </distributionManagement>
+</project>

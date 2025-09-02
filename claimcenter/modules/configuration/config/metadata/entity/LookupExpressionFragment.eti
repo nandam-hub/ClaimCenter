@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<subtype
+  supertype="ConditionExpressionFragment"
+  xmlns="http://guidewire.com/datamodel"
+  entity="LookupExpressionFragment"
+  desc="Expression fragment for the case when the expression is a lookup."
+  platform="true"
+  final="true">
+  <implementsInterface
+    iface="com.guidewire.bizrules.codegenerator.GosuTextBuilder"
+    impl="com.guidewire.bizrules.codegenerator.LookupExpressionFragmentGosuTextBuilder"/>
+  <implementsInterface
+    iface="com.guidewire.bizrules.codegenerator.LookupExpressionFragmentValidationMethods"
+    impl="com.guidewire.bizrules.codegenerator.LookupExpressionFragmentGosuTextBuilder"/>
+  <implementsInterface
+    iface="com.guidewire.bizrules.domain.ExpressionFragmentDomainMethods"
+    impl="com.guidewire.bizrules.domain.LookupExpressionFragmentImpl"/>
+  <foreignkey
+    fkentity="RuleLookupRequestDef"
+    name="RuleLookupRequestDef"
+    nullok="true"/>
+  <column
+    name="LookupExpression"
+    nullok="true"
+    type="mediumtext"/>
+</subtype>

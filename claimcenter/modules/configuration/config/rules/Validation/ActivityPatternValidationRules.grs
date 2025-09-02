@@ -1,0 +1,13 @@
+package rules.Validation
+
+@gw.rules.RuleName("ActivityPatternValidationRules")
+@gw.rules.RuleSetDescription("Verifies that activity patterns have non-OOTB fields set appropriately")
+class ActivityPatternValidationRules extends gw.rules.RuleSetBase {
+  static function invoke(bean : entity.ActivityPattern) : gw.rules.ExecutionSession {
+    return invoke( new gw.rules.ExecutionSession(), bean )
+  }
+
+  static function invoke(exeSession : gw.rules.ExecutionSession, bean : entity.ActivityPattern) : gw.rules.ExecutionSession {
+    return _invoke( exeSession, bean, "ActivityPatternValidationRules", ActivityPatternValidationRules )
+  }
+}

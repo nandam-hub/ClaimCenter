@@ -1,0 +1,48 @@
+// The Widgets in the claim printout screen are pretty hardcoded to not allow other widgets or customization
+// But they use other formal widgets as their guts. Since folks want these styled differently on the print page,
+// We have to use the dreaded !important here or make a bunch of codegen changes
+#ClaimPrintout-ClaimPrintoutScreen {
+  .gw-VerbatimWidget--inner {
+    font-weight: normal !important;
+  }
+
+  .gw-DetailViewWidget {
+    margin: 0 !important;
+    padding: 0 !important;
+
+    .gw-InputColumnWidget {
+      margin: 0 !important;
+      padding: 0 !important;
+      position: relative !important;
+
+      .gw-PrintChoiceWidget {
+        background-color: $gw-app--panels--bg !important;
+        margin: $gw-app--SPACING-rem-M !important;
+
+        .gw-label {
+          display: block !important;
+          width: auto !important;
+          min-width: 100px !important;
+          max-width: none !important;
+        }
+
+        .gw-InputGroupWidget {
+          background-color: $gw-app--bg !important;
+          color: $gw-app--col !important;
+
+          .gw-InputGroup--header--label {
+            font-weight: normal !important;
+          }
+
+          .gw-emptyLabel {
+            display: none !important;
+          }
+        }
+      }
+
+      .gw-PrintOutButtonWidget, .gw-NonDownloadPrintOutButtonWidget {
+        @extend .gw-ToolbarButtonWidget;
+      }
+    }
+  }
+}

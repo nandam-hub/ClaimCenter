@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<plugin
+  interface="IApdRepositoryPlugin"
+  name="IApdCCPIRepositoryPlugin">
+  <plugin-java
+    disabled="${apd.ccpi.service.disabled:true}"
+    javaclass="com.guidewire.cloud.apd.ApdGitRepositoryImpl">
+    <param
+      name="gitUrl"
+      value="${apd.ccpi.codegen.git.url}"/>
+    <param
+      name="gitHttpsUsername"
+      value="${apd.ccpi.codegen.git.https.username}"/>
+    <param
+      name="gitHttpsPassword"
+      value="${apd.ccpi.codegen.git.https.password}"/>
+    <param
+      name="cloneDirectoryPath"
+      value="${apd.ccpi.codegen.cloneDir:/tmp/gw/apd_ccpi}"/>
+    <param
+      name="branchName"
+      value="${apd.ccpi.codegen.git.branch}"/>
+    <param
+      name="disableCommitHash"
+      value="true"/>
+  </plugin-java>
+</plugin>

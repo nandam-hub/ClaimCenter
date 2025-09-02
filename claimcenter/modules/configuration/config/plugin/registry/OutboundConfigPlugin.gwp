@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<plugin
+  interface="IStartablePlugin"
+  name="OutboundConfigPlugin">
+  <plugin-gosu
+    gosuclass="gw.plugin.outboundfile.ManagedS3OutboundConfigPlugin"
+    additionalInterfaces="gw.plugin.outboundfile.IManagedS3OutboundConfig">
+    <param
+      name="externalConfigFileLocation"
+      value="/tmp/guidewire/outbound/config/OutboundFileConfiguration.xml"/>
+    <param
+      name="updateExisting"
+      value="false"/>
+    <param
+      name="s3BucketName"
+      value="${PLUGIN_S3_BUCKET_NAME}"/>
+    <param
+      name="s3OutputPrefix"
+      value="${PLUGIN_OUTBOUND_S3_OUTPUT_PREFIX}"/>
+    <param
+      name="temporaryDir"
+      value="${PLUGIN_OUTBOUND_TEMP_DIR}"/>
+  </plugin-gosu>
+</plugin>

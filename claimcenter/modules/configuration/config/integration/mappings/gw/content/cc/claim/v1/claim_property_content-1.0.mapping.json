@@ -1,0 +1,25 @@
+{
+  "schemaName": "gw.content.cc.claim.v1.claim_property_content-1.0",
+  "combine": [
+    "gw.content.cc.claim.v1.claim_content-1.0",
+    "gw.core.cc.claim.v1.claim_property_core-1.0"
+  ],
+  "mappers": {
+    "DwellingIncident": {
+      "properties": {
+        "incidentOwner": {
+          "path": "DwellingIncident.incidentowner?.RestV1_getMatchingClaimContact(DwellingIncident.Claim)",
+          "mapper": "#/mappers/ClaimContactReference"
+        }
+      }
+    },
+    "LivingExpensesIncident": {
+      "properties": {
+        "incidentOwner": {
+          "path": "LivingExpensesIncident.incidentowner?.RestV1_getMatchingClaimContact(LivingExpensesIncident.Claim)",
+          "mapper": "#/mappers/ClaimContactReference"
+        }
+      }
+    }
+  }
+}

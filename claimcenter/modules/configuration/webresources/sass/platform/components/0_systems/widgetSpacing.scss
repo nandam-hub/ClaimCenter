@@ -1,0 +1,120 @@
+// =====================================
+// == WIDGET
+// =====================================
+@mixin gw-widgetOuterSpacing($top: $gw-app--widget-spacing--outer--top-rem, $right: $gw-app--widget-spacing--outer--right-rem, $bottom: $gw-app--widget-spacing--outer--bottom-rem, $left: $gw-app--widget-spacing--outer--left-rem) {
+  @include gw-outer-spacing($top, $right, $bottom, $left);
+
+  &.gw-outer--spacing--large {
+    @include gw-outer-spacing($gw-app--widget-spacing--LARGE--outer--top-rem, $gw-app--widget-spacing--LARGE--outer--right-rem, $gw-app--widget-spacing--LARGE--outer--bottom-rem, $gw-app--widget-spacing--LARGE--outer--left-rem)
+  }
+
+  &.gw-outer--spacing--none {
+    @include gw-outer-spacing(0, 0, 0, 0);
+  }
+
+  &.gw-left-indent {
+    @if ($left == null) {
+      $left: 0;
+    }
+    margin-left: $left + $gw-app--spacing--left-indent;
+
+    &.gw-outer--spacing--large {
+      margin-left: $gw-app--widget-spacing--LARGE--outer--left-rem + $gw-app--spacing--left-indent;
+    }
+
+    &.gw-outer--spacing--none {
+      margin-left: $gw-app--spacing--left-indent;
+    }
+  }
+}
+
+@mixin gw-widgetInnerSpacing() {
+  @include gw-inner-spacing($gw-app--widget-spacing--inner--top-rem, $gw-app--widget-spacing--inner--right-rem, $gw-app--widget-spacing--inner--bottom-rem, $gw-app--widget-spacing--inner--left-rem);
+
+  &.gw-inner--spacing--large {
+    @include gw-inner-spacing($gw-app--widget-spacing--LARGE--inner--top-rem, $gw-app--widget-spacing--LARGE--inner--right-rem, $gw-app--widget-spacing--LARGE--inner--bottom-rem, $gw-app--widget-spacing--LARGE--inner--left-rem);
+  }
+
+  &.gw-inner--spacing--none {
+    @include gw-inner-spacing(0, 0, 0, 0);
+  }
+}
+
+// =====================================
+// == PANEL
+// =====================================
+@mixin gw-panelOuterSpacing() {
+  @include gw-outer-spacing($gw-app--panel-spacing--outer--top-rem, $gw-app--panel-spacing--outer--right-rem, $gw-app--panel-spacing--outer--bottom-rem, $gw-app--panel-spacing--outer--left-rem);
+
+  &.gw-outer--spacing--large {
+    @include gw-outer-spacing($gw-app--panel-spacing--LARGE--outer--top-rem, $gw-app--panel-spacing--LARGE--outer--right-rem, $gw-app--panel-spacing--LARGE--outer--bottom-rem, $gw-app--panel-spacing--LARGE--outer--left-rem);
+  }
+
+  &.gw-outer--spacing--none {
+    @include gw-outer-spacing(0, 0, 0, 0);
+  }
+
+  &.gw-left-indent {
+    margin-left: $gw-app--panel-spacing--outer--left-rem + $gw-app--spacing--left-indent;
+
+    &.gw-outer--spacing--large {
+      margin-left: $gw-app--panel-spacing--LARGE--outer--left-rem + $gw-app--spacing--left-indent;
+    }
+
+    &.gw-outer--spacing--none {
+      margin-left: $gw-app--spacing--left-indent;
+    }
+  }
+}
+
+@mixin gw-panelInnerSpacing() {
+  @include gw-inner-spacing($gw-app--panel-spacing--inner--top-rem, $gw-app--panel-spacing--inner--right-rem, $gw-app--panel-spacing--inner--bottom-rem, $gw-app--panel-spacing--inner--left-rem);
+
+  &.gw-inner--spacing--large {
+    @include gw-inner-spacing($gw-app--panel-spacing--LARGE--inner--top-rem, $gw-app--panel-spacing--LARGE--inner--right-rem, $gw-app--panel-spacing--LARGE--inner--bottom-rem, $gw-app--panel-spacing--LARGE--inner--left-rem);
+  }
+
+  &.gw-inner--spacing--none {
+    @include gw-inner-spacing(0, 0, 0, 0);
+  }
+}
+
+// =====================================
+// == LAYOUT PANEL
+// =====================================
+@mixin gw-layoutPanelOuterSpacing() {
+  @include gw-outer-spacing($gw-app--layout-panel-spacing--outer--top-rem, $gw-app--layout-panel-spacing--outer--right-rem, $gw-app--layout-panel-spacing--outer--bottom-rem, $gw-app--layout-panel-spacing--outer--left-rem);
+
+  &.gw-outer--spacing--large {
+    @include gw-outer-spacing($gw-app--layout-panel-spacing--LARGE--outer--top-rem, $gw-app--layout-panel-spacing--LARGE--outer--right-rem, $gw-app--layout-panel-spacing--LARGE--outer--bottom-rem, $gw-app--layout-panel-spacing--LARGE--outer--left-rem);
+  }
+
+  &.gw-outer--spacing--none {
+    @include gw-outer-spacing(0, 0, 0, 0);
+  }
+
+  &.gw-left-indent {
+    margin-left: $gw-app--layout-panel-spacing--outer--left-rem + $gw-app--spacing--left-indent;
+
+    &.gw-outer--spacing--large {
+      margin-left: $gw-app--layout-panel-spacing--LARGE--outer--left-rem + $gw-app--spacing--left-indent;
+    }
+
+    &.gw-outer--spacing--none {
+      margin-left: $gw-app--spacing--left-indent;
+    }
+  }
+}
+
+@mixin gw-layoutPanelInnerSpacing($top: $gw-app--layout-panel-spacing--inner--top-rem, $right: $gw-app--layout-panel-spacing--inner--right-rem, $bottom: $gw-app--layout-panel-spacing--inner--bottom-rem, $left: $gw-app--layout-panel-spacing--inner--left-rem) {
+  @include gw-inner-spacing($top, $right, $bottom, $left);
+
+  &.gw-inner--spacing--large {
+    @include gw-inner-spacing($gw-app--layout-panel-spacing--LARGE--inner--top-rem, $gw-app--layout-panel-spacing--LARGE--inner--right-rem, $gw-app--layout-panel-spacing--LARGE--inner--bottom-rem, $gw-app--layout-panel-spacing--LARGE--inner--left-rem);
+  }
+
+  &.gw-inner--spacing--none {
+    @include gw-inner-spacing(0, 0, 0, 0);
+  }
+}
+

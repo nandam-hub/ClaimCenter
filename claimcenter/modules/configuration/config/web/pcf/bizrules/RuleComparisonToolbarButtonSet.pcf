@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <ToolbarButtonSet
+    desc="Rule Comparison Popup Toolbar Buttons"
+    id="RuleComparisonToolbarButtonSet">
+    <Require
+      name="importEntry"
+      type="RuleImportTaskEntry"/>
+    <Require
+      name="importHelper"
+      type="gw.bizrules.pcf.RuleExportImportPageHelper"/>
+    <Require
+      name="navSupport"
+      type="gw.bizrules.pcf.BizRulesPageNavigationSupport"/>
+    <ToolbarButton
+      action="importHelper.resolveConflict(importEntry, TC_EXISTING); CurrentLocation.cancel()"
+      desc="Button that chooses existing rule version to resolve conflict with importing version."
+      id="ChooseExisting"
+      label="DisplayKey.get('BizRules.Import.Comparison.KeepExisting')"
+      tooltip="DisplayKey.get('BizRules.Import.Comparison.KeepExistingTooltip')"
+      visible="importEntry.Status.Conflict"/>
+    <ToolbarButton
+      action="importHelper.resolveConflict(importEntry, TC_IMPORTING); CurrentLocation.cancel()"
+      desc="Button that chooses importing rule version to resolve conflict with existing version."
+      id="ChooseImporting"
+      label="DisplayKey.get('BizRules.Import.Comparison.ReplaceWithNew')"
+      tooltip="DisplayKey.get('BizRules.Import.Comparison.ReplaceWithNewTooltip')"
+      visible="importEntry.Status.Conflict"/>
+    <ToolbarButton
+      available="not importEntry.ExistingVersionDraft"
+      desc="Dropdown menu that goes to an edit popup that creates a new draft rule version based on either the existing or importing version."
+      id="EditNewMerge"
+      label="DisplayKey.get('BizRules.Import.Comparison.Edit')"
+      tooltip="DisplayKey.get('BizRules.Import.Comparison.EditTooltip')"
+      visible="importEntry.Status.Conflict and gw.bizrules.pcf.RulePermissionUIHelper.canEditRule(importEntry.getExistingVersion())">
+      <MenuItem
+        action="navSupport.pushRuleComparisonEditPopup(importEntry, importHelper, TC_EXISTING)"
+        desc="Menu item that goes to an edit popup that creates a merge rule version based on the existing version."
+        id="Existing"
+        label="DisplayKey.get('BizRules.Import.Comparison.Edit.Existing')"
+        tooltip="DisplayKey.get('BizRules.Import.Comparison.Edit.ExistingTooltip')"
+        visible="importEntry.Status != TC_EDITEDRESOLVEDCONFLICT"/>
+      <MenuItem
+        action="navSupport.pushRuleComparisonEditPopup(importEntry, importHelper, TC_IMPORTING)"
+        desc="Menu item that goes to an edit popup that creates a merge rule version based on the importing version."
+        id="Importing"
+        label="DisplayKey.get('BizRules.Import.Comparison.Edit.Importing')"
+        tooltip="DisplayKey.get('BizRules.Import.Comparison.Edit.ImportingTooltip')"
+        visible="importEntry.Status != TC_EDITEDRESOLVEDCONFLICT"/>
+    </ToolbarButton>
+  </ToolbarButtonSet>
+</PCF>

@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    afterCommit="TopLocation.startEditing()"
+    id="APDCodeGeneratedPopup"
+    title="DisplayKey.get(&quot;Web.APDProduct.GenerateSourceCode.Success&quot;)">
+    <LocationEntryPoint
+      signature="APDCodeGeneratedPopup(helpers: List&lt;gw.apd.model.generate.GenerationHelper&gt;, branchSuffix: String)"/>
+    <Variable
+      name="helpers"
+      type="List&lt;gw.apd.model.generate.GenerationHelper&gt;"/>
+    <Variable
+      name="branchSuffix"
+      type="java.lang.String"/>
+    <Screen>
+      <Verbatim
+        id="APDCCCodeGeneratedSuccessDetails"
+        label="helpers.stream().allMatch(\h -&gt; h.IsDeployed) ? DisplayKey.get(&quot;Web.APDProduct.GenerateSourceCode.SuccessCloudDetails&quot;) : DisplayKey.get(&quot;Web.APDProduct.GenerateSourceCode.SuccessDetails&quot;)"/>
+      <PanelIterator
+        elementName="helper"
+        value="helpers"
+        valueType="java.util.List&lt;gw.apd.model.generate.GenerationHelper&gt;">
+        <PanelSet>
+          <DetailViewPanel>
+            <InputColumn>
+              <TextInput
+                id="ApdGenerationSuccessBranch"
+                label="DisplayKey.get(&quot;Web.APDProduct.GenerateSourceCode.BranchNameForGenerator&quot;, helper.GeneratorName)"
+                value="helper.getBranchName(branchSuffix)"
+                visible="helper.IsGenerated and helper.IsDeployed"/>
+            </InputColumn>
+          </DetailViewPanel>
+        </PanelSet>
+        <PanelSet>
+          <DetailViewPanel>
+            <InputColumn>
+              <TextInput
+                id="ApdGenerationSuccess"
+                label="helper.GeneratorName"
+                value="null"
+                visible="helper.IsGenerated and !helper.IsDeployed"/>
+            </InputColumn>
+          </DetailViewPanel>
+        </PanelSet>
+      </PanelIterator>
+    </Screen>
+  </Popup>
+</PCF>

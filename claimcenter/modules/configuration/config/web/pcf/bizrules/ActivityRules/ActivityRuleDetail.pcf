@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    afterCancel="stateHolder.afterCancel()"
+    beforeCommit="stateHolder.beforeUpdate()"
+    canEdit="true"
+    id="ActivityRuleDetail"
+    parent="ActivityRules()"
+    infoBar="RuleExecutionInfoBar(stateHolder.Head, stateHolder.ExecutionStatus, stateHolder.NavigationSupport.VersionController)"
+    showUpLink="true"
+    title="DisplayKey.get('Web.BizRules.Rule.Title', version.Rule.Name ?: '')">
+    <LocationEntryPoint
+      signature="ActivityRuleDetail(context: gw.bizrules.ActivityRules.ActivityRulesNavigationContext, version: RuleVersion)"/>
+    <Variable
+      name="context"
+      type="gw.bizrules.ActivityRules.ActivityRulesNavigationContext"/>
+    <Variable
+      name="version"
+      type="RuleVersion"/>
+    <Variable
+      initialValue="gw.cc.bizrules.CCRulesUtil.VersionController.getRuleHead(version)"
+      name="head"
+      type="RuleHead"/>
+    <Variable
+      initialValue="new gw.bizrules.CCRulesDetailsStateHolder(context, head, CurrentLocation)"
+      name="stateHolder"
+      type="gw.bizrules.CCRulesDetailsStateHolder"/>
+    <ScreenRef
+      def="RuleDetailScreen(context, stateHolder, head)"/>
+  </Page>
+</PCF>

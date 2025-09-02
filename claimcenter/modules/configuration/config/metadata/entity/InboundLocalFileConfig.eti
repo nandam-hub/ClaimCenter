@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<subtype
+  platform="true"
+  xmlns="http://guidewire.com/datamodel"
+  entity="InboundLocalFileConfig"
+  supertype="InboundFileConfig"
+  final="true">
+  <column
+    desc="The full path name of the file that was loaded from the file system."
+    name="InputDirectory"
+    nullok="false"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="512"/>
+  </column>
+  <column
+    desc="The full path name of the archived file."
+    name="ArchiveDirectory"
+    nullok="false"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="512"/>
+  </column>
+  <index
+    desc="Unique index for the InputDirectory"
+    name="inbndsrcindirindx"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="InputDirectory"/>
+  </index>
+  <implementsInterface
+    iface="com.guidewire.inboundfile.config.InboundFileConfigMethods"
+    impl="com.guidewire.inboundfile.config.InboundFileLocalConfigImpl"/>
+</subtype>

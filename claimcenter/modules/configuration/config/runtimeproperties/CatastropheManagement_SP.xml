@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<Properties xmlns="http://guidewire.com/psc/properties">
+  <Property>
+    <Group>catastrophe_sp</Group>
+    <Name>Enabled</Name>
+    <Description>Runtime property to indicate whether the proactive catastrophe management feature has been enabled</Description>
+    <Value>true</Value>
+  </Property>
+</Properties>

@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="InboundRecordDV"
+    mode="InboundRecord">
+    <Require
+      name="record"
+      type="KeyableBean"/>
+    <InputColumn>
+      <TextInput
+        id="InboundRecordDVLineNumber"
+        label="DisplayKey.get(&quot;InboundFile.LineNumber&quot;)"
+        value="(record as InboundRecord).LineNumber"
+        valueType="int"/>
+      <TextInput
+        id="InboundRecordDVHandlerName"
+        label="DisplayKey.get(&quot;InboundFile.Config&quot;)"
+        value="(record as InboundRecord).Config"/>
+      <TypeKeyInput
+        id="InboundRecordDVStatus"
+        label="DisplayKey.get(&quot;InboundFile.RecordStatus&quot;)"
+        value="(record as InboundRecord).Status"
+        valueType="InboundRecordStatus"/>
+      <TextInput
+        id="InboundRecordDVLastModifiedUser"
+        label="DisplayKey.get(&quot;InboundFile.LastModifiedUser&quot;)"
+        value="(record as InboundRecord).UpdateUser.DisplayName"/>
+      <TextInput
+        id="InboundRecordDVErrorMessage"
+        label="DisplayKey.get(&quot;InboundFile.ErrorMessage&quot;)"
+        value="(record as InboundRecord).ErrorMessage"/>
+      <TextAreaInput
+        editable="gw.api.inboundfile.InboundFileHelper.canEdit(record)"
+        id="InboundRecordDVContent"
+        label="DisplayKey.get(&quot;InboundFile.Content&quot;)"
+        numRows="20"
+        value="(record as InboundRecord).Content"
+        visible="gw.api.inboundfile.InboundFileHelper.canView(record)"/>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

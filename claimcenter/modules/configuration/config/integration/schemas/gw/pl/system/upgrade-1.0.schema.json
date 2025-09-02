@@ -1,0 +1,58 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "definitions": {
+    "DDLUpgradeStep": {
+      "type": "object",
+      "description": "DDL upgrade step type",
+      "properties": {
+        "execOrder": {
+          "type": "string"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "tableName": {
+          "type": "string"
+        },
+        "columnName": {
+          "type": "string"
+        },
+        "sqls": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "finalize": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "postUpgrade": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "error": {
+          "type": "string"
+        }
+      }
+    },
+    "ProposedUpgradeReport": {
+      "type": "object",
+      "properties": {
+        "ddlSteps": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DDLUpgradeStep"
+          }
+        }
+      }
+    }
+  }
+}

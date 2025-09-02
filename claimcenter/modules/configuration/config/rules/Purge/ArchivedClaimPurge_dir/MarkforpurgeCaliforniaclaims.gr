@@ -1,0 +1,25 @@
+package rules.Purge.ArchivedClaimPurge_dir
+
+uses gw.api.util.DateUtil
+
+@gw.rules.RuleDisabled
+@gw.rules.RuleName("Mark for purge - California claims")
+internal class MarkforpurgeCaliforniaclaims {
+  static function doCondition(claimInfo : ClaimInfo) : boolean {
+/*start00rule*/
+/** There are filters that are already applied in order to select claims before they can be mark PurgeReady 1. ArchivedEntityPurgeDate <= Today 2. isDoNotDestroy = false 3. claim status = archived
+ Below are the additional filters(Sample Rules) that can be applied on the top of 3 explained above.*/
+    return claimInfo.JurisdictionState == Jurisdiction.TC_CA
+/*end00rule*/
+  }
+
+  static function doAction(claimInfo : ClaimInfo, actions : gw.rules.Action) {
+/*start00rule*/
+    var reasonToPurge = "Claim is over 7 years old and in CA jurisdiction"
+
+    if (DateUtil.addYears(claimInfo.getLossDate(), 7) <= DateUtil.currentDate()) {
+      claimInfo.optInArchivedClaimToMarkPurgeReady(reasonToPurge)
+    }
+/*end00rule*/
+  }
+}

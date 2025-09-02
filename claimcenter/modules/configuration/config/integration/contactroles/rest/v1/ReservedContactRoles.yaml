@@ -1,0 +1,50 @@
+reservedRoles:
+  BaggageIncident:
+    roles:
+      - "incidentowner"
+  Claim:
+    roles:
+      - "reporter"
+      - "maincontact"
+      - "servicerequestparticipant"
+      - "servicerequestspecialist"
+      - "witness"
+  DwellingIncident:
+    roles:
+    - "incidentowner"
+  Exposure:
+    roles:
+      - "claimant"
+  FixedPropertyIncident:
+    roles:
+      - "incidentowner"
+  OtherStructureIncident:
+    roles:
+      - "incidentowner"
+  Policy:
+    roles:
+      - "agent"
+      - "coveredparty"
+      - "excludedparty"
+      - "insured"
+  InjuryIncident:
+    roles:
+      - "injured"
+      - "PrimaryDoctor"
+  LivingExpensesIncident:
+    roles:
+    - "incidentowner"
+  PropertyContentsIncident:
+    roles:
+      - "incidentowner"
+  TripIncident:
+    roles:
+      - "incidentowner"
+  VehicleIncident:
+    roles:
+      - "driver"
+      - "incidentowner"
+      - "passenger"
+  GeneralIncident:
+    roles:
+      - "incidentowner"

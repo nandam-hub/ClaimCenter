@@ -1,0 +1,118 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="Damage Points On Vehicle"
+  name="VehicleDamagePoints">
+  <typecode
+    code="fl_bumper"
+    desc="Front Left Bumper And Light Cluster"
+    name="Front Left Bumper And Light Cluster"/>
+  <typecode
+    code="f_bumper"
+    desc="Front Bumper And Grill"
+    name="Front Bumper And Grill"/>
+  <typecode
+    code="fr_bumper"
+    desc="Front Right Bumper And Light Cluster"
+    name="Front Right Bumper And Light Cluster"/>
+  <typecode
+    code="fl_wing"
+    desc="Front Left Wing And Wheel Area"
+    name="Front Left Wing And Wheel Area"/>
+  <typecode
+    code="bonnet"
+    desc="Bonnet"
+    name="Bonnet"/>
+  <typecode
+    code="fr_wing"
+    desc="Front Right Wing And Wheel Area"
+    name="Front Right Wing And Wheel Area"/>
+  <typecode
+    code="fl_door"
+    desc="Front Left Door"
+    name="Front Left Door"/>
+  <typecode
+    code="roof"
+    desc="Roof"
+    name="Roof"/>
+  <typecode
+    code="fr_door"
+    desc="Front Right Door"
+    name="Front Right Door"/>
+  <typecode
+    code="bl_door"
+    desc="Back Left Door"
+    name="Back Left Door"/>
+  <typecode
+    code="br_door"
+    desc="Back Right Door"
+    name="Back Right Door"/>
+  <typecode
+    code="bl_wing"
+    desc="Rear Left Wing Wheel Area"
+    name="Rear Left Wing Wheel Area"/>
+  <typecode
+    code="boot"
+    desc="Boot"
+    name="Boot"/>
+  <typecode
+    code="br_wing"
+    desc="Rear Right Wing Wheel Area"
+    name="Rear Right Wing Wheel Area"/>
+  <typecode
+    code="bl_bumper"
+    desc="Rear Right Bumper And Light Cluster"
+    name="Rear Left Bumper And Light Cluster"/>
+  <typecode
+    code="b_bumper"
+    desc="Rear Bumper"
+    name="Rear Bumper"/>
+  <typecode
+    code="br_bumper"
+    desc="Rear Right Bumper And Light Cluster"
+    name="Rear Right Bumper And Light Cluster"/>
+  <typecode
+    code="FIRE"
+    desc="Fire"
+    name="Fire"/>
+  <typecode
+    code="INTR"
+    desc="Interior"
+    name="Interior"/>
+  <typecode
+    code="MB10"
+    desc="Left Side, Front End"
+    name="Left Side, Front End"/>
+  <typecode
+    code="MB11"
+    desc="Right Side, Front End"
+    name="Right Side, Front End"/>
+  <typecode
+    code="MB20"
+    desc="Left Side, Center (Engine, Fuel Tank etc.)"
+    name="Left Side, Center (Engine, Fuel Tank etc.)"/>
+  <typecode
+    code="MB21"
+    desc="Right Side,  Center (Engine, Fuel Tank etc.)"
+    name="Right Side,  Center (Engine, Fuel Tank etc.)"/>
+  <typecode
+    code="MB30"
+    desc="Left Side, Rear End"
+    name="Left Side, Rear End"/>
+  <typecode
+    code="MB31"
+    desc="Right Side, Rear End"
+    name="Right Side, Rear End"/>
+  <typecode
+    code="ROLL"
+    desc="Vehicle Rollover"
+    name="Vehicle Rollover"/>
+  <typecode
+    code="UNDR"
+    desc="Under Carriage Or Chassis"
+    name="Under Carriage Or Chassis"/>
+  <typecode
+    code="WATR"
+    desc="Water"
+    name="Water"/>
+</typelist>

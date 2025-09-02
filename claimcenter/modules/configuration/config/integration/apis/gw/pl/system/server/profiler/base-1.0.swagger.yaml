@@ -1,0 +1,32 @@
+swagger: '2.0'
+x-gw-combine:
+- gw.pl.framework.paging_definitions-1.0
+- gw.pl.framework.query_definitions-1.0
+parameters:
+  entrypoint:
+    name: entrypoint
+    in: path
+    description: Entry point code
+    required: true
+    type: string
+  occurrenceId:
+    name: occurrenceId
+    in: path
+    description: Occurrence id
+    required: true
+    type: string
+  entrypointCode:
+    name: entrypoint
+    in: query
+    description: Entry point code
+    type: string
+  profilingEnabled:
+    name: profilingEnabled
+    in: query
+    description: Filter results by entry points whose profiling is enabled or disabled
+    type: boolean
+  force:
+    name: force
+    in: query
+    description: Attempt force deletion of ongoing profiling history occurrences
+    type: boolean

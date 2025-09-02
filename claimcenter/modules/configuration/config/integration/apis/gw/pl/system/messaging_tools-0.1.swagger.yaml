@@ -1,0 +1,246 @@
+swagger: '2.0'
+info:
+  description: |
+               Administrative API for messages.
+  version: '0.1'
+  title: "Messaging Tools API"
+basePath: /system/v0/messagingtools
+x-gw-permissions:
+- integadmin
+x-gw-runlevel: maintenance
+x-gw-schema-import:
+  messaging: gw.pl.system.messaging_tools-0.1
+x-gw-apihandlers:
+- gw.api.rest.pl.system.v0.MessagingToolsAPIHandler
+paths:
+  /destinations/{destinationId}/suspend:
+    post:
+      summary: "Suspend a destination"
+      description: ''
+      operationId: suspendDestination
+      parameters:
+      - $ref: "#/parameters/destinationId"
+      - name: direction
+        in: query
+        required: false
+        type: string # TODO - AHK - REST - Technically a MessageProcessingDirection
+      produces:
+      - text/plain
+      responses:
+        '200':
+          description: "successful operation"
+          schema:
+            type: string
+  /destinations/{destinationId}/resume:
+    post:
+      summary: "Resume a destination"
+      description: ''
+      operationId: resumeDestination
+      parameters:
+      - $ref: "#/parameters/destinationId"
+      - name: direction
+        in: query
+        required: false
+        type: string # TODO - AHK - REST - Technically a MessageProcessingDirection
+      produces:
+      - text/plain
+      responses:
+        '200':
+          description: "successful operation"
+          schema:
+            type: string
+  /destinations/{destinationId}/configuration:
+    get:
+      summary: "Get the configuration for a destination"
+      description: ''
+      operationId: getConfiguration
+      parameters:
+      - $ref: "#/parameters/destinationId"
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: "successful operation"
+          schema:
+            $ref: "messaging#/definitions/DestinationConfig"
+    patch:
+      summary: "Get the configuration for a destination"
+      description: ''
+      operationId: setConfiguration
+      parameters:
+      - $ref: "#/parameters/destinationId"
+      - name: timeToWait
+        in: query
+        required: true
+        type: integer
+        format: int32
+        minimum: 0
+        maximum: 3600 # TODO - AHK - REST
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: "messaging#/definitions/DestinationConfig"
+      consumes:
+      - application/json
+      responses:
+        '204':
+          description: "successful operation"
+  /destinations/{destinationId}/statistics:
+    get:
+      summary: "Get the configuration for a destination"
+      description: ''
+      operationId: getStatistics
+      parameters:
+      - $ref: "#/parameters/destinationId"
+      - name: safeOrderedObjectId
+        type: string
+        required: false
+        in: query
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: "successful operation"
+          schema:
+            $ref: "messaging#/definitions/DestinationStatistics"
+  /destinations/{destinationId}/retry:
+    post:
+      summary: "Retry messages for a destination that had errors"
+      description: ''
+      operationId: retryMessages
+      parameters:
+      - $ref: "#/parameters/destinationId"
+      - name: retryLimit
+        in: query
+        required: false
+        type: integer
+        format: int32
+      - name: category
+        in: query
+        required: false
+        type: string
+        x-gw-type: typekey.ErrorCategory
+      produces:
+      - text/plain
+      responses:
+        '200':
+          description: "successful operation"
+          schema:
+            type: string # TODO - AHK - REST - Should this really return a boolean on "successful" completion?
+  /destinations/{destinationId}/status:
+    get:
+      summary: "Retry messages for a destination that had errors"
+      description: ''
+      operationId: getDestinationStatus
+      parameters:
+      - $ref: "#/parameters/destinationId"
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: "successful operation"
+          schema:
+            $ref: "messaging#/definitions/DestinationStatus"
+  /messages/{messageId}/ack:
+    post:
+      summary: "Acknowledge a message"
+      description: ''
+      operationId: ackMessage
+      parameters:
+      - $ref: "#/parameters/messageId"
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: "messaging#/definitions/Acknowledgement"
+      consumes:
+      - application/json
+      produces:
+      - text/plain
+      responses:
+        '200':
+          description: "successful operation"
+          schema:
+            type: string # TODO - AHK - REST - Should this really return a boolean on "successful" completion?
+  /messages/{messageId}/retry:
+    post:
+      summary: "Retry a message"
+      description: ''
+      operationId: retryMessage
+      parameters:
+      - $ref: "#/parameters/messageId"
+      produces:
+      - text/plain
+      responses:
+        '200':
+          description: "successful operation"
+          schema:
+            type: string # TODO - AHK - REST - Should this really return a boolean on "successful" completion?
+  /messages/{messageId}/skip:
+    post:
+      summary: "Skip a message"
+      description: ''
+      operationId: skipMessage
+      parameters:
+      - $ref: "#/parameters/messageId"
+      produces:
+      - text/plain
+      responses:
+        '200':
+          description: "successful operation"
+          schema:
+            type: string # TODO - AHK - REST - Should this really return a boolean on "successful" completion?
+  /messages/search:
+    get:
+      summary: "Find messages by senderRefId and, optionally, destinationId"
+      description: ''
+      operationId: searchMessages
+      parameters:
+      - name: destinationId
+        in: query
+        required: false
+        type: integer
+        format: int32
+      - name: senderRefId
+        in: query
+        required: true
+        type: string
+      produces:
+      - text/plain
+      responses:
+        '200':
+          description: "successful operation"
+          schema:
+            type: string # TODO - AHK - REST - This should probably be a more complex response
+  /messages/purge:
+    post:
+      summary: "Purges complected messages after a certain date"
+      description: ''
+      operationId: purgeMessages
+      parameters:
+      - name: cutoffDate
+        in: query
+        required: true
+        type: string
+        format: date-time
+      responses:
+        '204':
+          description: "successful operation"
+parameters:
+  destinationId:
+    name: destinationId
+    in: path
+    description: "ID of the destination"
+    required: true
+    # TODO - AHK - REST - Min of 0?
+    type: integer
+    format: int32
+  messageId:
+    name: messageId
+    in: path
+    description: "ID of the message"
+    # TODO - AHK - REST - Min of 0?
+    required: true
+    type: integer
+    format: int64

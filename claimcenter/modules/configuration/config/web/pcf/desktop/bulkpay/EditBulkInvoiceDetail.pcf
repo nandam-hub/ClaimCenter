@@ -1,0 +1,120 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    afterCancel="bulkPayHelper.flushCache()"
+    afterCommit="bulkPayHelper.flushCache()"
+    beforeCommit="bulkInvoice.verifyChangesAllowed()"
+    beforeValidate="bulkPayHelper.prepBulkInvoiceForSave(bulkInvoice, CostType.TC_UNSPECIFIED, CostCategory.TC_UNSPECIFIED); paymentMethodHelper.cleanUpBeforeCommit()"
+    canEdit="perm.BulkInvoice.edit"
+    canVisit="perm.BulkInvoice.view"
+    id="EditBulkInvoiceDetail"
+    parent="BulkPay()"
+    showUpLink="true"
+    startEditing="showAddressFields.Value = paymentMethodHelper.setupMailingAddress() "
+    title="DisplayKey.get(&quot;Web.Financials.BulkPay.Invoice.BulkInvoiceDetail&quot;)">
+    <LocationEntryPoint
+      signature="EditBulkInvoiceDetail(bulkInvoice : BulkInvoice)"/>
+    <Variable
+      initialValue="new gw.api.financials.BulkPayHelper()"
+      name="bulkPayHelper"
+      type="gw.api.financials.BulkPayHelper"/>
+    <Variable
+      name="bulkInvoice"
+      type="BulkInvoice"/>
+    <Variable
+      initialValue="bulkInvoice.Payee!=null ? gw.api.contact.ContactSystemUtil.INSTANCE.generateLinkStatus(bulkInvoice.Payee) : null"
+      name="payeeLinkStatus"
+      recalculateOnRefresh="true"
+      type="gw.api.contact.ContactSystemLinkStatus"/>
+    <Variable
+      initialValue="new gw.api.financials.PaymentMethodHelper(bulkInvoice)"
+      name="paymentMethodHelper"
+      type="gw.api.financials.PaymentMethodHelper"/>
+    <Variable
+      name="claimNumberFilter"
+      type="String"/>
+    <Variable
+      initialValue="new org.apache.commons.lang3.mutable.MutableBoolean(bulkInvoice.MailingAddress == null and bulkInvoice.Payee.PrimaryAddress == null) "
+      name="showAddressFields"
+      type="org.apache.commons.lang3.mutable.MutableBoolean"/>
+    <Screen
+      editable="true"
+      id="BulkInvoiceDetailScreen">
+      <Toolbar>
+        <EditButtons
+          editVisible="bulkInvoice.Editable and perm.BulkInvoice.edit"/>
+        <ToolbarButton
+          action="gw.api.financials.BulkInvoiceUIHelper.validateAndSubmit(bulkPayHelper, bulkInvoice)"
+          available="(bulkInvoice.Validateable or bulkInvoice.Submittable) and perm.BulkInvoice.edit"
+          hideIfEditable="true"
+          id="SubmitButton"
+          label="DisplayKey.get(&quot;Web.Financials.BulkPay.Button.Submit&quot;)"/>
+        <ToolbarDivider/>
+        <ToolbarButton
+          action="null"
+          hideIfEditable="true"
+          id="RefreshButton"
+          label="DisplayKey.get(&quot;Web.Financials.BulkPay.Button.Refresh&quot;)"/>
+        <ToolbarButton
+          action="gw.api.financials.BulkInvoiceUIHelper.retryProcessing(bulkInvoice)"
+          id="RetryButton"
+          label="DisplayKey.get(&quot;Web.Financials.BulkPay.Invoice.RetryProcessing&quot;)"
+          visible="bulkInvoice.FailedOperation != null"/>
+      </Toolbar>
+      <AlertBar
+        id="errorDuringProcessingAlertBar"
+        label="bulkInvoice.FailedOperationMessage"
+        visible="bulkInvoice.FailedOperation != null"/>
+      <PanelRef
+        def="BulkInvoiceDetailDV(bulkInvoice, payeeLinkStatus, paymentMethodHelper, showAddressFields)"/>
+      <PanelRef
+        def="BulkInvoiceItemsLV(bulkInvoice, bulkPayHelper, claimNumberFilter)">
+        <TitleBar title="DisplayKey.get(&quot;Web.Financials.BulkPay.Invoice.InvoiceItems.InvoiceItems.Title&quot;)"/>
+        <Toolbar>
+          <IteratorButtons
+            iterator="BulkInvoiceItemsLV.BulkInvoiceItemsLV"/>
+          <ToolbarDivider/>
+          <ToolbarInput
+            available="true"
+            id="ClaimFilter"
+            editable="not CurrentLocation.InEditMode"
+            label="DisplayKey.get(&quot;Web.Financials.BulkPay.Invoice.InvoiceItems.FilterByClaim&quot;)"
+            requestValidationExpression="gw.api.claim.ClaimNumberSearchUtil.search(VALUE) != null ? null : DisplayKey.get(&quot;Java.ClaimNumberSearchMenuItem.Error&quot;)"
+            value="claimNumberFilter"
+            valueType="String"
+            visible="true">
+            <PickerMenuItem
+              id="ClaimFilterClaimSearchPicker"
+              label="DisplayKey.get(&quot;Web.Financials.BulkPay.Invoice.InvoiceItems.Search&quot;)"
+              action="ClaimSearchPopup.push()"
+              available="perm.Claim.genericviewclaim and perm.System.viewsearch"
+              onPick="claimNumberFilter = (PickedValue as ClaimSearchView).ClaimNumber"/>
+            <MenuItem
+              id="ClaimFilterRecentList"
+              label="DisplayKey.get(&quot;Web.Financials.BulkPay.Invoice.InvoiceItems.RecentClaims&quot;)">
+              <MenuItemIterator
+                elementName="recentClaim"
+                id="RecentClaimIterator"
+                value="gw.api.claim.ClaimUtil.getRecentlyViewedClaims()"
+                valueType="entity.ClaimRecentView[]">
+                <MenuItem
+                  action="claimNumberFilter = recentClaim.Claim.ClaimNumber"
+                  id="RecentClaimNumber"
+                  label="recentClaim.DisplayName"/>
+              </MenuItemIterator>
+            </MenuItem>
+            <MenuItem
+              id="ClearClaimFilter"
+              visible="gw.util.GosuStringUtil.isNotBlank(claimNumberFilter)"
+              label="DisplayKey.get(&quot;Web.Financials.BulkPay.Invoice.InvoiceItems.ClearClaimFilter&quot;)"
+              action="claimNumberFilter = null"/>
+            <PostOnChange
+              deferUpdate="false"/>
+          </ToolbarInput>
+        </Toolbar>
+      </PanelRef>
+    </Screen>
+  </Page>
+</PCF>

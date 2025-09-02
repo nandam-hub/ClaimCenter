@@ -1,0 +1,157 @@
+/**
+ * Overview of UI Color:
+ * Some widgets have PCF fields that allow a color to be input.
+ * Some allow directly inputting a color value, such as a CSS3 name, or a hex value.
+ * Some require an instance of GwColor. GwColor is a java class with a number of helper methods for adding color.
+ *
+ * Manually adding the color `GwColor.createFromHex(#0000FF)` or `GwColor.createFromCssLevel3Color('blue')`
+ * to a PCF field will cause that field to be blue.
+ *
+ * However, GW Applications have multiple themes. If you plan to support themeing then it is rarely the case that you'd
+ * want to directly specify a color.
+ * Instead, you would want to specify a concept, and then let the themes translate that concept into a color that makes
+ * sense for the context.
+ *
+ * The simplest way to do specify theme safe colors is to use the GwColor static instances;
+ * such as 'GwColor.THEME_NUMBERS_NEGATIVE` or `GwColor.THEME_OUTCOME_POSITIVE`.
+ * Using these instances will cause the widget to have a css class that is then manipulated per theme.
+ * 'positive' might be a very light green color in the 'dark theme', or a darker green in the 'blue theme'.
+ *
+ * Typing `GwColor.T` should provide you with an intellisense dropdown of all the options. But you can also see the
+ * static references directly in GwColor.java.
+ * The GwColor THEME instances are mapped to Sass color values in `platform_colors_themeable_in_pcf.scss`.
+ *
+ * Further, some widgets expose selecting colors as a higher level abstraction, called widgetStyles:
+ * because these widgets need to make use of more than one color, or require colors to interact in specific ways.
+ * These PCF fields take a value of `WidgetStyleEnum`--and you can select things like `WidgetStyleError`
+ * or `WidgetStyleSuccess` from the intellisense dropdown.
+
+ * Many, if not all, colors visible in the application that are not exposed directly in PCFs (like Button colors,
+ * or the color of the left navigation panel, etc) can all be changed and themed directly in Sass files.
+ */
+
+// Helpers
+$gw-app--palette--info: $gw-app--palette--blue !default;
+$gw-app--palette--error: $gw-app--palette--red !default;
+$gw-app--palette--warning: $gw-app--palette--orange !default;
+$gw-app--palette--new: $gw-app--palette--green !default;
+$gw-app--palette--active: $gw-app--palette--blue-active !default;
+$gw-app--palette--inactive: $gw-app--palette--gray-A !default;
+$gw-app--palette--disabled: $gw-app--palette--gray-A !default;
+
+// =====================================
+// == COLORS EXPOSED TO GWCOLOR
+// =====================================
+
+$gw-app--palette--blank: transparent !default;
+$gw-app--palette--urgencynone: $gw-app--palette--new !default;
+$gw-app--palette--urgencylow: $gw-app--palette--yellow !default;
+$gw-app--palette--urgencymedium: $gw-app--palette--orange !default;
+$gw-app--palette--urgencyhigh: $gw-app--palette--orange-dark !default;
+$gw-app--palette--urgencycritical: $gw-app--palette--error !default;
+
+$gw-app--palette--importancenone: $gw-app--palette--urgencynone !default;
+$gw-app--palette--importancelow: $gw-app--palette--urgencylow !default;
+$gw-app--palette--importancemedium: $gw-app--palette--urgencymedium !default;
+$gw-app--palette--importancehigh: $gw-app--palette--urgencyhigh !default;
+$gw-app--palette--importancecritical: $gw-app--palette--urgencycritical !default;
+
+$gw-app--palette--numbersnegative: $gw-app--palette--error!default;
+$gw-app--palette--numbersneutral: $gw-app--palette--inactive !default;
+$gw-app--palette--numberspositive: $gw-app--palette--new !default;
+
+$gw-app--palette--progressunstarted: $gw-app--palette--info !default;
+$gw-app--palette--progressinprogress: $gw-app--palette--warning !default;
+$gw-app--palette--progressblocked: $gw-app--palette--error !default;
+$gw-app--palette--progressoverdue: $gw-app--palette--error !default;
+$gw-app--palette--progresscomplete: $gw-app--palette--new !default;
+$gw-app--palette--progressabandoned: $gw-app--palette--gray-7 !default;
+
+$gw-app--palette--actionsafe: $gw-app--palette--new !default;
+$gw-app--palette--actionneutral: $gw-app--palette--inactive !default;
+$gw-app--palette--actiondanger: $gw-app--palette--error !default;
+
+$gw-app--palette--outcomepositive: $gw-app--palette--new !default;
+$gw-app--palette--outcomeneutral: $gw-app--palette--inactive !default;
+$gw-app--palette--outcomenegative: $gw-app--palette--error !default;
+
+$gw-app--palette--alertwarning: $gw-app--palette--warning !default;
+$gw-app--palette--alerterror: $gw-app--palette--error !default;
+$gw-app--palette--alertinfo: $gw-app--palette--info !default;
+$gw-app--palette--alertsuccess: $gw-app--palette--new !default;
+$gw-app--palette--alertneutral: $gw-app--palette--inactive !default;
+
+$gw-app--palette--tier4: $gw-app--palette--bronze !default;
+$gw-app--palette--tier3: $gw-app--palette--silver !default;
+$gw-app--palette--tier2: $gw-app--palette--gold !default;
+$gw-app--palette--tier1: $gw-app--palette--platinum !default;
+
+$gw-app--palette--highlight: $gw-app--palette--yellow !default;
+$gw-app--palette--highlightalt: $gw-app--palette--yellow-dark !default;
+
+$gw-app--palette--callout: $gw-app--palette--blue-highlight !default;
+$gw-app--palette--calloutalt: $gw-app--palette--blue-highlight-alt!default;
+
+
+
+
+// Text on palette colors
+$gw-app--palette--new--text-overlay-col: getTextColorBasedOnBackgroundLuminance($gw-app--palette--new) !default;
+$gw-app--palette--blank--text-overlay-col: inherit !default;
+$gw-app--palette--disabled--text-overlay-col: getTextColorBasedOnBackgroundLuminance($gw-app--palette--disabled) !default;
+$gw-app--palette--active--text-overlay-col: getTextColorBasedOnBackgroundLuminance($gw-app--palette--active) !default;
+$gw-app--palette--inactive--text-overlay-col: getTextColorBasedOnBackgroundLuminance($gw-app--palette--inactive) !default;
+
+$gw-app--palette--urgencynone--text-overlay-col: getTextColorBasedOnBackgroundLuminance($gw-app--palette--urgencynone) !default;
+$gw-app--palette--urgencylow--text-overlay-col: getTextColorBasedOnBackgroundLuminance($gw-app--palette--urgencylow) !default;
+$gw-app--palette--urgencymedium--text-overlay-col: getTextColorBasedOnBackgroundLuminance($gw-app--palette--urgencymedium) !default;
+$gw-app--palette--urgencyhigh--text-overlay-col: getTextColorBasedOnBackgroundLuminance($gw-app--palette--urgencyhigh) !default;
+$gw-app--palette--urgencycritical--text-overlay-col: getTextColorBasedOnBackgroundLuminance($gw-app--palette--urgencycritical) !default;
+
+$gw-app--palette--importancenone--text-overlay-col: getTextColorBasedOnBackgroundLuminance($gw-app--palette--importancenone) !default;
+$gw-app--palette--importancelow--text-overlay-col: getTextColorBasedOnBackgroundLuminance($gw-app--palette--importancelow) !default;
+$gw-app--palette--importancemedium--text-overlay-col: getTextColorBasedOnBackgroundLuminance($gw-app--palette--importancemedium) !default;
+$gw-app--palette--importancehigh--text-overlay-col: getTextColorBasedOnBackgroundLuminance($gw-app--palette--importancehigh) !default;
+$gw-app--palette--importancecritical--text-overlay-col: getTextColorBasedOnBackgroundLuminance($gw-app--palette--importancecritical) !default;
+
+$gw-app--palette--numbersnegative--text-overlay-col: getTextColorBasedOnBackgroundLuminance($gw-app--palette--numbersnegative) !default;
+$gw-app--palette--numbersneutral--text-overlay-col: getTextColorBasedOnBackgroundLuminance($gw-app--palette--numbersneutral) !default;
+$gw-app--palette--numberspositive--text-overlay-col: getTextColorBasedOnBackgroundLuminance($gw-app--palette--numberspositive) !default;
+
+$gw-app--palette--progressunstarted--text-overlay-col: getTextColorBasedOnBackgroundLuminance($gw-app--palette--progressunstarted) !default;
+$gw-app--palette--progressinprogress--text-overlay-col: getTextColorBasedOnBackgroundLuminance($gw-app--palette--progressinprogress) !default;
+$gw-app--palette--progressblocked--text-overlay-col: getTextColorBasedOnBackgroundLuminance($gw-app--palette--progressblocked) !default;
+$gw-app--palette--progressoverdue--text-overlay-col: getTextColorBasedOnBackgroundLuminance($gw-app--palette--progressoverdue) !default;
+$gw-app--palette--progresscomplete--text-overlay-col: getTextColorBasedOnBackgroundLuminance($gw-app--palette--progresscomplete) !default;
+$gw-app--palette--progressabandoned--text-overlay-col: getTextColorBasedOnBackgroundLuminance($gw-app--palette--progressabandoned) !default;
+
+$gw-app--palette--actionsafe--text-overlay-col: getTextColorBasedOnBackgroundLuminance($gw-app--palette--actionsafe) !default;
+$gw-app--palette--actionneutral--text-overlay-col: getTextColorBasedOnBackgroundLuminance($gw-app--palette--actionneutral) !default;
+$gw-app--palette--actiondanger--text-overlay-col: getTextColorBasedOnBackgroundLuminance($gw-app--palette--actiondanger) !default;
+
+$gw-app--palette--outcomepositive--text-overlay-col: getTextColorBasedOnBackgroundLuminance($gw-app--palette--outcomepositive) !default;
+$gw-app--palette--outcomeneutral--text-overlay-col: getTextColorBasedOnBackgroundLuminance($gw-app--palette--outcomeneutral) !default;
+$gw-app--palette--outcomenegative--text-overlay-col: getTextColorBasedOnBackgroundLuminance($gw-app--palette--outcomenegative) !default;
+
+$gw-app--palette--alertwarning--text-overlay-col: getTextColorBasedOnBackgroundLuminance($gw-app--palette--alertwarning) !default;
+$gw-app--palette--alerterror--text-overlay-col: getTextColorBasedOnBackgroundLuminance($gw-app--palette--alerterror) !default;
+$gw-app--palette--alertinfo--text-overlay-col: getTextColorBasedOnBackgroundLuminance($gw-app--palette--alertinfo) !default;
+$gw-app--palette--alertsuccess--text-overlay-col: getTextColorBasedOnBackgroundLuminance($gw-app--palette--alertsuccess) !default;
+$gw-app--palette--alertneutral--text-overlay-col: getTextColorBasedOnBackgroundLuminance($gw-app--palette--alertneutral) !default;
+
+$gw-app--palette--tier4--text-overlay-col: getTextColorBasedOnBackgroundLuminance($gw-app--palette--tier4) !default;
+$gw-app--palette--tier3--text-overlay-col: getTextColorBasedOnBackgroundLuminance($gw-app--palette--tier3) !default;
+$gw-app--palette--tier2--text-overlay-col: getTextColorBasedOnBackgroundLuminance($gw-app--palette--tier2) !default;
+$gw-app--palette--tier1--text-overlay-col: getTextColorBasedOnBackgroundLuminance($gw-app--palette--tier1) !default;
+
+$gw-app--palette--highlight--text-overlay-col: getTextColorBasedOnBackgroundLuminance($gw-app--palette--highlight) !default;
+$gw-app--palette--highlightalt--text-overlay-col: getTextColorBasedOnBackgroundLuminance($gw-app--palette--highlightalt) !default;
+
+$gw-app--palette--callout--text-overlay-col: getTextColorBasedOnBackgroundLuminance($gw-app--palette--callout) !default;
+$gw-app--palette--calloutalt--text-overlay-col: getTextColorBasedOnBackgroundLuminance($gw-app--palette--calloutalt) !default;
+
+// Helpers
+$gw-app--palette--info--text-overlay-col: getTextColorBasedOnBackgroundLuminance($gw-app--palette--info) !default;
+$gw-app--palette--error--text-overlay-col: getTextColorBasedOnBackgroundLuminance($gw-app--palette--error) !default;
+$gw-app--palette--warning--text-overlay-col: getTextColorBasedOnBackgroundLuminance($gw-app--palette--warning) !default;
+$gw-app--palette--orange--vibrant--text-overlay-col: getTextColorBasedOnBackgroundLuminance($gw-app--palette--orange--vibrant) !default;

@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<subtype
+  platform="true"
+  xmlns="http://guidewire.com/datamodel"
+  entity="OutboundFileLocalConfig"
+  supertype="OutboundFileConfig">
+  <column
+    desc="Valid file path to the permanent directory."
+    name="PermanentDirectory"
+    nullok="false"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="512"/>
+  </column>
+  <implementsInterface
+    iface="com.guidewire.outboundfile.config.OutboundFileConfigMethods"
+    impl="com.guidewire.outboundfile.config.OutboundFileLocalConfigImpl"/>
+</subtype>

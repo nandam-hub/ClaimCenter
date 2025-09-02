@@ -1,0 +1,296 @@
+swagger: "2.0"
+consumes:
+- application/json
+produces:
+- application/json
+x-gw-combine:
+- gw.core.cc.claim.v1.claim_core-1.0
+x-gw-schema-import:
+  claims: gw.core.cc.claim.v1.claim_auto_core-1.0
+paths:
+  "/claims/{claimId}/policy/vehicle-risk-units":
+    parameters:
+    - $ref: "#/parameters/claimId"
+    get:
+      summary: "The vehicle risk units of a policy associated with a given claim"
+      description: "The vehicle risk units of a policy associated with a given claim"
+      operationId: getVehicleRiskUnits
+      x-gw-extensions:
+        childResourceType: VehicleRiskUnit
+        operationType: get-collection
+        resourceType: VehicleRiskUnits
+      x-gw-parameter-sets:
+      - get-collection
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/VehicleRiskUnitList"
+  "/claims/{claimId}/policy/vehicle-risk-units/{vehicleRiskUnitId}":
+    parameters:
+    - $ref: "#/parameters/claimId"
+    - $ref: "#/parameters/vehicleRiskUnitId"
+    get:
+      summary: "Retrieve a vehicle risk unit"
+      description: "Retrieve a vehicle risk unit"
+      operationId: getVehicleRiskUnit
+      x-gw-extensions:
+        operationType: get-element
+        resourceType: VehicleRiskUnit
+      x-gw-parameter-sets:
+      - get-element
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/VehicleRiskUnitResponse"
+  "/claims/{claimId}/policy/vehicle-risk-units/{vehicleRiskUnitId}/coverages":
+    parameters:
+    - $ref: "#/parameters/claimId"
+    - $ref: "#/parameters/vehicleRiskUnitId"
+    get:
+      summary: "Retrieves a list of coverages on a vehicle risk unit"
+      description: "Retrieves a list of coverages on a vehicle risk unit"
+      operationId: getVehicleRiskUnitCoverages
+      x-gw-sinceVersion: "1.4.0"
+      x-gw-extensions:
+        childResourceType: VehicleRiskUnitCoverage
+        operationType: get-collection
+        resourceType: VehicleRiskUnitCoverages
+      x-gw-parameter-sets:
+      - get-collection
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/PolicyCoverageList"
+  "/claims/{claimId}/policy/vehicle-risk-units/{vehicleRiskUnitId}/coverages/{coverageId}":
+    parameters:
+    - $ref: "#/parameters/claimId"
+    - $ref: "#/parameters/vehicleRiskUnitId"
+    - $ref: "#/parameters/coverageId"
+    get:
+      summary: "Details of a coverage on a vehicle risk unit"
+      description: "Details of a coverage on a vehicle risk unit"
+      operationId: getVehicleRiskUnitCoverage
+      x-gw-sinceVersion: "1.4.0"
+      x-gw-extensions:
+        operationType: get-element
+        resourceType: VehicleRiskUnitCoverage
+      x-gw-parameter-sets:
+      - get-element
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/PolicyCoverageResponse"
+  "/unverified-policies/{policyId}/vehicle-risk-units":
+    parameters:
+    - $ref: "#/parameters/policyId"
+    get:
+      summary: "Retrieves a list of vehicle risk units"
+      description: "Retrieves a list of vehicle risk units"
+      operationId: getUnverifiedVehicleRiskUnits
+      x-gw-sinceVersion: "1.2.0"
+      x-gw-extensions:
+        childResourceType: UnverifiedVehicleRiskUnit
+        operationType: get-collection
+        resourceType: UnverifiedVehicleRiskUnits
+      x-gw-parameter-sets:
+      - get-collection
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/VehicleRiskUnitList"
+    post:
+      summary: "Create a vehicle risk unit"
+      description: "Create a vehicle risk unit"
+      operationId: postUnverifiedVehicleRiskUnit
+      x-gw-sinceVersion: "1.2.0"
+      x-gw-extensions:
+        childResourceType: UnverifiedVehicleRiskUnit
+        operationType: post-collection
+        resourceType: UnverifiedVehicleRiskUnits
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: "#/definitions/VehicleRiskUnitRequest"
+      x-gw-parameter-sets:
+      - post-collection
+      responses:
+        "201":
+          description: "Successful creation"
+          schema:
+            $ref: "#/definitions/VehicleRiskUnitResponse"
+  "/unverified-policies/{policyId}/vehicle-risk-units/{vehicleRiskUnitId}":
+    parameters:
+    - $ref: "#/parameters/policyId"
+    - $ref: "#/parameters/vehicleRiskUnitId"
+    get:
+      summary: "Get a vehicle risk unit"
+      description: "Get a vehicle risk unit"
+      operationId: getUnverifiedVehicleRiskUnit
+      x-gw-sinceVersion: "1.2.0"
+      x-gw-extensions:
+        operationType: get-element
+        resourceType: UnverifiedVehicleRiskUnit
+      x-gw-parameter-sets:
+      - get-element
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/VehicleRiskUnitResponse"
+    patch:
+      summary: "Update a vehicle risk unit"
+      description: "Update a vehicle risk unit"
+      operationId: patchUnverifiedVehicleRiskUnit
+      x-gw-sinceVersion: "1.2.0"
+      x-gw-extensions:
+        operationType: patch-element
+        resourceType: UnverifiedVehicleRiskUnit
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: "#/definitions/VehicleRiskUnitRequest"
+      x-gw-parameter-sets:
+      - patch-element
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/VehicleRiskUnitResponse"
+  "/unverified-policies/{policyId}/vehicle-risk-units/{vehicleRiskUnitId}/coverages":
+    parameters:
+    - $ref: "#/parameters/policyId"
+    - $ref: "#/parameters/vehicleRiskUnitId"
+    get:
+      summary: "Retrieves a list of coverages on a vehicle risk unit"
+      description: "Retrieves a list of coverages on a vehicle risk unit"
+      operationId: getUnverifiedVehicleRiskUnitCoverages
+      x-gw-sinceVersion: "1.2.0"
+      x-gw-extensions:
+        childResourceType: UnverifiedVehicleRiskUnitCoverage
+        operationType: get-collection
+        resourceType: UnverifiedVehicleRiskUnitCoverages
+      x-gw-parameter-sets:
+      - get-collection
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/UnverifiedPolicyCoverageList"
+    post:
+      summary: "Create a coverage on a vehicle risk unit"
+      description: "Create a coverage on a vehicle risk unit"
+      operationId: postUnverifiedVehicleRiskUnitCoverage
+      x-gw-sinceVersion: "1.2.0"
+      x-gw-extensions:
+        childResourceType: UnverifiedVehicleRiskUnitCoverage
+        operationType: post-collection
+        resourceType: UnverifiedVehicleRiskUnitCoverages
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: "#/definitions/UnverifiedPolicyCoverageRequest"
+      x-gw-parameter-sets:
+      - post-collection
+      responses:
+        "201":
+          description: "Successful creation"
+          schema:
+            $ref: "#/definitions/UnverifiedPolicyCoverageResponse"
+  "/unverified-policies/{policyId}/vehicle-risk-units/{vehicleRiskUnitId}/coverages/{coverageId}":
+    parameters:
+    - $ref: "#/parameters/policyId"
+    - $ref: "#/parameters/vehicleRiskUnitId"
+    - $ref: "#/parameters/coverageId"
+    get:
+      summary: "Details of a coverage on a vehicle risk unit"
+      description: "Details of a coverage on a vehicle risk unit"
+      operationId: getUnverifiedVehicleRiskUnitCoverage
+      x-gw-sinceVersion: "1.2.0"
+      x-gw-extensions:
+        operationType: get-element
+        resourceType: UnverifiedVehicleRiskUnitCoverage
+      x-gw-parameter-sets:
+      - get-element
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/UnverifiedPolicyCoverageResponse"
+    patch:
+      summary: "Update a coverage on a vehicle risk unit"
+      description: "Update a coverage on a vehicle risk unit"
+      operationId: patchUnverifiedVehicleRiskUnitCoverage
+      x-gw-sinceVersion: "1.2.0"
+      x-gw-extensions:
+        operationType: patch-element
+        resourceType: UnverifiedVehicleRiskUnitCoverage
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: "#/definitions/UnverifiedPolicyCoverageRequest"
+      x-gw-parameter-sets:
+      - patch-element
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/UnverifiedPolicyCoverageResponse"
+parameters:
+  vehicleRiskUnitId:
+    name: vehicleRiskUnitId
+    in: path
+    description: "The identifier for the vehicle risk unit"
+    required: true
+    type: string
+definitions:
+  ClaimResponseInclusions:
+    type: object
+    properties:
+      VehicleRiskUnit:
+        type: array
+        items:
+          $ref: "#/definitions/VehicleRiskUnitData"
+  VehicleRiskUnitData:
+    x-gw-extend:
+    - "#/definitions/DataEnvelope"
+    required:
+    - attributes
+    properties:
+      attributes:
+        $ref: "claims#/definitions/VehicleRiskUnit"
+  VehicleRiskUnitList:
+    type: object
+    x-gw-extend:
+    - "#/definitions/DataListEnvelope"
+    properties:
+      data:
+        type: array
+        items:
+          $ref: "#/definitions/VehicleRiskUnitData"
+  VehicleRiskUnitRequest:
+    type: object
+    required:
+    - data
+    properties:
+      data:
+        $ref: "#/definitions/VehicleRiskUnitData"
+  VehicleRiskUnitResponse:
+    type: object
+    properties:
+      data:
+        $ref: "#/definitions/VehicleRiskUnitData"
+      included:
+        $ref: "#/definitions/ClaimResponseInclusions"

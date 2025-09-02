@@ -1,0 +1,3 @@
+# GAR START: config/portal/capabilities/maintenance.gwproperties [/opt/teamcity/agent/work/45c3a2f1b8ee4237/gpm-generator/downloads/edge/backend/xcenter-config/xcenter-utils/cc-utils/../../../Shared/maintenance-cc/src/main]
+handlers.claimMaintenance=edge.capabilities.maintenance.MaintenanceHandler
+# GAR END

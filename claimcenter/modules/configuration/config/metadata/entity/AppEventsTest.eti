@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<entity
+  desc="Test entity to be used for verification as part of App Events provisioning "
+  platform="true"
+  xmlns="http://guidewire.com/datamodel"
+  entity="AppEventsTest"
+  table="appeventstest"
+  type="editable"
+  extendable="false">
+  <events>
+  <event
+    description="Fired when App Events test is requested."
+    name="AppEventsTest"/>
+  </events>
+</entity>

@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<entity
+  desc="Custom work item for purging outbound files."
+  loadable="false"
+  xmlns="http://guidewire.com/datamodel"
+  entity="OutboundFilePurgeWorkItem"
+  table="outboundfilepurgeworkitem"
+  type="keyable"
+  platform="true">
+  <implementsEntity
+    name="WorkItem"/>
+  <foreignkey
+    desc="Reference to Outbound File."
+    createConstraint="false"
+    fkentity="OutboundFile"
+    name="OutboundFile"
+    nullok="true"/>
+</entity>

@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<plugin
+  interface="IApdRepositoryPlugin"
+  name="IApdRepositoryPlugin">
+  <plugin-java
+    disabled="${apd.service.disabled:true}"
+    javaclass="com.guidewire.cloud.apd.ApdGitRepositoryImpl">
+    <param
+      name="gitUrl"
+      value="${apd.codegen.git.url}"/>
+    <param
+      name="gitHttpsUsername"
+      value="${apd.codegen.git.https.username}"/>
+    <param
+      name="gitHttpsPassword"
+      value="${apd.codegen.git.https.password}"/>
+    <param
+      name="cloneDirectoryPath"
+      value="${apd.codegen.cloneDir:/tmp/gw/apd}"/>
+    <param
+      name="branchName"
+      value="${apd.codegen.git.branch}"/>
+  </plugin-java>
+</plugin>

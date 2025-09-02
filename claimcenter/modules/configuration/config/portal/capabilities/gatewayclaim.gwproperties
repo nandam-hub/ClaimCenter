@@ -1,0 +1,18 @@
+# GAR START: config/portal/capabilities/gatewayclaim.gwproperties [/opt/teamcity/agent/work/45c3a2f1b8ee4237/gpm-generator/downloads/edge/backend/xcenter-config/xcenter-utils/cc-utils/../../../Capabilities/gpa-claim/src/main]
+handlers.claim=edge.capabilities.claim.GatewayClaimHandler
+handlers.activity=edge.capabilities.claim.activity.ActivityHandler
+handlers.docs=edge.capabilities.claim.document.ClaimDocumentHandler
+handlers.docupload=edge.capabilities.claim.document.ClaimDocumentUploadHandler
+
+# LOB START PA
+claimdetails.lob.PersonalAuto=edge.capabilities.claim.lob.impl.personalauto.claimdetail.PAClaimDetailPlugin
+policy.lob.PersonalAuto=edge.capabilities.claim.lob.impl.personalauto.policy.PAPolicyPlugin
+# LOB END PA
+
+# LOB START HO
+claimdetails.lob.Homeowner=edge.capabilities.claim.lob.impl.homeowners.claimdetail.HOClaimDetailPlugin
+policy.lob.Homeowner=edge.capabilities.claim.lob.impl.homeowners.policy.HOPolicyPlugin
+# LOB END HO
+
+
+# GAR END

@@ -1,0 +1,30 @@
+  .gw-CalendarWidgetMain {
+  font-size: $gw-app--CalendarWidget--font-size;
+
+  .gw-row {
+    display: flex;
+  }
+
+  .gw-CalendarMainTop {
+    padding-top: $gw-app--CalendarWidget--general-margin;
+    padding-bottom: $gw-app--CalendarWidget--general-margin;
+  }
+
+  .gw-CalendarMainLeft {
+    float: left;
+  }
+
+  .gw-CalendarMainLeft, .gw-CalendarMainRight {
+    display: inline-block;
+    margin-right: $gw-app--CalendarWidget--general-margin;
+    margin-bottom: $gw-app--CalendarWidget--general-margin;
+    @include gw-borderRadius($gw-app--CalendarWidget--border-radius);
+    background-color: $gw-app--CalendarWidget--main-holders-bg;
+
+    & > div {
+      vertical-align: top;
+    }
+  }
+
+}
+

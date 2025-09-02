@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Single claim timeline entry"
+  entity="TimelineEntry_SP"
+  table="timelineentry_sp"
+  type="retireable">
+  <column
+    name="Summary"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="1000"/>
+  </column>
+  <column
+    name="EventDate"
+    nullok="false"
+    type="datetime"/>
+  <foreignkey
+    fkentity="Timeline_SP"
+    name="Timeline"
+    nullok="false"/>
+  <implementsEntity
+    name="Extractable"/>
+  <typekey
+    name="TimelineCategory"
+    nullok="false"
+    typelist="TimelineCategory_SP"/>
+  <array
+    arrayentity="TimelineLink_SP"
+    cascadeDelete="true"
+    name="TimelineLinks"/>
+  <column
+    default="false"
+    name="PossibleDuplicate"
+    nullok="false"
+    type="bit"/>
+  <typekey
+    default="high"
+    name="Importance"
+    nullok="false"
+    typelist="TimelineImportance_SP"/>
+</entity>

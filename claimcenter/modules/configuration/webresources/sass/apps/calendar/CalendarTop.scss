@@ -1,0 +1,44 @@
+$gw-CalendarWidget--top--h-padding: gw-pxFixed(25);
+$gw-CalendarWidget--top-label--h-padding: gw-remScaled(.5);
+
+// ========== Top Navigator Section
+.gw-CalendarTopNavigation {
+  .gw-CalendarTopNavigation--TopNav {
+    padding-right: $gw-CalendarWidget--top--h-padding;
+    .gw-label {
+      padding-right: $gw-CalendarWidget--top-label--h-padding;
+    }
+    .gw-CalendarTopNavigation--JumpTo {
+      display: inline-flex;
+      flex-flow: column;
+      align-items: left;
+    }
+  }
+}
+
+// ========== Top Filters Section
+.gw-CalendarFilters {
+  display: inline-flex;
+  flex-wrap: wrap;
+
+  .gw-CalendarMonth--filter {
+    display: inline-flex;
+    align-items: center;
+
+    + .gw-CalendarMonth--filter {
+      padding-left: $gw-CalendarWidget--top--h-padding;
+    }
+
+    .gw-filter-label {
+      justify-content: flex-end;
+      padding-right: $gw-CalendarWidget--top-label--h-padding;
+
+      .gw-label {
+        display: inline;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+      }
+    }
+  }
+}

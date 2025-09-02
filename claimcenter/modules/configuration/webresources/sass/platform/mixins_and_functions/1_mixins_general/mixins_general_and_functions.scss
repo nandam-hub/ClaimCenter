@@ -1,0 +1,401 @@
+@mixin gw-msEdgeOnly() {
+  @supports (-ms-ime-align: auto) {
+    @content;
+  }
+}
+
+@mixin gw-required($left: $gw-app--InputColumn--required--left-em, $top: $gw-app--InputColumn--required--top-em, $size: $gw-app--InputColumn--required--size-em, $ignore-flex: null) {
+  &:not(.gw-styleTag--ToolbarWidget) {
+    @include gw-icon($gw-app--InputColumn--required--glyph, $size, $color: $gw-app--InputColumn--required--col, $position: absolute, $top: $top, $left: $left, $ignore-flex: $ignore-flex);
+  }
+}
+
+@mixin gw-requiredAfter($em-space-between: gw-emFixed(.1), $width: 1em) {
+  &:after {
+    display: inline-block;
+    width: $width; //@em-allowed
+    margin-left: $em-space-between;
+    content: "*"; //TODO: look into converting this to the font awesome stuff, but there's a spacing problem happening.
+    color: $gw-app--InputColumn--required--col;
+  }
+}
+
+@function gw-border($col: $gw-app--border--col) {
+  @return $gw-app--border-width-px solid $col;
+}
+
+@function gw-borderOrDefault($col, $def) {
+  @if ($col == null) {
+    @return gw-border($def);
+  } @else {
+    @return gw-border($col);
+  }
+}
+
+@mixin gw-borderRadius($rad: $gw-app--border-radius-px) {
+  border-radius: $rad;
+}
+
+@mixin gw-grayOut() {
+  @include gw-filter(grayscale(.4));
+  opacity: 0.88;
+}
+
+@mixin gw-retired() {
+  @include gw-grayOut();
+}
+
+@mixin gw-disabledInner($bg: null, $col: null) {
+  cursor: $gw-app--buttons--disabled-cursor !important;
+  color: $col;
+
+  @if ($bg == null) {
+    @include gw-grayOut();
+  } @else {
+    background-color: $bg;
+  }
+}
+
+/*
+ If the bg color is null, then we apply the grayout filter, otherwise, we just apply the bg color.
+
+ See https://stackoverflow.com/questions/52937708/why-does-applying-a-css-filter-on-the-parent-break-the-child-positioning
+ for an explanation of why we need to move the 'filter: grayscale' styling to an inner div in some cases.
+*/
+@mixin gw-disabled($bg: null, $col: null, $applyToActionableInner: false) {
+  &[disabled], &[aria-disabled="true"] {
+    @if ($applyToActionableInner) {
+      .gw-actionable--inner {
+        @include gw-disabledInner($bg, $col);
+      }
+    } @else {
+      @include gw-disabledInner($bg, $col);
+    }
+  }
+}
+
+/**
+  Expects content appended via a block
+ */
+@mixin ifDisabled() {
+  &[aria-disabled="true"], &[disabled] {
+    @content
+  }
+}
+
+/**
+  Expects content appended via a block
+ */
+@mixin ifNotDisabled() {
+  &:not([aria-disabled="true"]):not([disabled]) {
+    @content
+  }
+}
+
+@mixin gw-addFocusOutline($col: $gw-app--default-focus-outline-col, $offset: $gw-app--focus--outline-offset-px) {
+  &[disabled], &[aria-disabled="true"] {
+    outline-style: var(--gw-focus-outline-style-for-disabled-el, dashed);
+  }
+
+  &:not([aria-disabled="true"]):not([disabled]) {
+    outline-style: var(--gw-focus-outline-style-for-enabled-el, solid);
+  }
+
+  outline-width: $gw-app--focus--outline-width-px;
+  outline-color: $col;
+  outline-offset: $offset;
+}
+
+@function getImgPath($fileName) {
+  @return $gw-img--path + $fileName + $gw-img--ext;
+}
+
+@function getLogoPath($fileName) {
+  @return $gw-logo--path + $fileName;
+}
+
+@mixin gw-bgImg($fileName, $col: null) {
+  $url: getImgPath($fileName);
+  background-col: $col;
+  background-image: url($url);
+  background-repeat: no-repeat;
+}
+
+@mixin gw-backgroundUri($bgAsURI, $anchor-h: left, $anchor-v: center, $background-size: contain, $background-repeat: no-repeat) {
+  background: $bgAsURI;
+  background-size: $background-size;
+  background-repeat: $background-repeat;
+  background-position: $anchor-h $anchor-v;
+}
+
+@mixin _gw-collapse() {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  -webkit-border-vertical-spacing: 0 !important;
+  line-height: 0% !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  max-height: 0 !important;
+}
+
+@mixin gw-collapseRow() {
+  visibility: collapse !important;
+
+  @include _gw-collapse();
+
+  *, *:before, *:after {
+    @include _gw-collapse();
+  }
+}
+
+@mixin gw-borderCap($top: null, $right: null, $bottom: null, $left: null) {
+
+  @if ($top) {
+    border-top-left-radius: $gw-app--border-radius-px;
+    border-top-right-radius: $gw-app--border-radius-px;
+  } @else if ($top != null) {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+
+  @if ($right) {
+    border-top-right-radius: $gw-app--border-radius-px;
+    border-bottom-right-radius: $gw-app--border-radius-px;
+  } @else if ($right != null) {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  @if ($bottom) {
+    border-bottom-left-radius: $gw-app--border-radius-px;
+    border-bottom-right-radius: $gw-app--border-radius-px;
+  } @else if ($bottom != null) {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  @if ($left) {
+    border-top-left-radius: $gw-app--border-radius-px;
+    border-bottom-left-radius: $gw-app--border-radius-px;
+  } @else if ($left != null) {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+}
+
+@mixin gw-imgToLineHeight($margin-top: null) {
+  display: inline-block;
+  vertical-align: middle; //top
+  height: gw-lineHeightInFixedEms();
+  width: gw-lineHeightInFixedEms();
+  margin-top: $margin-top;
+}
+
+/*
+ This requires a wrapper of identical size to the select to be around the <select> plus a <div class="gw-icon"></div>
+ The wrapper also needs to handle declaring [aria-disabled="true"], so that the icon
+ //another option we could use, if this becomes a problem in some browsers is a base 64 images svg of the font awesome caret-down,
+ in which case we'd need a normal, hover, disabled version. ie:
+ //background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPHN2ZyB3aWR0aD0iMTc5MiIgaGVpZ2h0PSIxNzkyIiB2aWV3Qm94PSIwIDAgMTc5MiAxNzkyIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxwYXRoIGQ9Ik0xNDA4IDcwNHEwIDI2LTE5IDQ1bC00NDggNDQ4cS0xOSAxOS00NSAxOXQtNDUtMTlsLTQ0OC00NDhxLTE5LTE5LTE5LTQ1dDE5LTQ1IDQ1LTE5aDg5NnEyNiAwIDQ1IDE5dDE5IDQ1eiIvPjwvc3ZnPg==');
+*/
+@mixin gw-convertSelectWrapperWithGlyph($top: true, $right: true, $bottom: true, $left: true, $add-pad-v-borders: true, $use-secondary-base: false, $custom-pad-v: null) {
+  display: inline-block;
+  flex-grow: 1;
+  flex-shrink: 1;
+  position: relative;
+  height: 100%;
+  min-width: $gw-app--inputs--select-min-width-em;
+
+  $bg: $gw-app--inputs--select-bg;
+  $col: $gw-app--inputs--select-col;
+  $hover-bg: $gw-app--inputs--select-hover-bg;
+  $hover-col: $gw-app--inputs--select-hover-col;
+  $active-bg: $gw-app--inputs--select-active-bg;
+  $active-col: $gw-app--inputs--select-active-col;
+  $pad-h: $gw-app--inputs--pad-h-rem;
+  $pad-v: $gw-app--inputs--pad-v-rem;
+  $border-col: $gw-app--inputs--border--col;
+
+  @if ($use-secondary-base and $gw-app--inputs--select--behave-like-secondary) {
+    $col: $gw-app--buttons--secondary--col;
+    $border-col: $gw-app--buttons--secondary--border-col;
+  }
+
+  @if ($add-pad-v-borders) {
+    //$pad-v: $pad-v + ($gw-app--border-width-px / $gw-app--font-size--for-rem-in-px); //TODO: see if this breaks anything
+  }
+
+  @if ($custom-pad-v != null) {
+    $pad-v: $custom-pad-v;
+  }
+
+  background-color: transparent;
+  color: $col;
+
+  &:hover:not([aria-disabled="true"]):not([disabled]) {
+    color: $hover-col;
+  }
+
+  &.gw-active:not([aria-disabled="true"]):not([disabled]) {
+    color: $active-col;
+  }
+
+  &[aria-disabled="true"] {
+    color: $gw-app--buttons--disabled-col;
+    .gw-icon {
+      @include gw-grayOut();
+    }
+  }
+
+  .gw-icon {
+    @include gw-icon($gw-app--inputs--select-glyph); //
+    pointer-events: none;
+    position: absolute;
+    display: inline-flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    height: 100%;
+    right: $pad-h;
+  }
+
+  select {
+    @if ($gw-app--inputs--select--behave-like-secondary) {
+      @include gw-button--secondary($pad-v: $pad-v, $pad-h: $pad-h, $border-color: $border-col, $col: $col, $bg: $bg);
+    } @else {
+      @include gw-button--normal($bg, $col, $hover-bg, $hover-col, $active-bg, $active-col, $pad-v, $pad-h, $use-button-shadows: false, $hover-border-col: $gw-app--inputs--border--col, $active-border-col: $gw-app--inputs--border--col);
+      border: gw-border($border-col);
+    }
+
+    display: inline-block;
+    vertical-align: top;
+    @include gw-appearanceClear();
+    text-align: left;
+    min-width: 100%;
+    max-width: 100%;
+    padding-right: calc(1.2em + #{$gw-app--inputs--pad-h-rem * 2});
+    @include gw-textEllipse();
+    @include gw-borderCap($top, $right, $bottom, $left);
+  }
+
+  select::-ms-expand {
+    display: none;
+  }
+}
+
+@mixin gw-error-inverted() {
+  @include gw-button--colors($gw-app--palette--error, $gw-app--panels--bg);
+}
+
+@mixin gw-warning-inverted() {
+  @include gw-button--colors($gw-app--palette--warning, $gw-app--panels--bg);
+}
+
+@mixin gw-info-inverted() {
+  @include gw-button--colors($gw-app--palette--info, $gw-app--panels--bg);
+}
+
+@mixin gw-stateInsetHighlight($color, $size: $gw-app--inputs--state-shadow-width-px) {
+  @if (gw-stripUnit($size) != 0) {
+    box-shadow: -$size 0 0 $color;
+  }
+}
+
+@mixin gw-stateInsetHighlightError() {
+  @include gw-stateInsetHighlight($gw-app--palette--error);
+}
+
+@mixin gw-stateInsetHighlightWarning() {
+  @include gw-stateInsetHighlight($gw-app--palette--warning);
+}
+
+@mixin gw-stateInsetHighlightInfo() {
+  @include gw-stateInsetHighlight($gw-app--palette--info);
+}
+
+@function _gw-boxShadow($inset: false, $h: gw-pxFixed(2), $v: gw-pxFixed(2), $blur: null, $radius: 0) {
+  $blur: if($blur == null, $h, $blur);
+  @return if($inset != false, inset, null) $h $v $blur $radius $gw-app--palette--shadow-col;
+}
+
+@mixin gw-boxShadowStandard($inset: false, $h: gw-pxFixed(2), $v: gw-pxFixed(2), $blur: null, $radius: 0) {
+  box-shadow: _gw-boxShadow($inset, $h, $v, $blur, $radius);
+}
+
+@mixin gw-boxShadowInsetSingleSides($width: $gw-app--border-width-px, $top: false, $right: false, $bottom: false, $left: false, $blur: null) {
+  $final: null;
+
+  @if($top != false) {
+    $w: if($top == true, $width, $top);
+    $b: if($blur != null, $blur, $w);
+    $shadow: _gw-boxShadow(true, 0, 2 * $w, $b, -$w);
+    $final: $final, $shadow;
+  }
+
+  @if($bottom != false) {
+    $w: if($bottom == true, $width, $bottom);
+    $b: if($blur != null, $blur, $w);
+    $shadow: _gw-boxShadow(true, 0, -2 * $w, $b, -$w);
+    $final: $final, $shadow;
+  }
+
+  @if($left != false) {
+    $w: if($left == true, $width, $left);
+    $b: if($blur != null, $blur, $w);
+    $shadow: _gw-boxShadow(inset, 2 * $w, 0, $b, -$w);
+    $final: $final, $shadow;
+  }
+
+  @if($right != false) {
+    $w: if($right == true, $width, $right);
+    $b: if($blur != null, $blur, $w);
+    $shadow: _gw-boxShadow(inset, -2 * $w, 0, $b, -$w);
+    $final: $final, $shadow;
+  }
+
+  box-shadow: $final;
+}
+
+@function gw-roundRemToNearestPixel($remAmount) {
+  @return gw-pxFixed(round(gw-applicationBaseFontSizeStripped() * gw-stripUnit($remAmount)));
+}
+
+@mixin gw-pad-for-input-readonly-mode($is-checkbox-or-radio: false) {
+
+  @if ($gw-app--InputColumn--align-readonly-values-to-editable-values or ($gw-app--InputColumn--align-checkboxes-and-radio-buttons-to-readonly-values == false and $is-checkbox-or-radio == true)) {
+    &:not(.gw-has-border-when-readonly) {
+      @if ($is-checkbox-or-radio == false) {
+        border-left: $gw-app--border-width-px solid transparent;
+      }
+      & > .gw-vw--value {
+        padding-left: $gw-app--inputs--pad-h-rem;
+      }
+    }
+  }
+}
+
+@mixin gw-loader-dots($svg-size: contain) {
+  min-width: gw-emFixed(2);
+  min-height: gw-emFixed(2);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: $svg-size;
+  background-image: url('data:image/svg+xml;utf8,<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 64 64" preserveAspectRatio="xMinYMin meet"><g><circle fill="black" cx="16" cy="32" stroke-width="0" r="5.95085"><animate attributeName="fill-opacity" dur="750ms" values=".5;.6;.8;1;.8;.6;.5;.5" repeatCount="indefinite"></animate><animate attributeName="r" dur="750ms" values="3;3;4;5;6;5;4;3" repeatCount="indefinite"></animate></circle><circle fill="black" cx="32" cy="32" stroke-width="0" r="5.04915"><animate attributeName="fill-opacity" dur="750ms" values=".5;.5;.6;.8;1;.8;.6;.5" repeatCount="indefinite"></animate><animate attributeName="r" dur="750ms" values="4;3;3;4;5;6;5;4" repeatCount="indefinite"></animate></circle><circle fill="black" cx="48" cy="32" stroke-width="0" r="4.04915"><animate attributeName="fill-opacity" dur="750ms" values=".6;.5;.5;.6;.8;1;.8;.6" repeatCount="indefinite"></animate><animate attributeName="r" dur="750ms" values="5;4;3;3;4;5;6;5" repeatCount="indefinite"></animate></circle></g></svg>');
+  background-color: rgba(255, 255, 255, .4);
+}
+
+@mixin gw-loader-dots-white($svg-size: contain) {
+  min-width: gw-emFixed(2);
+  min-height: gw-emFixed(2);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: $svg-size;
+  background-image: url('data:image/svg+xml;utf8,<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 64 64" preserveAspectRatio="xMinYMin meet"><g><circle fill="white"  cx="16" cy="32" stroke-width="0" r="5.95085"><animate attributeName="fill-opacity" dur="750ms" values=".5;.6;.8;1;.8;.6;.5;.5" repeatCount="indefinite"></animate><animate attributeName="r" dur="750ms" values="3;3;4;5;6;5;4;3" repeatCount="indefinite"></animate></circle><circle fill="white"  cx="32" cy="32" stroke-width="0" r="5.04915"><animate attributeName="fill-opacity" dur="750ms" values=".5;.5;.6;.8;1;.8;.6;.5" repeatCount="indefinite"></animate><animate attributeName="r" dur="750ms" values="4;3;3;4;5;6;5;4" repeatCount="indefinite"></animate></circle><circle fill="white"  cx="48" cy="32" stroke-width="0" r="4.04915"><animate attributeName="fill-opacity" dur="750ms" values=".6;.5;.5;.6;.8;1;.8;.6" repeatCount="indefinite"></animate><animate attributeName="r" dur="750ms" values="5;4;3;3;4;5;6;5" repeatCount="indefinite"></animate></circle></g></svg>');
+  background-color: rgba(0, 0, 0, .4);
+}
+
+
+

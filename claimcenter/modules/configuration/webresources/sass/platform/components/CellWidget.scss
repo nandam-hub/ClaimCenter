@@ -1,0 +1,373 @@
+// ============== Cell Styling For All Cell Types ===================
+.gw-CellWidget, .gw-FooterCellWidget, .gw-HeaderCellWidget, .gw-LinkCellWidget, .gw-FormatCellWidget, .gw-ListDetailSelectButtonCellWidget {
+  overflow: hidden;
+  position: relative;
+
+  .gw-emptyLabel {
+    display: none;
+  }
+
+  // ============= Wrap and Multi Content Cell Behavior =============
+  .gw-multi-content-cell {
+    display: flex;
+    align-items: stretch;
+
+    // These checkboxes are automatically added on the server, but we need to ensure that in the list of children, they appear first, and space themselves
+    & > .gw-IteratorEntryCheckBoxWidget {
+      order: -1;
+      margin-right: $gw-app--SPACING-rem-S;
+    }
+  }
+
+  &.gw-possibly-wrap-cell-contents {
+    .gw-multi-content-cell {
+      flex-wrap: wrap;
+    }
+
+    .gw-vw--value {
+      @include gw-wrapNever();
+    }
+
+    .gw-readonly, .gw-actionValue {
+      .gw-vw--value {
+        @include gw-wrapOnWhiteSpace();
+        .gw-ActionValueWidget, .gw-label {
+          @include gw-wrapOnWhiteSpace()
+        }
+      }
+    }
+  }
+
+  &:not(.gw-possibly-wrap-cell-contents) {
+    .gw-multi-content-cell {
+      flex-wrap: nowrap;
+    }
+
+    .gw-vw--value {
+      @include gw-wrapNever();
+    }
+  }
+
+  // ============ Cells Set to Stacked or not Stacked ================
+  &.gw-stacked {
+    .gw-multi-content-cell {
+      flex-direction: column;
+    }
+  }
+
+  &:not(.gw-stacked) {
+    .gw-multi-content-cell {
+      flex-direction: row;
+    }
+  }
+
+  // ============ Cell Alignment ======================================
+  &.gw-align-h--left {
+    .gw-cell-inner {
+      text-align: left;
+      .gw-header-content-wrapper {
+        justify-content: flex-start;
+      }
+
+      .gw-vw--value {
+        input[type="text"] {
+          text-align: left;
+        }
+      }
+    }
+
+    &.gw-stacked {
+      .gw-multi-content-cell {
+        justify-content: flex-start;
+      }
+    }
+
+    &:not(.gw-stacked) {
+      .gw-multi-content-cell {
+        justify-content: flex-start;
+      }
+    }
+  }
+
+  &.gw-align-h--right {
+    .gw-cell-inner {
+      text-align: right;
+      .gw-header-content-wrapper {
+        justify-content: flex-end;
+      }
+
+      .gw-vw--value {
+        input[type="text"] {
+          text-align: right;
+        }
+      }
+    }
+
+    &.gw-stacked {
+      .gw-multi-content-cell {
+        align-items: flex-end;
+        justify-content: flex-start;
+      }
+    }
+
+    &:not(.gw-stacked) {
+      .gw-multi-content-cell {
+        align-items: center;
+        justify-content: flex-end;
+      }
+    }
+  }
+
+  &.gw-align-h--center {
+    .gw-cell-inner {
+      text-align: center;
+      .gw-header-content-wrapper {
+        justify-content: center;
+      }
+
+      .gw-vw--value {
+        input[type="text"] {
+          text-align: center;
+        }
+      }
+    }
+
+    &.gw-stacked {
+      .gw-multi-content-cell {
+        align-items: center;
+      }
+    }
+
+    &:not(.gw-stacked) {
+      .gw-multi-content-cell {
+        justify-content: center;
+      }
+    }
+  }
+
+  // =====================================
+  // == CELL VERTICAL ALIGNMENT
+  // =====================================
+  &:not(.gw-align-v--top):not(.gw-align-v--bottom):not(.gw-align-v--middle) {
+    vertical-align: middle;
+  }
+
+  &.gw-align-v--top {
+    vertical-align: top;
+
+    &.gw-stacked {
+      .gw-multi-content-cell {
+        justify-content: flex-start;
+      }
+    }
+
+    &:not(.gw-stacked) {
+      .gw-multi-content-cell {
+        align-items: flex-start;
+      }
+    }
+  }
+
+  &.gw-align-v--middle {
+    vertical-align: middle;
+
+    &.gw-stacked {
+      .gw-multi-content-cell {
+        justify-content: center;
+      }
+    }
+
+    &:not(.gw-stacked) {
+      .gw-multi-content-cell {
+        align-items: center;
+      }
+    }
+  }
+
+  &.gw-align-v--bottom {
+    vertical-align: bottom;
+
+    &.gw-stacked {
+      .gw-multi-content-cell {
+        justify-content: flex-end;
+      }
+    }
+
+    &:not(.gw-stacked) {
+      .gw-multi-content-cell {
+        align-items: flex-end;
+      }
+    }
+  }
+
+  min-width: gw-lineHeightInFixedEms(); // This is purposeful, so we at least always collapse a visible cell down to a small square
+
+  & > .gw-cell-inner {
+    min-height: gw-lineHeightInFixedEms();
+  }
+
+  // ================== Cell Inner Handles Scrolling ===============
+  .gw-cell-inner {
+    display: inline-block;
+    vertical-align: top;
+
+    & > div {
+      vertical-align: top;
+    }
+
+    overflow: auto;
+    width: 100%; //NOTE: do not change this trying to fix a bug, the mins and maxes are set on the td.
+    @include gw-wrapNever();
+
+    .gw-styleTag--CellWidget {
+      .gw-TextAreaValueWidget & .gw-readonly {
+        background-color: transparent;
+      }
+    }
+
+    // ============== Mins and Maxes for all Value Widgets in Readonly Mode inside of Cells ==============
+    > .gw-actionValue, & > .gw-ValueWidget { //TODO: this should move into the value widget "in cells" section of ValueWidget.scss
+      &:not(.gw-HeaderCellValueWidget):not(.gw-FooterCellValueWidget):not(.gw-ImplicitHeaderCellValue) {
+        .gw-vw--value {
+          min-width: $gw-app--tables--cell--type-general-min-width;
+        }
+
+        &.gw-TextAreaValueWidget {
+          .gw-vw--value {
+            textarea {
+              min-width: $gw-app--tables--cell--type-text-area-min-width-em;
+            }
+          }
+        }
+
+        &.gw-EmptyFooterCellValueWidget, .gw-EmptyHeaderCellValueWidget {
+          @include gw-hidden();
+        }
+      }
+    }
+  }
+}
+
+// ============= Non Header Cell Padding ============================
+.gw-CellWidget, .gw-LinkCellWidget, .gw-FormatCellWidget, .gw-TemplateCellWidget, .gw-ListDetailSelectButtonCellWidget {
+  & > .gw-cell-inner {
+    padding: $gw-app--tables--cell--pad-v-rem $gw-app--tables--cell--pad-h-rem;
+  }
+}
+
+.gw-FooterCellWidget {
+  vertical-align: top;
+  & > .gw-cell-inner {
+    padding: $gw-app--ListView--footer-pad-v-rem $gw-app--tables--cell--pad-h-rem;
+  }
+}
+
+// ============= Generic Cell and Footer Widget Styling =============
+.gw-CellWidget, .gw-FooterCellWidget {
+
+  .gw-IteratorEntryCheckBoxWidget, .gw-SmartHeaderCheckBoxWidget {
+    justify-content: center;
+  }
+
+  &.gw-impl-cell--CB {
+    width: $gw-app--HeaderCell--iterator-checkbox--default-width;
+  }
+
+  &.gw-possibly-wrap-cell-contents {
+    div {
+      flex-shrink: 1;
+    }
+    .gw-cell-inner {
+      .gw-readonly, .gw-actionValue {
+        .gw-vw--value {
+          @include gw-wrapOnWhiteSpace();
+        }
+      }
+    }
+  }
+
+  &:not(.gw-possibly-wrap-cell-contents) {
+    .gw-cell-inner {
+      .gw-readonly, .gw-actionValue {
+        .gw-vw--value {
+          // This is currently already being set and inherited higher up the component chain; adding
+          // this to prevent a ripple down regression if something in its lineage changes
+          white-space: nowrap;
+        }
+      }
+    }
+  }
+}
+
+// ============= Smart Header Cells =================================
+
+tr.gw-isSmartHeader > td.gw-CellWidget {
+
+  &.gw-required div.gw-value-readonly-wrapper {
+    @include gw-requiredAfter();
+  }
+
+}
+
+// =====================================
+// == DRAG BAR
+// =====================================
+.gw-CellWidget, .gw-FooterCellWidget, .gw-HeaderCellWidget, .gw-LinkCellWidget, .gw-FormatCellWidget, .gw-ListDetailSelectButtonCellWidget {
+
+  .gw-drag-bar {
+    display: inline-block;
+    position: absolute;
+    width: $gw-app--ListView--resize-bar-width;
+    right: 0;
+    top: 0px;
+    height: 100%;
+    vertical-align: top;
+    background-color: $gw-app--ListView--resize-bar-bg;
+    cursor: col-resize;
+  }
+
+  @if ($gw-app--ListView--show-resize-bar-on-full-cell-hover) {
+    .gw-drag-bar {
+      display: none;
+    }
+
+    // gw-resizing gets set on all cells in the column when being resized, which provides the "appearance" of a sliding single bar
+    &:hover:not([colspan]), &.gw-resizing:not([colspan]) {
+      .gw-drag-bar {
+        display: inline-block;
+      }
+    }
+
+  } @else {
+    .gw-drag-bar {
+      opacity: 0;
+    }
+
+    &[colspan]{
+      .gw-drag-bar { //Cannot drag cells with colspan
+        display: none;
+        pointer-events: none;
+      }
+    }
+
+    &:not([colspan]) {
+      .gw-drag-bar {
+        &:hover {
+          opacity: 1;
+          @if($gw-app--allow-css-animations) {
+            transition: opacity #{$gw-app--ListView--resize-bar-fade-in-time} ease-in;
+          }
+        }
+      }
+      // gw-resizing gets set on all cells in the column when being resized, which provides the "appearance" of a sliding single bar
+      &.gw-resizing {
+        .gw-drag-bar {
+          opacity: 1;
+          @if($gw-app--allow-css-animations) {
+            transition: opacity #{$gw-app--ListView--resize-bar-fade-in-time} ease-in;
+          }
+        }
+      }
+    }
+  }
+}

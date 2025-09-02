@@ -1,0 +1,169 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "x-gw-import": {
+    "linking": "gw.pl.framework.linking-1.0"
+  },
+  "definitions": {
+    "EntryPoint": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "x-gw-type": "typekey.ProfilerConfig",
+          "x-gw-export-enumeration": true
+        },
+        "config": {
+          "$ref": "#/definitions/EntryPointConfig"
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "EntryPointPageRow": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "_links": {
+          "$ref": "linking#/definitions/Links"
+        }
+      }
+    },
+    "VerboseEntryPointPage": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EntryPoint"
+          }
+        },
+        "_links": {
+          "$ref": "linking#/definitions/Links"
+        },
+        "count": {
+          "type": "integer"
+        },
+        "totalCount": {
+          "type": "integer"
+        }
+      }
+    },
+    "EntryPointPage": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EntryPointPageRow"
+          }
+        },
+        "_links": {
+          "$ref": "linking#/definitions/Links"
+        },
+        "count": {
+          "type": "integer"
+        },
+        "totalCount": {
+          "type": "integer"
+        }
+      }
+    },
+    "EntryPointConfig": {
+      "type": "object",
+      "properties": {
+        "profiling": {
+          "type": "boolean"
+        },
+        "stackTraceTracking": {
+          "type": "boolean"
+        },
+        "queryOptimizerTracing": {
+          "type": "boolean"
+        },
+        "extendedQueryTracing": {
+          "type": "boolean"
+        },
+        "diffDBMSInstrumentationCounters": {
+          "type": "boolean"
+        },
+        "dbmsInstrumentationCaptureThresholdInMillis": {
+          "type": "integer"
+        },
+        "hiResClock": {
+          "type": "boolean"
+        }
+      }
+    },
+    "Occurrence": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "x-gw-type": "typekey.ProfilerConfig",
+          "x-gw-export-enumeration": true
+        },
+        "serverId": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "start": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "complete": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "_links": {
+          "$ref": "linking#/definitions/Links"
+        }
+      }
+    },
+    "HistoryPage": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Occurrence"
+          }
+        },
+        "_links": {
+          "$ref": "linking#/definitions/Links"
+        },
+        "count": {
+          "type": "integer"
+        },
+        "totalCount": {
+          "type": "integer"
+        }
+      }
+    },
+    "DeleteHistoryOccurrencesResult": {
+      "type": "object",
+      "properties": {
+        "deleteAttemptedOccurrenceIds": {
+          "type": "array",
+          "description": "Delete was attempted on these history occurrences",
+          "items": {
+            "type": "string"
+          }
+        },
+        "_links": {
+          "$ref": "linking#/definitions/Links"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<Properties xmlns="http://guidewire.com/psc/properties">
+  <Property>
+    <Group>policysearch</Group>
+    <Name>Policy_Search_Base_URL</Name>
+    <Description>Runtime property to indicate the base url of Policy Search Endpoint</Description>
+    <Value>https://pc-dev-gwcpdev.valuemom.zeta1-andromeda.guidewire.net/rest/policy/v1</Value>
+  </Property>
+  <Property>
+    <Group>policysearch</Group>
+    <Name>Policy_Search_Endpoint</Name>
+    <Description>Runtime property to indicate the  url of Policy Search Endpoint</Description>
+    <Value>/policies?filter=product:eq:USParametric</Value>
+  </Property>
+</Properties>

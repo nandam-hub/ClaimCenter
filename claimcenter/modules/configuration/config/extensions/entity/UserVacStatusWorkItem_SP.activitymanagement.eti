@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  entity="UserVacStatusWorkItem_SP"
+  desc="Work Item entity for custom work queue to toggle vacation status on a user"
+  table="uservacstatusworkitem_sp"
+  type="keyable">
+  <foreignkey
+    desc="The user PTO record for this work item"
+    fkentity="UserPTO_SP"
+    name="UserPTO"
+    nullok="false"/>
+  <implementsEntity
+    name="WorkItem"/>
+  <typekey
+    desc="The work queue with which this work item is associated"
+    name="QueueType"
+    nullok="false"
+    typelist="BatchProcessType"/>
+</entity>

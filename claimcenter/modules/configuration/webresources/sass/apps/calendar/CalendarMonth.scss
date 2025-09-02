@@ -1,0 +1,237 @@
+$gw-CalendarMonth--area-padding: gw-remScaled(1);
+$gw-CalendarWidget--label-bg: $gw-app--palette--gray-E;
+$gw-CalendarWidget--Month--header-cell-pad-v: 0;
+$gw-CalendarWidget--Month--header-cell-height: gw-pxFixed(35);
+$gw-CalendarWidget--Month--header-cell-font-col: #1f1f1f;
+$gw-CalendarWidget--Month--header-cell-font-size: gw-pxFixed(14);
+$gw-CalendarWidget--Month--cell-activity-pad: gw-pxFixed(1);
+$gw-CalendarWidget--Month--event-action-col: #31aade;
+$gw-CalendarMonth--day-header-bg: #586d87;
+
+// ========== Title Section
+.gw-CalendarTitle {
+  align-items: center;
+  justify-content: center;
+  background-color: $gw-app--CalendarWidget--ui-bg;
+  font-size: $gw-app--CalendarWidget--Title--font-size;
+  height: $gw-app--CalendarWidget--Title--height;
+  width: 100%;
+
+  @mixin calendarHeaderButton($glyph) {
+    @include gw-Calendar--titleButton($glyph);
+  }
+
+  .gw-CalendarMonth--header--prev {
+    @include calendarHeaderButton($gw-app--CalendarWidget--Title--prev-glyph);
+  }
+
+  .gw-CalendarMonth--header--title {
+    text-align: $gw-app--CalendarWidget--Header--title-align;
+    font-size: $gw-app--CalendarWidget--Header--title-font-size;
+    padding: $gw-app--CalendarWidget--Header--title-pad-v $gw-app--CalendarWidget--Header--title-pad-h;
+  }
+
+  .gw-CalendarMonth--header--next {
+    @include calendarHeaderButton($gw-app--CalendarWidget--Title--next-glyph);
+  }
+
+}
+
+// ========= Large Calendar Month Widget
+.gw-CalendarMonth {
+  display: inline-block;
+  width: $gw-app--CalendarWidget--Month--cell-size * 6;
+
+  @include gw-borderRadius($gw-app--CalendarWidget--border-radius);
+  border: gw-border($gw-app--CalendarWidget--ui-border);
+
+  .gw-CalendarMonth--body {
+    border: gw-border($gw-app--CalendarWidget--month-border-col);
+  }
+
+  .gw-CalendarMonth--headercell {
+    display: inline-block;
+    border-top: gw-border($gw-app--CalendarWidget--ui-border);
+    width: 16.666667%;
+    text-align: center;
+
+    & + .gw-CalendarMonth--headercell {
+      border-left: gw-border($gw-app--CalendarWidget--ui-border);
+    }
+  }
+
+  .gw-CalendarMonth--cell {
+    display: inline-block;
+    background-color: $gw-app--CalendarWidget--cell--bg;
+    border-top: gw-border($gw-app--CalendarWidget--cell-border);
+    width: 16.6666667%;
+    height: $gw-app--CalendarWidget--Month--cell-size;
+
+    & + .gw-CalendarMonth--cell {
+      border-left: gw-border($gw-app--CalendarWidget--cell-border);
+    }
+  }
+
+  .gw-CalendarMonth--headercell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: $gw-CalendarWidget--Month--header-cell-height;
+    background-color: $gw-app--CalendarWidget--ui-header-bg;
+    padding: $gw-CalendarWidget--Month--header-cell-pad-v 0;
+    .gw-label {
+      font-size: $gw-CalendarWidget--Month--header-cell-font-size;
+      font-weight: bold;
+      text-align: center;
+    }
+  }
+
+  .gw-CalendarMonth--selectedWeek {
+    background-color: $gw-app--CalendarWidget--Month--selected-week-bg;
+  }
+
+  .gw-CalendarMonth--selected {
+    background-color: $gw-app--CalendarWidget--Month--cell-selected-bg;
+  }
+
+
+  .gw-CalendarMonth--event--more-display-text {
+    display: flex;
+    justify-content: center;
+    color: $gw-app--palette--gray-8;
+  }
+
+  .gw-CalendarMonth--weekday {
+    width: 100%;
+    height: 100%;
+
+    cursor: pointer;
+
+    &:hover {
+      background-color: $gw-app--CalendarWidget--day-hover-bg;
+    }
+
+    .gw-CalendarMonth--event--more-display-text {
+      padding-top: gw-emFixed(1);
+    }
+  }
+
+  .gw-CalendarMonth--weekend {
+    width: 100%;
+    height: 50%;
+
+    & + .gw-CalendarMonth--weekend {
+      border-top: gw-border($gw-app--CalendarWidget--cell-border);
+    }
+
+    cursor: pointer;
+
+    &:hover {
+      background-color: $gw-app--CalendarWidget--day-hover-bg;
+    }
+
+    .gw-CalendarMonth--event--more-display-text {
+      padding-top: 0;
+    }
+  }
+
+  .gw-CalendarMonth--notMonth {
+    background-color: $gw-app--CalendarWidget--not-month-bg;
+
+    .gw-CalendarMonth--month-name, .gw-CalendarMonth--day-number {
+      opacity: 0.8;
+    }
+  }
+
+  .gw-CalendarMonth--day--status-wrap {
+    width: 100%;
+    height: 100%;
+    position: relative;
+
+    .gw-CalendarMonth--day-header {
+      display: inline-flex;
+      justify-content: flex-end;
+      align-content: center;
+
+      position: absolute;
+      left: 0;
+      top: 0;
+
+      min-height: $gw-app--CalendarWidget--Month--day-header-h;
+      text-align: right;
+      width: 100%;
+      padding: $gw-app--CalendarWidget--Month--day-header-padding;
+
+      .gw-CalendarMonth--day-number {
+        display: inline-block;
+        text-align: center;
+      }
+    }
+
+    &.gw-CalendarMonth--today {
+      .gw-CalendarMonth--day-header {
+        padding: gw-remScaled($gw-app--CalendarWidget--Month--day-header-today--padding);
+        .gw-CalendarMonth--day-number {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 50%;
+          width: $gw-app--CalendarWidget--Month--day-header-today--h;
+          height: $gw-app--CalendarWidget--Month--day-header-today--h;
+          color: $gw-app--palette--white;
+          background: $gw-CalendarMonth--day-header-bg;
+        }
+      }
+    }
+
+    .gw-CalendarMonth--day-body {
+      width: 100%;
+      padding-top: $gw-app--CalendarWidget--Month--day-header-h;
+
+      .gw-CalendarMonth--event {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        vertical-align: middle;
+        overflow: hidden;
+        white-space: nowrap;
+        width: 100%;
+
+        .gw-CalendarMonth-icon {
+          max-width: 20%;
+          min-width: 20%;
+          display: flex;
+          justify-content: center;
+
+          .gw-critical--icon {
+            display: flex;
+            @include gw-Calendar--criticalIcon();
+          }
+        }
+
+        .gw-CalendarMonth--event--display-text {
+          @include gw-button--normal(
+                          $gw-app--CalendarWidget--Title--button-bg, $gw-CalendarWidget--Month--event-action-col,
+                          $gw-app--CalendarWidget--Title--button-hover-bg, $gw-app--CalendarWidget--Title--button-col,
+                          $gw-app--CalendarWidget--Title--button-hover-bg, $gw-app--CalendarWidget--Title--button-col,
+                          $gw-CalendarWidget--Month--cell-activity-pad, $gw-CalendarWidget--Month--cell-activity-pad);
+          @include gw-textEllipse();
+          text-align: left;
+          max-width: 80%;
+          min-width: 80%;
+        }
+      }
+    }
+  }
+
+  .gw-CalendarMonth--footer {
+    flex-direction: column;
+    background-color: $gw-app--CalendarWidget--ui-bg;
+    padding: $gw-app--CalendarWidget--general-margin $gw-CalendarMonth--area-padding;
+    border-top: gw-border($gw-app--CalendarWidget--cell-border);
+
+    .gw-CalendarMonth--footer-entry {
+      display: inline-block;
+    }
+  }
+}

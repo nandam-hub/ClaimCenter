@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<plugin
+  interface="IMultiClusterSessionPlugin"
+  name="IMultiClusterSessionPlugin">
+  <plugin-gosu
+    disabled="true"
+    gosuclass="gw.web.multicluster.SampleMultiClusterSessionPlugin">
+    <param
+      name="WIPServiceUrl"
+      value="http://localhost:8480/px/service/samplemulticluster"/>
+  </plugin-gosu>
+</plugin>

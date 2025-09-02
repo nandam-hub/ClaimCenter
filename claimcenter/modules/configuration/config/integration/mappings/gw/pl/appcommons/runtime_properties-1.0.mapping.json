@@ -1,0 +1,26 @@
+{
+  "schemaName": "gw.pl.appcommons.runtime_properties-1.0",
+  "mappers": {
+    "RuntimePropertyAttributes": {
+      "schemaDefinition": "RuntimePropertyAttributes",
+      "root": "entity.RuntimeProperty",
+      "properties": {
+        "description": {
+          "path": "RuntimeProperty.Description"
+        },
+        "id": {
+          "path": "RuntimeProperty.PublicID"
+        },
+        "propertyGroup": {
+          "path": "RuntimeProperty.PropertyGroup"
+        },
+        "name": {
+          "path": "RuntimeProperty.Name"
+        },
+        "value": {
+          "path": "RuntimeProperty.Value"
+        }
+      }
+    }
+  }
+}

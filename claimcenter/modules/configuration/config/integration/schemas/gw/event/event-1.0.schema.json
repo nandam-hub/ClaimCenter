@@ -1,0 +1,111 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "definitions": {
+    "EntitySyncStatus": {
+      "type": "object",
+      "properties": {
+        "synced": {
+          "type": "boolean"
+        }
+      }
+    },
+    "EventType": {
+      "type" : "object",
+      "properties" : {
+        "dataSchema": {
+          "$ref": "#/definitions/SchemaRef"
+        },
+        "graphSchema": {
+          "$ref": "#/definitions/SchemaRef"
+        },
+        "description" : {
+          "type" : "string",
+          "description" : "Description of the event"
+        },
+        "entity" : {
+          "type" : "string",
+          "description" : "The entity for which the event is generated"
+        },
+        "group": {
+          "type" : "string",
+          "description" : "Whether the entity is primary, administrative, or cross-primary.",
+          "enum": [
+            "primary",
+            "admin",
+            "cross"
+          ]
+        },
+        "mapper": {
+          "type" : "string",
+          "description" : "The name of the mapper used to map data for the event"
+        },
+        "name" : {
+          "type" : "string",
+          "description" : "The name of the event"
+        },
+        "subjectTemplate": {
+          "type": "string",
+          "description": "The template of the path of the event data within a graph"
+        },
+        "subtypeMappers": {
+          "$ref": "#/definitions/EventTypeSubtypeMappers"
+        }
+      }
+    },
+    "EventTypesList": {
+      "type" : "object",
+      "properties" : {
+        "types" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/EventType"
+          }
+        }
+      }
+    },
+    "EventTypeSubtypeMapper": {
+      "type": "object",
+      "properties": {
+        "mapper": {
+          "type" : "string",
+          "description" : "The name of the mapper used to map data for the event"
+        },
+        "subjectTemplate": {
+          "type": "string",
+          "description": "The template of the path of the event data within a graph"
+        }
+      }
+    },
+    "EventTypeSubtypeMappers": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/EventTypeSubtypeMapper"
+      }
+    },
+    "SchemaRef": {
+      "type": "object",
+      "properties": {
+        "packageName": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "SyncStatus": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref" : "#/definitions/EntitySyncStatus"
+      }
+    },
+    "TestEventInfo": {
+      "type" : "object",
+      "properties": {
+        "rootId": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

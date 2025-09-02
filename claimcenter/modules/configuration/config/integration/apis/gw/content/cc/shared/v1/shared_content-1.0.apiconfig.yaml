@@ -1,0 +1,17 @@
+combine:
+- gw.core.cc.shared.v1.shared_core-1.0
+resourceAccess:
+  contactAuthorizationIds:
+    yaml: gw.content.cc.shared.v1.contactAuthorizationIds_content-1.0
+  gwabuid:
+    yaml: gw.content.cc.shared.v1.gwabuid_content-1.0
+  internal:
+    yaml: gw.content.cc.shared.v1.internal_content-1.0
+  policyNumbers:
+    yaml: gw.content.cc.shared.v1.policyNumbers_content-1.0
+  producerCodes:
+    yaml: gw.content.cc.shared.v1.producerCodes_content-1.0
+  service:
+    yaml: gw.content.cc.shared.v1.serviceUser_content-1.0
+  unauthenticated:
+    yaml: gw.content.cc.shared.v1.unauthenticatedUser_content-1.0

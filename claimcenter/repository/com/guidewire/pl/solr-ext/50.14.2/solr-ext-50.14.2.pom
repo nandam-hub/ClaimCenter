@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.guidewire.pl</groupId>
+  <artifactId>solr-ext</artifactId>
+  <version>50.14.2</version>
+  <properties/>
+  <parent>
+    <groupId>com.guidewire.pl</groupId>
+    <artifactId>pl-parent</artifactId>
+    <version>50.14.2</version>
+    <relativePath>../../../../../platform/build/publications/mavenJava/pom-default.xml</relativePath>
+  </parent>
+  <dependencyManagement>
+    <dependencies/>
+  </dependencyManagement>
+  <dependencies>
+    <dependency>
+      <groupId>org.apache.lucene</groupId>
+      <artifactId>lucene-core</artifactId>
+      <scope>provided</scope>
+      <exclusions>
+        <exclusion>
+          <groupId>*</groupId>
+          <artifactId>*</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>gw.managed.osgi</groupId>
+      <artifactId>gw-libphonenumber</artifactId>
+      <scope>provided</scope>
+    </dependency>
+  </dependencies>
+</project>

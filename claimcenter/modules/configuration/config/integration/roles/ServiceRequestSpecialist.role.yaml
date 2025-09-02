@@ -1,0 +1,210 @@
+name: ServiceRequestSpecialist
+endpoints:
+- endpoint: /async/v1/openapi.json
+  methods:
+  - GET
+- endpoint: "/async/v1/requests/*"
+  methods:
+  - GET
+- endpoint: "/async/v1/requests/*/response"
+  methods:
+  - GET
+- endpoint: /claim/v1/claims
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*"
+  methods:
+  - GET
+- endpoint: /claim/v1/openapi.json
+  methods:
+  - GET
+- endpoint: /claim/v1/service-requests
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/service-requests"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/service-requests/*"
+  methods:
+  - GET
+  - PATCH
+- endpoint: "/claim/v1/claims/*/service-requests/*/accept"
+  methods:
+  - POST
+- endpoint: "/claim/v1/claims/*/service-requests/*/add-quote"
+  methods:
+  - POST
+- endpoint: "/claim/v1/claims/*/service-requests/*/cancel"
+  methods:
+  - POST
+- endpoint: "/claim/v1/claims/*/service-requests/*/complete-work"
+  methods:
+  - POST
+- endpoint: "/claim/v1/claims/*/service-requests/*/completion-date"
+  methods:
+  - POST
+- endpoint: "/claim/v1/claims/*/service-requests/*/decline"
+  methods:
+  - POST
+- endpoint: "/claim/v1/claims/*/service-requests/*/history"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/service-requests/*/history/*"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/service-requests/*/instructions"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/service-requests/*/instructions/*"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/service-requests/*/invoices"
+  methods:
+  - GET
+  - POST
+- endpoint: "/claim/v1/claims/*/service-requests/*/invoices/*"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/service-requests/*/invoices/*/withdraw"
+  methods:
+  - POST
+- endpoint: "/claim/v1/claims/*/service-requests/*/messages"
+  methods:
+  - GET
+  - POST
+- endpoint: "/claim/v1/claims/*/service-requests/*/messages/*"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/service-requests/*/quote-date"
+  methods:
+  - POST
+- endpoint: "/claim/v1/claims/*/service-requests/*/resume"
+  methods:
+  - POST
+- endpoint: "/claim/v1/claims/*/service-requests/*/suspend"
+  methods:
+  - POST
+- endpoint: /claim/v1/service-messages
+  methods:
+  - GET
+- endpoint: /admin/v1/openapi.json
+  methods:
+  - GET
+- endpoint: /claim/v1/openapi.json
+  methods:
+  - GET
+- endpoint: /common/v1/openapi.json
+  methods:
+  - GET
+- endpoint: /composite/v1/composite
+  methods:
+  - POST
+- endpoint: /composite/v1/openapi.json
+  methods:
+  - GET
+accessibleFields:
+  Claim:
+    view:
+    - assignedUser
+    - claimNumber
+    - closeDate
+    - closedOutcome
+    - description
+    - howReported
+    - id
+    - insured
+    - jurisdiction
+    - lobCode
+    - lossCause
+    - lossDate
+    - lossLocation
+    - lossType
+    - mainContact
+    - policyAddresses
+    - policyNumber
+    - reportedByType
+    - reportedDate
+    - reporter
+    - reporterDetails
+    - state
+    - witnesses
+  ServiceRequest:
+    edit:
+    - referenceNumber
+    view:
+    - assignmentDate
+    - assignmentDateTime
+    - canceledReason
+    - claim
+    - createTime
+    - customer
+    - expectedQuoteCompletionDate
+    - expectedQuoteCompletionDateTime
+    - expectedServiceCompletionDate
+    - expectedServiceCompletionDateTime
+    - id
+    - instruction
+    - kind
+    - latestQuote
+    - nextStep
+    - overdue
+    - progress
+    - quoteStatus
+    - referenceNumber
+    - relatedTo
+    - requestedQuoteCompletionDate
+    - requestedQuoteCompletionDateTime
+    - requestedServiceCompletionDate
+    - requestedServiceCompletionDateTime
+    - serviceRequestNumber
+    - services
+    - specialist
+    - specialistCommMethod
+    - tier
+  ServiceRequestChange:
+    view:
+    - "*"
+  ServiceRequestInstruction:
+    view:
+    - createTime
+    - customer
+    - id
+    - instructionText
+    - serviceAddress
+    - services
+  ServiceRequestInvoice:
+    edit:
+    - description
+    - lineItems
+    - referenceNumber
+    - source
+    view:
+    - approvalDate
+    - approvedBy
+    - creationTime
+    - declineReason
+    - description
+    - expectedDaysToPerformService
+    - id
+    - lineItems
+    - paymentDate
+    - paymentDateTime
+    - referenceNumber
+    - source
+    - status
+    - subtype
+    - total
+  ServiceRequestMessage:
+    edit:
+    - body
+    - messageType
+    - sendDate
+    - title
+    view:
+    - author
+    - body
+    - id
+    - messageType
+    - sendDate
+    - serviceRequest
+    - title

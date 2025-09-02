@@ -1,0 +1,8 @@
+{
+  "schemaName": "ext.testutil.v1.testutil_ext-1.0",
+  "combine": [
+    "ext.common.v1.common_ext-1.0",
+    "gw.content.cc.testutil.v1.testutil_content-1.0"
+  ],
+  "mappers": { }
+}

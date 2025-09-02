@@ -1,0 +1,112 @@
+swagger: "2.0"
+info:
+  description: APIs for events and related objects
+  version: '1.0'
+  title: Standard Event API
+basePath: /event/v1
+x-gw-apihandlers:
+- gw.rest.event.v1.EventAPIHandler
+produces:
+- application/json
+x-gw-schema-import:
+  event : gw.event.event-1.0
+x-gw-authorizer:
+    gw.api.rest.auth.ApiRoleApiAuthorizer
+paths:
+  /events/{eventId}/data:
+    parameters:
+    - $ref: "#/parameters/eventId"
+    get:
+      summary: Get event data associated with event Id
+      description: >
+        Get event data claim checked for the event with the specified id
+      operationId: retrieveData
+      responses:
+        200:
+          description: OK
+          schema:
+            type: string
+  /syncstatus:
+    get:
+      summary: Get the synchronization status of all App Events EventMigratable instances
+      description: >
+        Get the synchronization status of all App Events EventMigratable instances
+      operationId: getSyncStatus
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: "event#/definitions/SyncStatus"
+  /schemas/{schemaName}/{definitionName}:
+    parameters:
+    - $ref: "#/parameters/schemaName"
+    - $ref: "#/parameters/definitionName"
+    get:
+      summary: Gets the schema for the requested definition
+      description: >
+        Gets the schema for the requested definition
+      operationId: getSchema
+      responses:
+        200:
+          description: OK
+          schema:
+            type: string
+  /status:
+    get:
+      summary: Get status of App Events
+      description: >
+        Get status of App Events if enabled or disabled
+      operationId: getStatus
+      responses:
+        200:
+          description: OK
+          schema:
+            type: string
+            enum:
+              - enabled
+              - disabled
+  /types:
+    get:
+      summary: List the events
+      description: >
+        Gets the event types supported by App Events
+      operationId: getTypes
+      produces:
+      - application/json
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: "event#/definitions/EventTypesList"
+  /status/test:
+    post:
+      summary: Raises an AppEventsTest event and returns the payload with root id
+      description: >
+        Raises an AppEventsTest admin event.
+      operationId: testAppEvents
+      produces:
+        - application/json
+      responses:
+        201:
+          description: OK
+          schema:
+            $ref: "event#/definitions/TestEventInfo"
+parameters:
+  eventId:
+    name: eventId
+    type: string
+    in: path
+    required: true
+    description: The identifier for the event
+  schemaName:
+    name: schemaName
+    type: string
+    in: path
+    required: true
+    description: name of schema in which to find the definition
+  definitionName:
+    name: definitionName
+    type: string
+    in: path
+    required: true
+    description: name of definition in schema to find

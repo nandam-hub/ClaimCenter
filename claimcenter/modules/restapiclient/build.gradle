@@ -1,0 +1,51 @@
+group = "gwgen.restclient"
+version = "1.0.0"
+
+buildscript {
+  repositories {
+    maven { url project.rootDir.absolutePath + "/../../repository" }
+  }
+  dependencies {
+    classpath 'com.guidewire.restclient:plugin:14.0.7'
+    classpath 'com.guidewire.restclient:codegen:14.0.7'
+    classpath 'org.openapitools:openapi-generator-cli:7.4.0'
+  }
+}
+
+apply from: 'build-extensions.gradle'
+apply plugin: 'com.guidewire.restclient.codegen'
+
+ext {
+  zipDir = file(project.buildDir.absolutePath + "/zip/lib")
+}
+subprojects {
+  task copy(type: Copy) {
+    group "Guidewire Rest Client"
+    destinationDir(zipDir)
+    from(project.buildDir.absolutePath + "/libs") {
+      include("*.jar")
+    }
+    afterEvaluate {
+      def buildTask = tasks.findByPath("build")
+      if (buildTask != null) {
+        buildTask.finalizedBy(copy)
+      }
+    }
+  }
+}
+
+task clean {
+  doFirst {
+    delete rootProject.buildDir
+  }
+  subprojects.each { dependsOn(it.name + ":clean") }
+}
+
+task publishZip(type: Zip) {
+  group "Guidewire Rest Client"
+  archiveFileName = "endpoints-" + project.version + ".zip"
+  outputs.upToDateWhen { false }
+  destinationDirectory = file(project.buildDir.absolutePath + "/distribution")
+  from zipDir
+  subprojects.each { dependsOn(it.name + ":copy") }
+}

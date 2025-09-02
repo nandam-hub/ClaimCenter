@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin interface="IBaseURLBuilder" name="IBaseURLBuilder">
+  <plugin-gosu gosuclass="gw.plugin.baseurlbuilder.ForwardAwareBaseURLBuilder"/>
+</plugin>

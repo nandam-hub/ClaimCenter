@@ -1,0 +1,79 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "x-gw-import": {
+    "linking": "gw.pl.framework.linking-1.0"
+  },
+  "definitions": {
+    "TypeKey": {
+      "type": "object",
+      "properties": {
+        "typelist": {
+          "type": "string",
+          "description": "The typelist this type key belongs in."
+        },
+        "code": {
+          "type": "string",
+          "description": "The code for this type key, this is locale independent and unique."
+        },
+        "retired": {
+          "type": "boolean",
+          "description": "Whether this type key is retired."
+        },
+        "priority": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The priority relative to other type keys for sorting."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of this type key.  This is locale dependent."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of this type key.  This is locale dependent and not necessarily unique."
+        },
+        "categories": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Category"
+          },
+          "description": "Any categories that are assigned to this type key."
+        }
+      }
+    },
+    "TypeKeyList": {
+      "type": "object",
+      "description": "This is a page of type keys.",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TypeKey"
+          }
+        },
+        "_links": {
+          "$ref": "linking#/definitions/Links"
+        },
+        "count": {
+          "type": "integer"
+        },
+        "totalCount": {
+          "type": "integer"
+        }
+      }
+    },
+    "Category": {
+      "type": "object",
+      "properties": {
+        "typelist": {
+          "type": "string",
+          "description": "The typelist name for this type key."
+        },
+        "code": {
+          "type": "string",
+          "description": "The code for this type key, this is locale independent."
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<extension
+  xmlns="http://guidewire.com/datamodel"
+  entityName="ActivityPattern">
+  <events/>
+  <column
+    default="false"
+    desc="Can activities using this activity pattern be created in ClaimCenter from BillingCenter"
+    name="BCGenerationAllowed_SP"
+    nullok="true"
+    type="bit"/>
+  <column
+    default="false"
+    desc="Can activities using this activity pattern be created in ClaimCenter from PolicyCenter"
+    name="PCGenerationAllowed_SP"
+    nullok="true"
+    type="bit"/>
+  <implementsEntity
+    name="Validatable"/>
+  <foreignkey
+    desc="foreign key to Queue to which activities of this pattern shall be assigned to"
+    fkentity="AssignableQueue"
+    name="AssignableQueue_SP"
+    nullok="true"/>
+  <foreignkey
+    desc="foreign key to Group to which activities of this pattern shall be assigned to"
+    fkentity="Group"
+    name="Group_SP"
+    nullok="true"/>
+</extension>

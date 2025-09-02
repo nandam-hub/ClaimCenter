@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<typelist xmlns="http://guidewire.com/typelists" name="ValuationRequired" desc="Indicates if and why valuation for the incident's property is needed">
+  <typecode
+    code="yes"
+    desc="Yes"
+    name="Yes"/>
+  <typecode
+    code="no_quote_indicates_repair"
+    desc="No, quote indicates repair"
+    name="No, quote indicates repair"/>
+  <typecode
+    code="no_quote_indicates_total_loss"
+    desc="No, quote indicates total loss"
+    name="No, quote indicates total loss"/>
+  <typecode
+    code="no_analytics_indicate_repair"
+    desc="No, analytics indicate repair"
+    name="No, analytics indicate repair"/>
+</typelist>

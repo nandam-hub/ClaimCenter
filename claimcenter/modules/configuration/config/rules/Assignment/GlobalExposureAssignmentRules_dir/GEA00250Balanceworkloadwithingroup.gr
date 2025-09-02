@@ -1,0 +1,89 @@
+package rules.Assignment.GlobalExposureAssignmentRules_dir
+
+uses gw.api.locale.DisplayKey
+uses gw.api.system.CCLoggerCategory
+uses gw.assignment.AssignExposureSameCoverageImpl
+uses gw.assignment.AssignmentUtil_Ext
+
+@gw.rules.RuleName("GEA00250 - Balance workload within group")
+internal class GEA00250Balanceworkloadwithingroup {
+  static function doCondition(exposure : entity.Exposure) : boolean {
+/*start00rule*/
+    var scriptWWLEnabled = AssignExposureSameCoverageImpl.EnableWeightedWorkload_Ext
+
+    var groupToUse = exposure.AssignedGroup != null
+        ? exposure.AssignedGroup
+        : exposure.Claim.AssignedGroup
+
+    return scriptWWLEnabled
+        and groupToUse != null
+        and AssignmentUtil_Ext.getEligibleUsersFromGroupAndChildren(groupToUse).size() > 0
+/*end00rule*/
+}
+
+  static function doAction(exposure : entity.Exposure, actions : gw.rules.Action) {
+/*start00rule*/
+    var logger = CCLoggerCategory.ASSIGNMENT_WEIGHTED_WORKLOAD
+    var wwlEnabled = gw.api.system.CCConfigParameters.WeightedAssignmentEnabled.Value
+    var scriptWWLEnabled = AssignExposureSameCoverageImpl.EnableWeightedWorkload_Ext
+
+    logger.info("### GEA00250: Exposure ID: " + exposure.ID +
+        ", Config WWL=" + wwlEnabled +
+        ", ScriptParam WWL=" + scriptWWLEnabled +
+        ", Initial AssignedGroup=" + exposure.AssignedGroup)
+
+    var assigned = false
+
+    // If AssignedGroup is null but Claim has one, set from Claim
+    var inheritedFromClaim = false
+    if (exposure.AssignedGroup == null and exposure.Claim.AssignedGroup != null) {
+      exposure.assignGroup(exposure.Claim.AssignedGroup)
+      inheritedFromClaim = true
+      logger.info("### GEA00250: AssignedGroup inherited from Claim: " + exposure.AssignedGroup)
+    }
+
+    var groupToUse = exposure.AssignedGroup
+
+    // If group came from claim, walk up to root group
+    if (inheritedFromClaim and groupToUse != null) {
+      var rootGroup = groupToUse
+      while (rootGroup.Parent != null) {
+        rootGroup = rootGroup.Parent
+      }
+      groupToUse = rootGroup
+      logger.info("### GEA00250: Walked up to Root Group: " + rootGroup)
+    }
+
+    // Try WWL first
+    if (wwlEnabled and scriptWWLEnabled) {
+      assigned = exposure.assignUserByWorkload(true, groupToUse)
+      if (assigned) {
+        logger.info("### GEA00250: WWL assigned Exposure to: " + exposure.AssignedUser)
+        actions.exit()
+      } else {
+        logger.info("### GEA00250: WWL failed or tie — trying RR Similar fallback")
+      }
+    } else {
+      logger.info("### GEA00250: WWL disabled — trying RR Similar fallback")
+    }
+
+    // Fallback to RR Similar
+    assigned = exposure.assignUserByRoundRobinKeepSimilarTogether(true, groupToUse)
+    if (assigned) {
+      logger.info("### GEA00250: RR Similar assigned Exposure to: " + exposure.AssignedUser)
+      actions.exit()
+    } else {
+      logger.warn("### GEA00250: RR Similar failed — trying final RR fallback")
+    }
+
+    // Final fallback to regular RR
+    assigned = exposure.assignUserByRoundRobin(true, groupToUse)
+    if (assigned) {
+      logger.info("### GEA00250: RR assigned Exposure to: " + exposure.AssignedUser)
+      actions.exit()
+    } else {
+      logger.warn("### GEA00250: All assignment attempts failed — no user assigned")
+    }
+/*end00rule*/
+  }
+}

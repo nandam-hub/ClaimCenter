@@ -1,0 +1,136 @@
+.gw-BadgeWidget {
+  text-align: left;
+  color: $gw-app--BadgeWidget--default-col;
+  background-color: $gw-app--BadgeWidget--default-bg;
+  margin-right: $gw-app--SPACING-rem-XS;
+
+}
+
+.gw-badge-style--none {
+  background-color: transparent;
+  color: inherit;
+}
+
+.gw-badge-style--info {
+  background-color: $gw-app--palette--info;
+  color: $gw-app--palette--info--text-overlay-col;
+}
+
+.gw-badge-style--warning {
+  background-color: $gw-app--palette--orange--vibrant;
+  color: $gw-app--palette--orange--vibrant--text-overlay-col;
+}
+
+.gw-badge-style--error {
+  background-color: $gw-app--palette--error;
+  color: $gw-app--palette--error--text-overlay-col;
+}
+
+.gw-badge-style--success {
+  background-color: $gw-app--palette--outcomepositive;
+  color: $gw-app--palette--outcomepositive--text-overlay-col;
+}
+
+.gw-badge-style--tier1 {
+  background-color: $gw-app--palette--tier1;
+  color: $gw-app--palette--tier1--text-overlay-col;
+}
+
+.gw-badge-style--tier2 {
+  background-color: $gw-app--palette--tier2;
+  color: $gw-app--palette--tier2--text-overlay-col;
+}
+
+.gw-badge-style--tier3 {
+  background-color: $gw-app--palette--tier3;
+  color: $gw-app--palette--tier3--text-overlay-col;
+}
+
+.gw-badge-style--tier4 {
+  background-color: $gw-app--palette--tier4;
+  color: $gw-app--palette--tier4--text-overlay-col;
+}
+
+.gw-badge-style--highlight {
+  background-color: $gw-app--palette--highlight;
+  color: $gw-app--palette--highlight--text-overlay-col;
+}
+
+.gw-badge-style--highlight_alt {
+  background-color: $gw-app--palette--highlightalt;
+  color: $gw-app--palette--highlightalt--text-overlay-col;
+}
+
+.gw-badge-style--callout {
+  background-color: $gw-app--palette--callout;
+  color: $gw-app--palette--callout--text-overlay-col;
+}
+
+.gw-badge-style--callout_alt {
+  background-color: $gw-app--palette--calloutalt;
+  color: $gw-app--palette--calloutalt--text-overlay-col;
+}
+
+
+.gw-BadgeWidget, .gw-badge {
+  @include gw-possiblyApplyForcedBadgeWidgetColor();
+
+  line-height: 1;
+  &:empty {
+    min-height: gw-emFixed(1);
+    min-width: gw-emFixed(1);
+    @include gw-borderRadius(50%);
+  }
+
+  &.gw-styleTag--TitleBarWidget, &.gw-styleTag--VerbatimWidget {
+    margin-left: $gw-app--SPACING-rem-S;
+  }
+
+  &.gw-badge-min-w {
+    min-width: $gw-app--BadgeWidget--standard-min-width;
+    @if($gw-app--BadgeWidget--standard-min-width-should-also-center-align) {
+      text-align: center;
+    }
+  }
+
+  &.gw-styleTag--InputWidget {
+    float: left;
+
+    &.gw-badge-small {
+      margin-top: $gw-app--InputColumn--label-margin-top-rem;
+    }
+
+    &:not(.gw-badge-small) {
+      margin-top: $gw-app--inputs--pad-v-rem;
+    }
+  }
+
+  &.gw-badge-small {
+    font-size: $gw-app--BadgeWidget--small-font-size-px;
+    font-weight: $gw-app--BadgeWidget--small-font-weight;
+    border-radius: $gw-app--BadgeWidget--small-border-radius;
+    padding: $gw-app--BadgeWidget--small-pad-v $gw-app--BadgeWidget--small-pad-h;
+  }
+  
+  &:not(.gw-badge-small) {
+    font-size: $gw-app--BadgeWidget--large-font-size-px;
+    font-weight: $gw-app--BadgeWidget--large-font-weight;
+    border-radius: $gw-app--BadgeWidget--large-border-radius;
+    padding: $gw-app--BadgeWidget--large-pad-v $gw-app--BadgeWidget--large-pad-h;
+  }
+
+  .gw-icon + .gw-label:not(:empty) {
+    margin-left: $gw-app--SPACING-rem-S;
+  }
+
+  .gw-icon {
+    min-width: 1em;
+    display: inline-block;
+    text-align: center;
+  }
+
+  .gw-label {
+    //PH
+  }
+
+}

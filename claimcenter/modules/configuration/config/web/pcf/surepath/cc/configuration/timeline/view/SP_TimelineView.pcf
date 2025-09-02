@@ -1,0 +1,409 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../../../pcf.xsd">
+  <Page
+    afterEnter="gw.surepath.cc.configuration.timeline.creation.TimelineUtil.onTimelineView(claim)"
+    canEdit="true"
+    id="SP_TimelineView"
+    startInEditMode="true"
+    title="&quot;Timeline&quot;">
+    <LocationEntryPoint
+      signature="SP_TimelineView(claim : Claim)"/>
+    <Variable
+      name="claim"
+      type="Claim"/>
+    <Variable
+      name="jumpToDate"
+      type="java.util.Date"/>
+    <Screen
+      editable="true">
+      <TitleBar
+        title="&quot;Claim Timeline&quot;"/>
+      <DetailViewPanel
+        editable="true">
+        <InputColumn>
+          <DateInput
+            editable="true"
+            id="GoToDateWidget"
+            label="&quot;Jump to Date&quot;"
+            value="jumpToDate">
+            <PostOnChange
+              deferUpdate="false"/>
+          </DateInput>
+        </InputColumn>
+      </DetailViewPanel>
+      <TemplatePanel>
+        <TemplatePanelContents><![CDATA[
+<%uses java.util.ArrayList
+uses java.text.DateFormatSymbols
+uses gw.surepath.cc.configuration.timeline.creation.ui.TimelineModel
+uses gw.surepath.cc.configuration.timeline.creation.TimelineUtil
+uses gw.surepath.cc.configuration.timeline.creation.TimelineServlet
+uses gw.api.locale.DisplayKey
+uses java.util.Calendar
+uses java.util.GregorianCalendar
+uses gw.api.util.DateUtil
+uses java.util.Date
+uses java.text.DateFormat %>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.css" rel="stylesheet">
+<style>
+
+#timeline-container {
+  min-width: 1000px;
+  height: 500px;
+  width: 100%;
+  position: relative;
+}
+
+#timeline-scroll {
+  height: 100%;
+  overflow-y: auto;
+  position: relative;
+}
+
+#timeline {
+  width: 80%;
+  float: left;
+  margin-right: 20%;
+}
+
+.day:last-child {
+  border:none;
+}
+
+.day {
+  border-bottom-style: solid;
+  border-width: 7px;
+  border-color: #E9F2FA;
+}
+
+.month {
+  border-bottom-style: solid;
+  border-width: 15px;
+  border-color: #E9F2FA;
+}
+.month:last-child {
+  border:none;
+}
+
+.cell {
+  display: inline-block;
+  padding: 7px;
+  vertical-align: top;
+}
+
+.date {
+  font-size: 1em;
+  width: 10%;
+  position: absolute;
+}
+
+.entry {
+  margin-left: 10%;
+}
+
+.summary {
+  font-size: 1em;
+  width: 80%;
+  border-left-style: solid;
+  border-width: 1px;
+  border-color: rgba(234, 234, 234, 1);
+  padding-left: 22.5px;
+  min-height: 40px;
+}
+
+.time {
+  font-size: .8em;
+  width: 5%;
+  min-width: 60px;
+  color: #5C5C5C;
+
+}
+
+.filters {
+  min-width: 160px;
+  display: block;
+  width: 15%;
+  right: 3%;
+  top: 0px;
+  position: absolute;
+}
+
+input {
+  margin-left: none;
+}
+
+.hideEntry {
+  display: none;
+}
+
+.link {
+  color: #0067ac;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+select {
+  width: 150px;
+  margin-top: 10px;
+  background-color: #f8f8f8;
+  display: block;
+}
+
+.relatedToTitle {
+  padding-top: 10px;
+}
+
+.iconFilterWrapper {
+  margin: 4px;
+  display: inline-block;
+}
+
+.categoryIcon {
+    border-radius: 50%;
+    display: inherit;
+    color: #fff;
+    background: #ccc;
+    font-size: 12px;
+    width: 25px;
+    height: 25px;
+    box-sizing: border-box;
+    text-align: center;
+    line-height: 25px;
+}
+
+
+.activities {
+    background: #ffb430;
+    color: #ffebc9;
+}
+
+.fa {
+    display: inline-block;
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.serviceRequests {
+  background : #50c7a7;
+  color : #d9fff4;
+}
+
+.notes {
+  background : #976190;
+  color : #ffd9fb;
+}
+
+.documents {
+  background: #000000 ;
+  color: #dcfe92 ;
+}
+
+.financials {
+  background: #85c202 ;
+  color: #dcfe92 ;
+}
+
+.timeline-icon {
+  position: relative;
+  left: 20px;
+  top: -3px;
+}
+
+#sliderLabelDiv {
+  margin-bottom: 18px;
+}
+
+#sliderLabelLeft {
+  left: 0%;
+  position: absolute;
+}
+#sliderLabelRight {
+  right: 0%;
+  position: absolute;
+}
+.sliderLabelMiddle {
+  position: absolute;
+}
+.sliderLabelMiddleInner {
+  margin-left: -50%;
+}
+
+#noMatches{
+  margin: 8px;
+}
+#slider {
+    width: 100%;
+}
+.button-wrapper {
+  text-align: center;
+}
+
+#monthSelect {
+  width: 50px;
+  display: inline-block;
+}
+
+#daySelect {
+  width: 42px;
+  display: inline-block;
+  margin-right: 1px;
+}
+
+#yearSelect {
+  width: 56px;
+  display: inline-block;
+  margin-right: 1px;
+}
+
+#importanceLabel {
+  margin-top: 10px;
+}
+
+</style>
+
+<div id="timeline-container">
+
+<script>
+<% var timeline = new TimelineModel(claim.Timeline_SP.TimelineEntries.sortByDescending(\ entry -> entry.EventDate))
+var dateTimeFormat = DateFormat.getTimeInstance(DateFormat.SHORT) %>
+
+var jumpToDateYear = ${jumpToDate != null ? jumpToDate.YearOfDate: null}
+var jumpToDateMonth = ${jumpToDate != null ? jumpToDate.MonthOfYear - 1 : null}
+var jumpToDateDay = ${jumpToDate != null ? jumpToDate.DayOfMonth : null}
+
+var months = []
+var days = []
+var entries = []
+var links = []
+var waitMessage = ""
+var claimCreateMessage = ""
+<% if (claim.Timeline_SP.TimelineStatus == TimelineStatus_SP.TC_RESTORING) { %>
+  waitMessage = "${DisplayKey.get("SP.Timeline.UI.Message.Restoring")}"
+<% } else { %>
+  <% var claimCreateDate = claim.CreateTime ?: DateUtil.currentDate()%>
+  claimCreateMessage = "${DisplayKey.get("SP.Timeline.UI.Message.Claim.Created",
+    claim.ClaimNumber,
+    dateTimeFormat.format(claimCreateDate))}"
+<% } %>
+
+var servlet_path = "${TimelineServlet.SERVLET_PATH}"
+var servlet_path_prefix = "${TimelineServlet.SERVLET_PATH_PREFIX}"
+var claimNumber = "${claim.ClaimNumber}"
+var entryCount = ${claim.Timeline_SP.TimelineEntries.length}
+
+<%var allKeys =  TimelineUtil.timelineEventValues()%>
+var allCategories = []
+<% for (key in allKeys) { %>
+    allCategories.push({
+    Code: "${key.Code}",
+    DisplayName: "${key.DisplayName}"
+    })
+<% } %>
+
+categoryCodes = {
+  activities : "${TimelineCategory_SP.TC_ACTIVITIES.Code}",
+  services : "${TimelineCategory_SP.TC_SERVICEREQUESTS.Code}",
+  notes: "${TimelineCategory_SP.TC_NOTES.Code}",
+  financials: "${TimelineCategory_SP.TC_FINANCIALS.Code}",
+  documents: "${TimelineCategory_SP.TC_DOCUMENTS.Code}"
+}
+
+importanceLabel = "${DisplayKey.get("SP.Timeline.UI.Filter.Importance.Label")}"
+importanceCodes = []
+<% for (key in TimelineImportance_SP.getTypeKeys(false).orderBy(\k -> k.Priority)) { %>
+    importanceCodes.push({
+        name : "${key.DisplayName}"
+    })
+<% } %>
+
+var jumpToButtonText = "${DisplayKey.get("SP.Timeline.UI.Filter.JumpTo.Button")}"
+var monthNames = []
+<% var monthArray = new DateFormatSymbols().getShortMonths()
+for (month in monthArray) { %>
+ monthNames.push("${month}")
+<% } %>
+
+var jumpToLabelText = "${DisplayKey.get("SP.Timeline.UI.Filter.JumpTo.Label")}"
+
+var claimStartYear = "${claim.CreateTime.YearOfDate}"
+
+<% function createEntityLists(entityList : List<KeyableBean>, noChoiceText : String, filterID : String) { %>
+  var choices = []
+  <% for (entity in entityList) { %>
+    choices.push({
+      DisplayName : "${entity.DisplayName}",
+      BeanID: "${entity.PublicID}"
+    })
+  <% } %>
+  var wrappedChoices = {
+    noChoiceText : "${noChoiceText}",
+    selectedBeanID : "${noChoiceText}",
+    choices : choices,
+    filterID : "${filterID}"
+  }
+<% } %>
+
+<% var candidates = claim.RelatedToCandidates
+   var exposures : List<Exposure> = new ArrayList<Exposure>()
+   var contacts : List<Contact> = new ArrayList<Contact>()
+   var matters = new ArrayList<Matter>()
+   var services = new ArrayList<ServiceRequest>()
+   for (candidate in candidates) {
+     if (candidate typeis Exposure) {
+       exposures.add(candidate)
+     } else if (candidate typeis Contact) {
+       contacts.add(candidate)
+     } else if (candidate typeis Matter) {
+       matters.add(candidate)
+     } else if (candidate typeis ServiceRequest) {
+       services.add(candidate)
+     }
+   }
+   contacts = contacts.sortBy(\elt -> elt typeis Person ? elt.LastName : elt.DisplayName)
+   exposures = exposures.sortBy(\elt -> elt.DisplayName)
+%>
+<% createEntityLists(exposures, DisplayKey.get("SP.Timeline.UI.Filter.RelatedTo.Exposure"), "exposure") %>
+var exposures = wrappedChoices
+<% createEntityLists(contacts, DisplayKey.get("SP.Timeline.UI.Filter.RelatedTo.Contact"), "contact") %>
+var contacts = wrappedChoices
+<% createEntityLists(matters, DisplayKey.get("SP.Timeline.UI.Filter.RelatedTo.Matter"), "matter") %>
+var matters = wrappedChoices
+<% createEntityLists(services, DisplayKey.get("SP.Timeline.UI.Filter.RelatedTo.Service"), "service") %>
+var services = wrappedChoices
+var relatedToTitle = "${DisplayKey.get("SP.Timeline.UI.Filter.RelatedTo")}"
+var showMoreButtonText = "${DisplayKey.get("SP.Timeline.UI.ShowMoreButton")}"
+var storagePrefix = "timeline-u" + "${User.util.CurrentUser.PublicID}" + "c" + "${claim.PublicID}-"
+var noMatchesText = "${DisplayKey.get("SP.Timeline.UI.NoMatchesText")}"
+var pageSize = 100
+var MIN_VISIBLE = 25
+
+// Capture the context path so we can generate a dynamic application URL
+var contextPathTimeline = "${TimelineServlet.CONTEXT_PATH_TIMELINE}"
+var contextPathAsync = "${TimelineServlet.CONTEXT_PATH_ASYNC}"
+var scripts = [ contextPathTimeline, contextPathAsync]
+scripts.forEach(function(src) {
+  var script = document.createElement('script');
+  script.src = src;
+  script.async = false;
+  document.head.appendChild(script);
+});
+
+</script>
+
+
+</div>
+
+
+
+
+        ]]></TemplatePanelContents>
+      </TemplatePanel>
+    </Screen>
+  </Page>
+</PCF>

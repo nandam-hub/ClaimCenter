@@ -1,0 +1,28 @@
+swagger: "2.0"
+info:
+  title: "ClaimCenter App Events API"
+  version: "1.0"
+x-gw-combine:
+- gw.event.event-1.0
+x-gw-apihandlers:
+- gw.rest.event.cc.event.v1.CCEventAPIHandler
+paths:
+  "/claims/{claimId}/resync":
+    parameters:
+    - $ref: "#/parameters/claimId"
+    post:
+      summary: "Resync the specified Claim with App Events"
+      description: "Resyncs the specified Claim that may have already been synced with App Events"
+      operationId: resyncClaim
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: "Successfully updated to be resynced to App Events."
+parameters:
+  claimId:
+    name: claimId
+    in: path
+    description: "The identifier for the claim"
+    required: true
+    type: string

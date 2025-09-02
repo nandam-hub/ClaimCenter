@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="ApplicabilityCriteriaDV"
+    mode="ReserveRule">
+    <Require
+      name="context"
+      type="gw.bizrules.CCRulesNavigationContext"/>
+    <Require
+      name="version"
+      type="RuleVersion"/>
+    <Variable
+      initialValue="new gw.bizrules.ReserveRules.ReserveRulePanelSetHelper(version.Rule as ReserveRule, CurrentLocation)"
+      name="helper"
+      recalculateOnRefresh="true"
+      type="gw.bizrules.ReserveRules.ReserveRulePanelSetHelper"/>
+    <InputColumn>
+      <InputSetRef
+        def="ApplicabilityCriteriaSingleSelectInputSet(helper.LossTypesBundle, true)"
+        id="LossTypes"/>
+      <InputSetRef
+        def="ApplicabilityCriteriaMultiSelectInputSet(helper.PolicyTypesBundle)"
+        id="PolicyTypes"/>
+      <InputSetRef
+        def="ApplicabilityCriteriaMultiSelectInputSet(helper.JurisdictionsBundle)"
+        id="Jurisdictions"/>
+    </InputColumn>
+    <InputColumn>
+      <InputSetRef
+        def="ApplicabilityCriteriaMultiSelectInputSet(helper.ExposureTypesBundle)"
+        id="ExposureTypes"/>
+      <InputSetRef
+        def="ApplicabilityCriteriaMultiSelectInputSet(helper.ClaimSegmentsBundle)"
+        id="ClaimSegments"/>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

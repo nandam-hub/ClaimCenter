@@ -1,0 +1,377 @@
+{
+  "schemaName": "gw.core.pl.systemtools.v1.systemtools_pl-1.0",
+  "combine": [
+    "gw.core.pl.framework.v1.framework_pl-1.0"
+  ],
+  "mappers": {
+    "ApiRole": {
+      "schemaDefinition": "ApiRole",
+      "root": "gw.rest.core.pl.systemtools.v1.apirole.ApiRoleWrapper",
+      "properties": {
+        "applicableOnThisPlanetClass": {
+          "path": "ApiRoleWrapper.ApplicableOnThisPlanetClass"
+        },
+        "applicablePlanetClasses": {
+          "path": "ApiRoleWrapper.ApplicablePlanetClasses",
+          "mapper": "#/mappers/PlanetClass"
+        },
+        "id": {
+          "path": "ApiRoleWrapper.Id"
+        }
+      }
+    },
+    "BatchProcess": {
+      "schemaDefinition": "BatchProcess",
+      "root": "gw.rest.core.pl.systemtools.v1.batch.BatchProcessSummary",
+      "properties": {
+        "distributed": {
+          "path": "BatchProcessSummary.Distributed"
+        },
+        "processHistoryId": {
+          "path": "BatchProcessSummary.Id"
+        },
+        "processId": {
+          "path": "BatchProcessSummary.ProcessId"
+        },
+        "status": {
+          "path": "BatchProcessSummary.ProcessStatus",
+          "mapper": "#/mappers/ProcessStatus"
+        },
+        "type": {
+          "path": "BatchProcessSummary.Type",
+          "mapper": "#/mappers/TypeKeyReference"
+        },
+        "wasStopped": {
+          "path": "BatchProcessSummary.WasStopped"
+        },
+        "workQueueStatus": {
+          "path": "BatchProcessSummary.WorkQueueStatus",
+          "mapper": "#/mappers/WorkQueueStatus"
+        }
+      }
+    },
+    // Suppress warnings
+    "BatchProcessArguments": {
+      "schemaDefinition": "BatchProcessArguments",
+      "root": "java.lang.Object",
+      "properties": {
+        "dbconsistencycheck": {
+          "path": "null as Object",
+          "mapper": "#/mappers/DBConsistencyCheckArguments"
+        },
+        "purgeAsyncApiRequests": {
+          "path": "null as Object",
+          "mapper": "#/mappers/PurgeAsyncApiRequestsArguments"
+        },
+        "syncAdminAppEvents": {
+          "path": "null as Object",
+          "mapper": "#/mappers/SyncAdminAppEventsArguments"
+        }
+      }
+    },
+    // Suppress warnings
+    "DBConsistencyCheckArguments": {
+      "schemaDefinition": "DBConsistencyCheckArguments",
+      "root": "java.lang.Object",
+      "properties": {
+        "checkTypes": {
+          "path": "null as String[]"
+        },
+        "description": {
+          "path": "null as String"
+        },
+        "rerunKey": {
+          "path": "0"
+        },
+        "tableNames": {
+          "path": "null as String[]"
+        }
+      }
+    },
+    "DatabaseConsistencyCheck": {
+      "schemaDefinition": "DatabaseConsistencyCheck",
+      "root": "entity.DBConsistCheckRun",
+      "properties": {
+        "description": {
+          "path": "DBConsistCheckRun.Description"
+        },
+        "duration": {
+          "path": "DBConsistCheckRun.Duration"
+        },
+        "endTime": {
+          "path": "DBConsistCheckRun.EndTime"
+        },
+        "errors": {
+          "path": "DBConsistCheckRun.NumErrorExecs"
+        },
+        "extensionsSchemaVersion": {
+          "path": "DBConsistCheckRun.ExtensionsSchemaVersion"
+        },
+        "id": {
+          "path": "DBConsistCheckRun.RestId"
+        },
+        "key": {
+          "path": "DBConsistCheckRun.ID.Value"
+        },
+        "majorSchemaVersion": {
+          "path": "DBConsistCheckRun.MajorSchemaVersion"
+        },
+        "minorSchemaVersion": {
+          "path": "DBConsistCheckRun.MinorSchemaVersion"
+        },
+        "platformMajorSchemaVersion": {
+          "path": "DBConsistCheckRun.PlatformMajorSchemaVersion"
+        },
+        "platformMinorSchemaVersion": {
+          "path": "DBConsistCheckRun.PlatformMinorSchemaVersion"
+        },
+        "startTime": {
+          "path": "DBConsistCheckRun.StartTime"
+        },
+        "totalChecks": {
+          "path": "DBConsistCheckRun.TotalNumChecks"
+        }
+      }
+    },
+    "DesignApiExtensionBundle": {
+      "schemaDefinition": "DesignApiExtensionBundle",
+      "root": "gw.rest.core.pl.systemtools.v1.apiextensionbundle.ApiExtensionBundleSummary",
+      "properties": {
+        "code": {
+          "path": "ApiExtensionBundleSummary.Code"
+        },
+        "definition": {
+          "path": "ApiExtensionBundleSummary.Definition"
+        },
+        "name": {
+          "path": "ApiExtensionBundleSummary.Name"
+        }
+      }
+    },
+    "InstalledApiExtensionBundle": {
+      "schemaDefinition": "InstalledApiExtensionBundle",
+      "root": "gw.rest.core.pl.systemtools.v1.apiextensionbundle.ApiExtensionBundleSummary",
+      "properties": {
+        "code": {
+          "path": "ApiExtensionBundleSummary.Code"
+        },
+        "definition": {
+          "path": "ApiExtensionBundleSummary.Definition"
+        },
+        "name": {
+          "path": "ApiExtensionBundleSummary.Name"
+        },
+        "shadowed": {
+          "path": "ApiExtensionBundleSummary.Shadowed"
+        },
+        "vendor": {
+          "path": "ApiExtensionBundleSummary.Vendor"
+        }
+      }
+    },
+    "PlanetClass": {
+      "schemaDefinition": "PlanetClass",
+      "root": "gw.rest.core.pl.systemtools.v1.apirole.PlanetClassWrapper",
+      "properties": {
+        "lower": {
+          "path": "PlanetClassWrapper.Lower"
+        },
+        "name": {
+          "path": "PlanetClassWrapper.Name"
+        }
+      }
+    },
+    "ProcessHistory": {
+      "schemaDefinition": "ProcessHistory",
+      "root": "gw.rest.core.pl.systemtools.v1.batch.processhistory.ProcessHistoryWrapper",
+      "properties": {
+        "dateCompleted": {
+          "path": "ProcessHistoryWrapper.CompletionDate"
+        },
+        "dateCreated": {
+          "path": "ProcessHistoryWrapper.CreateDate"
+        },
+        "description": {
+          "path": "ProcessHistoryWrapper.Description"
+        },
+        "failedOps": {
+          "path": "ProcessHistoryWrapper.FailedOps"
+        },
+        "failureReason": {
+          "path": "ProcessHistoryWrapper.FailureReason"
+        },
+        "id": {
+          "path": "ProcessHistoryWrapper.Id"
+        },
+        "internalFailure": {
+          "path": "ProcessHistoryWrapper.InternalFailure"
+        },
+        "leaseId": {
+          "path": "ProcessHistoryWrapper.LeaseId"
+        },
+        "opsCompleted": {
+          "path": "ProcessHistoryWrapper.OpsPerformed"
+        },
+        "ranToCompletion": {
+          "path": "ProcessHistoryWrapper.RanToCompletion"
+        },
+        "returnValue": {
+          "path": "ProcessHistoryWrapper.ReturnValue"
+        },
+        "scheduled": {
+          "path": "ProcessHistoryWrapper.Scheduled"
+        },
+        "serverId": {
+          "path": "ProcessHistoryWrapper.ServerId"
+        },
+        "startDate": {
+          "path": "ProcessHistoryWrapper.StartDate"
+        },
+        "type": {
+          "path": "ProcessHistoryWrapper.ProcessType"
+        },
+        "workQueue": {
+          "path": "ProcessHistoryWrapper.WorkQueueInfoWrapper",
+          "mapper": "#/mappers/WorkQueueInfo"
+        }
+      }
+    },
+    "ProcessHistoryBase": {
+      "schemaDefinition": "ProcessHistoryBase",
+      "root": "java.lang.Object",
+      "properties": {
+        "dateCompleted": {
+          "path": "null as Date",
+          "predicate": "false"
+        },
+        "dateCreated": {
+          "path": "null as Date",
+          "predicate": "false"
+        },
+        "failedOps": {
+          "path": "null as Integer",
+          "predicate": "false"
+        },
+        "failureReason": {
+          "path": "null as String",
+          "predicate": "false"
+        },
+        "opsCompleted": {
+          "path": "null as Integer",
+          "predicate": "false"
+        },
+        "serverId": {
+          "path": "null as String",
+          "predicate": "false"
+        },
+        "startDate": {
+          "path": "null as Date",
+          "predicate": "false"
+        },
+        "type": {
+          "path": "null as String",
+          "predicate": "false"
+        }
+      }
+    },
+    "ProcessStatus": {
+      "schemaDefinition": "ProcessStatus",
+      "root": "gw.api.webservice.maintenanceTools.ProcessStatus",
+      "properties": {
+        "dateCompleted": {
+          "path": "ProcessStatus.DateCompleted"
+        },
+        "dateCreated": {
+          "path": "ProcessStatus.DateCreated"
+        },
+        "failedOps": {
+          "path": "ProcessStatus.FailedOps"
+        },
+        "failureReason": {
+          "path": "ProcessStatus.FailureReason"
+        },
+        "opsCompleted": {
+          "path": "ProcessStatus.OpsCompleted"
+        },
+        "opsExpected": {
+          "path": "ProcessStatus.OpsExpected"
+        },
+        "progress": {
+          "path": "ProcessStatus.Progress"
+        },
+        "serverId": {
+          "path": "ProcessStatus.ServerId"
+        },
+        "startDate": {
+          "path": "ProcessStatus.StartDate"
+        },
+        "type": {
+          "path": "ProcessStatus.Type"
+        }
+      }
+    },
+    "PurgeAsyncApiRequestsArguments": {
+      "schemaDefinition": "PurgeAsyncApiRequestsArguments",
+      "root": "java.lang.Object",
+      "properties": {
+        "purgeDaysOld": {
+          "path": "null as Integer"
+        }
+      }
+    },
+    "SyncAdminAppEventsArguments": {
+      "schemaDefinition": "SyncAdminAppEventsArguments",
+      "root": "java.lang.Object",
+      "properties": {
+        "adminEntityNames": {
+          "path": "null as String[]"
+        }
+      }
+    },
+    "WorkQueueInfo": {
+      "schemaDefinition": "WorkQueueStatus",
+      "root": "gw.rest.core.pl.systemtools.v1.batch.processhistory.WorkQueueInfoWrapper",
+      "properties": {
+        "activeWorkersCount": {
+          "path": "WorkQueueInfoWrapper.ActiveWorkersCount"
+        },
+        "checkedOutCount": {
+          "path": "WorkQueueInfoWrapper.CheckedOutCount"
+        },
+        "failedCount": {
+          "path": "WorkQueueInfoWrapper.FailedCount"
+        },
+        "numActiveExecutors": {
+          "path": "WorkQueueInfoWrapper.ExecutorsRunning"
+        },
+        "numActiveWorkItems": {
+          "path": "WorkQueueInfoWrapper.AvailableCount"
+        }
+      }
+    },
+    "WorkQueueStatus": {
+      "schemaDefinition": "WorkQueueStatus",
+      "root": "gw.api.webservice.maintenanceTools.WQueueStatus",
+      "properties": {
+        "activeWorkersCount": {
+          "path": "null as Integer",
+          "predicate": "false"
+        },
+        "checkedOutCount": {
+          "path": "null as Integer",
+          "predicate": "false"
+        },
+        "failedCount": {
+          "path": "null as Integer",
+          "predicate": "false"
+        },
+        "numActiveExecutors": {
+          "path": "WQueueStatus.NumActiveExecutors"
+        },
+        "numActiveWorkItems": {
+          "path": "WQueueStatus.NumActiveWorkItems"
+        }
+      }
+    }
+  }
+}

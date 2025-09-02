@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<typelist xmlns="http://guidewire.com/typelists" name="PreferredEmailType" desc="The preferred contact method for email">
+  <typecode
+    code="no_email_updates"
+    desc="No email updates"
+    name="No email updates"
+    priority="0"/>
+  <typecode
+    code="email_address_1"
+    desc="Main"
+    name="Main"
+    priority="1"/>
+  <typecode
+    code="email_address_2"
+    desc="Alternate"
+    name="Alternate"
+    priority="2"/>
+</typelist>

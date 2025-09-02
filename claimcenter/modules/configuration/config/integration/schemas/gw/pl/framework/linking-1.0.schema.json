@@ -1,0 +1,26 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "definitions": {
+    "LinkObject": {
+      "description" : "This is a single link.",
+      "type": "object",
+      "properties": {
+        "href": {
+          "type": "string"
+        },
+        "method": {
+          "type": "string",
+          "default" : "get",
+          "enum": ["get","post","put","patch","delete"]
+        }
+      }
+    },
+    "Links": {
+      "description" : "This is a collections of links. The links are added as additional properties. For example 'first', 'last', 'prev', 'next'",
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/LinkObject"
+      }
+    }
+  }
+}

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <MenuItemSet
+    id="SP_NewCrossSuiteActivityMenuItemSet">
+    <Variable
+      initialValue="gw.surepath.cc.configuration.activitymanagement.util.ActivityPatternFinder.retrieveCrossSuiteActivityPatterns().toTypedArray()"
+      name="crossAppActPatterns"
+      type="CrossAppActPattern_SP[]"/>
+    <MenuItemIterator
+      elementName="menuItem"
+      value="crossAppActPatterns"
+      valueType="CrossAppActPattern_SP[]">
+      <MenuItem
+        action="SP_NewCrossSuiteActivityPopup.push(menuItem)"
+        id="MenuItemDisplayName"
+        label="menuItem.DestinationApplication.DisplayName + &quot; - &quot; + menuItem.PatternDisplayName"/>
+    </MenuItemIterator>
+  </MenuItemSet>
+</PCF>

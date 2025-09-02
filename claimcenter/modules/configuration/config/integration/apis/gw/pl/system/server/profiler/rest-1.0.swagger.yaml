@@ -1,0 +1,204 @@
+swagger: '2.0'
+x-gw-runlevel: maintenance
+x-gw-schema-import:
+  rest: gw.pl.system.server.profiler.rest-1.0
+  base: gw.pl.system.server.profiler.base-1.0
+  linking: gw.pl.framework.linking-1.0
+x-gw-combine:
+- gw.pl.system.server.profiler.base-1.0
+- gw.pl.framework.paging_definitions-1.0
+- gw.pl.framework.query_definitions-1.0
+x-gw-apihandlers:
+- gw.api.rest.pl.system.v1.server.profiler.RestAPIHandler
+paths:
+  /rest/entrypoints:
+    get:
+      operationId: getRestEntryPoints
+      summary: "Get all rest entry points"
+      description: |
+        - no named filters
+        - the supported properties are:
+        -- entrypoint, a string, so pattern match (pm) and contains (cn) operators are supported
+      parameters:
+        - $ref: "#/parameters/profilingEnabled"
+        - $ref: "#/parameters/filter"
+        - $ref: "#/parameters/pageSize100"
+        - $ref: "#/parameters/pageToken"
+        - $ref: "#/parameters/includeTotalCount"
+      produces:
+        - application/json
+      x-gw-permissions:
+        - toolsProfilerview
+      responses:
+        '200':
+          description: "Returns all entry points based on specified criteria"
+          schema:
+            $ref: "base#/definitions/EntryPointPage"
+  /rest/entrypoints/{entrypoint}/config:
+    get:
+      summary: "Get configuration for entry point"
+      description: "Get configuration for entry point"
+      operationId: getConfigurationForRestEntryPoint
+      parameters:
+        - $ref: "#/parameters/entrypoint"
+      produces:
+        - application/json
+      x-gw-permissions:
+        - toolsProfilerview
+      responses:
+        '200':
+          description: "Returns configuration"
+          schema:
+            $ref: "base#/definitions/EntryPointConfig"
+    patch:
+      summary: "Sets configuration for entry point"
+      operationId: updateConfigurationForRestEntryPoint
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      x-gw-permissions:
+        - toolsProfileredit
+      parameters:
+        - $ref: "#/parameters/entrypoint"
+        - name: body
+          in: body
+          schema:
+            $ref: "base#/definitions/EntryPointConfig"
+          required: true
+      responses:
+        '200':
+          description: "Updates configuration for entry point and returns updated configuration"
+          schema:
+            $ref: "base#/definitions/EntryPointConfig"
+  /rest/entrypoints/{entrypoint}/history:
+    get:
+      summary: "Get all occurrences for this entry point"
+      description: |
+        - no named filters
+        - the supported properties are:
+        -- complete, a date, the completed time, use 8601 value or ('now' for today) with offset (example use -P1W for last week)
+        -- start, a date, the started time, use 8601 value or ('now' for today) with offset (example use -P1W for last week)
+        -- server, a string, the name of the server that this profile was collected on
+        -- path, a string, the http path (note that this must be escaped properly, so think about using operator 'cn' or 'pm' with this)
+        -- traceability, a string, the hash of the id (note that this is usually a random string so pick 6 or so characters and use 'cn' and you will get close)
+        - any of these can be used as sort columns as well
+      operationId: getOccurrencesForRestEntryPoint
+      produces:
+        - application/json
+      x-gw-permissions:
+        - toolsProfilerview
+      parameters:
+        - $ref: "#/parameters/entrypoint"
+        - $ref: "#/parameters/filter"
+        - $ref: "#/parameters/sort"
+        - $ref: "#/parameters/pageSize100"
+        - $ref: "#/parameters/pageToken"
+        - $ref: "#/parameters/includeTotalCount"
+      responses:
+        '200':
+          description: "Returns all occurrences for this entry point"
+          schema:
+            $ref: "rest#/definitions/RestHistoryPage"
+    delete:
+      summary: "Delete rest profiling history for specified entry point (with optional time-range)"
+      description: |
+        - no named filters
+        - the supported properties are:
+        -- complete, a date, the completed time, use 8601 value or ('now' for today) with offset (example use -P1W for last week)
+        -- start, a date, the started time, use 8601 value or ('now' for today) with offset (example use -P1W for last week)
+        -- server, a string, the name of the server that this profile was collected on
+        -- path, a string, the http path (note that this must be escaped properly, so think about using operator 'cn' or 'pm' with this)
+        -- traceability, a string, the hash of the id (note that this is usually a random string so pick 6 or so characters and use 'cn' and you will get close)
+      operationId: deleteProfilerAnalysisForRestEntryPoint
+      parameters:
+      - $ref: "#/parameters/entrypoint"
+      - $ref: "#/parameters/filter"
+      - $ref: "#/parameters/force"
+      produces:
+      - application/json
+      x-gw-permissions:
+      - toolsProfileredit
+      responses:
+        '200':
+          description: "Operation successful"
+          schema:
+            $ref: "base#/definitions/DeleteHistoryOccurrencesResult"
+  /rest/history/{occurrenceId}:
+    get:
+      summary: "Download profiler analysis for this occurrence"
+      operationId: getProfilerAnalysisForRestOccurrence
+      parameters:
+        - $ref: "#/parameters/occurrenceId"
+      produces:
+        - application/x-gzip
+      x-gw-permissions:
+        - toolsProfilerview
+      responses:
+        '200':
+          description: "Download profiler analysis"
+    delete:
+      summary: "Delete rest profiling history occurrence"
+      operationId: deleteProfilerAnalysisForRestOccurrence
+      parameters:
+        - $ref: "#/parameters/occurrenceId"
+        - $ref: "#/parameters/force"
+      x-gw-permissions:
+        - toolsProfileredit
+      responses:
+        '204':
+          description: "Profiler history occurrence deleted"
+  /rest/history:
+    get:
+      summary: "Get history for all entry points"
+      description: |
+        - no named filters
+        - the supported properties are:
+        -- name, a string, actually the handler class and method name (this is the same as entrypoint but this permits other operations besides eq)
+        -- complete, a date, the completed time, use 8601 value or ('now' for today) with offset (example use -P1W for last week)
+        -- start, a date, the started time, use 8601 value or ('now' for today) with offset (example use -P1W for last week)
+        -- server, a string, the name of the server that this profile was collected on
+        -- path, a string, the http path (note that this must be escaped properly, so think about using operator 'cn' or 'pm' with this)
+        -- traceability, a string, the hash of the id (note that this is usually a random string so pick 6 or so leading characters and use 'sw' and you will get close)
+        - any of these can be used as sort columns as well
+      operationId: getOccurrencesForAllRestEntryPoints
+      parameters:
+      - $ref: "#/parameters/entrypointCode"
+      - $ref: "#/parameters/filter"
+      - $ref: "#/parameters/sort"
+      - $ref: "#/parameters/pageSize100"
+      - $ref: "#/parameters/pageToken"
+      - $ref: "#/parameters/includeTotalCount"
+      produces:
+        - application/json
+      x-gw-permissions:
+        - toolsProfilerview
+      responses:
+        '200':
+          description: "Returns history"
+          schema:
+            $ref: "rest#/definitions/RestHistoryPage"
+    delete:
+      summary: "Delete rest profiling history for all entry points (with optional time-range and entry point)"
+      description: |
+        - no named filters
+        - the supported properties are:
+        -- complete, a date, the completed time, use 8601 value or ('now' for today) with offset (example use -P1W for last week)
+        -- start, a date, the started time, use 8601 value or ('now' for today) with offset (example use -P1W for last week)
+        -- server, a string, the name of the server that this profile was collected on
+        -- path, a string, the http path (note that this must be escaped properly, so think about using operator 'cn' or 'pm' with this)
+        -- traceability, a string, the hash of the id (note that this is usually a random string so pick 6 or so characters and use 'cn' and you will get close)
+      operationId: deleteProfilerAnalysisForAllRestEntryPoints
+      parameters:
+      - $ref: "#/parameters/filter"
+      - $ref: "#/parameters/entrypointCode"
+      - $ref: "#/parameters/force"
+      produces:
+      - application/json
+      x-gw-permissions:
+      - toolsProfileredit
+      responses:
+        '200':
+          description: "Operation successful"
+          schema:
+            $ref: "base#/definitions/DeleteHistoryOccurrencesResult"

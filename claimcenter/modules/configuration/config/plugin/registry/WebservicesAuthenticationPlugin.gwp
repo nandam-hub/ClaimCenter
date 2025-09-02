@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<plugin
+  name="WebservicesAuthenticationPlugin">
+  <plugin-gosu
+    gosuclass="gw.auth.gwhub.OAuthWebservicesAuthenticationPlugin"/>
+</plugin>

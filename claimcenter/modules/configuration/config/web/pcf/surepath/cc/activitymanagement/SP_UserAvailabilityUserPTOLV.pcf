@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <ListViewPanel
+    id="SP_UserAvailabilityUserPTOLV">
+    <Require
+      name="user"
+      type="User"/>
+    <ExposeIterator
+      valueType="entity.UserPTO_SP"
+      widget="SP_UserAvailabilityUserPTOLV"/>
+    <RowIterator
+      canPick="pto.Active and pto.BatchProcessDate == null"
+      checkBoxVisible="pto.Active and pto.BatchProcessDate == null"
+      editable="true"
+      elementName="pto"
+      hasCheckBoxes="true"
+      id="SP_UserAvailabilityUserPTOLV"
+      pickLocation="SP_UserAvailabilityUserPTOPopup.push(user)"
+      toAdd="user.addToUserPTO_SP(pto)"
+      toRemove="user.removeFromUserPTO_SP(pto)"
+      value="user.UserPTO_SP"
+      valueType="UserPTO_SP[]">
+      <Row
+        editable="false"
+        useArchivedStyle="!pto.Active">
+        <TypeKeyCell
+          action="SP_UserAvailabilityUserPTOPopup.push(pto,(CurrentLocation.InEditMode &amp;&amp; pto.Active == true))"
+          actionAvailable="pto.Active"
+          id="Description"
+          label="DisplayKey.get(&quot;SP.ActivityManagement.UserAvailability.Web.Admin.UserPTODV.PTOType&quot;)"
+          value="pto.PTOType"
+          valueType="UserPTOType_SP"/>
+        <DateCell
+          id="startDate"
+          label="DisplayKey.get(&quot;SP.ActivityManagement.UserAvailability.Web.Admin.UserPTODV.StartDate&quot;)"
+          value="pto.BeginDate"/>
+        <DateCell
+          id="EndDate"
+          label="DisplayKey.get(&quot;SP.ActivityManagement.UserAvailability.Web.Admin.UserPTODV.EndDate&quot;)"
+          value="pto.EndDate"/>
+        <BooleanRadioCell
+          id="Active"
+          label="DisplayKey.get(&quot;SP.ActivityManagement.UserAvailability.Web.Admin.UserPTODV.Active&quot;)"
+          value="pto.Active"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

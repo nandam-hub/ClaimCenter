@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <CardViewPanel
+    id="VehIncidentDetailDV">
+    <Require
+      name="VehicleIncident"
+      type="VehicleIncident"/>
+    <Require
+      name="unusedServiceRequests"
+      type="java.util.Set&lt;ServiceRequest&gt;"/>
+    <Card
+      id="Vehicle_DetailsCard"
+      title="DisplayKey.get(&quot;NVV.Exposure.VehicleDamage.Details&quot;)">
+      <PanelRef
+        def="VehicleIncidentDV(VehicleIncident, unusedServiceRequests)"/>
+    </Card>
+    <Card
+      id="Incident_Assessment"
+      title="DisplayKey.get(&quot;NVV.Incident.Vehicle.Assessment&quot;)">
+      <PanelRef
+        def="VehIncidentAssessDV(VehicleIncident)">
+        <!-- <Toolbar>
+          <IteratorButtons/>
+        </Toolbar> -->
+      </PanelRef>
+    </Card>
+    <Card
+      id="Incident_AutopilotCard"
+      title="DisplayKey.get(&quot;Web.Incident.AutopilotCard&quot;)"
+      visible="gw.api.feature.AutomaticProcessingFeatureInfo.isEnabled()">
+      <PanelRef
+        def="IncidentAutopilotDV(VehicleIncident)"/>
+    </Card>
+  </CardViewPanel>
+</PCF>

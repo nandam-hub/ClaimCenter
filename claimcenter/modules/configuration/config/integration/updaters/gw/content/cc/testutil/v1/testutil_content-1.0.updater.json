@@ -1,0 +1,53 @@
+{
+  "schemaName": "gw.content.cc.testutil.v1.testutil_content-1.0",
+  "combine": [
+    "gw.content.cc.common.v1.common_content-1.0",
+    "gw.core.cc.testutil.v1.testutil_core-1.0"
+  ],
+  "updaters": {
+    "TestUtilCovTerm": {
+      "schemaDefinition": "TestUtilCovTerm",
+      "root": "entity.CovTerm",
+      "properties": {
+        "covTermOrder": {
+          "path": "CovTerm.CovTermOrder"
+        },
+        "covTermPattern": {
+          "path": "CovTerm.CovTermPattern",
+          "valueResolver": {
+            "typeName": "TypeKeyValueResolver"
+          }
+        },
+        "modelAggregation": {
+          "path": "CovTerm.ModelAggregation",
+          "valueResolver": {
+            "typeName": "TypeKeyValueResolver"
+          }
+        },
+        "modelRestriction": {
+          "path": "CovTerm.ModelRestriction",
+          "valueResolver": {
+            "typeName": "TypeKeyValueResolver"
+          }
+        }
+      }
+    },
+    "TestUtilCoverage": {
+      "schemaDefinition": "TestUtilCoverage",
+      "root": "entity.Coverage",
+      "properties": {
+        "coverageType": {
+          "path": "Coverage.Type",
+          "postUpdateValidators": [
+            {
+              "typeName": "gw.rest.ext.cc.claim.v1.claims.policy.coverages.CoverageTypePostUpdateValidator"
+            }
+          ],
+          "valueResolver": {
+            "typeName": "TypeKeyValueResolver"
+          }
+        }
+      }
+    }
+  }
+}

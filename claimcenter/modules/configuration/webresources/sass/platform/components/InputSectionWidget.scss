@@ -1,0 +1,6 @@
+//InputSections are basically InputColumns with display:block that sit at the top or bottom of a DV.
+//and display their Inputs the same way an IC does.
+//See InputColumnWidget.scss for the child Input styling.
+.gw-InputSectionWidget, .gw-InputHeaderSectionWidget, .gw-InputFooterSectionWidget {
+  display: block;
+}

@@ -1,0 +1,160 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    afterCommit="afterCommit()"
+    autosaveable="false"
+    alwaysInEditMode="true"
+    canEdit="true"
+    id="NewBulkRestoreArchivedClaims"
+    parent="BulkRestoreArchivedClaimsRestoreRecord()"
+    showUpLink="true"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.Admin.Utilities.NewBulkRestoreArchivedClaims.Title&quot;)">
+    <LocationEntryPoint
+      signature="NewBulkRestoreArchivedClaims()"/>
+    <LocationEntryPoint
+      signature="NewBulkRestoreArchivedClaims(claimList : String)"/>
+    <Variable
+      initialValue="BulkRestoreType.TC_CLAIMS_LIST"
+      name="restoreType"
+      type="BulkRestoreType"/>
+    <Variable
+      name="claimList"
+      type="String"/>
+    <Variable
+      initialValue="new String(DisplayKey.get(&quot;Web.Admin.NewBulkRestoreArchivedClaimsDV.Or&quot;))"
+      name="OR"
+      type="String"/>
+    <Variable
+      name="description"
+      type="String"/>
+    <Variable
+      name="bulkRestoreRecordTitle"
+      type="String"/>
+    <Variable
+      name="file"
+      type="gw.api.web.WebFile"/>
+    <Variable
+      name="responseInfo"
+      type="gw.api.archiving.BulkRestoreArchivedEntitiesResponseInfo&lt;ClaimInfo&gt;"/>
+    <Variable
+      initialValue="new gw.api.archiving.BulkRestoreArchivedClaimsHelper()"
+      name="bulkRestoreArchivedClaimsHelper"
+      type="gw.api.archiving.BulkRestoreArchivedClaimsHelper"/>
+    <Variable
+      name="validatedClaimNumbers"
+      type="gw.api.archiving.BulkRestoreArchivedClaimsUtil.ValidatedClaimNumbers"/>
+    <Variable
+      initialValue="gw.api.system.PLConfigParameters.MaxNumberOfArchivedEntitiesToRestore.getValue()"
+      name="maxLimit"
+      type="Integer"/>
+    <Screen
+      id="NewBulkClaimsRestoreScreen">
+      <Toolbar>
+        <EditButtons
+          cancelVisible="false"
+          updateVisible="false"/>
+        <ToolbarButton
+          action="responseInfo = bulkRestoreArchivedClaimsHelper.submitRequest(CurrentLocation.getBundle(), bulkRestoreRecordTitle, description, claimList, file);CurrentLocation.commit()"
+          id="Update"
+          label="DisplayKey.get(&quot;Web.Admin.NewBulkRestoreArchivedClaimsDV.Button.SubmitRequest&quot;)"/>
+      </Toolbar>
+      <PanelSet>
+        <Verbatim
+          id="bulkRestoreRecordMessage"
+          label="DisplayKey.get(&quot;Web.Admin.NewBulkRestoreArchivedClaimsDV.Message.CreationOfBulkRestoreRecord&quot;)"/>
+        <DetailViewPanel
+          editable="true">
+          <InputColumn
+            minWidth="55em">
+            <TextInput
+              editable="true"
+              id="Title"
+              label="DisplayKey.get(&quot;Web.Admin.NewBulkRestoreArchivedClaimsDV.BulkRestoreRecordTitle&quot;)"
+              required="true"
+              value="bulkRestoreRecordTitle">
+              <PostOnChange/>
+            </TextInput>
+            <TextAreaInput
+              editable="true"
+              id="Description"
+              inputMask="DisplayKey.get(&quot;Web.Admin.NewBulkRestoreArchivedClaimsDV.DescriptionMask&quot;)"
+              label="DisplayKey.get(&quot;Web.Admin.NewBulkRestoreArchivedClaimsDV.Description&quot;)"
+              numRows="3"
+              value="description"/>
+          </InputColumn>
+        </DetailViewPanel>
+      </PanelSet>      
+      <DetailViewPanel>
+        <InputColumn>
+          <TypeKeyInput
+            editable="true"
+            id="RestoreType"
+            label="DisplayKey.get(&quot;Web.Admin.NewBulkRestoreArchivedClaimsDV.Restore.RestoreType&quot;)"
+            required="true"
+            value="restoreType"
+            valueType="typekey.BulkRestoreType"            
+            visible="true">
+            <PostOnChange/>
+          </TypeKeyInput>
+        </InputColumn>
+      </DetailViewPanel>
+      <DetailViewPanel>
+        <InputColumn
+          minWidth="55em">
+          <TextAreaInput
+            inputMask="DisplayKey.get(&quot;Web.Admin.NewBulkRestoreArchivedClaimsDV.ClaimListMask&quot;)"
+            numRows="10"
+            editable="true"
+            id="claimListId"
+            label="DisplayKey.get(&quot;Web.Admin.NewBulkRestoreArchivedClaimsDV.ClaimList&quot;, maxLimit)"
+            required="restoreType.getValue() == BulkRestoreType.TC_CLAIMS_LIST"
+            value="claimList"
+            visible="restoreType.getValue() == BulkRestoreType.TC_CLAIMS_LIST"/>
+          <FileInput
+            editable="true"
+            id="fileId"
+            label="DisplayKey.get(&quot;Web.Admin.NewBulkRestoreArchivedClaimsDV.ClaimNumbersCsvFile&quot;, maxLimit)"
+            required="restoreType.getValue() == BulkRestoreType.TC_CLAIMS_CSV"
+            helpText="DisplayKey.get(&quot;Web.Admin.NewBulkRestoreArchivedClaimsDV.ClaimNumbersCsvFile.FileInputMask&quot;)"
+            value="file"
+            visible="restoreType.getValue() == BulkRestoreType.TC_CLAIMS_CSV">
+            <MenuItem
+              action="bulkRestoreArchivedClaimsHelper.clearInputFile(file); file = null"
+              id="clearButtonId"
+              label="DisplayKey.get(&quot;Web.Admin.NewBulkRestoreArchivedClaimsDV.Button.Clear&quot;)"/>
+          </FileInput>
+        </InputColumn>
+      </DetailViewPanel>      
+    </Screen>
+    <Code><![CDATA[uses gw.api.archiving.BulkRestoreArchivedClaimsHelper
+
+    @Deprecated("since 50.3.0")
+    function clearResource() {
+      if (file != null) {
+        file.releaseResources()
+        file = null
+      }
+      file = null
+    }
+
+    @Deprecated("since 50.3.0")
+    function submitRequest() {
+      validatedClaimNumbers = BulkRestoreArchivedClaimsHelper.submitRequest(CurrentLocation.getBundle(), claimList, file, description, bulkRestoreRecordTitle)
+      clearResource()
+    }
+
+    function afterCommit() {
+      if (bulkRestoreArchivedClaimsHelper.onAfterCommit(responseInfo, file)) {
+        claimList = null;
+        file = null;
+      }
+      if (responseInfo!= null && responseInfo.hasBulkRestoreRecord()) {
+        BulkRestoreClaimsRecordDetail.go(responseInfo.getBulkRestoreRecord(), responseInfo )
+      }
+    }
+    ]]></Code>
+  </Page>
+</PCF>

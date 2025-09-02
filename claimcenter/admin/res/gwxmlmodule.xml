@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<module name="cc-cmdline" fingerprint="Y9EU7j5R4z8map4I/JWjZ4R7K5g=" xmlns="http://guidewire.com/xml/module">
+  <dependencies>
+    <dependency name="pl"/>
+  </dependencies>
+  <excludes>
+    <pattern>gw/xsd/guidewire/soapheaders.xsd</pattern>
+  </excludes>
+  <settings>
+    <setting name="gx.product" value="cc"/>
+  </settings>
+</module>

@@ -1,0 +1,46 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  
+    "x-gw-import" : {
+        "dataauditfieldrecord_sp" : "gw.surepath.cc.adminaudit.dataauditfieldrecord_sp-1.0"
+    },
+	"definitions": {
+    "DataAudit_SP" : {
+        "type" : "object",
+        "properties" : {
+			"OccurrenceDate" : {
+				"type" : "string",
+				"format" : "date"
+			},
+			"PerformingUser" : {
+				"type" : "string"
+			},
+			"AuditableBeanEntityType" : {
+				"type" : "string"
+			},
+			"AuditBeanParentEntityType" : {
+				"type" : "string"
+			},
+			"AuditableBeanDisplayName" : {
+				"type" : "string"
+			},
+			"AuditableBeanStatus" : {
+				"type" : "string"
+			},
+			"UpdateTime" : {
+				"type" : "string",
+				"format" : "date"
+			},
+			"FieldRecords" : {
+				"type" : "array",
+				"items" : {
+					"$ref" : "dataauditfieldrecord_sp#/definitions/DataAuditFieldRecord_SP"
+				}
+			},
+			"AuditableEntityPublicID" : {
+				"type" : "string"
+			}
+        }
+    }
+  }
+}

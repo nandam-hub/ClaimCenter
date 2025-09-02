@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    canEdit="true"
+    id="S3FileCopyingPopup"
+    startInEditMode="true"
+    title="&quot;S3FileCopyingPopup&quot;">
+    <LocationEntryPoint
+      signature="S3FileCopyingPopup(sourcePath:String)"/>
+    <Variable
+      name="sourcePath"
+      type="String"/>
+    <Screen>
+      <DetailViewPanel
+        editable="true">
+        <InputColumn>
+          <InputSet>
+            <Variable
+              name="destinationPath"
+              type="String"/>
+            <TextInput
+              boldLabel="true"
+              editable="true"
+              id="source"
+              label="&quot;Source Path&quot;"
+              value="sourcePath"
+              visible="true"/>
+            <TextInput
+              boldLabel="true"
+              editable="true"
+              id="destinationPath"
+              label="&quot;Destination Path&quot;"
+              required="true"
+              value="destinationPath"
+              visible="true"/>
+            <ButtonInput
+              action="s3.AmazonS3Util.Instance.copyFile(sourcePath,destinationPath)"
+              id="copyButton"
+              value="&quot;Copy&quot;"/>
+          </InputSet>
+        </InputColumn>
+      </DetailViewPanel>
+    </Screen>
+  </Popup>
+</PCF>

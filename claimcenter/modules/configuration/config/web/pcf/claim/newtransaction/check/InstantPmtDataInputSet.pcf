@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <InputSet
+    id="InstantPmtDataInputSet">
+    <Require
+      name="Check"
+      type="Check"/>
+    <Variable
+      initialValue="new gw.pcf.claim.newtransaction.check.InstantPmtDataInputSetHelper()"
+      name="helper"
+      type="gw.pcf.claim.newtransaction.check.InstantPmtDataInputSetHelper"/>
+    <TextInput
+      editable="true"
+      id="MailToContactInstantPmt"
+      label="DisplayKey.get(&quot;NVV.Financials.NewCheckPayee.Check.MailToContact&quot;)"
+      required="true"
+      value="Check.MailTo"/>
+    <TextInput
+      id="MailingAddressInstantPmt"
+      label="DisplayKey.get(&quot;NVV.Financials.NewCheckPayee.Check.MailingAddress&quot;)"
+      value="Check.CheckAddressOwner.Address"
+      valueType="entity.Address"/>
+    <TextInput
+      editable="true"
+      formatType="email"
+      id="Email"
+      label="DisplayKey.get(&quot;NVV.Financials.NewCheckPayee.Check.Email&quot;)"
+      onPick="Check.setInstantPmtPayeeEmail(PickedValue as String)"
+      required="true"
+      value="Check.InstantPmtPayeeEmail"></TextInput>
+    <TextInput
+      editable="true"
+      formatType="phoneNumber"
+      id="CellPhone"
+      label="DisplayKey.get(&quot;NVV.Financials.NewCheckPayee.Check.CellPhone&quot;)"
+      validationExpression="helper.getStandardPhoneOwner(Check).validatePhone()"
+      value="helper.getStandardPhoneOwner(Check).PhoneFields.NationalSubscriberNumber"></TextInput>
+  </InputSet>
+</PCF>

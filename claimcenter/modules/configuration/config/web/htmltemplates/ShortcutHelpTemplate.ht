@@ -1,0 +1,10 @@
+<div id="gw-ShortcutPopupHelp">
+  <div id="gw-ShortcutPopupHelp--inner" role="region" aria-labelledby="gw-ShortcutPopupHelp--title" data-gw-focus-lock>
+      <div id="gw-ShortcutPopupHelp--title" class="gw-label">${title}</div>
+      <div :for="shortcutHelpEntry" :in="shortcutHelpEntries"
+           class="gw-ShortcutPopupHelp--entry">${shortcutHelpEntry}</div>
+      <div id="gw-ShortcutPopupHelp--bottom">
+        <div id="gw-ShortcutPopupHelp--close" role="button" data-gw-click="gwApp.closeShortcutHelp" data-gw-focus-lock-top data-gw-focus-lock-bottom>${closeLabel}</div>
+      </div>
+  </div>
+</div>

@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  entity="ActivityPatternAudit_SP"
+  supertype="DataAudit_SP">
+  <foreignkey
+    columnName="ActivityPatternID"
+    fkentity="ActivityPattern"
+    name="ActivityPattern"
+    nullok="true"/>
+</subtype>

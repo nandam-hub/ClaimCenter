@@ -1,0 +1,24 @@
+package rules.Workplan.ClaimWorkplan_dir
+
+uses gw.surepath.cc.configuration.catastrophe.util.CatastropheProperties
+
+
+@gw.rules.RuleName("SP_CLW00050 - Bypass workplan rules for template cat claims")
+internal class SP_CLW00050Bypassworkplanrulesfortemplatecatclaims {
+  static function doCondition(claim  :  entity.Claim) : boolean {
+/*start00rule*/
+return CatastropheProperties.INSTANCE.FeatureEnabled and claim.Catastrophe != null
+and claim.Catastrophe.CatClaimTemplateSettings_SP != null
+and claim.Catastrophe.CatClaimTemplateSettings_SP.Active
+and claim.Catastrophe.CatClaimTemplateSettings_SP.WorkplanOverride
+/*end00rule*/
+}
+
+  static function doAction(claim  :  entity.Claim, actions : gw.rules.Action) {
+/*start00rule*/
+// If this is a proactive catastrophe claim, check the "Suppress Workplan Rules"
+// option. If selected, skip all workplan rules.
+actions.exit() 
+/*end00rule*/
+  }
+}

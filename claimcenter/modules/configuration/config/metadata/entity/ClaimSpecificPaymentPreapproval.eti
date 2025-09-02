@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  entity="ClaimSpecificPaymentPreapproval"
+  desc="Used by the ClaimSpecificPaymentPreapproval feature to represent a payment preapproval on a particular Claim. "
+  table="claimspecpymtpreapproval"
+  type="retireable"
+  extendable="false">
+  <implementsEntity
+    name="Extractable"/>
+  <foreignkey
+    columnName="ClaimID"
+    desc="The Claim to which this preapproval applies."
+    fkentity="Claim"
+    name="Claim"
+    nullok="false"/>
+  <column
+    desc="The preapproved limit for Payments."
+    name="ApprovedAmount"
+    type="nonnegativecurrencyamount"
+    nullok="false"/>
+  <column
+    desc="Rationale behind this preapproval."
+    name="Rationale"
+    type="varchar"
+    nullok="true">
+    <columnParam
+      name="size"
+      value="100"/>
+  </column>
+  <foreignkey
+    columnName="UserID"
+    desc="The User whose Authority Limits this preapproval overrides. A null value matches any User."
+    fkentity="User"
+    name="User"
+    nullok="true"/>
+  <foreignkey
+    desc="ReserveLine to match against. A null value matches any ReserveLine. This field can only have a value if both CoverageType and CostType are null."
+    fkentity="ReserveLine"
+    name="ReserveLine"
+    nullok="true"/>
+  <typekey
+    desc="CoverageType to match against. A null value matches any CoverageType. This field can only have a value if ReserveLine is null."
+    name="CoverageType"
+    nullok="true"
+    typelist="CoverageType"/>
+  <typekey
+    desc="CostType to match against. A null value matches any CostType. This field can only have a value if ReserveLine is null."
+    name="CostType"
+    nullok="true"
+    typelist="CostType"/>
+  <column
+    desc="Expiration date of the preapproval. If null, the it is active indefinitely."
+    name="ExpirationDate"
+    nullok="true"
+    type="dateonly"/>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.claim.impl.ClaimSpecificPaymentPreapprovalPublicMethods"
+    impl="com.guidewire.cc.domain.claim.impl.ClaimSpecificPaymentPreapprovalImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.InsertCallback"
+    impl="com.guidewire.cc.domain.claim.impl.ClaimSpecificPaymentPreapprovalImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.UpdateCallback"
+    impl="com.guidewire.cc.domain.claim.impl.ClaimSpecificPaymentPreapprovalImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.RemoveCallback"
+    impl="com.guidewire.cc.domain.claim.impl.ClaimSpecificPaymentPreapprovalImpl"/>
+</entity>

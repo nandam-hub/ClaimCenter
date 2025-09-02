@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <ListViewPanel
+    id="BulkRestoreClaimsInRestoreRecordLV">
+    <ExposeIterator
+      valueType="entity.BulkRestoreRecord"
+      widget="BulkRestoreClaimsInRecordLV"/>
+    <Require
+      name="bulkRestoreClaimRecord"
+      type="entity.BulkRestoreRecord"/>
+    <Variable
+      initialValue="new gw.api.archiving.BulkRestoreArchivedClaimsHelper()"
+      name="bulkRestoreArchivedClaimsHelper"
+      type="gw.api.archiving.BulkRestoreArchivedClaimsHelper"/>
+    <RowIterator
+      editable="false"
+      elementName="claimInRestoreRecord"
+      hideCheckBoxesIfReadOnly="true"
+      value="bulkRestoreArchivedClaimsHelper.getBulkRestoreEntityInRestoreRecord(bulkRestoreClaimRecord)"
+      valueType="gw.api.database.IQueryBeanResult&lt;entity.EntityInRestoreRecord&gt;"
+      pageSize="50">
+      <Row>
+        <TextCell
+          editable="false"
+          id="Claim"
+          label="DisplayKey.get(&quot;Web.Admin.BulkRestoreClaimsInRestoreRecordLV.ClaimNumber&quot;)"
+          printWidth="0.75"
+          sortOrder="1"
+          unique="true"
+          value="(claimInRestoreRecord.BulkRestoreEntity as ClaimInfo).ClaimNumber"
+          valueType="String"/>
+        <TextCell
+          id="ClaimArchiveStatus"
+          label="DisplayKey.get(&quot;Web.Admin.BulkRestoreClaimsInRestoreRecordLV.ArchiveState&quot;)"
+          value="bulkRestoreArchivedClaimsHelper.getClaimArchiveStateFromEntityInRestoreRecord(claimInRestoreRecord)"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

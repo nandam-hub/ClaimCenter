@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Forward
+    id="MultiClusterForward">
+    <LocationEntryPoint
+      signature="MultiClusterForward(locationKey:String, goToGroup: boolean)"/>
+    <Variable
+      name="locationKey"
+      type="String"/>
+    <Variable
+      name="goToGroup"
+      type="boolean"/>
+    <ForwardCondition
+      action="gw.api.web.UnsavedWorkHelper.goToUnsavedWorkGroup(locationKey)"
+      condition="goToGroup and gw.api.web.UnsavedWorkHelper.canGoToUnsavedWork(locationKey)"/>
+    <ForwardCondition
+      action="gw.api.web.UnsavedWorkHelper.goToUnsavedWork(locationKey)"
+      condition="gw.api.web.UnsavedWorkHelper.canGoToUnsavedWork(locationKey)"/>
+    <ForwardCondition
+      action="Error.go(DisplayKey.get(&quot;Java.UnsavedWork.NotFound&quot;), null, null)"/>
+  </Forward>
+</PCF>

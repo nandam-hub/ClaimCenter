@@ -1,0 +1,390 @@
+swagger: '2.0'
+info:
+  title: "System tools cluster API"
+  description: |
+               This API is related to system cluster resources.
+  version: '1.0'
+basePath: /system/v1/cluster
+x-gw-runlevel: maintenance
+x-gw-schema-import:
+  cluster: gw.pl.system.cluster_tools-1.0
+x-gw-apihandlers:
+- gw.api.rest.pl.system.v1.ClusterToolsAPIHandler
+x-gw-authorizer: gw.api.rest.auth.ApiRoleApiAuthorizer
+paths:
+  /runlevel/highest:
+    get:
+      summary: Gets the highest run level of all/any servers in the cluster
+      description: |
+                   Gets the highest run level of all/any servers in the cluster.
+      operationId: getHighestRunlevel
+      produces:
+      - text/plain
+      responses:
+        '200':
+          description: |
+                       Successful operation
+          schema:
+            type: string
+  /state:
+    get:
+      summary: "Get state of cluster"
+      description: |
+                   Returns a list of all nodes in the cluster, their roles, and what distributed components they run.
+      operationId: getClusterState
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: |
+                       Successful operation
+          schema:
+            $ref: "cluster#/definitions/ClusterState"
+  "/{serverid}/releaseresources":
+    post:
+      summary: "Release resources (batch processes, plugins, message destinations etc) of node"
+      description: |
+                    Cleans and releases resources (batch processes, plugins, message destinations etc) held by a specified node.
+                    This method might have a dangerous impact if the node is still running.
+      operationId: nodeFailed
+      parameters:
+      - $ref: "#/parameters/serverid"
+      - name: evenifincluster
+        in: query
+        required: false
+        type: boolean
+        default: false
+      responses:
+        '200':
+          description: |
+                       Successful operation
+  "/{serverid}/shutdown":
+    post:
+      summary: "Schedule shutdown of node"
+      description: |
+                   Schedules the shutdown of a specified server.
+      operationId: scheduleShutdown
+      consumes:
+      - application/json
+      parameters:
+      - $ref: "#/parameters/serverid"
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: "cluster#/definitions/ShutdownOptions"
+      responses:
+        '200':
+          description: "Shutdown scheduled"
+    delete:
+      summary: "Cancel shutdown"
+      description: |
+                   Cancels shutdown of a specified server.
+      operationId: cancelShutdown
+      parameters:
+      - $ref: "#/parameters/serverid"
+      responses:
+        '200':
+          description: |
+                       Shutdown cancellation accepted
+  "/components/{componenttype}/{componentid}/completefailedfailover":
+    post:
+      summary: "Complete failed failover"
+      description: |
+                   Completes component failover.
+      operationId: completeFailedFailover
+      parameters:
+      - $ref: "#/parameters/componenttype"
+      - $ref: "#/parameters/componentid"
+      responses:
+        '200':
+          description: |
+                       Successful operation
+  "/components/{transferableComponentType}/{componentid}/requesttransfer":
+    post:
+      summary: "Request Component Transfer"
+      description: |
+                   Requests component transfer.
+      operationId: requestComponentTransfer
+      parameters:
+      - $ref: "#/parameters/transferableComponentType"
+      - $ref: "#/parameters/componentid"
+      - name: serverId
+        in: query
+        description: |
+                      Target server id
+        required: true
+        type: string
+      responses:
+        '200':
+          description: |
+                       Successful operation
+
+  /readOnly/switchToNormalMode:
+    post:
+      summary: "Switch cluster to normal mode"
+      description: |
+        Switches cluster from Read-Only to normal (writable) mode
+        No effect if cluster is already in normal mode.
+      operationId: switchToNormalMode
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: |
+            Successful operation
+          schema:
+            $ref: "cluster#/definitions/SwitchToNormalModeResponse"
+        '403':
+          description: |
+            Operation cannot be performed, e.g. in Prod mode
+
+  /blue-green-upgrade:
+    get:
+      summary: "Gets the current state of the most recent upgrade, if it's a blue/green upgrade"
+      description: |
+                   If the most recent upgrade is a blue/green upgrade, its status is returned.
+      operationId: blueGreenUpgradeStatusOfMostRecent
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: |
+                       Status of the most recent upgrade, if it's a blue/green upgrade.
+          schema:
+            $ref: "cluster#/definitions/UpgradeResponse"
+        '409':
+          description: |
+                       The most recent upgrade is not a blue/green upgrade.
+    delete:
+      summary: "Cancels the most recent upgrade process if its a blue/green upgrade which has been started but is not yet in progress"
+      description: |
+                   Cancels the current upgrade process, if it is a blue/green upgrade, and it has been started but is
+                   not yet in  progress.
+      operationId: blueGreenUpgradeCancelMostRecent
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: |
+                       Confirmation the upgrade was cancelled.
+          schema:
+            $ref: "cluster#/definitions/UpgradeResponse"
+        '409':
+          description: |
+                       The most recent upgrade is not a blue/green upgrade or unable to cancel a blue/green upgrade
+                       that is in progress. In the latter case, use backout instead.
+
+  /blue-green-upgrade/id/{id}:
+    get:
+      summary: "Gets the current state of the specified blue/green upgrade"
+      description: |
+                   Gets the current state of blue/green upgrade process
+      parameters:
+        - name: id
+          in: path
+          description: |
+                       ID of the blue/green upgrade process
+          required: true
+          type: string
+      operationId: blueGreenUpgradeStatus
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: |
+                       Status of the specified blue/green upgrade.
+          schema:
+            $ref: "cluster#/definitions/UpgradeResponse"
+        '404':
+          description: |
+                       Specified blue/green upgrade doesn't exist.
+    delete:
+      summary: "Cancels the specified blue/green upgrade process"
+      description: |
+                   Cancels the specified blue/green upgrade process if it is started but not yet in progress.
+      parameters:
+        - name: id
+          in: path
+          description: |
+                       ID of the blue/green upgrade process
+          required: true
+          type: string
+      operationId: blueGreenUpgradeCancel
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: |
+                       Confirmation the upgrade was cancelled.
+          schema:
+            $ref: "cluster#/definitions/UpgradeResponse"
+        '404':
+          description: |
+                       If the specified id doesn't correspond to any upgrade instance
+        '409':
+          description: |
+                       Unable to cancel a blue/green upgrade that is in progress. Use backout instead.
+
+  /blue-green-upgrade/start:
+    post:
+      summary: Starts a blue/green upgrade process
+      description: |
+                   Starts blue/green upgrade process
+      operationId: blueGreenUpgradeStart
+      produces:
+        - application/json
+      parameters:
+        - name: optionID
+          in: query
+          description: |
+                       Blue-green option ID. Defaults to 1 if not supplied. See gw.upgrade.BlueGreenOption.
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: |
+                       Blue-green upgrade started.
+          schema:
+            $ref: "cluster#/definitions/UpgradeResponse"
+        '409':
+          description: |
+                       Cannot start blue/green upgrade because there is already an upgrade started or in progress.
+
+  /blue-green-upgrade/{id}/enable-schema-migration:
+    patch:
+      summary: "Used to enable schema upgrades after generating the upgrade schema report."
+      description: |
+                   If the upgrade was originally in report generation mode, this switches it to actually perform the schema upgrade.
+      parameters:
+        - name: id
+          in: path
+          description: |
+                       ID of the blue/green upgrade process
+          required: true
+          type: string
+      operationId: blueGreenUpgradeEnableSchemaMigration
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: |
+                       Blue/Green schema upgrade enabled.
+          schema:
+            $ref: "cluster#/definitions/UpgradeResponse"
+        '404':
+          description: |
+                       If the specified id doesn't correspond to any upgrade instance or doesn't correspond to the latest upgrade instance
+        '409':
+          description: |
+                       Unable to enable schema upgrade because it is not started or schema upgrade report is not generated.
+
+  /blue-green-upgrade/{id}/enable-green-cluster:
+    patch:
+      summary: "Used to enable starting members of the Green cluster after generating applying the needed schema changes."
+      description: |
+                   If the schema upgrade has been completed, this enables fully starting servers using the new configuration.
+      parameters:
+        - name: id
+          in: path
+          description: |
+                       ID of the blue/green upgrade process
+          required: true
+          type: string
+      operationId: blueGreenUpgradeEnableGreenCluster
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: |
+                       Green Cluster enabled.
+          schema:
+            $ref: "cluster#/definitions/UpgradeResponse"
+        '404':
+          description: |
+                       If the specified id doesn't correspond to any upgrade instance.
+        '409':
+          description: |
+                       Unable to enable Green Cluster because schema changes have not been applied or the upgrade has not been started.
+
+  /blue-green-upgrade/{id}/complete:
+    patch:
+      summary: Completes the current blue/green upgrade process
+      description: |
+                   Completes the current blue/green upgrade process
+      parameters:
+        - name: id
+          in: path
+          description: |
+                       ID of the blue/green upgrade process
+          required: true
+          type: string
+      operationId: blueGreenUpgradeComplete
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: |
+                       Blue/Green upgrade completed.
+          schema:
+            $ref: "cluster#/definitions/UpgradeResponse"
+        '404':
+          description: |
+                       If the specified id doesn't correspond to any upgrade instance.
+        '409':
+          description: |
+                       Unable to complete blue/green upgrade because database work is not complete or because it is not started.
+
+  /upgrade:
+    get:
+      summary: "Gets the current state of the most recent upgrade. This upgrade may already be complete."
+      description: |
+                   Status of the morst recent upgrade.
+      operationId: upgradeStatusOfMostRecent
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: |
+                       Status of the most recent upgrade.
+          schema:
+            $ref: "cluster#/definitions/UpgradeResponse"
+
+parameters:
+  serverid:
+    name: serverid
+    in: path
+    description: |
+                 Id of the server
+    required: true
+    type: string
+  componenttype:
+    name: componenttype
+    in: path
+    description: |
+                 Type of component, these are subset of enum *gw.api.system.cluster.ComponentType*
+    required: true
+    type: string
+    enum:
+      - BATCH_PROCESS
+      - MESSAGE_DESTINATION
+      - MESSAGE_PREPROCESSOR
+      - STARTABLE_PLUGIN
+  transferableComponentType:
+    name: transferableComponentType
+    in: path
+    description: |
+                 Type of component, these are subset of enum *gw.api.system.cluster.ComponentType*
+    required: true
+    type: string
+    enum:
+      - MESSAGE_DESTINATION
+      - MESSAGE_PREPROCESSOR
+      - STARTABLE_PLUGIN
+  componentid:
+    name: componentid
+    in: path
+    description: |
+               Id of the component
+    required: true
+    type: string

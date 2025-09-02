@@ -1,0 +1,8 @@
+name: gw_appeventprocessor
+endpoints:
+- endpoint: /claim/v1/graph-schema
+  methods:
+  - GET
+- endpoint: "/event/v1/events/*/data"
+  methods:
+  - GET

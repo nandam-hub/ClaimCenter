@@ -1,0 +1,102 @@
+swagger: '2.0'
+info:
+  title: "Business Rules API"
+  description: |
+               This API is related to business rules export and import.
+  version: '1.0'
+x-gw-runlevel: maintenance
+basePath: /bizrules/v1
+x-gw-schema-import:
+  biz: gw.bizrules.bizrules-1.0
+x-gw-apihandlers:
+- gw.api.rest.bizrules.v1.BizRulesAPIHandler
+paths:
+  /export:
+    post:
+      summary: "Export all business rules"
+      description: "Export all business rules"
+      operationId: export
+      parameters:
+        - name: ruleSubtype
+          in: query
+          description: |
+                 Type of business rule
+          required: true
+          type: string
+      produces:
+        - application/x-gzip
+      responses:
+        '200':
+          description: "Returns zipped exported business rules."
+          schema:
+            type: string
+        '400':
+          description: "Returned if roleSubtype does not exist."
+  /import:
+    post:
+      summary: "Import business rules"
+      description: "Import business rules"
+      operationId: import
+      consumes:
+        - application/x-gzip
+      parameters:
+        - name: fileName
+          in: query
+          description: "The name of the file."
+          required: true
+          type: string
+        - name: overrideConflicts
+          in: query
+          description: "If true overrides all conflicts"
+          required: false
+          type: boolean
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: "Rules import successful."
+  /verifyMetaData:
+    post:
+      summary: "Verify business rules meta data"
+      description: "Verify business rules meta data"
+      operationId: verifyMetaData
+      consumes:
+        - application/x-gzip
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: "Rules verification successful."
+          schema:
+            $ref: "biz#/definitions/VerificationResult"
+  /verify:
+    post:
+      summary: "Verify business rules"
+      description: "Verify if passed business rules are exactly the same as the ones on this instance."
+      operationId: verify
+      consumes:
+        - application/x-gzip
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: "Verification completed."
+          schema:
+            $ref: "biz#/definitions/VerificationResult"
+        '400':
+          description: "Returned if checksums.json does not exist in passed zip."

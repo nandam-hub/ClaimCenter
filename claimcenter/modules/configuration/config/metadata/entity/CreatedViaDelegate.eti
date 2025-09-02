@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<delegate
+  xmlns="http://guidewire.com/datamodel"
+  name="CreatedViaDelegate">
+  <typekey
+    desc="Which automation or user created the implementing object"
+    name="CreatedVia"
+    nullok="true"
+    typelist="CreatedVia"/>
+</delegate>

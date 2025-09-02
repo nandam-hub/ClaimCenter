@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="A set of instructions to be transmitted to the specialist who will work on a service request"
+  entity="ServiceRequestInstruction"
+  exportable="true"
+  loadable="false"
+  table="servicerequestinstruction"
+  type="editable">
+  <implementsInterface
+    iface="gw.cc.vendormanagement.entity.ServiceRequestInstruction"
+    impl="com.guidewire.cc.domain.vendormanagement.impl.ServiceRequestInstructionImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.InsertCallback"
+    impl="com.guidewire.cc.domain.vendormanagement.impl.ServiceRequestInstructionImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.UpdateCallback"
+    impl="com.guidewire.cc.domain.vendormanagement.impl.ServiceRequestInstructionImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <fulldescription><![CDATA[
+    Contains a set of instructions to be transmitted to the specialist who will work on a service request.
+  ]]></fulldescription>
+  <foreignkey
+    columnName="ServiceRequestID"
+    desc="The service request for which the specialist is being instructed."
+    fkentity="ServiceRequest"
+    name="ServiceRequest"
+    nullok="false"/>
+  <array
+    arrayentity="ServiceRequestInstructionService"
+    cascadeDelete="true"
+    desc="The services to be performed for this set of instructions."
+    name="Services"
+    owner="true"/>
+  <column
+    desc="Text instructions to be provided to the specialist. This field is only intended to be used with the 'Core Service Requests' feature."
+    name="InstructionTextGw"
+    nullok="true"
+    type="longtext"/>
+  <foreignkey
+    columnName="CustomerContactGwID"
+    desc="The contact with whom the specialist should coordinate to perform the work. In many cases, this will be the claimant. This field is only intended to be used with the 'Core Service Requests' feature. It has a nullable reference to Contact by default, non-nullable constraint is added when 'Core Service Requests' feature is enabled."
+    fkentity="Contact"
+    name="CustomerContactGw"
+    nullok="true"/>
+  <foreignkey
+    archivingOwner="source"
+    columnName="ServiceAddressGwID"
+    desc="The location at which the service is to be performed; may be null if the location is implied by the specialist, such as if it will be performed at the specialist's place of business. This field is only intended to be used with the 'Core Service Requests' feature."
+    fkentity="Address"
+    name="ServiceAddressGw"
+    nullok="true"/>
+  <onetoone
+    desc="Refers to the change where this instruction was added to the service request. This field is only intended to be used with the 'Core Service Requests' feature."
+    fkentity="ServiceRequestChange"
+    ignoreforevents="true"
+    name="ChangeWhereIntroducedGw"
+    nullok="false"/>
+</entity>

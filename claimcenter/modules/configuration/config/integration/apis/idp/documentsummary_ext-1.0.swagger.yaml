@@ -1,0 +1,49 @@
+swagger: "2.0"
+info:
+  title: Document Summary API
+  description: Document Summary API.
+  version: 1.0.0
+basePath: /idp/v1
+x-gw-schema-import:
+  documentsummary: idp.documentsummary_ext-1.0
+x-gw-apihandlers:
+  - gw.idp.DocumentSummaryHandler
+paths:
+  /claim/{claimId}/document/{docId}:
+    post:
+      summary: Document Summary API
+      description: Document Summary API.
+      operationId: doPost
+      consumes:
+        - application/json
+      parameters:
+        - $ref: "#/parameters/body"
+        - $ref: "#/parameters/claimId"
+        - $ref: "#/parameters/docId"
+      produces:
+        - application/json
+      responses:
+        200:
+          description: Successful operation
+
+parameters:
+  body:
+    name: body
+    in: body
+    required: true
+    schema:
+      $ref: "documentsummary#/definitions/DocumentSummary"
+
+  claimId:
+    name: claimId
+    in: path
+    type: string
+    required: true
+
+  docId:
+    name: docId
+    in: path
+    type: string
+    required: true
+
+

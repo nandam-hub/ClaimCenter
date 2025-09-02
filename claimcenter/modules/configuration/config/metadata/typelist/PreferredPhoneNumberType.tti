@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<typelist xmlns="http://guidewire.com/typelists" name="PreferredPhoneNumberType" desc="The preferred contact method for text messages">
+  <typecode
+    code="do_not_call"
+    desc="Do not call"
+    name="Do not call"
+    priority="0"/>
+  <typecode
+    code="do_not_text"
+    desc="Do not text"
+    name="Do not text"
+    priority="0"/>
+  <typecode
+    code="home"
+    desc="Home"
+    name="Home"
+    priority="2"/>
+  <typecode
+    code="work"
+    desc="Work"
+    name="Work"
+    priority="3"/>
+  <typecode
+    code="mobile"
+    name="Mobile"
+    desc="Mobile"
+    priority="4"/>
+  <typefilter
+    desc="Text messages-capable lines"
+    name="TextMessage">
+    <include
+      code="do_not_text"/>
+    <include
+      code="home"/>
+    <include
+      code="work"/>
+    <include
+      code="mobile"/>
+  </typefilter>
+  <typefilter
+    desc="Voice-capable lines"
+    name="Voice">
+    <include
+      code="do_not_call"/>
+    <include
+      code="home"/>
+    <include
+      code="work"/>
+    <include
+      code="mobile"/>
+  </typefilter>
+</typelist>

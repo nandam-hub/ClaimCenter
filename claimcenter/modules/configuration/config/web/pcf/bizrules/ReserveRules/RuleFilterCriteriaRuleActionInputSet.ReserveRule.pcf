@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <InputSet
+    editable="true"
+    id="RuleFilterCriteriaRuleActionInputSet"
+    mode="ReserveRule">
+    <Require
+      name="filterCriteria"
+      type="gw.bizrules.CCRuleFilterCriteriaBase"/>
+    <Variable
+      initialValue="filterCriteria as gw.bizrules.ReserveRules.ReserveRuleFilterCriteria"
+      name="ruleFilterCriteria"
+      type="gw.bizrules.ReserveRules.ReserveRuleFilterCriteria"/>
+  </InputSet>
+</PCF>

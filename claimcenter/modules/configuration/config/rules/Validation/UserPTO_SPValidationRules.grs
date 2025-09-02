@@ -1,0 +1,13 @@
+package rules.Validation
+
+@gw.rules.RuleName("UserPTO_SPValidationRules")
+@gw.rules.RuleSetDescription("Validation rule set for the UserPTO_SP entity, used to control when users are marked as on vacation")
+class UserPTO_SPValidationRules extends gw.rules.RuleSetBase {
+  static function invoke(bean : entity.UserPTO_SP) : gw.rules.ExecutionSession {
+    return invoke( new gw.rules.ExecutionSession(), bean )
+  }
+
+  static function invoke(exeSession : gw.rules.ExecutionSession, bean : entity.UserPTO_SP) : gw.rules.ExecutionSession {
+    return _invoke( exeSession, bean, "UserPTO_SPValidationRules", UserPTO_SPValidationRules )
+  }
+}

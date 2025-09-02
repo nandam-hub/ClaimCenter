@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<Properties xmlns="http://guidewire.com/psc/properties">
+  <Property>
+    <Group>data_auditor_sp</Group>
+    <Name>Enabled</Name>
+    <Description>Controls if the Data Auditor Feature is Enabled</Description>
+    <Value>true</Value>
+  </Property>
+  <Property>
+    <Group>data_auditor_sp</Group>
+    <Name>SendToExternalSystem</Name>
+    <Description>Controls if the Data Audit records can be sent to an External System</Description>
+    <Value>false</Value>
+  </Property>
+  <Property>
+    <Group>data_auditor_sp</Group>
+    <Name>DaysToKeepIfPrimary</Name>
+    <Description>If Audit records are primarily stored in the Application database, This is the
+      number of days before considering Audit records saved in the application database available for removal.
+      Used when SendToExternalSystem is false</Description>
+    <Value>365</Value>
+  </Property>
+  <Property>
+    <Group>data_auditor_sp</Group>
+    <Name>DaysToKeepIfSecondary</Name>
+    <Description>If Audit records are primarily stored outside the Application, This is the
+      number of days before considering Audit records saved in the application database available for removal.
+      Used when SendToExternalSystem is true</Description>
+    <Value>90</Value>
+  </Property>
+  <Property>
+    <Group>data_auditor_sp</Group>
+    <Name>AdminAuditSearchResultLimit</Name>
+    <Description>The limit of search results returned</Description>
+    <Value>200</Value>
+  </Property>
+</Properties>

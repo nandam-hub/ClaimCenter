@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  entity="CrossAppActPattern_SP"
+  desc="A cross-app activity pattern is a reference to an activity pattern that exists in another InsuranceSuite application, and is used to facilitate the creation of an actual activity in said InsuranceSuite application instead of the one to which the user is logged in"
+  table="crossappactpattern_sp"
+  type="retireable"
+  exportable="true">
+  <index
+    desc="Used to ensure record uniqueness"
+    name="code"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="PatternCode"/>
+    <indexcol
+      keyposition="2"
+      name="DestinationApplication"/>
+    <indexcol
+      keyposition="3"
+      name="Retired"/>
+  </index>
+  <column
+    desc="The code of the activity pattern to which this refers in the destination application. Must not be null, and must match exactly to the Code property on the corresponding activity pattern"
+    name="PatternCode"
+    nullok="false"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="60"/>
+  </column>
+  <column
+    desc="The display name of the activity pattern to which this refers in the destination application. Must not be null, but can be any display name that the insurer wants to appear to users in this application"
+    name="PatternDisplayName"
+    nullok="false"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="60"/>
+  </column>
+  <typekey
+    desc="The application to which we should send cross-application activities of this type"
+    name="DestinationApplication"
+    nullok="false"
+    typelist="CrossAppActivityDest_SP"/>
+  <events/>
+  <implementsEntity
+    name="Validatable"/>
+</entity>

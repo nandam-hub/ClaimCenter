@@ -1,0 +1,154 @@
+name: restricted
+accessibleFields:
+  BaggageIncident:
+    edit: []
+    view:
+    - id
+    - incidentOwner.id
+    - incidentOwner.type
+    - incidentOwner.uri
+    - lossParty
+  Claim:
+    edit: []
+    view:
+    - claimNumber
+    - id
+    - jurisdiction
+    - lobCode
+    - lossCause
+    - lossDate
+    - lossLocation
+    - lossType
+    - reportedDate
+  ClaimContact:
+    edit: []
+    view:
+    - id
+  DwellingIncident:
+    edit: []
+    view:
+    - id
+    - incidentOwner.id
+    - incidentOwner.type
+    - incidentOwner.uri
+    - lossParty
+  Exposure:
+    edit: []
+    view:
+    - baggageIncident.id
+    - baggageIncident.type
+    - baggageIncident.uri
+    - claimant.id
+    - claimant.type
+    - claimant.uri
+    - claimant.type
+    - closeDate
+    - coverage.id
+    - coverage.uri
+    - coverage.type
+    - deductible
+    - externalStatus
+    - fixedPropertyIncident.id
+    - fixedPropertyIncident.uri
+    - fixedPropertyIncident.type
+    - generalIncident.id
+    - generalIncident.uri
+    - generalIncident.type
+    - id
+    - injuryIncident.id
+    - injuryIncident.uri
+    - injuryIncident.type
+    - jurisdiction
+    - lossParty
+    - otherStructureIncident.id
+    - otherStructureIncident.uri
+    - otherStructureIncident.type
+    - primaryCoverage
+    - propertyContentsIncident.id
+    - propertyContentsIncident.uri
+    - propertyContentsIncident.type
+    - tripIncident.id
+    - tripIncident.uri
+    - tripIncident.type
+    - vehicleIncident.id
+    - vehicleIncident.uri
+    - vehicleIncident.type
+  FixedPropertyIncident:
+    edit: []
+    view:
+    - id
+    - incidentOwner.id
+    - incidentOwner.type
+    - incidentOwner.uri
+    - location.id
+    - lossParty
+  GeneralIncident:
+    edit: []
+    view:
+    - id
+    - incidentOwner.id
+    - incidentOwner.type
+    - incidentOwner.uri
+    - lossParty
+  InjuryIncident:
+    edit: []
+    view:
+    - id
+    - injuredPerson.id
+    - injuredPerson.type
+    - injuredPerson.uri
+    - lossParty
+  LivingExpensesIncident:
+    edit: []
+    view:
+    - id
+    - incidentOwner.id
+    - incidentOwner.type
+    - incidentOwner.uri
+    - lossParty
+  OtherStructureIncident:
+    edit: []
+    view:
+    - id
+    - incidentOwner.id
+    - incidentOwner.type
+    - incidentOwner.uri
+    - lossParty
+  PropertyContentsIncident:
+    edit: []
+    view:
+    - id
+    - incidentOwner.id
+    - incidentOwner.type
+    - incidentOwner.uri
+    - lossParty
+  TripIncident:
+    edit: []
+    view:
+    - id
+    - incidentOwner.id
+    - incidentOwner.type
+    - incidentOwner.uri
+  VehicleIncident:
+    edit: []
+    view:
+    - id
+    - driver.id
+    - driver.type
+    - driver.uri
+    - incidentOwner.id
+    - incidentOwner.type
+    - incidentOwner.uri
+    - lossParty
+    - passengers.id
+    - passengers.type
+    - passengers.uri
+    - vehicle.id
+    - vehicle.make
+    - vehicle.model
+    - vehicle.year
+  PropertyContentsScheduledItem:
+    edit: []
+    view:
+    - id
+    - itemOrder

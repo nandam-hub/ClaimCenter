@@ -1,0 +1,6 @@
+ext {
+    gwRestGen_endpoint_package = "petstore"
+    gwRestGen_endpoint_source = "https://petstore.swagger.io/v2/swagger.json"
+
+    gwRestGen_isInsuranceSuite = "true"
+}

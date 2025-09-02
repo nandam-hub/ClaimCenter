@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<Entity
+  name="RUCoverage">
+  <Columns>
+    <Column
+      beanPath="RUCoverage.RiskUnit"
+      displayName="true"
+      name="riskunit"/>
+  </Columns>
+  <DisplayName>riskunit</DisplayName>
+</Entity>

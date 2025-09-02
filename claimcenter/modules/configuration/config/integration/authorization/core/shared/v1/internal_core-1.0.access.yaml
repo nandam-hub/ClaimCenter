@@ -1,0 +1,1065 @@
+combine:
+- gw.core.pl.common.v1.common_pl-1.0
+resources:
+  Activities:
+    filter: gw.rest.core.cc.common.v1.activities.CommonActivitiesFilter
+  ActivityNotes:
+    permissions:
+      view:
+      - __inherit
+      - perm.System.viewclaimnotes
+      create: "perm.Claim.createnote(resource.Activity.Claim)"
+    filter: gw.rest.core.cc.claim.v1.claims.notes.ActivityNoteFilter
+  AdminOpenApiSchema:
+    permissions:
+      view: true
+  AssessmentContentItem:
+    permissions:
+      view: __inherit
+      edit: "perm.Incident.edit(resource.Incident)"
+      delete: "perm.Incident.edit(resource.Incident)"
+  AssessmentContentItems:
+    permissions:
+      view: __inherit
+      create: "perm.Claim.createincident(resource.Claim) || perm.Incident.edit(resource.Incident)"
+    filter: __noFilter
+  AssessmentSummaries:
+    permissions:
+      view:
+      - __inherit
+      - perm.System.assessmentsummaryview
+      create: "perm.Claim.createassessmentsummary(resource.Parent.Claim)"
+    filter: gw.rest.core.cc.claim.v1.claims.AssessmentSummaryFilterFactory
+  AssessmentSummary:
+    permissions:
+      view: "perm.AssessmentSummary.view(resource.AssessmentSummary)"
+  AssignableQueue:
+    permissions:
+      view: __inherit
+      edit: __inherit
+      delete: __inherit
+  AssignableQueues:
+    permissions:
+      view: __inherit
+      create: __inherit
+    filter: __noFilter
+  Attribute:
+    permissions:
+      view: __inherit
+      edit: perm.Attribute.edit
+      delete: perm.Attribute.delete
+  Attributes:
+    permissions:
+      view: "perm.Attribute.view || perm.User.manageattributes"
+      create: perm.Attribute.create
+    filter: __noFilter
+  AuthorityLimit:
+    permissions:
+      view: __inherit
+      edit: __inherit
+      delete: __inherit
+  AuthorityLimitProfile:
+    permissions:
+      view: perm.AuthorityLimitProfile.view
+      edit: perm.AuthorityLimitProfile.edit
+      delete: perm.AuthorityLimitProfile.delete
+  AuthorityLimitProfiles:
+    permissions:
+      view: perm.AuthorityLimitProfile.view
+      create: perm.AuthorityLimitProfile.create
+    filter: __noFilter
+  AuthorityLimits:
+    permissions:
+      view: __inherit
+      create: __inherit
+    filter: __noFilter
+  BaggageIncident:
+    permissions:
+      view: "perm.Incident.view(resource.Incident)"
+      edit: "perm.Incident.edit(resource.Incident)"
+      delete: "perm.Incident.edit(resource.Incident)"
+  BodilyInjuryPoint:
+    permissions:
+      view: __inherit
+      edit: __inherit
+      delete: __inherit
+  BodilyInjuryPoints:
+    permissions:
+      view: __inherit
+      create: __inherit
+    filter: __noFilter
+  BusinessLineMetadataSchema:
+    permissions:
+      view: "user.hasBusinessLineMetadataAccess()"
+  CalendarDateCalculation:
+    permissions:
+      view: true
+      edit: true
+      calculate-date: true
+  Catastrophe:
+    permissions:
+      view: __inherit
+      edit: perm.Catastrophe.edit
+      delete: perm.Catastrophe.delete
+  CatastrophePeril:
+    permissions:
+      view: __inherit
+      edit: __inherit
+      delete: __inherit
+  CatastrophePerils:
+    permissions:
+      view: __inherit
+      create: __inherit
+  CatastropheZone:
+    permissions:
+      view: __inherit
+      edit: __inherit
+      delete: __inherit
+  CatastropheZones:
+    permissions:
+      view: __inherit
+      create: __inherit
+  Catastrophes:
+    permissions:
+      view: "perm.Catastrophe.view || perm.User.viewcatlimited"
+      create: perm.Catastrophe.create
+    filter: __noFilter
+  Check:
+    permissions:
+      view:
+      - __inherit
+      - "perm.Check.view(resource.Element)"
+      edit:
+      - __inherit
+      - "perm.Check.edit(resource.Element)"
+      delete:
+      - __inherit
+      - "perm.Check.delete(resource.Element)"
+      acknowledge-submission: __inherit
+      mark-cleared: __inherit
+      mark-issued: __inherit
+      mark-stopped: __inherit
+      mark-voided: __inherit
+      request-stop:
+      - __inherit
+      - "perm.Payment.stop(resource.Element)"
+      request-void:
+      - __inherit
+      - "perm.Payment.voidpmt(resource.Element)"
+  CheckSet:
+    permissions:
+      view: __inherit
+  CheckSets:
+    permissions:
+      view:
+      - __inherit
+      - "perm.Claim.viewpayments(resource.Claim)"
+      create:
+      - "perm.Claim.viewpayments(resource.Claim)"
+      - "perm.Claim.createpayment(resource.Claim)"
+    filter: __noFilter
+  Checks:
+    permissions:
+      view:
+      - __inherit
+      - "perm.Claim.viewpayments(resource.Parent.Claim)"
+    filter: __noFilter
+  Claim:
+    permissions:
+      view: "perm.Claim.view(resource.Claim)"
+      edit: "perm.Claim.edit(resource.Claim)"
+      assign: "perm.Claim.assign(resource.Claim)"
+      cancel: "perm.Claim.edit(resource.Claim)"
+      close: "perm.Claim.close(resource.Claim)"
+      reopen: "perm.Claim.reopen(resource.Claim)"
+      submit:
+      - "perm.Claim.edit(resource.Claim)"
+      - perm.Claim.create
+      validate: "perm.Claim.validate(resource.Claim)"
+  ClaimActivities:
+    permissions:
+      view:
+      - __inherit
+      - perm.System.viewworkplan
+      create: "perm.Claim.createactivity(resource.Claim)"
+    filter: gw.rest.core.cc.claim.v1.claims.activities.ActivityFilterFactory
+  ClaimActivityAssignees:
+    permissions:
+      view: __inherit
+  ClaimActivityPatterns:
+    permissions:
+      view: __inherit
+  ClaimApiOpenApiSchema:
+    permissions:
+      view: true
+  ClaimBaggageIncidents:
+    permissions:
+      view: __inherit
+      create: "perm.Claim.createincident(resource.Claim)"
+    filter: __noFilter
+  ClaimContact:
+    permissions:
+      view:
+      - __inherit
+      - perm.Contact.viewlocal
+      edit:
+      - __inherit
+      - "perm.Contact.editlocal(resource.ClaimContact.Contact)"
+      delete:
+      - "perm.Claim.edit(resource.Claim)"
+      - "perm.Claim.managepartiesinvolved(resource.Claim)"
+      initialize-authorization-id:
+      - __inherit
+      - "perm.Contact.editlocal(resource.ClaimContact.Contact)"
+  ClaimContactRoleOwners:
+    permissions:
+      view: __inherit
+  ClaimContacts:
+    permissions:
+      view:
+      - __inherit
+      - perm.Contact.viewlocal
+      create:
+      - "perm.Claim.edit(resource.Claim)"
+      - perm.Contact.createlocal
+    filter: __noFilter
+  ClaimDocument:
+    permissions:
+      view:
+      - __inherit
+      - "perm.Document.view(resource.Document)"
+      edit:
+      - __inherit
+      - "perm.Document.edit(resource.Document)"
+      delete:
+      - "perm.Document.edit(resource.Document)"
+      - "perm.Document.delete(resource.Document)"
+  ClaimDocumentContent:
+    permissions:
+      view:
+      - __inherit
+      - perm.System.viewdocs
+  ClaimDocuments:
+    permissions:
+      view:
+      - __inherit
+      - perm.System.viewdocs
+      create: "perm.Claim.createdocument(resource.Claim)"
+    filter: gw.rest.core.cc.claim.v1.claims.documents.DocumentFilterFactory
+  ClaimDwellingIncidents:
+    permissions:
+      view: __inherit
+      create: "perm.Claim.createincident(resource.Claim)"
+    filter: __noFilter
+  ClaimExposures:
+    permissions:
+      view:
+      - __inherit
+      - perm.System.viewexposures
+      create: "perm.Claim.createexposure(resource.Parent.Claim)"
+    filter: gw.rest.core.cc.claim.v1.claims.exposures.ExposureFilterFactory
+  ClaimFixedPropertyIncidents:
+    permissions:
+      view: __inherit
+      create: "perm.Claim.createincident(resource.Claim)"
+    filter: __noFilter
+  ClaimGeneralIncidents:
+    permissions:
+      view: __inherit
+      create: "perm.Claim.createincident(resource.Claim)"
+    filter: __noFilter
+  ClaimGraphSchema:
+    permissions:
+      view: true
+  ClaimHistoryEvents:
+    permissions:
+      view:
+      - __inherit
+      - perm.System.viewclaimhistory
+    filter: __noFilter
+  ClaimInfo:
+    permissions:
+      view: "resource.ClaimInfo.Claim == null ? perm.ClaimInfo.view(resource.ClaimInfo) : perm.Claim.view(resource.ClaimInfo.Claim)"
+      edit: "false"
+      retrieve: "true"
+  ClaimInfos:
+    permissions:
+      view: "true"
+    filter: gw.rest.core.cc.claim.v1.claims.ClaimInfoSecurityFilter
+  ClaimInjuryIncidents:
+    permissions:
+      view: __inherit
+      create: "perm.Claim.createincident(resource.Claim)"
+    filter: __noFilter
+  ClaimIntakeInteractions:
+    permissions:
+      view:
+      - __inherit
+      create: "perm.Claim.createintakeinteraction(resource.Claim)"
+    filter: __noFilter
+  ClaimLivingExpensesIncidents:
+    permissions:
+      view: __inherit
+      create: "perm.Claim.createincident(resource.Claim)"
+    filter: __noFilter
+  ClaimMatters:
+    permissions:
+      view:
+      - "perm.Matter.view(resource.Claim)"
+      - perm.System.viewmatters
+      create: "perm.Claim.creatematter(resource.Claim)"
+    filter: __noFilter
+  ClaimNotes:
+    permissions:
+      view:
+      - __inherit
+      - perm.System.viewclaimnotes
+      create: "perm.Claim.createnote(resource.Claim)"
+    filter: gw.rest.core.cc.claim.v1.claims.notes.NoteFilterFactory
+  ClaimOtherStructureIncidents:
+    permissions:
+      view: __inherit
+      create: "perm.Claim.createincident(resource.Claim)"
+    filter: __noFilter
+  ClaimPropertyContentsIncidents:
+    permissions:
+      view: __inherit
+      create: "perm.Claim.createincident(resource.Claim)"
+    filter: __noFilter
+  ClaimRelatedObjects:
+    permissions:
+      view: __inherit
+  ClaimSearch:
+    permissions:
+      view: perm.System.viewsearch
+    filter: __noFilter
+  ClaimSearchResult:
+    permissions:
+      view: perm.Claim.genericviewclaim
+  ClaimSearchResultWrapper:
+    permissions:
+      view: perm.Claim.genericviewclaim
+  ClaimSearchV2:
+    permissions:
+      view: perm.System.viewsearch
+  ClaimServiceRequests:
+    permissions:
+      view: __inherit
+      create: __inherit
+    filter: __noFilter
+  ClaimSolrSearch:
+    permissions:
+      view: perm.System.viewsearch
+  ClaimSolrSearchResult:
+    permissions:
+      view: perm.Claim.genericviewclaim
+  ClaimTripIncidents:
+    permissions:
+      view: __inherit
+      create: "perm.Claim.createincident(resource.Claim)"
+    filter: __noFilter
+  ClaimVehicleIncidents:
+    permissions:
+      view: __inherit
+      create: "perm.Claim.createincident(resource.Claim)"
+    filter: __noFilter
+  Claims:
+    permissions:
+      view: true
+      create: perm.Claim.create
+    filter: gw.rest.core.cc.claim.v1.claims.ClaimSecurityFilter
+  ContactRoleConstraint:
+    permissions:
+      view: true
+  ContactRoleConstraints:
+    permissions:
+      view: true
+  # override common_pl
+  Document:
+    permissions:
+      view:
+      - "perm.Document.view(resource.Document)"
+      edit:
+      - "perm.Document.edit(resource.Document)"
+      delete:
+      - "perm.Document.edit(resource.Document)"
+      - "perm.Document.delete(resource.Document)"
+  DocumentContent:
+    permissions:
+      view:
+      - __inherit
+      - "perm.Document.view(resource.Document)"
+  DwellingIncident:
+    permissions:
+      view: "perm.Incident.view(resource.Incident)"
+      edit: "perm.Incident.edit(resource.Incident)"
+      delete: "perm.Incident.edit(resource.Incident)"
+  Endorsement:
+    permissions:
+      view: __inherit
+  EntitySchema:
+    permissions:
+      view: true
+  EntitySchemas:
+    permissions:
+      view: true
+  Exposure:
+    permissions:
+      view: "perm.Exposure.view(resource.Exposure)"
+      edit: "perm.Exposure.edit(resource.Exposure)"
+      delete: "perm.Exposure.edit(resource.Exposure)"
+      assign: "perm.Exposure.assign(resource.Exposure)"
+      close: "perm.Claim.closeexposure(resource.Exposure)"
+      reopen: "perm.Exposure.reopen(resource.Exposure)"
+      validate: "perm.Exposure.validate(resource.Exposure)"
+  FinancialCalculation:
+    permissions:
+      view: __inherit
+      edit: __inherit
+      get-amount: __inherit
+  FinancialCalculations:
+    permissions:
+      view: __inherit
+  FixedPropertyIncident:
+    permissions:
+      view: "perm.Incident.view(resource.Incident)"
+      edit: "perm.Incident.edit(resource.Incident)"
+      delete: "perm.Incident.edit(resource.Incident)"
+  GeneralIncident:
+    permissions:
+      view: "perm.Incident.view(resource.Incident)"
+      edit: "perm.Incident.edit(resource.Incident)"
+      delete: "perm.Incident.edit(resource.Incident)"
+  GenericRelation:
+    permissions:
+      view: true
+  GeographicZone:
+    permissions:
+      view: true
+  GeographicZones:
+    permissions:
+      view: true
+    filter: __noFilter
+  Group:
+    permissions:
+      view:
+      - "perm.Group.view(resource.Group)"
+      - "gw.rest.core.pl.util.v1.GroupInternalPermissionUtil.canCurrentUserView(resource.Group)"
+      edit:
+      - perm.Group.edit
+      delete:
+      - perm.Group.delete
+  GroupRegion:
+    permissions:
+      view:
+      - __inherit
+      edit:
+      - perm.Group.edit
+      delete:
+      - perm.Group.edit
+      - perm.Region.edit
+  GroupRegions:
+    permissions:
+      view:
+      - __inherit
+      - perm.Group.view
+      - perm.Region.view
+      create:
+      - perm.Group.edit
+      - perm.Region.edit
+    filter: __noFilter
+  GroupUser:
+    permissions:
+      view:
+      - __inherit
+      edit:
+      - "perm.Group.edit(resource.GroupUser.Group)"
+      delete:
+      - perm.User.edit
+      - "perm.Group.edit(resource.GroupUser.Group)"
+  GroupUsers:
+    permissions:
+      view:
+      - __inherit
+      - perm.User.view
+      - "perm.Group.view(resource.Parent.Group)"
+      create:
+      - perm.User.edit
+      - "perm.Group.edit(resource.Parent.Group)"
+    filter: __noFilter
+  Groups:
+    permissions:
+      view: perm.Group.viewtree
+      create:
+      - perm.Group.create
+    filter: gw.rest.core.pl.admin.v1.group.GroupSecurityZoneFilter
+  HistoryEvent:
+    permissions:
+      view: __inherit
+  Holiday:
+    permissions:
+      view: perm.Holiday.view
+      edit: perm.Holiday.edit
+      delete: perm.Holiday.delete
+  HolidayZone:
+    permissions:
+      view: __inherit
+      edit: __inherit
+      delete: __inherit
+  HolidayZones:
+    permissions:
+      view: perm.Holiday.view
+      create: perm.Holiday.create
+    filter: __noFilter
+  Holidays:
+    permissions:
+      view: perm.Holiday.view
+      create: perm.Holiday.create
+    filter: __noFilter
+  ICDCode:
+    permissions:
+      view: __inherit
+      edit: perm.System.editrefdata
+  ICDCodeSearch:
+    permissions:
+      view: "perm.System.viewrefdata || perm.User.viewicdcode"
+    filter: __noFilter
+  ICDCodes:
+    permissions:
+      view: "perm.System.viewrefdata || perm.User.viewicdcode"
+      create: perm.System.editrefdata
+    filter: __noFilter
+  InjuryIncident:
+    permissions:
+      view: "perm.Incident.view(resource.Incident)"
+      edit: "perm.Incident.edit(resource.Incident)"
+      delete: "perm.Incident.edit(resource.Incident)"
+  IntakeInteraction:
+    permissions:
+      view: "perm.IntakeInteraction.view(resource.IntakeInteraction)"
+      edit: "perm.IntakeInteraction.edit(resource.IntakeInteraction)"
+  LivingExpensesIncident:
+    permissions:
+      view: "perm.Incident.view(resource.Incident)"
+      edit: "perm.Incident.edit(resource.Incident)"
+      delete: "perm.Incident.edit(resource.Incident)"
+  LocationBasedRiskUnit:
+    permissions:
+      view: __inherit
+  LocationBasedRiskUnitCoverage:
+    permissions:
+      view: __inherit
+  LocationBasedRiskUnitCoverages:
+    permissions:
+      view: __inherit
+    filter: __noFilter
+  LocationBasedRiskUnits:
+    permissions:
+      view: __inherit
+    filter: __noFilter
+  Matter:
+    permissions:
+      view: "perm.Matter.view(resource.Matter)"
+      edit: "perm.Matter.edit(resource.Matter)"
+      assign: perm.Matter.genericassign
+      close: "perm.Claim.closematter(resource.Matter.Claim)"
+      reopen: "perm.Claim.reopenmatter(resource.Matter.Claim)"
+  MedicalDiagnoses:
+    permissions:
+      view: __inherit
+      create: __inherit
+    filter: __noFilter
+  MedicalDiagnosis:
+    permissions:
+      view: __inherit
+      edit: __inherit
+      delete: __inherit
+  MedicalTreatment:
+    permissions:
+      view:
+      - __inherit
+      - perm.System.viewSensMCMdetails
+      edit:
+      - __inherit
+      - perm.System.editSensMCMdetails
+      delete:
+      - __inherit
+      - perm.System.editSensMCMdetails
+  MedicalTreatments:
+    permissions:
+      view:
+      - __inherit
+      - perm.System.viewSensMCMdetails
+      create:
+      - __inherit
+      - perm.System.editSensMCMdetails
+  # override common_pl
+  Note:
+    permissions:
+      view:
+      - "perm.Claim.view(resource.Note.Claim)"
+      - perm.System.viewclaimnotes
+      - "perm.Note.view(resource.Note)"
+      - "!resource.Note.Confidential || resource.Note.Author == entity.User.util.CurrentUser || perm.Claim.viewconfidentialnotes(resource.Note.Claim)"
+  OtherStructureIncident:
+    permissions:
+      view: "perm.Incident.view(resource.Incident)"
+      edit: "perm.Incident.edit(resource.Incident)"
+      delete: __inherit
+  Payment:
+    permissions:
+      view: "perm.Payment.view(resource.Payment)"
+      edit: "perm.Payment.edit(resource.Payment)"
+      acknowledge-submission: __inherit
+  Payments:
+    permissions:
+      view:
+      - __inherit
+      - "perm.Claim.viewpayments(resource.Claim)"
+    filter: __noFilter
+  Policy:
+    permissions:
+      view:
+      - __inherit
+      - "perm.Policy.view(resource.Claim)"
+      - perm.System.viewpolicy
+  PolicyCoverage:
+    permissions:
+      view: __inherit
+  PolicyCoverages:
+    permissions:
+      view: __inherit
+    filter: __noFilter
+  PolicyEndorsements:
+    permissions:
+      view: __inherit
+    filter: __noFilter
+  PolicyLocation:
+    permissions:
+      view: __inherit
+  PolicyLocations:
+    permissions:
+      view: __inherit
+    filter: __noFilter
+  PropertyContentsIncident:
+    permissions:
+      view: "perm.Incident.view(resource.Incident)"
+      edit: "perm.Incident.edit(resource.Incident)"
+      delete: "perm.Incident.edit(resource.Incident)"
+  PropertyContentsScheduledItem:
+    permissions:
+      view: __inherit
+      edit: __inherit
+      delete: __inherit
+  PropertyContentsScheduledItems:
+    permissions:
+      view: __inherit
+      create: __inherit
+    filter: __noFilter
+  PropertyItem:
+    permissions:
+      view: __inherit
+  PropertyItems:
+    permissions:
+      view: __inherit
+    filter: __noFilter
+  Recoveries:
+    permissions:
+      view:
+      - __inherit
+      - "perm.Claim.viewrecoveries(resource.Claim)"
+    filter: __noFilter
+  Recovery:
+    permissions:
+      view: "perm.Recovery.view(resource.Recovery)"
+      edit: "perm.Recovery.edit(resource.Recovery)"
+      acknowledge-submission: __inherit
+  RecoveryReserve:
+    permissions:
+      view: "perm.RecoveryReserve.view(resource.RecoveryReserve)"
+      edit: "perm.RecoveryReserve.edit(resource.RecoveryReserve)"
+      acknowledge-submission: __inherit
+  RecoveryReserveSet:
+    permissions:
+      view: __inherit
+  RecoveryReserveSets:
+    permissions:
+      view:
+      - __inherit
+      - "perm.Claim.viewrecoveryreserves(resource.Claim)"
+      create:
+      - "perm.Claim.createrecoveryreserve(resource.Claim)"
+    filter: __noFilter
+  RecoveryReserves:
+    permissions:
+      view:
+      - __inherit
+      - "perm.Claim.viewrecoveryreserves(resource.Claim)"
+    filter: __noFilter
+  RecoverySet:
+    permissions:
+      view: __inherit
+  RecoverySets:
+    permissions:
+      view:
+      - __inherit
+      - "perm.Claim.viewrecoveries(resource.Claim)"
+      create:
+      - "perm.Claim.createrecovery(resource.Claim)"
+    filter: __noFilter
+  Region:
+    permissions:
+      view: __inherit
+      edit: perm.Region.edit
+      delete: perm.Region.delete
+  RegionZone:
+    permissions:
+      view: __inherit
+      edit: __inherit
+      delete: __inherit
+  RegionZones:
+    permissions:
+      view: perm.Region.view
+      create: perm.Region.edit
+    filter: __noFilter
+  Regions:
+    permissions:
+      view: perm.Region.view
+      create: perm.Region.create
+    filter: __noFilter
+  Reserve:
+    permissions:
+      view: "perm.Reserve.view(resource.Reserve)"
+      edit: "perm.Reserve.edit(resource.Reserve)"
+      acknowledge-submission: __inherit
+  ReserveSet:
+    permissions:
+      view: __inherit
+  ReserveSets:
+    permissions:
+      view:
+      - __inherit
+      - "perm.Claim.viewreserves(resource.Claim)"
+      create:
+      - "perm.Claim.viewreserves(resource.Claim)"
+      - "perm.Claim.createreserve(resource.Claim)"
+    filter: __noFilter
+  Reserves:
+    permissions:
+      view:
+      - __inherit
+      - "perm.Claim.viewreserves(resource.Claim)"
+    filter: __noFilter
+  RiskUnitCoverage:
+    permissions:
+      view: __inherit
+  RiskUnitCoverages:
+    permissions:
+      view: __inherit
+    filter: __noFilter
+  Role:
+    permissions:
+      view: "perm.Role.view(resource.Element)"
+      edit: "perm.Role.edit(resource.Element)"
+      delete: "perm.Role.delete(resource.Element)"
+  RolePermission:
+    permissions:
+      view: __inherit
+      edit: perm.RolePrivilege.edit
+      delete: perm.RolePrivilege.delete
+  RolePermissions:
+    permissions:
+      view: __inherit
+      create: perm.RolePrivilege.create
+    filter: __noFilter
+  Roles:
+    permissions:
+      view: perm.Role.view
+      create: perm.Role.create
+    filter: __noFilter
+  SecurityZone:
+    permissions:
+      view: perm.SecurityZone.view
+      edit: perm.SecurityZone.edit
+      delete: perm.SecurityZone.delete
+  SecurityZones:
+    permissions:
+      view: perm.SecurityZone.view
+      create: perm.SecurityZone.create
+    filter: __noFilter
+  ServiceRequest:
+    permissions:
+      view: "perm.Claim.view(resource.ServiceRequest.Claim) || (user.isAssignedUserFor(resource.ServiceRequest) && perm.System.claimview)"
+      edit: "perm.Claim.edit(resource.ServiceRequest.Claim) || (user.isAssignedUserFor(resource.ServiceRequest) && perm.System.claimview)"
+      # The assumption here is that the assigned user may perform
+      # certain vendor-specific actions--such as accept or decline--
+      # "on behalf" of the vendor. Set these to "false" or disallow
+      # the endpoints for internal users if this is not the case.
+      accept: __inherit
+      add-quote: __inherit
+      approve-quote: __inherit
+      assign: __inherit
+      cancel: __inherit
+      complete-work: __inherit
+      decline: __inherit
+      internal-cancel: __inherit
+      submit: __inherit
+  ServiceRequestHistories:
+    permissions:
+      view: __inherit
+  ServiceRequestHistory:
+    permissions:
+      view: __inherit
+  ServiceRequestInvoice:
+    permissions:
+      view: __inherit
+      edit: __inherit
+      approve: __inherit
+      mark-as-paid: __inherit
+      withdraw: __inherit
+  ServiceRequestInvoices:
+    permissions:
+      view: __inherit
+      create: __inherit
+    filter: __noFilter
+  ServiceRequestMessage:
+    permissions:
+      view: __inherit
+  ServiceRequestMessages:
+    permissions:
+      view: __inherit
+      create: __inherit
+  ServiceRequests:
+    permissions:
+      view: true
+    filter: gw.rest.core.cc.claim.v1.servicerequests.ServiceRequestsInternalFilter
+  Subrogation:
+    permissions:
+      view: __inherit
+      edit: __inherit
+      delete: __inherit
+  SubrogationSummaries:
+    permissions:
+      view:
+      - __inherit
+      - perm.System.viewsubrodetails
+      create:
+      - __inherit
+      - perm.System.editsubrodetails
+  SubrogationSummary:
+    permissions:
+      view:
+      - __inherit
+      - perm.System.viewsubrodetails
+      edit:
+      - __inherit
+      - perm.System.editsubrodetails
+  Subrogations:
+    permissions:
+      view: __inherit
+      create: __inherit
+  TripAccommodation:
+    permissions:
+      view: __inherit
+      edit: "perm.Incident.edit(resource.TripIncident)"
+      delete: "perm.Incident.edit(resource.TripIncident)"
+  TripAccommodations:
+    permissions:
+      view: __inherit
+      create: "perm.Claim.createincident(resource.Claim) || perm.Incident.edit(resource.TripIncident)"
+    filter: __noFilter
+  TripIncident:
+    permissions:
+      view: "perm.Incident.view(resource.Incident)"
+      edit: "perm.Incident.edit(resource.Incident)"
+      delete: __inherit
+  TripRiskUnit:
+    permissions:
+      view: __inherit
+  TripRiskUnits:
+    permissions:
+      view: __inherit
+    filter: __noFilter
+  TripSegment:
+    permissions:
+      view: __inherit
+      edit: "perm.Incident.edit(resource.TripIncident)"
+      delete: "perm.Incident.edit(resource.TripIncident)"
+  TripSegments:
+    permissions:
+      view: __inherit
+      create: "perm.Claim.createincident(resource.Claim) || perm.Incident.edit(resource.TripIncident)"
+    filter: __noFilter
+  UnverifiedEndorsement:
+    permissions:
+      view: __inherit
+      edit: __inherit
+  UnverifiedLocationBasedRiskUnit:
+    permissions:
+      view: __inherit
+      edit: __inherit
+  UnverifiedLocationBasedRiskUnitCoverage:
+    permissions:
+      view: __inherit
+      edit: __inherit
+  UnverifiedLocationBasedRiskUnitCoverages:
+    permissions:
+      view: __inherit
+      create: __inherit
+    filter: __noFilter
+  UnverifiedLocationBasedRiskUnits:
+    permissions:
+      view: __inherit
+      create: __inherit
+    filter: __noFilter
+  UnverifiedPolicies:
+    permissions:
+      view: true
+      create: perm.Policy.createunverifiedpolicy
+    filter: gw.rest.core.cc.claim.v1.claims.policy.UnverifiedPolicySecurityFilter
+  UnverifiedPolicy:
+    permissions:
+      view: "resource.Element.Claim == null ? perm.Policy.createunverifiedpolicy : perm.Policy.view(resource.Element)"
+      edit: "resource.Element.Claim == null ? perm.Policy.createunverifiedpolicy : perm.Policy.edit(resource.Element)"
+  UnverifiedPolicyContacts:
+    permissions:
+      view: __inherit
+      create: __inherit
+    filter: __noFilter
+  UnverifiedPolicyCoverage:
+    permissions:
+      view: __inherit
+      edit: __inherit
+  UnverifiedPolicyCoverages:
+    permissions:
+      view: __inherit
+      create: __inherit
+    filter: __noFilter
+  UnverifiedPolicyEndorsements:
+    permissions:
+      view: __inherit
+      create: __inherit
+    filter: __noFilter
+  UnverifiedPolicyLocation:
+    permissions:
+      view: __inherit
+      edit: __inherit
+  UnverifiedPolicyLocations:
+    permissions:
+      view: __inherit
+      create: __inherit
+    filter: __noFilter
+  UnverifiedPropertyItem:
+    permissions:
+      view: __inherit
+      edit: __inherit
+  UnverifiedPropertyItems:
+    permissions:
+      view: __inherit
+      create: __inherit
+    filter: __noFilter
+  UnverifiedRiskUnitCoverage:
+    permissions:
+      view: __inherit
+      edit: __inherit
+  UnverifiedRiskUnitCoverages:
+    permissions:
+      view: __inherit
+      create: __inherit
+    filter: __noFilter
+  UnverifiedTripRiskUnit:
+    permissions:
+      view: __inherit
+      edit: __inherit
+  UnverifiedTripRiskUnits:
+    permissions:
+      view: __inherit
+      create: __inherit
+    filter: __noFilter
+  UnverifiedVehicleRiskUnit:
+    permissions:
+      view: __inherit
+      edit: __inherit
+  UnverifiedVehicleRiskUnitCoverage:
+    permissions:
+      view: __inherit
+      edit: __inherit
+  UnverifiedVehicleRiskUnitCoverages:
+    permissions:
+      view: __inherit
+      create: __inherit
+    filter: __noFilter
+  UnverifiedVehicleRiskUnits:
+    permissions:
+      view: __inherit
+      create: __inherit
+    filter: __noFilter
+  User:
+    permissions:
+      view: "perm.User.view(resource.Element)"
+      edit: "perm.User.edit(resource.Element)"
+      delete: "perm.User.delete(resource.Element)"
+  UserAttribute:
+    permissions:
+      view: __inherit
+      edit: "gw.rest.core.pl.util.v1.UserAttributeInternalPermissionUtil.canCurrentUserEdit()"
+      delete: __inherit
+  UserAttributes:
+    permissions:
+      view:
+      - __inherit
+      - perm.User.manageattributes
+      create: perm.User.manageattributes
+    filter: __noFilter
+  UserRegion:
+    permissions:
+      view: __inherit
+      edit:
+      - perm.User.edit
+      delete:
+      - perm.Region.edit
+      - perm.User.edit
+  UserRegions:
+    permissions:
+      view:
+      - __inherit
+      - perm.Region.view
+      - perm.User.view
+      create:
+      - perm.Region.edit
+      - perm.User.edit
+    filter: __noFilter
+  Users:
+    permissions:
+      view: perm.User.view
+      create: perm.User.create
+    filter: __noFilter
+  VehicleDamagePoint:
+    permissions:
+      view: __inherit
+      edit: __inherit
+      delete: __inherit
+  VehicleDamagePoints:
+    permissions:
+      view: __inherit
+      create: __inherit
+    filter: __noFilter
+  VehicleIncident:
+    permissions:
+      view: "perm.Incident.view(resource.Incident)"
+      edit: "perm.Incident.edit(resource.Incident)"
+      delete: "perm.Incident.edit(resource.Incident)"
+  VehicleRiskUnit:
+    permissions:
+      view: __inherit
+  VehicleRiskUnitCoverage:
+    permissions:
+      view: __inherit
+  VehicleRiskUnitCoverages:
+    permissions:
+      view: __inherit
+    filter: __noFilter
+  VehicleRiskUnits:
+    permissions:
+      view: __inherit
+    filter: __noFilter

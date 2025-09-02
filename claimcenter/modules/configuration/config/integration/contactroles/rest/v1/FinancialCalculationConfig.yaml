@@ -1,0 +1,25 @@
+FinancialCalculationConfig:
+  contactAuthorizationIds:
+    claimLevel:
+      values: "user.hasPrivilegedRoleOnClaim(claim) ? null : {}"
+    exposure:
+      required: "!user.hasPrivilegedRoleOnClaim(claim)"
+    costType:
+      required: "true"
+      values: "{\"claimcost\"}"
+    costCategory:
+    reservingCurrency:
+  internal:
+    claimLevel:
+    exposure:
+    costType:
+    costCategory:
+    reservingCurrency:
+    recoveryCategory:
+  service:
+    claimLevel:
+    exposure:
+    costType:
+    costCategory:
+    reservingCurrency:
+    recoveryCategory:

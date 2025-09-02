@@ -1,0 +1,37 @@
+Subject: [PATCH] Disable the Edge DI Plugin
+
+---
+
+diff --git a/modules/configuration/gsrc/edge/di/EdgeJsonRpcBootstrapPlugin.gs b/modules/configuration/gsrc/edge/di/EdgeJsonRpcBootstrapPlugin.gs
+--- a/modules/configuration/gsrc/edge/di/EdgeJsonRpcBootstrapPlugin.gs
++++ b/modules/configuration/gsrc/edge/di/EdgeJsonRpcBootstrapPlugin.gs
+@@ -19,17 +19,18 @@
+
+
+   override function start(p0: StartablePluginCallbackHandler, p1: boolean) {
+-    _state = StartablePluginState.Started
+-    try {
+-      final var x = HandlerInfoLookup.Status
+-      if (x.isLeft) {
+-        for (err in x.left) {
+-          _logger.logError("EDGE STARTUP ERROR: " + err)
+-        }
+-      }
+-    } catch(e : Throwable) {
+-      _logger.logError(e)
+-    }
++    _logger.logInfo("Edge layer disabled")
++//    _state = StartablePluginState.Started
++//    try {
++//      final var x = HandlerInfoLookup.Status
++//      if (x.isLeft) {
++//        for (err in x.left) {
++//          _logger.logError("EDGE STARTUP ERROR: " + err)
++//        }
++//      }
++//    } catch(e : Throwable) {
++//      _logger.logError(e)
++//    }
+   }
+
+   override function stop(p0: boolean) {

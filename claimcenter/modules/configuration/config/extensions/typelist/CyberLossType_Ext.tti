@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<typelist xmlns="http://guidewire.com/typelists" name="CyberLossType_Ext" desc="What is at Loss?">
+  <typecode
+    code="PersonalData"
+    desc="Personal Data Loss"
+    name="Personal Data"
+    priority="1"/>
+  <typecode
+    code="IP"
+    desc="IP Theft"
+    name="IP"
+    priority="2"/>
+  <typecode
+    code="PaymentData"
+    desc="Payment Data loss"
+    name="Payment Data"
+    priority="3"/>
+  <typecode
+    code="ControlofSystems"
+    desc="Control of Systems"
+    name="Control of Systems"
+    priority="4"/>
+  <typecode
+    code="Phishing"
+    desc="Phishing"
+    name="Phishing"
+    priority="5"/>
+</typelist>

@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  entity="OutboundRecPurgeWorkItem"
+  desc="Custom work item for purging outbound records"
+  table="outboundrecpurgeworkitem"
+  type="keyable"
+  loadable="false"
+  platform="true"
+  replicable="false">
+  <implementsEntity
+    name="WorkItem"/>
+  <foreignkey
+    desc="Reference to Outbound Record"
+    fkentity="OutboundRecord"
+    name="OutboundRecord"
+    nullok="true"/>
+</entity>

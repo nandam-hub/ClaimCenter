@@ -1,0 +1,39 @@
+@import "../platform_source_sans_pro";
+
+$gw-app--base-font-size--in-px: 15px;
+$gw-app--font-size--smaller-px: 14px;
+$gw-app--font-family: 'Source Sans Pro', sans-serif;
+$gw-app--border-radius-px: gw-pxFixed(4);
+$gw-app--font-size--tiny-px: 12px;
+
+$gw-app--force-all-gw-icons-to-another-library-using-conversion-map: true;
+$gw-app--PerformanceIndicator--Value--use-calculator-display: true;
+
+$gw-logo--path: "../../logos/";
+$gw-app--Logo--app--uri: url($gw-logo--path + "WhiteAppLogo.svg");
+
+$gw-app--click-overlay--cursor: wait;
+
+$gw-app--inputs--select--behave-like-secondary: true;
+
+$gw-app--RowTree--expand-glyph: "chevron-right";
+$gw-app--RowTree--collapse-glyph: "chevron-down";
+$gw-app--RowTree--expand-collapse-glyph-as-button: false;
+$gw-app--RowTree--show-leaf-dot: false;
+
+$gw-app--Screen--file-area--user-alternative-layout: true;
+
+$gw-app--SouthPanel--use-float-toggle: true;
+
+$gw-app--TitleBar--screen--use-alternate-breadcrumb-ux: false;
+
+$gw-app--ListView--columns-button-icon: "cog";
+
+$gw-app--wizards--step-button--use-shadow-for-depth: false;
+
+$gw-app--ListView--show-resize-bar-on-full-cell-hover: true;
+
+$gw-app--NorthPanel--border--width-px: gw-pxFixed(0);
+$gw-app--NorthPanel--font-size-em: 1em;
+
+$gw-app--DateValue--date-picker--use-icons: false;

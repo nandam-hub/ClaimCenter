@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<internaltypelistextension xmlns="http://guidewire.com/typelists" name="SystemPermissionType" desc="Defines all permissions that can be granted to users via privileges and roles. The maximum number of supported SystemPermissionTypes is 7000.">
+  <typecode
+    code="eventdataaccess"
+    desc="(Obsolete): Events API authorization is now controlled by Role Authorizer"
+    name="Event Data Access"
+    retired="true"/>
+  <typecode
+    code="eventschemaaccess"
+    desc="(Obsolete): Events API authorization is now controlled by Role Authorizer"
+    name="Event Schema Access"
+    retired="true"/>
+</internaltypelistextension>

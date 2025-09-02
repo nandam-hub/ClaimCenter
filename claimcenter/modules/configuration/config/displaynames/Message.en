@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<Entity
+  name="Message">
+  <Columns>
+    <Column
+      beanPath="Message.DestinationID"
+      name="Destination"
+      sortBeanPath="Message.DestinationID"
+      sortOrder="1"/>
+    <Column
+      beanPath="Message.CreationTime"
+      name="CreationTime"
+      sortBeanPath="Message.CreationTime"
+      sortOrder="2"/>
+    <Column
+      beanPath="Message.EventName"
+      name="EventName"
+      sortBeanPath="Message.EventName"
+      sortOrder="3"/>
+    <Column
+      beanPath="Message.MessageRoot"
+      name="MessageRoot"
+      sortBeanPath="Message.MessageRoot"
+      sortOrder="5"/>
+    <Column
+      beanPath="Message.PrimaryObject"
+      name="PrimaryObject"
+      sortBeanPath="Message.PrimaryObject"
+      sortOrder="4"/>
+    <Column
+      beanPath="Message.ErrorDescription"
+      name="ErrorDescription"
+      sortBeanPath="Message.ErrorDescription"
+      sortOrder="7"/>
+    <Column
+      beanPath="Message.Status"
+      name="Status"
+      sortBeanPath="Message.Status"
+      sortOrder="6"/>
+  </Columns>
+  <DisplayName>return "#" + Destination + " " + CreationTime + " '" + EventName + "' " + MessageRoot + " [" + PrimaryObject + "] " + gw.pl.messaging.MessageStatus.getMessageStatusString(Status) + ": " + ErrorDescription
+</DisplayName>
+</Entity>

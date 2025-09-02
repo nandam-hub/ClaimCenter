@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<plugin interface="DBAuthenticationPlugin" name="DBAuthenticationPlugin">
+  <plugin-gosu env="cloud-dev" gosuclass="gw.surepath.suite.integration.credentials.DatabaseAuthenticationPlugin"/>
+</plugin>

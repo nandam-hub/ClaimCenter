@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <ModalCell
+    id="ExpressionFragCell"
+    mode="nested">
+    <Require
+      name="fragHolder"
+      type="gw.bizrules.pcf.ExpressionFragmentHolder"/>
+    <Require
+      name="lineHolder"
+      type="gw.bizrules.pcf.RuleConditionLineHolder"/>
+    <Variable
+      initialValue="fragHolder as gw.bizrules.pcf.NestedInputConfig"
+      name="inputConfig"
+      recalculateOnRefresh="true"
+      type="gw.bizrules.pcf.NestedInputConfig"/>
+    <FormatCell
+      id="NestedInputCell">
+      <TextInput
+        hideChildrenIfReadOnly="false"
+        id="DisplayText"
+        value="inputConfig.getLabelandNestedText()">
+        <MenuItemSetRef
+          def="ConditionBuilderExpressionMenuItemSet(fragHolder, lineHolder)"/>
+      </TextInput>
+      <ContentInput>
+        <Link
+          action="inputConfig.pushPopup()"
+          hideIfReadOnly="true"
+          label="inputConfig.PopupLinkLabel"
+          id="PopupLink"/>
+      </ContentInput>
+    </FormatCell>
+  </ModalCell>
+</PCF>

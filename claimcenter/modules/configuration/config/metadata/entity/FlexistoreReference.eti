@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<delegate
+  name="FlexistoreReference"
+  xmlns="http://guidewire.com/datamodel"
+  platform="true">
+  <column
+    desc="The ID of the Flexistore pool."
+    name="PoolID"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="The ID of the Flexistore document."
+    name="DocumentID"
+    nullok="true"
+    type="shorttext"/>
+</delegate>

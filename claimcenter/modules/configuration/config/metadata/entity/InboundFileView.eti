@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<viewEntity
+  xmlns="http://guidewire.com/datamodel"
+  exportable="false"
+  entity="InboundFileView"
+  platform="true"
+  primaryEntity="InboundFile">
+  <viewEntityLink
+    name="InboundFile"
+    path="ID"/>
+  <viewEntityColumn
+    name="Config"
+    path="Config"/>
+  <viewEntityTypekey
+    name="Status"
+    path="Status"/>
+  <viewEntityColumn
+    name="InputLocation"
+    path="InputLocation"/>
+  <viewEntityColumn
+    name="ArchiveLocation"
+    path="ArchiveLocation"/>
+  <viewEntityColumn
+    name="Checksum"
+    path="Checksum"/>
+  <viewEntityColumn
+    name="ErrorMessage"
+    path="ErrorMessage"/>
+  <viewEntityColumn
+    name="LoadDate"
+    path="LoadDate"/>
+  <viewEntityColumn
+    name="PurgeDate"
+    path="PurgeDate"/>
+</viewEntity>

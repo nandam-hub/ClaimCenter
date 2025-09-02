@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../../../pcf.xsd">
+  <ListViewPanel id="SP_TimelineLV">
+    <ExposeIterator
+      valueType="entity.TimelineEvent_SP"
+      widget="TimelineEventIterator"/>
+    <Require
+      name="TimelineEventList"
+      type="gw.api.database.IQueryBeanResult&lt;TimelineEvent_SP&gt;"/>
+        <RowIterator
+          checkBoxVisible="CurrentLocation.InEditMode ? true : false"
+          editable="true"
+          elementName="timelineEventValue"
+          hideCheckBoxesIfReadOnly="true"
+          id="TimelineEventIterator"
+          toCreateAndAdd="new TimelineEvent_SP()"
+          toRemove="gw.surepath.cc.configuration.timeline.creation.TimelineUtil.removeTimelineEvent(timelineEventValue)"
+          value="TimelineEventList"
+          valueType="gw.api.database.IQueryBeanResult&lt;entity.TimelineEvent_SP&gt;">
+          <Row>
+            <RangeCell
+              editable="true"
+              id="EventType"
+              label="DisplayKey.get(&quot;SP.Timeline.UI.EventType&quot;)"
+              value="timelineEventValue.EventType"
+              valueRange="typekey.TimelineCategory_SP.getTypeKeys(false)"
+              valueType="TimelineCategory_SP"/>
+            <DateCell
+              editable="true"
+              id="EffectiveDate"
+              label="DisplayKey.get(&quot;SP.Timeline.UI.EffectiveDate&quot;)"
+              required="true"
+              value="timelineEventValue.EffectiveDate"/>
+            <DateCell
+              editable="true"
+              id="ExpirationDate"
+              label="DisplayKey.get(&quot;SP.Timeline.UI.ExpirationDate&quot;)"
+              value="timelineEventValue.ExpirationDate"/>
+          </Row>
+        </RowIterator>
+      </ListViewPanel>
+</PCF>

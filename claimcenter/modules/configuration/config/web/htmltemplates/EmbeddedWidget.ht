@@ -1,0 +1,9 @@
+<div class="gw-EmbeddedWidget"
+    data-gw-url="${url}"
+    data-gw-origin="${origin}"
+    id="${id}"
+    data-gw-frame-name="${id}"
+    data-gw-request-type="${requestType}"
+    data-gw-logical-names="${logicalNames}"
+    data-gw-context-provider="${contextProvider}">
+</div>

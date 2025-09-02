@@ -1,0 +1,31 @@
+.gw-MenuTreeWidget {
+    // Position to other widgets
+    margin-top: $gw-app--MenuTree--spacing-widget-top-rem;
+    margin-left: $gw-app--MenuTree--spacing-widget-left-rem;
+    margin-right: $gw-app--MenuTree--spacing-widget-right-rem;
+    margin-bottom: $gw-app--MenuTree--spacing-widget-bottom-rem;
+
+    // Internal padding
+    padding-top: $gw-app--MenuTree--spacing-inner-top-rem;
+    padding-left: $gw-app--MenuTree--spacing-inner-left-rem;
+    padding-right: $gw-app--MenuTree--spacing-inner-right-rem;
+    padding-bottom: $gw-app--MenuTree--spacing-inner-bottom-rem;
+    
+    overflow: auto;
+    min-height: $gw-app--MenuTree--min-height;
+    min-width: $gw-app--MenuTree--min-width;
+    border-bottom: $gw-app--MenuTree--border-bottom;
+
+    @if ($gw-app--MenuTree--has-border-radius) {
+        @include gw-borderRadius();
+    }
+
+    // See TreeViewWidget for inner implementation
+}
+
+//TODO: from overrides meld if time
+// Force tree widgets to feel like a cloud left nav menu item
+.gw-MenuTreeWidget.gw-styleTag--WestPanelWidget {
+    margin: 0 $gw-app--WestPanel--padding-h-rem $gw-app--WestPanel--item-spacing-v-rem $gw-app--WestPanel--padding-h-rem !important;
+    border-radius: 0px !important;
+}

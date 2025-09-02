@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<entity
+  desc="Incident Type Applicability Criteria"
+  loadable="false"
+  xmlns="http://guidewire.com/datamodel"
+  entity="AppCritIncidentType"
+  table="appcritincidenttype"
+  type="versionable">
+  <typekey
+    desc="Incident Type in a rule availability criteria"
+    name="IncidentType"
+    nullok="false"
+    typelist="Incident"/>
+  <foreignkey
+    columnName="RuleID"
+    desc="The associated rule"
+    fkentity="CCRule"
+    name="Rule"
+    nullok="false"/>
+  <implementsEntity
+    name="RuleVersionDependent"/>
+  <implementsInterface
+    iface="gw.bizrules.domain.RuleVersionDependent"
+    impl="com.guidewire.cc.domain.bizrules.AppCritIncidentTypeImpl"/>
+  <index
+    desc="Enforce uniqueness per incidentType/rule combo"
+    name="UniqueEntryIndex"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="RuleID"/>
+    <indexcol
+      keyposition="2"
+      name="IncidentType"/>
+  </index>
+</entity>

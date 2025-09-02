@@ -1,0 +1,35 @@
+package rules.Preupdate.ClaimPreupdate_dir
+
+uses gw.surepath.cc.configuration.catastrophe.util.CatastropheProperties
+
+@gw.rules.RuleName("SP_CPU50000 - Claims from Catastrophe Template")
+internal class SP_CPU50000ClaimsfromCatastropheTemplate {
+  static function doCondition(claim : entity.Claim) : boolean {
+/*start00rule*/
+return CatastropheProperties.INSTANCE.FeatureEnabled and
+    claim.New and claim.CatFromCatClaimTemplate_SP and claim.Catastrophe != null and
+    claim.Catastrophe.CatClaimTemplateSettings_SP != null and
+    claim.Catastrophe.CatClaimTemplateSettings_SP.Active
+/*end00rule*/
+}
+
+  static function doAction(claim : entity.Claim, actions : gw.rules.Action) {
+/*start00rule*/
+var templateSettings = claim.Catastrophe.CatClaimTemplateSettings_SP
+for (eachActivity in templateSettings.ActivityRules) {
+  var offsetDate = Date.Today
+  // Check the quick-setup claim activity settings to see if escalation/target days are overridden.
+  // If not, then use the default days from the activity pattern.
+  var escalationDays = eachActivity.EscalationDays ?: eachActivity.ActivityPattern.EscalationDays
+  var targetDays = eachActivity.TargetDays ?: eachActivity.ActivityPattern.TargetDays
+  // Determine escalation/target date
+  var escalationDate = offsetDate.addDays(escalationDays)
+  var targetDate = offsetDate.addDays(targetDays)
+  // Create the activity on the new claim.
+  var newActivity = claim.createActivity(null, eachActivity.ActivityPattern, null, null, TC_HIGH, true, null, null)
+  newActivity.TargetDate = targetDate
+  newActivity.EscalationDate = escalationDate
+}
+/*end00rule*/
+  }
+}

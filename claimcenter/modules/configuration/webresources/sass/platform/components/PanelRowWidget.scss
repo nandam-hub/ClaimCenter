@@ -1,0 +1,20 @@
+.gw-PanelRowWidget {
+  @include gw-layoutPanelInnerSpacing();
+  @include gw-layoutPanelOuterSpacing();
+  @include gw-widgetStyles();
+
+  flex-grow: 0;
+  vertical-align: top;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  position: relative;
+
+  &.gw-child-dividers {
+    > div + div {
+      border-left: gw-border();
+    }
+  }
+}

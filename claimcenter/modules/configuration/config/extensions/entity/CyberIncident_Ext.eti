@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  entity="CyberIncident_Ext"
+  desc="Incident for a claim on cyber line"
+  supertype="Incident">
+  <column
+    desc="Business Continuity"
+    name="BusinessContinuity"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Loss of Data"
+    name="DataLoss"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Theft of Data"
+    name="DataTheft"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Ransomware"
+    name="Ransomware"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Was Anti-malware Installed?"
+    name="AntimalwareInstalled"
+    nullok="true"
+    type="bit"/>
+  <typekey
+    name="CyberLossType"
+    nullok="true"
+    typelist="CyberLossType_Ext"/>
+</subtype>

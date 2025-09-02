@@ -1,0 +1,33 @@
+name: vendor
+accessibleFields:
+  ClaimContact:
+    edit: []
+    view:
+    - addressBookUID
+    - authorizationID
+    - cellPhone
+    - claimUpdatesViaEmailOptIn
+    - claimUpdatesViaTextOptIn
+    - companyName
+    - companyNameKanji
+    - contactSubtype
+    - dateOfBirth
+    - displayName
+    - doctorSpecialty
+    - emailAddress1
+    - emailAddress2
+    - firstName
+    - homePhone
+    - id
+    - lastName
+    - licenseNumber
+    - licenseState
+    - medicalLicense
+    - preferredPhoneType
+    - primaryAddress
+    - primaryContact
+    - primaryLanguage
+    - primaryLocale
+    - primaryPhone
+    - primaryPhoneType
+    - workPhone

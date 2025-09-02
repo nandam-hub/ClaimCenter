@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<typelistextension
+  xmlns="http://guidewire.com/typelists"
+  name="BatchProcessType">
+  <!-- batch processes -->
+  <typecode
+    code="UserAvailabilityOnVacation_SP"
+    desc="Toggles the vacation status of all users concerned  to On Vacation"
+    name="Toggles the Vacation Status to On Vacation">
+    <category
+      code="UIRunnable"
+      typelist="BatchProcessTypeUsage"/>
+    <category
+      code="APIRunnable"
+      typelist="BatchProcessTypeUsage"/>
+    <category
+      code="Schedulable"
+      typelist="BatchProcessTypeUsage"/>
+  </typecode>
+  <typecode
+    code="UserAvailabilityAtWork_SP"
+    desc="Toggles the vacation status of all users concerned  to At Work"
+    name="Toggles the Vacation Status to At Work">
+    <category
+      code="UIRunnable"
+      typelist="BatchProcessTypeUsage"/>
+    <category
+      code="APIRunnable"
+      typelist="BatchProcessTypeUsage"/>
+    <category
+      code="Schedulable"
+      typelist="BatchProcessTypeUsage"/>
+  </typecode>
+</typelistextension>

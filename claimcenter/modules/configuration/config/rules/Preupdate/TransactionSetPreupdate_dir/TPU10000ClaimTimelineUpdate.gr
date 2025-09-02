@@ -1,0 +1,18 @@
+package rules.Preupdate.TransactionSetPreupdate_dir
+uses gw.surepath.cc.configuration.timeline.creation.TimelineUtil
+
+@gw.rules.RuleName("TPU10000 - Claim Timeline Update")
+internal class TPU10000ClaimTimelineUpdate {
+  static function doCondition(transactionSet : entity.TransactionSet) : boolean {
+/*start00rule*/
+return true
+/*end00rule*/
+}
+
+  static function doAction(transactionSet : entity.TransactionSet, actions : gw.rules.Action) {
+/*start00rule*/
+  var claim = transactionSet.Claim
+  TimelineUtil.registerCallback(claim, claim.Bundle)
+/*end00rule*/
+  }
+}

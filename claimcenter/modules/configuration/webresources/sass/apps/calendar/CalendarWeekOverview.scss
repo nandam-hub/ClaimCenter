@@ -1,0 +1,217 @@
+$gw-CalendarWeek--title--pad-h: gw-remScaled(.2);
+$gw-CalendarWeek--day-title--pad-h: gw-remScaled(2);
+$gw-CalendarWeek--day-title--pad-v: gw-remScaled(2);
+$gw-CalendarWeek--event-inner-padding: gw-emFixed(0) gw-emFixed(0) gw-emFixed(1) gw-emFixed(.5);
+
+// ======== Events in Week Overview Section
+.gw-CalendarWeek {
+  display: block;
+  overflow: hidden;
+
+  .gw-CalendarWeek--header {
+    display: inline-flex;
+    height: $gw-app--CalendarWidget--Title--height;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    border-top: gw-border($gw-app--CalendarWidget--cell-border);
+    border-left: gw-border($gw-app--CalendarWidget--cell-border);
+    border-right: gw-border($gw-app--CalendarWidget--cell-border);
+    background-color: $gw-app--CalendarWidget--ui-bg;
+
+    .gw-CalendarWeek--prev {
+      @include gw-Calendar--titleButton($gw-app--CalendarWidget--Week--prev-glyph);
+    }
+
+    .gw-title {
+      display: inline-flex;
+      align-items: center;
+      font-size: $gw-app--CalendarWidget--Week--title-font-size;
+      color: $gw-app--CalendarWidget--Week--title-col;
+      padding: 0 $gw-CalendarWeek--title--pad-h;
+      border-left: gw-border($gw-app--CalendarWidget--ui-border);
+      border-right: gw-border($gw-app--CalendarWidget--ui-border);
+    }
+
+    .gw-CalendarWeek--next {
+      @include gw-Calendar--titleButton($gw-app--CalendarWidget--Week--next-glyph);
+    }
+  }
+
+  .gw-CalendarWeek--body {
+    width: 100%;
+    border: gw-border($gw-app--CalendarWidget--Week--day-border-col);
+    border-top: 0;
+
+    .gw-CalendarWeek--day {
+      width: 100%;
+      border-bottom: gw-border($gw-app--CalendarWidget--cell-border);
+      padding: $gw-app--CalendarWidget--general-inset;
+      background-color: $gw-app--CalendarWidget--cell--bg;
+
+      .gw-day--title {
+        display: inline-block;
+        width: 40%;
+        padding: gw-remScaled(.5) gw-remScaled(1) gw-remScaled(.5) gw-remScaled(1);
+      }
+
+      .gw-day--event-summary {
+        width: 50%;
+      }
+
+      .gw-day--toggle {
+        width: 10%;
+        text-align: right;
+      }
+
+      // Only show the critical icon at the day level when the day is collapsed
+      &.gw-closed {
+        height: gw-remScaled(2.6);
+        background-color: $gw-app--CalendarWidget--ui-bg;
+        .gw-day--event-summary {
+          display: inline-block;
+          padding: gw-remScaled(.5) gw-remScaled(1) gw-remScaled(.5) gw-remScaled(1);
+          font-weight: bold;
+        }
+        .gw-day--critical {
+          display: inline-block;
+          .gw-icon {
+            @include gw-Calendar--criticalIcon();
+          }
+        }
+        .gw-day--content {
+          display: none;
+        }
+      }
+
+      &:not(.gw-closed) {
+        .gw-day--critical, .gw-day--event-summary {
+          display: none;
+        }
+      }
+
+      .gw-day--toggle {
+        display: inline-block;
+        float: right;
+        color: $gw-app--CalendarWidget--Week--day-overview-open-close-col;
+        padding: gw-remScaled(0.5) gw-remScaled(1) gw-remScaled(0.5) gw-remScaled(1);
+      }
+
+      &.gw-closed {
+        .gw-CalendarWeek--event--outer {
+          display: none;
+        }
+
+        .gw-day--toggle {
+          .gw-icon {
+            @include gw-icon($gw-app--CalendarWidget--Week--day-overview-open-glyph, gw-emFixed(.8));
+          }
+        }
+      }
+
+      &:not(.gw-closed) {
+        .gw-day--toggle {
+          .gw-icon {
+            @include gw-icon($gw-app--CalendarWidget--Week--day-overview-close-glyph, gw-emFixed(.8));
+          }
+        }
+      }
+
+      .gw-CalendarWeek--event--outer {
+        width: 100%;
+
+        & + .gw-CalendarWeek--event--outer {
+          padding-top: $gw-app--CalendarWidget--general-inset;
+        }
+
+        .gw-CalendarWeek--event--inner {
+          display: flex;
+          align-items: flex-start;
+          padding: $gw-CalendarWeek--event-inner-padding;
+
+          .gw-event--toggle {
+            display: inline-block;
+            padding-right: $gw-app--CalendarWidget--general-inset;
+          }
+
+          .gw-critical {
+            display: inline-block;
+            padding-right: $gw-app--CalendarWidget--general-inset;
+            vertical-align: top;
+
+            &.gw-icon {
+              @include gw-Calendar--criticalIcon();
+            }
+          }
+
+          &.gw-closed {
+            .gw-event--props {
+              display: none;
+            }
+            .gw-event--toggle {
+              .gw-icon {
+                @include gw-Calendar--weekButton-event-toggle($gw-app--CalendarWidget--Week--activity-open-glyph);
+              }
+            }
+          }
+
+          &:not(.gw-closed) {
+            .gw-event--toggle {
+              .gw-icon {
+                @include gw-Calendar--weekButton-event-toggle($gw-app--CalendarWidget--Week--activity-close-glyph);
+              }
+            }
+          }
+
+          .gw-event--inner--left {
+            display: flex;
+            justify-content: flex-end;
+            width: $gw-app--CalendarWidget--Week--left-action-icon-width;
+          }
+
+          .gw-event--inner--right {
+            flex-grow: 1;
+            cursor: pointer;
+            background-color: $gw-app--CalendarWidget--Week--action-bg;
+            padding-left: $gw-app--CalendarWidget--general-inset;
+
+            &:hover {
+              background-color: $gw-app--CalendarWidget--Week--action-hover-bg;
+              color: $gw-app--CalendarWidget--Week--action-hover-col;
+
+              .gw-event--action {
+                color: $gw-app--CalendarWidget--Week--action-hover-col;
+              }
+            }
+
+            .gw-event--time {
+              display: inline-block;
+              padding-right: gw-remScaled(.6);
+            }
+
+            .gw-event--action {
+              display: inline-block;
+              max-width: $gw-app--CalendarWidget--Week--action-max-width;
+              text-align: left;
+              color: $gw-app--CalendarWidget--Week--action-col;
+            }
+
+            .gw-event--props {
+              .gw-event--prop {
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .gw-CalendarWeek--footer {
+    display: none;
+    // TODO: skwon - kill me?  Leaving in for now...
+    //width: 100%;
+    //font-size: gw-emFixed(1.05);
+    //padding: gw-remScaled(.4) gw-remScaled(1);
+    //background-color: $gw-app--CalendarWidget--ui-bg;
+  }
+}

@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="TimelineStatus_SP"
+  name="TimelineStatus_SP">
+  <typecode
+    code="new"
+    desc="New"
+    name="New"/>
+  <typecode
+    code="cleaned"
+    desc="Cleaned"
+    name="Cleaned"/>
+  <typecode
+    code="restoring"
+    desc="Restoring"
+    name="Restoring"/>
+  <typecode
+    code="active"
+    desc="Active"
+    name="Active"/>
+</typelist>

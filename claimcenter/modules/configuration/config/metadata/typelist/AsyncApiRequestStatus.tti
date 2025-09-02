@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<typelist
+  final="true"
+  platform="true"
+  xmlns="http://guidewire.com/typelists" name="AsyncApiRequestStatus" desc="The status of an asynchronous API request">
+  <typecode
+    code="Accepted"
+    desc="The request has been accepted for asynchronous processing, but processing of the request has not started yet"
+    name="Accepted"/>
+  <typecode
+    code="InProgress"
+    desc="The request is still in progress"
+    name="In Progress"/>
+  <typecode
+    code="Complete"
+    desc="The request has completed"
+    name="Complete"/>
+</typelist>

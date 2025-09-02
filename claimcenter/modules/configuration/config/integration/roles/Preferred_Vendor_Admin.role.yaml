@@ -1,0 +1,6 @@
+name: "Preferred Vendor Admin"
+endpoints: []
+accessibleFields:
+  "*":
+    edit: "*"
+    view: "*"

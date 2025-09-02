@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../../pcf.xsd">
+  <ListViewPanel
+    id="SP_DataAuditEntriesLV">
+    <Require
+      name="AuditEntries"
+      type="gw.api.database.IQueryBeanResult&lt;DataAudit_SP&gt;"/>
+    <RowIterator
+      editable="false"
+      elementName="entry"
+      value="AuditEntries"
+      valueType="gw.api.database.IQueryBeanResult&lt;DataAudit_SP&gt;">
+      <Row>
+        <TextCell
+          action="gw.surepath.cc.configuration.adminaudit.util.DataAuditController.redirectToParentEntityPage(entry)"
+          actionAvailable="entry.RemovedAuditBeanID == null and gw.surepath.cc.configuration.adminaudit.util.DataAuditController.eligibleParentEntitiesForRedirect().hasMatch(\elt1 -&gt; elt1 == entry.AuditBeanParentEntityType)"
+          id="ModifiedBeanMasterEntity"
+          label="DisplayKey.get(&quot;SP.AdminAudit.Admin.Audit.MasterEntityName&quot;)"
+          value="entry.AuditBeanParentEntityType"/>
+        <TextCell
+          id="ModifiedBeanEntityName"
+          label="DisplayKey.get(&quot;SP.AdminAudit.Admin.Audit.EntityName&quot;)"
+          value="entry.AuditableBeanEntityType"/>
+        <TextCell
+          action="pcf.SP_DataAuditFieldRecordsPopup.push(entry)"
+          actionAvailable="entry.AuditableBeanStatus == TC_UPDATED"
+          id="ModifiedBeanStatus"
+          label="DisplayKey.get(&quot;SP.AdminAudit.Admin.Audit.ModifiedBeanStatus&quot;)"
+          value="entry.AuditableBeanStatus.DisplayName"/>
+        <TextCell
+          id="ModifiedBeanDisplayName"
+          label="DisplayKey.get(&quot;SP.AdminAudit.Admin.Audit.ModifiedObject&quot;)"
+          value="entry.AuditableBeanDisplayName"/>
+        <DateCell
+          dateFormat="short"
+          id="OccurrenceDate"
+          label="DisplayKey.get(&quot;SP.AdminAudit.Admin.Audit.ModifiedDate&quot;)"
+          timeFormat="short"
+          value="entry.OccurrenceDate"/>
+        <TextCell
+          id="PerformingUserName"
+          label="DisplayKey.get(&quot;SP.AdminAudit.Admin.Audit.ModifiedBy&quot;)"
+          value="entry.PerformingUser.DisplayName + &quot; (&quot; + entry.PerformingUser.Credential.UserName + &quot;)&quot;"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

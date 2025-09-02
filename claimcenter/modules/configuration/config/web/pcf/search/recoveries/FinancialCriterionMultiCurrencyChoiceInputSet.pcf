@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <InputSet
+    id="FinancialCriterionMultiCurrencyChoiceInputSet">
+    <Require
+      name="FinancialCriterionMC"
+      type="FinancialCriterionMC"/>
+    <Require
+      name="available"
+      type="boolean"/>
+    <Require
+      name="chosenOptionVisible"
+      type="boolean"/>
+    <Require
+      name="inputGroupId"
+      type="String"/>
+    <Label
+      label="inputGroupId"/>
+    <TypeKeyInput
+      editable="true"
+      id="FinancialCurrency"
+      label="DisplayKey.get('Java.Search.Financials.Currency')"
+      value="FinancialCriterionMC.Currency"
+      valueType="typekey.Currency"
+      visible="gw.api.util.CurrencyUtil.isMultiCurrencyMode()">
+      <PostOnChange />
+    </TypeKeyInput>
+    <RangeInput
+      editable="true"
+      available="(gw.api.util.CurrencyUtil.isSingleCurrencyMode() or FinancialCriterionMC.Currency != null)"
+      id="FinancialChosenOption"
+      label="DisplayKey.get('Java.Search.Financials.ExpressionType')"
+      optionLabel="gw.api.locale.DisplayKey.get(VALUE)"
+      value="FinancialCriterionMC.ChosenOption"
+      valueRange="FinancialCriterionMC.Options"
+      valueType="java.lang.String"
+      visible="chosenOptionVisible">
+      <PostOnChange />
+    </RangeInput>
+    <TextInput
+      editable="true"
+      id="FinancialAmountStart"
+      available="((gw.api.util.CurrencyUtil.isSingleCurrencyMode() or FinancialCriterionMC.Currency != null)
+                  and (FinancialCriterionMC.Options.length == 0 or FinancialCriterionMC.ChosenOption != null))"
+      format="gw.api.util.CurrencyUtil.getCurrencyFormatExpression(FinancialCriterionMC.Currency)"
+      label="DisplayKey.get('Java.Search.From')"
+      required="false"
+      value="FinancialCriterionMC.AmountStart"
+      valueType="java.math.BigDecimal"/>
+    <TextInput
+      editable="true"
+      id="FinancialAmountEnd"
+      available="((gw.api.util.CurrencyUtil.isSingleCurrencyMode() or FinancialCriterionMC.Currency != null)
+                  and (FinancialCriterionMC.Options.length == 0 or FinancialCriterionMC.ChosenOption != null))"
+      format="gw.api.util.CurrencyUtil.getCurrencyFormatExpression(FinancialCriterionMC.Currency)"
+      label="DisplayKey.get('Java.Search.To')"
+      required="false"
+      value="FinancialCriterionMC.AmountEnd"
+      valueType="java.math.BigDecimal"/>
+    <InputDivider/>
+  </InputSet>
+</PCF>

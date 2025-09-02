@@ -1,0 +1,521 @@
+{
+  "schemaName": "gw.core.pl.admin.v1.admin_pl-1.0",
+  "combine": [
+    "gw.core.pl.framework.v1.framework_pl-1.0",
+    "gw.core.pl.common.v1.common_pl-1.0"
+  ],
+  "mappers": {
+    "AssignableQueue": {
+      "schemaDefinition": "AssignableQueue",
+      "root": "entity.AssignableQueue",
+      "properties": {
+        "description": {
+          "path": "AssignableQueue.Description"
+        },
+        "id": {
+          "path": "AssignableQueue.RestId"
+        },
+        "name": {
+          "path": "AssignableQueue.Name"
+        },
+        "subGroupVisible": {
+          "path": "AssignableQueue.SubGroupVisible"
+        }
+      }
+    },
+    "Attribute": {
+      "schemaDefinition": "Attribute",
+      "root": "entity.Attribute",
+      "properties": {
+        "description": {
+          "path": "Attribute.Description"
+        },
+        "id": {
+          "path": "Attribute.RestId"
+        },
+        "name": {
+          "path": "Attribute.Name"
+        },
+        "type": {
+          "path": "Attribute.Type",
+          "mapper": "#/mappers/TypeKeyReference"
+        }
+      }
+    },
+    "CalendarDateCalculation": {
+      "schemaDefinition": "CalendarDateCalculation",
+      "root": "gw.rest.core.pl.admin.v1.activitycalendar.CalendarDateCalculation",
+      "properties": {
+        "calculatedDate": {
+          "path": "CalendarDateCalculation.CalculatedDate"
+        },
+        "holidayTag": {
+          "path": "CalendarDateCalculation.HolidayTag",
+          "mapper": "#/mappers/TypeKeyReference"
+        },
+        "includeDaysType": {
+          "path": "CalendarDateCalculation.IncludeDaysType",
+          "mapper": "#/mappers/TypeKeyReference"
+        },
+        "location": {
+          "path": "CalendarDateCalculation.Location",
+          "mapper": "#/mappers/Address"
+        },
+        "numberOfDays": {
+          "path": "CalendarDateCalculation.NumberOfDays"
+        },
+        "numberOfHours": {
+          "path": "CalendarDateCalculation.NumberOfHours"
+        },
+        "startDate": {
+          "path": "CalendarDateCalculation.StartDate"
+        }
+      }
+    },
+    "GeographicZone": {
+      "schemaDefinition": "GeographicZone",
+      "root": "entity.Zone",
+      "properties": {
+        "code": {
+          "path": "Zone.Code"
+        },
+        "country": {
+          "path": "Zone.Country",
+          "mapper": "#/mappers/TypeKeyReference"
+        },
+        "displayName": {
+          "path": "Zone.RestV1_SafeDisplayName"
+        },
+        "id": {
+          "path": "Zone.RestId"
+        },
+        "name": {
+          "path": "Zone.Name"
+        },
+        "zoneType": {
+          "path": "Zone.ZoneType",
+          "mapper": "#/mappers/TypeKeyReference"
+        }
+      }
+    },
+    "Group": {
+      "schemaDefinition": "Group",
+      "root": "entity.Group",
+      "properties": {
+        "displayName": {
+          "path": "Group.RestV1_SafeDisplayName"
+        },
+        "groupType": {
+          "path": "Group.GroupType",
+          "mapper": "#/mappers/TypeKeyReference"
+        },
+        "id": {
+          "path": "Group.RestId"
+        },
+        "name": {
+          "path": "Group.Name"
+        },
+        "parent": {
+          "path": "Group.Parent.RestV1_AsReference",
+          "mapper": "#/mappers/ResourceReference"
+        },
+        "securityZone": {
+          "path": "Group.SecurityZone.RestV1_AsReference",
+          "mapper": "#/mappers/ResourceReference"
+        },
+        "supervisor": {
+          "path": "Group.Supervisor.RestV1_AsReference",
+          "mapper": "#/mappers/ResourceReference"
+        }
+      }
+    },
+    "GroupRegion": {
+      "schemaDefinition": "GroupRegion",
+      "root": "entity.GroupRegion",
+      "properties": {
+        "id": {
+          "path": "GroupRegion.RestId"
+        },
+        "region": {
+          "path": "GroupRegion.Region.RestV1_AsReference",
+          "mapper": "#/mappers/ResourceReference"
+        }
+      }
+    },
+    "GroupUser": {
+      "schemaDefinition": "GroupUser",
+      "root": "entity.GroupUser",
+      "properties": {
+        "id": {
+          "path": "GroupUser.RestId"
+        },
+        "loadFactor": {
+          "path": "GroupUser.LoadFactor"
+        },
+        "loadFactorType": {
+          "path": "GroupUser.LoadFactorType",
+          "mapper": "#/mappers/TypeKeyReference"
+        },
+        "manager": {
+          "path": "GroupUser.Manager"
+        },
+        "member": {
+          "path": "GroupUser.Member"
+        },
+        "user": {
+          "path": "GroupUser.User.RestV1_AsReference",
+          "mapper": "#/mappers/ResourceReference"
+        }
+      }
+    },
+    "Holiday": {
+      "schemaDefinition": "Holiday",
+      "root": "entity.Holiday",
+      "properties": {
+        "appliesToAllZones": {
+          "path": "Holiday.AppliesToAllZones"
+        },
+        "holidayTags": {
+          "path": "Holiday.RestV1_SortedHolidayTagCodes",
+          "mapper": "#/mappers/TypeKeyReference"
+        },
+        "id": {
+          "path": "Holiday.RestId"
+        },
+        "name": {
+          "path": "Holiday.Name"
+        },
+        "occurrenceDate": {
+          "path": "Holiday.RestV1_OccurrenceDate"
+        }
+      }
+    },
+    "HolidayZone": {
+      "schemaDefinition": "HolidayZone",
+      "root": "entity.HolidayZone",
+      "properties": {
+        "code": {
+          "path": "HolidayZone.Code"
+        },
+        "country": {
+          "path": "HolidayZone.Country",
+          "mapper": "#/mappers/TypeKeyReference"
+        },
+        "geographicZone": {
+          "path": "null as gw.api.modules.rest.framework.v1.refs.ResourceReference",
+          "mapper": "#/mappers/ResourceReference",
+          "predicate": "false"
+        },
+        "id": {
+          "path": "HolidayZone.RestId"
+        },
+        "zoneType": {
+          "path": "HolidayZone.ZoneType",
+          "mapper": "#/mappers/TypeKeyReference"
+        }
+      }
+    },
+    "Organization": {
+      "schemaDefinition": "Organization",
+      "root": "entity.Organization",
+      "properties": {
+        "carrier": {
+          "path": "Organization.Carrier"
+        },
+        "contact": {
+          "path": "Organization.Contact",
+          "mapper": "#/mappers/Contact",
+          // Updates to the linked Contact will not automatically trigger an event on this Organization
+          "eventSafe": false
+        },
+        "displayName": {
+          "path": "Organization.RestV1_SafeDisplayName"
+        },
+        "id": {
+          "path": "Organization.RestId"
+        },
+        "masterAdmin": {
+          "path": "Organization.MasterAdmin"
+        },
+        "name": {
+          "path": "Organization.Name"
+        },
+        "rootGroup": {
+          "path": "Organization.RootGroup.RestV1_AsReference",
+          "mapper": "#/mappers/ResourceReference"
+        },
+        "type": {
+          "path": "Organization.Type",
+          "mapper": "#/mappers/TypeKeyReference"
+        }
+      }
+    },
+    "Region": {
+      "schemaDefinition": "Region",
+      "root": "entity.Region",
+      "properties": {
+        "id": {
+          "path": "Region.RestId"
+        },
+        "name": {
+          "path": "Region.Name"
+        }
+      }
+    },
+    "RegionZone": {
+      "schemaDefinition": "RegionZone",
+      "root": "entity.RegionZone",
+      "properties": {
+        "code": {
+          "path": "RegionZone.Code"
+        },
+        "country": {
+          "path": "RegionZone.Country",
+          "mapper": "#/mappers/TypeKeyReference"
+        },
+        "geographicZone": {
+          "path": "null as gw.api.modules.rest.framework.v1.refs.ResourceReference",
+          "mapper": "#/mappers/ResourceReference",
+          "predicate": "false"
+        },
+        "id": {
+          "path": "RegionZone.RestId"
+        },
+        "zoneType": {
+          "path": "RegionZone.ZoneType",
+          "mapper": "#/mappers/TypeKeyReference"
+        }
+      }
+    },
+    "Role": {
+      "schemaDefinition": "Role",
+      "root": "entity.Role",
+      "properties": {
+        "carrierInternal": {
+          "path": "Role.CarrierInternalRole"
+        },
+        "description": {
+          "path": "Role.Description"
+        },
+        "displayName": {
+          "path": "Role.RestV1_SafeDisplayName"
+        },
+        "id": {
+          "path": "Role.RestId"
+        },
+        "name": {
+          "path": "Role.Name"
+        },
+        "roleType": {
+          "path": "Role.RoleType",
+          "mapper": "#/mappers/TypeKeyReference"
+        }
+      }
+    },
+    "RolePermission": {
+      "schemaDefinition": "RolePermission",
+      "root": "entity.RolePrivilege",
+      "properties": {
+        "id": {
+          "path": "RolePrivilege.RestId"
+        },
+        "permission": {
+          "path": "RolePrivilege.Permission",
+          "mapper": "#/mappers/TypeKeyReference"
+        }
+      }
+    },
+    "SecurityZone": {
+      "schemaDefinition": "SecurityZone",
+      "root": "entity.SecurityZone",
+      "properties": {
+        "description": {
+          "path": "SecurityZone.Description"
+        },
+        "displayName": {
+          "path": "SecurityZone.RestV1_SafeDisplayName"
+        },
+        "id": {
+          "path": "SecurityZone.RestId"
+        },
+        "name": {
+          "path": "SecurityZone.Name"
+        }
+      }
+    },
+    "User": {
+      "schemaDefinition": "User",
+      "root": "entity.User",
+      "properties": {
+        "active": {
+          "path": "User.Credential.Active"
+        },
+        "cellPhone": {
+          "path": "User.Contact.RestV1_getPhoneNumber(Person#CellPhone)",
+          "mapper": "#/mappers/PhoneNumber"
+        },
+        "displayName": {
+          "path": "User.RestV1_SafeDisplayName",
+          // The User's DisplayName depends on the associated Contact's DisplayName.  Changes to the Contact will trigger
+          // an event on the User, and the Contact's DisplayName should only reference columns directly on the Contact
+          "eventSafe": true
+        },
+        "employeeNumber": {
+          "path": "User.Contact.EmployeeNumber"
+        },
+        "externalUser": {
+          "path": "User.ExternalUser"
+        },
+        "firstName": {
+          "path": "User.Contact.FirstName"
+        },
+        "gender": {
+          "path": "User.Contact.Gender",
+          "mapper": "#/mappers/TypeKeyReference"
+        },
+        "groups": {
+          "path": "User.RestV1_SortedUserGroups",
+          "mapper": "#/mappers/UserGroupReference",
+          // The underlying GroupUsers array is not safe because GroupUser generates but does not propagate events
+          "eventSafe": false
+        },
+        "homePhone": {
+          "path": "User.Contact.RestV1_getPhoneNumber(Contact#HomePhone)",
+          "mapper": "#/mappers/PhoneNumber"
+        },
+        "id": {
+          "path": "User.RestId"
+        },
+        "lastName": {
+          "path": "User.Contact.LastName"
+        },
+        "pronounAggregate": {
+          "path": "User.Contact.PronounAggregate",
+          "mapper": "#/mappers/TypeKeyReference"
+        },
+        "pronounAggregateDisplay": {
+          "path": "User.Contact.PronounAggregateDisplay"
+        },
+        "pronounObjective": {
+          "path": "User.Contact.PronounObjective"
+        },
+        "pronounPossessive": {
+          "path": "User.Contact.PronounPossessive"
+        },
+        "pronounSubjective": {
+          "path": "User.Contact.PronounSubjective"
+        },
+        "roles": {
+          "path": "User.RestV1_SortedUserRoles",
+          "mapper": "#/mappers/UserRoleReference"
+        },
+        "sexAssignedAtBirth": {
+          "path": "User.Contact.SexAssignedAtBirth",
+          "mapper": "#/mappers/TypeKeyReference"
+        },
+        "suffix": {
+          "path": "User.Contact.Suffix",
+          "mapper": "#/mappers/TypeKeyReference"
+        },
+        "username": {
+          "path": "User.Credential.UserName"
+        },
+        "vacationStatus": {
+          "path": "User.VacationStatus",
+          "mapper": "#/mappers/TypeKeyReference"
+        },
+        "workPhone": {
+          "path": "User.Contact.RestV1_getPhoneNumber(Contact#WorkPhone)",
+          "mapper": "#/mappers/PhoneNumber"
+        }
+      }
+    },
+    "UserAttribute": {
+      "schemaDefinition": "UserAttribute",
+      "root": "entity.AttributeUser",
+      "properties": {
+        "attribute": {
+          "path": "AttributeUser.Attribute.RestV1_AsReference",
+          "mapper": "#/mappers/ResourceReference"
+        },
+        "id": {
+          "path": "AttributeUser.RestId"
+        },
+        "state": {
+          "path": "AttributeUser.State",
+          "mapper": "#/mappers/TypeKeyReference"
+        },
+        "value": {
+          "path": "AttributeUser.Value"
+        }
+      }
+    },
+    "UserGroupReference": {
+      "schemaDefinition": "UserGroupReference",
+      "root": "entity.GroupUser",
+      "referenceMapper": true,
+      "properties": {
+        "displayName": {
+          "path": "GroupUser.Group.RestV1_SafeDisplayName",
+          // Display names on references are always considered unsafe, as they can reference fields on the referenced entity that are not immutable
+          "eventSafe": false
+        },
+        "id": {
+          "path": "GroupUser.Group.RestId",
+          // The Group on a GroupUser should be immtuable
+          "eventSafe": true
+        },
+        "type": {
+          "path": "(typeof GroupUser.Group).RelativeName",
+          // The Group on a GroupUser should be immtuable
+          "eventSafe": true
+        },
+        "uri": {
+          "path": "GroupUser.Group.RestV1_AsReference.Uri",
+          // The Group on a GroupUser should be immtuable
+          "eventSafe": true
+        }
+      }
+    },
+    "UserRegion": {
+      "schemaDefinition": "UserRegion",
+      "root": "entity.UserRegion",
+      "properties": {
+        "id": {
+          "path": "UserRegion.RestId"
+        },
+        "region": {
+          "path": "UserRegion.Region.RestV1_AsReference",
+          "mapper": "#/mappers/ResourceReference"
+        }
+      }
+    },
+    "UserRoleReference": {
+      "schemaDefinition": "UserRoleReference",
+      "root": "entity.UserRole",
+      "referenceMapper": true,
+      "properties": {
+        "displayName": {
+          "path": "UserRole.Role.RestV1_SafeDisplayName",
+          // Display names on references are always considered unsafe, as they can reference fields on the referenced entity that are not immutable
+          "eventSafe": false
+        },
+        "id": {
+          "path": "UserRole.Role.RestId",
+          // The Role on a UserRole should be immutable
+          "eventSafe": true
+        },
+        "type": {
+          "path": "(typeof UserRole.Role).RelativeName",
+          // The Role on a UserRole should be immutable
+          "eventSafe": true
+        },
+        "uri": {
+          "path": "UserRole.Role.RestV1_AsReference.Uri",
+          // The Role on a UserRole should be immutable
+          "eventSafe": true
+        }
+      }
+    }
+  }
+}

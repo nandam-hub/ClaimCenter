@@ -1,0 +1,20 @@
+identifier: admin
+displayKey: Web.CCSampleData.Admin.Name
+description: "Example admin sample data for CC"
+className: CCGosuLoadableSampleDataSet
+priority: 1
+params:
+  dataGroups:
+   - SampleSeczonesRegions
+   - SampleZones
+   - SampleUsersGroups
+   - SampleExchangeRates
+   - SampleCatastrophes
+   - SampleCustomerServiceTiers
+   - SampleSpecialistServiceTree
+   - SampleSpecialistServiceDetails
+   - SampleMetricLimits
+   - SampleRefTables
+   - SampleXMLRefTables
+   - SampleQuestions
+   - SampleWeightWorkloadClassifications

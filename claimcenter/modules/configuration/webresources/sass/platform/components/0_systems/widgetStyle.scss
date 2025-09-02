@@ -1,0 +1,141 @@
+
+
+@mixin gw-widgetStyles($default-bg: transparent, $default-col: inherit, $fixed-border-col: null, $has-default-border: false, $default-border-color: $gw-app--border--col) {
+  &:not(.gw-border) {
+    @if ($has-default-border) {
+      border: gw-border($default-bg);
+      @include gw-borderRadius();
+    }
+  }
+
+  &.gw-border {
+    @include gw-borderRadius();
+  }
+
+  &:not(.gw-has-widget-style) {
+    background-color: $default-bg;
+    color: $default-col;
+
+    &.gw-border {
+      border: gw-borderOrDefault($fixed-border-col, $default-border-color);
+    }
+  }
+
+  &.gw-widget-style--Inherit {
+    background-color: inherit;
+    color: inherit;
+
+    &.gw-border {
+      border: gw-borderOrDefault($fixed-border-col, inherit);
+    }
+  }
+
+  &.gw-widget-style--Info {
+    background-color: $gw-app--widget-style--bg--info;
+    color: $gw-app--widget-style--text-overlay-col--info;
+
+    &.gw-border {
+      border: gw-borderOrDefault($fixed-border-col, $gw-app--widget-style--border--info);
+    }
+  }
+
+  &.gw-widget-style--New {
+    background-color: $gw-app--widget-style--bg--new;
+    color: $gw-app--widget-style--text-overlay-col--new;
+
+    &.gw-border {
+      border: gw-borderOrDefault($fixed-border-col, $gw-app--widget-style--border--new);
+    }
+  }
+
+  &.gw-widget-style--CustomerBackgroundAndColor {
+    background-color: $gw-app--widget-style--bg--customer;
+    color: $gw-app--widget-style--text-overlay-col--customer;
+
+    &.gw-border {
+      border: gw-borderOrDefault($fixed-border-col, $gw-app--widget-style--border--customer);
+    }
+  }
+
+  &.gw-widget-style--AppDefault {
+    background-color: $gw-app--bg;
+    color: $gw-app--col;
+
+    &.gw-border {
+      border: gw-borderOrDefault($fixed-border-col, $gw-app--border--col);
+    }
+  }
+
+  &.gw-widget-style--UIDefault {
+    background-color: $gw-app--panels--bg;
+    color: $gw-app--panels--col;
+
+    &.gw-border {
+      border: gw-borderOrDefault($fixed-border-col, $gw-app--panels--border-col);
+    }
+  }
+
+  &.gw-widget-style--Warning {
+    background-color: $gw-app--widget-style--bg--warning;
+    color: $gw-app--widget-style--text-overlay-col--warning;
+
+    &.gw-border {
+      border: gw-borderOrDefault($fixed-border-col, $gw-app--widget-style--border--warning);
+    }
+  }
+
+  &.gw-widget-style--Error {
+    background-color: $gw-app--widget-style--bg--error;
+    color: $gw-app--widget-style--text-overlay-col--error;
+
+    &.gw-border {
+      border: gw-borderOrDefault($fixed-border-col, $gw-app--widget-style--border--error);
+    }
+  }
+
+  &.gw-widget-style--Archived {
+    background-color: transparent;
+    color: inherit;
+    @include gw-retired();
+
+    &.gw-border {
+      border: gw-borderOrDefault($fixed-border-col, $default-border-color);
+    }
+  }
+
+  &.gw-widget-style--Highlight {
+    background-color: $gw-app--widget-style--bg--highlight;
+    color: $gw-app--widget-style--text-overlay-col--highlight;
+
+    &.gw-border {
+      border: gw-borderOrDefault($fixed-border-col, $gw-app--widget-style--border--highlight);
+    }
+  }
+
+  &.gw-widget-style--Highlight_Alt {
+    background-color: $gw-app--widget-style--bg--highlightalt;
+    color: $gw-app--widget-style--text-overlay-col--highlightalt;
+
+    &.gw-border {
+      border: gw-borderOrDefault($fixed-border-col, $gw-app--widget-style--border--highlightalt);
+    }
+  }
+
+  &.gw-widget-style--Callout {
+    background-color: $gw-app--widget-style--bg--callout;
+    color: $gw-app--widget-style--text-overlay-col--callout;
+
+    &.gw-border {
+      border: gw-borderOrDefault($fixed-border-col, $gw-app--widget-style--border--callout);
+    }
+  }
+
+  &.gw-widget-style--Callout_Alt {
+    background-color: $gw-app--widget-style--bg--calloutalt;
+    color: $gw-app--widget-style--text-overlay-col--calloutalt;
+
+    &.gw-border {
+      border: gw-borderOrDefault($fixed-border-col, $gw-app--widget-style--border--calloutalt);
+    }
+  }
+}

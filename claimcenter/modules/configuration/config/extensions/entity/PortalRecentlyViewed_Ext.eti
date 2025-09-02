@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  entity="PortalRecentlyViewed_Ext"
+  table="portalrecentlyviewed_ext"
+  type="retireable">
+  <array
+    arrayentity="PortalClaim_Ext"
+    desc="Array of recently viewed claims in a Guidewire portal."
+    name="PortalClaims"/>
+  <column
+    columnName="PortalUser"
+    desc="The username of the portal user"
+    name="PortalUser"
+    nullok="false"
+    type="shorttext"/>
+</entity>

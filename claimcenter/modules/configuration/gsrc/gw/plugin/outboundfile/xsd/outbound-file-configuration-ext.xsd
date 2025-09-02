@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema targetNamespace="http://guidewire.com/outbound/ext" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://guidewire.com/outbound/ext" elementFormDefault="qualified">
+
+  <xs:element name="OutboundConfigurations">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element type="OutboundLocalConfiguration" name="LocalConfiguration"/>
+        <xs:element type="OutboundS3Configuration" name="S3Configuration"/>
+        <xs:element type="ManagedS3OutboundConfiguration" name="ManagedS3Configuration"/>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:complexType name="OutboundConfigurationBase">
+    <xs:sequence>
+      <xs:element type="xs:string" name="Name"/>
+      <xs:element type="xs:string" name="Prefix"/>
+      <xs:element type="xs:string" name="Extension"/>
+      <xs:element type="xs:string" name="FileHandlerClass"/>
+      <xs:element type="xs:integer" name="DaysTillPurge"/>
+    </xs:sequence>
+    <xs:attribute name="env" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType name="OutboundLocalConfiguration">
+    <xs:complexContent>
+      <xs:extension base="OutboundConfigurationBase">
+        <xs:sequence>
+          <xs:element type="xs:string" name="TemporaryDirectory"/>
+          <xs:element type="xs:string" name="PermanentDirectory"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="OutboundS3Configuration">
+    <xs:complexContent>
+      <xs:extension base="OutboundConfigurationBase">
+        <xs:sequence>
+          <xs:element type="xs:string" name="TemporaryDirectory"/>
+          <xs:element type="xs:string" name="ProfileName" minOccurs="0"/>
+          <xs:element type="xs:string" name="PermanentBucketName"/>
+          <xs:element type="xs:string" name="PermanentPrefix"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="ManagedS3OutboundConfiguration">
+    <xs:complexContent>
+      <xs:extension base="OutboundConfigurationBase"/>
+    </xs:complexContent>
+  </xs:complexType>
+
+</xs:schema>

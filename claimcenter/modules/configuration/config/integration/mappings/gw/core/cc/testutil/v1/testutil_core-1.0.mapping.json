@@ -1,0 +1,681 @@
+{
+  "schemaName": "gw.core.cc.testutil.v1.testutil_core-1.0",
+  "combine": [
+    "gw.core.cc.common.v1.common_core-1.0"
+  ],
+  "mappers": {
+    "TestUtilBuilding": {
+      "schemaDefinition": "TestUtilBuilding",
+      "root": "entity.Building",
+      "properties": {
+        "buildingNumber": {
+          "path": "Building.BuildingNumber"
+        },
+        "id": {
+          "path": "Building.RestId"
+        },
+        "notes": {
+          "path": "Building.Notes"
+        },
+        "policySystemId": {
+          "path": "Building.PolicySystemId"
+        }
+      }
+    },
+    "TestUtilContact": {
+      "schemaDefinition": "TestUtilContact",
+      "root": "entity.Contact",
+      "properties": {
+        "addressBookUID": {
+          "path": "Contact.AddressBookUID"
+        },
+        "authorizationId": {
+          "path": "Contact.AuthorizationID"
+        },
+        "cellPhone": {
+          "path": "Contact.RestV1_getPhoneNumber(Person#CellPhone)",
+          "mapper": "#/mappers/PhoneNumber",
+          "predicate": "Contact typeis Person"
+        },
+        "companyName": {
+          "path": "Contact.Name",
+          "predicate": "Contact typeis Company"
+        },
+        "dateOfBirth": {
+          "path": "(Contact as Person).DateOfBirth",
+          "predicate": "Contact typeis Person"
+        },
+        "displayName": {
+          "path": "Contact.RestV1_SafeDisplayName"
+        },
+        "doctorSpecialty": {
+          "path": "null as SpecialtyType",
+          "mapper": "#/mappers/TypeKeyReference"
+        },
+        "emailAddress1": {
+          "path": "Contact.EmailAddress1"
+        },
+        "emailAddress2": {
+          "path": "Contact.EmailAddress2"
+        },
+        "firstName": {
+          "path": "(Contact as Person).FirstName",
+          "predicate": "Contact typeis Person"
+        },
+        "gender": {
+          "path": "(Contact as Person).Gender",
+          "mapper": "#/mappers/TypeKeyReference",
+          "predicate": "Contact typeis Person"
+        },
+        "homePhone": {
+          "path": "Contact.RestV1_getPhoneNumber(Contact#HomePhone)",
+          "mapper": "#/mappers/PhoneNumber",
+          "predicate": "Contact typeis Person"
+        },
+        "id": {
+          "path": "Contact.RestId"
+        },
+        "lastName": {
+          "path": "(Contact as Person).LastName",
+          "predicate": "Contact typeis Person"
+        },
+        "licenseNumber": {
+          "path": "(Contact as Person).LicenseNumber",
+          "predicate": "Contact typeis Person"
+        },
+        "licenseState": {
+          "path": "(Contact as Person).LicenseState",
+          "mapper": "#/mappers/TypeKeyReference",
+          "predicate": "Contact typeis Person"
+        },
+        "medicalLicense": {
+          "path": "null as String"
+        },
+        "policySystemId": {
+          "path": "Contact.PolicySystemId"
+        },
+        "primaryAddress": {
+          "path": "Contact.PrimaryAddress",
+          "mapper": "#/mappers/Address"
+        },
+        "primaryLanguage": {
+          "path": "Contact.PrimaryLanguage",
+          "mapper": "#/mappers/TypeKeyReference"
+        },
+        "primaryLocale": {
+          "path": "Contact.PrimaryLocale",
+          "mapper": "#/mappers/TypeKeyReference"
+        },
+        "primaryPhone": {
+          "path": "Contact.PrimaryPhoneValue"
+        },
+        "primaryPhoneType": {
+          "path": "Contact.PrimaryPhone",
+          "mapper": "#/mappers/TypeKeyReference"
+        },
+        "pronounAggregate": {
+          "path": "(Contact as Person).PronounAggregate",
+          "mapper": "#/mappers/TypeKeyReference",
+          "predicate": "Contact typeis Person"
+        },
+        "pronounAggregateDisplay": {
+          "path": "(Contact as Person).PronounAggregateDisplay",
+          "predicate": "Contact typeis Person"
+        },
+        "pronounObjective": {
+          "path": "(Contact as Person).PronounObjective",
+          "predicate": "Contact typeis Person"
+        },
+        "pronounPossessive": {
+          "path": "(Contact as Person).PronounPossessive",
+          "predicate": "Contact typeis Person"
+        },
+        "pronounSubjective": {
+          "path": "(Contact as Person).PronounSubjective",
+          "predicate": "Contact typeis Person"
+        },
+        "sexAssignedAtBirth": {
+          "path": "(Contact as Person).SexAssignedAtBirth",
+          "mapper": "#/mappers/TypeKeyReference",
+          "predicate": "Contact typeis Person"
+        },
+        "subtype": {
+          "path": "Contact.Subtype",
+          "mapper": "#/mappers/TypeKeyReference"
+        },
+        "taxId": {
+          "path": "null as String"
+        },
+        "workPhone": {
+          "path": "Contact.RestV1_getPhoneNumber(Contact#WorkPhone)",
+          "mapper": "#/mappers/PhoneNumber"
+        }
+      }
+    },
+    "TestUtilCovTerm": {
+      "schemaDefinition": "TestUtilCovTerm",
+      "root": "entity.CovTerm",
+      "properties": {
+        "code": {
+          "path": "(CovTerm as ClassificationCovTerm).Code",
+          "predicate": "CovTerm typeis ClassificationCovTerm"
+        },
+        "covTermSubtype": {
+          "path": "CovTerm.Subtype"
+        },
+        "description": {
+          "path": "(CovTerm as ClassificationCovTerm).Description",
+          "predicate": "CovTerm typeis ClassificationCovTerm"
+        },
+        "financialAmount": {
+          "path": "(CovTerm as FinancialCovTerm).FinancialAmount",
+          "mapper": "#/mappers/CurrencyAmount",
+          "predicate": "CovTerm typeis FinancialCovTerm"
+        },
+        "id": {
+          "path": "CovTerm.RestId"
+        },
+        "numericValue": {
+          "path": "(CovTerm as NumericCovTerm).NumericValue",
+          "predicate": "CovTerm typeis NumericCovTerm"
+        },
+        "policySystemId": {
+          "path": "CovTerm.PolicySystemId"
+        },
+        "units": {
+          "path": "(CovTerm as NumericCovTerm).Units",
+          "mapper": "#/mappers/TypeKeyReference",
+          "predicate": "CovTerm typeis NumericCovTerm"
+        }
+      }
+    },
+    "TestUtilCoverage": {
+      "schemaDefinition": "TestUtilCoverage",
+      "root": "entity.Coverage",
+      "properties": {
+        "claimAggLimit": {
+          "path": "(Coverage as VehicleCoverage).ClaimAggLimit",
+          "mapper": "#/mappers/CurrencyAmount",
+          "predicate": "Coverage typeis VehicleCoverage"
+        },
+        "coinsurance": {
+          "path": "(Coverage as PropertyCoverage).Coinsurance",
+          "predicate": "Coverage typeis PropertyCoverage"
+        },
+        "covTerms": {
+          "path": "Coverage.RestV1.OrderedCovTerms",
+          "mapper": "#/mappers/TestUtilCovTerm"
+        },
+        "coverageBasis": {
+          "path": "(Coverage as PropertyCoverage).CoverageBasis",
+          "mapper": "#/mappers/TypeKeyReference",
+          "predicate": "Coverage typeis PropertyCoverage"
+        },
+        "coverageSubtype": {
+          "path": "Coverage.Subtype",
+          "predicate": "Coverage typeis RUCoverage"
+        },
+        "coverageType": {
+          "path": "Coverage.Type",
+          "mapper": "#/mappers/TypeKeyReference"
+        },
+        "currency": {
+          "path": "Coverage.Currency",
+          "mapper": "#/mappers/TypeKeyReference"
+        },
+        "effectiveDate": {
+          "path": "Coverage.EffectiveDate"
+        },
+        "expirationDate": {
+          "path": "Coverage.ExpirationDate"
+        },
+        "exposureLimit": {
+          "path": "Coverage.ExposureLimit",
+          "mapper": "#/mappers/CurrencyAmount"
+        },
+        "id": {
+          "path": "Coverage.RestId"
+        },
+        "incidentLimit": {
+          "path": "Coverage.IncidentLimit",
+          "mapper": "#/mappers/CurrencyAmount"
+        },
+        "limitsIndicator": {
+          "path": "Coverage.LimitsIndicator",
+          "mapper": "#/mappers/TypeKeyReference"
+        },
+        "nonmedAggLimit": {
+          "path": "(Coverage as VehicleCoverage).NonmedAggLimit",
+          "mapper": "#/mappers/CurrencyAmount",
+          "predicate": "Coverage typeis VehicleCoverage"
+        },
+        "notes": {
+          "path": "Coverage.Notes"
+        },
+        "personAggLimit": {
+          "path": "(Coverage as VehicleCoverage).PersonAggLimit",
+          "mapper": "#/mappers/CurrencyAmount",
+          "predicate": "Coverage typeis VehicleCoverage"
+        },
+        "policySystemId": {
+          "path": "Coverage.PolicySystemId"
+        },
+        "replaceAggLimit": {
+          "path": "(Coverage as VehicleCoverage).ReplaceAggLimit",
+          "mapper": "#/mappers/CurrencyAmount",
+          "predicate": "Coverage typeis VehicleCoverage"
+        },
+        "state": {
+          "path": "Coverage.State",
+          "mapper": "#/mappers/TypeKeyReference"
+        }
+      }
+    },
+    "TestUtilEndorsement": {
+      "schemaDefinition": "TestUtilEndorsement",
+      "root": "entity.Endorsement",
+      "properties": {
+        "comments": {
+          "path": "Endorsement.Comments"
+        },
+        "description": {
+          "path": "Endorsement.Description"
+        },
+        "effectiveDate": {
+          "path": "Endorsement.EffectiveDate"
+        },
+        "expirationDate": {
+          "path": "Endorsement.ExpirationDate"
+        },
+        "formNumber": {
+          "path": "Endorsement.FormNumber"
+        },
+        "id": {
+          "path": "Endorsement.RestId"
+        }
+      }
+    },
+    "TestUtilGroup": {
+      "schemaDefinition": "TestUtilGroup",
+      "root": "entity.Group",
+      "properties": {
+        "id": {
+          "path": "Group.RestId"
+        },
+        "loadFactor": {
+          "path": "Group.LoadFactor"
+        },
+        "name": {
+          "path": "Group.Name"
+        },
+        "organization": {
+          "path": "Group.Organization.RestId"
+        },
+        "parent": {
+          "path": "Group.Parent.RestV1_AsReference",
+          "mapper": "#/mappers/ResourceReference"
+        },
+        "securityZone": {
+          "path": "Group.SecurityZone.Name"
+        },
+        "supervisor": {
+          "path": "Group.Supervisor.RestV1_AsReference",
+          "mapper": "#/mappers/ResourceReference"
+        },
+        "type": {
+          "path": "Group.GroupType",
+          "mapper": "#/mappers/TypeKeyReference"
+        }
+      }
+    },
+    "TestUtilLocationBasedRiskUnit": {
+      "schemaDefinition": "TestUtilLocationBasedRiskUnit",
+      "root": "entity.LocationBasedRU",
+      "properties": {
+        "RUNumber": {
+          "path": "LocationBasedRU.RUNumber"
+        },
+        "building": {
+          "path": "LocationBasedRU.Building",
+          "mapper": "#/mappers/TestUtilBuilding"
+        },
+        "coverages": {
+          "path": "LocationBasedRU.Coverages.sortBy(\\cov -> cov.Type)",
+          "mapper": "#/mappers/TestUtilCoverage"
+        },
+        "description": {
+          "path": "LocationBasedRU.Description"
+        },
+        "id": {
+          "path": "LocationBasedRU.RestId"
+        },
+        "otherRiskType": {
+          "path": "(LocationBasedRU as LocationMiscRU).OtherRiskType",
+          "mapper": "#/mappers/TypeKeyReference",
+          "predicate": "LocationBasedRU typeis LocationMiscRU"
+        },
+        "policySystemId": {
+          "path": "LocationBasedRU.PolicySystemId"
+        },
+        "subtype": {
+          "path": "LocationBasedRU.Subtype",
+          "mapper": "#/mappers/TypeKeyReference"
+        }
+      }
+    },
+    "TestUtilPolicy": {
+      "schemaDefinition": "TestUtilPolicy",
+      "root": "entity.Policy",
+      "properties": {
+        "accountNumber": {
+          "path": "Policy.AccountNumber"
+        },
+        "cancellationDate": {
+          "path": "Policy.CancellationDate"
+        },
+        "currency": {
+          "path": "Policy.Currency",
+          "mapper": "#/mappers/TypeKeyReference"
+        },
+        "effectiveDate": {
+          "path": "Policy.EffectiveDate"
+        },
+        "endorsements": {
+          "path": "Policy.Endorsements",
+          "mapper": "#/mappers/TestUtilEndorsement"
+        },
+        "expirationDate": {
+          "path": "Policy.ExpirationDate"
+        },
+        "id": {
+          "path": "Policy.RestId"
+        },
+        "originalEffectiveDate": {
+          "path": "Policy.OrigEffectiveDate"
+        },
+        "policyContacts": {
+          "path": "Policy.Contacts",
+          "mapper": "#/mappers/TestUtilPolicyContact"
+        },
+        "policyCoverages": {
+          "path": "Policy.Coverages",
+          "mapper": "#/mappers/TestUtilCoverage"
+        },
+        "policyLocations": {
+          "path": "Policy.PolicyLocations",
+          "mapper": "#/mappers/TestUtilPolicyLocation"
+        },
+        "policyNumber": {
+          "path": "Policy.PolicyNumber"
+        },
+        "policyType": {
+          "path": "Policy.PolicyType",
+          "mapper": "#/mappers/TypeKeyReference"
+        },
+        "producerCode": {
+          "path": "Policy.ProducerCode"
+        },
+        "producerCodeOfService": {
+          "path": "Policy.ProducerCodeOfService"
+        },
+        "status": {
+          "path": "Policy.Status",
+          "mapper": "#/mappers/TypeKeyReference"
+        },
+        "tripRiskUnits": {
+          "path": "Policy.getRiskUnits(TripRU) as List<TripRU>",
+          "mapper": "#/mappers/TestUtilTripRiskUnit"
+        },
+        "underwritingCo": {
+          "path": "Policy.UnderwritingCo",
+          "mapper": "#/mappers/TypeKeyReference"
+        },
+        "underwritingGroup": {
+          "path": "Policy.UnderwritingGroup",
+          "mapper": "#/mappers/TypeKeyReference"
+        },
+        "vehicleRiskUnits": {
+          "path": "Policy.Vehicles",
+          "mapper": "#/mappers/TestUtilVehicleRiskUnit"
+        },
+        "verifiedPolicy": {
+          "path": "Policy.Verified"
+        }
+      }
+    },
+    "TestUtilPolicyContact": {
+      "schemaDefinition": "TestUtilPolicyContact",
+      "root": "entity.ClaimContact",
+      "properties": {
+        "contact": {
+          "path": "ClaimContact.Contact",
+          "mapper": "#/mappers/SimpleReference"
+        },
+        "roles": {
+          "path": "ClaimContact.Roles*.Role",
+          "mapper": "#/mappers/TypeKeyReference"
+        }
+      }
+    },
+    "TestUtilPolicyLocation": {
+      "schemaDefinition": "TestUtilPolicyLocation",
+      "root": "entity.PolicyLocation",
+      "properties": {
+        "address": {
+          "path": "PolicyLocation.Address",
+          "mapper": "#/mappers/Address"
+        },
+        "displayName": {
+          "path": "PolicyLocation.RestV1_SafeDisplayName"
+        },
+        "id": {
+          "path": "PolicyLocation.RestId"
+        },
+        "locationBasedRiskUnits": {
+          "path": "PolicyLocation.LocationBasedRisks.sortBy(\\risk -> risk.RUNumber)",
+          "mapper": "#/mappers/TestUtilLocationBasedRiskUnit"
+        },
+        "locationNumber": {
+          "path": "PolicyLocation.LocationNumber"
+        },
+        "notes": {
+          "path": "PolicyLocation.Notes"
+        },
+        "policySystemId": {
+          "path": "PolicyLocation.PolicySystemId"
+        },
+        "primaryLocation": {
+          "path": "PolicyLocation.PrimaryLocation"
+        },
+        "propertyItems": {
+          "path": "PolicyLocation.getHighValueItems().sortBy(\\item -> item.Description)",
+          "mapper": "#/mappers/TestUtilPropertyItem"
+        }
+      }
+    },
+    "TestUtilPropertyItem": {
+      "schemaDefinition": "TestUtilPropertyItem",
+      "root": "entity.PropertyItem",
+      "properties": {
+        "appraisedValue": {
+          "path": "PropertyItem.AppraisedValue",
+          "mapper": "#/mappers/CurrencyAmount"
+        },
+        "description": {
+          "path": "PropertyItem.Description"
+        },
+        "id": {
+          "path": "PropertyItem.RestId"
+        },
+        "policySystemId": {
+          "path": "PropertyItem.PolicySystemId"
+        }
+      }
+    },
+    "TestUtilSpecialistService": {
+      "schemaDefinition": "TestUtilSpecialistService",
+      "root": "entity.SpecialistService",
+      "properties": {
+        "active": {
+          "path": "SpecialistService.Active"
+        },
+        "code": {
+          "path": "SpecialistService.Code"
+        },
+        "compatibleIncidentTypes": {
+          "path": "SpecialistService.CompatibleIncidentTypes*.IncidentType*.Code"
+        },
+        "compatibleKinds": {
+          "path": "SpecialistService.CompatibleKinds*.Kind*.Code"
+        },
+        "description": {
+          "path": "SpecialistService.Description"
+        },
+        "id": {
+          "path": "SpecialistService.RestId"
+        },
+        "name": {
+          "path": "SpecialistService.Name"
+        },
+        "parent": {
+          "path": "SpecialistService.Parent.Code"
+        }
+      }
+    },
+    "TestUtilTripRiskUnit": {
+      "schemaDefinition": "TestUtilTripRiskUnit",
+      "root": "entity.TripRU",
+      "properties": {
+        "RUNumber": {
+          "path": "TripRU.RUNumber"
+        },
+        "coverages": {
+          "path": "TripRU.RiskUnitRestV1.CoveragesSorted",
+          "mapper": "#/mappers/TestUtilCoverage"
+        },
+        "description": {
+          "path": "TripRU.Description"
+        },
+        "endDate": {
+          "path": "TripRU.EndDate"
+        },
+        "geographicalRegion": {
+          "path": "TripRU.GeographicalRegion",
+          "mapper": "#/mappers/TypeKeyReference"
+        },
+        "id": {
+          "path": "TripRU.RestId"
+        },
+        "policySystemId": {
+          "path": "TripRU.PolicySystemId"
+        },
+        "startDate": {
+          "path": "TripRU.StartDate"
+        },
+        "tripDescription": {
+          "path": "TripRU.TripDescription"
+        }
+      }
+    },
+    "TestUtilUser": {
+      "schemaDefinition": "TestUtilUser",
+      "root": "entity.User",
+      "properties": {
+        "authorityProfile": {
+          "path": "User.AuthorityProfile.Name"
+        },
+        "groups": {
+          "path": "User.AllGroups.map(\\g -> (g as Group).RestV1_AsReference)",
+          "mapper": "#/mappers/ResourceReference"
+        },
+        "id": {
+          "path": "User.RestId"
+        },
+        "roles": {
+          "path": "User.Roles*.Role*.RestId"
+        },
+        "username": {
+          "path": "User.Credential.UserName"
+        }
+      }
+    },
+    "TestUtilVehicle": {
+      "schemaDefinition": "TestUtilVehicle",
+      "root": "entity.Vehicle",
+      "properties": {
+        "color": {
+          "path": "Vehicle.Color"
+        },
+        "displayName": {
+          "path": "Vehicle.RestV1_SafeDisplayName"
+        },
+        "id": {
+          "path": "Vehicle.RestId"
+        },
+        "licensePlate": {
+          "path": "Vehicle.LicensePlate"
+        },
+        "make": {
+          "path": "Vehicle.Make"
+        },
+        "manufacturer": {
+          "path": "Vehicle.Manufacturer",
+          "mapper": "#/mappers/TypeKeyReference"
+        },
+        "model": {
+          "path": "Vehicle.Model"
+        },
+        "policySystemId": {
+          "path": "Vehicle.PolicySystemId"
+        },
+        "state": {
+          "path": "Vehicle.State",
+          "mapper": "#/mappers/TypeKeyReference"
+        },
+        "style": {
+          "path": "Vehicle.Style",
+          "mapper": "#/mappers/TypeKeyReference"
+        },
+        "vin": {
+          "path": "Vehicle.Vin"
+        },
+        "year": {
+          "path": "Vehicle.Year"
+        }
+      }
+    },
+    "TestUtilVehicleRiskUnit": {
+      "schemaDefinition": "TestUtilVehicleRiskUnit",
+      "root": "entity.VehicleRU",
+      "properties": {
+        "RUNumber": {
+          "path": "VehicleRU.RUNumber"
+        },
+        "coverages": {
+          "path": "VehicleRU.Coverages.sortBy(\\cov -> cov.Type)",
+          "mapper": "#/mappers/TestUtilCoverage"
+        },
+        "description": {
+          "path": "VehicleRU.Description"
+        },
+        "id": {
+          "path": "VehicleRU.RestId"
+        },
+        "policySystemId": {
+          "path": "VehicleRU.PolicySystemId"
+        },
+        "vehicle": {
+          "path": "VehicleRU.Vehicle",
+          "mapper": "#/mappers/TestUtilVehicle"
+        },
+        "vehicleId": {
+          "path": "VehicleRU.Vehicle.RestId"
+        },
+        "vehicleLocation": {
+          "path": "VehicleRU.VehicleLocation",
+          "mapper": "#/mappers/TestUtilPolicyLocation"
+        }
+      }
+    }
+  }
+}

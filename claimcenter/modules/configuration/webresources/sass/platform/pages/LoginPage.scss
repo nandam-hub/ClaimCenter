@@ -1,0 +1,232 @@
+$gw-LoginPage--center-section-top-margin: gw-pxFixed(250);
+
+$gw-LoginPage--stripes-w: gw-pxFixed(314);
+$gw-LoginPage--stripes-h: gw-pxFixed(285);
+
+$gw-LoginPage--company-logo-w: gw-pxFixed(187);
+$gw-LoginPage--company-logo-h: gw-pxFixed(30);
+$gw-LoginPage--company-name-top: gw-pxFixed(70);
+$gw-LoginPage--company-name-left: gw-pxFixed(70);
+
+$gw-LoginPage--button--margin-top: gw-pxFixed(18);
+
+$gw-LoginPage--app-name-w: gw-pxFixed(300);
+$gw-LoginPage--app-name-h: gw-pxFixed(52);
+
+#Login-LoginScreen {
+  @include gw-z-index(loginScreen);
+  display: inline-block !important;
+  height: 100vh !important;
+  width: 100vw !important;
+  overflow: hidden !important;
+  position: fixed !important; // We're using this to fill the screen with the Login Screen , since we don't use west or north on login page
+  top: 0 !important;
+  left: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  font-size: 14px !important;
+  text-align: center !important;
+  //min-width: 640px !important;
+  //min-height: 480px !important;
+  background-color: $gw-app--bg !important;
+
+  .gw-ToolbarWidget {
+    display: none !important;
+  }
+
+  .gw-MessagesWidget {
+    text-align: left !important;
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    width: 80% !important;
+    max-width: 80% !important;
+  }
+
+  .app--login-page--logo {
+//     @include gw-backgroundUri($gw-app--Logo--company--uri, left, top);
+//     position: absolute !important;
+//     top: $gw-LoginPage--company-name-top !important;
+//     left: $gw-LoginPage--company-name-left !important;
+//     display: inline-block !important;
+//     width: $gw-LoginPage--company-logo-w !important;
+//     height: $gw-LoginPage--company-logo-h !important;
+      top: 9px !important;
+      left: 21px !important;
+  }
+
+  .app--login-page--stripes {
+//     @include gw-backgroundUri($gw-app--Logo--stripes--uri, right, top);
+//     position: absolute !important;
+//     top: 0 !important;
+//     right: 0 !important;
+//     display: inline-block !important;
+//     width: $gw-LoginPage--stripes-w !important;
+//     height: $gw-LoginPage--stripes-h !important;
+       display: none !important;
+  }
+
+  .gw-PanelColumnWidget {
+    position: static !important;
+    display: block !important;
+    padding: 0 !important;
+    margin: $gw-LoginPage--center-section-top-margin 0 0 0 !important;
+
+    .app--login-page--name {
+      order: 1 !important;
+      display: inline-block !important;
+      width: $gw-LoginPage--app-name-w !important;
+      height: $gw-LoginPage--app-name-h !important;
+      margin-left: 14px !important;
+    }
+
+    .gw-PanelRefWidget {
+      display: block !important;
+      order: 2 !important;
+      padding: 0 !important;
+      margin: 0 !important;
+    }
+
+    .gw-panelRefWidget--children {
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: stretch !important;
+      margin: auto !important;
+      //background-color: #fff !important;
+      //color: black !important;
+      border-radius: 4px !important;
+      //border: 1px solid #D8DDE6 !important;
+      width: 338px !important;
+      //padding: 1px 20px 20px 20px !important;
+      padding: 0 !important;
+    }
+
+    .gw-DetailViewWidget {
+      display: block !important;
+      padding: 0 !important;
+      margin: 0 !important;
+
+      .gw-DetailViewWidget--body {
+        display: block !important;
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+
+      .gw-InputColumnWidget {
+        display: block !important;
+        margin: 0 !important;
+        padding: 20px !important;
+        min-width: 0 !important;
+        width: auto !important;
+        max-width: none !important;
+
+        border-radius: 4px !important;
+        border: 1px solid #D8DDE6 !important;
+
+        box-shadow: none !important;
+
+        .gw-InputWidget.gw-styleTag--InputColumnWidget {
+          padding: 0 !important;
+          margin: 0  !important;
+          display: block !important;
+
+          > .gw-label {
+            margin: 0 !important;
+            display: block !important;
+            text-align: left !important;
+            //color: #696564 !important;
+            padding: 15px 0 5px 1px !important;
+          }
+          > .gw-value {
+            margin: 0 !important;
+            padding: 0 !important;
+            display: block !important;
+            text-align: center;
+            //color: black;
+
+            input {
+              //color: black !important;
+              //border: 1px solid #D8DDE6 !important;
+              padding: 12px !important;
+            }
+          }
+        }
+
+        .gw-ButtonInputWidget.gw-styleTag--InputColumnWidget {
+          padding: 0 !important;
+          margin: 0 !important;
+
+          > .gw-label {
+            display: none !important;
+          }
+          > .gw-value {
+            text-align: center !important;
+            width: 100% !important;
+
+            .gw-ButtonValueWidget {
+              margin-top: $gw-LoginPage--button--margin-top * 1.2 !important;
+              width: 100% !important;
+              .gw-action--inner {
+                text-align: center !important;
+                padding: 12px !important;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .gw-VerbatimWidget.gw-styleTag--PanelRefWidget {
+      order: 10 !important;
+      @include gw-wrapOnWhiteSpace();
+
+      border: 0 solid transparent !important;
+      margin: 0 !important;
+      background-color: transparent !important;
+      color: $gw-app--palette--error !important;
+      font-weight: bold !important;
+
+      .gw-VerbatimWidget--inner {
+        border: 0 solid transparent !important;
+        width: auto !important;
+        font-size: 1em !important;
+        margin: 10px 1px 10px 4px !important;
+        background-color: transparent !important;
+        color: $gw-app--palette--error !important;
+        font-weight: bold !important;
+        text-align: left !important;
+        line-height: 1.4em !important;
+      }
+    }
+  }
+}
+
+@media screen and (max-height: 640px) {
+  #Login-LoginScreen {
+
+    .app--login-page--logo {
+      top: 14px !important;
+      left: 14px !important;
+    }
+
+    .app--login-page--stripes {
+      display: none !important;
+    }
+
+    .gw-PanelColumnWidget {
+      display: flex !important;
+      flex-direction: column !important;
+      justify-content: center !important;
+      align-items: center !important;
+      margin: 14px 0 0 0 !important;
+      height: 100% !important;
+    }
+  }
+}
+
+body {
+  .app--login-page--name {
+    @include gw-backgroundUri($gw-app--Logo--login--app--uri, center, center, auto);
+  }
+}
+

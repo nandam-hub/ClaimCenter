@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="ApplicabilityCriteriaDV"
+    mode="ActivityRule">
+    <Require
+      name="context"
+      type="gw.bizrules.CCRulesNavigationContext"/>
+    <Require
+      name="version"
+      type="RuleVersion"/>
+    <Variable
+      initialValue="new gw.bizrules.ActivityRulePanelSetHelper(version.Rule as ActivityRule, CurrentLocation)"
+      name="helper"
+      recalculateOnRefresh="true"
+      type="gw.bizrules.ActivityRulePanelSetHelper"/>
+    <InputColumn>
+      <InputSetRef
+        def="ApplicabilityCriteriaMultiSelectInputSet(helper.LossTypesBundle)"
+        id="LossTypes"/>
+      <InputSetRef
+        def="ApplicabilityCriteriaMultiSelectInputSet(helper.PolicyTypesBundle)"
+        id="PolicyTypes"/>
+      <InputSetRef
+        def="ApplicabilityCriteriaMultiSelectInputSet(helper.JurisdictionsBundle)"
+        id="Jurisdictions"/>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

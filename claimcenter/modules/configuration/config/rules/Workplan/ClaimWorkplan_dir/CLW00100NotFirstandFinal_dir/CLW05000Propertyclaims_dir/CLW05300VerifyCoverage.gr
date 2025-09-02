@@ -1,0 +1,24 @@
+package rules.Workplan.ClaimWorkplan_dir.CLW00100NotFirstandFinal_dir.CLW05000Propertyclaims_dir
+
+uses gw.config.LOBAbstraction
+
+@gw.rules.RuleDisabled
+@gw.rules.RuleName("CLW05300 - Verify Coverage")
+internal class CLW05300VerifyCoverage {
+  static function doCondition(claim : entity.Claim) : boolean {
+    
+/*start00rule*/
+return LOBAbstraction.ForPolicy.isHomeownersPolicy(claim.Policy)
+/*end00rule*/
+
+  }
+
+  static function doAction(claim : entity.Claim, actions : gw.rules.Action) {
+
+/*start00rule*/
+claim.createActivityFromPattern(
+    null, ActivityPattern.finder.getActivityPatternByCode("coverage"))
+/*end00rule*/
+
+  }
+}

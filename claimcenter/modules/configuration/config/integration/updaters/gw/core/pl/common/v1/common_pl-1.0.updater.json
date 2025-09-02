@@ -1,0 +1,402 @@
+{
+  "schemaName": "gw.core.pl.common.v1.common_pl-1.0",
+  "combine": [
+    "gw.core.pl.framework.v1.framework_pl-1.0"
+  ],
+  "typeUses": [
+    "gw.rest.core.pl.common.v1.phone.PhoneNumberResolver"
+  ],
+  "updaters": {
+    "Activity": {
+      "schemaDefinition": "Activity",
+      "root": "entity.Activity",
+      "properties": {
+        "activityPattern": {
+          // This property is handled out of band as part of activity creation
+          "ignore": "true"
+        },
+        "approvalIssue": {
+          "path": "Activity.ApprovalIssue",
+          "allowed": "Activity.RestV1_approvalFieldUpdateAllowed(\"approvalIssue\")"
+        },
+        "approvalRationale": {
+          "path": "Activity.ApprovalRationale",
+          "allowed": "Activity.RestV1_approvalFieldUpdateAllowed(\"approvalIssue\")"
+        },
+        "description": {
+          "path": "Activity.Description"
+        },
+        "dueDate": {
+          "path": "Activity.TargetDate"
+        },
+        "endDate": {
+          "path": "Activity.EndDate",
+          "allowed": "Activity.RestV1_eventFieldUpdateAllowed(\"endDate\")"
+        },
+        "escalationDate": {
+          "path": "Activity.EscalationDate"
+        },
+        "externallyOwned": {
+          "path": "Activity.ExternallyOwned"
+        },
+        "initialAssignment": {
+          // This property is handled out of band as part of activity creation
+          "ignore": "true"
+        },
+        "mandatory": {
+          "path": "Activity.Mandatory"
+        },
+        "priority": {
+          "path": "Activity.Priority",
+          "valueResolver": {
+            "typeName": "TypeKeyValueResolver"
+          }
+        },
+        "recurring": {
+          "path": "Activity.Recurring"
+        },
+        "startDate": {
+          "path": "Activity.TargetDate",
+          "allowed": "Activity.RestV1_eventFieldUpdateAllowed(\"startDate\")"
+        },
+        "subject": {
+          "path": "Activity.Subject"
+        }
+      }
+    },
+    "Address": {
+      "schemaDefinition": "Address",
+      "root": "entity.Address",
+      "preUpdateProcessor": {
+        "typeName": "gw.api.modules.rest.framework.v1.updater.processor.AddressPreUpdateProcessor"
+      },
+      "properties": {
+        "addressBookUID": {
+          "path": "Address.AddressBookUID"
+        },
+        "addressLine1": {
+          "path": "Address.AddressLine1"
+        },
+        "addressLine2": {
+          "path": "Address.AddressLine2"
+        },
+        "addressLine3": {
+          "path": "Address.AddressLine3"
+        },
+        "addressType": {
+          "path": "Address.AddressType",
+          "valueResolver": {
+            "typeName": "TypeKeyValueResolver"
+          }
+        },
+        // Hong Kong - Kowloon or New Territories
+        "area": {
+          "path": "Address.State",
+          "allowed": "Address.RestV1_validateInputField('area', srcJson)",
+          "valueResolver": {
+            "typeName": "TypeKeyValueResolver"
+          }
+        },
+        "city": {
+          "path": "Address.City"
+        },
+        "country": {
+          "path": "Address.Country"
+        },
+        "county": {
+          "path": "Address.County",
+          "allowed": "Address.RestV1_validateInputField('county', srcJson)"
+        },
+        // Columbia
+        "department": {
+          "path": "Address.State",
+          "allowed": "Address.RestV1_validateInputField('department', srcJson)",
+          "valueResolver": {
+            "typeName": "TypeKeyValueResolver"
+          }
+        },
+        "description": {
+          "path": "Address.Description"
+        },
+        // United Arab Emirates
+        "emirate": {
+          "path": "Address.State",
+          "allowed": "Address.RestV1_validateInputField('emirate', srcJson)",
+          "valueResolver": {
+            "typeName": "TypeKeyValueResolver"
+          }
+        },
+        "island": {
+          "path": "Address.State",
+          "allowed": "Address.RestV1_validateInputField('island', srcJson)",
+          "valueResolver": {
+            "typeName": "TypeKeyValueResolver"
+          }
+        },
+        //Russia
+        "oblast": {
+          "path": "Address.State",
+          "allowed": "Address.RestV1_validateInputField('oblast', srcJson)",
+          "valueResolver": {
+            "typeName": "TypeKeyValueResolver"
+          }
+        },
+        // Jamaica and Barbados
+        "parish": {
+          "path": "Address.State",
+          "allowed": "Address.RestV1_validateInputField('parish', srcJson)",
+          "valueResolver": {
+            "typeName": "TypeKeyValueResolver"
+          }
+        },
+        "postalCode": {
+          "path": "Address.PostalCode",
+          "allowed": "Address.RestV1_validateInputField('postalCode', srcJson)"
+        },
+        //Japan
+        "prefecture": {
+          "path": "Address.State",
+          "allowed": "Address.RestV1_validateInputField('prefecture', srcJson)",
+          "valueResolver": {
+            "typeName": "TypeKeyValueResolver"
+          }
+        },
+        "province": {
+          "path": "Address.State",
+          "allowed": "Address.RestV1_validateInputField('province', srcJson)",
+          "valueResolver": {
+            "typeName": "TypeKeyValueResolver"
+          }
+        },
+        "spatialPoint": {
+          "path": "Address.SpatialPoint",
+          "valueResolver": {
+            "typeName": "SpatialPointValueResolver"
+          }
+        },
+        "state": {
+          "path": "Address.State",
+          "allowed": "Address.RestV1_validateInputField('state', srcJson)",
+          "valueResolver": {
+            "typeName": "TypeKeyValueResolver"
+          }
+        },
+        "validUntil": {
+          "path": "Address.ValidUntil"
+        }
+      }
+    },
+    "Contact": {
+      "schemaDefinition": "Contact",
+      "root": "entity.Contact",
+      "updateFirst": [
+        "pronounAggregate"
+      ],
+      "properties": {
+        "addressBookUID": {
+          "path": "Contact.AddressBookUID"
+        },
+        "cellPhone": {
+          "path": "(Contact as Person).RestV1_CellPhone",
+          "setter": "Contact.RestV1_setPhoneNumber(Person#CellPhone, value)",
+          "valueResolver": {
+            "typeName": "PhoneNumberResolver"
+          }
+        },
+        "companyName": {
+          "path": "Contact.Name"
+        },
+        "dateOfBirth": {
+          "path": "(Contact as Person).RestV1_DateOfBirth"
+        },
+        "emailAddress1": {
+          "path": "Contact.EmailAddress1"
+        },
+        "emailAddress2": {
+          "path": "Contact.EmailAddress2"
+        },
+        "firstName": {
+          "path": "(Contact as Person).FirstName"
+        },
+        "gender": {
+          "path": "(Contact as Person).Gender",
+          "valueResolver": {
+            "typeName": "TypeKeyValueResolver"
+          }
+        },
+        "homePhone": {
+          "path": "Contact.RestV1_HomePhone",
+          "setter": "Contact.RestV1_setPhoneNumber(Contact#HomePhone, value)",
+          "valueResolver": {
+            "typeName": "PhoneNumberResolver"
+          }
+        },
+        "lastName": {
+          "path": "(Contact as Person).LastName"
+        },
+        "preferred": {
+          "path": "Contact.Preferred"
+        },
+        "primaryAddress": {
+          "path": "Contact.PrimaryAddress",
+          "create": "new Address(Contact)",
+          "touchParent": "currentValue.Changed",
+          "updaterRef": "#/updaters/Address"
+        },
+        "primaryLanguage": {
+          "path": "Contact.PrimaryLanguage",
+          "valueResolver": {
+            "typeName": "TypeKeyValueResolver"
+          }
+        },
+        "primaryLocale": {
+          "path": "Contact.PrimaryLocale",
+          "valueResolver": {
+            "typeName": "TypeKeyValueResolver"
+          }
+        },
+        "primaryPhoneType": {
+          "path": "Contact.PrimaryPhone",
+          "valueResolver": {
+            "typeName": "TypeKeyValueResolver"
+          }
+        },
+        "pronounAggregate": {
+          "path": "(Contact as Person).PronounAggregate",
+          "valueResolver": {
+            "typeName": "TypeKeyValueResolver"
+          }
+        },
+        "pronounObjective": {
+          "path": "(Contact as Person).PronounObjective",
+          "allowed": "Contact.RestV1_pronounUpdateAllowed(\"pronounObjective\")"
+        },
+        "pronounPossessive": {
+          "path": "(Contact as Person).PronounPossessive",
+          "allowed": "Contact.RestV1_pronounUpdateAllowed(\"pronounPossessive\")"
+        },
+        "pronounSubjective": {
+          "path": "(Contact as Person).PronounSubjective",
+          "allowed": "Contact.RestV1_pronounUpdateAllowed(\"pronounSubjective\")"
+        },
+        "sexAssignedAtBirth": {
+          "path": "(Contact as Person).SexAssignedAtBirth",
+          "valueResolver": {
+            "typeName": "TypeKeyValueResolver"
+          }
+        },
+        "subtype": {
+          // This field is ignored, but is present in order to trigger createOnly validation of the field
+          "ignore": "true"
+        },
+        "taxId": {
+          "path": "Contact.RestV1_TaxId"
+        },
+        "workPhone": {
+          "path": "Contact.RestV1_WorkPhone",
+          "setter": "Contact.RestV1_setPhoneNumber(Contact#WorkPhone, value)",
+          "valueResolver": {
+            "typeName": "PhoneNumberResolver"
+          }
+        }
+      }
+    },
+    "Document": {
+      "schemaDefinition": "Document",
+      "root": "entity.Document",
+      "properties": {
+        "author": {
+          "path": "Document.Author"
+        },
+        "dateModified": {
+          "path": "Document.DateModified"
+        },
+        "description": {
+          "path": "Document.Description"
+        },
+        "dms": {
+          "path": "Document.DMS"
+        },
+        "docUID": {
+          "path": "Document.DocUID"
+        },
+        "inbound": {
+          "path": "Document.Inbound"
+        },
+        "language": {
+          "path": "Document.Language",
+          "valueResolver": {
+            "typeName": "TypeKeyValueResolver"
+          }
+        },
+        "mimeType": {
+          "path": "Document.MimeType"
+        },
+        "name": {
+          "path": "Document.Name"
+        },
+        "obsolete": {
+          "path": "Document.Obsolete"
+        },
+        "pendingDocUID": {
+          "path": "Document.PendingDocUID"
+        },
+        "recipient": {
+          "path": "Document.Recipient"
+        },
+        "section": {
+          "path": "Document.Section",
+          "valueResolver": {
+            "typeName": "TypeKeyValueResolver"
+          }
+        },
+        "securityType": {
+          "path": "Document.SecurityType",
+          "valueResolver": {
+            "typeName": "TypeKeyValueResolver"
+          }
+        },
+        "status": {
+          "path": "Document.Status",
+          "valueResolver": {
+            "typeName": "TypeKeyValueResolver"
+          }
+        },
+        "type": {
+          "path": "Document.Type",
+          "valueResolver": {
+            "typeName": "TypeKeyValueResolver"
+          }
+        }
+      }
+    },
+    "Note": {
+      "schemaDefinition": "Note",
+      "root": "entity.Note",
+      "properties": {
+        "body": {
+          "path": "Note.Body"
+        },
+        "confidential": {
+          "path": "Note.Confidential"
+        },
+        "securityType": {
+          "path": "Note.SecurityType",
+          "setter": "Note.RestV1_setSecurityTypeWithPermissionCheck(value)",
+          "valueResolver": {
+            "typeName": "TypeKeyValueResolver"
+          }
+        },
+        "subject": {
+          "path": "Note.Subject"
+        },
+        "topic": {
+          "path": "Note.Topic",
+          "valueResolver": {
+            "typeName": "TypeKeyValueResolver"
+          }
+        }
+      }
+    }
+  }
+}

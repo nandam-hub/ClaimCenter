@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <!-- The next area controls the Claim Search -->
+  <DetailViewPanel
+    id="FreeTextArchivedClaimSearchDV">
+    <Require
+      name="ArchivedClaimSearchCriteria"
+      type="ArchivedClaimSearchCriteria"/>
+    <Require
+      name="archiveSearchEnabled"
+      type="boolean"/>
+    <Require
+      name="helper"
+      type="gw.api.archiving.FreeTextArchivedClaimSearchScreenHelper"/>
+    <InputHeaderSection/>    
+    <InputColumn>
+      <InputSetRef
+        def="FreeTextArchivedClaimSearchInputSet(ArchivedClaimSearchCriteria)"/>
+    </InputColumn>
+    <InputColumn>
+      <InputSetRef
+        def="FreeTextArchivedClaimSearchAdditionalInputSet(ArchivedClaimSearchCriteria)"/>
+    </InputColumn>    
+    <InputFooterSection>
+      <InputSet
+        id="ClaimSearchAndResetInputSet">
+        <ContentInput
+          id="searchBtns"
+          labelAbove="true">
+          <Link
+            action="gw.api.util.SearchUtil.search(); helper.resetSelections()"
+            default="true"
+            id="Search"
+            label="DisplayKey.get(&quot;Button.Search&quot;)"
+            shortcut="S"
+            styleClass="bigButton"
+            visible="true"/>
+          <Link
+            action="gw.api.claim.ClaimUtil.resetArchivedClaimSearchCriteria(); helper.resetSelections()"
+            id="Reset"
+            label="DisplayKey.get(&quot;Button.Reset&quot;)"
+            shortcut="R"
+            styleClass="bigButton"
+            visible="true"/>
+        </ContentInput>
+      </InputSet>
+    </InputFooterSection>
+  </DetailViewPanel>
+</PCF>

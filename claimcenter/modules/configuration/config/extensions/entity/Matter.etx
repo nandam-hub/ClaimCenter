@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<extension
+  xmlns="http://guidewire.com/datamodel"
+  entityName="Matter">
+  <!-- Default value for MatterType moved from Matter.eti to Matter.etx -->
+  <typekey-override
+    default="General"
+    name="MatterType"/>
+  <!-- Default value for CourtType moved from Matter.eti to Matter.etx -->
+  <typekey-override
+    default="state"
+    name="CourtType"/>
+</extension>

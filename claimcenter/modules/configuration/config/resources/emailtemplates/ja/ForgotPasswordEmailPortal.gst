@@ -1,0 +1,1 @@
+<%@ params( email: String, portalURL: String, code: String ) %> ${email} 様 <br /> パスワードをリセットするには次のリンクを開いてください。 <br /> <a href="${portalURL}?token=${code}">パスワードをリセット</a><br /><br /> よろしくお願いいたします。  

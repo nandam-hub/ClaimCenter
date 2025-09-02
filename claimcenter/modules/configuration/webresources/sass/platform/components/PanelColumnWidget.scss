@@ -1,0 +1,15 @@
+.gw-PanelColumnWidget {
+  @include gw-layoutPanelInnerSpacing();
+  @include gw-layoutPanelOuterSpacing();
+  @include gw-widgetStyles();
+
+  vertical-align: top;
+  position: relative;
+  flex-grow: 0;
+  min-width: auto;
+
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+}

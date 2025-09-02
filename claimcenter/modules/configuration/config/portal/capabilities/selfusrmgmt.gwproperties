@@ -1,0 +1,4 @@
+# GAR START: config/portal/capabilities/selfusrmgmt.gwproperties [/opt/teamcity/agent/work/45c3a2f1b8ee4237/gpm-generator/downloads/edge/backend/xcenter-config/xcenter-utils/cc-utils/../../../Shared/extuser-mgmt/src/main]
+handlers.resetpassword=edge.capabilities.extusermgmt.resetpassword.ResetPasswordHandler
+handlers.singlelogout=edge.capabilities.extusermgmt.uaalogout.SingleLogoutHandler
+# GAR END

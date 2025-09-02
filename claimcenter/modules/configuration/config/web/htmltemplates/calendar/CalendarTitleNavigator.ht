@@ -1,0 +1,15 @@
+<div id="${prefixId}ccCalPrevMonth" class="gw-CalendarMonth--header--prev"
+     aria-label="${prevMonthAriaLabel}" role="button"
+     data-gw-click="calendar.month id:${calendarId} ${prevButtonArgs}">
+    <div class="gw-icon"></div>
+</div>
+
+<div class="gw-CalendarMonth--header--title">
+    <div class="gw-label">${headerTitle}</div>
+</div>
+
+<div id="${prefixId}ccCalNextMonth" class="gw-CalendarMonth--header--next"
+     aria-label="${nextMonthAriaLabel}" role="button"
+     data-gw-click="calendar.month id:${calendarId} ${nextButtonArgs}">
+    <div class="gw-icon"></div>
+</div>

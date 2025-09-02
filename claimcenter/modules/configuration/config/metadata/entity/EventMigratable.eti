@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<delegate
+  platform="true"
+  requiresType="keyable"
+  xmlns="http://guidewire.com/datamodel"
+  name="EventMigratable">
+  <fulldescription>A delegate that allows an entity to be synchronized to App Events</fulldescription>
+  <implementsInterface
+    iface="com.guidewire.events.domain.migration.EventMigratablePublicMethods"
+    impl="com.guidewire.events.domain.migration.impl.EventMigratableImpl"/>
+  <implementsInterface
+    iface="com.guidewire.events.domain.migration.impl.EventMigratableInternalMethods"
+    impl="com.guidewire.events.domain.migration.impl.EventMigratableImpl"/>
+  <typekey
+    desc="Indicates the synchronization status of the entity instance with respect to App Events. A null value means that it is unknown and essentially unsynchronized."
+    name="AppEventSyncStatus"
+    nullok="true"
+    setterScriptability="doesNotExist"
+    typelist="AppEventSyncStatus"/>
+</delegate>

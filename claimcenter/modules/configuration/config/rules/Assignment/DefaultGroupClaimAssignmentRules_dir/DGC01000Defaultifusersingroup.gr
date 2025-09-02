@@ -1,0 +1,34 @@
+package rules.Assignment.DefaultGroupClaimAssignmentRules_dir
+
+uses gw.api.locale.DisplayKey
+uses gw.api.system.CCLoggerCategory
+uses gw.assignment.AssignmentUtil_Ext
+
+@gw.rules.RuleName("DGC01000 - Default - if users in group")
+internal class DGC01000Defaultifusersingroup {
+  static function doCondition(claim : entity.Claim) : boolean {
+    
+/*start00rule*/
+    return claim.AssignedGroup != null
+        and AssignmentUtil_Ext.getEligibleUsersFromGroupAndChildren(claim.AssignedGroup).size() > 0
+/*end00rule*/
+
+  }
+
+  static function doAction(claim : entity.Claim, actions : gw.rules.Action) {
+
+/*start00rule*/
+    var logger = CCLoggerCategory.ASSIGNMENT
+
+    // Attempt Round Robin assignment (including child group users)
+    if (claim.assignUserByRoundRobin(true, claim.AssignedGroup)) {
+      logger.info(DisplayKey.get("Rules.Assignment.DefaultGroup.Claim", actions.ShortRuleName))
+      logger.info(DisplayKey.get("Rules.Assignment.AssignedUserIs", claim.AssignedUser))
+      actions.exit()
+    }
+
+    logger.info("Round Robin (including child groups) failed for Claim ID: " + claim.ID)
+/*end00rule*/
+
+  }
+}

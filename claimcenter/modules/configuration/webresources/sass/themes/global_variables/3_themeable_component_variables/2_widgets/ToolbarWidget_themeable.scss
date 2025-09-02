@@ -1,0 +1,14 @@
+// --------------- Toolbar
+
+// Other
+$gw-app--ToolbarDivider--width-px: $gw-app--border-width-px !default;
+$gw-app--ToolbarDivider--height-em: gw-emFixed(1) !default;
+$gw-app--ToolbarDivider--bg: $gw-app--border--col-lighter !default;
+
+
+// -------------- Things in Toolbars
+// Position to other widgets
+$gw-app--ToolbarWidget-children--spacing-widget-top-rem: $gw-app--SPACING-rem-XS !default;
+$gw-app--ToolbarWidget-children--spacing-widget-left-rem: $gw-app--SPACING-rem-S !default;
+$gw-app--ToolbarWidget-children--spacing-widget-right-rem: $gw-app--SPACING-rem-XS !default;
+$gw-app--ToolbarWidget-children--spacing-widget-bottom-rem: $gw-app--SPACING-rem-XS !default;

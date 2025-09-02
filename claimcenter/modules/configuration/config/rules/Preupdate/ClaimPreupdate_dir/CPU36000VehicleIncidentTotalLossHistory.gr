@@ -1,0 +1,39 @@
+package rules.Preupdate.ClaimPreupdate_dir
+
+uses gw.api.locale.DisplayKey
+
+
+@gw.rules.RuleName("CPU36000 - Vehicle Incident Total Loss History")
+internal class CPU36000VehicleIncidentTotalLossHistory {
+  static function doCondition(claim  :  entity.Claim) : boolean {
+/*start00rule*/
+    return User.util.CurrentUser == User.finder.findAutopilotUser()
+
+/*end00rule*/
+}
+
+  static function doAction(claim  :  entity.Claim, actions : gw.rules.Action) {
+/*start00rule*/
+    var vehicleIncidents = claim.VehicleIncidentsOnly.where(\vi -> vi.isFieldChanged(VehicleIncident#TotalLoss))
+
+    for (var vehicleIncident in vehicleIncidents) {
+      var description : String
+      switch (vehicleIncident.TotalLoss) {
+        case true:
+          description = DisplayKey.get("Java.Autopilot.HistoryEvent.VehicleIncident.TotalLossIndicated",
+              vehicleIncident.Vehicle.DisplayName)
+          break;
+        case false:
+          description = DisplayKey.get("Java.Autopilot.HistoryEvent.VehicleIncident.TotalLossDiscarded",
+              vehicleIncident.Vehicle.DisplayName)
+          break;
+        case null:
+          description = DisplayKey.get("Java.Autopilot.HistoryEvent.VehicleIncident.TotalLossCleared",
+              vehicleIncident.Vehicle.DisplayName)
+          break;
+      }
+      claim.createHistoryEvent(HistoryType.TC_AUTOPILOT, description)
+    }
+/*end00rule*/
+  }
+}

@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<typelist xmlns="http://guidewire.com/typelists" name="AutopilotPurpose" desc="Autopilot Purpose">
+  <typecode
+    code="coverage_verification"
+    desc="Coverage Verification"
+    name="Coverage Verification"/>
+  <typecode
+    code="other"
+    desc="Other"
+    name="Other"/>
+  <typecode
+    code="manual_total_loss_evaluation"
+    desc="Manual Total Loss Evaluation"
+    name="Manual Total Loss Evaluation"/>
+  <typecode
+    code="policy_verification"
+    desc="Policy Verification"
+    name="Policy Verification"/>
+  <typecode
+    code="user_action_required"
+    desc="User Action Required"
+    name="User Action Required"/>
+</typelist>

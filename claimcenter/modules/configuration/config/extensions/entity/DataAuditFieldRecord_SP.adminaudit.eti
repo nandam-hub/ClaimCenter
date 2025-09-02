@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  entity="DataAuditFieldRecord_SP"
+  desc="An instance of a changed field - storing the field changed, the original value, and the new value - in the context of a admin data audit record for a changed entity instance"
+  table="dataauditfieldrecord_sp"
+  type="retireable"
+  exportable="true"
+  final="false">
+  <column
+    desc="The name of the field that was changed on the triggering bean"
+    name="AuditableBeanChangedField"
+    nullok="false"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="100"/>
+  </column>
+  <foreignkey
+    desc="The admin data audit record associated with this changed field record"
+    fkentity="DataAudit_SP"
+    name="DataAudit_SP"
+    nullok="false"/>
+  <column
+    desc="The original value of the field that was changed on the triggering bean - this can be null"
+    name="OriginalValue"
+    nullok="true"
+    type="mediumtext"/>
+  <column
+    desc="The new value of the field that was changed on the triggering bean - this can be null"
+    name="NewValue"
+    nullok="true"
+    type="mediumtext"/>
+</entity>

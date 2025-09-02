@@ -1,0 +1,10 @@
+<div class="gw-cell-inner">
+    <div class="gw-RowSelectRadioButtonWidget">
+        <div class="gw-radio-wrapper">
+            <div role="radio" aria-label="${ariaLabel}"
+                 id="${radioButtonId}" tabindex="0" aria-checked="${checked ? 'true' : 'false'}" class="gw-radio-button gw-rowselect-radio ${checked ? 'gw-checked'}"
+                 data-gw-click="fireEvent id:${targetId}" data-gw-radio-group="${radioGroupId}"
+            ></div>
+        </div>
+    </div>
+</div>

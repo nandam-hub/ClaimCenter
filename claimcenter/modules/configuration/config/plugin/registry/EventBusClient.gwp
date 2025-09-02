@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<plugin
+  interface="EventBusClient"
+  name="EventBusClient">
+  <plugin-java
+    javaclass="com.guidewire.events.system.integration.kafka.KafkaEventBusClient">
+    <param
+      name="kafka.bootstrap.servers"
+      value="${PLUGIN_APPEVENTS_BROKERS:}"/>
+    <param
+      name="kafka.security.protocol"
+      value="SSL"/>
+    <param
+      name="kafka.ssl.key.password"
+      value="${PLUGIN_APPEVENTS_KEY_PASS:}"/>
+    <param
+      name="kafka.ssl.keystore.password"
+      value="${PLUGIN_APPEVENTS_KEY_PASS:}"/>
+    <param
+      name="keystoreContent"
+      value="${PLUGIN_APPEVENTS_KEYSTORE_CONTENT:}"/>
+  </plugin-java>
+</plugin>

@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<entity
+  desc="Exposure Type Applicability Criteria "
+  loadable="false"
+  xmlns="http://guidewire.com/datamodel"
+  entity="AppCritExposureType"
+  table="appcritexposuretype"
+  type="versionable">
+  <typekey
+    desc="Exposure type in a rule availability criteria"
+    name="ExposureType"
+    nullok="false"
+    typelist="ExposureType"/>
+  <foreignkey
+    columnName="RuleID"
+    desc="The associated rule"
+    fkentity="CCRule"
+    name="Rule"
+    nullok="false"/>
+  <implementsEntity
+    name="RuleVersionDependent"/>
+  <implementsInterface
+    iface="gw.bizrules.domain.RuleVersionDependent"
+    impl="com.guidewire.cc.domain.bizrules.AppCritExposureTypeImpl"/>
+  <index
+    desc="Enforce uniqueness per exposureType/rule combo"
+    name="UniqueEntryIndex"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="RuleID"/>
+    <indexcol
+      keyposition="2"
+      name="ExposureType"/>
+  </index>
+</entity>

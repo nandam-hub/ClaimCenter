@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<nonPersistentEntity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Summary information about a field on an apd risk unit."
+  entity="PolicySummaryAPDRiskUnitField"
+  exportable="true">
+  <implementsInterface
+    iface="gw.cc.policy.entity.PolicySummaryAPDRiskUnitField"
+    impl="com.guidewire.cc.domain.policy.impl.PolicySummaryAPDRiskUnitFieldImpl"/>
+  <column
+    desc="Name"
+    name="Name"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="40"/>
+  </column>
+  <column
+    desc="Value"
+    name="Value"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="40"/>
+  </column>
+  <column
+    desc="Type"
+    name="Type"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="40"/>
+  </column>
+  <column
+    desc="TypeList"
+    name="TypeList"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="40"/>
+  </column>
+  <column
+    desc="Field order"
+    name="OrderIndex"
+    nullok="false"
+    type="integer"/>
+  <foreignkey
+    columnName="PolicySummaryAPDRiskUnitID"
+    desc="Related apd risk unit."
+    exportable="false"
+    fkentity="PolicySummaryAPDRiskUnit"
+    name="PolicySummaryAPDRiskUnit"
+    nullok="false"/>
+</nonPersistentEntity>

@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <InputSet
+    id="CCRuleApplicabilityCriteriaComparisonInputSet"
+    mode="ExposureRule">
+    <Require
+      name="controller"
+      type="gw.bizrules.pcf.RuleVersionComparisonController"/>
+    <Variable
+      initialValue="new gw.bizrules.RuleVersionComparisonHelper&lt;ExposureRule&gt;(controller.RuleVersions)"
+      name="helper"
+      type="gw.bizrules.RuleVersionComparisonHelper&lt;ExposureRule&gt;"/>
+    <InputSetRef
+      def="RuleComparisonSectionLabelInputSet(controller, DisplayKey.get(&quot;Web.BizRules.Rule.ApplicabilityCriteria&quot;))"
+      id="ApplicabilityCriteriaSectionLabel"/>
+    <InputSetRef
+      def="RuleComparisonRowStringInputSet(helper.LossTypeRow)"
+      id="LossType"/>
+    <InputSetRef
+      def="RuleComparisonRowStringInputSet(helper.PolicyTypeRow)"
+      id="PolicyType"/>
+    <InputSetRef
+      def="RuleComparisonRowStringInputSet(helper.JurisdictionRow)"
+      id="Jurisdiction"/>
+    <InputSetRef
+      def="RuleComparisonRowStringInputSet(helper.createRowForTypelist(DisplayKey.get(&quot;Web.BizRules.Rule.ApplicabilityCriteria.LossCause&quot;), \rule -&gt; rule.LossCauses*.LossCause))"
+      id="LossCause"/>
+    <InputSetRef
+      def="RuleComparisonRowStringInputSet(helper.createRowForTypelist(DisplayKey.get(&quot;Web.BizRules.Rule.ApplicabilityCriteria.CoverageType&quot;), \rule -&gt; rule.CoverageTypes*.CoverageType))"
+      id="CoverageType"/>
+    <InputSetRef
+      def="RuleComparisonRowStringInputSet(helper.createRowForTypelist(DisplayKey.get(&quot;Web.BizRules.Rule.ApplicabilityCriteria.IncidentType&quot;), \rule -&gt; rule.IncidentTypes*.IncidentType))"
+      id="IncidentType"/>
+    <InputSetRef
+      def="RuleComparisonRowStringInputSet(helper.createRowForTypelist(DisplayKey.get(&quot;Web.BizRules.Rule.ApplicabilityCriteria.LossPartyType&quot;), \rule -&gt; rule.LossPartyTypes*.LossPartyType))"
+      id="LossPartyType"/>
+  </InputSet>
+</PCF>

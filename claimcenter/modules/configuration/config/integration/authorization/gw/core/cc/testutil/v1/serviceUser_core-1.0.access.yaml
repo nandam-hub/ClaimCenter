@@ -1,0 +1,32 @@
+resources:
+  TestUtilContacts:
+    permissions:
+      view: true
+      create: true
+    filter: __noFilter
+  TestUtilGroups:
+    permissions:
+      view: false
+      create: false
+    filter: gw.rest.core.cc.security.NoPermissionsQueryFilter
+  TestUtilOpenApiSchema:
+    permissions:
+      view: true
+  TestUtilPolicies:
+    permissions:
+      view: true
+      create: true
+    filter: __noFilter
+  TestUtilSpecialistService:
+    permissions:
+      view: true
+  TestUtilSpecialistServices:
+    permissions:
+      view: true
+      create: true
+    filter: __noFilter
+  TestUtilUsers:
+    permissions:
+      view: false
+      create: false
+    filter: gw.rest.core.cc.security.NoPermissionsQueryFilter

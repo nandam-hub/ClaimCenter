@@ -1,0 +1,19 @@
+$gw-app--SouthPanel--min-height-em: auto !default;
+$gw-app--SouthPanel--drag-bar--height-px: gw-pxFixed(6) !default;
+$gw-app--SouthPanel--drag-bar--bg: $gw-app--palette--blue-light !default;
+
+$gw-app--SouthPanel--top-section-bg: $gw-app--bg !default;
+$gw-app--SouthPanel--use-float-toggle: false !default;
+
+$gw-app--SouthPanel--floatToggle--open-glyph: "angle-double-up" !default;
+$gw-app--SouthPanel--floatToggle--close-glyph: "angle-double-down" !default;
+$gw-app--SouthPanel--floatToggle--bg: $gw-app--palette--gray-C !default;
+$gw-app--SouthPanel--floatToggle--col: $gw-app--palette--gray-5 !default;
+
+$gw-app--SouthPanel--minmax-open-glyph: "angle-double-up-solid" !default;
+$gw-app--SouthPanel--minmax-close-glyph: "angle-double-down-solid" !default;
+
+$gw-app--SouthPanel--top-border-w-px: $gw-app--border-width-px !default;
+$gw-app--SouthPanel--top-border-col: $gw-app--border--col !default;
+
+$gw-app--SouthPanel--top-shadow: 0px 3px 6px 2px $gw-app--palette--shadow-col !default; //@px-allowed

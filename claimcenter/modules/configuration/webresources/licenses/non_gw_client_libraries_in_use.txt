@@ -1,0 +1,43 @@
+Non GW client libraries in use:
+------------------------------------
+jquery: https://github.com/jquery/jquery/blob/master/LICENSE.txt
+jQuery Form Plugin: https://github.com/malsup/form#copyright-and-license
+jQuery PEP: https://github.com/jquery/PEP/blob/master/LICENSE.txt
+normalize.css: https://github.com/necolas/normalize.css/blob/master/LICENSE.md
+exif-js: https://github.com/exif-js/exif-js/blob/master/LICENSE.md
+font-awesome-4: http://fontawesome.io/license/
+
+----------------------------------
+Font Awesome 5 License
+------------------------------------
+font-awesome-5: https://fontawesome.com/license
+//We include support for Font Awesome 5 Pro, but customer needs to purchase a license and include the SVGs from the pro package to wire it all up legally.
+//Otherwise we provide Font Awesome 5 Free as an alternative
+
+Font Awesome Pro is commercial software that requires a paid license.
+Font Awesome Pro license: https://fontawesome.com/license.
+
+# Commercial License
+The Font Awesome Pro commercial license allows you to pay for FA Pro once, own
+it, and use it just about everywhere you'd like.
+
+# Attribution
+Attribution is not required by the Font Awesome Pro commercial license.
+
+# Brand Icons
+All brand icons are trademarks of their respective owners. The use of these
+trademarks does not indicate endorsement of the trademark holder by Font
+Awesome, nor vice versa. **Please do not use brand logos for any purpose except
+to represent the company, product, or service to which they refer.**
+
+
+-----------------------------------
+Node Modules:
+-------------------------------------
+//TODO: update with node based library information for:
+typescript
+webpack
+typescript loader
+etc
+=======
+

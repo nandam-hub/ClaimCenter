@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="DamageSeverity"
+  name="DamageSeverity">
+  <typecode
+    code="minor"
+    desc="Minor"
+    name="Minor"
+    priority="1"/>
+  <typecode
+    code="moderate"
+    desc="Moderate"
+    name="Moderate"
+    priority="2"/>
+  <typecode
+    code="severe"
+    desc="Severe"
+    name="Severe"
+    priority="3"/>
+</typelist>

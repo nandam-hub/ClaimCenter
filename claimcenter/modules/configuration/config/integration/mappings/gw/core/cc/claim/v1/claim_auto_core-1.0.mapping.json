@@ -1,0 +1,61 @@
+{
+  "schemaName": "gw.core.cc.claim.v1.claim_auto_core-1.0",
+  "combine": [
+    "gw.core.cc.claim.v1.claim_core-1.0",
+    "gw.core.cc.common.v1.common_auto_core-1.0"
+  ],
+  "mappers": {
+    "ClaimContact": {
+      "schemaDefinition": "ClaimContact",
+      "root": "entity.ClaimContact",
+      "properties": {
+        "licenseNumber": {
+          "path": "(ClaimContact.Contact as Person).LicenseNumber",
+          "predicate": "(ClaimContact.Contact typeis Person) and (ClaimContact.Claim == null || (ClaimContact.Claim.LossType.equals(LossType.get('AUTO'))))"
+        },
+        "licenseState": {
+          "path": "(ClaimContact.Contact as Person).LicenseState",
+          "mapper": "#/mappers/TypeKeyReference",
+          "predicate": "(ClaimContact.Contact typeis Person) and (ClaimContact.Claim == null || (ClaimContact.Claim.LossType.equals(LossType.get('AUTO'))))"
+        }
+      }
+    },
+    "VehicleRiskUnit": {
+      "schemaDefinition": "VehicleRiskUnit",
+      "root": "entity.VehicleRU",
+      "properties": {
+        "RUNumber": {
+          "path": "VehicleRU.RUNumber"
+        },
+        "coverages": {
+          "path": "VehicleRU.Coverages.sortBy(\\cov -> cov.Type)",
+          "mapper": "#/mappers/Coverage",
+          // The underlying Coverages array is safe because it is an owned array. (Sorting is irrelevant to App Events.)
+          "eventSafe": true
+        },
+        "description": {
+          "path": "VehicleRU.Description"
+        },
+        "id": {
+          "path": "VehicleRU.RestId"
+        },
+        "policySystemId": {
+          "path": "VehicleRU.PolicySystemId"
+        },
+        "vehicle": {
+          "path": "VehicleRU.RestV1.VehicleWrapper",
+          "mapper": "#/mappers/ClaimVehicle",
+          // This wraps the VehicleRiskUnit's Vehicle, which is safe because it is a foreign key directly on VehicleRiskUnit without an associated array, and Vehicle does not generate events
+          "eventSafe": true
+        },
+        "vehicleId": {
+          "path": "VehicleRU.Vehicle.RestId"
+        },
+        "vehicleLocation": {
+          "path": "VehicleRU.VehicleLocation",
+          "mapper": "#/mappers/PolicyLocation"
+        }
+      }
+    }
+  }
+}

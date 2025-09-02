@@ -1,0 +1,28 @@
+$gw-app--BadgeWidget--default-col: $gw-app--palette--white-for-dark-backgrounds !default;
+$gw-app--BadgeWidget--default-bg: $gw-app--palette--info !default;
+$gw-app--BadgeWidget--standard-min-width: gw-emFixed(7) !default;
+$gw-app--BadgeWidget--standard-min-width-should-also-center-align: false !default;
+
+$gw-app--BadgeWidget--small-font-size-px: $gw-app--font-size--tiny-px !default;
+$gw-app--BadgeWidget--small-pad-v: gw-pxFixed(2) !default;
+$gw-app--BadgeWidget--small-pad-h: $gw-app--SPACING-rem-S !default;
+$gw-app--BadgeWidget--small-font-weight: bold !default;
+$gw-app--BadgeWidget--small-border-radius: $gw-app--border-radius-px !default;
+
+$gw-app--BadgeWidget--large-font-size-px: $gw-app--font-size--smaller-px !default;
+$gw-app--BadgeWidget--large-pad-v: $gw-app--SPACING-rem-S !default;
+$gw-app--BadgeWidget--large-pad-h: $gw-app--SPACING-rem-M !default;
+$gw-app--BadgeWidget--large-font-weight: bold !default;
+$gw-app--BadgeWidget--large-border-radius: $gw-app--border-radius-px !default;
+
+$gw-app--BadgeWidget--force-all-badge-styles-to-light-text-with-shadow: true !default;
+
+
+
+@mixin gw-possiblyApplyForcedBadgeWidgetColor() {
+  @if ($gw-app--BadgeWidget--force-all-badge-styles-to-light-text-with-shadow) {
+    color: $gw-app--palette--white-for-dark-backgrounds;
+    text-shadow: getTextShadowBasedOnTextLuminance($gw-app--palette--white-for-dark-backgrounds);
+  }
+}
+

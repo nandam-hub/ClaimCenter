@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<delegate
+  xmlns="http://guidewire.com/datamodel"
+  name="ZoneDelegate">
+  <column
+    desc="The code for this zone, this is the value that should be used for lookups."
+    name="Code"
+    nullok="false"
+    supportsLinguisticSearch="true"
+    type="shorttext"/>
+</delegate>

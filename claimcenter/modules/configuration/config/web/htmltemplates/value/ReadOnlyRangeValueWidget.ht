@@ -1,0 +1,7 @@
+<div :for="option" :in="selectedOptions" class="gw-RangeValue ${option.retired ? 'gw-retired'}" data-gw-value="${option.value}">
+  ${option.icon}
+  <div :if="option.label" class="gw-label">${option.label}</div>
+</div>
+<div :if="noOptionLabel" class="gw-RangeValue" data-gw-value="">
+  <div class="gw-label">${noOptionLabel}</div>
+</div>

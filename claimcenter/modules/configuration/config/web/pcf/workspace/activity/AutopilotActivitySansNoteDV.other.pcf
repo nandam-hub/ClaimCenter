@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="AutopilotActivitySansNoteDV"
+    mode="other">
+    <Require
+      name="Activity"
+      type="Activity"/>
+    <InputColumn>
+      <InputSetRef
+        def="ActivityDetailsInputSet(Activity)"/>
+    </InputColumn>
+    <InputColumn>
+      <InputSetRef
+        def="ActivityOwnerInputSet(Activity)"/>
+      <InputDivider/>
+      <InputSetRef
+        def="ActivityDocumentInputSet(Activity)"/>
+      <InputDivider/>
+      <InputSetRef
+        def="ActivityTrackingInputSet(Activity)"/>
+    </InputColumn>
+    <InputColumn>
+      <InputSetRef
+        def="CoverageIssuesInputSet(Activity)"/>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../../pcf.xsd">
+  <Page
+    afterCancel="Properties.go()"
+    afterCommit="Properties.go()"
+    canEdit="true"
+    canVisit="perm.System.exportproperties"
+    countsAsWork="false"
+    id="ExportProperties"
+    parent="Properties()"
+    showUpLink="false"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;RuntimeProperties.Property.Export.Properties&quot;)">
+    <LocationEntryPoint
+      signature="ExportProperties()"/>
+    <Variable
+      initialValue="new gw.api.properties.PropertyExportOptions()"
+      name="exportOptions"
+      type="gw.api.properties.PropertyExportOptions"/>
+    <ScreenRef
+      def="ExportPropertiesScreen(exportOptions)"/>
+  </Page>
+</PCF>

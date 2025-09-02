@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<typelist xmlns="http://guidewire.com/typelists" name="BeanStatus_SP" desc="Status of a given bean in the context of a given commit">
+  <typecode
+    code="inserted"
+    desc="Inserted"
+    name="Inserted"/>
+  <typecode
+    code="updated"
+    desc="Updated"
+    name="Updated"/>
+  <typecode
+    code="removed"
+    desc="Removed"
+    name="Removed"/>
+</typelist>

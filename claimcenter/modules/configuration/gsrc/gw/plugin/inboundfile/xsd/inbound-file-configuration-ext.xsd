@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema targetNamespace="http://guidewire.com/inbound/ext" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://guidewire.com/inbound/ext" elementFormDefault="qualified">
+
+  <xs:element name="InboundConfigurations">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element type="InboundLocalConfiguration" name="LocalConfiguration"/>
+        <xs:element type="InboundS3Configuration" name="S3Configuration"/>
+        <xs:element type="ManagedS3InboundConfiguration" name="ManagedS3Configuration"/>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:complexType name="InboundConfigurationBase">
+    <xs:sequence>
+      <xs:element type="xs:string" name="Name"/>
+      <xs:element type="xs:string" name="FileHandlerClass"/>
+      <xs:element type="xs:integer" name="ChunkSize"/>
+      <xs:element type="xs:integer" name="DaysTillPurge"/>
+    </xs:sequence>
+    <xs:attribute name="env" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType name="InboundLocalConfiguration">
+    <xs:complexContent>
+      <xs:extension base="InboundConfigurationBase">
+        <xs:sequence>
+          <xs:element type="xs:string" name="InputDirectory"/>
+          <xs:element type="xs:string" name="ArchiveDirectory"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="InboundS3Configuration">
+    <xs:complexContent>
+      <xs:extension base="InboundConfigurationBase">
+        <xs:sequence>
+          <xs:element type="xs:string" name="ProfileName" minOccurs="0"/>
+          <xs:element type="xs:string" name="InputBucketName"/>
+          <xs:element type="xs:string" name="InputPrefix"/>
+          <xs:element type="xs:string" name="ArchiveBucketName"/>
+          <xs:element type="xs:string" name="ArchivePrefix"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType
+          name="ManagedS3InboundConfiguration">
+    <xs:complexContent>
+      <xs:extension
+              base="InboundConfigurationBase"></xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+</xs:schema>

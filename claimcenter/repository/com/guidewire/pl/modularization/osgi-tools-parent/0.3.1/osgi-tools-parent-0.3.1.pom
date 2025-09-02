@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.guidewire.pl.modularization</groupId>
+  <artifactId>osgi-tools-parent</artifactId>
+  <version>0.3.1</version>
+  <packaging>pom</packaging>
+
+  <name>OSGi Tools</name>
+  <description>OSGi tooling projects</description>
+
+  <organization>
+    <name>Guidewire, Inc.</name>
+    <url>http://guidewire.com</url>
+  </organization>
+
+  <scm>
+    <developerConnection>scm:git:ssh://stash.guidewire.com/bld/osgi-tools.git</developerConnection>
+    <connection>scm:git:https://stash.guidewire.com/scm/bld/osgi-tools.git</connection>
+    <tag>osgi-tools-parent-0.3.1</tag>
+  </scm>
+
+  <properties>
+    <!-- Plugins -->
+    <maven.compiler.plugin.version>3.13.0</maven.compiler.plugin.version>
+    <maven.plugin.plugin.version>3.12.0</maven.plugin.plugin.version>
+    <maven.release.plugin.version>3.0.1</maven.release.plugin.version>
+
+    <!-- Build -->
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>11</maven.compiler.source>
+    <maven.compiler.target>11</maven.compiler.target>
+
+    <!-- Libraries -->
+    <bnd.lib.version>6.0.0</bnd.lib.version>
+    <guava.version>33.1.0-jre</guava.version>
+    <maven.core.version>3.9.6</maven.core.version>
+    <maven.plugin.annotations.version>3.12.0</maven.plugin.annotations.version>
+    <slf4j.api.version>1.7.36</slf4j.api.version>
+  </properties>
+
+  <modules>
+    <module>osgi-metadata-gen</module>
+    <module>osgi-maven-plugin</module>
+  </modules>
+
+  
+
+  
+
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>${maven.compiler.plugin.version}</version>
+          <configuration>
+            <compilerArguments>
+              <Xlint />
+            </compilerArguments>
+            <showWarnings>true</showWarnings>
+          </configuration>
+        </plugin>
+        <plugin>
+          <artifactId>maven-release-plugin</artifactId>
+          <version>${maven.release.plugin.version}</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+
+  <distributionManagement>
+    <repository>
+      <id>publish.to.repository.id</id>
+      <url>${env.PUBLISH_TO_REPOSITORY_URL}</url>
+    </repository>
+  </distributionManagement>
+</project>

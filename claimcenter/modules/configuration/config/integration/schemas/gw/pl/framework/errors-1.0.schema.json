@@ -1,0 +1,72 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "definitions": {
+    "ErrorCause" : {
+      "title": "Error cause",
+      "description": "Basic information of an unexpected server exception",
+      "type": "object",
+      "properties": {
+        "message": {
+          "title": "Message",
+          "description": "The exception message",
+          "type": "string"
+        }
+      }
+    },
+    "ErrorInfo" : {
+      "title": "Error info",
+      "description": "Generic schema that REST error responses follow",
+      "type" : "object",
+      "properties" : {
+        "cause": {
+          "title": "Cause",
+          "description": "The exception that caused the error, if this was an internal server error",
+          "$ref" : "#/definitions/ErrorCause"
+        },
+        "developerMessage" : {
+          "title": "Developer message",
+          "description": "An error message that might be more technical than the `userMessage` and is more suitable for use by a developer who built the code that made the API call",
+          "type" : "string"
+        },
+        "details" : {
+          "title": "Details",
+          "description": "Additional details of the error. For example, if this overall error response was caused by a schema validation failure, the error details might represent specific validation errors.",
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/ErrorDetail"
+          }
+        },
+        "stackTrace" : {
+          "title": "Stack trace",
+          "description": "The stack trace associated with the error, if this error was caused by an internal server error.  Stack traces will not appear if the server is set to production mode.",
+          "type" : "string"
+        },
+        "status" : {
+          "title": "Status",
+          "description": "The HTTP status code associated with the error",
+          "type" : "integer"
+        },
+        "userMessage" : {
+          "title": "User message",
+          "description": "An error message suitable for displaying to an end user, such as someone using a UI that made the API call",
+          "type" : "string"
+        }
+      }
+    },
+    "ErrorDetail" : {
+      "type" : "object",
+      "properties" : {
+        "message" : {
+          "title": "Message",
+          "description": "A message associated with this specific error",
+          "type" : "string"
+        },
+        "properties" : {
+          "title": "Properties",
+          "description": "Properties of this specific error.  The specific properties will depend on the specific type of error.",
+          "type" : "object"
+        }
+      }
+    }
+  }
+}

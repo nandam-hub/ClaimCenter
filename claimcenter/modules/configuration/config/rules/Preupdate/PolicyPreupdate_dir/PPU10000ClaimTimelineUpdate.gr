@@ -1,0 +1,18 @@
+package rules.Preupdate.PolicyPreupdate_dir
+uses gw.surepath.cc.configuration.timeline.creation.TimelineUtil
+
+@gw.rules.RuleName("PPU10000 - Claim Timeline Update")
+internal class PPU10000ClaimTimelineUpdate {
+  static function doCondition(policy : entity.Policy) : boolean {
+/*start00rule*/
+return true
+/*end00rule*/
+}
+
+  static function doAction(policy : entity.Policy, actions : gw.rules.Action) {
+/*start00rule*/
+  var claim = policy.Claim
+  TimelineUtil.registerCallback(claim, claim.Bundle)
+/*end00rule*/
+  }
+}

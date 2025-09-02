@@ -1,0 +1,52 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "x-gw-combine": [
+    "gw.core.pl.systemtools.v1.systemtools_pl-1.0",
+    "gw.core.cc.framework.v1.framework_core-1.0"
+  ],
+  "definitions": {
+    "AggLimitCalcArguments": {
+      "title": "AggLimitCalc",
+      "description": "Arguments for the AggLimitCalc batch process",
+      "type": "object",
+      "x-gw-sinceVersion": "1.5.0",
+      "properties": {
+        "rebuildAll": {
+          "title": "Rebuild all",
+          "description": "Flag indicating whether all aggregate limits should be rebuilt. If false or not specified, only invalid aggregate limits are rebuilt.",
+          "type": "boolean"
+        }
+      }
+    },
+    "BatchProcessArguments": {
+      "properties": {
+        "agglimitcalc": {
+          "title": "AggLimitCalc",
+          "description": "Arguments for the AggLimitCalc batch process",
+          "$ref": "#/definitions/AggLimitCalcArguments"
+        },
+        "financialscalc": {
+          "title": "FinancialsCalc",
+          "description": "Arguments for the FinancialsCalc batch process",
+          "$ref": "#/definitions/FinancialsCalcArguments"
+        }
+      }
+    },
+    "FinancialsCalcArguments": {
+      "title": "FinancialsCalc",
+      "description": "Arguments for the FinancialsCalc batch process",
+      "type": "object",
+      "x-gw-sinceVersion": "1.5.0",
+      "properties": {
+        "claimNumbers": {
+          "title": "Claim numbers",
+          "description": "List of claims whose rpt tables should be recalculated. If not specified, all rpt tables are recalculated.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

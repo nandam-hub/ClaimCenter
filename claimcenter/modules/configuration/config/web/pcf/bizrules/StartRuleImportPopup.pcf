@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Popup
+    canEdit="true"
+    canVisit="gw.bizrules.pcf.RulePermissionUIHelper.canImportRule()"
+    countsAsWork="false"
+    id="StartRuleImportPopup"
+    returnType="RuleImportTask"
+    startInEditMode="true"
+    title="DisplayKey.get(&apos;BizRules.Import&apos;)">
+    <LocationEntryPoint
+      signature="StartRuleImportPopup(navigationSupport: gw.bizrules.pcf.BizRulesPageNavigationSupport)"/>
+    <Variable
+      name="navigationSupport"
+      type="gw.bizrules.pcf.BizRulesPageNavigationSupport"/>
+    <Variable
+      name="file"
+      type="gw.api.web.WebFile"/>
+    <Screen>
+      <Toolbar>
+        <ToolbarButton
+          action="navigationSupport.VersionController.ExportImportController.startRulesImportFromWebFile(file); CurrentLocation.cancel(); navigationSupport.goToExportImportStatusPage()"
+          available="file != null"
+          id="ImportButton"
+          label="DisplayKey.get(&apos;BizRules.Import&apos;)"
+          tooltip="DisplayKey.get(&apos;BizRules.StartRuleImportPopup.ImportTooltip&apos;)"/>
+        <ToolbarButton
+          action="CurrentLocation.cancel()"
+          id="CancelButton"
+          label="DisplayKey.get(&apos;Button.Cancel&apos;)"
+          tooltip="DisplayKey.get(&apos;BizRules.StartRuleImportPopup.CancelTooltip&apos;)"/>
+      </Toolbar>
+      <DetailViewPanel>
+        <InputColumn>
+          <InputSet>
+            <TextInput
+              id="fileLabel"
+              labelAbove="true"
+              value="DisplayKey.get(&apos;BizRules.StartRuleImportPopup.FileDescription&apos;, navigationSupport.VersionController.ExportImportController.RulesFileExtension)"/>
+            <FileInput
+              acceptableMimeTypes="application/vnd.guidewire.insurancesuite.rules"
+              editable="true"
+              id="File"
+              labelAbove="true"
+              required="true"
+              value="file"/>
+          </InputSet>
+        </InputColumn>
+      </DetailViewPanel>
+    </Screen>
+  </Popup>
+</PCF>

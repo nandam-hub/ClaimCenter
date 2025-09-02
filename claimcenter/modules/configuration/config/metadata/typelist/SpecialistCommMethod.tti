@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="A channel through which specialists can communicate with the carrier"
+  name="SpecialistCommMethod">
+  <typefilter
+    desc="Indicates if service request messages should be supported on service requests with this given communication method"
+    name="SpecialistMessagesSupported"/>
+</typelist>

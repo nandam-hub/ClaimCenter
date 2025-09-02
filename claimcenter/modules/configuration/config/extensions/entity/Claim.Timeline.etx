@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<!-- Extension to claim table -->
+<extension xmlns="http://guidewire.com/datamodel" entityName="Claim">
+    <onetoone
+      fkentity="Timeline_SP"
+      name="Timeline_SP"
+      nullok="true"/>
+</extension>

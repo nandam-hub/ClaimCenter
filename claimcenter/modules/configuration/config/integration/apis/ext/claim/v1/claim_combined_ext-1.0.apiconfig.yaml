@@ -1,0 +1,4 @@
+combine:
+- ext.claim.v1.claim_ext-1.0
+linkedApis:
+- ext.common.v1.common_ext-1.0

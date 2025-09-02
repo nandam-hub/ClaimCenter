@@ -1,0 +1,1418 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow
+  subtype="MetroReportWorkflow"
+  version="1"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="workflow.xsd">
+  <Context>
+    <Symbol
+      name="metroReport"
+      type="MetroReport"
+      value="Workflow.MetroReport"/>
+    <Symbol
+      name="claim"
+      type="Claim"
+      value="Workflow.Claim"/>
+  </Context>
+  <Start
+    firstStep="SendOrder"/>
+  <!-- ================================ SENDING ORDER =================================== -->
+  <AutoStep
+    desc="Send Order"
+    id="SendOrder"
+    layoutid="10041114">
+    <Assert
+      condition="metroReport.Status == TC_VALIDATED"
+      message="MetroReport must be validated at start of Workflow"/>
+    <Enter><![CDATA[// Sends the "MetroReportOrderFile" message in Event rules
+      metroReport.Status = TC_SENDINGORDER]]></Enter>
+    <Go
+      desc=""
+      layoutid="10855753"
+      nextStep="CheckOnOrder"/>
+    <StepLocalization
+      locale="zh_CN"
+      name="发送订单"/>
+    <StepLocalization
+      locale="de"
+      name="Anforderung senden"/>
+    <StepLocalization
+      locale="es"
+      name="Enviar pedido"/>
+    <StepLocalization
+      locale="pt"
+      name="Enviar solicitação"/>
+    <StepLocalization
+      locale="fr"
+      name="Envoyer la commande"/>
+    <StepLocalization
+      locale="ru"
+      name="Отправить заказ"/>
+    <StepLocalization
+      locale="ja"
+      name="注文の送信"/>
+    <StepLocalization
+      locale="it"
+      name="Invia ordine"/>
+    <StepLocalization
+      locale="nl"
+      name="Order verzenden"/>
+  </AutoStep>
+  <AutoStep
+    desc="Check On Order"
+    id="CheckOnOrder"
+    layoutid="22214031">
+    <Go
+      desc=""
+      id="accepted"
+      if="metroReport.Status == TC_ACCEPTED or metroReport.Status == TC_PENDING"
+      layoutid="31025082"
+      nextStep="WaitBeforeInquiry"/>
+    <Go
+      desc=""
+      id="orderfailed"
+      if="metroReport.Status == TC_ORDERFAILED"
+      layoutid="2687752"
+      nextStep="SendFailed"/>
+    <Go
+      desc=""
+      id="error"
+      if="metroReport.Status == TC_ERROR"
+      layoutid="8790553"
+      nextStep="SendFailed"/>
+    <Go
+      desc=""
+      id="orderTimedOut"
+      if="metroReport.PastOrderTimeout"
+      layoutid="13598146"
+      nextStep="OrderTimedOut"/>
+    <Go
+      desc=""
+      id="duplicateWithReport"
+      if="metroReport.Status == TC_HASREPORT"
+      layoutid="3899905"
+      nextStep="DownloadReport"/>
+    <Go
+      desc=""
+      layoutid="2675737"
+      nextStep="RetryCheckOnOrder"/>
+    <StepLocalization
+      locale="zh_CN"
+      name="订购时检查"/>
+    <StepLocalization
+      locale="de"
+      name="Auf Anforderung prüfen"/>
+    <StepLocalization
+      locale="es"
+      name="Comprobar pedido"/>
+    <StepLocalization
+      locale="pt"
+      name="Verificar solicitação"/>
+    <StepLocalization
+      locale="fr"
+      name="Voir la commande"/>
+    <StepLocalization
+      locale="ru"
+      name="Проверить заказ"/>
+    <StepLocalization
+      locale="ja"
+      name="注文のチェック"/>
+    <StepLocalization
+      locale="it"
+      name="Verifica su ordine"/>
+    <StepLocalization
+      locale="nl"
+      name="Controleren op order"/>
+  </AutoStep>
+  <ManualStep
+    desc="Retry Check On Order"
+    id="RetryCheckOnOrder"
+    layoutid="24612435">
+    <Timeout
+      desc=""
+      layoutid="8185505"
+      nextStep="CheckOnOrder"
+      timeDelta="5m"/>
+    <StepLocalization
+      locale="zh_CN"
+      name="订购时重试检查"/>
+    <StepLocalization
+      locale="de"
+      name="Auf Anforderung prüfen erneut versuchen"/>
+    <StepLocalization
+      locale="es"
+      name="Reintentar comprobación del pedido"/>
+    <StepLocalization
+      locale="pt"
+      name="Repetir verificação da solicitação"/>
+    <StepLocalization
+      locale="fr"
+      name="Réessayer Voir la commande"/>
+    <StepLocalization
+      locale="ru"
+      name="Повторить проверку заказа"/>
+    <StepLocalization
+      locale="ja"
+      name="注文のチェックの再試行"/>
+    <StepLocalization
+      locale="it"
+      name="Ripeti verifica su ordine"/>
+    <StepLocalization
+      locale="nl"
+      name="Controleren op order opnieuw proberen"/>
+  </ManualStep>
+  <!-- ================================ WAITING BEFORE INQUIRY =================================== -->
+  <ManualStep
+    desc="Wait Before Inquiry"
+    id="WaitBeforeInquiry"
+    layoutid="2163844">
+    <Timeout
+      desc=""
+      layoutid="614550"
+      nextStep="SendInquiry"
+      timeAbsolute="gw.api.util.DateUtil.addMinutes(Workflow.EnteredStep, gw.api.upgrade.Coercions.makePIntFrom(metroReport.InquiryWaitInterval))"/>
+    <StepLocalization
+      locale="zh_CN"
+      name="查询前等待"/>
+    <StepLocalization
+      locale="de"
+      name="Wartezeit vor Abfrage"/>
+    <StepLocalization
+      locale="es"
+      name="Esperar antes de hacer la consulta"/>
+    <StepLocalization
+      locale="pt"
+      name="Aguardar antes da consulta"/>
+    <StepLocalization
+      locale="fr"
+      name="Attendre avant la demande"/>
+    <StepLocalization
+      locale="ru"
+      name="Ожидание перед запросом"/>
+    <StepLocalization
+      locale="ja"
+      name="問い合わせ前に待機する"/>
+    <StepLocalization
+      locale="it"
+      name="Attendi prima della richiesta di informazioni"/>
+    <StepLocalization
+      locale="nl"
+      name="Wachten voordat onderzoek wordt gestart"/>
+  </ManualStep>
+  <!-- ================================ SENDING INQUIRY =================================== -->
+  <AutoStep
+    desc="Send Inquiry"
+    id="SendInquiry"
+    layoutid="28280470">
+    <Enter><![CDATA[// Sends the "MetroReportOrderInquiryFile" message in Event rules
+      metroReport.Status = TC_SENDINGINQUIRY]]></Enter>
+    <Go
+      desc=""
+      layoutid="27537533"
+      nextStep="CheckOnInquiry"/>
+    <StepLocalization
+      locale="zh_CN"
+      name="发送查询"/>
+    <StepLocalization
+      locale="de"
+      name="Abfrage senden"/>
+    <StepLocalization
+      locale="es"
+      name="Enviar consulta"/>
+    <StepLocalization
+      locale="pt"
+      name="Enviar consulta"/>
+    <StepLocalization
+      locale="fr"
+      name="Envoyer une demande"/>
+    <StepLocalization
+      locale="ru"
+      name="Отправить запрос"/>
+    <StepLocalization
+      locale="ja"
+      name="問い合わせの送信"/>
+    <StepLocalization
+      locale="it"
+      name="Invia richiesta informazioni"/>
+    <StepLocalization
+      locale="nl"
+      name="Onderzoek verzenden"/>
+  </AutoStep>
+  <AutoStep
+    desc="Check On Inquiry"
+    id="CheckOnInquiry"
+    layoutid="11341523">
+    <Go
+      desc=""
+      id="pending"
+      if="metroReport.Status == TC_PENDING"
+      layoutid="7043860"
+      nextStep="WaitBeforeInquiry"/>
+    <Go
+      desc=""
+      id="hasReport"
+      if="metroReport.Status == TC_HASREPORT"
+      layoutid="6135260"
+      nextStep="DownloadReport"/>
+    <Go
+      desc=""
+      id="holdWithActivity"
+      if="metroReport.Status == TC_HOLD and metroReport.CreateHoldActivity"
+      layoutid="2560563"
+      nextStep="InquiryHeldActivity"/>
+    <Go
+      desc=""
+      id="holdWithoutActivity"
+      if="metroReport.Status == TC_HOLD and !metroReport.CreateHoldActivity"
+      layoutid="18606577"
+      nextStep="WaitBeforeInquiry"/>
+    <Go
+      desc=""
+      id="deferredWithActivity"
+      if="metroReport.Status == TC_DEFERRED and metroReport.CreateDeferredActivity"
+      layoutid="26988764"
+      nextStep="InquiryDeferredActivity"/>
+    <Go
+      desc=""
+      id="deferredWithoutActivity"
+      if="metroReport.Status == TC_DEFERRED and !metroReport.CreateDeferredActivity"
+      layoutid="11352336"
+      nextStep="WaitBeforeInquiry"/>
+    <Go
+      desc=""
+      id="inquiryFailed"
+      if="metroReport.Status == TC_INQUIRYFAILED"
+      layoutid="8215615"
+      nextStep="InquiryFailedActivity"/>
+    <Go
+      desc=""
+      id="closed"
+      if="metroReport.Status == TC_CLOSED &amp;&amp; metroReport.DocumentURL == null"
+      layoutid="3367344"
+      nextStep="OrderClosed"/>
+    <Go
+      desc=""
+      id="closedWithReport"
+      if="metroReport.Status == TC_CLOSED &amp;&amp; metroReport.DocumentURL != null"
+      layoutid="30270834"
+      nextStep="DownloadClosedReport"/>
+    <Go
+      desc=""
+      id="error"
+      if="metroReport.Status == TC_ERROR"
+      layoutid="22194826"
+      nextStep="WaitBeforeInquiry"/>
+    <Go
+      desc=""
+      id="workflowTimedOut"
+      if="metroReport.PastWorkflowTimeout"
+      layoutid="24442476"
+      nextStep="WorkflowTimedOut"/>
+    <Go
+      desc=""
+      layoutid="3832554"
+      nextStep="RetryCheckOnInquiry"/>
+    <StepLocalization
+      locale="zh_CN"
+      name="查询时检查"/>
+    <StepLocalization
+      locale="de"
+      name="Auf Abfrage prüfen"/>
+    <StepLocalization
+      locale="es"
+      name="Comprobar consulta"/>
+    <StepLocalization
+      locale="pt"
+      name="Verificar consulta"/>
+    <StepLocalization
+      locale="fr"
+      name="Voir la demande"/>
+    <StepLocalization
+      locale="ru"
+      name="Проверить запрос"/>
+    <StepLocalization
+      locale="ja"
+      name="問い合わせのチェック"/>
+    <StepLocalization
+      locale="it"
+      name="Verifica su richiesta informazioni"/>
+    <StepLocalization
+      locale="nl"
+      name="Controleren op onderzoek"/>
+  </AutoStep>
+  <ManualStep
+    desc="Retry Check On Inquiry"
+    id="RetryCheckOnInquiry"
+    layoutid="27812318">
+    <Timeout
+      desc=""
+      layoutid="22785877"
+      nextStep="CheckOnInquiry"
+      timeDelta="5m"/>
+    <StepLocalization
+      locale="zh_CN"
+      name="查询时重试检查"/>
+    <StepLocalization
+      locale="de"
+      name="Auf Abfrage prüfen erneut versuchen"/>
+    <StepLocalization
+      locale="es"
+      name="Reintentar comprobación de la consulta"/>
+    <StepLocalization
+      locale="pt"
+      name="Repetir verificação da consulta"/>
+    <StepLocalization
+      locale="fr"
+      name="Réessayer Voir la demande"/>
+    <StepLocalization
+      locale="ru"
+      name="Повторить проверку запроса"/>
+    <StepLocalization
+      locale="ja"
+      name="問い合わせのチェックの再試行"/>
+    <StepLocalization
+      locale="it"
+      name="Ripeti verifica su richiesta informazioni"/>
+    <StepLocalization
+      locale="nl"
+      name="Controleren op onderzoek opnieuw proberen"/>
+  </ManualStep>
+  <!-- ================================ HANDLING THE INQUIRY =================================== -->
+  <AutoStep
+    desc="Inquiry Held Activity"
+    id="InquiryHeldActivity"
+    layoutid="28398961">
+    <Notification
+      pattern="metropolitan_report_held">
+      <Init><![CDATA[Workflow.initActivity(Activity);
+        Activity.Description =
+          gw.api.locale.DisplayKey.get("Workflow.MetroReport.InquiryHeldActivity", metroReport.MetroReportType, claim.ClaimNumber, metroReport.ErrorMessage, metroReport.InformationURL);
+        Activity.assignToClaimOwner();]]></Init>
+    </Notification>
+    <Go
+      desc=""
+      layoutid="5509066"
+      nextStep="WaitBeforeInquiry"/>
+    <StepLocalization
+      locale="zh_CN"
+      name="查询暂停活动"/>
+    <StepLocalization
+      locale="de"
+      name="Abfrage gehaltene Aktivität"/>
+    <StepLocalization
+      locale="es"
+      name="Actividad realizada de consulta"/>
+    <StepLocalization
+      locale="pt"
+      name="Consulta reteve a atividade"/>
+    <StepLocalization
+      locale="fr"
+      name="Demande de suspension d'activité"/>
+    <StepLocalization
+      locale="ru"
+      name="Задача по удерживаемому запросу"/>
+    <StepLocalization
+      locale="ja"
+      name="問い合わせ保留中アクティビティ"/>
+    <StepLocalization
+      locale="it"
+      name="Richiesta informazioni su attività mantenuta"/>
+    <StepLocalization
+      locale="nl"
+      name="Activiteit verricht onderzoek"/>
+  </AutoStep>
+  <AutoStep
+    desc="Inquiry Deferred Activity"
+    id="InquiryDeferredActivity"
+    layoutid="23112737">
+    <Notification
+      pattern="metropolitan_report_deferred">
+      <Init><![CDATA[Workflow.initActivity(Activity);
+        Activity.Description =
+          gw.api.locale.DisplayKey.get("Workflow.MetroReport.InquiryDeferredActivity", metroReport.MetroReportType, claim.ClaimNumber, metroReport.ErrorMessage, metroReport.DelayMemoURL);
+        Activity.assignToClaimOwner();]]></Init>
+    </Notification>
+    <Go
+      desc=""
+      layoutid="14203871"
+      nextStep="WaitBeforeInquiry"/>
+    <StepLocalization
+      locale="zh_CN"
+      name="查询推迟活动"/>
+    <StepLocalization
+      locale="de"
+      name="Abfrage zurückgestellte Aktivität"/>
+    <StepLocalization
+      locale="es"
+      name="Actividad aplazada de consulta"/>
+    <StepLocalization
+      locale="pt"
+      name="Consulta diferiu a atividade"/>
+    <StepLocalization
+      locale="fr"
+      name="Demande d'activité reportée"/>
+    <StepLocalization
+      locale="ru"
+      name="Задача по отложенному запросу"/>
+    <StepLocalization
+      locale="ja"
+      name="問い合わせ延期アクティビティ"/>
+    <StepLocalization
+      locale="it"
+      name="Richiesta informazioni su attività rinviata"/>
+    <StepLocalization
+      locale="nl"
+      name="Activiteit uitgesteld onderzoek"/>
+  </AutoStep>
+  <AutoStep
+    desc="Download Report"
+    id="DownloadReport"
+    layoutid="29679763">
+    <Enter><![CDATA[libraries.Metro.downloadHasReportDocument(metroReport)]]></Enter>
+    <Go
+      desc=""
+      layoutid="18231547"
+      nextStep="CheckHasReportDocumentReady"/>
+    <StepLocalization
+      locale="zh_CN"
+      name="下载报告"/>
+    <StepLocalization
+      locale="de"
+      name="Bericht herunterladen"/>
+    <StepLocalization
+      locale="es"
+      name="Descargar informe"/>
+    <StepLocalization
+      locale="pt"
+      name="Baixar relatório"/>
+    <StepLocalization
+      locale="fr"
+      name="Télécharger le rapport"/>
+    <StepLocalization
+      locale="ru"
+      name="Загрузить отчет"/>
+    <StepLocalization
+      locale="ja"
+      name="レポートのダウンロード"/>
+    <StepLocalization
+      locale="it"
+      name="Scarica report"/>
+    <StepLocalization
+      locale="nl"
+      name="Rapport downloaden"/>
+  </AutoStep>
+  <ManualStep
+    desc="Retry Check Has Report Document Ready"
+    id="RetryCheckHasReportDocumentReady"
+    layoutid="7600315">
+    <Timeout
+      desc=""
+      layoutid="32108524"
+      nextStep="CheckHasReportDocumentReady"
+      timeDelta="5m"/>
+    <StepLocalization
+      locale="zh_CN"
+      name="重试检查的报告文档已就绪"/>
+    <StepLocalization
+      locale="de"
+      name="Prüfung hält Berichtsdokument bereit erneut versuchen"/>
+    <StepLocalization
+      locale="es"
+      name="Reintentar comprobación de documento de informe preparado"/>
+    <StepLocalization
+      locale="pt"
+      name="Repetir documento do relatório de verificação está pronto"/>
+    <StepLocalization
+      locale="fr"
+      name="Réessayer Vérifier si le rapport est prêt"/>
+    <StepLocalization
+      locale="ru"
+      name="Повторить проверку готовности документа отчета"/>
+    <StepLocalization
+      locale="ja"
+      name="チェックの再試行によるレポートドキュメントが準備できました"/>
+    <StepLocalization
+      locale="it"
+      name="Ripeti verifica con report pronto"/>
+    <StepLocalization
+      locale="nl"
+      name="Controle heeft rapportdocument gereed opnieuw proberen"/>
+  </ManualStep>
+  <AutoStep
+    desc="Check Has Report Document Ready"
+    id="CheckHasReportDocumentReady"
+    layoutid="30329749">
+    <Go
+      desc=""
+      id="hasReportDocumentReady"
+      if="metroReport.Status == TC_RECEIVED"
+      layoutid="25588745"
+      nextStep="ReportFinished"/>
+    <Go
+      desc=""
+      id="hasReportDocumentError"
+      if="metroReport.Status == TC_ERROR"
+      layoutid="2894551"
+      nextStep="WaitBeforeInquiry"/>
+    <Go
+      desc=""
+      id="workflowTimedOut"
+      if="metroReport.PastWorkflowTimeout"
+      layoutid="24375328"
+      nextStep="WorkflowTimedOut"/>
+    <Go
+      desc=""
+      layoutid="28351701"
+      nextStep="RetryCheckHasReportDocumentReady"/>
+    <StepLocalization
+      locale="zh_CN"
+      name="检查的报告文档已就绪"/>
+    <StepLocalization
+      locale="de"
+      name="Prüfung hält Berichtsdokument bereit"/>
+    <StepLocalization
+      locale="es"
+      name="Comprobación de documento de informe preparado"/>
+    <StepLocalization
+      locale="pt"
+      name="Documento do relatório de verificação está pronto"/>
+    <StepLocalization
+      locale="fr"
+      name="Vérifier si le rapport est prêt"/>
+    <StepLocalization
+      locale="ru"
+      name="Проверка готовности документа отчета"/>
+    <StepLocalization
+      locale="ja"
+      name="チェックによるレポートドキュメントが準備できました"/>
+    <StepLocalization
+      locale="it"
+      name="Verifica con report pronto"/>
+    <StepLocalization
+      locale="nl"
+      name="Controle heeft rapportdocument gereed"/>
+  </AutoStep>
+  <!-- ================================ OUTCOMES =================================== -->
+  <Outcome
+    desc="Send Failed"
+    id="SendFailed"
+    layoutid="26715168">
+    <Notification
+      pattern="metropolitan_request_failed">
+      <Init><![CDATA[Workflow.initActivity(Activity);
+        Activity.Description =
+          gw.api.locale.DisplayKey.get("Workflow.MetroReport.SendOrderFailed", metroReport.MetroReportType, claim.ClaimNumber, metroReport.ErrorMessage);
+        Activity.assignToClaimOwner();]]></Init>
+    </Notification>
+    <StepLocalization
+      locale="zh_CN"
+      name="发送失败"/>
+    <StepLocalization
+      locale="de"
+      name="Senden fehlgeschlagen"/>
+    <StepLocalization
+      locale="es"
+      name="Error de envío"/>
+    <StepLocalization
+      locale="pt"
+      name="Falha no envio"/>
+    <StepLocalization
+      locale="fr"
+      name="Échec de l'envoi"/>
+    <StepLocalization
+      locale="ru"
+      name="Сбой отправки"/>
+    <StepLocalization
+      locale="ja"
+      name="送信が失敗しました"/>
+    <StepLocalization
+      locale="it"
+      name="Invio non riuscito"/>
+    <StepLocalization
+      locale="nl"
+      name="Versturen is mislukt"/>
+  </Outcome>
+  <Outcome
+    desc="Order Closed"
+    id="OrderClosed"
+    layoutid="9980233">
+    <Notification
+      pattern="metropolitan_report_unavailable">
+      <Init><![CDATA[Workflow.initActivity(Activity);
+        Activity.Description = Activity.Description + " " +
+          gw.api.locale.DisplayKey.get("Workflow.MetroReport.SendOrderFailed", metroReport.MetroReportType, claim.ClaimNumber, metroReport.ErrorMessage);
+        Activity.assignToClaimOwner();]]></Init>
+    </Notification>
+    <StepLocalization
+      locale="zh_CN"
+      name="订单已关闭"/>
+    <StepLocalization
+      locale="de"
+      name="Auftrag geschlossen"/>
+    <StepLocalization
+      locale="es"
+      name="Pedido cerrado"/>
+    <StepLocalization
+      locale="pt"
+      name="Ordem fechada"/>
+    <StepLocalization
+      locale="fr"
+      name="Commande clôturée"/>
+    <StepLocalization
+      locale="ru"
+      name="Заказ закрыт"/>
+    <StepLocalization
+      locale="ja"
+      name="オーダーがクローズしました"/>
+    <StepLocalization
+      locale="it"
+      name="Ordine chiuso"/>
+    <StepLocalization
+      locale="nl"
+      name="Order gesloten"/>
+  </Outcome>
+  <Outcome
+    desc="Report Finished"
+    id="ReportFinished"
+    layoutid="32726548">
+    <Notification
+      pattern="metropolitan_report_available">
+      <Init><![CDATA[Workflow.initActivity(Activity);
+        Activity.Description = gw.api.locale.DisplayKey.get("Workflow.MetroReport.ReportFinished", metroReport.MetroReportType, claim.ClaimNumber, metroReport.CreateTime);
+        Activity.assignToClaimOwner();]]></Init>
+    </Notification>
+    <StepLocalization
+      locale="zh_CN"
+      name="报告已完成"/>
+    <StepLocalization
+      locale="de"
+      name="Bericht abgeschlossen"/>
+    <StepLocalization
+      locale="es"
+      name="Informe finalizado"/>
+    <StepLocalization
+      locale="pt"
+      name="Relatório concluído"/>
+    <StepLocalization
+      locale="fr"
+      name="Rapport terminé"/>
+    <StepLocalization
+      locale="ru"
+      name="Отчет закончен"/>
+    <StepLocalization
+      locale="ja"
+      name="レポートが終了しました"/>
+    <StepLocalization
+      locale="it"
+      name="Report completato"/>
+    <StepLocalization
+      locale="nl"
+      name="Rapport voltooid"/>
+  </Outcome>
+  <AutoStep
+    desc="Download Closed Report"
+    id="DownloadClosedReport"
+    layoutid="18611714">
+    <Enter><![CDATA[libraries.Metro.downloadClosedDocument(metroReport)]]></Enter>
+    <Go
+      desc=""
+      id="OrderClosed"
+      layoutid="3530991"
+      nextStep="OrderClosed"/>
+    <StepLocalization
+      locale="zh_CN"
+      name="下载结案报告"/>
+    <StepLocalization
+      locale="de"
+      name="Geschlossenen Bericht herunterladen"/>
+    <StepLocalization
+      locale="es"
+      name="Descargar informe completado"/>
+    <StepLocalization
+      locale="pt"
+      name="Baixar relatório fechado"/>
+    <StepLocalization
+      locale="fr"
+      name="Télécharger le rapport de clôture"/>
+    <StepLocalization
+      locale="ru"
+      name="Загрузить закрытый отчет"/>
+    <StepLocalization
+      locale="ja"
+      name="クローズ済みレポートのダウンロード"/>
+    <StepLocalization
+      locale="it"
+      name="Scarica report chiuso"/>
+    <StepLocalization
+      locale="nl"
+      name="Afgesloten rapport downloaden"/>
+  </AutoStep>
+  <AutoStep
+    desc="Inquiry Failed Activity"
+    id="InquiryFailedActivity"
+    layoutid="2061073">
+    <Notification
+      pattern="metropolitan_report_inquiry_failed">
+      <Init><![CDATA[Workflow.initActivity(Activity);
+        Activity.Description =
+          gw.api.locale.DisplayKey.get("Workflow.MetroReport.InquiryFailedActivity", metroReport.MetroReportType, claim.ClaimNumber, metroReport.ErrorMessage, metroReport.DelayMemoURL);
+        Activity.assignToClaimOwner();]]></Init>
+    </Notification>
+    <Go
+      desc=""
+      id="WaitBeforeInquiry"
+      layoutid="8306609"
+      nextStep="WaitBeforeInquiry"/>
+    <StepLocalization
+      locale="zh_CN"
+      name="查询失败活动"/>
+    <StepLocalization
+      locale="de"
+      name="Abfrage fehlgeschlagene Aktivität"/>
+    <StepLocalization
+      locale="es"
+      name="Actividad de error en la consulta"/>
+    <StepLocalization
+      locale="pt"
+      name="Consulta falhou a atividade"/>
+    <StepLocalization
+      locale="fr"
+      name="Demande d'activité interrompue"/>
+    <StepLocalization
+      locale="ru"
+      name="Задача по ошибке запроса"/>
+    <StepLocalization
+      locale="ja"
+      name="問い合わせ失敗アクティビティ"/>
+    <StepLocalization
+      locale="it"
+      name="Richiesta informazioni su attività non riuscita"/>
+    <StepLocalization
+      locale="nl"
+      name="Activiteit mislukt onderzoek"/>
+  </AutoStep>
+  <Outcome
+    desc="Outcome if our initial order request does not get a response from Metro in a reasonable amount of time"
+    id="OrderTimedOut"
+    layoutid="15955969">
+    <Notification
+      pattern="metropolitan_request_failed">
+      <Init><![CDATA[Workflow.initActivity(Activity)
+        Activity.Description = gw.api.locale.DisplayKey.get("Workflow.MetroReport.SendOrderTimedOut", metroReport.MetroReportType, claim.ClaimNumber);
+        Activity.assignToClaimOwner();]]></Init>
+    </Notification>
+    <StepLocalization
+      locale="zh_CN"
+      name="初始订购请求未在合理时间内得到 Metro 回应时输出结果"/>
+    <StepLocalization
+      locale="de"
+      name="Ergebnis, wenn ursprüngliche Auftragsanforderung nach einer angemessenen Dauer keine Rückmeldung von der Behörde erhält"/>
+    <StepLocalization
+      locale="es"
+      name="Resultado en caso de que nuestra solicitud inicial de pedido no reciba una respuesta de Metro en un período razonable"/>
+    <StepLocalization
+      locale="pt"
+      name="Resultado se nossa solicitação inicial não obtiver uma resposta do Metro em um tempo razoável"/>
+    <StepLocalization
+      locale="fr"
+      name="Résultat si les autorités n'ont pas répondu à notre commande initiale dans un délai raisonnable"/>
+    <StepLocalization
+      locale="ru"
+      name="Результат, если на наш первоначальный запрос заказа не был получен ответ от города за разумное время"/>
+    <StepLocalization
+      locale="ja"
+      name="初期注文要求に対して適度な時間内にメトロポリタンからの応答を得られない場合の結果"/>
+    <StepLocalization
+      locale="it"
+      name="Risultato se la richiesta d'ordine iniziale non ha ottenuto una risposta da Metro in tempi ragionevoli"/>
+    <StepLocalization
+      locale="nl"
+      name="Uitkomst als onze eerste orderaanvraag binnen een redelijke tijd geen antwoord krijgt vanuit Metro"/>
+  </Outcome>
+  <Outcome
+    desc="Outcome if entire workflow has been running too long and should be shut down"
+    id="WorkflowTimedOut"
+    layoutid="32339600">
+    <Notification
+      pattern="metropolitan_request_failed">
+      <Init><![CDATA[Workflow.initActivity(Activity)
+        Activity.Description = gw.api.locale.DisplayKey.get("Workflow.MetroReport.WorkflowTimedOut", metroReport.MetroReportType, claim.ClaimNumber);
+        Activity.assignToClaimOwner();]]></Init>
+    </Notification>
+    <StepLocalization
+      locale="zh_CN"
+      name="整个工作流持续运行时间过长并且应关闭时输出结果"/>
+    <StepLocalization
+      locale="de"
+      name="Ergebnis, wenn der gesamte Arbeitsablauf zu lange ausgeführt wurde und beendet werden muss"/>
+    <StepLocalization
+      locale="es"
+      name="Resultado en caso de que el flujo de trabajo completo se haya ejecutado durante mucho tiempo y deba finalizarse"/>
+    <StepLocalization
+      locale="pt"
+      name="Resultado se todo o fluxo de trabalho estiver demorando muito e precisar ser encerrado"/>
+    <StepLocalization
+      locale="fr"
+      name="Résultat si l'ensemble du workflow a duré trop longtemps et devrait être clôturé"/>
+    <StepLocalization
+      locale="ru"
+      name="Результат, если весь бизнес-процесс выполнялся слишком долго и должен быть закрыт"/>
+    <StepLocalization
+      locale="ja"
+      name="ワークフロー全体の実行が長すぎ、シャットダウンする必要がある場合の結果"/>
+    <StepLocalization
+      locale="it"
+      name="Risultato se tutto il flusso di lavoro ha richiesto troppo tempo ed è stato necessario arrestarlo"/>
+    <StepLocalization
+      locale="nl"
+      name="Uitkomst als de volledige workflow te lang duurt en moet worden afgesloten"/>
+  </Outcome>
+  <Layout>
+    <BoxUI
+      height="4"
+      layoutid="10041114"
+      width="10"
+      x="34"
+      y="-68"/>
+    <BoxUI
+      height="4"
+      layoutid="22214031"
+      width="12"
+      x="33"
+      y="-58"/>
+    <BoxUI
+      height="4"
+      layoutid="24612435"
+      width="15"
+      x="10"
+      y="-46"/>
+    <BoxUI
+      height="4"
+      layoutid="2163844"
+      width="20"
+      x="28"
+      y="-31"/>
+    <BoxUI
+      height="4"
+      layoutid="28280470"
+      width="11"
+      x="60"
+      y="-26"/>
+    <BoxUI
+      height="4"
+      layoutid="11341523"
+      width="13"
+      x="35"
+      y="-15"/>
+    <BoxUI
+      height="4"
+      layoutid="27812318"
+      width="17"
+      x="65"
+      y="-15"/>
+    <BoxUI
+      height="4"
+      layoutid="28398961"
+      width="18"
+      x="-11"
+      y="-9"/>
+    <BoxUI
+      height="4"
+      layoutid="23112737"
+      width="18"
+      x="1"
+      y="-16"/>
+    <BoxUI
+      height="4"
+      layoutid="29679763"
+      width="14"
+      x="60"
+      y="-9"/>
+    <BoxUI
+      height="4"
+      layoutid="7600315"
+      width="20"
+      x="83"
+      y="4"/>
+    <BoxUI
+      height="4"
+      layoutid="30329749"
+      width="20"
+      x="77"
+      y="-4"/>
+    <BoxUI
+      height="4"
+      layoutid="26715168"
+      width="9"
+      x="58"
+      y="-45"/>
+    <BoxUI
+      height="5"
+      layoutid="9980233"
+      width="11"
+      x="38"
+      y="-5"/>
+    <BoxUI
+      height="4"
+      layoutid="32726548"
+      width="14"
+      x="73"
+      y="10"/>
+    <ArrowUI
+      layoutid="10855753"
+      visible="true">
+      <PointUI
+        x="39"
+        y="-64"/>
+      <PointUI
+        x="39"
+        y="-58"/>
+    </ArrowUI>
+    <ArrowUI
+      layoutid="31025082"
+      visible="true">
+      <PointUI
+        x="38"
+        y="-54"/>
+      <PointUI
+        x="38"
+        y="-31"/>
+    </ArrowUI>
+    <ArrowUI
+      layoutid="2687752"
+      visible="true">
+      <PointUI
+        x="42"
+        y="-54"/>
+      <PointUI
+        x="42"
+        y="-49"/>
+      <PointUI
+        x="64"
+        y="-49"/>
+      <PointUI
+        x="64"
+        y="-45"/>
+    </ArrowUI>
+    <ArrowUI
+      layoutid="8790553"
+      visible="true">
+      <PointUI
+        x="40"
+        y="-54"/>
+      <PointUI
+        x="40"
+        y="-47"/>
+      <PointUI
+        x="61"
+        y="-47"/>
+      <PointUI
+        x="61"
+        y="-45"/>
+    </ArrowUI>
+    <ArrowUI
+      layoutid="2675737"
+      visible="true">
+      <PointUI
+        x="36"
+        y="-54"/>
+      <PointUI
+        x="36"
+        y="-50"/>
+      <PointUI
+        x="17"
+        y="-50"/>
+      <PointUI
+        x="17"
+        y="-46"/>
+    </ArrowUI>
+    <ArrowUI
+      layoutid="8185505"
+      visible="true">
+      <PointUI
+        x="17"
+        y="-42"/>
+      <PointUI
+        x="17"
+        y="-38"/>
+      <PointUI
+        x="4"
+        y="-38"/>
+      <PointUI
+        x="4"
+        y="-61"/>
+      <PointUI
+        x="37"
+        y="-61"/>
+      <PointUI
+        x="37"
+        y="-58"/>
+    </ArrowUI>
+    <ArrowUI
+      layoutid="614550"
+      visible="true">
+      <PointUI
+        x="48"
+        y="-29"/>
+      <PointUI
+        x="66"
+        y="-29"/>
+      <PointUI
+        x="66"
+        y="-26"/>
+    </ArrowUI>
+    <ArrowUI
+      layoutid="27537533"
+      visible="true">
+      <PointUI
+        x="66"
+        y="-22"/>
+      <PointUI
+        x="66"
+        y="-18"/>
+      <PointUI
+        x="47"
+        y="-18"/>
+      <PointUI
+        x="47"
+        y="-15"/>
+    </ArrowUI>
+    <ArrowUI
+      layoutid="7043860"
+      visible="true">
+      <PointUI
+        x="42"
+        y="-15"/>
+      <PointUI
+        x="42"
+        y="-27"/>
+    </ArrowUI>
+    <ArrowUI
+      layoutid="6135260"
+      visible="true">
+      <PointUI
+        x="47"
+        y="-11"/>
+      <PointUI
+        x="47"
+        y="-7"/>
+      <PointUI
+        x="60"
+        y="-7"/>
+    </ArrowUI>
+    <ArrowUI
+      layoutid="2560563"
+      visible="true">
+      <PointUI
+        x="35"
+        y="-12"/>
+      <PointUI
+        x="26"
+        y="-12"/>
+      <PointUI
+        x="26"
+        y="-7"/>
+      <PointUI
+        x="7"
+        y="-7"/>
+    </ArrowUI>
+    <ArrowUI
+      layoutid="18606577"
+      visible="true">
+      <PointUI
+        x="38"
+        y="-15"/>
+      <PointUI
+        x="38"
+        y="-27"/>
+    </ArrowUI>
+    <ArrowUI
+      layoutid="26988764"
+      visible="true">
+      <PointUI
+        x="35"
+        y="-14"/>
+      <PointUI
+        x="19"
+        y="-14"/>
+    </ArrowUI>
+    <ArrowUI
+      layoutid="11352336"
+      visible="true">
+      <PointUI
+        x="40"
+        y="-15"/>
+      <PointUI
+        x="40"
+        y="-27"/>
+    </ArrowUI>
+    <ArrowUI
+      layoutid="8215615"
+      visible="true">
+      <PointUI
+        x="36"
+        y="-15"/>
+      <PointUI
+        x="36"
+        y="-20"/>
+      <PointUI
+        x="30"
+        y="-20"/>
+    </ArrowUI>
+    <ArrowUI
+      layoutid="3367344"
+      visible="true">
+      <PointUI
+        x="43"
+        y="-11"/>
+      <PointUI
+        x="43"
+        y="-5"/>
+    </ArrowUI>
+    <ArrowUI
+      layoutid="22194826"
+      visible="true">
+      <PointUI
+        x="44"
+        y="-15"/>
+      <PointUI
+        x="44"
+        y="-27"/>
+    </ArrowUI>
+    <ArrowUI
+      layoutid="3832554"
+      visible="true">
+      <PointUI
+        x="48"
+        y="-14"/>
+      <PointUI
+        x="65"
+        y="-14"/>
+    </ArrowUI>
+    <ArrowUI
+      layoutid="22785877"
+      visible="true">
+      <PointUI
+        x="65"
+        y="-12"/>
+      <PointUI
+        x="48"
+        y="-12"/>
+    </ArrowUI>
+    <ArrowUI
+      layoutid="5509066"
+      visible="true">
+      <PointUI
+        x="-2"
+        y="-9"/>
+      <PointUI
+        x="-2"
+        y="-37"/>
+      <PointUI
+        x="35"
+        y="-37"/>
+      <PointUI
+        x="35"
+        y="-31"/>
+    </ArrowUI>
+    <ArrowUI
+      layoutid="14203871"
+      visible="true">
+      <PointUI
+        x="9"
+        y="-16"/>
+      <PointUI
+        x="9"
+        y="-34"/>
+      <PointUI
+        x="32"
+        y="-34"/>
+      <PointUI
+        x="32"
+        y="-31"/>
+    </ArrowUI>
+    <ArrowUI
+      layoutid="18231547"
+      visible="true">
+      <PointUI
+        x="74"
+        y="-7"/>
+      <PointUI
+        x="85"
+        y="-7"/>
+      <PointUI
+        x="85"
+        y="-4"/>
+    </ArrowUI>
+    <ArrowUI
+      layoutid="32108524"
+      visible="true">
+      <PointUI
+        x="93"
+        y="4"/>
+      <PointUI
+        x="93"
+        y="0"/>
+    </ArrowUI>
+    <ArrowUI
+      layoutid="25588745"
+      visible="true">
+      <PointUI
+        x="81"
+        y="0"/>
+      <PointUI
+        x="81"
+        y="10"/>
+    </ArrowUI>
+    <ArrowUI
+      layoutid="2894551"
+      visible="true">
+      <PointUI
+        x="88"
+        y="-4"/>
+      <PointUI
+        x="88"
+        y="-34"/>
+      <PointUI
+        x="41"
+        y="-34"/>
+      <PointUI
+        x="41"
+        y="-31"/>
+    </ArrowUI>
+    <ArrowUI
+      layoutid="28351701"
+      visible="true">
+      <PointUI
+        x="88"
+        y="0"/>
+      <PointUI
+        x="88"
+        y="4"/>
+    </ArrowUI>
+    <BoxUI
+      height="4"
+      layoutid="18611714"
+      width="20"
+      x="33"
+      y="4"/>
+    <ArrowUI
+      layoutid="3530991"
+      visible="true">
+      <PointUI
+        x="43"
+        y="4"/>
+      <PointUI
+        x="43"
+        y="0"/>
+    </ArrowUI>
+    <ArrowUI
+      layoutid="30270834"
+      visible="true">
+      <PointUI
+        x="37"
+        y="-11"/>
+      <PointUI
+        x="37"
+        y="4"/>
+    </ArrowUI>
+    <BoxUI
+      height="4"
+      layoutid="19899359"
+      width="8"
+      x="1"
+      y="18"/>
+    <BoxUI
+      height="4"
+      layoutid="2061073"
+      width="18"
+      x="12"
+      y="-22"/>
+    <ArrowUI
+      layoutid="8306609"
+      visible="true">
+      <PointUI
+        x="29"
+        y="-22"/>
+      <PointUI
+        x="29"
+        y="-27"/>
+    </ArrowUI>
+    <BoxUI
+      height="4"
+      layoutid="15955969"
+      width="10"
+      x="69"
+      y="-45"/>
+    <ArrowUI
+      layoutid="13598146"
+      visible="true">
+      <PointUI
+        x="44"
+        y="-54"/>
+      <PointUI
+        x="44"
+        y="-51"/>
+      <PointUI
+        x="74"
+        y="-51"/>
+      <PointUI
+        x="74"
+        y="-45"/>
+    </ArrowUI>
+    <BoxUI
+      height="4"
+      layoutid="32339600"
+      width="10"
+      x="54"
+      y="10"/>
+    <ArrowUI
+      layoutid="24442476"
+      visible="true">
+      <PointUI
+        x="45"
+        y="-11"/>
+      <PointUI
+        x="45"
+        y="-6"/>
+      <PointUI
+        x="58"
+        y="-6"/>
+      <PointUI
+        x="58"
+        y="10"/>
+    </ArrowUI>
+    <ArrowUI
+      layoutid="24375328"
+      visible="true">
+      <PointUI
+        x="79"
+        y="0"/>
+      <PointUI
+        x="79"
+        y="5"/>
+      <PointUI
+        x="60"
+        y="5"/>
+      <PointUI
+        x="60"
+        y="10"/>
+    </ArrowUI>
+    <ArrowUI
+      layoutid="3899905"
+      visible="true">
+      <PointUI
+        x="45"
+        y="-56"/>
+      <PointUI
+        x="91"
+        y="-56"/>
+      <PointUI
+        x="91"
+        y="-8"/>
+      <PointUI
+        x="74"
+        y="-8"/>
+    </ArrowUI>
+  </Layout>
+</Workflow>

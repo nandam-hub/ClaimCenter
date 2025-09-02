@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!-- Deprecated since 50.3.1. Claim Association is no longer created when submitting a bulk restore request -->
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <ListViewPanel
+    id="BulkRestoreClaimsInAssociationLV">
+    <ExposeIterator
+      valueType="entity.ClaimInAssociation"
+      widget="BulkRestoreClaimsInAssociationLV"/>
+    <Require
+      name="bulkRestoreClaimAssociation"
+      type="entity.ClaimAssociation"/>
+    <Variable
+      initialValue="new gw.api.archiving.BulkRestoreArchivedClaimsHelper()"
+      name="bulkRestoreArchivedClaimsHelper"
+      type="gw.api.archiving.BulkRestoreArchivedClaimsHelper"/>
+    <RowIterator
+      editable="false"
+      elementName="claimInAssocView"
+      hideCheckBoxesIfReadOnly="true"
+      value="bulkRestoreArchivedClaimsHelper.getBulkRestoreClaimInAssociationView(bulkRestoreClaimAssociation)"
+      valueType="gw.api.database.IQueryBeanResult&lt;entity.ClaimInAssociationView&gt;"
+      pageSize="50">
+      <Row>
+        <TextCell
+          editable="false"
+          id="Claim"
+          label="DisplayKey.get(&quot;Web.Admin.BulkRestoreClaimsInAssociationLV.ClaimNumber&quot;)"
+          printWidth="0.75"
+          sortOrder="1"
+          unique="true"
+          value="claimInAssocView.ClaimNumber"
+          valueType="String"/>
+        <TextCell
+          id="ClaimArchiveStatus"
+          label="DisplayKey.get(&quot;Web.Admin.BulkRestoreClaimsInAssociationLV.ArchiveState&quot;)"
+          value="bulkRestoreArchivedClaimsHelper.getClaimArchiveStateFromAssociationView(claimInAssocView)"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

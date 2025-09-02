@@ -1,0 +1,8 @@
+<div id="${name}" class="gw-Pref gw-ValueWidget gw-editable" data-gw-change="gwPrefPanel.change" data-gw-getset="checkbox" role="group">
+    <div class="gw-Pref--inner">
+        <div class="gw-label" id="${name}-label">${label}</div>
+        <div class="gw-value">
+            <input class="gw-Pref--val gw-Pref--boolean" name="${name}" type="checkbox" checked="${checked}" aria-describedby="${name}-label">
+        </div>
+    </div>
+</div>

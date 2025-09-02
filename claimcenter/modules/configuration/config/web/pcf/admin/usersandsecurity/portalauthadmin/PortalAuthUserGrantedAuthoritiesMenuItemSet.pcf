@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <MenuItemSet
+    id="PortalAuthUserGrantedAuthoritiesMenuItemSet">
+    <Require
+      name="authorities"
+      type="java.util.List&lt;edge.security.authorization.Authority&gt;"/>
+    <MenuItem
+      action="PortalCreateUserGrantedAuthorityPopup.push(edge.security.authorization.AuthorityType.ACCOUNT, authorities)"
+      id="AddNewAuthorityAccountHolderOption"
+      label="DisplayKey.get(&quot;Edge.Web.AuthAdminConsole.PortalGrantedAuthorities.Authority.AccountHolder&quot;)"/>
+    <MenuItem
+      action="PortalCreateUserGrantedAuthorityPopup.push(edge.security.authorization.AuthorityType.POLICY, authorities)"
+      id="AddNewAuthorityPolicyholderOption"
+      label="DisplayKey.get(&quot;Edge.Web.AuthAdminConsole.PortalGrantedAuthorities.Authority.Policyholder&quot;)"/>
+    <MenuItem
+      action="PortalCreateUserGrantedAuthorityPopup.push(edge.security.authorization.AuthorityType.PRODUCER, authorities)"
+      id="AddNewAuthorityProducerOption"
+      label="DisplayKey.get(&quot;Edge.Web.AuthAdminConsole.PortalGrantedAuthorities.Authority.Producer&quot;)"/>
+    <MenuItem
+      action="PortalCreateUserGrantedAuthorityVendorPopup.push(authorities)"
+      id="AddNewAuthorityVendorOption"
+      label="DisplayKey.get(&quot;Edge.Web.AuthAdminConsole.PortalGrantedAuthorities.Authority.Vendor&quot;)"/>
+  </MenuItemSet>
+</PCF>

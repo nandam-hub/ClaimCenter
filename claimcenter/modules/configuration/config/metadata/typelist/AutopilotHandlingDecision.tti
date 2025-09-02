@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<typelist
+  final="true"
+  xmlns="http://guidewire.com/typelists" name="AutopilotHandlingDecision" desc="Autopilot Handling Decision">
+  <typecode
+    code="handled_manually"
+    desc="Handled Manually"
+    name="Handled Manually"/>
+  <typecode
+    code="handled_by_autopilot"
+    desc="Handled By Autopilot"
+    name="Handled By Autopilot"/>
+  <typecode
+    code="confirm_total_loss"
+    desc="Confirm Total Loss"
+    name="Confirm Total Loss"/>
+  <typecode
+    code="confirm_vehicle_repair"
+    desc="Confirm Vehicle Repair"
+    name="Confirm Vehicle Repair"/>
+</typelist>

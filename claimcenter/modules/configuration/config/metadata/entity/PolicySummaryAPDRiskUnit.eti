@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  desc="Summary information about an apd risk unit on a policy summary."
+  entity="PolicySummaryAPDRiskUnit"
+  supertype="PolicySummaryRiskUnit">
+  <implementsInterface
+    iface="gw.cc.policy.entity.PolicySummaryAPDRiskUnit"
+    impl="com.guidewire.cc.domain.policy.impl.PolicySummaryAPDRiskUnitImpl"/>
+  <array
+    arrayentity="PolicySummaryAPDRiskUnitField"
+    desc="List of fields on this APD risk unit."
+    name="Fields"
+    owner="true"
+    triggersValidation="true"/>
+  <column
+    desc="code"
+    name="Code"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="40"/>
+  </column>
+</subtype>

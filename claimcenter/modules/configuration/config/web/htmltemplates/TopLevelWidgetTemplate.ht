@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html id="${currentTheme}" lang="${languageCode}">
+  <head>
+    <title>${title}</title> <!-- Title value will be kept updated via JavaScript, but initialize it correctly -->
+    <base href="${webResourcesUrl}/">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    ${metaTags}
+
+    <link rel="stylesheet" href="css/font.css" />
+    <link rel="stylesheet" href="css/gen/pretheme.css"/>
+    <link rel="stylesheet" href="css/gen/${currentTheme}.css">
+
+    <link href="${webResourcesUrl}/img/app/favicon.ico" rel="icon" type="image/x-icon">
+    ${linkTags}
+
+    <script src="js/gen/app-ts.js"></script>
+    <script src="js/gen/all.js"></script>
+    ${scriptTags}
+  </head>
+  <body class="gw-app-${appCode}" data-gw-config="${config}">
+    <div id="gw-focus-barrier-top" tabindex="0"></div>
+    <form class="gw-top-level" id="gw-root-form" method="POST">${:children}</form>
+    <div class="gw-click-overlay" id="gw-click-overlay"></div>
+    <div id="gw-serverError" class="gw-hidden"></div>
+    <div id="gw-focus-barrier-bottom" tabindex="0"></div>
+    <script type="text/javascript" src="${baseUrl}/service/displaykeyvalues?checksum=${displayKeyChecksum}"></script>
+  </body>
+</html>

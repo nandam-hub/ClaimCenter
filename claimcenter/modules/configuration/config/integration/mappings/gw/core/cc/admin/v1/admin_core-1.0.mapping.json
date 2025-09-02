@@ -1,0 +1,239 @@
+{
+  "schemaName": "gw.core.cc.admin.v1.admin_core-1.0",
+  "combine": [
+    "gw.core.cc.common.v1.common_core-1.0",
+    "gw.core.pl.admin.v1.admin_pl-1.0"
+  ],
+  "mappers": {
+    "AuthorityLimit": {
+      "schemaDefinition": "AuthorityLimit",
+      "root": "entity.AuthorityLimit",
+      "properties": {
+        "costType": {
+          "path": "AuthorityLimit.CostType",
+          "mapper": "#/mappers/TypeKeyReference"
+        },
+        "coverageType": {
+          "path": "AuthorityLimit.CoverageType",
+          "mapper": "#/mappers/TypeKeyReference"
+        },
+        "id": {
+          "path": "AuthorityLimit.RestId"
+        },
+        "limitAmount": {
+          "path": "AuthorityLimit.LimitAmount",
+          "mapper": "#/mappers/CurrencyAmount"
+        },
+        "limitType": {
+          "path": "AuthorityLimit.LimitType",
+          "mapper": "#/mappers/TypeKeyReference"
+        },
+        "policyType": {
+          "path": "AuthorityLimit.PolicyType",
+          "mapper": "#/mappers/TypeKeyReference"
+        }
+      }
+    },
+    "AuthorityLimitProfile": {
+      "schemaDefinition": "AuthorityLimitProfile",
+      "root": "entity.AuthorityLimitProfile",
+      "properties": {
+        "currency": {
+          "path": "AuthorityLimitProfile.Currency",
+          "mapper": "#/mappers/TypeKeyReference"
+        },
+        "custom": {
+          "path": "AuthorityLimitProfile.Custom"
+        },
+        "description": {
+          "path": "AuthorityLimitProfile.Description"
+        },
+        "displayName": {
+          "path": "AuthorityLimitProfile.RestV1_SafeDisplayName"
+        },
+        "id": {
+          "path": "AuthorityLimitProfile.RestId"
+        },
+        "name": {
+          "path": "AuthorityLimitProfile.Name"
+        }
+      }
+    },
+    "Catastrophe": {
+      "schemaDefinition": "Catastrophe",
+      "root": "entity.Catastrophe",
+      "properties": {
+        "active": {
+          "path": "Catastrophe.Active"
+        },
+        "bottomRightLatitude": {
+          "path": "Catastrophe.BottomRightLatitude"
+        },
+        "bottomRightLongitude": {
+          "path": "Catastrophe.BottomRightLongitude"
+        },
+        "catastropheNumber": {
+          "path": "Catastrophe.CatastropheNumber"
+        },
+        "catastropheValidFrom": {
+          "path": "Catastrophe.CatastropheValidFrom"
+        },
+        "catastropheValidTo": {
+          "path": "Catastrophe.CatastropheValidTo"
+        },
+        "comments": {
+          "path": "Catastrophe.Comments"
+        },
+        "description": {
+          "path": "Catastrophe.Description"
+        },
+        "id": {
+          "path": "Catastrophe.RestId"
+        },
+        "name": {
+          "path": "Catastrophe.Name"
+        },
+        "pcsCatastropheNumber": {
+          "path": "Catastrophe.PCSCatastropheNumber"
+        },
+        "policyEffectiveDate": {
+          "path": "Catastrophe.PolicyEffectiveDate"
+        },
+        "policyRetrievalCompletionTime": {
+          "path": "Catastrophe.PolicyRetrievalCompletionTime"
+        },
+        "policyRetrievalSetTime": {
+          "path": "Catastrophe.PolicyRetrievalSetTime"
+        },
+        "scheduleBatch": {
+          "path": "Catastrophe.ScheduleBatch"
+        },
+        "topLeftLatitude": {
+          "path": "Catastrophe.TopLeftLatitude"
+        },
+        "topLeftLongitude": {
+          "path": "Catastrophe.TopLeftLongitude"
+        },
+        "type": {
+          "path": "Catastrophe.Type",
+          "mapper": "#/mappers/TypeKeyReference"
+        }
+      }
+    },
+    "CatastrophePeril": {
+      "schemaDefinition": "CatastrophePeril",
+      "root": "entity.CatastrophePeril",
+      "properties": {
+        "comments": {
+          "path": "CatastrophePeril.Comments"
+        },
+        "id": {
+          "path": "CatastrophePeril.RestId"
+        },
+        "lossCause": {
+          "path": "CatastrophePeril.LossCause",
+          "mapper": "#/mappers/TypeKeyReference"
+        },
+        "lossType": {
+          "path": "CatastrophePeril.LossType",
+          "mapper": "#/mappers/TypeKeyReference"
+        }
+      }
+    },
+    "CatastropheZone": {
+      "schemaDefinition": "CatastropheZone",
+      "root": "entity.CatastropheZone",
+      "properties": {
+        "code": {
+          "path": "CatastropheZone.Code"
+        },
+        "country": {
+          "path": "CatastropheZone.Country",
+          "mapper": "#/mappers/TypeKeyReference"
+        },
+        "geographicZone": {
+          "path": "null as gw.api.modules.rest.framework.v1.refs.ResourceReference",
+          "mapper": "#/mappers/ResourceReference",
+          "predicate": "false"
+        },
+        "id": {
+          "path": "CatastropheZone.RestId"
+        },
+        "zoneType": {
+          "path": "CatastropheZone.ZoneType",
+          "mapper": "#/mappers/TypeKeyReference"
+        }
+      }
+    },
+    "ICDCode": {
+      "schemaDefinition": "ICDCode",
+      "root": "entity.ICDCode",
+      "properties": {
+        "availabilityDate": {
+          "path": "ICDCode.AvailabilityDate"
+        },
+        "bodySystem": {
+          "path": "ICDCode.BodySystem",
+          "mapper": "#/mappers/TypeKeyReference"
+        },
+        "chronic": {
+          "path": "ICDCode.Chronic"
+        },
+        "code": {
+          "path": "ICDCode.Code"
+        },
+        "description": {
+          "path": "ICDCode.CodeDesc"
+        },
+        "edition": {
+          "path": "ICDCode.Edition",
+          "mapper": "#/mappers/TypeKeyReference"
+        },
+        "expirationDate": {
+          "path": "ICDCode.ExpiryDate"
+        },
+        "id": {
+          "path": "ICDCode.RestId"
+        }
+      }
+    },
+    "ICDCodeSearchRequestAttributes": {
+      "schemaDefinition": "ICDCodeSearchRequestAttributes",
+      "root": "gw.icd.ICDSearchCriteria",
+      "properties": {
+        "activeDate": {
+          "path": "null as Date",
+          "predicate": "false"
+        },
+        "bodySystem": {
+          "path": "null as gw.entity.TypeKey",
+          "mapper": "#/mappers/TypeKeyReference",
+          "predicate": "false"
+        },
+        "code": {
+          "path": "null as String",
+          "predicate": "false"
+        },
+        "description": {
+          "path": "null as String",
+          "predicate": "false"
+        },
+        "edition": {
+          "path": "null as gw.entity.TypeKey",
+          "mapper": "#/mappers/TypeKeyReference",
+          "predicate": "false"
+        }
+      }
+    },
+    "User": {
+      "schemaDefinition": "User",
+      "root": "entity.User",
+      "properties": {
+        "authorityLimitProfile": {
+          "path": "User.AuthorityProfile.RestV1_AsReference",
+          "mapper": "#/mappers/ResourceReference"
+        }
+      }
+    }
+  }
+}

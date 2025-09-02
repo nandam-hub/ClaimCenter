@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<viewEntity
+  xmlns="http://guidewire.com/datamodel"
+  entity="InboundSubRecordView"
+  exportable="false"
+  platform="true"
+  primaryEntity="InboundSubRecord">
+  <viewEntityLink
+    name="InboundSubRecord"
+    path="ID"/>
+  <viewEntityColumn
+    name="LineNumber"
+    path="LineNumber"/>
+  <viewEntityColumn
+    name="Content"
+    path="Content"/>
+  <viewEntityLink
+    name="InboundRecord"
+    path="InboundRecord"/>
+</viewEntity>

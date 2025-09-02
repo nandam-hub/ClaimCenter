@@ -1,0 +1,20 @@
+name: gw_microapps
+endpoints:
+  - endpoint: "/*/v1/openapi.json"
+    methods:
+      - GET
+  - endpoint: "/productdefinition/v1/**"
+    methods:
+      - GET
+  - endpoint: "/account/v1/**"
+    methods:
+      - GET
+      - POST
+  - endpoint: "/job/v1/**"
+    methods:
+      - GET
+      - POST
+accessibleFields:
+  "*":
+    edit: "*"
+    view: "*"

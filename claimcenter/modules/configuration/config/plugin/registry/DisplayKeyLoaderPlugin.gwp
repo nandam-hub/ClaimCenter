@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<plugin
+  interface="DisplayKeyLoaderPlugin"
+  name="DisplayKeyLoaderPlugin">
+  <plugin-java
+    javaclass="com.guidewire.pl.system.locale.DefaultDisplayKeyLoader"/>
+</plugin>

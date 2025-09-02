@@ -1,0 +1,825 @@
+swagger: "2.0"
+info:
+  description: "APIs for common InsuranceSuite platform objects like activities and notes"
+  version: "1.13.0"
+basePath: /common/v1
+consumes:
+- application/json
+produces:
+- application/json
+x-gw-combine:
+- gw.core.pl.framework.v1.framework_pl-1.0
+- gw.core.pl.batch.v1.batch_pl-1.0
+x-gw-schema-import:
+  common: gw.core.pl.common.v1.common_pl-1.0
+paths:
+  /activities:
+    get:
+      summary: "Retrieve the `Activity` elements that are assigned to the caller"
+      description: "Retrieves the `Activity` elements that are assigned to the caller"
+      operationId: getActivities
+      x-gw-extensions:
+        childResourceType: Activity
+        operationType: get-collection
+        resourceType: Activities
+      x-gw-parameter-sets:
+      - get-collection
+      responses:
+        "200":
+          description: "The paginated list of `Activity` elements"
+          schema:
+            $ref: "#/definitions/ActivityList"
+  "/activities/{activityId}":
+    parameters:
+    - $ref: "#/parameters/activityId"
+    get:
+      summary: "Retrieve an `Activity`"
+      description: "Retrieves an `Activity` by its `id`. An `Activity` is an assignable item that represents a task to be done, a decision to be made, or information to be aware of."
+      operationId: getActivity
+      x-gw-extensions:
+        operationType: get-element
+        resourceType: Activity
+      x-gw-parameter-sets:
+      - get-element
+      responses:
+        "200":
+          description: "The details of the `Activity`"
+          schema:
+            $ref: "#/definitions/ActivityResponse"
+    patch:
+      summary: "Update an `Activity`"
+      description: "Updates an `Activity`. Only allowed if the `Activity` has a `status` of `open`."
+      operationId: updateActivity
+      x-gw-extensions:
+        operationType: patch-element
+        resourceType: Activity
+      parameters:
+      - name: body
+        in: body
+        description: "The fields to update on the `Activity`"
+        required: true
+        schema:
+          $ref: "#/definitions/ActivityRequest"
+      x-gw-parameter-sets:
+      - patch-element
+      responses:
+        "200":
+          description: "The details of the updated `Activity`"
+          schema:
+            $ref: "#/definitions/ActivityResponse"
+  "/activities/{activityId}/approve":
+    parameters:
+    - $ref: "#/parameters/activityId"
+    post:
+      summary: "Approve an `Activity`"
+      description: "Marks the `Activity` as approved, setting `approved` to `true`, `status` to `completed`, and updating the `closeDate` and `closeUser`. Only applicable if the `Activity` has an `activityType` of `approval` and has not yet been approved or rejected."
+      operationId: approveActivity
+      x-gw-extensions:
+        operationType: custom-action
+        resourceType: Activity
+      parameters:
+      - name: body
+        in: body
+        description: "Additional details of the approval such as the `approvalRationale`"
+        schema:
+          $ref: "#/definitions/ActivityApprovalRequest"
+      x-gw-parameter-sets:
+      - custom-action
+      responses:
+        "200":
+          description: "The details of the updated `Activity`"
+          schema:
+            $ref: "#/definitions/ActivityResponse"
+  "/activities/{activityId}/assign":
+    parameters:
+    - $ref: "#/parameters/activityId"
+    post:
+      summary: "Assign an `Activity`"
+      description: "Assigns or re-assigns an `Activity`"
+      operationId: assignActivity
+      x-gw-extensions:
+        operationType: custom-action
+        resourceType: Activity
+      parameters:
+      - name: body
+        in: body
+        description: "Specifies the `Assignee` that the `Activity` should be assigned to"
+        required: true
+        schema:
+          $ref: "#/definitions/ActivityAssignmentRequest"
+      x-gw-parameter-sets:
+      - custom-action
+      responses:
+        "200":
+          description: "The details of the updated `Activity`"
+          schema:
+            $ref: "#/definitions/ActivityResponse"
+  "/activities/{activityId}/assignees":
+    parameters:
+    - $ref: "#/parameters/activityId"
+    get:
+      summary: "Retrieve the suggested `Assignee` elements for an `Activity`"
+      description: "Retrieves the suggested `Assignee` elements for an `Activity`. An `Assignee` represents the target for an `assign` action. That target can be a concrete assignment request, such as a specific `User` and `Group`, or it can be a request for rule-based assignment, such as automatically determining the assignment or assigning based on specific roles."
+      operationId: getActivitySuggestedAssignees
+      x-gw-extensions:
+        childResourceType: Assignee
+        operationType: get-collection
+        resourceType: ActivityAssignees
+      x-gw-parameter-sets:
+      - get-collection
+      responses:
+        "200":
+          description: "The paginated list of suggested `Assignee` elements for this `Activity`"
+          schema:
+            $ref: "#/definitions/AssigneeList"
+  "/activities/{activityId}/complete":
+    parameters:
+    - $ref: "#/parameters/activityId"
+    post:
+      summary: "Complete an `Activity`"
+      description: "Marks an `Activity` as completed, setting the `status` to `complete` and updating the `closeDate` and `closeUser`. Only allowed if the `Activity` has a `status` of `open`, has been assigned to a specific `User`, and has an `activityType` of `general` or `approvaldenied`."
+      operationId: completeActivity
+      x-gw-extensions:
+        operationType: custom-action
+        resourceType: Activity
+      parameters:
+      - name: body
+        in: body
+        description: "A request body can be sent in order to use the `included` feature of the request envelope to update or create additional elements when completing the `Activity`, such as attaching a `Note` to include details of what was done."
+        schema:
+          $ref: "#/definitions/ActivityActionRequest"
+      x-gw-parameter-sets:
+      - custom-action
+      responses:
+        "200":
+          description: "The details of the updated `Activity`"
+          schema:
+            $ref: "#/definitions/ActivityResponse"
+  "/activities/{activityId}/notes":
+    parameters:
+    - $ref: "#/parameters/activityId"
+    get:
+      summary: "Retrieve the `Note` elements for an `Activity`"
+      description: "Retrieves the `Note` elements for an `Activity`"
+      operationId: getActivityNotes
+      x-gw-extensions:
+        childResourceType: Note
+        operationType: get-collection
+        resourceType: ActivityNotes
+      x-gw-parameter-sets:
+      - get-collection
+      responses:
+        "200":
+          description: "The paginated list of `Note` elements for the `Activity`."
+          schema:
+            $ref: "#/definitions/NoteList"
+    post:
+      summary: "Create a `Note` on an `Activity`"
+      description: "Creates a new `Note` and associates it with an `Activity`"
+      operationId: createActivityNote
+      x-gw-extensions:
+        childResourceType: Note
+        operationType: post-collection
+        resourceType: ActivityNotes
+      parameters:
+      - name: body
+        in: body
+        description: "The details of the `Note` to create"
+        required: true
+        schema:
+          $ref: "#/definitions/NoteRequest"
+      x-gw-parameter-sets:
+      - post-collection
+      responses:
+        "201":
+          description: "The details of the newly created `Note`"
+          schema:
+            $ref: "#/definitions/NoteResponse"
+  "/activities/{activityId}/reject":
+    parameters:
+    - $ref: "#/parameters/activityId"
+    post:
+      summary: "Reject an `Activity`"
+      description: "Activity is not approved, updates the `closeDate`, `closeUser` and `status` to `completed`. Only applicable if the `Activity` has an `activityType` of `approval` and has not yet been approved or rejected."
+      operationId: rejectActivity
+      x-gw-sinceVersion: "1.12.0"
+      x-gw-extensions:
+        operationType: custom-action
+        resourceType: Activity
+      x-gw-parameter-sets:
+      - custom-action
+      responses:
+        "200":
+          description: "The details of the rejected `Activity`"
+          schema:
+            $ref: "#/definitions/ActivityResponse"
+  "/activities/{activityId}/skip":
+    parameters:
+    - $ref: "#/parameters/activityId"
+    post:
+      summary: "Skip an `Activity`"
+      description: "Marks an `Activity` as skipped, setting the `status` to `skipped` and updating the `closeDate` and `closeUser`. Only allowed if the `Activity` is not marked as mandatory, has a `status` of `open`, has been assigned to a specific `User`, and has an `activityType` of `general` or `approvaldenied`."
+      operationId: skipActivity
+      x-gw-extensions:
+        operationType: custom-action
+        resourceType: Activity
+      parameters:
+      - name: body
+        in: body
+        description: "A request body can be sent in order to use the `included` feature of the request envelope to update or create additional elements when completing the `Activity`, such as attaching a `Note` to include a reason for why the `Activity` was skipped."
+        schema:
+          $ref: "#/definitions/ActivityActionRequest"
+      x-gw-parameter-sets:
+      - custom-action
+      responses:
+        "200":
+          description: "The details of the updated `Activity`"
+          schema:
+            $ref: "#/definitions/ActivityResponse"
+  "/documents/{documentId}":
+    parameters:
+    - $ref: "#/parameters/documentId"
+    get:
+      summary: "Retrieve a `Document`"
+      description: "Retrieves a `Document` by its `id`. A `Document` represents a document within the application, which can have additional metadata such as the author of the document or a specific security level. The actual contents of the document are generally stored in a separate document management system that this application is linked to."
+      operationId: getDocument
+      x-gw-sinceVersion: "1.1.0"
+      x-gw-extensions:
+        operationType: get-element
+        resourceType: Document
+      x-gw-parameter-sets:
+      - get-element
+      responses:
+        "200":
+          description: "The details of the `Document`"
+          schema:
+            $ref: "#/definitions/DocumentResponse"
+    patch:
+      summary: "Update a `Document`"
+      description: "Updates a `Document`. Can be used to update the metadata about the `Document`, the contents of the `Document, or both."
+      operationId: patchDocument
+      consumes:
+      - multipart/form-data
+      - application/json
+      x-gw-sinceVersion: "1.1.0"
+      x-gw-extensions:
+        operationType: patch-element
+        resourceType: Document
+      parameters:
+      - name: metadata
+        in: formData
+        description: "Metadata about the `Document` such as the `author` or `description`"
+        required: true
+        type: string
+        x-gw-schema-ref: "#/definitions/DocumentRequest"
+      - name: content
+        in: formData
+        description: "The updated contents of the `Document`"
+        type: file
+      - name: body
+        in: body
+        description: "Metadata about the `Document` such as the `author` or `description`"
+        required: true
+        schema:
+          $ref: "#/definitions/PatchDocumentRequest"
+      x-gw-parameter-sets:
+      - patch-element
+      responses:
+        "200":
+          description: "The details of the updated `Document`"
+          schema:
+            $ref: "#/definitions/DocumentResponse"
+    delete:
+      summary: "Delete a `Document`"
+      description: "Deletes a `Document`"
+      operationId: deleteDocument
+      x-gw-sinceVersion: "1.1.0"
+      x-gw-extensions:
+        operationType: delete-element
+        resourceType: Document
+      x-gw-parameter-sets:
+      - delete-element
+      responses:
+        "204":
+          description: "Indicates that the `Document` was successfully deleted"
+  "/documents/{documentId}/content":
+    parameters:
+    - $ref: "#/parameters/documentId"
+    get:
+      summary: "Retrieve the contents of a `Document`"
+      description: "Retrieves the contents of a `Document` as a Base64-encoded string"
+      operationId: getDocumentContent
+      x-gw-sinceVersion: "1.1.0"
+      x-gw-extensions:
+        operationType: get-element
+        resourceType: DocumentContent
+      x-gw-parameter-sets:
+      - get-element
+      responses:
+        "200":
+          description: "The contents of the `Document` as a Base64-encoded string"
+          schema:
+            $ref: "#/definitions/DocumentContentResponse"
+  /entity-schemas:
+    get:
+      summary: "Return a schema for a collection of business entities"
+      description: "Return a schema for a collection of business entities. The schema will contain definitions for all included business entities as well as other schema definitions they reference."
+      operationId: getEntitySchemas
+      x-gw-sinceVersion: "1.7.0"
+      x-gw-extensions:
+        operationType: get-element
+        resourceType: EntitySchemas
+      parameters:
+      - name: inlineTypelists
+        in: query
+        description: "Whether or not to include all referenced typelist values inline on properties.  Defaults to false."
+        type: boolean
+        default: false
+        x-gw-sinceVersion: "1.7.0"
+      - $ref: "#/parameters/prettyPrintSchema"
+      - $ref: "#/parameters/filter"
+      - $ref: "#/parameters/includeLocalizations"
+      responses:
+        "200":
+          description: "Successful response"
+          schema:
+            type: string
+  "/entity-schemas/{entityId}":
+    parameters:
+    - $ref: "#/parameters/entityId"
+    get:
+      summary: "Return a schema for a single named business entity"
+      description: "Return a schema for a single named business entity. The schema will contain the definition for the requested business entity as well as other schema definitions it references."
+      operationId: getEntitySchema
+      x-gw-sinceVersion: "1.7.0"
+      x-gw-extensions:
+        operationType: get-element
+        resourceType: EntitySchema
+      parameters:
+      - name: inlineTypelists
+        in: query
+        description: "Whether or not to include all referenced typelist values inline on properties.  Defaults to false."
+        type: boolean
+        default: false
+        x-gw-sinceVersion: "1.7.0"
+      - $ref: "#/parameters/prettyPrintSchema"
+      - $ref: "#/parameters/includeLocalizations"
+      responses:
+        "200":
+          description: "Successful response"
+          schema:
+            type: string
+  "/history-events/{historyEventId}":
+    parameters:
+    - $ref: "#/parameters/historyEventId"
+    get:
+      summary: "Retrieve a history event"
+      description: "Retrieves a history event by its `id`"
+      operationId: getHistoryEvent
+      x-gw-sinceVersion: "1.10.0"
+      x-gw-extensions:
+        operationType: get-element
+        resourceType: HistoryEvent
+      x-gw-parameter-sets:
+      - get-element
+      responses:
+        "200":
+          description: "The details of the history event"
+          schema:
+            $ref: "#/definitions/HistoryEventResponse"
+  "/notes/{noteId}":
+    parameters:
+    - $ref: "#/parameters/noteId"
+    get:
+      summary: "Retrieve a `Note`"
+      description: "Retrieves a `Note` by its `id`"
+      operationId: getNote
+      x-gw-extensions:
+        operationType: get-element
+        resourceType: Note
+      x-gw-parameter-sets:
+      - get-element
+      responses:
+        "200":
+          description: "The details of the `Note`"
+          schema:
+            $ref: "#/definitions/NoteResponse"
+    patch:
+      summary: "Update a `Note`"
+      description: "Updates a `Note`"
+      operationId: updateNote
+      x-gw-extensions:
+        operationType: patch-element
+        resourceType: Note
+      parameters:
+      - name: body
+        in: body
+        description: "The fields to update on the `Note`"
+        required: true
+        schema:
+          $ref: "#/definitions/NoteRequest"
+      x-gw-parameter-sets:
+      - patch-element
+      responses:
+        "200":
+          description: "The details of the updated `Note`"
+          schema:
+            $ref: "#/definitions/NoteResponse"
+    delete:
+      summary: "Delete a `Note`"
+      description: "Deletes a `Note`"
+      operationId: deleteNote
+      x-gw-extensions:
+        operationType: delete-element
+        resourceType: Note
+      x-gw-parameter-sets:
+      - delete-element
+      responses:
+        "204":
+          description: "Indicates that the `Note` was successfully deleted"
+  /openapi.json:
+    get:
+      summary: "Retrieve the `OpenAPI 3.0` schema for this API"
+      description: "Retrieves the `OpenAPI 3.0` schema for this API"
+      operationId: getOpenApiSchema
+      x-gw-extensions:
+        operationType: get-element
+        resourceType: CommonOpenApiSchema
+      x-gw-parameter-sets:
+      - openapi
+      responses:
+        "200":
+          description: "The `OpenAPI 3.0` schema for this API"
+          schema:
+            type: string
+  /typelists:
+    get:
+      summary: "Retrieve all `TypeList` elements"
+      description: "Retrieves all `TypeList` elements"
+      operationId: getTypeLists
+      produces:
+      - application/json
+      x-gw-extensions:
+        childResourceType: TypeList
+        operationType: get-collection
+        resourceType: TypeLists
+      x-gw-parameter-sets:
+      - get-collection
+      responses:
+        "200":
+          description: "The paginated list of `TypeList` elements"
+          schema:
+            $ref: "#/definitions/TypeListList"
+  "/typelists/{typelist}":
+    parameters:
+    - name: typelist
+      in: path
+      description: "The `name` of the `TypeList`"
+      required: true
+      type: string
+    get:
+      summary: "Retrieve a `TypeList`"
+      description: "Retrieves a `TypeList` by `name`. A `TypeList` represents a list of enumerated `TypeKey` values."
+      operationId: getTypeList
+      produces:
+      - application/json
+      x-gw-extensions:
+        operationType: get-element
+        resourceType: TypeList
+      parameters:
+      - name: includeRetired
+        in: query
+        description: "Indicates whether retired `TypeKey` elements should be included in the response. Defaults to `false`."
+        type: boolean
+      - name: typekeyFilter
+        in: query
+        description: "Filters the `typeKeys` array on the response. The query parameter's value should be of the form  `typekeyFilter=<field>:<operator>:<value>`. Valid filter fields include `code`, `category`, `name`, `priority`, and `retired`. See the Cloud API documentation for more information."
+        type: array
+        items:
+          type: string
+        collectionFormat: multi
+      - name: typekeySort
+        in: query
+        description: "Sorts the `typeKeys` array on the response. The query parameter's value should be of the form `typekeySort=<fields>`, where `<fields>` is a comma-separated list of fields to sort on. Valid sort fields include `code`, `name`, `retired`, and `priority`. See the Cloud API documentation for more information."
+        type: array
+        items:
+          type: string
+      x-gw-parameter-sets:
+      - get-element
+      responses:
+        "200":
+          description: "The details of the `TypeList`"
+          schema:
+            $ref: "#/definitions/TypeListResponse"
+parameters:
+  activityId:
+    name: activityId
+    in: path
+    description: "The `id` of the `Activity`"
+    required: true
+    type: string
+  documentId:
+    name: documentId
+    in: path
+    description: "The `id` of the `Document`"
+    required: true
+    type: string
+    x-gw-sinceVersion: "1.1.0"
+  entityId:
+    name: entityId
+    in: path
+    description: "The id of the entity whose schema is being requested"
+    required: true
+    type: string
+    x-gw-sinceVersion: "1.7.0"
+  historyEventId:
+    name: historyEventId
+    in: path
+    description: "The `id` of the history event"
+    required: true
+    type: string
+    x-gw-sinceVersion: "1.10.0"
+  noteId:
+    name: noteId
+    in: path
+    description: "The `id` of the `Note`"
+    required: true
+    type: string
+x-gw-cors-policy: common
+x-gw-localizationKeyPrefix: common.v1
+definitions:
+  ActivityActionRequest:
+    type: object
+    properties:
+      included:
+        $ref: "#/definitions/ActivityRequestInclusions"
+  ActivityApprovalAttributes:
+    type: object
+    properties:
+      approvalRationale:
+        title: "Approval rationale"
+        description: "The rationale for approving this `Activity`"
+        type: string
+  ActivityApprovalData:
+    x-gw-extend:
+    - "#/definitions/DataEnvelope"
+    required:
+    - attributes
+    properties:
+      attributes:
+        $ref: "#/definitions/ActivityApprovalAttributes"
+  ActivityApprovalRequest:
+    type: object
+    required:
+    - data
+    properties:
+      data:
+        $ref: "#/definitions/ActivityApprovalData"
+      included:
+        $ref: "#/definitions/ActivityRequestInclusions"
+  ActivityAssignmentRequest:
+    type: object
+    required:
+    - data
+    properties:
+      data:
+        $ref: "#/definitions/AssigneeData"
+      included:
+        $ref: "#/definitions/ActivityRequestInclusions"
+  ActivityData:
+    x-gw-extend:
+    - "#/definitions/DataEnvelope"
+    required:
+    - attributes
+    properties:
+      attributes:
+        $ref: "common#/definitions/Activity"
+  ActivityList:
+    type: object
+    x-gw-extend:
+    - "#/definitions/DataListEnvelope"
+    properties:
+      data:
+        type: array
+        items:
+          $ref: "#/definitions/ActivityData"
+      included:
+        $ref: "#/definitions/ActivityResponseInclusions"
+  ActivityPatternData:
+    x-gw-extend:
+    - "#/definitions/DataEnvelope"
+    required:
+    - attributes
+    properties:
+      attributes:
+        $ref: "common#/definitions/ActivityPattern"
+  ActivityPatternList:
+    type: object
+    x-gw-extend:
+    - "#/definitions/DataListEnvelope"
+    properties:
+      data:
+        type: array
+        items:
+          $ref: "#/definitions/ActivityPatternData"
+  ActivityRequest:
+    type: object
+    required:
+    - data
+    properties:
+      data:
+        $ref: "#/definitions/ActivityData"
+      included:
+        $ref: "#/definitions/ActivityRequestInclusions"
+  ActivityRequestInclusions:
+    type: object
+    properties:
+      Note:
+        type: array
+        items:
+          $ref: "#/definitions/NoteData"
+  ActivityResponse:
+    type: object
+    properties:
+      data:
+        $ref: "#/definitions/ActivityData"
+      included:
+        $ref: "#/definitions/ActivityResponseInclusions"
+  ActivityResponseInclusions:
+    type: object
+    properties:
+      Assignee:
+        type: array
+        items:
+          $ref: "#/definitions/AssigneeData"
+      Note:
+        type: array
+        items:
+          $ref: "#/definitions/NoteData"
+  AssigneeData:
+    x-gw-extend:
+    - "#/definitions/DataEnvelope"
+    required:
+    - attributes
+    properties:
+      attributes:
+        $ref: "common#/definitions/Assignee"
+  AssigneeList:
+    type: object
+    x-gw-extend:
+    - "#/definitions/DataListEnvelope"
+    properties:
+      data:
+        type: array
+        items:
+          $ref: "#/definitions/AssigneeData"
+  ContactData:
+    x-gw-extend:
+    - "#/definitions/DataEnvelope"
+    required:
+    - attributes
+    properties:
+      attributes:
+        $ref: "common#/definitions/Contact"
+  ContactList:
+    type: object
+    x-gw-extend:
+    - "#/definitions/DataListEnvelope"
+    properties:
+      data:
+        type: array
+        items:
+          $ref: "#/definitions/ContactData"
+  DocumentContentData:
+    x-gw-extend:
+    - "#/definitions/DataEnvelope"
+    required:
+    - attributes
+    properties:
+      attributes:
+        $ref: "common#/definitions/DocumentContent"
+  DocumentContentResponse:
+    type: object
+    properties:
+      data:
+        $ref: "#/definitions/DocumentContentData"
+  DocumentData:
+    x-gw-extend:
+    - "#/definitions/DataEnvelope"
+    required:
+    - attributes
+    properties:
+      attributes:
+        $ref: "common#/definitions/Document"
+  DocumentList:
+    type: object
+    x-gw-extend:
+    - "#/definitions/DataListEnvelope"
+    properties:
+      data:
+        type: array
+        items:
+          $ref: "#/definitions/DocumentData"
+  DocumentRequest:
+    type: object
+    required:
+    - data
+    properties:
+      data:
+        $ref: "#/definitions/DocumentData"
+  DocumentResponse:
+    type: object
+    properties:
+      data:
+        $ref: "#/definitions/DocumentData"
+      included:
+        $ref: "#/definitions/DocumentResponseInclusions"
+  DocumentResponseInclusions:
+    type: object
+    properties:
+      DocumentContent:
+        type: array
+        items:
+          $ref: "#/definitions/DocumentContentData"
+  HistoryEventData:
+    x-gw-extend:
+    - "#/definitions/DataEnvelope"
+    required:
+    - attributes
+    properties:
+      attributes:
+        $ref: "common#/definitions/HistoryEvent"
+  HistoryEventList:
+    type: object
+    x-gw-extend:
+    - "#/definitions/DataListEnvelope"
+    properties:
+      data:
+        type: array
+        items:
+          $ref: "#/definitions/HistoryEventData"
+  HistoryEventResponse:
+    type: object
+    properties:
+      data:
+        $ref: "#/definitions/HistoryEventData"
+  NoteData:
+    x-gw-extend:
+    - "#/definitions/DataEnvelope"
+    required:
+    - attributes
+    properties:
+      attributes:
+        $ref: "common#/definitions/Note"
+  NoteList:
+    type: object
+    x-gw-extend:
+    - "#/definitions/DataListEnvelope"
+    properties:
+      data:
+        type: array
+        items:
+          $ref: "#/definitions/NoteData"
+  NoteRequest:
+    type: object
+    required:
+    - data
+    properties:
+      data:
+        $ref: "#/definitions/NoteData"
+  NoteResponse:
+    type: object
+    properties:
+      data:
+        $ref: "#/definitions/NoteData"
+      included:
+        $ref: "#/definitions/ActivityResponseInclusions"
+  PatchDocumentRequest:
+    type: object
+    required:
+    - data
+    properties:
+      data:
+        $ref: "#/definitions/DocumentData"
+  TypeListData:
+    x-gw-extend:
+    - "#/definitions/DataEnvelope"
+    required:
+    - attributes
+    properties:
+      attributes:
+        $ref: "common#/definitions/TypeList"
+  TypeListList:
+    type: object
+    x-gw-extend:
+    - "#/definitions/DataListEnvelope"
+    properties:
+      data:
+        type: array
+        items:
+          $ref: "#/definitions/TypeListData"
+  TypeListResponse:
+    type: object
+    properties:
+      data:
+        $ref: "#/definitions/TypeListData"

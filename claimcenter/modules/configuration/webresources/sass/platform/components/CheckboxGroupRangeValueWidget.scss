@@ -1,0 +1,51 @@
+.gw-CheckboxGroupRangeValueWidget,
+.gw-CheckboxGroupTypeKeyValueWidget {
+
+  &.gw-retired {
+    .gw-checkboxDiv {
+      @include gw-retired();
+    }
+  }
+
+  & > .gw-vw--value {
+    .gw-actionRangeValue > div {
+      @include gw-link();
+    }
+
+    .gw-retired {
+      @include gw-retired();
+    }
+
+    .gw-actionBooleanValue {
+      .gw-icon {
+        @include gw-clickable($gw-app--inputs--col);
+      }
+    }
+  }
+
+  .gw-checkboxDiv--checkbox-group, & > .gw-vw--value {
+    display: flex;
+    column-gap: $gw-app--SPACING-rem-L;
+    row-gap: $gw-app--SPACING-rem-XS;
+  }
+
+  .gw-checkboxDiv--checkbox-group {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start
+  }
+
+  &.gw-stacked {
+    .gw-checkboxDiv--checkbox-group {
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+    }
+  }
+}
+
+.gw-InputWidget.gw-styleTag--InputColumnWidget {
+  .gw-checkboxDiv--checkbox-group {
+    margin-top: $gw-app--CheckboxGroup--input-value-stacked-spacing-top-rem;
+  }
+}

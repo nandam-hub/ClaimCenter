@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<typelist xmlns="http://guidewire.com/typelists" name="RepairOptionChoice_Ext" desc="">
+  <typecode
+    code="PreferredVendor"
+    desc="Repair using an existing, preferred vendor"
+    name="Preferred Vendor"/>
+  <typecode
+    code="NewVendor"
+    desc="Repair using a vendor not yet defined "
+    name="New Vendor"/>
+  <typecode
+    code="NoRepair"
+    desc="No repairs selected"
+    name="No Repair"/>
+</typelist>

@@ -1,0 +1,1 @@
+<input class="gw-QuickjumpWidget--input gw-noTrack" name="${renderId}" type="text" placeholder="${placeholder}" aria-label="${label}"/>

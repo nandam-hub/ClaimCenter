@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><Localization xmlns="http://guidewire.com/localization">
+  <GWLocale code="en_US_EDG" name="Edge English (US)" typecode="en_US_EDG">
+    <DateFormat long="E, MMM d, yyyy" medium="MMM d, yyyy" short="MM/dd/yyyy"/>
+    <TimeFormat long="hh:mm aa" medium="hh:mm aa" short="hh:mm aa"/>
+    <NumberFormat decimalSymbol="." thousandsSymbol=","/>
+    <CurrencyFormat negativePattern="($#)" positivePattern="$#" zeroValue="-"/>
+  </GWLocale>
+</Localization>

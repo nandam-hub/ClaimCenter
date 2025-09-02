@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<entity
+  desc="Managing the timeline events "
+  xmlns="http://guidewire.com/datamodel"
+  entity="TimelineEvent_SP"
+  table="timelineevent_sp"
+  type="retireable">
+  <typekey
+    name="EventType"
+    nullok="false"
+    typelist="TimelineCategory_SP"/>
+  <column
+    desc="The effective date for the given event"
+    name="EffectiveDate"
+    nullok="false"
+    type="datetime"/>
+  <column
+    desc="The expiration date for the given event"
+    name="ExpirationDate"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="Whether or not this event has been used at least once"
+    name="InUse"
+    nullok="true"
+    type="bit"/>
+</entity>

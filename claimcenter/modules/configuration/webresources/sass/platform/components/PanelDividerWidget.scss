@@ -1,0 +1,37 @@
+.gw-PanelDividerWidget:not(.gw-styleTab--PanelColumnWidget) {
+  display: block;
+  vertical-align: middle;
+  flex-basis: 100%;
+  flex-grow: 0;
+  flex-shrink: 0;
+  align-self: stretch;
+  padding: 0px !important;
+
+  // Position to other widgets
+  margin-top: $gw-app--PanelDivider--horizontal--spacing-widget-top-rem;
+  margin-left: $gw-app--PanelDivider--horizontal--spacing-widget-left-rem;
+  margin-right: $gw-app--PanelDivider--horizontal--spacing-widget-right-rem;
+  margin-bottom: $gw-app--PanelDivider--horizontal--spacing-widget-bottom-rem;
+
+  height: $gw-app--PanelDivider--thickness-px;
+  background-color: $gw-app--PanelDivider--bg;
+}
+
+.gw-PanelDividerWidget.gw-styleTab--PanelColumnWidget {
+  display: inline-block;
+  flex-basis: 100%;
+  flex-grow: 0;
+  flex-shrink: 0;
+  align-self: stretch;
+  //Ensure that parents don't apply padding to divider children, resulting in a "fat" divider
+  padding: 0px !important;
+
+  // Position to other widgets
+  margin-top: $gw-app--PanelDivider--vertical--spacing-widget-top-rem;
+  margin-left: $gw-app--PanelDivider--vertical--spacing-widget-left-rem;
+  margin-right: $gw-app--PanelDivider--vertical--spacing-widget-right-rem;
+  margin-bottom: $gw-app--PanelDivider--vertical--spacing-widget-bottom-rem;
+
+  width: $gw-app--PanelDivider--thickness-px;
+  background-color: $gw-app--PanelDivider--bg;
+}

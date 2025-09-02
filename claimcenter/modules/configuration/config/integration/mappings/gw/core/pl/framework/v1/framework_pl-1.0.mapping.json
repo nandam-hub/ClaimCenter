@@ -1,0 +1,333 @@
+{
+  "schemaName": "gw.core.pl.framework.v1.framework_pl-1.0",
+  "mappers": {
+    "CurrencyAmount": {
+      "schemaDefinition": "MonetaryAmount",
+      "root": "gw.api.financials.CurrencyAmount",
+      "properties": {
+        "amount": {
+          "path": "CurrencyAmount.Amount",
+          // Properties on immutable value objects are always considered event-safe
+          "eventSafe": true
+        },
+        "currency": {
+          "path": "CurrencyAmount.Currency",
+          // Properties on immutable value objects are always considered event-safe
+          "eventSafe": true
+        }
+      }
+    },
+    "EnumValueReference": {
+      "schemaDefinition": "TypeKeyReference",
+      "root": "com.guidewire.pl.apiextensionbundles.runtime.design.EpdrEnumValue",
+      "properties": {
+        "code": {
+          "path": "EpdrEnumValue.Code",
+          // Properties on immutable value objects are always considered event-safe
+          "eventSafe": true
+        },
+        "name": {
+          "path": "EpdrEnumValue.Name",
+          // Properties on immutable value objects are always considered event-safe
+          "eventSafe": true
+        }
+      }
+    },
+    "GenericRelation": {
+      "schemaDefinition": "GenericRelation",
+      "root": "entity.KeyableBean",
+      "referenceMapper": true,
+      "properties": {
+        "displayName": {
+          "path": "KeyableBean.RestV1_SafeDisplayName",
+          // DisplayNames are not generally immutable, and so are not safe to include on references
+          "eventSafe": false
+        },
+        "id": {
+          "path": "KeyableBean.RestId",
+          // IDs are immutable, and safe to include on references
+          "eventSafe": true
+        },
+        // Suppress warnings
+        "jsonPath": {
+          "path": "null as String",
+          "predicate": "false"
+        },
+        "type": {
+          "path": "(typeof KeyableBean).RelativeName",
+          // Entity types are immutable, and safe to include on references
+          "eventSafe": true
+        },
+        // Suppress warnings
+        "uri": {
+          "path": "null as String",
+          "predicate": "false"
+        }
+      }
+    },
+    "GenericRelationResource": {
+      "schemaDefinition": "GenericRelation",
+      "root": "gw.api.modules.rest.framework.v1.refs.ResourceReference",
+      "referenceMapper": true,
+      "properties": {
+        "displayName": {
+          "path": "ResourceReference.DisplayName",
+          // DisplayNames are not generally immutable, and so are not safe to include on references
+          "eventSafe": false
+        },
+        "id": {
+          "path": "ResourceReference.Id",
+          // IDs are immutable, and safe to include on references
+          "eventSafe": true
+        },
+        "jsonPath": {
+          "path": "ResourceReference.JsonPath",
+          // JsonPaths should be derived from immutable foreign keys and ids, so they're safe to include on references
+          "eventSafe": true
+        },
+        "type": {
+          "path": "ResourceReference.Type",
+          // Types are immutable, so they're safe to include on references
+          "eventSafe": true
+        },
+        "uri": {
+          "path": "ResourceReference.Uri",
+          // URIs should be derived from immutable foreign keys and ids, so they're safe to include on references
+          "eventSafe": true
+        }
+      }
+    },
+    // Suppress warnings
+    "LinkObject": {
+      "schemaDefinition": "LinkObject",
+      "root": "java.lang.Object",
+      "properties": {
+        "href": {
+          "path": "null as String",
+          "predicate": "false"
+        },
+        "methods": {
+          "path": "null as String[]",
+          "predicate": "false"
+        }
+      }
+    },
+    // Suppress warnings
+    "Links": {
+      "schemaDefinition": "Links",
+      "root": "java.lang.Object",
+      "properties": { }
+    },
+    // Suppress warnings
+    "MetaObject": {
+      "schemaDefinition": "MetaObject",
+      "root": "java.lang.Object",
+      "properties": {
+        "checksum": {
+          "path": "null as String",
+          "predicate": "false"
+        },
+        "id": {
+          "path": "null as String",
+          "predicate": "false"
+        },
+        "links": {
+          "path": "null",
+          "mapper": "#/mappers/Links",
+          "predicate": "false"
+        },
+        "refid": {
+          "path": "null as String",
+          "predicate": "false"
+        },
+        "related": {
+          "path": "null",
+          "mapper": "#/mappers/RelatedCollections",
+          "predicate": "false"
+        },
+        "type": {
+          "path": "null as String",
+          "predicate": "false"
+        }
+      }
+    },
+    "MonetaryAmount": {
+      "schemaDefinition": "MonetaryAmount",
+      "root": "gw.pl.currency.MonetaryAmount",
+      "properties": {
+        "amount": {
+          "path": "MonetaryAmount.Amount",
+          // Properties on immutable value objects are always considered event-safe
+          "eventSafe": true
+        },
+        "currency": {
+          "path": "MonetaryAmount.Currency",
+          // Properties on immutable value objects are always considered event-safe
+          "eventSafe": true
+        }
+      }
+    },
+    "PhoneNumber": {
+      "schemaDefinition": "PhoneNumber",
+      "root": "gw.rest.core.pl.common.v1.phone.PhoneNumber",
+      "properties": {
+        "countryCode": {
+          "path": "PhoneNumber.CountryCode",
+          "mapper": "#/mappers/TypeKeyReference",
+          // Properties on immutable value objects are always considered event-safe
+          "eventSafe": true
+        },
+        "displayName": {
+          "path": "PhoneNumber.DisplayName",
+          // Properties on immutable value objects are always considered event-safe
+          // In this case, the DisplayName is computed entirely from other fields on the PhoneNumber
+          "eventSafe": true
+        },
+        "extension": {
+          "path": "PhoneNumber.Extension",
+          // Properties on immutable value objects are always considered event-safe
+          "eventSafe": true
+        },
+        "number": {
+          "path": "PhoneNumber.Number",
+          // Properties on immutable value objects are always considered event-safe
+          "eventSafe": true
+        }
+      }
+    },
+    // Suppress warnings
+    "RelatedCollection": {
+      "schemaDefinition": "RelatedCollection",
+      "root": "java.lang.Object",
+      "properties": {
+        "count": {
+          "path": "null as Integer",
+          "predicate": "false"
+        },
+        "data": {
+          "path": "null as entity.KeyableBean[]",
+          "mapper": "#/mappers/SimpleReference",
+          "predicate": "false"
+        },
+        "total": {
+          "path": "null as Integer",
+          "predicate": "false"
+        }
+      }
+    },
+    // Suppress warnings
+    "RelatedCollections": {
+      "schemaDefinition": "RelatedCollections",
+      "root": "java.lang.Object",
+      "properties": { }
+    },
+    "ResourceReference": {
+      "schemaDefinition": "SimpleReference",
+      "root": "gw.api.modules.rest.framework.v1.refs.ResourceReference",
+      "referenceMapper": true,
+      "properties": {
+        "displayName": {
+          "path": "ResourceReference.DisplayName",
+          "predicate": "ResourceReference.IncludeDisplayName",
+          // DisplayNames can be based on mutable values, so they're not safe for inclusion on a reference mapper
+          "eventSafe": false
+        },
+        "id": {
+          "path": "ResourceReference.Id",
+          // IDs are assumed to be immutable, so they're safe to include on a reference mapper
+          "eventSafe": true
+        },
+        "jsonPath": {
+          "path": "ResourceReference.JsonPath",
+          // JsonPaths are assumed to be computed from immutable foreign keys and IDs, so they're safe to include on a reference mapper
+          "eventSafe": true
+        },
+        // Suppress warnings
+        "refid": {
+          "path": "null as String",
+          "predicate": "false"
+        },
+        "type": {
+          "path": "ResourceReference.Type",
+          // Types are immutable, so they're safe to include on a reference mapper
+          "eventSafe": true
+        },
+        "uri": {
+          "path": "ResourceReference.Uri",
+          // URIs are assumed to be computed from immutable foreign keys and IDs, so they're safe to include on a reference mapper
+          "eventSafe": true
+        }
+      }
+    },
+    "SimpleReference": {
+      "schemaDefinition": "SimpleReference",
+      "root": "entity.KeyableBean",
+      "referenceMapper": true,
+      "properties": {
+        "displayName": {
+          "path": "KeyableBean.RestV1_SafeDisplayName",
+          "predicate": "KeyableBean.RestV1_IncludeDisplayName",
+          // DisplayNames can be based on mutable values, so they're not safe for inclusion on a reference mapper
+          "eventSafe": false
+        },
+        "id": {
+          "path": "KeyableBean.RestId",
+          // IDs are assumed to be immutable, so they're safe to include on a reference mapper
+          "eventSafe": true
+        },
+        // Suppress warnings
+        "jsonPath": {
+          "path": "null as String",
+          "predicate": "false"
+        },
+        "refid": {
+          "path": "null as String",
+          "predicate": "false"
+        },
+        "type": {
+          "path": "null as String",
+          "predicate": "false"
+        },
+        "uri": {
+          "path": "null as String",
+          "predicate": "false"
+        }
+      }
+    },
+    "SpatialPoint": {
+      "schemaDefinition": "SpatialPoint",
+      "root": "gw.api.database.spatial.SpatialPoint",
+      "properties": {
+        "latitude": {
+          "path": "SpatialPoint.Latitude",
+          // Properties on immutable value objects are always considered event-safe
+          "eventSafe": true
+        },
+        "longitude": {
+          "path": "SpatialPoint.Longitude",
+          // Properties on immutable value objects are always considered event-safe
+          "eventSafe": true
+        }
+      }
+    },
+    "TypeKeyReference": {
+      "schemaDefinition": "TypeKeyReference",
+      "root": "gw.entity.TypeKey",
+      "referenceMapper": true,
+      "properties": {
+        "code": {
+          "path": "TypeKey.Code",
+          // Properties on immutable value objects are always considered event-safe
+          "eventSafe": true
+        },
+        "name": {
+          "path": "TypeKey.DisplayName",
+          // Technically the TypeKey's name can change over time due to configuration
+          // changes, but it still should be acceptable to include it, as the name will
+          // be some valid value from some version of the configuration
+          "eventSafe": true
+        }
+      }
+    }
+  }
+}

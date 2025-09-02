@@ -1,0 +1,3 @@
+<div class="gw-NorthPanelWidget--top-section" role="banner">
+  ${:children}
+</div>

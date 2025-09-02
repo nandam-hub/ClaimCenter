@@ -1,0 +1,23 @@
+.gw-MenuIconWidget {
+  @include gw-button--asMenuItem(true, $is-small: $gw-app--MenuIcon--is-small);
+  //TODO: experiment
+  //& > .gw-action--inner {
+  //  padding-left: 0 !important;
+  //  padding-right: 0 !important;
+  //}
+
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+}
+
+.gw-MenuIconWidget.gw-styleTag--InputColumnWidget,
+.gw-MenuIconWidget.gw-styleTag--ValueWidget {
+  align-self: center;
+
+  // Position to other widgets
+  margin-top: $gw-app--MenuIcon--spacing-widget-top-rem;
+  margin-left: $gw-app--MenuIcon--spacing-widget-left-rem;
+  margin-right: $gw-app--MenuIcon--spacing-widget-right-rem;
+  margin-bottom: $gw-app--MenuIcon--spacing-widget-bottom-rem;
+}

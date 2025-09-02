@@ -1,0 +1,267 @@
+{
+  "schemaName": "gw.core.cc.claim.v1.claim_property_core-1.0",
+  "combine": [
+    "gw.core.cc.claim.v1.claim_core-1.0"
+  ],
+  "updaters": {
+    "Building": {
+      "schemaDefinition": "Building",
+      "root": "entity.Building",
+      "properties": {
+        "buildingNumber": {
+          "path": "Building.BuildingNumber"
+        },
+        "notes": {
+          "path": "Building.Notes"
+        },
+        "policySystemId": {
+          "path": "Building.PolicySystemId"
+        }
+      }
+    },
+    "Claim": {
+      "schemaDefinition": "Claim",
+      "root": "entity.Claim",
+      "properties": {
+        "arson": {
+          "path": "Claim.PropertyFireDamage.Arson"
+        },
+        "fireDepartmentResponded": {
+          "path": "Claim.PropertyFireDamage.FireDeptResponded"
+        },
+        "fireSource": {
+          "path": "Claim.PropertyFireDamage.FireSource"
+        },
+        "hasWaterBeenTurnedOff": {
+          "path": "Claim.PropertyWaterDamage.HasWaterBeenTurnedOff"
+        },
+        "howWasFireDiscovered": {
+          "path": "Claim.PropertyFireDamage.HowWasFireDiscovered"
+        },
+        "isAnyoneInjured": {
+          "path": "Claim.PropertyFireDamage.IsAnyoneInjured"
+        },
+        "isHomeHabitable": {
+          "path": "Claim.PropertyFireDamage.IsHomeHabitable"
+        },
+        "isHomeSecure": {
+          "path": "Claim.PropertyFireDamage.IsHomeSecure"
+        },
+        "isRoofProtected": {
+          "path": "Claim.PropertyWaterDamage.IsRoofProtected"
+        },
+        "smokeDamageOnly": {
+          "path": "Claim.PropertyFireDamage.SmokeDamageOnly"
+        },
+        "waterSource": {
+          "path": "Claim.PropertyWaterDamage.WaterSource",
+          "valueResolver": {
+            "typeName": "TypeKeyValueResolver"
+          }
+        }
+      }
+    },
+    "DwellingIncident": {
+      "schemaDefinition": "DwellingIncident",
+      "root": "entity.DwellingIncident",
+      "properties": {
+        "automationPath": {
+          "path": "DwellingIncident.AutomationPath",
+          "valueResolver": {
+            "typeName": "TypeKeyValueResolver"
+          }
+        },
+        "damagedAreaSize": {
+          "path": "DwellingIncident.DamagedAreaSize"
+        },
+        "description": {
+          "path": "DwellingIncident.Description"
+        },
+        "dwellingRoomDamages": {
+          "path": "DwellingIncident.DwellingRoomDamages",
+          "items": {
+            "add": "DwellingIncident.addToDwellingRoomDamages(value)",
+            "create": "new DwellingRoomDamage(DwellingIncident)",
+            "remove": "DwellingIncident.removeFromDwellingRoomDamages(value)",
+            "jsonKey": "jsonValue.get('id')",
+            "valueKey": "value.RestId",
+            "updaterRef": "#/updaters/DwellingRoomDamage"
+          }
+        },
+        "fireProtectionAvailable": {
+          "path": "DwellingIncident.FireProtectionAvailable"
+        },
+        "location": {
+          "path": "DwellingIncident.Property",
+          "create": "new PolicyLocation(DwellingIncident)",
+          "handler": "PolicyObjectSemiSharedPropertyUpdateHandler",
+          "valueResolver": {
+            "typeName": "gw.rest.core.cc.claim.property.v1.claims.PolicyLocationJsonValueResolver"
+          },
+          "shouldCreate": "currentValue == null || currentValue.Policy != null",
+          "touchParent": "currentValue.Changed",
+          "updaterRef": "#/updaters/Location"
+        },
+        "lossParty": {
+          "path": "DwellingIncident.LossParty",
+          "valueResolver": {
+            "typeName": "TypeKeyValueResolver"
+          }
+        },
+        "materialsDamaged": {
+          "path": "DwellingIncident.MaterialsDamaged"
+        },
+        "numberOfPeopleOnPolicy": {
+          "path": "DwellingIncident.NumberOfPeopleOnPolicy"
+        },
+        "occupancyType": {
+          "path": "DwellingIncident.OccupancyType",
+          "valueResolver": {
+            "typeName": "TypeKeyValueResolver"
+          }
+        },
+        "propertySize": {
+          "path": "DwellingIncident.PropertySize"
+        },
+        "severity": {
+          "path": "DwellingIncident.Severity",
+          "valueResolver": {
+            "typeName": "TypeKeyValueResolver"
+          }
+        },
+        "yearBuilt": {
+          "path": "DwellingIncident.YearBuilt"
+        },
+        "yearsInHome": {
+          "path": "DwellingIncident.YearsInHome"
+        }
+      }
+    },
+    "DwellingRoomDamage": {
+      "schemaDefinition": "DwellingRoomDamage",
+      "root": "entity.DwellingRoomDamage",
+      "properties": {
+        "numberOfRooms": {
+          "path": "DwellingRoomDamage.NumberOfRooms"
+        },
+        "roomType": {
+          "path": "DwellingRoomDamage.RoomType",
+          "valueResolver": {
+            "typeName": "TypeKeyValueResolver"
+          }
+        }
+      }
+    },
+    "Exposure": {
+      "schemaDefinition": "Exposure",
+      "root": "entity.Exposure",
+      "properties": {
+        "dwellingIncident": {
+          "path": "Exposure.DwellingIncident",
+          "allowed": "Exposure.RestV1.incidentTypeAllowedMessage('DwellingIncident')",
+          "valueResolver": {
+            "typeName": "gw.rest.core.cc.claim.property.v1.claims.dwellingincidents.DwellingIncidentJsonValueResolver"
+          }
+        },
+        "livingExpensesIncident": {
+          "path": "Exposure.LivingExpensesIncident",
+          "allowed": "Exposure.RestV1.incidentTypeAllowedMessage('LivingExpensesIncident')",
+          "valueResolver": {
+            "typeName": "gw.rest.core.cc.claim.property.v1.claims.livingexpensesincidents.LivingExpensesIncidentJsonValueResolver"
+          }
+        }
+      }
+    },
+    "LivingExpensesIncident": {
+      "schemaDefinition": "LivingExpensesIncident",
+      "root": "entity.LivingExpensesIncident",
+      "properties": {
+        "automationPath": {
+          "path": "LivingExpensesIncident.AutomationPath",
+          "valueResolver": {
+            "typeName": "TypeKeyValueResolver"
+          }
+        },
+        "description": {
+          "path": "LivingExpensesIncident.Description"
+        },
+        "lossParty": {
+          "path": "LivingExpensesIncident.LossParty",
+          "valueResolver": {
+            "typeName": "TypeKeyValueResolver"
+          }
+        },
+        "startDate": {
+          "path": "LivingExpensesIncident.StartDate"
+        }
+      }
+    },
+    "Location": {
+      "schemaDefinition": "PolicyLocation",
+      "root": "entity.PolicyLocation",
+      "properties": {
+        "buildings": {
+          "path": "PolicyLocation.Buildings",
+          "items": {
+            "add": "PolicyLocation.addToBuildings(value)",
+            "create": "new Building(PolicyLocation)",
+            "remove": "PolicyLocation.removeFromBuildings(value)",
+            "jsonKey": "jsonValue.get('id')",
+            "valueKey": "value.RestId",
+            "updaterRef": "#/updaters/Building"
+          }
+        }
+      }
+    },
+    "LocationBasedRiskUnit": {
+      "schemaDefinition": "LocationBasedRiskUnit",
+      "root": "entity.LocationBasedRU",
+      "properties": {
+        "building": {
+          "path": "LocationBasedRU.Building",
+          "valueResolver": {
+            "typeName": "gw.rest.core.cc.claim.property.v1.claims.RiskUnitBuildingJsonValueResolver"
+          }
+        },
+        "description": {
+          "path": "LocationBasedRU.Description"
+        },
+        "otherRiskType": {
+          "path": "(LocationBasedRU as LocationMiscRU).OtherRiskType",
+          "valueResolver": {
+            "typeName": "TypeKeyValueResolver"
+          }
+        },
+        "policyLocation": {
+          "path": "LocationBasedRU.PolicyLocation",
+          "valueResolver": {
+            "typeName": "gw.rest.core.cc.claim.property.v1.claims.PolicyLocationJsonValueResolver"
+          }
+        },
+        "policySystemId": {
+          "path": "LocationBasedRU.PolicySystemId"
+        },
+        "subtype": {
+          "ignore": "true"
+        }
+      }
+    },
+    "UnverifiedPolicyLocation": {
+      "schemaDefinition": "UnverifiedPolicyLocation",
+      "root": "entity.PolicyLocation",
+      "properties": {
+        "buildings": {
+          "path": "PolicyLocation.Buildings",
+          "items": {
+            "add": "PolicyLocation.addToBuildings(value)",
+            "create": "new Building(PolicyLocation)",
+            "remove": "PolicyLocation.removeFromBuildings(value)",
+            "jsonKey": "jsonValue.get('id')",
+            "valueKey": "value.RestId",
+            "updaterRef": "#/updaters/Building"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,18 @@
+package rules.Preupdate.ExposurePreupdate_dir
+uses gw.surepath.cc.configuration.timeline.creation.TimelineUtil
+
+@gw.rules.RuleName("EPU15000 - Claim Timeline Update")
+internal class EPU15000ClaimTimelineUpdate {
+  static function doCondition(exposure  :  entity.Exposure) : boolean {
+/*start00rule*/
+return true
+/*end00rule*/
+}
+
+  static function doAction(exposure  :  entity.Exposure, actions : gw.rules.Action) {
+/*start00rule*/
+var claim = exposure.Claim
+  TimelineUtil.registerCallback(claim, claim.Bundle) 
+/*end00rule*/
+  }
+}

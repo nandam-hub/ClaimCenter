@@ -1,0 +1,34 @@
+name: gw_isoperator
+endpoints:
+- endpoint: /system/v0/database/upgrade
+  methods:
+  - POST
+- endpoint: "/system/v1/cluster/*/shutdown"
+  methods:
+  - POST
+  - DELETE
+- endpoint: /system/v1/cluster/upgrade
+  methods:
+  - GET
+- endpoint: "/system/v1/cluster/blue-green-upgrade/id/*"
+  methods:
+  - GET
+  - DELETE
+- endpoint: /system/v1/cluster/blue-green-upgrade/start
+  methods:
+  - POST
+- endpoint: "/system/v1/cluster/blue-green-upgrade/*/enable-schema-migration"
+  methods:
+  - PATCH
+- endpoint: "/system/v1/cluster/blue-green-upgrade/*/enable-green-cluster"
+  methods:
+  - PATCH
+- endpoint: "/system/v1/cluster/blue-green-upgrade/*/complete"
+  methods:
+  - PATCH
+accessibleFields:
+  "*":
+    edit:
+    - "*"
+    view:
+    - "*"

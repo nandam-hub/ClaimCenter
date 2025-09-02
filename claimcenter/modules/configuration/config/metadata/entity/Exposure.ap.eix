@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<internalExtension
+  xmlns="http://guidewire.com/datamodel"
+  entityName="Exposure">
+  <typekey
+    default="never_processed"
+    desc="Autopilot status of this exposure"
+    name="AutopilotStatus"
+    nullok="false"
+    typelist="ExposureAutopilotStatus"/>
+</internalExtension>

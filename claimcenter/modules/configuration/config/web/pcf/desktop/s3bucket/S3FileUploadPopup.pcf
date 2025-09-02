@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Popup
+    afterCommit="S3Bucket.go()"
+    canEdit="true"
+    countsAsWork="false"
+    id="S3FileUploadPopup"
+    returnType="RuleImportTask"
+    startInEditMode="true"
+    title="DisplayKey.get(&apos;BizRules.Import&apos;)">
+    <LocationEntryPoint
+      signature="S3FileUploadPopup(folderName : String)"/>
+    <Variable
+      name="file"
+      type="gw.api.web.WebFile"/>
+    <Variable
+      name="folderName"
+      type="String"/>
+    <Screen>
+      <DetailViewPanel>
+        <InputColumn>
+          <TextInput
+            boldLabel="true"
+            editable="true"
+            id="currentFolderName"
+            label="DisplayKey.get(&quot;Web.File.Store.Foldername&quot;)"
+            value="folderName"
+            visible="true"/>
+          <InputSet>
+            <FileInput
+              buttonText="DisplayKey.get(&quot;Button.Upload&quot;)"
+              editable="true"
+              id="File"
+              label="DisplayKey.get(&quot;Web.File.Store.FileUpload&quot;)"
+              required="true"
+              value="file"/>
+          </InputSet>
+          <ButtonInput
+            action="s3.AmazonS3Util.Instance.uploadtoS3(folderName, file.getName(), java.nio.ByteBuffer.wrap(file.InputStream.readAllBytes()))"
+            id="uploadButton"
+            value="DisplayKey.get(&quot;Button.Upload&quot;)"
+            visible="file != null"/>
+        </InputColumn>
+      </DetailViewPanel>
+    </Screen>
+  </Popup>
+</PCF>

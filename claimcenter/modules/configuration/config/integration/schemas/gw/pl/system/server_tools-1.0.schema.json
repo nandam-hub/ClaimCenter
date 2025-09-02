@@ -1,0 +1,196 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "definitions": {
+    "ServerVersion": {
+      "type": "object",
+      "description": "Server version information",
+      "properties": {
+        "appVersion": {
+          "type": "string",
+          "description": "Version of the application"
+        },
+        "platformVersion": {
+          "type": "string",
+          "description": "Version of the platform lib"
+        },
+        "schemaVersion": {
+          "type": "string",
+          "description": "Database schema version"
+        },
+        "customerVersion": {
+          "type": "string",
+          "description": "Customer version of app"
+        }
+      }
+    },
+    "ServerInfo": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "version": {
+          "$ref": "#/definitions/ServerVersion"
+        },
+        "serverRoles": {
+          "$ref": "#/definitions/ServerRoles"
+        }
+      }
+    },
+    "ServerRoles": {
+      "type": "object",
+      "properties": {
+        "roles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SessionData": {
+      "type": "object",
+      "description": "Session information for a server session",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SessionInfo"
+          }
+        }
+      }
+    },
+    "SessionInfo": {
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string",
+          "description": "Name of the user's credential"
+        },
+        "userId": {
+          "type": "string",
+          "description": "User id in the session"
+        },
+        "sessionId": {
+          "type": "string",
+          "description": "Session id for this entry"
+        }
+      }
+    },
+    "Loggers": {
+      "type": "object",
+      "properties": {
+        "loggers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Logger"
+          }
+        }
+      }
+    },
+    "Logger": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "level": {
+          "type": "string",
+          "enum": [
+            "TRACE",
+            "DEBUG",
+            "INFO",
+            "WARN",
+            "ERROR"
+          ]
+        }
+      },
+      "required": [
+        "name",
+        "level"
+      ]
+    },
+    "ILConfig": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "enabled"
+      ]
+    },
+    "ILElementConfigs": {
+      "type": "object",
+      "properties": {
+        "elementConfigurations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ILElementConfig"
+          }
+        }
+      },
+      "required": [
+        "elementConfigurations"
+      ]
+    },
+    "ILElementConfig": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "enabled": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "name",
+        "enabled"
+      ]
+    },
+    "StartupProbeResponse": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "code"
+      ]
+    },
+    "ReadinessProbeResponse": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "code"
+      ]
+    },
+    "LivenessProbeResponse": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "code"
+      ]
+    }
+  }
+}

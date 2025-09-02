@@ -1,0 +1,4 @@
+combine:
+- ext.shared.v1.shared_ext-1.0
+linkedApis:
+- ext.common.v1.common_ext-1.0

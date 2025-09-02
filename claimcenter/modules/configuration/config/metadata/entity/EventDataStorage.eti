@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<entity
+  extendable="false"
+  loadable="false"
+  platform="true"
+  xmlns="http://guidewire.com/datamodel"
+  entity="EventDataStorage"
+  desc="Stores data for the standard events whose data is too large to write to the event bus"
+  table="eventdatastorage"
+  type="keyable">
+  <column
+    desc="The identifier of the event with which this data is associated"
+    name="EventId"
+    nullok="false"
+    setterScriptability="hidden"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="36"/>
+  </column>
+  <column
+    desc="The data to be stored for the event."
+    name="EventData"
+    nullok="false"
+    setterScriptability="hidden"
+    type="text">
+    <columnParam
+      name="trimwhitespace"
+      value="true"/>
+    <columnParam
+      name="encryption"
+      value="true"/>
+  </column>
+  <column
+    desc="When this event data storage entry was created"
+    name="CreationTime"
+    nullok="true"
+    setterScriptability="hidden"
+    type="datetime"/>
+  <index
+    desc="Guarantees uniqueness of the EventId"
+    name="EventDataStorageId"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="EventId"/>
+  </index>
+  <index
+    desc="Used to determine expiration based on CreationTime"
+    name="EventDataExpire">
+    <indexcol
+      keyposition="1"
+      name="CreationTime"/>
+  </index>
+</entity>

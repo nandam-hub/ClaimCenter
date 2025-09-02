@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<typelistextension
+  xmlns="http://guidewire.com/typelists"
+  name="BatchProcessType">
+  <!-- batch processes -->
+  <typecode
+    code="PurgeDataAuditRecords_SP"
+    desc='Removes data audit records that are considered "+old"'
+    name="Purge Data Audit Records">
+    <category
+      code="UIRunnable"
+      typelist="BatchProcessTypeUsage"/>
+    <category
+      code="APIRunnable"
+      typelist="BatchProcessTypeUsage"/>
+    <category
+      code="Schedulable"
+      typelist="BatchProcessTypeUsage"/>
+  </typecode>
+</typelistextension>

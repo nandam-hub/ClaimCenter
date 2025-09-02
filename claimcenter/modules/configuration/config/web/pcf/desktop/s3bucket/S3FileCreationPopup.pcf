@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Popup
+    afterCommit="S3Bucket.go()"
+    canEdit="true"
+    countsAsWork="false"
+    id="S3FileCreationPopup"
+    returnType="RuleImportTask"
+    startInEditMode="true"
+    title="&quot;Create New Folder&quot;">
+    <LocationEntryPoint
+      signature="S3FileCreationPopup(currentFolderName:String)"/>
+    <Variable
+      name="currentFolderName"
+      type="String"/>
+    <Screen>
+      <DetailViewPanel
+        editable="true">
+        <InputColumn>
+          <InputSet>
+            <Variable
+              name="newFolderName"
+              type="String"/>
+            <TextInput
+              boldLabel="true"
+              id="currentFolderName"
+              label="DisplayKey.get(&quot;Web.File.Store.Foldername&quot;)"
+              value="currentFolderName"
+              visible="true"/>
+            <TextInput
+              editable="true"
+              id="NewS3File"
+              label="DisplayKey.get(&quot;Web.File.Store.Foldername&quot;)"
+              required="true"
+              value="newFolderName"
+              visible="true"/>
+            <ButtonInput
+              action="s3.AmazonS3Util.Instance.createNewFolder(currentFolderName, newFolderName)"
+              id="uploadButton"
+              value="DisplayKey.get(&quot;Web.File.Store.Create&quot;)"/>
+          </InputSet>
+        </InputColumn>
+      </DetailViewPanel>
+    </Screen>
+  </Popup>
+</PCF>

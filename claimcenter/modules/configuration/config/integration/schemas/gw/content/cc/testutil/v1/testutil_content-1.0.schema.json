@@ -1,0 +1,52 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "x-gw-combine": [
+    "gw.content.cc.common.v1.common_content-1.0",
+    "gw.core.cc.testutil.v1.testutil_core-1.0"
+  ],
+  "definitions": {
+    "TestUtilCovTerm": {
+      "properties": {
+        "covTermOrder": {
+          "title": "Coverage term order",
+          "description": "The order of this coverage term relative to other terms on the same coverage. Used to present the terms in sorted order.",
+          "type": "integer",
+          "x-gw-nullable": true
+        },
+        "covTermPattern": {
+          "title": "Coverage term pattern",
+          "description": "The specific pattern for this term. The pattern defines the type of value that the term carries.",
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "typelist": "CovTermPattern"
+          }
+        },
+        "modelAggregation": {
+          "title": "Model aggregation",
+          "description": "Describes how aggregate limits are determined for this coverage term",
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "typelist": "CovTermModelAgg"
+          }
+        },
+        "modelRestriction": {
+          "title": "Model restriction",
+          "description": "A sub-categorization of the term that further refines what the model type on the `covTermPattern` applies to in the context of this term",
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "typelist": "CovTermModelRest"
+          }
+        },
+        "value": {
+          "title": "Value",
+          "description": "The value of this term",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    }
+  }
+}

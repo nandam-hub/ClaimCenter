@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<plugin
+  interface="IRestValidatorFactory"
+  name="JsonLogicPropertyValidatorFactory">
+  <plugin-java
+    javaclass="gw.api.modules.rest.framework.v1.validation.JsonLogicPropertyValidatorFactory"/>
+</plugin>

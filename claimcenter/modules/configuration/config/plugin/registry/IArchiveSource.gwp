@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<plugin interface="IArchiveSource" name="IArchiveSource">
+ <!-- <plugin-gosu gosuclass="gw.cc.extensions.plugins.archiving.aws.s3.CCClaimInfoAwsS3ArchiveSourcePlugin">
+    <param name="awsCredentialsProfile" value=""/>
+    <param name="awsRegion" value="1"/>
+    <param name="awsEndpoint" value=""/>
+    <param name="awsS3Bucket" value="1"/>
+    <param name="awsS3KeyPrefix" value="1"/>
+  </plugin-gosu>-->
+  <plugin-gosu
+    gosuclass="gw.surepath.cc.configuration.timeline.creation.ClaimWithTimelineInfoArchiveSource">
+    <param
+      name="documents.path"
+      value="files/documents"/>
+  </plugin-gosu>  
+</plugin>

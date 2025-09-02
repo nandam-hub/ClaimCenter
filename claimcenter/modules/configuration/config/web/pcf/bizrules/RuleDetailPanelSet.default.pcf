@@ -1,0 +1,155 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <PanelSet
+    editable="version.Rule.Editable"
+    id="RuleDetailPanelSet"
+    mode="default">
+    <Require
+      name="context"
+      type="gw.bizrules.CCRulesNavigationContext"/>
+    <Require
+      name="version"
+      type="RuleVersion"/>
+    <Require
+      name="importingVersion"
+      type="boolean"/>
+    <Require
+      name="controller"
+      type="gw.bizrules.pcf.RulePageController"/>
+    <Require
+      name="ruleConditionType"
+      type="RuleConditionType"/>
+    <Variable
+      initialValue="version.Rule.Subtype"
+      name="ruleSubType"
+      type="typekey.Rule"/>
+    <Variable
+      initialValue="context.getTriggerEntityValues(ruleSubType)"
+      name="triggerEntityValues"
+      type="List&lt;RuleContextDefinitionKey&gt;"/>
+    <Variable
+      initialValue="context.getTriggerActionValues(ruleSubType, controller.RuleContextDefinitionKey)"
+      name="triggerActionValues"
+      recalculateOnRefresh="true"
+      type="List&lt;typekey.TriggeringPointKey&gt;"/>
+    <Variable
+      initialValue="initSingleOpptionFields()"
+      name="fieldsInitialized"
+      recalculateOnRefresh="true"
+      type="Boolean"/>
+    <Variable
+      initialValue="ruleConditionType != RuleConditionType.TC_ALWAYSTRUE"
+      name="displayRuleConditions"
+      type="boolean"/>
+    <DetailViewPanel>
+      <InputColumn>
+        <InputSetRef
+          def="RuleManagementAuditLinkInputSet(context.VersionController, importingVersion, version)"/>
+        <TextInput
+          editable="true"
+          id="Name"
+          label="DisplayKey.get('Web.BizRules.Rule.Name')"
+          required="true"
+          value="version.Rule.Name">
+          <PostOnChange/>
+        </TextInput>
+        <TextAreaInput
+          editable="true"
+          id="Description"
+          label="DisplayKey.get('Web.BizRules.Rule.Description')"
+          numRows="5"
+          value="version.Rule.Description"/>
+        <RangeInput
+          editable="triggerEntityValues.Count &gt; 1"
+          id="RuleContextDefinitionKey"
+          label="DisplayKey.get('Web.BizRules.Rule.Context')"
+          required="true"
+          value="controller.RuleContextDefinitionKey"
+          valueRange="triggerEntityValues"
+          valueType="typekey.RuleContextDefinitionKey">
+          <PostOnChange
+            deferUpdate="false"
+            onChange="if (!gw.bizrules.BizRulesComponentMapper.getInstance().isSupportedContextForTriggeringPoint(version.Rule.TriggeringPointKey, controller.RuleContextDefinitionKey)) {version.Rule.TriggeringPointKey = null}"/>
+        </RangeInput>
+        <TextInput
+          id="ContextDescription"
+          value="controller.RuleContextDefinitionKeyDescription"
+          visible="CurrentLocation.InEditMode "/>
+        <RangeInput
+          editable="triggerActionValues.Count &gt; 1"
+          id="TriggeringPointKey"
+          label="DisplayKey.get('Web.BizRules.Rule.Trigger')"
+          required="true"
+          value="version.Rule.TriggeringPointKey"
+          valueRange="triggerActionValues"
+          valueType="typekey.TriggeringPointKey">
+          <PostOnChange/>
+        </RangeInput>
+        <InputSetRef
+          def="AvailableToRunInputSet(version)"/>
+      </InputColumn>
+    </DetailViewPanel>
+    <PanelRef
+      def="ApplicabilityCriteriaDV(context, version)"
+      mode="ruleSubType.EntityType.RelativeName">
+      <TitleBar
+        title="DisplayKey.get('Web.BizRules.Rule.ApplicabilityCriteria')"/>
+    </PanelRef>
+    <PanelRef
+      def="RuleVariablesPanelSet(controller.RuleVariableController)">
+      <TitleBar
+        id="RuleVariableTitle"
+        title="DisplayKey.get('Web.BizRules.Rule.Variable.Title')"/>
+    </PanelRef>
+    <PanelSet
+      id="RuleConditionPanelSet"
+      visible="CurrentLocation.InEditMode or displayRuleConditions">
+      <PanelRef>
+        <TitleBar
+          id="RuleConditionTitle"
+          title="DisplayKey.get('Web.BizRules.Rule.Condition.Title')"/>
+        <DetailViewPanel>
+          <InputColumn>
+            <BooleanRadioInput
+              editable="true"
+              hideIfReadOnly="true"
+              id="DisplayRuleCondition"
+              label="DisplayKey.get('Web.BizRules.Rule.Condition.DisplayRuleConditionsLabel')"
+              stacked="false"
+              value="displayRuleConditions"
+              valueType="boolean">
+              <PostOnChange/>
+            </BooleanRadioInput>
+          </InputColumn>
+        </DetailViewPanel>
+      </PanelRef>
+      <PanelRef
+        def="ConditionBuilderPanelSet(controller.ConditionBuilderController)"
+        visible="CurrentLocation.InEditMode ? displayRuleConditions : true"></PanelRef>
+    </PanelSet>
+    <PanelRef
+      def="RuleCommandDefinitionsListDetailView(controller.CommandDefinitionController, controller.Rule.Subtype)">
+      <TitleBar
+        title="DisplayKey.get('Web.BizRules.Rule.Action.Title')"/>
+      <Verbatim
+        hideIfReadOnly="true"
+        id="ExposureActionHint"
+        label="context.CreateActionHintLabel"
+        visible="context.ShowCreateActionHint"/>
+    </PanelRef>
+    <Code>// if we're editing a new rule and the field only has one option, preselect it
+protected function initSingleOpptionFields(): boolean {
+  if (CurrentLocation.InEditMode and version.Rule.New and version.Rule.Editable) {
+    if (triggerEntityValues.Count == 1) {
+      controller.RuleContextDefinitionKey = triggerEntityValues.single()
+    }
+    if (triggerActionValues.Count == 1) {
+      version.Rule.TriggeringPointKey = triggerActionValues.single()
+    }
+  }
+  return true
+}</Code>
+  </PanelSet>
+</PCF>

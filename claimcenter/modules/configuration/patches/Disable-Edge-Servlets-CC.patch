@@ -1,0 +1,29 @@
+Subject: [PATCH] Disable the Edge Servlets
+
+---
+
+diff --git a/modules/configuration/config/servlet/servlets.xml b/modules/configuration/config/servlet/servlets.xml
+--- a/modules/configuration/config/servlet/servlets.xml
++++ b/modules/configuration/config/servlet/servlets.xml
+@@ -41,8 +41,8 @@
+-  <servlet
+-    class="edge.servlet.jsonrpc.JsonRpcServlet"/>
+-  <servlet
+-    class="edge.servlet.jsonrpc.JsonRpcUnauthenticatedServlet"/>
+-  <servlet
+-    class="edge.di.servlet.HandlerStatusServlet"/>
+-  <servlet
+-    class="edge.di.servlet.DIConfigReloadServlet"/>
++<!--  <servlet-->
++<!--    class="edge.servlet.jsonrpc.JsonRpcServlet"/>-->
++<!--  <servlet-->
++<!--    class="edge.servlet.jsonrpc.JsonRpcUnauthenticatedServlet"/>-->
++<!--  <servlet-->
++<!--    class="edge.di.servlet.HandlerStatusServlet"/>-->
++<!--  <servlet-->
++<!--    class="edge.di.servlet.DIConfigReloadServlet"/>-->
+@@ -51,2 +51,2 @@
+-  <servlet
+-    class="edge.servlet.DocumentDownloadServlet"/>
++<!--  <servlet-->
++<!--    class="edge.servlet.DocumentDownloadServlet"/>-->

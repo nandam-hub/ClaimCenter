@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<extension
+  xmlns="http://guidewire.com/datamodel"
+  entityName="UserContact">
+
+  <onetoone
+    desc="The single user associated with this user contact"
+    fkentity="User"
+    name="User"
+    nullok="true"/>
+</extension>

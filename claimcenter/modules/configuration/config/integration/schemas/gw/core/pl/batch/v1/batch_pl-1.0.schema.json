@@ -1,0 +1,144 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "x-gw-localizationKeyPrefix": "batch.v1",
+  "definitions": {
+    "BatchRequest": {
+      "title": "Batch request",
+      "description": "The body of a batch request",
+      "required": [
+        "requests"
+      ],
+      "properties": {
+        "requests": {
+          "title": "Requests",
+          "description": "The array of subrequests",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BatchSubRequest"
+          }
+        }
+      }
+    },
+    "BatchResponse": {
+      "title": "Batch response",
+      "description": "The body of a response to a batch request. The `responses` field will have one element for every entry in the `requests` field on the request, and responses will appear in the same order.",
+      "properties": {
+        "responses": {
+          "title": "Responses",
+          "description": "The list of subresponses, appearing in the same order as the elements in the `requests` field of the request",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BatchSubResponse"
+          }
+        }
+      }
+    },
+    "BatchSubRequest": {
+      "title": "Batch subrequest",
+      "description": "An individual subrequest within a batch request",
+      "required": [
+        "method",
+        "path"
+      ],
+      "properties": {
+        "body": {
+          "title": "Body",
+          "description": "The body of the subrequest",
+          "type": "object"
+        },
+        "headers": {
+          "title": "Headers",
+          "description": "Headers that will be included as part of the subrequest. Any headers defined using this field will override header values inherited from the main request. Any headers present on the main request that are not defined in this list will be inherited when the subrequest is made, with the exception of the `GW-Checksum` header.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Header"
+          }
+        },
+        "method": {
+          "title": "Method",
+          "description": "The HTTP method for the subrequest",
+          "type": "string",
+          "enum": [
+            "delete",
+            "head",
+            "get",
+            "options",
+            "patch",
+            "post",
+            "put"
+          ]
+        },
+        "onFail": {
+          "title": "On fail",
+          "description": "Controls whether or not subsequent subrequests are processed if this subrequest fails. The default behavior is to continue processing subrequests. The `abort` option specifies that all subsequent subrequests will be skipped.",
+          "type": "string",
+          "enum": [
+            "abort",
+            "continue"
+          ]
+        },
+        "path": {
+          "title": "Path",
+          "description": "The path for the subrequest. This path is relative to the root of the API hosting the batch endpoint. For example, if the batch endpoint is `<servlet>/rest/common/v1/batch`, then a path of `/activities` will mean a request against `<servlet>/rest/common/v1/activities`. The path must start with `/` and cannot contain whitespace.",
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^/[\\S]*$"
+        },
+        "query": {
+          "title": "Query",
+          "description": "The query string to use for the subrequest",
+          "type": "string"
+        }
+      }
+    },
+    "BatchSubResponse": {
+      "title": "Batch subresponse",
+      "description": "A subresponse to a batch subrequest",
+      "properties": {
+        "body": {
+          "title": "Body",
+          "description": "The body of the subresponse",
+          "type": "object"
+        },
+        "code": {
+          "title": "Code",
+          "description": "The HTTP status code for the subresponse",
+          "type": "integer"
+        },
+        "headers": {
+          "title": "Headers",
+          "description": "The headers returned for the subresponse",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Header"
+          }
+        },
+        "skipped": {
+          "title": "Skipped",
+          "description": "A `true` value indicates that the corresponding subrequest was not processed due to a prior failed request that specified the `onFail` field with the `abort` option",
+          "type": "boolean"
+        }
+      }
+    },
+    "Header": {
+      "title": "Header",
+      "description": "An HTTP request or response header",
+      "required": [
+        "name",
+        "value"
+      ],
+      "properties": {
+        "name": {
+          "title": "Name",
+          "description": "The header name",
+          "type": "string"
+        },
+        "value": {
+          "title": "Value",
+          "description": "The header value",
+          "type": "string"
+        }
+      }
+    }
+  }
+}

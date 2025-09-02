@@ -1,0 +1,40 @@
+${:children}
+
+<div class="gw-CalendarMonth--body" role="group">
+    <div class="gw-row" aria-label="${daysOfTheWeekAriaLabel}" role="row">
+        <div :for="title" :in="columnTitles" class="gw-CalendarMonth--headercell" role="columnheader">
+            <div class="gw-label">${title}</div>
+        </div>
+    </div>
+
+    <div :for="week" :in="weeks" class="gw-row" aria-label="${calendarWeekAriaLabel}" role="row">
+        <div :for="cell" :in="week.cells" class="gw-CalendarMonth--cell">
+            <div :for="day" :in="cell.days" class="${day.weekend ? 'gw-CalendarMonth--weekend' : 'gw-CalendarMonth--weekday'} ${day.notPartOfMonth ? 'gw-CalendarMonth--notMonth'} ${day.selected ? 'gw-CalendarMonth--selected'} ${day.inSelectedWeek ? 'gw-CalendarMonth--selectedWeek'}">
+                <div id="${prefixId}${day.id}" data-gw-click="calendar.day id:${calendarId} ${day.buttonArgs}" class="gw-CalendarMonth--day--status-wrap ${day.today ? 'gw-CalendarMonth--today'}">
+                    <div class="gw-CalendarMonth--day-header">
+                        <div :if="day.monthName" class="gw-CalendarMonth--month-name">${day.monthName}&nbsp;</div>
+                        <div class="gw-CalendarMonth--day-number">${day.dayOfMonth}</div>
+                    </div>
+                    <div class="gw-CalendarMonth--day-body">
+                        <div :for="event" :in="day.events" class="gw-CalendarMonth--event ${event.critical ? 'gw-critical'}"
+                                aria-label="${event.ariaLabel}"
+                                data-gw-click="?{event.action} calendar.action id:${calendarId} action:${event.action}"
+                                data-gw-tooltip="${event.shortLabel}">
+                                <div class="gw-CalendarMonth-icon">
+                                  <div :if="event.critical" class="gw-critical--icon gw-icon"></div>
+                                </div>
+                                <div class="gw-CalendarMonth--event--display-text">${event.calendarDisplay}</div>
+                        </div>
+                        <div :if="day.eventsMessage" class="gw-CalendarMonth--event--more-display-text">${day.eventsMessage}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="gw-CalendarMonth--footer gw-row">
+        <div :for="eventDescription" :in="orderedEvents" class="gw-CalendarMonth--footer-entry gw-label" role="note">
+            ${eventDescription}
+        </div>
+        <div :if="noEvents" class="gw-label">${noEvents}</div>
+    </div>
+</div>

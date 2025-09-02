@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<extension
+  xmlns="http://guidewire.com/datamodel"
+  entityName="Exposure">
+  <implementsInterface
+    iface="gw.api.assignment.AssignSimilarMethods"
+    impl="gw.assignment.AssignExposureSameCoverageImpl"/>
+</extension>

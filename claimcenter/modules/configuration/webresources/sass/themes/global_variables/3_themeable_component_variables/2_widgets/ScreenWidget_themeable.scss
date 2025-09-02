@@ -1,0 +1,24 @@
+// Internal padding
+$gw-app--Screen--spacing-inner-top-rem: $gw-app--SPACING-rem-S !default;
+$gw-app--Screen--spacing-inner-left-rem: 0 !default;
+$gw-app--Screen--spacing-inner-right-rem: 0 !default;
+$gw-app--Screen--spacing-inner-bottom-rem: gw-remScaled(40/14) !default;
+
+$gw-app--Screen--min-width: auto !default;
+
+$gw-app--Screen--file-drop-area--height: 10em !default;
+$gw-app--Screen--in-South-Panel--file-drop-area--height: 5em !default;
+$gw-app--Screen--file-drop-area--bg: $gw-app--palette--offwhite !default;
+$gw-app--Screen--file-drop-area--col: $gw-app--palette--gray-7 !default;
+$gw-app--Screen--file-drop-area--border: 1px dashed #{$gw-app--palette--gray-7} !default;
+$gw-app--Screen--file-drop-area--font-size: 1.2em !default;
+
+$gw-app--Screen--file-drop-area--hover-bg: $gw-app--palette--green-light !default;
+$gw-app--Screen--file-drop-area--hover-col: $gw-app--col !default;
+$gw-app--Screen--file-drop-area--hover-border: 1px dashed #{$gw-app--border--col} !default;
+$gw-app--Screen--file-drop-area--max-width: 1000px !default;
+
+$gw-app--Screen--file-paste-area--border: 1px solid $gw-app--border--col-lighter !default;
+$gw-app--Screen--file-area--user-alternative-layout: true !default;
+
+$gw-app--Screen--flex-container-padding: gw-remScaled(.5) !default;

@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <InputSet
+    id="UserDetailInputSet">
+    <Require
+      name="User"
+      type="User"/>
+    <Require
+      name="UserOwner"
+      type="gw.api.name.NameOwner"/>
+    <Variable
+      initialValue="new gw.api.name.PersonNameDelegate(User.Contact)"
+      name="name"
+      type="gw.api.name.PersonNameDelegate"/>
+    <Variable
+      initialValue="gw.api.system.PLConfigParameters.SingleSignOnAuthenticationEnabled.getValue()"
+      name="ssoEnabled"
+      type="Boolean"/>
+    <Variable
+      initialValue="User.SystemUserType == SystemUserType.TC_AUTOPROCESSOR"
+      name="isAutomationUser"
+      type="boolean"
+    />
+    <InputSetRef
+      def="GlobalPersonNameInputSet(UserOwner)"
+      id="Name"
+      mode="gw.api.name.NameLocaleSettings.PCFMode"/>
+    <!-- Username and Password fields are disabled/hidden when 'SingleSignOnAuthenticationEnabled' is true. 
+         Because they are controlled by the external SSO authentication provider and should not be editable here. -->
+    <TextInput
+      editable="!isAutomationUser and (User.New or User != User.util.CurrentUser or !ssoEnabled)"
+      id="Username"
+      label="DisplayKey.get(&quot;Web.Admin.UserDetailDV.Username&quot;)"
+      required="true"
+      value="User.Credential.UserName"/>
+    <ConfirmPasswordInput
+      confirmLabel="DisplayKey.get(&quot;Web.Admin.UserDetailDV.ConfirmPassword&quot;)"
+      editable="true"
+      id="Password"
+      label="DisplayKey.get(&quot;Web.Admin.UserDetailDV.Password&quot;)"
+      oldPasswordLabel="DisplayKey.get(&quot;Web.Admin.UserDetailDV.OldPassword&quot;)"
+      requireOldPassword="User.util.CurrentUser == User"
+      required="User.New"
+      value="User.Credential.Password"
+      visible="User.New or !ssoEnabled"/>
+    <BooleanRadioInput
+      editable="User.Credential.canUpdateActive() and !isAutomationUser"
+      id="Active"
+      label="DisplayKey.get(&quot;Web.Admin.UserDetailDV.Active&quot;)"
+      required="true"
+      value="User.Credential.Active"/>
+    <BooleanRadioInput
+      editable="!isAutomationUser"
+      id="AccountLocked"
+      label="DisplayKey.get(&quot;Web.Admin.UserDetailDV.AccountLocked&quot;)"
+      value="User.AccountLocked"/>
+    <TypeKeyInput
+      editable="perm.System.oridevacationstatus_sp and !isAutomationUser"
+      id="VacationStatus"
+      label="DisplayKey.get(&quot;Web.Admin.UserDetailDV.VacationStatus&quot;)"
+      required="true"
+      value="User.VacationStatus"
+      valueType="typekey.VacationStatusType"/>
+    <UserInput
+      editable="!isAutomationUser"
+      id="BackupUser"
+      label="DisplayKey.get(&quot;Web.Admin.UserDetailDV.BackupUser&quot;)"
+      validationExpression="gw.api.claimparties.ClaimUserUtil.validateBackupUser(User.BackupUser)"
+      value="User.BackupUser"/>
+    <TextInput
+      editable="true"
+      id="SessionTimeout"
+      label="DisplayKey.get(&quot;Web.Admin.UserDetailDV.SessionTimeoutSecs&quot;)"
+      required="false"
+      value="User.SessionTimeoutSecs"
+      valueType="java.lang.Integer"/>
+  </InputSet>
+</PCF>

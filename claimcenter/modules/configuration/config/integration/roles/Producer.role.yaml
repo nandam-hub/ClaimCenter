@@ -1,0 +1,813 @@
+name: Producer
+endpoints:
+- endpoint: /async/v1/openapi.json
+  methods:
+  - GET
+- endpoint: "/async/v1/requests/*"
+  methods:
+  - GET
+- endpoint: "/async/v1/requests/*/response"
+  methods:
+  - GET
+- endpoint: /claim/v1/claims
+  methods:
+  - GET
+  - POST
+- endpoint: "/claim/v1/claims/*"
+  methods:
+  - GET
+  - PATCH
+- endpoint: "/claim/v1/claims/*/submit"
+  methods:
+  - POST
+- endpoint: "/claim/v1/claims/*/contacts"
+  methods:
+  - GET
+  - POST
+- endpoint: "/claim/v1/claims/*/contacts/*"
+  methods:
+  - GET
+  - PATCH
+- endpoint: "/claim/v1/claims/*/exposures"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/exposures/*"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/other-structure-incidents"
+  methods:
+  - GET
+  - POST
+- endpoint: "/claim/v1/claims/*/other-structure-incidents/*"
+  methods:
+  - GET
+  - PATCH
+- endpoint: "/claim/v1/claims/*/policy"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/policy/coverages"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/policy/coverages/*"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/policy/endorsements"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/policy/endorsements/*"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/policy/locations"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/policy/locations/*"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/policy/locations/*/property-items"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/policy/locations/*/property-items/*"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/policy/trip-risk-units"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/policy/trip-risk-units/*"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/policy/trip-risk-units/*/coverages"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/policy/trip-risk-units/*/coverages/*"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/policy/vehicle-risk-units"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/policy/vehicle-risk-units/*"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/policy/vehicle-risk-units/*/coverages"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/policy/vehicle-risk-units/*/coverages/*"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/policy/location-based-risk-units"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/policy/location-based-risk-units/*"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/policy/location-based-risk-units/*/coverages"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/policy/location-based-risk-units/*/coverages/*"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/baggage-incidents"
+  methods:
+  - GET
+  - POST
+- endpoint: "/claim/v1/claims/*/baggage-incidents/*"
+  methods:
+  - GET
+  - PATCH
+- endpoint: "/claim/v1/claims/*/baggage-incidents/*/assessment-content-items"
+  methods:
+  - GET
+  - POST
+- endpoint: "/claim/v1/claims/*/baggage-incidents/*/assessment-content-items/*"
+  methods:
+  - GET
+  - PATCH
+  - DELETE
+- endpoint: "/claim/v1/claims/*/dwelling-incidents"
+  methods:
+  - GET
+  - POST
+- endpoint: "/claim/v1/claims/*/dwelling-incidents/*"
+  methods:
+  - GET
+  - PATCH
+- endpoint: "/claim/v1/claims/*/living-expenses-incidents"
+  methods:
+  - GET
+  - POST
+- endpoint: "/claim/v1/claims/*/living-expenses-incidents/*"
+  methods:
+  - GET
+  - PATCH
+- endpoint: "/claim/v1/claims/*/fixed-property-incidents"
+  methods:
+  - GET
+  - POST
+- endpoint: "/claim/v1/claims/*/fixed-property-incidents/*"
+  methods:
+  - GET
+  - PATCH
+- endpoint: "/claim/v1/claims/*/general-incidents"
+  methods:
+  - GET
+  - POST
+- endpoint: "/claim/v1/claims/*/general-incidents/*"
+  methods:
+  - GET
+  - PATCH
+- endpoint: "/claim/v1/claims/*/general-incidents/*/assessment-content-items"
+  methods:
+  - GET
+  - POST
+- endpoint: "/claim/v1/claims/*/general-incidents/*/assessment-content-items/*"
+  methods:
+  - GET
+  - PATCH
+  - DELETE
+- endpoint: "/claim/v1/claims/*/injury-incidents"
+  methods:
+  - GET
+  - POST
+- endpoint: "/claim/v1/claims/*/injury-incidents/*"
+  methods:
+  - GET
+  - PATCH
+- endpoint: "/claim/v1/claims/*/intake-interactions"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/intake-interactions/*"
+  methods:
+  - GET
+- endpoint: "/claim/v1/claims/*/property-contents-incidents"
+  methods:
+  - GET
+  - POST
+- endpoint: "/claim/v1/claims/*/property-contents-incidents/*"
+  methods:
+  - GET
+  - PATCH
+- endpoint: "/claim/v1/claims/*/property-contents-incidents/*/assessment-content-items"
+  methods:
+  - GET
+  - POST
+- endpoint: "/claim/v1/claims/*/property-contents-incidents/*/assessment-content-items/*"
+  methods:
+  - GET
+  - PATCH
+  - DELETE
+- endpoint: "/claim/v1/claims/*/property-contents-incidents/*/scheduled-items"
+  methods:
+  - GET
+  - POST
+- endpoint: "/claim/v1/claims/*/property-contents-incidents/*/scheduled-items/*"
+  methods:
+  - GET
+  - PATCH
+  - DELETE
+- endpoint: "/claim/v1/claims/*/trip-incidents"
+  methods:
+  - GET
+  - POST
+- endpoint: "/claim/v1/claims/*/trip-incidents/*"
+  methods:
+  - GET
+  - PATCH
+- endpoint: "/claim/v1/claims/*/trip-incidents/*/trip-accommodations"
+  methods:
+  - GET
+  - POST
+- endpoint: "/claim/v1/claims/*/trip-incidents/*/trip-accommodations/*"
+  methods:
+  - GET
+  - PATCH
+- endpoint: "/claim/v1/claims/*/trip-incidents/*/trip-segments"
+  methods:
+  - GET
+  - POST
+- endpoint: "/claim/v1/claims/*/trip-incidents/*/trip-segments/*"
+  methods:
+  - GET
+  - PATCH
+- endpoint: "/claim/v1/claims/*/vehicle-incidents"
+  methods:
+  - GET
+  - POST
+- endpoint: "/claim/v1/claims/*/vehicle-incidents/*"
+  methods:
+  - GET
+  - PATCH
+- endpoint: /admin/v1/openapi.json
+  methods:
+  - GET
+- endpoint: /claim/v1/openapi.json
+  methods:
+  - GET
+- endpoint: /common/v1/openapi.json
+  methods:
+  - GET
+- endpoint: /composite/v1/composite
+  methods:
+  - POST
+- endpoint: /composite/v1/openapi.json
+  methods:
+  - GET
+accessibleFields:
+  AssessmentContentItem:
+    edit:
+    - contentCategory
+    - dateAcquired
+    - description
+    - incidentOrder
+    - itemComment
+    - numberOfItems
+    - purchaseCost
+    - replacementValue
+    view:
+    - amountAfterLimit
+    - contentCategory
+    - contentSchedule
+    - dateAcquired
+    - depreciationPercentage
+    - description
+    - id
+    - incidentOrder
+    - itemComment
+    - numberOfItems
+    - purchaseCost
+    - replacementValue
+  BaggageIncident:
+    edit:
+    - baggageMissingFrom
+    - baggageRecoveredOn
+    - baggageType
+    - carrierCompensated
+    - carrierCompensatedAmount
+    - delayOnly
+    - description
+    - incidentOwner
+    - lossParty
+    view:
+    - baggageMissingFrom
+    - baggageRecoveredOn
+    - baggageType
+    - carrierCompensated
+    - carrierCompensatedAmount
+    - delayOnly
+    - description
+    - id
+    - incidentOwner
+    - lossParty
+    - severity
+  Claim:
+    edit:
+    - description
+    - howReported
+    - lobCode
+    - lossCause
+    - lossDate
+    - lossLocation
+    - lossType
+    - mainContact
+    - policyNumber
+    - reportedByType
+    - reporter
+    - witnesses
+    view:
+    - claimNumber
+    - closeDate
+    - closedOutcome
+    - description
+    - faultRating
+    - howReported
+    - id
+    - insured
+    - jurisdiction
+    - lobCode
+    - lossCause
+    - lossDate
+    - lossLocation
+    - lossType
+    - mainContact
+    - policyAddresses
+    - policyNumber
+    - reportedByType
+    - reportedDate
+    - reporter
+    - reporterDetails
+    - state
+    - witnesses
+  ClaimContact:
+    edit:
+    - addressBookUID
+    - cellPhone
+    - companyName
+    - companyNameKanji
+    - contactSubtype
+    - dateOfBirth
+    - editableRoles
+    - emailAddress1
+    - emailAddress2
+    - firstName
+    - homePhone
+    - lastName
+    - licenseNumber
+    - licenseState
+    - preferredPhoneType
+    - primaryAddress
+    - primaryLanguage
+    - primaryLocale
+    - primaryPhoneType
+    - syncAddressBookUID
+    - workPhone
+    view:
+    - addressBookUID
+    - cellPhone
+    - companyName
+    - companyNameKanji
+    - contactSubtype
+    - dateOfBirth
+    - displayName
+    - doctorSpecialty
+    - editableRoles
+    - emailAddress1
+    - emailAddress2
+    - firstName
+    - homePhone
+    - id
+    - lastName
+    - licenseNumber
+    - licenseState
+    - medicalLicense
+    - preferredPhoneType
+    - primaryAddress
+    - primaryContact
+    - primaryLanguage
+    - primaryLocale
+    - primaryPhone
+    - primaryPhoneType
+    - roles
+    - workPhone
+  DwellingIncident:
+    edit:
+    - damagedAreaSize
+    - description
+    - dwellingRoomDamages
+    - incidentOwner
+    - location
+    - lossParty
+    - materialsDamaged
+    - occupancyType
+    - propertySize
+    - yearBuilt
+    - yearsInHome
+    view:
+    - damagedAreaSize
+    - description
+    - dwellingRoomDamages
+    - id
+    - incidentOwner
+    - fireProtectionAvailable
+    - location
+    - lossParty
+    - materialsDamaged
+    - numberOfPeopleOnPolicy
+    - occupancyType
+    - propertySize
+    - severity
+    - yearBuilt
+    - yearsInHome
+  Endorsement:
+    view:
+    - comments
+    - description
+    - effectiveDate
+    - expirationDate
+    - formNumber
+    - id
+  Exposure:
+    view:
+    - baggageIncident
+    - claimant
+    - claimantType
+    - closeDate
+    - coverage
+    - deductible
+    - externalStatus
+    - fixedPropertyIncident
+    - generalIncident
+    - id
+    - injuryIncident
+    - jurisdiction
+    - lossParty
+    - otherStructureIncident
+    - primaryCoverage
+    - propertyContentsIncident
+    - tripIncident
+    - vehicleIncident
+  FixedPropertyIncident:
+    edit:
+    - description
+    - incidentOwner
+    - location
+    - lossParty
+    - occupancyType
+    view:
+    - description
+    - id
+    - incidentOwner
+    - location
+    - lossParty
+    - occupancyType
+    - severity
+  GeneralIncident:
+    edit:
+    - description
+    - incidentOwner
+    - lossParty
+    view:
+    - description
+    - id
+    - incidentOwner
+    - lossParty
+    - severity
+  InjuryIncident:
+    edit:
+    - ambulanceUsed
+    - bodyParts
+    - description
+    - detailedInjuryType
+    - disabledDueToAccident
+    - injuredPerson
+    - generalInjuryType
+    - lossParty
+    - lostWages
+    - primaryDoctor
+    view:
+    - ambulanceUsed
+    - bodyParts
+    - description
+    - detailedInjuryType
+    - disabledDueToAccident
+    - injuredPerson
+    - id
+    - generalInjuryType
+    - lossParty
+    - lostWages
+    - primaryDoctor
+    - severity
+    - treatmentType
+  IntakeInteraction:
+    view:
+    - claimContact
+    - createTime
+    - description
+    - id
+    - relatedEntity
+    - status
+  LivingExpensesIncident:
+    edit:
+    - description
+    - lossParty
+    - startDate
+    - incidentOwner
+    view:
+    - description
+    - id
+    - lossParty
+    - startDate
+    - incidentOwner
+  LocationBasedRiskUnit:
+    view:
+    - RUNumber
+    - building
+    - coverages
+    - description
+    - id
+    - locationId
+    - otherRiskType
+    - policyLocation
+    - policySystemId
+    - subtype
+  LocationBasedRiskUnitCoverage:
+    view:
+    - claimAggLimit
+    - coinsurance
+    - covTerms
+    - coverageBasis
+    - coverageType
+    - currency
+    - effectiveDate
+    - expirationDate
+    - exposureLimit
+    - id
+    - incidentLimit
+    - limitsIndicator
+    - nonmedAggLimit
+    - notes
+    - personAggLimit
+    - policySystemId
+    - replaceAggLimit
+    - state
+  OtherStructureIncident:
+    edit:
+    - alreadyRepaired
+    - description
+    - estimatesReceived
+    - estimatedRepairCost
+    - estimatedRepairTime
+    - fencesDamaged
+    - incidentOwner
+    - lossEstimate
+    - lossParty
+    - severity
+    view:
+    - alreadyRepaired
+    - description
+    - estimatesReceived
+    - estimatedRepairCost
+    - estimatedRepairTime
+    - fencesDamaged
+    - id
+    - incidentOwner
+    - lossEstimate
+    - lossParty
+    - severity
+  Policy:
+    view:
+    - accountNumber
+    - agent
+    - assignedRisk
+    - cancellationDate
+    - coveredParties
+    - currency
+    - effectiveDate
+    - excludedParties
+    - expirationDate
+    - financialInterests
+    - foreignCoverage
+    - id
+    - insured
+    - notes
+    - originalEffectiveDate
+    - policyLocations
+    - policyNumber
+    - policyType
+    - producerCode
+    - producerCodeOfService
+    - serviceTier
+    - status
+    - verifiedPolicy
+  PolicyCoverage:
+    view:
+    - claimAggLimit
+    - coinsurance
+    - covTerms
+    - coverageBasis
+    - coverageType
+    - currency
+    - effectiveDate
+    - expirationDate
+    - exposureLimit
+    - id
+    - incidentLimit
+    - limitsIndicator
+    - nonmedAggLimit
+    - notes
+    - personAggLimit
+    - policySystemId
+    - replaceAggLimit
+    - state
+  PolicyLocation:
+    view:
+    - address
+    - buildings
+    - displayName
+    - id
+    - locationNumber
+    - notes
+    - policySystemId
+    - primaryLocation
+  PropertyContentsIncident:
+    edit:
+    - description
+    - incidentOwner
+    - location
+    - lossParty
+    view:
+    - description
+    - id
+    - incidentOwner
+    - location
+    - lossParty
+    - severity
+  PropertyContentsScheduledItem:
+    edit:
+    - propertyItem
+    view:
+    - id
+    - itemOrder
+    - propertyItem
+  PropertyItem:
+    view:
+    - appraisedValue
+    - description
+    - id
+    - policySystemId
+  RiskUnitCoverage:
+    view:
+    - covTerms
+    - coverageType
+    - currency
+    - effectiveDate
+    - expirationDate
+    - exposureLimit
+    - id
+    - incidentLimit
+    - limitsIndicator
+    - notes
+    - policySystemId
+    - state
+  TripAccommodation:
+    edit:
+    - address
+    - cancelOnly
+    - checkinDateTime
+    - checkoutDateTime
+    - propertyName
+    view:
+    - address
+    - agentFees
+    - assessment
+    - cancelOnly
+    - cancellationFees
+    - checkinDateTime
+    - checkoutDateTime
+    - id
+    - otherFees
+    - paidAmount
+    - propertyName
+    - reasonForCancellation
+    - reasonForDenial
+  TripIncident:
+    edit:
+    - description
+    - incidentOwner
+    - tripRiskUnit
+    view:
+    - description
+    - id
+    - incidentOwner
+    - severity
+    - tripRiskUnit
+  TripRiskUnit:
+    view:
+    - RUNumber
+    - coverages
+    - description
+    - endDate
+    - geographicalRegion
+    - id
+    - policySystemId
+    - startDate
+    - tripDescription
+  TripSegment:
+    edit:
+    - arrivalDateTime
+    - cancelOnly
+    - carrierName
+    - carrierNumber
+    - departureDateTime
+    - portOfDisembarkation
+    - portOfEmbarkation
+    - transportType
+    view:
+    - agentFees
+    - arrivalDateTime
+    - assessment
+    - cancelOnly
+    - cancellationFees
+    - carrierName
+    - carrierNumber
+    - departureDateTime
+    - id
+    - otherFees
+    - paidAmount
+    - portOfDisembarkation
+    - portOfEmbarkation
+    - reasonForCancellation
+    - reasonForDenial
+    - transportType
+  VehicleIncident:
+    edit:
+    - airbagsDeployed
+    - childSafetySeatStatus
+    - collision
+    - collisionPoint
+    - damageDescription
+    - driver
+    - equipmentFailure
+    - incidentOwner
+    - lossParty
+    - numOccupants
+    - passengers
+    - propertyDamageDescription
+    - safeToDrive
+    - theft
+    - vehicle
+    - vehicleDirection
+    - vehicleParked
+    - vehicleType
+    - vehicleUseReason
+    view:
+    - airbagsDeployed
+    - childSafetySeatStatus
+    - collision
+    - collisionPoint
+    - damageDescription
+    - driver
+    - equipmentFailure
+    - id
+    - incidentOwner
+    - lossParty
+    - numOccupants
+    - passengers
+    - propertyDamageDescription
+    - propertyValue
+    - safeToDrive
+    - severity
+    - theft
+    - totalLoss
+    - vehicle
+    - vehicleDirection
+    - vehicleParked
+    - vehicleType
+    - vehicleUseReason
+  VehicleRiskUnit:
+    view:
+    - RUNumber
+    - coverages
+    - description
+    - id
+    - policySystemId
+    - vehicle
+    - vehicleId
+    - vehicleLocation
+  VehicleRiskUnitCoverage:
+    view:
+    - claimAggLimit
+    - coinsurance
+    - covTerms
+    - coverageBasis
+    - coverageType
+    - currency
+    - effectiveDate
+    - expirationDate
+    - exposureLimit
+    - id
+    - incidentLimit
+    - limitsIndicator
+    - nonmedAggLimit
+    - notes
+    - personAggLimit
+    - policySystemId
+    - replaceAggLimit
+    - state

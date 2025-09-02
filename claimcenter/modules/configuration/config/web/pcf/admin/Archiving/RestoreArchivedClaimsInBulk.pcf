@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <LocationGroup
+    canVisit="gw.api.claim.ClaimUtil.ArchivingEnabled"
+    id="RestoreArchivedClaimsInBulk"
+    parent="Admin()"
+    title="DisplayKey.get(&quot;Web.TabBar.RestoreArchivedClaimsInBulk&quot;)">
+    <LocationEntryPoint
+      signature="RestoreArchivedClaimsInBulk()"/>
+    <LocationRef
+      location="BulkRestoreArchivedClaimsRestoreRecord()"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;Web.TabBar.Search.ArchivedClaims&quot;)"
+      location="SearchArchivedClaims()"/>
+  </LocationGroup>
+</PCF>

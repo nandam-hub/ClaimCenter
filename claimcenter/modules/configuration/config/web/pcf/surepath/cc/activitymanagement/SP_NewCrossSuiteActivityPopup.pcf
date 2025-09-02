@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Popup
+    beforeCommit="new gw.surepath.cc.configuration.activitymanagement.api.ActivityAPIUtil().handleCreatedActivityToDestinationApplication(remoteActivityDTO)"
+    canEdit="true"
+    canVisit="gw.surepath.cc.configuration.activitymanagement.util.ActivityManagementProperties.INSTANCE.FeatureEnabled and gw.surepath.cc.configuration.activitymanagement.util.ActivityManagementProperties.INSTANCE.SharedActivitiesEnabled"
+    id="SP_NewCrossSuiteActivityPopup"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;SP.ActivityManagement.CrossSuiteActivities.NewCrossSuiteActivityPopup.Title&quot;)">
+    <LocationEntryPoint
+      signature="SP_NewCrossSuiteActivityPopup(crossAppActpattern : CrossAppActPattern_SP)"/>
+    <Variable
+      name="crossAppActpattern"
+      type="CrossAppActPattern_SP"/>
+    <Variable
+      initialValue="gw.surepath.cc.configuration.activitymanagement.dto.RemoteActivityDTO.valueOf(crossAppActpattern.PatternCode, null, crossAppActpattern.DestinationApplication, null, null, null, null, null)"
+      name="remoteActivityDTO"
+      type="gw.surepath.cc.configuration.activitymanagement.dto.RemoteActivityDTO"/>
+    <Screen>
+      <Toolbar>
+        <EditButtons
+          cancelVisible="true"
+          editVisible="false"
+          updateConfirmMessage="DisplayKey.get(&quot;SP.ActivityManagement.CrossSuiteActivities.NewCrossSuiteActivityPopup.ConfirmMessage&quot;)"
+          updateLabel="DisplayKey.get(&quot;SP.ActivityManagement.CrossSuiteActivities.NewCrossSuiteActivityPopup.SendActivity&quot;)"
+          updateVisible="true"/>
+      </Toolbar>
+      <DetailViewPanel>
+        <InputColumn>
+          <TextInput
+            id="PatternCode"
+            label="DisplayKey.get(&quot;SP.ActivityManagement.PCF.PatternCode&quot;)"
+            value="crossAppActpattern.PatternCode"/>
+          <TextInput
+            id="DisplayName"
+            label="DisplayKey.get(&quot;SP.ActivityManagement.PCF.PatternDisplayName&quot;)"
+            value="crossAppActpattern.PatternDisplayName"/>
+          <TextInput
+            id="DestinationApplication"
+            label="DisplayKey.get(&quot;SP.ActivityManagement.PCF.DestinationApplication&quot;)"
+            value="crossAppActpattern.DestinationApplication"
+            valueType="typekey.CrossAppActivityDest_SP"/>
+          <TextAreaInput
+            editable="true"
+            id="Description"
+            label="DisplayKey.get(&quot;SP.ActivityManagement.PCF.Description&quot;)"
+            numRows="4"
+            value="remoteActivityDTO.Description"/>
+          <TextInput
+            editable="true"
+            id="ApprovalIssue"
+            label="DisplayKey.get(&quot;SP.ActivityManagement.PCF.ApprovalIssue&quot;)"
+            value="remoteActivityDTO.ApprovalIssue"/>
+          <TextInput
+            available="remoteActivityDTO.PolicyNumber == null"
+            editable="true"
+            id="AccountNumber"
+            label="DisplayKey.get(&quot;SP.ActivityManagement.PCF.AccountNumber&quot;)"
+            value="remoteActivityDTO.AccountNumber"
+            valueType="java.lang.String">
+            <PostOnChange/>
+          </TextInput>
+          <TextInput
+            available="remoteActivityDTO.AccountNumber == null"
+            editable="true"
+            id="PolicyNumber"
+            label="DisplayKey.get(&quot;SP.ActivityManagement.PCF.PolicyNumber&quot;)"
+            value="remoteActivityDTO.PolicyNumber"
+            valueType="java.lang.String">
+            <PostOnChange/>
+          </TextInput>
+          <TextInput
+            available="remoteActivityDTO.PolicyNumber != null and remoteActivityDTO.AsOfDate == null"
+            editable="true"
+            id="TermNumber"
+            label="DisplayKey.get(&quot;SP.ActivityManagement.PCF.TermNumber&quot;)"
+            value="remoteActivityDTO.TermNumber"
+            valueType="java.lang.String"
+            visible="crossAppActpattern.DestinationApplication == TC_BILLINGCENTER">
+            <PostOnChange/>
+          </TextInput>
+          <DateInput
+            available="remoteActivityDTO.PolicyNumber != null and remoteActivityDTO.TermNumber == null"
+            editable="true"
+            id="AsOfDate"
+            label="DisplayKey.get(&quot;SP.ActivityManagement.PCF.AsOfDate&quot;)"
+            value="remoteActivityDTO.AsOfDate"
+            visible="crossAppActpattern.DestinationApplication == TC_POLICYCENTER">
+            <PostOnChange/>
+          </DateInput>
+        </InputColumn>
+      </DetailViewPanel>
+    </Screen>
+  </Popup>
+</PCF>

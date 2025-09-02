@@ -1,0 +1,4 @@
+swagger: "2.0"
+x-gw-combine:
+- gw.pl.framework.dev_template-1.0
+- gw.core.cc.framework.v1.cors_policies-1.0

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<typelistextension
+  name="LanguageType"
+  xmlns="http://guidewire.com/typelists">
+  <!--
+  <typecode
+    code="de"
+    desc="Deutsch"
+    name="Deutsch"/>
+  -->
+  <!--
+  <typecode
+    code="es"
+    desc="Español"
+    name="Español"/>
+  -->
+  <!--
+  <typecode
+    code="es_ES"
+    desc="Español (España)"
+    name="Español (España)"/>
+  -->
+  <!--
+  <typecode
+    code="fr"
+    desc="Français"
+    name="Français"/>
+  -->
+  <!--
+  <typecode
+    code="it"
+    desc="Italiano"
+    name="Italiano"/>
+  -->
+  <!--
+  <typecode
+    code="ja"
+    desc="日本語"
+    name="日本語"/>
+  -->
+  <!--
+  <typecode
+    code="nl"
+    desc="Nederlands"
+    name="Nederlands"/>
+  -->
+  <!--
+  <typecode
+    code="pt"
+    desc="Português"
+    name="Português"/>
+  -->
+  <!--
+  <typecode
+    code="ru"
+    desc="Русский"
+    name="Русский"/>
+  -->
+  <!--
+  <typecode
+    code="zh_CN"
+    desc="中文（中国）"
+    name="中文（中国）"/>
+  -->
+  <typecode
+    code="en_US_EDG"
+    desc="Edge English (US)"
+    name="Edge English (US)"/>
+  <typecode
+    code="en_US_EDG_PH"
+    desc="Edge Policyholder English (US)"
+    name="Edge Policyholder English (US)"
+    priority="-2"/>
+  <!-- GAR START: Typelists/LanguageType.ttx [/opt/teamcity/agent/work/45c3a2f1b8ee4237/gpm-generator/downloads/edge/backend/xcenter-config/xcenter-utils/cc-utils/../../../Platform/src/main] -->
+  <!-- GAR END -->
+</typelistextension>

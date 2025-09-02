@@ -1,0 +1,17 @@
+resources:
+  CompositeOpenApiSchema:
+    resource: gw.api.modules.rest.framework.v1.openapi.v3.OpenApiJsonPlatformResource
+basePaths:
+  composite: /composite/v1
+resourceAccess:
+  default:
+    yaml: gw.core.pl.composite.v1.composite_pl-1.0
+  external:
+    yaml: gw.core.pl.composite.v1.composite_pl-1.0
+  internal:
+    yaml: gw.core.pl.composite.v1.composite_pl-1.0
+  service:
+    yaml: gw.core.pl.composite.v1.composite_pl-1.0
+  unauthenticated:
+    yaml: gw.core.pl.composite.v1.composite_pl-1.0
+entityURIMappings: {}

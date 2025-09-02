@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Custom work item for purging inbound files."
+  loadable="false"
+  entity="InboundFilePurgeWorkItem"
+  table="inboundfilepurgeworkitem"
+  platform="true"
+  type="keyable"
+  replicable="false">
+  <implementsEntity
+    name="WorkItem"/>
+  <foreignkey
+    createConstraint="false"
+    desc="Reference to Inbound File."
+    fkentity="InboundFile"
+    name="InboundFile"
+    nullok="true"/>
+</entity>

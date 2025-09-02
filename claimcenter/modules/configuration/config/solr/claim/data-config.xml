@@ -1,0 +1,51 @@
+<dataConfig>
+    <dataSource type="FileDataSource" encoding="UTF-8"/>
+    <document>
+        <!--
+        The value of the url attribute below should only be changed if the Solr Batch Loader is run
+        in standalone mode outside the Guidewire app (outside CC, PC, etc.). Do not change this value (for example,
+        in Studio) if you intend to run the Solr Batch Loader inside the app.
+
+        If you change the value of the url attribute, it must evaluate to an absolute path name.
+
+        You can reference the core instance folder via the Solr property ${solr.core.instanceDir}
+
+        If needed, see also https://cwiki.apache.org/confluence/display/solr/Configuring+solrconfig.xml
+        under "Substituting Properties in Solr Config Files" for other solr.core properties available.
+
+        You can also use an explicit path, for example:
+
+        On Linux, an absolute path name is prefixed with "/", for example:
+
+            /opt/gwsolr/cc/solr/claim_active/workDir/claim.xml
+
+        On Windows, an absolute path name is prefixed with a drive specifier (for example, "C:") and "/", for example:
+
+            C:/opt/gwsolr/cc/solr/claim_active/workDir/claim.xml
+
+        The form of the url value should be <WORKDIR>/<DOCTYPE>.xml where:
+
+            <WORKDIR> is identical to the value of the absolutePathToWorkDir param in the batchload-config.xml file and
+            <DOCTYPE> is identical to the value of the name attribute of the <entity> element in the batchload-config.xml file
+        -->
+        <entity name="claim" processor="XPathEntityProcessor" forEach="/CONTAINER_ELEM/CLAIM" url="${solr.core.instanceDir}/workDir/claim.xml" stream="true">
+            <field column="urn" xpath="/CONTAINER_ELEM/CLAIM/URN"/>
+            <field column="claimNumber" xpath="/CONTAINER_ELEM/CLAIM/CLAIMNUMBER"/>
+            <field column="policyNumber" xpath="/CONTAINER_ELEM/CLAIM/POLICYNUMBER"/>
+            <field column="catastrophe" xpath="/CONTAINER_ELEM/CLAIM/CATASTROPHE"/>
+            <field column="jurisdiction" xpath="/CONTAINER_ELEM/CLAIM/JURISDICTION"/>
+            <field column="lineOfBusiness" xpath="/CONTAINER_ELEM/CLAIM/LINEOFBUSINESS"/>
+            <field column="lossType" xpath="/CONTAINER_ELEM/CLAIM/LOSSTYPE"/>
+            <field column="litigationStatus" xpath="/CONTAINER_ELEM/CLAIM/LITIGATIONSTATUS"/>
+            <field column="reinsuranceReportable" xpath="/CONTAINER_ELEM/CLAIM/REINSURANCEREPORTABLE"/>
+            <field column="incidentReport" xpath="/CONTAINER_ELEM/CLAIM/INCIDENTREPORT"/>
+            <field column="coverageInQuestion" xpath="/CONTAINER_ELEM/CLAIM/COVERAGEINQUESTION"/>
+            <field column="lossDate" xpath="/CONTAINER_ELEM/CLAIM/LOSSDATE"/>
+            <field column="reportedDate" xpath="/CONTAINER_ELEM/CLAIM/REPORTEDDATE"/>
+            <field column="closedDate" xpath="/CONTAINER_ELEM/CLAIM/CLOSEDDATE"/>
+            <field column="createTime" xpath="/CONTAINER_ELEM/CLAIM/CREATETIME"/>
+            <field column="anyone" xpath="/CONTAINER_ELEM/CLAIM/ANYONE"/>
+        </entity>
+
+    </document>
+</dataConfig>

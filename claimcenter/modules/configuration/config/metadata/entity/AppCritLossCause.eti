@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<entity
+  desc="Loss Cause Applicability Criteria "
+  loadable="false"
+  xmlns="http://guidewire.com/datamodel"
+  entity="AppCritLossCause"
+  table="appcritlosscause"
+  type="versionable">
+  <typekey
+    desc="Loss cause in a rule availability criteria"
+    name="LossCause"
+    nullok="false"
+    typelist="LossCause"/>
+  <foreignkey
+    columnName="RuleID"
+    desc="The associated rule"
+    fkentity="CCRule"
+    name="Rule"
+    nullok="false"/>
+  <implementsEntity
+    name="RuleVersionDependent"/>
+  <implementsInterface
+    iface="gw.bizrules.domain.RuleVersionDependent"
+    impl="com.guidewire.cc.domain.bizrules.AppCritLossCauseImpl"/>
+  <index
+    desc="Enforce uniqueness per lossCause/rule combo"
+    name="UniqueEntryIndex"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="RuleID"/>
+    <indexcol
+      keyposition="2"
+      name="LossCause"/>
+  </index>
+</entity>

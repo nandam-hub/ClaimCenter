@@ -1,0 +1,640 @@
+{
+  "schemaName": "gw.core.pl.common.v1.common_pl-1.0",
+  "combine": [
+    "gw.core.pl.framework.v1.framework_pl-1.0"
+  ],
+  "mappers": {
+    "Activity": {
+      "schemaDefinition": "Activity",
+      "root": "entity.Activity",
+      "properties": {
+        "activityPattern": {
+          "path": "Activity.ActivityPattern.Code",
+          // Activity pattern codes shouldn't be changed on existing patterns, so they should be safe to reference in events
+          "eventSafe": true
+        },
+        "activityType": {
+          "path": "Activity.Type",
+          "mapper": "#/mappers/TypeKeyReference"
+        },
+        "approvalIssue": {
+          "path": "Activity.ApprovalIssue",
+          "predicate": "Activity.Type == ActivityType.TC_APPROVAL"
+        },
+        "approvalRationale": {
+          "path": "Activity.ApprovalRationale",
+          "predicate": "Activity.Type == ActivityType.TC_APPROVAL"
+        },
+        "approved": {
+          "path": "Activity.Approved",
+          "predicate": "Activity.Type == ActivityType.TC_APPROVAL"
+        },
+        "assignedByUser": {
+          "path": "Activity.AssignedByUser.RestV1_AsReference",
+          "mapper": "#/mappers/ResourceReference"
+        },
+        "assignedGroup": {
+          "path": "Activity.AssignedGroup.RestV1_AsReference",
+          "mapper": "#/mappers/ResourceReference"
+        },
+        "assignedQueue": {
+          "path": "Activity.AssignedQueue.RestV1_AsReference",
+          "mapper": "#/mappers/ResourceReference"
+        },
+        "assignedUser": {
+          "path": "Activity.AssignedUser.RestV1_AsReference",
+          "mapper": "#/mappers/ResourceReference"
+        },
+        "assignmentStatus": {
+          "path": "Activity.AssignmentStatus",
+          "mapper": "#/mappers/TypeKeyReference"
+        },
+        "closeDate": {
+          "path": "Activity.CloseDate"
+        },
+        "closeUser": {
+          "path": "Activity.CloseUser.RestV1_AsReference",
+          "mapper": "#/mappers/ResourceReference"
+        },
+        "createTime": {
+          "path": "Activity.CreateTime"
+        },
+        "description": {
+          "path": "Activity.Description"
+        },
+        "dueDate": {
+          "path": "Activity.TargetDate",
+          "predicate": "Activity.ActivityClass != ActivityClass.TC_EVENT"
+        },
+        "endDate": {
+          "path": "Activity.EndDate",
+          "predicate": "Activity.ActivityClass == ActivityClass.TC_EVENT"
+        },
+        "escalated": {
+          "path": "Activity.Escalated"
+        },
+        "escalationDate": {
+          "path": "Activity.EscalationDate"
+        },
+        "externallyOwned": {
+          "path": "Activity.ExternallyOwned"
+        },
+        "id": {
+          "path": "Activity.RestId"
+        },
+        // Suppress warnings
+        "initialAssignment": {
+          "path": "null as gw.api.assignment.Assignee",
+          "mapper": "#/mappers/Assignee",
+          "predicate": "false"
+        },
+        "mandatory": {
+          "path": "Activity.Mandatory"
+        },
+        "priority": {
+          "path": "Activity.Priority",
+          "mapper": "#/mappers/TypeKeyReference"
+        },
+        "recurring": {
+          "path": "Activity.Recurring"
+        },
+        "startDate": {
+          "path": "Activity.TargetDate",
+          "predicate": "Activity.ActivityClass == ActivityClass.TC_EVENT"
+        },
+        "status": {
+          "path": "Activity.Status",
+          "mapper": "#/mappers/TypeKeyReference"
+        },
+        "subject": {
+          "path": "Activity.Subject"
+        }
+      }
+    },
+    "ActivityPattern": {
+      "schemaDefinition": "ActivityPattern",
+      "root": "entity.ActivityPattern",
+      "properties": {
+        "activityClass": {
+          "path": "ActivityPattern.ActivityClass",
+          "mapper": "#/mappers/TypeKeyReference"
+        },
+        "activityType": {
+          "path": "ActivityPattern.Type",
+          "mapper": "#/mappers/TypeKeyReference"
+        },
+        "category": {
+          "path": "ActivityPattern.Category",
+          "mapper": "#/mappers/TypeKeyReference"
+        },
+        "code": {
+          "path": "ActivityPattern.Code"
+        },
+        "description": {
+          "path": "ActivityPattern.Description"
+        },
+        "dueDate": {
+          "path": "ActivityPattern.RestV1_CalculatedDueDate"
+        },
+        "escalationDate": {
+          "path": "ActivityPattern.RestV1_CalculatedEscalationDate"
+        },
+        "id": {
+          "path": "ActivityPattern.RestId"
+        },
+        "mandatory": {
+          "path": "ActivityPattern.Mandatory"
+        },
+        "priority": {
+          "path": "ActivityPattern.Priority",
+          "mapper": "#/mappers/TypeKeyReference"
+        },
+        "recurring": {
+          "path": "ActivityPattern.Recurring"
+        },
+        "subject": {
+          "path": "ActivityPattern.Subject"
+        }
+      }
+    },
+    "Address": {
+      "schemaDefinition": "Address",
+      "root": "entity.Address",
+      "properties": {
+        "addressBookUID": {
+          "path": "Address.AddressBookUID"
+        },
+        "addressLine1": {
+          "path": "Address.AddressLine1"
+        },
+        "addressLine2": {
+          "path": "Address.AddressLine2"
+        },
+        "addressLine3": {
+          "path": "Address.AddressLine3"
+        },
+        "addressType": {
+          "path": "Address.AddressType",
+          "mapper": "#/mappers/TypeKeyReference"
+        },
+        // Hong Kong - Kowloon or New Territories
+        "area": {
+          "path": "Address.State",
+          "mapper": "#/mappers/TypeKeyReference",
+          "predicate": "Address.RestV1_isFieldAvailable('area')"
+        },
+        "city": {
+          "path": "Address.City"
+        },
+        "country": {
+          "path": "Address.Country"
+        },
+        "county": {
+          "path": "Address.County"
+        },
+        // Columbia and Nicaragua
+        "department": {
+          "path": "Address.State",
+          "mapper": "#/mappers/TypeKeyReference",
+          "predicate": "Address.RestV1_isFieldAvailable('department')"
+        },
+        "description": {
+          "path": "Address.Description"
+        },
+        "displayName": {
+          "path": "Address.RestV1_SafeDisplayName"
+        },
+        // United Arab Emirates
+        "emirate": {
+          "path": "Address.State",
+          "mapper": "#/mappers/TypeKeyReference",
+          "predicate": "Address.RestV1_isFieldAvailable('emirate')"
+        },
+        "id": {
+          "path": "Address.RestId"
+        },
+        "island": {
+          "path": "Address.State",
+          "mapper": "#/mappers/TypeKeyReference",
+          "predicate": "Address.RestV1_isFieldAvailable('island')"
+        },
+        // Russia
+        "oblast": {
+          "path": "Address.State",
+          "mapper": "#/mappers/TypeKeyReference",
+          "predicate": "Address.RestV1_isFieldAvailable('oblast')"
+        },
+        // Jamaica and Barbados
+        "parish": {
+          "path": "Address.State",
+          "mapper": "#/mappers/TypeKeyReference",
+          "predicate": "Address.RestV1_isFieldAvailable('parish')"
+        },
+        "postalCode": {
+          "path": "Address.PostalCode"
+        },
+        //Japan
+        "prefecture": {
+          "path": "Address.State",
+          "mapper": "#/mappers/TypeKeyReference",
+          "predicate": "Address.RestV1_isFieldAvailable('prefecture')"
+        },
+        "province": {
+          "path": "Address.State",
+          "mapper": "#/mappers/TypeKeyReference",
+          "predicate": "Address.RestV1_isFieldAvailable('province')"
+        },
+        "spatialPoint": {
+          "path": "Address.SpatialPoint",
+          "mapper": "#/mappers/SpatialPoint"
+        },
+        "state": {
+          "path": "Address.State",
+          "mapper": "#/mappers/TypeKeyReference",
+          "predicate": "Address.RestV1_isFieldAvailable('state')"
+        },
+        "validUntil": {
+          "path": "Address.ValidUntil"
+        }
+      }
+    },
+    "Assignee": {
+      "schemaDefinition": "Assignee",
+      "root": "gw.api.assignment.Assignee",
+      "properties": {
+        "assigneeId": {
+          "path": "Assignee.RestV1_AssigneeId"
+        },
+        "autoAssign": {
+          "path": "Assignee.RestV1_AutoAssign"
+        },
+        "groupId": {
+          "path": "Assignee.RestV1_GroupId"
+        },
+        "id": {
+          "path": "Assignee.RestV1_AssigneeId"
+        },
+        "name": {
+          "path": "Assignee.RestV1_Name",
+          // Assignee name maps to the DisplayName, so if the assignee were used as a reference, the DisplayName would not be safe
+          "eventSafe": false
+        },
+        "queueId": {
+          "path": "Assignee.RestV1_QueueId"
+        },
+        "userId": {
+          "path": "Assignee.RestV1_UserId"
+        }
+      }
+    },
+    "Contact": {
+      "schemaDefinition": "Contact",
+      "root": "entity.Contact",
+      "properties": {
+        "addressBookUID": {
+          "path": "Contact.AddressBookUID"
+        },
+        "authorizationID": {
+          "path": "Contact.AuthorizationID"
+        },
+        "cellPhone": {
+          "path": "Contact.RestV1_getPhoneNumber(Person#CellPhone)",
+          "mapper": "#/mappers/PhoneNumber",
+          "predicate": "Contact typeis Person"
+        },
+        "companyName": {
+          "path": "Contact.Name",
+          "predicate": "Contact typeis Company"
+        },
+        "dateOfBirth": {
+          "path": "(Contact as Person).RestV1_DateOfBirth",
+          "predicate": "Contact typeis Person"
+        },
+        "displayName": {
+          "path": "Contact.RestV1_SafeDisplayName"
+        },
+        "emailAddress1": {
+          "path": "Contact.EmailAddress1"
+        },
+        "emailAddress2": {
+          "path": "Contact.EmailAddress2"
+        },
+        "firstName": {
+          "path": "(Contact as Person).FirstName",
+          "predicate": "Contact typeis Person"
+        },
+        "gender": {
+          "path": "(Contact as Person).Gender",
+          "mapper": "#/mappers/TypeKeyReference",
+          "predicate": "Contact typeis Person"
+        },
+        "homePhone": {
+          "path": "Contact.RestV1_getPhoneNumber(Contact#HomePhone)",
+          "mapper": "#/mappers/PhoneNumber",
+          "predicate": "Contact typeis Person"
+        },
+        "id": {
+          "path": "Contact.RestId"
+        },
+        "lastName": {
+          "path": "(Contact as Person).LastName",
+          "predicate": "Contact typeis Person"
+        },
+        "preferred": {
+          "path": "Contact.Preferred",
+          "predicate": "Contact typeis CompanyVendor || Contact typeis PersonVendor"
+        },
+        "primaryAddress": {
+          "path": "Contact.PrimaryAddress",
+          "mapper": "#/mappers/Address"
+        },
+        "primaryLanguage": {
+          "path": "Contact.PrimaryLanguage",
+          "mapper": "#/mappers/TypeKeyReference"
+        },
+        "primaryLocale": {
+          "path": "Contact.PrimaryLocale",
+          "mapper": "#/mappers/TypeKeyReference"
+        },
+        "primaryPhone": {
+          "path": "Contact.PrimaryPhoneValue"
+        },
+        "primaryPhoneType": {
+          "path": "Contact.PrimaryPhone",
+          "mapper": "#/mappers/TypeKeyReference"
+        },
+        "pronounAggregate": {
+          "path": "(Contact as Person).PronounAggregate",
+          "mapper": "#/mappers/TypeKeyReference",
+          "predicate": "Contact typeis Person"
+        },
+        "pronounAggregateDisplay": {
+          "path": "(Contact as Person).PronounAggregateDisplay",
+          "predicate": "Contact typeis Person"
+        },
+        "pronounObjective": {
+          "path": "(Contact as Person).PronounObjective",
+          "predicate": "Contact typeis Person"
+        },
+        "pronounPossessive": {
+          "path": "(Contact as Person).PronounPossessive",
+          "predicate": "Contact typeis Person"
+        },
+        "pronounSubjective": {
+          "path": "(Contact as Person).PronounSubjective",
+          "predicate": "Contact typeis Person"
+        },
+        "sexAssignedAtBirth": {
+          "path": "(Contact as Person).SexAssignedAtBirth",
+          "mapper": "#/mappers/TypeKeyReference",
+          "predicate": "Contact typeis Person"
+        },
+        "subtype": {
+          "path": "Contact.Subtype",
+          "mapper": "#/mappers/TypeKeyReference"
+        },
+        "taxId": {
+          "path": "Contact.RestV1PL_MaskedTaxId"
+        },
+        "workPhone": {
+          "path": "Contact.RestV1_getPhoneNumber(Contact#WorkPhone)",
+          "mapper": "#/mappers/PhoneNumber"
+        }
+      }
+    },
+    "Document": {
+      "schemaDefinition": "Document",
+      "root": "entity.Document",
+      "properties": {
+        "author": {
+          "path": "Document.Author"
+        },
+        "dateModified": {
+          "path": "Document.DateModified"
+        },
+        "description": {
+          "path": "Document.Description"
+        },
+        "dms": {
+          "path": "Document.DMS"
+        },
+        "docUID": {
+          "path": "Document.DocUID"
+        },
+        "id": {
+          "path": "Document.RestId"
+        },
+        "inbound": {
+          "path": "Document.Inbound"
+        },
+        "language": {
+          "path": "Document.Language",
+          "mapper": "#/mappers/TypeKeyReference"
+        },
+        "mimeType": {
+          "path": "Document.MimeType"
+        },
+        "name": {
+          "path": "Document.Name"
+        },
+        "obsolete": {
+          "path": "Document.Obsolete"
+        },
+        "pendingDocUID": {
+          "path": "Document.PendingDocUID"
+        },
+        "recipient": {
+          "path": "Document.Recipient"
+        },
+        "section": {
+          "path": "Document.Section",
+          "mapper": "#/mappers/TypeKeyReference"
+        },
+        "securityType": {
+          "path": "Document.SecurityType",
+          "mapper": "#/mappers/TypeKeyReference"
+        },
+        "status": {
+          "path": "Document.Status",
+          "mapper": "#/mappers/TypeKeyReference"
+        },
+        "type": {
+          "path": "Document.Type",
+          "mapper": "#/mappers/TypeKeyReference"
+        }
+      }
+    },
+    "DocumentContent": {
+      "schemaDefinition": "DocumentContent",
+      "root": "gw.rest.core.pl.common.v1.documents.DocumentContent",
+      "properties": {
+        "contents": {
+          "path": "DocumentContent.Contents"
+        },
+        "id": {
+          "path": "DocumentContent.DocumentRestId"
+        },
+        "responseMimeType": {
+          "path": "DocumentContent.ResponseMimeType"
+        },
+        "url": {
+          "path": "DocumentContent.Url"
+        }
+      }
+    },
+    "GroupDetail": {
+      "schemaDefinition": "GroupDetail",
+      "root": "entity.Group",
+      "properties": {
+        "displayName": {
+          "path": "Group.RestV1_SafeDisplayName"
+        },
+        "id": {
+          "path": "Group.RestId"
+        }
+      }
+    },
+    "HistoryEvent": {
+      "schemaDefinition": "HistoryEvent",
+      "root": "entity.History",
+      "properties": {
+        "customType": {
+          "path": "History.CustomType",
+          "mapper": "#/mappers/TypeKeyReference"
+        },
+        "description": {
+          "path": "History.Description"
+        },
+        "eventTimestamp": {
+          "path": "History.EventTimestamp"
+        },
+        "historyType": {
+          "path": "History.Type",
+          "mapper": "#/mappers/TypeKeyReference"
+        },
+        "id": {
+          "path": "History.RestId"
+        },
+        "user": {
+          "path": "History.User.RestV1_AsReference",
+          "mapper": "#/mappers/ResourceReference"
+        }
+      }
+    },
+    "Note": {
+      "schemaDefinition": "Note",
+      "root": "entity.Note",
+      "properties": {
+        "author": {
+          "path": "Note.Author.RestV1_AsReference",
+          "mapper": "#/mappers/ResourceReference"
+        },
+        "body": {
+          "path": "Note.Body"
+        },
+        "bodySummary": {
+          "path": "Note.RestV1_truncatedBody(100)"
+        },
+        "confidential": {
+          "path": "Note.Confidential"
+        },
+        "createdDate": {
+          "path": "Note.AuthoringDate != null ? Note.AuthoringDate : Note.CreateTime",
+          // Event-safe because it only depends on AuthoringDate and CreateTime, which are directly on the Note
+          "eventSafe": true
+        },
+        "id": {
+          "path": "Note.RestId"
+        },
+        "securityType": {
+          "path": "Note.SecurityType",
+          "mapper": "#/mappers/TypeKeyReference"
+        },
+        "subject": {
+          "path": "Note.Subject"
+        },
+        "topic": {
+          "path": "Note.Topic",
+          "mapper": "#/mappers/TypeKeyReference"
+        },
+        "updateTime": {
+          "path": "Note.UpdateTime"
+        }
+      }
+    },
+    "QueueDetail": {
+      "schemaDefinition": "QueueDetail",
+      "root": "entity.User",
+      "properties": {
+        "displayName": {
+          "path": "User.Contact.FirstName"
+        },
+        "id": {
+          "path": "User.RestId"
+        }
+      }
+    },
+    "TypeFilter": {
+      "schemaDefinition": "TypeFilter",
+      "root": "gw.rest.core.pl.common.v1.metadata.TypeFilter",
+      "properties": {
+        "description": {
+          "path": "TypeFilter.Description"
+        },
+        "name": {
+          "path": "TypeFilter.Name"
+        },
+        "typeKeys": {
+          "path": "TypeFilter.TypeKeys"
+        }
+      }
+    },
+    "TypeKey": {
+      "schemaDefinition": "TypeKey",
+      "root": "gw.rest.core.pl.common.v1.metadata.TypeKey",
+      "properties": {
+        "categories": {
+          "path": "TypeKey.Categories"
+        },
+        "code": {
+          "path": "TypeKey.Code"
+        },
+        "description": {
+          "path": "TypeKey.Description"
+        },
+        "name": {
+          "path": "TypeKey.DisplayName"
+        },
+        "priority": {
+          "path": "TypeKey.Priority"
+        },
+        "retired": {
+          "path": "TypeKey.Retired"
+        },
+        "sortOrder": {
+          "path": "TypeKey.SortOrder"
+        }
+      }
+    },
+    "TypeList": {
+      "schemaDefinition": "TypeList",
+      "root": "gw.rest.core.pl.common.v1.metadata.TypeList",
+      "properties": {
+        "description": {
+          "path": "TypeList.Description"
+        },
+        "name": {
+          "path": "TypeList.Name"
+        },
+        "typeFilters": {
+          "path": "TypeList.TypeFilters",
+          "mapper": "#/mappers/TypeFilter"
+        },
+        "typeKeys": {
+          "path": "TypeList.TypeKeys",
+          "mapper": "#/mappers/TypeKey"
+        }
+      }
+    }
+  }
+}

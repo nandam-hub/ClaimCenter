@@ -1,0 +1,18 @@
+package rules.Preupdate.ClaimPreupdate_dir
+
+uses gw.api.locale.DisplayKey
+
+@gw.rules.RuleName("CPU34000 - Loss Cause Changed")
+internal class CPU34000LossCauseChanged {
+  static function doCondition(claim: entity.Claim): boolean {
+/*start00rule*/
+    return claim.getOriginalValue(Claim#LossCause) != null and claim.isFieldChanged(Claim#LossCause)
+/*end00rule*/
+  }
+
+  static function doAction(claim: entity.Claim, actions: gw.rules.Action) {
+/*start00rule*/
+    claim.createCustomHistoryEvent(CustomHistoryType.TC_DATACHANGE, DisplayKey.get("Rules.PreUpdate.Claim.LossCauseChanged", claim.getOriginalValue(Claim#LossCause), claim.LossCause))
+/*end00rule*/
+  }
+}

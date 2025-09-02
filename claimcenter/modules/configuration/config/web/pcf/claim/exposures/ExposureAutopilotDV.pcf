@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="ExposureAutopilotDV">
+    <Require
+      name="exposure"
+      type="Exposure"/>
+    <InputColumn>
+      <TypeKeyInput
+        id="ExposureAutopilotStatus"
+        label="DisplayKey.get(&quot;Web.Exposure.AutopilotCard.Status.Label&quot;)"
+        value="exposure.AutopilotStatus"
+        valueType="typekey.ExposureAutopilotStatus"/>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../../pcf.xsd">
+  <Page
+    canEdit="perm.System.editproperties"
+    canVisit="perm.System.viewproperties"
+    id="PropertyDetail"
+    parent="Properties()"
+    showUpLink="true"
+    title="DisplayKey.get(&quot;RuntimeProperties.Property.Detail&quot;)">
+    <LocationEntryPoint
+      signature="PropertyDetail(runtimeProperty : RuntimeProperty)"/>
+    <Variable
+      name="runtimeProperty"
+      type="RuntimeProperty"/>
+    <ScreenRef
+      def="PropertyDetailScreen(runtimeProperty, false)"/>
+  </Page>
+</PCF>

@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<plugin
+  interface="AuthenticationSourceCreatorPlugin"
+  name="RestAuthenticationSourceCreatorPlugin">
+  <plugin-java
+    additionalInterfaces="gw.api.modules.rest.framework.v1.plugin.security.IRestAuthenticationSourceCreatorPlugin"
+    javaclass="gw.api.modules.rest.framework.v1.plugin.security.RestAuthenticationSourceCreatorPlugin">
+    <param
+      name="unauthenticatedUserPublicId"
+      value="default_data:uauser"/>
+    <param
+      name="externalUserPublicId"
+      value="default_data:extuser"/>
+    <param
+      name="servicePublicId"
+      value="default_data:serviceuser"/>
+    <param
+      name="defaultPublicId"
+      value="default_data:defaultuser"/>
+    <!-- Defines whether or not basic auth will be supported on the REST servlet
+    lowerOnly will permit basic auth only on lower planet classes
+    allOff will never permit basic auth, even on lower planet classes
+    allOn will always permit basic auth, even prod and preprod planet classes, but prior approval must be granted from Guidewire to use this option
+    -->
+    <param
+      name="basicAuth"
+      value="lowerOnly"/>
+  </plugin-java>
+</plugin>

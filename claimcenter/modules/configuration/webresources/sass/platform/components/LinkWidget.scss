@@ -1,0 +1,29 @@
+.gw-LinkWidget {
+  flex-shrink: 0;
+  &:not([aria-disabled="true"]):not([disabled]) {
+    &.gw-actionable {
+      @include gw-link();
+    }
+
+    .gw-shortcutKey {
+      display: inline;
+      text-decoration: underline;
+    }
+  }
+
+  @include gw-disabled($applyToActionableInner: true);
+
+  display: inline-block;
+}
+
+.gw-vw--children {
+  .gw-mini-button {
+    margin-left: $gw-app--SPACING-rem-S;
+  }
+}
+
+.gw-link {
+  @include gw-link();
+}
+
+

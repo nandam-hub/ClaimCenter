@@ -1,0 +1,1 @@
+<%@ params( email: String, portalURL: String, code: String ) %> Salve ${email}, <br /> per reimpostare la password è necessario aprire l'URL seguente: <br /> <a href="${portalURL}?token=${code}">Reimpostazione password</a><br /><br /> Cordiali saluti,  

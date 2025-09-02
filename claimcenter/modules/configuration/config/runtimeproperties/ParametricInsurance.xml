@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<Properties xmlns="http://guidewire.com/psc/properties">
+  <Property>
+    <Group>parametricinsurance</Group>
+    <Name>Parametric_Insurance_Base_URL</Name>
+    <Description>Runtime property to indicate the base url of Parametric Insurance Endpoint</Description>
+    <Value>http://localhost:8081/api</Value>
+  </Property>
+  <Property>
+    <Group>parametricinsurance</Group>
+    <Name>Parametric_Insurance_Endpoint</Name>
+    <Description>Runtime property to indicate the  url of Parametric Insurance Endpoint</Description>
+    <Value>/weatherInfo</Value>
+  </Property>
+</Properties>

@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../../pcf.xsd">
+  <Page
+    afterCancel="Properties.go()"
+    afterCommit="Properties.go()"
+    canEdit="true"
+    canVisit="perm.System.importproperties"
+    countsAsWork="false"
+    id="ImportProperties"
+    parent="Properties()"
+    showUpLink="false"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;RuntimeProperties.Property.Import.Properties&quot;)">
+    <LocationEntryPoint
+      signature="ImportProperties()"/>
+    <Variable
+      initialValue="new gw.api.properties.PropertyImportData()"
+      name="importData"
+      type="gw.api.properties.PropertyImportData"/>
+    <ScreenRef
+      def="ImportPropertiesScreen(importData)"/>
+  </Page>
+</PCF>

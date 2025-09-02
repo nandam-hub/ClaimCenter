@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<typelistextension xmlns="http://guidewire.com/typelists" name="RuntimePropertyGroup">
+  <typecode
+    code="policysearch"
+    desc="Policy Search"
+    name="Policy Search"/>
+</typelistextension>

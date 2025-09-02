@@ -1,0 +1,1 @@
+<div :if="label" class="gw-VerbatimWidget--inner">${label}</div>

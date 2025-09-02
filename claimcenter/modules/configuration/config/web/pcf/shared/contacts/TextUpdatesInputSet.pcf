@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <InputSet
+    id="TextUpdatesInputSet">
+    <Require
+      name="person"
+      type="Person"/>
+    <TypeKeyInput
+      editable="true"
+      id="ClaimUpdatesViaTextOptIn"
+      label="DisplayKey.get(&quot;Web.ContactDetail.Phone.TextUpdatesTo&quot;)"
+      value="person.ClaimUpdatesViaTextOptIn"
+      valueType="typekey.PreferredPhoneNumberType"
+      visible="CurrentLocation.InEditMode"/>
+    <TextInput
+      id="ClaimUpdatesViaTextOptInValue"
+      label="DisplayKey.get(&quot;Web.ContactDetail.Phone.TextUpdatesTo&quot;)"
+      value="person.ClaimUpdatesViaTextOptIn.DisplayName"
+      visible="!CurrentLocation.InEditMode"/>
+  </InputSet>
+</PCF>

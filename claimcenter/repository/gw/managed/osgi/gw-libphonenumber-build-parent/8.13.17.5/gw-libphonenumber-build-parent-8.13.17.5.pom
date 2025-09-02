@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>gw.managed.osgi</groupId>
+  <artifactId>gw-libphonenumber-build-parent</artifactId>
+  <packaging>pom</packaging>
+  <version>8.13.17.5</version>
+
+  <scm>
+    <developerConnection>scm:git:ssh://git@stash.guidewire.com/pl/libphonenumber.git</developerConnection>
+    <connection>scm:git:https://stash.guidewire.com/scm/pl/libphonenumber.git</connection>
+    <tag>gw-libphonenumber-build-parent-8.13.17.5</tag>
+  </scm>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+    <!-- plugins -->
+    <maven.compiler.plugin.version>3.8.0</maven.compiler.plugin.version>
+
+    <!-- maven / java -->
+    <required.maven.version>3.6.0</required.maven.version>
+    <maven.compiler.source>8</maven.compiler.source>
+    <maven.compiler.target>8</maven.compiler.target>
+
+    <!-- libs -->
+    <junit.version>4.12</junit.version>
+  </properties>
+
+  <licenses>
+    <license>
+      <name>Apache 2</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <comments>Copyright (C) 2011 The Libphonenumber Authors</comments>
+    </license>
+  </licenses>
+
+  
+
+  
+  <modules>
+    <!--<module>tools/java</module>-->
+    <module>java</module>
+  </modules>
+
+  <distributionManagement>
+    <repository>
+      <id>publish.to.repository.id</id>
+      <url>${env.PUBLISH_TO_REPOSITORY_URL}</url>
+    </repository>
+  </distributionManagement>
+
+</project>

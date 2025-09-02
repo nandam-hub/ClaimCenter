@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <ModalCell
+    id="RuleExecutionInfoCell"
+    mode="default">
+    <Require
+      name="version"
+      type="RuleVersion"/>
+    <Require
+      name="versionController"
+      type="gw.bizrules.management.BizRulesVersionController"/>
+    <Variable
+      initialValue="versionController.getRuleHead(version)"
+      name="head"
+      type="RuleHead"/>
+    <Variable
+      initialValue="head.getExecutionStatus(versionController)"
+      name="status"
+      recalculateOnRefresh="true"
+      type="RuleExecutionStatus"/>
+    <FormatCell
+      align="center"
+      id="ExecutionIcons">
+      <ContentInput
+        align="center"
+        visible="head.HeadVersion.Rule != null">
+        <Link
+          icon="&quot;runstatus_executing&quot;"
+          iconColor="gw.api.web.color.GWColor.THEME_ALERT_SUCCESS"
+          iconType="svgFileName"
+          id="Executing"
+          tooltip="status.Description"
+          visible="status == TC_ENABLED"/>
+        <Link
+          icon="&quot;runstatus_not_executing&quot;"
+          iconColor="gw.api.web.color.GWColor.THEME_ALERT_ERROR"
+          iconType="svgFileName"
+          id="NotExecuting"
+          tooltip="status.Description"
+          visible="RuleExecutionStatus.TF_NOTEXECUTING.TypeKeys.contains(status)"/>
+        <Link
+        icon="&quot;runstatus_prev_executing&quot;"
+        iconColor="gw.api.web.color.GWColor.THEME_ALERT_WARNING"
+        iconType="svgFileName"
+        id="PrevExecuting"
+        tooltip="head.getPrevExecutionTooltip(versionController)"
+        visible="status == TC_PREVENABLED"/>
+        <Link
+          icon="&quot;runstatus_unknown&quot;"
+          iconColor="gw.api.web.color.GWColor.THEME_ACTION_NEUTRAL"
+          iconType="svgFileName"
+          id="Unknown"
+          tooltip="status.Description"
+          visible="status == TC_UNKNOWN"/>
+      </ContentInput>
+    </FormatCell>
+  </ModalCell>
+</PCF>

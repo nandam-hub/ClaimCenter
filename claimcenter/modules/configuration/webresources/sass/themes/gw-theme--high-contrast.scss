@@ -1,0 +1,53 @@
+@import "./gw-theme--cloud-banff";
+
+$high-contrast--lightest-gray: #757575;
+
+$gw-app--bg: #FFFFFF;
+$gw-app--col: #000000;
+$gw-app--border--col: $high-contrast--lightest-gray;
+
+$gw-app--palette--red: #D73E2D;
+$gw-app--palette--green: #1C8721;
+$gw-app--palette--orange: #B3610F;
+$gw-app--palette--blue: #4D73C7;
+
+// custom badge colors for contrast
+$gw-app--palette--tier1: #CBD0D6;
+$gw-app--palette--tier2: #FFC02E;
+$gw-app--palette--tier3: #F0F3F6;
+$gw-app--palette--tier4: #DAB26C;
+$gw-app--palette--tier1--text-overlay-col: $gw-app--palette--offblack;
+$gw-app--palette--tier2--text-overlay-col: $gw-app--palette--offblack;
+$gw-app--palette--tier3--text-overlay-col: $gw-app--palette--offblack;
+$gw-app--palette--tier4--text-overlay-col: $gw-app--palette--offblack;
+$gw-app--palette--info: #92B3FB;
+$gw-app--palette--error: #FFA1A1;
+$gw-app--palette--outcomepositive: #6BD56E;
+$gw-app--palette--orange--vibrant: #FFA948;
+$gw-app--palette--info--text-overlay-col: $gw-app--palette--offblack;
+$gw-app--palette--orange--vibrant--text-overlay-col: $gw-app--palette--offblack;
+$gw-app--palette--error--text-overlay-col: $gw-app--palette--offblack;
+$gw-app--palette--outcomepositive--text-overlay-col: $gw-app--palette--offblack;
+$gw-app--BadgeWidget--small-font-weight: 600;
+
+$gw-app--inputs--placeholder--col: $high-contrast--lightest-gray;
+
+$gw-app--AlertBar--icon-col: #B35908;
+
+$gw-app--HeaderCell--sort--hide-icon-on-sort: true;
+// icons should usually have a 3:1 contrast ratio, but this icon is very small and needs as much contrast as possible
+$gw-app--HeaderCell--sort--generic--col: black;
+
+$gw-app--NorthPanel--active-tab-bottom-bar-bg: #FFFFFF;
+
+$gw-app--panels--bg: $gw-app--bg;
+$gw-app--panels--col: $gw-app--col;
+
+// high contrast as background against white text and as text against light-gray background
+$gw-app--progress-bar--bar-color-default: #4067AA;
+
+$gw-app--links--col: #375ECB;
+$gw-app--links--underline-always: true;
+
+$gw-app--buttons--disabled-col: #5C5C5C;
+$gw-app--WestPanel--disabled--col: #959595;

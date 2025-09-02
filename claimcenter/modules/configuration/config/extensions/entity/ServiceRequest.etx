@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<extension
+  xmlns="http://guidewire.com/datamodel"
+  entityName="ServiceRequest">
+  <implementsInterface
+    iface="gw.core.vendormanagement.IServiceRequestCoreMethods"
+    impl="gw.vendormanagement.ServiceRequestCoreMethodsImpl"/>
+  <index
+    desc="Enforce uniqueness of ServiceRequestNumber"
+    name="servicerequestu1"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="ServiceRequestNumber"/>
+  </index>
+</extension>

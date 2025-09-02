@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<Entity
+  name="NumericCovTerm">
+  <Columns>
+    <Column
+      beanPath="NumericCovTerm.NumericValue"
+      name="numericValue"/>
+    <Column
+      beanPath="NumericCovTerm.Units"
+      name="units"/>
+    <Column
+      beanPath="NumericCovTerm.CovTermPattern"
+      name="covTermPattern"/>
+  </Columns>
+  <DisplayName><![CDATA[uses java.math.RoundingMode
+uses java.text.DecimalFormat
+uses java.lang.StringBuilder
+
+var sb = new StringBuilder()
+if (covTermPattern != null) {
+  sb.append(covTermPattern.DisplayName).append(" ")
+}
+if (numericValue != null) {
+  var df = new DecimalFormat("#.####")
+  sb.append(df.format(numericValue))
+  sb.append(" ")
+}
+if (units != null) {
+  sb.append(units)
+}
+return sb.toString()]]></DisplayName>
+</Entity>

@@ -1,0 +1,45 @@
+.gw-DetailViewWidget:not(.gw-isLayoutTable) {
+
+  @include gw-panelInnerSpacing();
+  @include gw-panelOuterSpacing();
+  @include gw-widgetStyles();
+
+  &.gw-isInline {
+    display: inline-block;
+  }
+
+  &:not(.gw-isInline) {
+    display: block;
+  }
+
+  .gw-DetailViewWidget--body {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    justify-content: flex-start;
+    @include gw-wrapNever();
+    overflow: hidden;
+  }
+
+  @include gw-wrapNever();
+
+  &.gw-childrenHaveBorders {
+    .gw-InputColumnWidget.gw-styleTag--DetailViewWidget {
+      @include gw-borderRadius();
+      border: $gw-app--DetailView--child-border;
+      //TODO: might need to enforce a min padding here
+    }
+  }
+
+  .gw-columnDivider {
+    align-self: stretch;
+    display: inline-block;
+    width: $gw-app--border-width-px;
+    background-color: $gw-app--border--col;
+    margin-top: $gw-app--SPACING-rem-L;
+    margin-bottom: $gw-app--SPACING-rem-L;
+    margin-left: $gw-app--SPACING-rem-XS;
+    margin-right: $gw-app--SPACING-rem-XS;
+  }
+}

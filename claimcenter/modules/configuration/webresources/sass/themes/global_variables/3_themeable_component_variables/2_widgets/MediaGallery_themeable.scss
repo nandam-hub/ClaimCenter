@@ -1,0 +1,44 @@
+$gw-app--MediaGallery--bg: $gw-app--palette--offwhite !default;
+$gw-app--MediaGallery--border-radius: $gw-app--border-radius-px !default;
+$gw-app--MediaGallery--has-default-border: true !default;
+$gw-app--MediaGallery--default-border-col: $gw-app--border--col-lighter !default;
+
+$gw-app--MediaGallery--header--bg: $gw-app--panels--bg !default;
+$gw-app--MediaGallery--header--font-size: 1.6em !default;
+$gw-app--MediaGallery--header--font-color: $gw-app--panels--col !default;
+$gw-app--MediaGallery--header--font-weight: gw-weight(light) !default;
+$gw-app--MediaGallery--header--padding: $gw-app--SPACING-rem-M $gw-app--SPACING-rem-M $gw-app--SPACING-rem-M $gw-app--SPACING-rem-XL !default;
+$gw-app--MediaGallery--header--bottom-border: 1px solid $gw-app--border--col-lighter !default;
+
+// Gallery Tiles
+
+$gw-app--MediaGallery--tile--width: 240px !default;
+$gw-app--MediaGallery--tile--max-height: 460px !default;
+$gw-app--MediaGallery--tile--image-height: 177px !default;
+$gw-app--MediaGallery--tile--image-fit: contain !default;
+$gw-app--MediaGallery--tile--image-bg: $gw-app--panels--bg !default;
+$gw-app--MediaGallery--tile--shadow: $gw-app--menus--shadow !default;
+
+$gw-app--MediaGallery--tile--title-font-size: 1.426em !default;
+$gw-app--MediaGallery--tile--title-font-color: $gw-app--secondary-col !default;
+$gw-app--MediaGallery--tile--title-bg: $gw-app--MediaGallery--tile--image-bg !default;
+$gw-app--MediaGallery--tile--uses-raised-title-bar: true !default;
+
+$gw-app--MediaGallery--tile--text-padding: $gw-app--SPACING-rem-M !default;
+
+$gw-app--MediaGallery--tile--margin: $gw-app--SPACING-rem-S !default;
+$gw-app--MediaGallery--tile--description-max-height: 7.2em !default;
+
+$gw-app--MediaGallery--tile--key-width: 40% !default;
+$gw-app--MediaGallery--tite--key-font-color: $gw-app--secondary-col !default;
+
+$gw-app--MediaGallery--tile--paragraph--font-size: $gw-app--font-size--smaller-px !default;
+$gw-app--MediaGallery--tile--paragraph--font-family: $gw-app--font-family--small !default;
+$gw-app--MediaGallery--tile--paragraph--font-color: $gw-app--secondary-col !default;
+$gw-app--MediaGallery--tile--paragraph--top-border: 1px dashed $gw-app--border--col-lighter !default;
+
+$gw-app--MediaGallery--tiles-fill-white-space: true !default;
+$gw-app--MediaGallery--tiles-max-width-when-grow: 1.6 * $gw-app--MediaGallery--tile--width !default;
+
+$gw-app--MediaGallery--tile-use-angular-badges: true !default;
+$gw-app--MediaGallery--tile-badge-font-size: $gw-app--font-size--tiny-px !default;

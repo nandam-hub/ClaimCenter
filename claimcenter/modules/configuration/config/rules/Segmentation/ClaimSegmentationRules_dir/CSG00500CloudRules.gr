@@ -1,0 +1,20 @@
+package rules.Segmentation.ClaimSegmentationRules_dir
+
+uses gw.api.cloud.rules.CloudRulesEngine
+
+@gw.rules.RuleName("CSG00500 - Cloud Rules")
+internal class CSG00500CloudRules {
+  static function doCondition(claim : entity.Claim) : boolean {
+/*start00rule*/
+return true
+/*end00rule*/
+}
+
+  static function doAction(claim : entity.Claim, actions : gw.rules.Action) {
+/*start00rule*/
+    if (CloudRulesEngine.segmentClaimIfEnabled(claim)) {
+      actions.exit()
+    }
+/*end00rule*/
+  }
+}

@@ -1,0 +1,4 @@
+<div class="gw-image-wrapper gw-loading ${imageStyleCss}">
+    <img src="${primaryUrl}" alt="${altText}" ${imageHeightAndWidths} class="gw-image ${objectFit}" onload="gw.globals.gwImageWidget.onLoad(event)" onerror="gw.globals.gwImageWidget.onError(event)">
+    <div :if="badgeText" role="status" class="gw-badge-slash ${badgeStyleCss}">${badgeText}</div>
+</div>

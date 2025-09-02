@@ -1,0 +1,24 @@
+damageables:
+  Vehicle:
+    ccRiskUnitName: VehicleRU
+    pcRiskUnitName: PersonalVehicle
+    pcRiskUnitPath: vehicles
+    fields:
+      LicensePlate:
+        required: true
+      Make:
+        required: true
+      Model:
+        required: true
+      Color:
+        required: true
+      Vin:
+        required: true
+      Year:
+        required: true
+        restFieldName: ModelYear
+      State:
+        apdFieldName: LicenseState
+        required: true
+      PolicySystemId:
+        restFieldName: ccPolicySystemId

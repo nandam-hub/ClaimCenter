@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="Archived Claims Restore Type"
+  name="BulkRestoreType"  
+  tableName="bulkrestoretype">
+  <typecode
+    code="claims_list"
+    desc="Enter claim numbers"
+    name="Enter claim numbers"    
+    priority="1"/>
+  <typecode
+    code="claims_csv"
+    desc="Upload a file with claim numbers to restore(.csv file)"    
+    name="Upload a list of claim numbers"
+    priority="2"/>  
+</typelist>

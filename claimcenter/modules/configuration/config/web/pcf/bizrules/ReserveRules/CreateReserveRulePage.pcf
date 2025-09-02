@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <!--The unique 'token' parameter allows us to edit more than one rule at a time.-->
+  <Page
+    afterCancel="context.goToRulesListPage(typekey.Rule.TC_RESERVERULE)"
+    afterCommit="context.goToRulesListPage(typekey.Rule.TC_RESERVERULE)"
+    canEdit="true"
+    id="CreateReserveRulePage"
+    parent="ReserveRules()"
+    showUpLink="true"
+    startInEditMode="true"
+    title="title">
+    <LocationEntryPoint
+      signature="CreateReserveRulePage(context: gw.bizrules.CCRulesNavigationContext, title: String, token: String)"/>
+    <LocationEntryPoint
+      signature="CreateReserveRulePage(context: gw.bizrules.CCRulesNavigationContext, title: String, ruleToClone: CCRule, token: String)"/>
+    <Variable
+      name="context"
+      type="gw.bizrules.CCRulesNavigationContext"/>
+    <Variable
+      name="title"
+      type="String"/>
+    <Variable
+      name="token"
+      type="String"/>
+    <Variable
+      name="ruleToClone"
+      type="CCRule"/>
+    <Variable
+      name="head"
+      type="RuleHead"
+      initialValue="context.RuleFactory.createRuleHead(com.google.common.base.Optional.fromNullable(ruleToClone))"/>
+    <ScreenRef
+      def="CCRuleCreationScreen(context, ruleToClone, head)"/>
+  </Page>
+</PCF>

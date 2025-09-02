@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<internaltypelistextension xmlns="http://guidewire.com/typelists" name="SystemPermissionType">
+  <typecode
+    code="viewexchangerates"
+    desc="Permission to view Exchange Rates screen"
+    name="View Exchange Rates screen"/>
+  <typecode
+    code="editexchangerates"
+    desc="Permission to edit Exchange Rates"
+    name="Edit Exchange Rates"/>
+</internaltypelistextension>

@@ -1,0 +1,6 @@
+# GAR START: config/portal/capabilities/granite_on_cloud-servicerequest.gwproperties [/opt/teamcity/agent/work/45c3a2f1b8ee4237/gpm-generator/downloads/edge/backend/xcenter-config/xcenter-utils/cc-utils/../../../Capabilities/servicerequest/src/main]
+handlers.servicerequest=edge.capabilities.servicerequest.ServiceRequestHandler
+handlers.docs=edge.capabilities.servicerequest.document.ServiceRequestDocumentHandler
+handlers.docupload=edge.capabilities.servicerequest.document.ServiceRequestFileUploadHandler
+httphandlers.servicerequestDocument=edge.capabilities.document.DocumentRetrievalHandler
+# GAR END

@@ -1,0 +1,6 @@
+<div class="gw-BulletPointTextValueWidget--inner">
+  <div class="gw-icon" role="img" aria-label="${bulletIconAltText}"></div>
+  <div class="gw-action" role="link" data-gw-click="${action}" data-gw-no-tab-index="${isUnclickable}" aria-hidden="${isUnclickable}">
+    ${currentValue}
+  </div>
+</div>

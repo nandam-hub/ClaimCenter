@@ -1,0 +1,101 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "x-gw-combine": [
+    "gw.core.pl.framework.v1.framework_pl-1.0"
+  ],
+  "x-gw-localizationKeyPrefix": "async.v1",
+  "definitions": {
+    "AsyncRequest": {
+      "title": "Async API request",
+      "description": "Details of an API request made using the `Prefer respond-async` header",
+      "type": "object",
+      "properties": {
+        "acceptedTime": {
+          "title": "Accepted time",
+          "description": "The date and time that the original API request was accepted for processing.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "completionTime": {
+          "title": "Completion time",
+          "description": "The date and time that processing for this request was completed. Only present if the request has completed.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "id": {
+          "title": "ID",
+          "description": "The unique identifier of this element",
+          "type": "string",
+          "readOnly": true
+        },
+        "requestMethod": {
+          "title": "Request method",
+          "description": "The HTTP method used for the original API request",
+          "type": "string",
+          "readOnly": true
+        },
+        "requestPath": {
+          "title": "Request path",
+          "description": "The path used for the original API request",
+          "type": "string",
+          "readOnly": true
+        },
+        "requestQueryString": {
+          "title": "Request query string",
+          "description": "The query string supplied on the original API request, if any",
+          "type": "string",
+          "readOnly": true
+        },
+        "responseBodyJson": {
+          "title": "Response body JSON",
+          "description": "The body of the response as a JSON object. Only present if the request has completed and its response has a `Content-Type` of `application/json`.",
+          "type": "object",
+          "readOnly": true
+        },
+        "responseHeaders": {
+          "title": "Response headers",
+          "description": "A map of the headers on the response. Only present if the request has completed.",
+          "$ref": "#/definitions/AsyncResponseHeaderMap",
+          "readOnly": true
+        },
+        "responseStatus": {
+          "title": "Response status",
+          "description": "The HTTP status code of the response. Only present if the request has completed.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "startTime": {
+          "title": "Start time",
+          "description": "The date and time when processing of the request started. Only present if the request has started or completed processing.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "status": {
+          "title": "Status",
+          "description": "The current status of this request, one of `Accepted`, `InProgress`, or `Completed`.",
+          "$ref": "#/definitions/TypeKeyReference",
+          "readOnly": true,
+          "x-gw-extensions": {
+            "typelist": "AsyncApiRequestStatus"
+          }
+        }
+      }
+    },
+    "AsyncResponseHeaderMap": {
+      "title": "Async API response header map",
+      "description": "A map of HTTP response headers on an async request response",
+      "type": "object",
+      "additionalProperties": {
+        "title": "Additional properties",
+        "description": "Each key in this map represents a header name, while each value is a list of values for that header",
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

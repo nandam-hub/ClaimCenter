@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="Types of foreign exchange rate markets."
+  final="false"
+  name="FXRateMarket"
+  platform="true">
+  <typecode
+    code="market"
+    desc="Market rates"
+    name="Market"/>
+  <typecode
+    code="corporate"
+    desc="Corporate rates"
+    name="Corporate"/>
+  <typefilter
+    desc="This filter ensures that only the relevant rate markets appear on the administrave screens."
+    name="AdminScreenSelector">
+    <include
+      code="corporate"/>
+    <include
+      code="market"/>
+  </typefilter>
+</typelist>

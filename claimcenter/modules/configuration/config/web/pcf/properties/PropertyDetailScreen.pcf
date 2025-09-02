@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../../pcf.xsd">
+  <Screen
+    id="PropertyDetailScreen">
+    <Require
+      name="runtimeProperty"
+      type="RuntimeProperty"/>
+    <Require
+      name="isNew"
+      type="boolean"/>
+    <Toolbar>
+      <EditButtons/>
+      <ToolbarButton
+        action="deleteRuntimeProperty(runtimeProperty); Properties.go()"
+        available="perm.System.deleteproperties"
+        confirmMessage="DisplayKey.get(&quot;RuntimeProperties.Property.Delete.Confirmation&quot;)"
+        hideIfEditable="true"
+        id="PropertyDetailScreenDeleteButton"
+        label="DisplayKey.get(&quot;Button.Delete&quot;)"/>
+    </Toolbar>
+    <PanelRef
+      def="PropertyDV(runtimeProperty, isNew)"/>
+    <Code>
+      <![CDATA[
+        function deleteRuntimeProperty(prop : RuntimeProperty) : void {
+          var bundle = gw.transaction.Transaction.getCurrent()
+          prop = bundle.add(prop)
+          prop.remove()
+          bundle.commit()
+        }
+      ]]>
+    </Code>
+  </Screen>
+</PCF>

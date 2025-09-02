@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  entity="EntityInRestoreRecord"
+  desc="Links an entity with a BulkRestoreRecord"
+  loadable="false"
+  platform="true"
+  table="entityinrestorerec"
+  type="retireable">
+  <implementsInterface
+    iface="com.guidewire.pl.domain.archiving.EntityInRestoreRecordPublicMethods"
+    impl="com.guidewire.pl.domain.archiving.impl.EntityInRestoreRecordImpl"/>
+  <foreignkey
+    columnName="BulkRestoreRecordID"
+    desc="BulkRestoreRecord which contains the entity info."
+    fkentity="BulkRestoreRecord"
+    name="BulkRestoreRecord"
+    nullok="false"/>
+  <column
+    name="BulkRestoreEntityID"
+    nullok="false"
+    type="softentityreference"/>
+</entity>

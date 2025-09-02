@@ -1,0 +1,8 @@
+{
+  "schemaName": "ext.systemtools.v1.systemtools_ext-1.0",
+  "combine": [
+    "gw.content.cc.systemtools.v1.systemtools_content-1.0",
+    "ext.framework.v1.framework_ext-1.0"
+  ],
+  "updaters": { }
+}

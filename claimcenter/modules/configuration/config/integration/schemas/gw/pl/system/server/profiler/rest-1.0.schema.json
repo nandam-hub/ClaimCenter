@@ -1,0 +1,64 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "x-gw-import": {
+    "linking": "gw.pl.framework.linking-1.0"
+  },
+  "definitions": {
+    "RestHistoryPage": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RestOccurrence"
+          }
+        },
+        "_links": {
+          "$ref": "linking#/definitions/Links"
+        },
+        "count": {
+          "type": "integer"
+        },
+        "totalCount": {
+          "type": "integer"
+        }
+      }
+    },
+    "RestOccurrence": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "x-gw-type": "typekey.ProfilerConfig",
+          "x-gw-export-enumeration": true
+        },
+        "serverId": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "start": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "complete": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "httpPath": {
+          "type": "string"
+        },
+        "traceabilityId": {
+          "type": "string"
+        },
+        "_links": {
+          "$ref": "linking#/definitions/Links"
+        }
+      }
+    }
+  }
+}

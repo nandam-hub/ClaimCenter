@@ -1,0 +1,54 @@
+<div class="gw-CalendarWeek--header">
+    <div id="${prefixId}ccCalPrevWeek" class="gw-CalendarWeek--prev"
+         aria-label="previousWeekAriaLabel" role="button"
+         data-gw-click="calendar.week id:${calendarId} ${prevWeekButtonArgs}">
+        <div class="gw-icon"></div>
+    </div>
+    <div class="gw-title"><div class="gw-label">${weekTitle}</div></div>
+    <div id="${prefixId}ccCalNextWeek" class="gw-CalendarWeek--next"
+         aria-label="nextWeekAriaLabel" role="button"
+         data-gw-click="calendar.week id:${calendarId} ${nextWeekButtonArgs}">
+        <div class="gw-icon"></div>
+    </div>
+</div>
+<div class="gw-CalendarWeek--body">
+    <div :for="day" :in="days" class="gw-CalendarWeek--day" aria-expanded="true">
+        <div class="gw-day--title">${day.longDayName}</div>
+        <div :if="day.hasEvents" class="gw-day--event-summary">${day.eventsSummary}</div>
+        <div class="gw-day--toggle" data-gw-click="calendar.toggleDay">
+            <div class="gw-icon"></div>
+        </div>
+        <div class="gw-day--content">
+            <div :unless="day.hasEvents" class="gw-CalendarWeek--event--outer">
+                <div class="gw-CalendarWeek--event--inner">
+                    ${noEventsText}
+                </div>
+            </div>
+            <div :for="eventOuter" :in="day.events" class="gw-CalendarWeek--event--outer">
+                <div :for="event" :in="eventOuter.allEvents" class="gw-CalendarWeek--event--inner">
+                    <div class="gw-event--inner--left">
+                      <div :if="event.critical" class="gw-critical gw-icon" data-gw-tooltip="${criticalLabel}"></div>
+                      <div :if="allowHidingIndividualEvents" class="gw-event--toggle" data-gw-click="calendar.toggleEvent" aria-expanded="true">
+                          <div class="gw-icon"></div>
+                      </div>
+                    </div>
+                    <div class="gw-event--inner--right" data-gw-click="calendar.action id:${calendarId} action:${event.action}" role="link">
+                        <div :if="event.timeLabel" class="gw-event--time">
+                            ${event.timeLabel}
+                        </div>
+                        <div class="gw-event--action"
+                          aria-label="${event.ariaLabel}">
+                            ${event.longWeekDisplay}
+                        </div>
+                        <div class="gw-event--props">
+                            <div :for="eventProp" :in="event.props" class="gw-event--prop">
+                                ${eventProp.singleLine}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="gw-CalendarWeek--footer"></div>

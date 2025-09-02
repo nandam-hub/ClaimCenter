@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<extension xmlns="http://guidewire.com/datamodel" entityName="Policy">
+  <!--GAR START: Entities/Policy.etx [/opt/teamcity/agent/work/45c3a2f1b8ee4237/gpm-generator/downloads/edge/backend/xcenter-config/xcenter-utils/cc-utils/../../../Capabilities/claim/src/main]-->
+    
+  <index desc="Index for portal search on accountnumber and policyType" name="portalsearch_acct" unique="true">
+        
+    <indexcol keyposition="2" name="AccountNumber"/>
+        
+    <indexcol keyposition="3" name="PolicyType"/>
+        
+    <indexcol keyposition="4" name="Retired"/>
+        
+    <indexcol keyposition="1" name="ID"/>
+      
+  </index>
+    
+  <index desc="Index for portal search on policynumber and policyType" name="portalsearch_pol" unique="true">
+        
+    <indexcol keyposition="1" name="ID"/>
+        
+    <indexcol keyposition="2" name="PolicyNumber"/>
+        
+    <indexcol keyposition="3" name="PolicyType"/>
+        
+    <indexcol keyposition="4" name="Retired"/>
+      
+  </index>
+    
+  <index desc="Index for portal search on producercode and policyType" name="portalsearch_pcode" unique="true">
+        
+    <indexcol keyposition="1" name="ID"/>
+        
+    <indexcol keyposition="2" name="ProducerCode"/>
+        
+    <indexcol keyposition="3" name="PolicyType"/>
+        
+    <indexcol keyposition="4" name="Retired"/>
+      
+  </index>
+  
+  <!--GAR END-->
+</extension>

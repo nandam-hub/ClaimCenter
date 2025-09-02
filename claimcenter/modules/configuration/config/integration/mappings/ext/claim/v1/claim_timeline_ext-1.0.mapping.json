@@ -1,0 +1,64 @@
+{
+  "schemaName": "ext.claim.v1.claim_timeline_ext-1.0",
+   "mappers": {
+     "TimeLine_SP": {
+      "schemaDefinition":"TimeLine_SP",
+     "root": "entity.Timeline_SP",
+     "properties": {
+       "RestoreDate": {
+         "path": "Timeline_SP.RestoreDate"
+       },
+       "TimelineStatus": {
+         "path" : "Timeline_SP.TimelineStatus"
+       },
+       "TimelineEntries": {
+         "path": "Timeline_SP.TimelineEntries",
+         "mapper": "#/mappers/TimelineEntry_SP"
+       }
+     }
+   },
+     "TimelineEntry_SP": {
+       "schemaDefinition": "TimelineEntry_SP",
+       "root": "entity.TimelineEntry_SP",
+       "properties": {
+         "summary": {
+           "path": "TimelineEntry_SP.Summary"
+         },
+         "eventDate": {
+           "path": "TimelineEntry_SP.EventDate"
+         },
+         "TimelineCategory": {
+           "path": "TimelineEntry_SP.TimelineCategory"
+         },
+         "Importance": {
+           "path": "TimelineEntry_SP.Importance"
+         },
+         "PossibleDuplicate": {
+           "path": "TimelineEntry_SP.PossibleDuplicate"
+         },
+         "TimelineLinks":  {
+           "path": "TimelineEntry_SP.TimelineLinks",
+           "mapper": "#/mappers/TimelineLink_SP"
+         }
+       }
+     },
+     "TimelineLink_SP": {
+       "schemaDefinition": "TimelineLink_SP",
+       "root": "entity.TimelineLink_SP",
+       "properties": {
+         "BeanID": {
+           "path": "TimelineLink_SP.BeanID"
+         },
+         "BeanType": {
+           "path": "TimelineLink_SP.BeanType"
+         },
+         "Sequence": {
+           "path": "TimelineLink_SP.Sequence"
+         },
+         "ArbitraryLinkEnum": {
+           "path": "TimelineLink_SP.ArbitraryLinkEnum"
+         }
+       }
+     }
+   }
+}

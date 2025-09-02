@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  entity="RegionAudit_SP"
+  supertype="DataAudit_SP">
+  <foreignkey
+    columnName="RegionID"
+    fkentity="Region"
+    name="Region"
+    nullok="true"/>
+</subtype>

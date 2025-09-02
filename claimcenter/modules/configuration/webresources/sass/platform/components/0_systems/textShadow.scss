@@ -1,0 +1,230 @@
+/**
+  Text Shadow's primary purpose in our client is to ensure a high contrast ratio between text and background.
+  In the most extreme, would be uncaught "bugs" in themeing (either by GW or by a Customer), where we end up with something like white text and white background.
+  Adding Text shadow to the text, allows that white text to be visually distinct from a white background.
+  Also, can be enabled by a user to support accessibility issues.
+
+  There are also, purely design and artistic reasons for text shadows, in some places. Like making a title standout. And a theme
+  or a customer could choose to add them in one off places, directly in sass, wherever they wanted.
+
+  For that reason, we can't provide a universal on/off toggle for text shadows.
+  Instead we apply a top level set of styles here that allows the theme to "enable" text shadows.
+  But the same styles can also be "forced" on by the user via the preferences panel.
+ */
+body {
+  @mixin addTextShadow($col) {
+    text-shadow: getTextShadowBasedOnTextLuminance($col);
+  }
+
+  @mixin addTextShadowForHoverables($col, $hov-col, $act-col) {
+    @include addTextShadow($col);
+
+    &:hover:not([aria-disabled="true"]):not([disabled]), &.gw-hover:not([aria-disabled="true"]):not([disabled]) {
+      @include addTextShadow($hov-col);
+    }
+
+    &.gw-active:not([aria-disabled="true"]):not([disabled]), &.gw-hasOpenSubMenu, &.gw-event-temp-active {
+      @include addTextShadow($act-col);
+    }
+
+    &[aria-disabled="true"], &[disabled] {
+      text-shadow: none;
+    }
+
+  }
+
+  @mixin textShadowsOn() {
+    text-shadow: $gw-app--global-text-shadow;
+    // List of various places that could use text shadows that need to override the default for the theme
+
+    // =====================================
+    // == MENUS
+    // =====================================
+    .gw-TileActionsWidget {
+      .gw-TileActionWidget {
+        @include addTextShadowForHoverables($gw-app--menus--col, $gw-app--menus--hover--col, $gw-app--menus--active--col);
+      }
+    }
+
+    .gw-MenuItemWidget:not(.gw-WestPanelMenuItem), .gw-TabBarLinkWidget, .gw-columns-menu--clientMenuItem, .gw-ToolbarButtonWidget.gw-styleTag--MenuItemWidget {
+      @include addTextShadowForHoverables($gw-app--menus--col, $gw-app--menus--hover--col, $gw-app--menus--active--col);
+    }
+
+    .gw-styleTag--TabBarWidget {
+      @include addTextShadowForHoverables($gw-app--NorthPanel--button--col, $gw-app--NorthPanel--button--hover--col, $gw-app--NorthPanel--button--active--col);
+    }
+
+    .gw-SearchItemWidget:not(.gw-WestPanelMenuItem) {
+      @include addTextShadowForHoverables($gw-app--menus--col, $gw-app--menus--col, $gw-app--menus--col);
+    }
+
+    // =====================================
+    // == PRIMARY BUTTONS
+    // =====================================
+    .gw-big-button, .gw-MenuIconWidget, .gw-paging--button, .gw-button, .gw-ButtonValueWidget, .gw-ToolbarButtonWidget, .gw-MediaUploader--import, .gw-MediaUploader--upload,
+    .gw-mini-button, .gw-TileActionsWidget, .gw-TileActionWidget, .gw-PasswordValueWidget--dropMenu, .gw-PrivacyValueWidget--dropMenu, .gw-SelectorCellValueWidget, #gw-quickErrorButton {
+      @include addTextShadowForHoverables($gw-app--buttons--col, $gw-app--buttons--hover--col, $gw-app--buttons--active--col);
+    }
+
+    // =====================================
+    // == SECONDARY BUTTONS
+    // =====================================
+    .gw-button-secondary, .gw-date-icon, .gw-custom-menuItem, .gw-FileInputWidget--button, .gw-ImageButtonWidget, .gw-picker-clear {
+      @include addTextShadowForHoverables($gw-app--buttons--secondary--col, $gw-app--buttons--secondary--hover--col, $gw-app--buttons--secondary--active--col);
+    }
+
+    // =====================================
+    // == INPUTS
+    // =====================================
+
+    .gw-select-wrapper {
+      @if ($gw-app--inputs--select--behave-like-secondary) {
+        @include addTextShadowForHoverables($gw-app--buttons--secondary--col, $gw-app--buttons--secondary--hover--col, $gw-app--buttons--secondary--active--col);
+        select {
+          @include addTextShadowForHoverables($gw-app--buttons--secondary--col, $gw-app--buttons--secondary--hover--col, $gw-app--buttons--secondary--active--col);
+        }
+      } @else {
+        @include addTextShadowForHoverables($gw-app--inputs--select-col, $gw-app--inputs--select-hover-col, $gw-app--inputs--select-active-col);
+        select {
+          @include addTextShadowForHoverables($gw-app--inputs--select-col, $gw-app--inputs--select-hover-col, $gw-app--inputs--select-active-col);
+        }
+      }
+    }
+
+    input {
+      @include addTextShadow($gw-app--inputs--col);
+    }
+
+    input[type="checkbox"] {
+      @include addTextShadow($gw-app--inputs--checkbox-checked-col);
+    }
+
+    // =====================================
+    // == OTHER
+    // =====================================
+    .gw-tooltip {
+      @include addTextShadow($gw-app--tooltips--col);
+    }
+
+    .gw-GalleryTile--modal-data {
+      @include addTextShadow($gw-app--palette--white-for-dark-backgrounds);
+    }
+
+    .gw-progress--bar-label {
+      @include addTextShadow($gw-app--progress-bar--in-bar-label-col);
+
+      &.gw-progress--shifted-label {
+        @include addTextShadow($gw-app--progress-bar--outside-bar-label-col);
+      }
+    }
+
+    #gw-west-panel {
+      #gw-west-panel--children {
+        @include addTextShadow($gw-app--WestPanel--button--col);
+      }
+
+      .gw-MenuActionsWidget {
+        @include addTextShadowForHoverables($gw-app--MenuActionsWidget--col, $gw-app--MenuActionsWidget--hover-col, $gw-app--MenuActionsWidget--active-col);
+      }
+
+      .gw-WestPanelMenuItem, .gw-MenuTitleBarWidget, .gw-MenuTreeWidget {
+        @include addTextShadowForHoverables($gw-app--WestPanel--button--col, $gw-app--WestPanel--button--hover--col, $gw-app--WestPanel--button--active--col);
+      }
+    }
+
+    #gw-north-panel {
+      .gw-isTopLevelMenu {
+        @include addTextShadowForHoverables($gw-app--NorthPanel--button--col, $gw-app--NorthPanel--button--hover--col, $gw-app--NorthPanel--button--active--col);
+        > .gw-subMenu {
+          .gw-action--outer {
+            @include addTextShadowForHoverables($gw-app--menus--col, $gw-app--menus--hover--col, $gw-app--menus--active--col);
+          }
+        }
+      }
+    }
+
+    #gw-datePicker {
+      .gw-datePicker--inputted-value {
+        @include addTextShadowForHoverables($gw-app--buttons--secondary--col, $gw-app--buttons--secondary--hover--col, $gw-app--buttons--secondary--active--col);
+      }
+      td {
+        @include addTextShadowForHoverables($gw-app--DateValue--date-picker--cell-standard-day-col, $gw-app--DateValue--date-picker--cell-hover-col, $gw-app--DateValue--date-picker--cell-hover-col);
+        .gw-datePicker--today-cell {
+          @include addTextShadowForHoverables($gw-app--DateValue--date-picker--cell-today-col, $gw-app--DateValue--date-picker--cell-hover-col, $gw-app--DateValue--date-picker--cell-hover-col);
+        }
+      }
+
+      th {
+        @include addTextShadow($gw-app--DateValue--date-picker--cell-header-color);
+      }
+    }
+
+    @if ($gw-app--BadgeWidget--force-all-badge-styles-to-light-text-with-shadow != true) {
+
+      //TODO: unify all these things
+      .gw-badge, .gw-BadgeWidget, .gw-GalleryTile--badge, .gw-badge-slash {
+        @include addTextShadow(white);
+      }
+
+      .gw-badge-style--none {
+
+      }
+
+      .gw-badge-style--info {
+        @include addTextShadow($gw-app--palette--info--text-overlay-col);
+      }
+
+      .gw-badge-style--warning {
+        @include addTextShadow($gw-app--palette--orange--vibrant--text-overlay-col)
+      }
+
+      .gw-badge-style--error {
+        @include addTextShadow($gw-app--palette--error--text-overlay-col);
+      }
+
+      .gw-badge-style--success {
+        @include addTextShadow($gw-app--palette--outcomepositive--text-overlay-col);
+      }
+
+      .gw-badge-style--tier1 {
+        @include addTextShadow($gw-app--palette--tier1--text-overlay-col)
+      }
+
+      .gw-badge-style--tier2 {
+        @include addTextShadow($gw-app--palette--tier2--text-overlay-col);
+      }
+
+      .gw-badge-style--tier3 {
+        @include addTextShadow($gw-app--palette--tier3--text-overlay-col);
+      }
+
+      .gw-badge-style--tier4 {
+        @include addTextShadow($gw-app--palette--tier4--text-overlay-col);
+      }
+
+      .gw-badge-style--highlight {
+        @include addTextShadow($gw-app--palette--highlight--text-overlay-col);
+      }
+
+      .gw-badge-style--highlight_alt {
+        @include addTextShadow($gw-app--palette--highlightalt--text-overlay-col);
+      }
+
+      .gw-badge-style--callout {
+        @include addTextShadow($gw-app--palette--callout--text-overlay-col);
+      }
+
+      .gw-badge-style--callout_alt {
+        @include addTextShadow($gw-app--palette--calloutalt--text-overlay-col);
+      }
+    }
+  }
+
+  @if ($gw-app--use-text-shadow) {
+    @include textShadowsOn();
+  } @else {
+    &.gw-force-text-shadows {
+      @include textShadowsOn();
+    }
+  }
+}

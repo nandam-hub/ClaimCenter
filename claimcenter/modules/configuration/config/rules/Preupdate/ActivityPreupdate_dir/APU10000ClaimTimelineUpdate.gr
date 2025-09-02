@@ -1,0 +1,18 @@
+package rules.Preupdate.ActivityPreupdate_dir
+uses gw.surepath.cc.configuration.timeline.creation.TimelineUtil
+
+@gw.rules.RuleName("APU10000 - Claim Timeline Update")
+internal class APU10000ClaimTimelineUpdate {
+  static function doCondition(activity    :    entity.Activity) : boolean {
+/*start00rule*/
+return true
+/*end00rule*/
+}
+
+  static function doAction(activity    :    entity.Activity, actions : gw.rules.Action) {
+/*start00rule*/
+var claim = activity.Claim
+TimelineUtil.registerCallback(claim, claim.Bundle) 
+/*end00rule*/
+  }
+}

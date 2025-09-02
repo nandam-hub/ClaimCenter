@@ -1,0 +1,64 @@
+package rules.Assignment.GlobalExposureAssignmentRules_dir
+uses gw.api.locale.DisplayKey
+uses gw.api.system.CCLoggerCategory
+uses gw.assignment.AssignExposureSameCoverageImpl
+@gw.rules.RuleName("GEA00500 - Round Robin Similar")
+internal class GEA00500RoundRobinSimilar {
+  static function doCondition(exposure : entity.Exposure) : boolean {
+/*start00rule*/
+    return AssignExposureSameCoverageImpl.EnableRoundRobinSimilarExposures_Ext
+/*end00rule*/
+}
+
+  static function doAction(exposure : entity.Exposure, actions : gw.rules.Action) {
+/*start00rule*/
+    var logger = CCLoggerCategory.ASSIGNMENT
+    logger.info("##### GEA00500: Rule triggered for Exposure ID: " + exposure.ID)
+
+    var originalGroup = exposure.AssignedGroup
+
+    if (originalGroup == null and exposure.Claim.AssignedGroup != null) {
+      exposure.assignGroup(exposure.Claim.AssignedGroup)
+      logger.info("##### GEA00500: AssignedGroup set from Claim: " + exposure.AssignedGroup)
+
+      var rootGroup = exposure.AssignedGroup
+      while (rootGroup.Parent != null) {
+        rootGroup = rootGroup.Parent
+      }
+
+      logger.info("##### GEA00500: Using Root Group (Claim) for RR Similar: " + rootGroup)
+
+      try {
+        var success = exposure.assignUserByRoundRobinKeepSimilarTogether(true, rootGroup)
+        if (success) {
+          logger.info("##### GEA00500: Successfully assigned user: " + exposure.AssignedUser)
+          actions.exit()
+        } else {
+          logger.warn("##### GEA00500: RR Similar failed — proceeding to next rule.")
+        }
+      } catch (e: java.lang.Exception) {
+        logger.error("##### GEA00500: Error during RR Similar assignment: " + e.Message)
+      }
+
+    } else if (originalGroup != null) {
+      logger.info("##### GEA00500: Using Existing AssignedGroup without walking to parent: " + originalGroup)
+
+      try {
+        var success = exposure.assignUserByRoundRobinKeepSimilarTogether(true, originalGroup)
+        if (success) {
+          logger.info("##### GEA00500: Successfully assigned user: " + exposure.AssignedUser)
+          actions.exit()
+        } else {
+          logger.warn("##### GEA00500: RR Similar failed — proceeding to next rule.")
+        }
+      } catch (e: java.lang.Exception) {
+        logger.error("##### GEA00500: Error during RR Similar assignment: " + e.Message)
+      }
+
+    } else {
+      logger.info("##### GEA00500: AssignedGroup is null — exiting rule.")
+      actions.exit()
+    }
+/*end00rule*/
+  }
+}

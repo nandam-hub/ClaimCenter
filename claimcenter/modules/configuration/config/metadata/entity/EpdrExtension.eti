@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<entity
+  loadable="false"
+  platform="true"
+  xmlns="http://guidewire.com/datamodel"
+  desc="Represents extension fields in the API Extension Bundle Design Runtime"
+  entity="EpdrExtension"
+  table="epdrextension"
+  type="editable"
+  extendable="false">
+  <column
+    desc="Name of the extended entity"
+    getterScriptability="hidden"
+    name="ExtendedObjectEntity"
+    nullok="false"
+    setterScriptability="hidden"
+    type="shorttext"/>
+  <column
+    desc="ID value of the extended entity instance"
+    getterScriptability="hidden"
+    name="ExtendedObjectId"
+    nullok="false"
+    setterScriptability="hidden"
+    type="softentityreference"/>
+  <index
+    desc="Alternate key"
+    name="extendedobjectuniq"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="ExtendedObjectId"/>
+    <indexcol
+      keyposition="2"
+      name="ExtendedObjectEntity"/>
+  </index>
+  <implementsEntity
+    name="EpdrDataContainer"/>
+  <implementsInterface
+    iface="com.guidewire.pl.domain.apiextensionbundles.EpdrExtensionMethods"
+    impl="com.guidewire.pl.domain.apiextensionbundles.EpdrExtensionMethodsImpl"/>
+</entity>

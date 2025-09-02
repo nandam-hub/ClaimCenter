@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Page
+    afterEnter="bulkRestoreArchivedClaimsHelper.printMessagesToUI(responseInfo)"
+    canEdit="false"
+    canVisit="true"
+    id="BulkRestoreClaimsRecordDetail"
+    parent="BulkRestoreArchivedClaimsRestoreRecord()"
+    showUpLink="true"
+    title="DisplayKey.get(&quot;Web.Admin.BulkRestoreClaimsRecordDetail&quot;)">
+    <LocationEntryPoint
+      signature="BulkRestoreClaimsRecordDetail(bulkRestoreClaimRecord : entity.BulkRestoreRecord)"/>
+    <LocationEntryPoint
+      signature="BulkRestoreClaimsRecordDetail(bulkRestoreClaimRecord : entity.BulkRestoreRecord, responseInfo : gw.api.archiving.BulkRestoreArchivedEntitiesResponseInfo)"/>
+    <Variable
+      name="bulkRestoreClaimRecord"
+      recalculateOnRefresh="true"
+      type="entity.BulkRestoreRecord"/>
+    <Variable
+      initialValue="new gw.api.archiving.BulkRestoreArchivedClaimsHelper()"
+      name="bulkRestoreArchivedClaimsHelper"
+      recalculateOnRefresh="true"
+      type="gw.api.archiving.IBulkRestoreArchivedEntitiesHelper"/>
+    <Variable
+      name="archiveStateCount"
+      recalculateOnRefresh="true"
+      type="gw.api.archiving.IBulkRestoreArchivedEntitiesHelper.ArchiveStateCount"
+      initialValue="bulkRestoreArchivedClaimsHelper.getArchiveStateCountFromBulkRestoreRecord(bulkRestoreClaimRecord)"/>
+    <Variable
+      name="responseInfo"
+      recalculateOnRefresh="true"
+      type="gw.api.archiving.BulkRestoreArchivedEntitiesResponseInfo"/>
+    <Screen
+      id="ClaimRecordDetailScreen">
+      <Toolbar>        
+        <ToolbarButton
+          action="null"
+          hideIfEditable="true"
+          id="RefreshButton"
+          label="DisplayKey.get(&quot;Web.Admin.BulkRestoreClaimsRecordDetail.Button.Refresh&quot;)"/>
+      </Toolbar>
+      <PanelRef
+        def="BulkRestoreClaimsRecordDetailDV(bulkRestoreClaimRecord, archiveStateCount)"/>
+    </Screen>
+  </Page>
+</PCF>

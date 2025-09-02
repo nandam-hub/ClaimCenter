@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<entity
+  abstract="true"
+  final="false"
+  xmlns="http://guidewire.com/datamodel"
+  entity="InboundFileConfig"
+  loadable="false"
+  desc="Used for storing info related to inbound file"
+  table="inboundfileconfig"
+  type="editable"
+  platform="true"
+  extendable="true"
+  replicable="false">
+  <column
+    desc="Name of the inbound file config."
+    name="Name"
+    nullok="false"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="40"/>
+  </column>
+  <column
+    desc="Fully qualified class name of the inbound file handler."
+    name="FileHandlerClass"
+    nullok="false"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="256"/>
+  </column>
+  <column
+    desc="Chunk size for processing records. 0 means that whole file must be processed by one queue)"
+    name="ChunkSize"
+    nullok="false"
+    type="integer">
+  </column>
+  <column
+    desc="The number of days to wait before purging inbound files. The value for this property should be between 90 and 730 (two years)"
+    name="DaysTillPurge"
+    nullok="false"
+    type="integer">
+  </column>
+  <index
+    desc="Unique index for the Name"
+    name="inbndsrcnameindx"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="Name"/>
+  </index>
+  <implementsInterface
+    iface="com.guidewire.inboundfile.config.InboundFileConfigMethods"/>
+</entity>

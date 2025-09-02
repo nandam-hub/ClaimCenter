@@ -1,0 +1,14 @@
+<div :wrapIf="singleselect" class="gw-select-wrapper" aria-disabled="${disabled ? 'true' : 'false'}">
+  <div :if="singleselect" class="gw-icon"></div>
+  <select size="${numRows}" name="${renderId}" aria-labelledby="${inputLabelAriaId}"
+          multiple="${!singleselect}" disabled="${disabled}"
+          aria-required="${required ? 'true' : 'false'}" aria-invalid="${invalid ? 'true' : 'false'}"
+          style="${selectWidth ? selectWidth}"
+          class="${noTrack ? 'gw-noTrack'}">
+    <:control :for="group" :in="groups">
+      <optgroup :wrapIf="group.label" label="${group.label}">
+        <option :for="option" :in="group.options" value="${option.value}" selected="${option.selected}" >${option.label || '&nbsp;'}</option>
+      </optgroup>
+    </:control>
+  </select>
+</div>

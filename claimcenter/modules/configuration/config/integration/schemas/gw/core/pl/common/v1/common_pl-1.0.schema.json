@@ -1,0 +1,1330 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "x-gw-combine": [
+    "gw.core.pl.framework.v1.framework_pl-1.0"
+  ],
+  "x-gw-localizationKeyPrefix": "common.v1",
+  "definitions": {
+    "Activity": {
+      "title": "Activity",
+      "description": "An `Activity` is an assignable item that represents a task to be done, a decision to be made, or information to be aware of",
+      "type": "object",
+      "properties": {
+        "activityPattern": {
+          "title": "Activity pattern",
+          "description": "The code of the `ActivityPattern` used to create this activity and set its initial values",
+          "type": "string",
+          "x-gw-extensions": {
+            "createOnly": true
+          }
+        },
+        "activityType": {
+          "title": "Activity type",
+          "description": "The type of this activity, such as `general` or `approval`",
+          "$ref": "#/definitions/TypeKeyReference",
+          "readOnly": true,
+          "x-gw-extensions": {
+            "typelist": "ActivityType"
+          }
+        },
+        "approvalIssue": {
+          "title": "Approval issue",
+          "description": "The reason approval is needed. Only applicable to activities with an `activityType` of `approval`.",
+          "type": "string"
+        },
+        "approvalRationale": {
+          "title": "Approval rationale",
+          "description": "Rationale for approving or rejecting this activity. Only applicable to activities with an `activityType` of `approval`.",
+          "type": "string"
+        },
+        "approved": {
+          "title": "Approved",
+          "description": "This field is `true` if this activity has been approved, `false` if this activity has been rejected, and omitted otherwise. Only applicable to activities with an `activityType` of `approval`.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "assignedByUser": {
+          "title": "Assigned by user",
+          "description": "A reference to the `User` who last assigned or re-assigned this activity",
+          "$ref": "#/definitions/SimpleReference",
+          "readOnly": true,
+          "x-gw-extensions": {
+            "resourceType": "User"
+          }
+        },
+        "assignedGroup": {
+          "title": "Assigned group",
+          "description": "A reference to the `Group` that this activity is currently assigned to",
+          "$ref": "#/definitions/SimpleReference",
+          "readOnly": true
+        },
+        "assignedQueue": {
+          "title": "Assigned queue",
+          "description": "A reference to the `Queue` that this activity is currently assigned to",
+          "$ref": "#/definitions/SimpleReference",
+          "readOnly": true
+        },
+        "assignedUser": {
+          "title": "Assigned user",
+          "description": "A reference to the `User` that this activity is currently assigned to",
+          "$ref": "#/definitions/SimpleReference",
+          "readOnly": true,
+          "x-gw-extensions": {
+            "resourceType": "User",
+            "sortable": true
+          }
+        },
+        "assignmentStatus": {
+          "title": "Assignment status",
+          "description": "The current assignment status of this activity, such as `assigned` or `unassigned`",
+          "$ref": "#/definitions/TypeKeyReference",
+          "readOnly": true,
+          "x-gw-extensions": {
+            "typelist": "AssignmentStatus"
+          }
+        },
+        "closeDate": {
+          "title": "Close date",
+          "description": "The date and time when this activity was completed, skipped, approved, or rejected",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "x-gw-extensions": {
+            "filterable": true
+          }
+        },
+        "closeUser": {
+          "title": "Close user",
+          "description": "A reference to the `User` that completed, skipped, approved, or rejected this activity",
+          "$ref": "#/definitions/SimpleReference",
+          "readOnly": true,
+          "x-gw-extensions": {
+            "resourceType": "User"
+          }
+        },
+        "createTime": {
+          "title": "Create time",
+          "description": "The date and time when this `Activity` was created",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "x-gw-sinceVersion": "1.1.0"
+        },
+        "description": {
+          "title": "Description",
+          "description": "The description of this activity",
+          "type": "string",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "defaultViews": [
+              "detail"
+            ]
+          }
+        },
+        "dueDate": {
+          "title": "Due date",
+          "description": "Date and time by which a person should complete the activity. If not completed by this time, the activity is considered overdue. Not applicable to activities that represent events rather than tasks.",
+          "type": "string",
+          "format": "date-time",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "filterable": true,
+            "sortable": true
+          }
+        },
+        "endDate": {
+          "title": "End date",
+          "description": "Date and time at which the activity is expected to end. Only applicable to activities that represent events.",
+          "type": "string",
+          "format": "date-time",
+          "x-gw-nullable": true
+        },
+        "escalated": {
+          "title": "Escalated",
+          "description": "A `true` value for this field indicates that the activity has been escalated",
+          "type": "boolean",
+          "readOnly": true,
+          "x-gw-extensions": {
+            "filterable": true,
+            "sortable": true
+          }
+        },
+        "escalationDate": {
+          "title": "Escalation date",
+          "description": "Date and time at which this activity will be escalated if it has not yet been completed",
+          "type": "string",
+          "format": "date-time",
+          "x-gw-nullable": true
+        },
+        "externallyOwned": {
+          "title": "Externally owned",
+          "description": "A `true` value for this field indicates that the activity is owned by a user or group outside of the insurer",
+          "type": "boolean",
+          "x-gw-extensions": {
+            "filterable": true
+          }
+        },
+        "id": {
+          "title": "ID",
+          "description": "The unique identifier of this `Activity`",
+          "type": "string",
+          "readOnly": true
+        },
+        "initialAssignment": {
+          "title": "Initial assignment",
+          "description": "The `Assignee` that this activity should be assigned to when it is first created",
+          "$ref": "#/definitions/Assignee",
+          "x-gw-extensions": {
+            "createOnly": true
+          }
+        },
+        "mandatory": {
+          "title": "Mandatory",
+          "description": "A `true` value for this field indicates that the activity is mandatory and cannot be skipped",
+          "type": "boolean"
+        },
+        "priority": {
+          "title": "Priority",
+          "description": "The priority of this activity",
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-extensions": {
+            "filterable": true,
+            "sortable": true,
+            "typelist": "Priority"
+          }
+        },
+        "recurring": {
+          "title": "Recurring",
+          "description": "A `true` value indicates that this activity is recurring",
+          "type": "boolean"
+        },
+        "startDate": {
+          "title": "Start date",
+          "description": "Date and time at which the activity is scheduled to begin. Only applicable to activities that represent events.",
+          "type": "string",
+          "format": "date-time",
+          "x-gw-nullable": true
+        },
+        "status": {
+          "title": "Status",
+          "description": "The status of this activity, such as `open` or `complete`",
+          "$ref": "#/definitions/TypeKeyReference",
+          "readOnly": true,
+          "x-gw-extensions": {
+            "filterable": true,
+            "sortable": true,
+            "typelist": "ActivityStatus"
+          }
+        },
+        "subject": {
+          "title": "Subject",
+          "description": "A brief title for the activity",
+          "type": "string",
+          "minLength": 1,
+          "x-gw-extensions": {
+            "filterable": true,
+            "sortable": true
+          }
+        }
+      }
+    },
+    "ActivityPattern": {
+      "title": "Activity pattern",
+      "description": "An `ActivityPattern` is a template for an activity, and is used to create a new activity and set defaults for some of its fields",
+      "type": "object",
+      "properties": {
+        "activityClass": {
+          "title": "Activity class",
+          "description": "The class of activity that this activity pattern creates, such as `task` or `event`",
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-extensions": {
+            "typelist": "ActivityClass"
+          }
+        },
+        "activityType": {
+          "title": "Activity type",
+          "description": "The type of activity that this activity pattern creates, such as `general` or `approval`",
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-extensions": {
+            "typelist": "ActivityType"
+          }
+        },
+        "category": {
+          "title": "Category",
+          "description": "The category of the activity pattern. Used to help organize `ActivityPatterns` when presenting them to a user.",
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-extensions": {
+            "sortable": true,
+            "typelist": "ActivityCategory"
+          }
+        },
+        "code": {
+          "title": "Code",
+          "description": "The code that uniquely identifies this `ActivityPattern`",
+          "type": "string",
+          "x-gw-extensions": {
+            "createOnly": true,
+            "sortable": true
+          }
+        },
+        "description": {
+          "title": "Description",
+          "description": "The default `description` for activities created from this activity pattern",
+          "type": "string",
+          "x-gw-localized": true
+        },
+        "dueDate": {
+          "title": "Due date",
+          "description": "The default `dueDate` for activities created from this activity pattern, calculated based on the current date and time",
+          "type": "string",
+          "format": "date-time"
+        },
+        "escalationDate": {
+          "title": "Escalation date",
+          "description": "The default `escalationDate` for activities created from this activity pattern, calculated based on the current date and time",
+          "type": "string",
+          "format": "date-time"
+        },
+        "id": {
+          "title": "ID",
+          "description": "The unique identifier of this `ActivityPattern`",
+          "type": "string"
+        },
+        "mandatory": {
+          "title": "Mandatory",
+          "description": "The default `mandatory` value for activities created from this activity pattern",
+          "type": "boolean"
+        },
+        "priority": {
+          "title": "Priority",
+          "description": "The default `priority` for activities created from this activity pattern",
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-extensions": {
+            "sortable": true,
+            "typelist": "Priority"
+          }
+        },
+        "recurring": {
+          "title": "Recurring",
+          "description": "The default `recurring` value for activities created from this activity pattern",
+          "type": "boolean"
+        },
+        "subject": {
+          "title": "Subject",
+          "description": "The default `subject` for activities created from this activity pattern",
+          "type": "string",
+          "x-gw-localized": true
+        }
+      }
+    },
+    "Address": {
+      "title": "Address",
+      "description": "An `Address` represents a postal address. The fields available on an `Address` will depend upon the `country` value for the `Address`.",
+      "type": "object",
+      "x-gw-extensions": {
+        "discriminatorProperty": "country"
+      },
+      "properties": {
+        "addressBookUID": {
+          "title": "Address book UID",
+          "description": "The unique ID of this `Address` within the contact management system. Only applicable if the `Address` has been linked to a contact management system.",
+          "type": "string",
+          "x-gw-nullable": true,
+          "x-gw-sinceVersion": "1.10.0",
+          "x-gw-extensions": {
+            "defaultViews": [
+              "detail"
+            ]
+          }
+        },
+        "addressLine1": {
+          "title": "Address line 1",
+          "description": "The first line of the address",
+          "type": "string",
+          "x-gw-nullable": true
+        },
+        "addressLine2": {
+          "title": "Address line 2",
+          "description": "The second line of the address",
+          "type": "string",
+          "x-gw-nullable": true
+        },
+        "addressLine3": {
+          "title": "Address line 3",
+          "description": "The third line of the address",
+          "type": "string",
+          "x-gw-nullable": true
+        },
+        "addressType": {
+          "title": "Address type",
+          "description": "The type of the address",
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-nullable": true,
+          "x-gw-sinceVersion": "1.2.0",
+          "x-gw-extensions": {
+            "typelist": "AddressType"
+          }
+        },
+        // Hong Kong - Kowloon or New Territories
+        "area": {
+          "title": "Area",
+          "description": "The area of the address. Only applicable in certain countries.",
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "countryRestricted": true,
+            "typelist": "State"
+          }
+        },
+        "city": {
+          "title": "City",
+          "description": "The city of the address",
+          "type": "string",
+          "x-gw-nullable": true
+        },
+        "country": {
+          "title": "Country",
+          "description": "The country of the address. The value of the `country` field will affect which other fields on the `Address` are applicable.",
+          "type": "string",
+          "x-gw-type": "typekey.Country",
+          "x-gw-nullable": true
+        },
+        "county": {
+          "title": "County",
+          "description": "The county of the address. Only applicable in certain countries.",
+          "type": "string",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "countryRestricted": true
+          }
+        },
+        // Columbia and Nicaragua
+        "department": {
+          "title": "Department",
+          "description": "The department of the address. Only applicable in certain countries.",
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "countryRestricted": true,
+            "typelist": "State"
+          }
+        },
+        "description": {
+          "title": "Description",
+          "description": "The description of the address",
+          "type": "string",
+          "x-gw-nullable": true,
+          "x-gw-sinceVersion": "1.2.0"
+        },
+        "displayName": {
+          "title": "Display name",
+          "description": "The formatted value of the address represented by this `Address`, including all standard fields for the address's country",
+          "type": "string",
+          "readOnly": true
+        },
+        // United Arab Emirates
+        "emirate": {
+          "title": "Emirate",
+          "description": "The emirate of the address. Only applicable in certain countries.",
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "countryRestricted": true,
+            "typelist": "State"
+          }
+        },
+        "id": {
+          "title": "ID",
+          "description": "The unique identifier of this `Address`",
+          "type": "string",
+          "readOnly": true
+        },
+        "island": {
+          "title": "Island",
+          "description": "The island of the address. Only applicable in certain countries.",
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "countryRestricted": true,
+            "typelist": "State"
+          }
+        },
+        // Russia
+        "oblast": {
+          "title": "Oblast",
+          "description": "The oblast of the address. Only applicable in certain countries.",
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "countryRestricted": true,
+            "typelist": "State"
+          }
+        },
+        // Jamaica and Barbados
+        "parish": {
+          "title": "Parish",
+          "description": "The parish of the address. Only applicable in certain countries.",
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "countryRestricted": true,
+            "typelist": "State"
+          }
+        },
+        "postalCode": {
+          "title": "Postal code",
+          "description": "The postal code of the address. Only applicable in certain countries.",
+          "type": "string",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "countryRestricted": true
+          }
+        },
+        // Japan
+        "prefecture": {
+          "title": "Prefecture",
+          "description": "The prefecture of the address. Only applicable in certain countries.",
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "countryRestricted": true,
+            "typelist": "State"
+          }
+        },
+        "province": {
+          "title": "Province",
+          "description": "The province of the address. Only applicable in certain countries.",
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "countryRestricted": true,
+            "typelist": "State"
+          }
+        },
+        "spatialPoint": {
+          "title": "Spatial point",
+          "description": "The latitude and longitude of this address, if it has been geocoded",
+          "$ref": "#/definitions/SpatialPoint",
+          "x-gw-nullable": true,
+          "x-gw-sinceVersion": "1.2.0"
+        },
+        "state": {
+          "title": "State",
+          "description": "The state of the address. Only applicable in certain countries.",
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "countryRestricted": true,
+            "typelist": "State"
+          }
+        },
+        "validUntil": {
+          "title": "Valid until",
+          "description": "The date and time that the address is valid until",
+          "type": "string",
+          "format": "date-time",
+          "x-gw-nullable": true,
+          "x-gw-sinceVersion": "1.2.0"
+        }
+      }
+    },
+    "Assignee": {
+      "title": "Assignee",
+      "description": "An `Assignee` represents the target of an assignment action, such as a user/group combination, assignment queue, or automatic rule-based assignment",
+      "type": "object",
+      "properties": {
+        "assigneeId": {
+          "title": "Assignee ID",
+          "description": "Unique ID to reference this `Assignee` for includes",
+          "type": "string",
+          "readOnly": true,
+          "x-gw-sinceVersion": "1.4.0",
+          "x-gw-deprecatedVersion": "1.12.0",
+          "x-gw-deprecatedReason": "This field has been deprecated, use the `id` field instead"
+        },
+        "autoAssign": {
+          "title": "Auto assign",
+          "description": "Set to `true` to indicate the assignment should be done automatically by the system. Cannot be combined with any other fields.",
+          "type": "boolean"
+        },
+        "groupId": {
+          "title": "Group ID",
+          "description": "The ID of the `Group` that the resource should be assigned to. If specified without the `userId` field, the `User` within the `Group` is selected by assignment rules. If specified along with the `userId` field, that specific `User` is assigned the element.",
+          "type": "string"
+        },
+        "id": {
+          "title": "ID",
+          "description": "The unique identifier of this `Assignee`",
+          "type": "string",
+          "readOnly": true,
+          "x-gw-sinceVersion": "1.12.0"
+        },
+        "name": {
+          "title": "Name",
+          "description": "A human-readable name for the type of assignment that this `Assignee` represents",
+          "type": "string",
+          "readOnly": true
+        },
+        "queueId": {
+          "title": "Queue ID",
+          "description": "The ID of the `Queue` that the resource should be assigned to. Cannot be combined with any other fields.",
+          "type": "string"
+        },
+        "userId": {
+          "title": "User ID",
+          "description": "The ID of the `User` that the resource should be assigned to. The `groupId` field must also be specified if the `userId` field is specified, and the `User` must be a member of that `Group` and have permission to be assigned the element.",
+          "type": "string"
+        }
+      }
+    },
+    "Contact": {
+      "title": "Contact",
+      "description": "A `Contact` represents a person or company",
+      "type": "object",
+      "properties": {
+        "addressBookUID": {
+          "title": "Address book UID",
+          "description": "The unique ID of this `Contact` within the contact management system. Only applicable if the `Contact` has been linked to a contact management system.",
+          "type": "string",
+          "x-gw-nullable": true
+        },
+        "authorizationID": {
+          "title": "AuthorizationID",
+          "description": "The ID of this `Contact` used for external authorization",
+          "type": "string",
+          "readOnly": true,
+          "x-gw-sinceVersion": "1.8.0"
+        },
+        "cellPhone": {
+          "title": "Cell phone",
+          "description": "The person's mobile phone number. Only applicable for a `Contact` that represents a person.",
+          "$ref": "#/definitions/PhoneNumber",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "entitySubtype": "Person"
+          }
+        },
+        "companyName": {
+          "title": "Company name",
+          "description": "The name of the company represented by this `Contact`. Only applicable for a `Contact` that represents a company.",
+          "type": "string",
+          "x-gw-extensions": {
+            "entitySubtype": "Company"
+          }
+        },
+        "dateOfBirth": {
+          "title": "Date of birth",
+          "description": "The person's date of birth. Only applicable for a `Contact` that represents a person.",
+          "type": "string",
+          "format": "date",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "before": "now",
+            "entitySubtype": "Person"
+          }
+        },
+        "displayName": {
+          "title": "Display name",
+          "description": "A formatted representation of the full name for this `Contact', including all applicable fields such as `firstName` or `lastName`",
+          "type": "string",
+          "readOnly": true,
+          "x-gw-nullable": true
+        },
+        "emailAddress1": {
+          "title": "E-mail address 1",
+          "description": "The contact's primary e-mail address",
+          "type": "string",
+          "x-gw-nullable": true
+        },
+        "emailAddress2": {
+          "title": "E-mail address 2",
+          "description": "The contact's secondary e-mail address",
+          "type": "string",
+          "x-gw-nullable": true
+        },
+        "firstName": {
+          "title": "First name",
+          "description": "The persons's first name. Only applicable for a `Contact` that represents a person.",
+          "type": "string",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "entitySubtype": "Person"
+          }
+        },
+        "gender": {
+          "title": "Gender type",
+          "description": "The type of the contact's gender, such as `female` or `male`. Only applicable for a `Contact` that represents a person.",
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-nullable": true,
+          "x-gw-sinceVersion": "1.10.0",
+          "x-gw-extensions": {
+            "entitySubtype": "Person",
+            "typelist": "GenderType"
+          }
+        },
+        "homePhone": {
+          "title": "Home phone",
+          "description": "The person's home phone number. Only applicable for a `Contact` that represents a person.",
+          "$ref": "#/definitions/PhoneNumber",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "entitySubtype": "Person"
+          }
+        },
+        "id": {
+          "title": "ID",
+          "description": "The unique identifier of this `Contact`",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastName": {
+          "title": "Last name",
+          "description": "The person's last name. Only applicable for a `Contact` that represents a person.",
+          "type": "string",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "entitySubtype": "Person"
+          }
+        },
+        "preferred": {
+          "title": "Preferred",
+          "description": "A `true` value for this field indicates that the vendor is one of the insurer's preferred vendors. Only applicable for a `Contact` that represents a vendor.",
+          "type": "boolean",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "entitySubtype": [
+              "CompanyVendor",
+              "PersonVendor"
+            ]
+          }
+        },
+        "primaryAddress": {
+          "title": "Primary address",
+          "description": "The contact's primary address",
+          "$ref": "#/definitions/Address",
+          "x-gw-extensions": {
+            "defaultViews": [
+              "detail"
+            ]
+          }
+        },
+        "primaryLanguage": {
+          "title": "Primary language",
+          "description": "The contact's primary language",
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "typelist": "LanguageType"
+          }
+        },
+        "primaryLocale": {
+          "title": "Primary locale",
+          "description": "The contact's primary locale",
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "typelist": "LocaleType"
+          }
+        },
+        "primaryPhone": {
+          "title": "Primary phone",
+          "description": "The contact's primary phone number, as determined by the type of phone number selected in the `primaryPhoneType` field",
+          "type": "string",
+          "readOnly": true
+        },
+        "primaryPhoneType": {
+          "title": "Primary phone type",
+          "description": "The type of the contact's primary phone, such as `home` or `mobile`",
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "typelist": "PrimaryPhoneType"
+          }
+        },
+        "pronounAggregate": {
+          "title": "Pronoun aggregate type",
+          "description": "The type of the contact's aggregate pronoun, such as `she/her/hers` or `self-identify`. Only applicable for a `Contact` that represents a person.",
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-nullable": true,
+          "x-gw-sinceVersion": "1.10.0",
+          "x-gw-extensions": {
+            "entitySubtype": "Person",
+            "typelist": "PronounAggregateType"
+          }
+        },
+        "pronounAggregateDisplay": {
+          "title": "Pronoun aggregate display",
+          "description": "A formatted representation of the pronoun aggregate for this `Person`",
+          "type": "string",
+          "readOnly": true,
+          "x-gw-sinceVersion": "1.10.0"
+        },
+        "pronounObjective": {
+          "title": "Pronoun objective",
+          "description": "The contact's objective pronoun. Only applicable for a `Contact` that represents a person.",
+          "type": "string",
+          "x-gw-nullable": true,
+          "x-gw-sinceVersion": "1.10.0",
+          "x-gw-extensions": {
+            "entitySubtype": "Person"
+          }
+        },
+        "pronounPossessive": {
+          "title": "Pronoun possessive",
+          "description": "The contact's possessive pronoun. Only applicable for a `Contact` that represents a person.",
+          "type": "string",
+          "x-gw-nullable": true,
+          "x-gw-sinceVersion": "1.10.0",
+          "x-gw-extensions": {
+            "entitySubtype": "Person"
+          }
+        },
+        "pronounSubjective": {
+          "title": "Pronoun subjective",
+          "description": "The contact's subjective pronoun. Only applicable for a `Contact` that represents a person.",
+          "type": "string",
+          "x-gw-nullable": true,
+          "x-gw-sinceVersion": "1.10.0",
+          "x-gw-extensions": {
+            "entitySubtype": "Person"
+          }
+        },
+        "sexAssignedAtBirth": {
+          "title": "Sex assigned at birth type",
+          "description": "The type of the contact's sex assigned at birth, such as `female` or `male`. Only applicable for a `Contact` that represents a person.",
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-nullable": true,
+          "x-gw-sinceVersion": "1.10.0",
+          "x-gw-extensions": {
+            "entitySubtype": "Person",
+            "typelist": "SexAssignedAtBirthType"
+          }
+        },
+        "subtype": {
+          "title": "Subtype",
+          "description": "The specific type of contact that this `Contact` represents, such as `Person` or `Company`. The set of fields that can be set on a `Contact` depend on its `subtype`.",
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "createOnly": true,
+            "requiredForCreate": true,
+            "typelist": "Contact"
+          }
+        },
+        "taxId": {
+          "title": "Tax ID",
+          "description": "The contact's tax ID",
+          "type": "string"
+        },
+        "workPhone": {
+          "title": "Work phone",
+          "description": "The contact's work phone number, if this `Contact` represents a person, or the business's phone number, if this `Contact` represents a company",
+          "$ref": "#/definitions/PhoneNumber",
+          "x-gw-nullable": true
+        }
+      }
+    },
+    "Document": {
+      "title": "Document",
+      "description": "A `Document` represents a document within the application, which can have additional metadata such as the author of the document or a specific security level. The actual contents of the document are generally stored in a separate document management system that this application is linked to.",
+      "type": "object",
+      "x-gw-sinceVersion": "1.1.0",
+      "properties": {
+        "author": {
+          "title": "Author",
+          "description": "The name of the person who created this document",
+          "type": "string",
+          "x-gw-nullable": true
+        },
+        "dateModified": {
+          "title": "Date modified",
+          "description": "The date and time that this `Document` was most recently updated",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "x-gw-extensions": {
+            "sortable": true
+          }
+        },
+        "description": {
+          "title": "Description",
+          "description": "A description of this document",
+          "type": "string",
+          "x-gw-nullable": true
+        },
+        "dms": {
+          "title": "DMS",
+          "description": "Whether this `Document` has content stored in a Document Management System",
+          "type": "boolean",
+          "x-gw-sinceVersion": "1.9.0"
+        },
+        "docUID": {
+          "title": "Document UID",
+          "description": "The unique identifier for this `Document` in the linked document management system. The exact format of the identifier depends upon the specifics of the document management system the application is linked to.",
+          "type": "string",
+          "x-gw-extensions": {
+            "defaultViews": [
+              "detail"
+            ]
+          }
+        },
+        "id": {
+          "title": "ID",
+          "description": "The unique identifier of this `Document`",
+          "type": "string",
+          "readOnly": true
+        },
+        "inbound": {
+          "title": "Inbound",
+          "description": "This field indicates whether this document is considered to be inbound, outbound, or neither",
+          "type": "boolean",
+          "x-gw-nullable": true
+        },
+        "language": {
+          "title": "Language",
+          "description": "The language in which this document was produced",
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "typelist": "LanguageType"
+          }
+        },
+        "mimeType": {
+          "title": "MIME type",
+          "description": "The MIME type of this document, such as `application/msword` for a Microsoft Word document",
+          "type": "string"
+        },
+        "name": {
+          "title": "Name",
+          "description": "The name of this document",
+          "type": "string",
+          "x-gw-extensions": {
+            "filterable": true,
+            "requiredForCreate": true,
+            "sortable": true
+          }
+        },
+        "obsolete": {
+          "title": "Obsolete",
+          "description": "Setting this field to `true` indicates that the information in this document can no longer be relied upon to be current and relevant. This is often used instead of deletion to preserve history.",
+          "type": "boolean",
+          "x-gw-nullable": true
+        },
+        "pendingDocUID": {
+          "title": "Pending document UID",
+          "description": "The unique identifier for this pending storage `Document`. The exact format of the identifier depends upon the specifics of the document management system the application is linked to.",
+          "type": "string",
+          "x-gw-nullable": true,
+          "x-gw-sinceVersion": "1.9.0"
+        },
+        "recipient": {
+          "title": "Recipient",
+          "description": "The name of the intended recipient of this document",
+          "type": "string",
+          "x-gw-nullable": true
+        },
+        "section": {
+          "title": "Section",
+          "description": "The section to which this document belongs",
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "filterable": true,
+            "typelist": "DocumentSection"
+          }
+        },
+        "securityType": {
+          "title": "Security type",
+          "description": "The security level that has been assigned to this document",
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "typelist": "DocumentSecurityType"
+          }
+        },
+        "status": {
+          "title": "Status",
+          "description": "The current status of this document, such as `draft` or `approved`",
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-extensions": {
+            "filterable": true,
+            "requiredForCreate": true,
+            "typelist": "DocumentStatusType"
+          }
+        },
+        "type": {
+          "title": "Type",
+          "description": "The specific type of document",
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-extensions": {
+            "filterable": true,
+            "requiredForCreate": true,
+            "typelist": "DocumentType"
+          }
+        }
+      }
+    },
+    "DocumentContent": {
+      "title": "Document content",
+      "description": "The contents of a `Document`",
+      "type": "object",
+      "x-gw-sinceVersion": "1.1.0",
+      "properties": {
+        "contents": {
+          "title": "Contents",
+          "description": "The contents of this document as a Base64-encoded string",
+          "type": "string",
+          "format": "byte",
+          "readOnly": true
+        },
+        "id": {
+          "title": "ID",
+          "description": "The unique identifier of this `Document`",
+          "type": "string",
+          "readOnly": true,
+          "x-gw-sinceVersion": "1.12.0"
+        },
+        "responseMimeType": {
+          "title": "Response MIME type",
+          "description": "The MIME type of this document's contents, such as `application/msword` for a Microsoft Word document",
+          "type": "string",
+          "readOnly": true
+        },
+        "url": {
+          "title": "URL",
+          "description": "The URL of this document within the linked document management system",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "GroupDetail": {
+      "title": "Group detail",
+      "description": "Used to represent a reference to a `Group`",
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "title": "Display name",
+          "description": "The name of the `Group`",
+          "type": "string"
+        },
+        "id": {
+          "title": "ID",
+          "description": "The unique identifier of the `Group`",
+          "type": "string"
+        }
+      }
+    },
+    "HistoryEvent": {
+      "title": "HistoryEvent",
+      "description": "An event that is used to record certain types of state changes on key business entities",
+      "type": "object",
+      "x-gw-sinceVersion": "1.10.0",
+      "properties": {
+        "customType": {
+          "title": "Custom type",
+          "description": "Customer-defined history event type",
+          "$ref": "#/definitions/TypeKeyReference",
+          "readOnly": true,
+          "x-gw-extensions": {
+            "typelist": "CustomHistoryType"
+          }
+        },
+        "description": {
+          "title": "Description",
+          "description": "Description of the history event",
+          "type": "string",
+          "readOnly": true,
+          "x-gw-extensions": {
+            "filterable": true,
+            "sortable": true
+          }
+        },
+        "eventTimestamp": {
+          "title": "Event timestamp",
+          "description": "The event timestamp for the history event",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "x-gw-extensions": {
+            "filterable": true,
+            "sortable": true
+          }
+        },
+        "historyType": {
+          "title": "History type",
+          "description": "The type of history event",
+          "$ref": "#/definitions/TypeKeyReference",
+          "readOnly": true,
+          "x-gw-extensions": {
+            "filterable": true,
+            "sortable": true,
+            "typelist": "HistoryType"
+          }
+        },
+        "id": {
+          "title": "ID",
+          "description": "Unique identifier of this history event",
+          "type": "string",
+          "readOnly": true
+        },
+        "user": {
+          "title": "User",
+          "description": "User who created the history event",
+          "$ref": "#/definitions/SimpleReference",
+          "readOnly": true,
+          "x-gw-extensions": {
+            "resourceType": "User"
+          }
+        }
+      }
+    },
+    "Note": {
+      "title": "Note",
+      "description": "A `Note` is used to capture any sort of additional text that needs to be associated with another business object. A `Note` consists of a `body` that contains the actual text of the note, along with other fields the represent additional metadata about the note.",
+      "type": "object",
+      "properties": {
+        "author": {
+          "title": "Author",
+          "description": "The `User` who authored this note",
+          "$ref": "#/definitions/SimpleReference",
+          "readOnly": true,
+          "x-gw-extensions": {
+            "resourceType": "User"
+          }
+        },
+        "body": {
+          "title": "Body",
+          "description": "The text of this note",
+          "type": "string",
+          "minLength": 1,
+          "x-gw-extensions": {
+            "defaultViews": [
+              "detail"
+            ],
+            "filterable": true,
+            "requiredForCreate": true
+          }
+        },
+        "bodySummary": {
+          "title": "Body summary",
+          "description": "A shorter summary of this note's `body` field, more suitable for displaying in a list of notes",
+          "type": "string",
+          "readOnly": true,
+          "x-gw-extensions": {
+            "defaultViews": [
+              "summary"
+            ]
+          }
+        },
+        "confidential": {
+          "title": "Confidential",
+          "description": "A `true` value for this field indicates that the note contains confidential information",
+          "type": "boolean"
+        },
+        "createdDate": {
+          "title": "Created date",
+          "description": "The date and time that this `Note` was created",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "id": {
+          "title": "ID",
+          "description": "Unique identifier of this `Note`",
+          "type": "string",
+          "readOnly": true
+        },
+        "securityType": {
+          "title": "Security type",
+          "description": "The security level that has been assigned to this note",
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "typelist": "NoteSecurityType"
+          }
+        },
+        "subject": {
+          "title": "Subject",
+          "description": "The subject of this note",
+          "type": "string",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "filterable": true,
+            "sortable": true
+          }
+        },
+        "topic": {
+          "title": "Topic",
+          "description": "The topic of this note",
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-extensions": {
+            "filterable": true,
+            "sortable": true,
+            "typelist": "NoteTopicType"
+          }
+        },
+        "updateTime": {
+          "title": "Update time",
+          "description": "The date and time when this `Note` was most recently updated",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "x-gw-extensions": {
+            "sortable": true
+          }
+        }
+      }
+    },
+    "QueueDetail": {
+      "title": "Queue detail",
+      "description": "Used to represent a reference to a `Queue`",
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "title": "Display name",
+          "description": "The name of the `Queue`",
+          "type": "string"
+        },
+        "id": {
+          "title": "ID",
+          "description": "The unique identifier of the `Queue`",
+          "type": "string"
+        }
+      }
+    },
+    "TypeFilter": {
+      "title": "TypeFilter",
+      "description": "A `TypeFilter` represents a filtered set of the `TypeKey` values from a `TypeList`",
+      "type": "object",
+      "properties": {
+        "description": {
+          "title": "Description",
+          "description": "The description of this `TypeFilter`",
+          "type": "string"
+        },
+        "name": {
+          "title": "Name",
+          "description": "The name of this `TypeFilter`",
+          "type": "string"
+        },
+        "typeKeys": {
+          "title": "TypeKeys",
+          "description": "The `code` values for the `TypeKeys` that are included by this `TypeFilter`",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-gw-extensions": {
+            "defaultViews": [
+              "detail"
+            ]
+          }
+        }
+      }
+    },
+    "TypeKey": {
+      "title": "TypeKey",
+      "description": "A `TypeKey` represents one of the possible enumerated values of a `TypeList`",
+      "type": "object",
+      "properties": {
+        "categories": {
+          "title": "Categories",
+          "description": "The categories that this `TypeKey` belongs to. Categories are formatted by combining the name of the `TypeList` with the `code` for its `TypeKey`, separated by a `.` character.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-gw-extensions": {
+            "defaultViews": [
+              "none"
+            ]
+          }
+        },
+        "code": {
+          "title": "Code",
+          "description": "The code for this `TypeKey`. `TypeKey` codes are unique within a `TypeList`.",
+          "type": "string"
+        },
+        "description": {
+          "title": "Description",
+          "description": "The longer description of this `TypeKey`",
+          "type": "string"
+        },
+        "name": {
+          "title": "Name",
+          "description": "The human-readable name of this `TypeKey`",
+          "type": "string"
+        },
+        "priority": {
+          "title": "Priority",
+          "description": "The order of this `TypeKey` relative to other `TypeKeys` in the same `TypeList`. A `TypeKey` with a lower `priority` will appear before a `TypeKey` with a higher priority when the values for a `TypeList` are presented in sorted order.",
+          "type": "integer"
+        },
+        "retired": {
+          "title": "Retired",
+          "description": "A `true` value for this field indicates that the `TypeKey` value should no longer be used. Retired `TypeKey` values are retained only for the sake of historical data that may already be using the `TypeKey`.",
+          "type": "boolean",
+          "x-gw-extensions": {
+            "defaultViews": [
+              "none"
+            ]
+          }
+        },
+        "sortOrder": {
+          "title": "Sort order",
+          "description": "Returns the sort order for this `TypeKey`. Sort order is calculated using the following in order: non-retired before retired, any 'TypeKey` in the `TypeList`'s sort file overrides before anything that's not, priority, language-dependent name comparison, code.",
+          "type": "integer",
+          "x-gw-sinceVersion": "1.9.0"
+        }
+      }
+    },
+    "TypeList": {
+      "title": "TypeList",
+      "description": "A `TypeList` represents a list of enumerated `TypeKey` values",
+      "type": "object",
+      "properties": {
+        "description": {
+          "title": "Description",
+          "description": "The description of this `TypeList`",
+          "type": "string"
+        },
+        "name": {
+          "title": "Name",
+          "description": "The name of this `TypeList`",
+          "type": "string",
+          "x-gw-extensions": {
+            "filterable": true,
+            "sortable": true
+          }
+        },
+        "typeFilters": {
+          "title": "TypeFilters",
+          "description": "The set of `TypeFilters` available on this `TypeList`. A `TypeFilter` represents a filtered subset of the `TypeKeys` in this `TypeList`.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TypeFilter"
+          },
+          "x-gw-extensions": {
+            "defaultViews": [
+              "detail"
+            ]
+          }
+        },
+        "typeKeys": {
+          "title": "TypeKeys",
+          "description": "The list of `TypeKeys` available on this `TypeList`. A `TypeKey` represents one of the enumerated values that comprise this `TypeList`.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TypeKey"
+          },
+          "x-gw-extensions": {
+            "defaultViews": [
+              "detail"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

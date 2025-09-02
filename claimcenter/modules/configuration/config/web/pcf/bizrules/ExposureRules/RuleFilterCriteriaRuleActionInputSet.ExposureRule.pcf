@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <InputSet
+    editable="true"
+    id="RuleFilterCriteriaRuleActionInputSet"
+    mode="ExposureRule">
+    <Require
+      name="filterCriteria"
+      type="gw.bizrules.CCRuleFilterCriteriaBase"/>
+    <Variable
+      initialValue="filterCriteria as gw.bizrules.ExposureRules.ExposureRuleFilterCriteria"
+      name="ruleFilterCriteria"
+      type="gw.bizrules.ExposureRules.ExposureRuleFilterCriteria"/>
+  </InputSet>
+</PCF>

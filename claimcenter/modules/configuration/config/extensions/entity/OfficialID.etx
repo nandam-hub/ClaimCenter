@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<extension
+  xmlns="http://guidewire.com/datamodel"
+  entityName="OfficialID">
+  <implementsInterface
+    iface="gw.api.obfuscation.Obfuscator"
+    impl="gw.personaldata.obfuscation.DefaultPersonalDataObfuscator"/>
+  <column-override
+    name="OfficialIDValue">
+    <tag
+      name="PersonalData"
+      value="ObfuscateDefault"/>
+  </column-override>
+  <typekey-override
+    name="State">
+    <tag
+      name="PersonalData"
+      value="ObfuscateDefault"/>
+  </typekey-override>
+  <index
+    desc="Enforce uniqueness of ID,Type,State for each Contact"
+    name="officialidu1"
+    unique="true">
+    <indexcol
+      keyposition="2"
+      name="OfficialIDType"/>
+    <indexcol
+      keyposition="1"
+      name="OfficialIDValue"/>
+    <indexcol
+      keyposition="3"
+      name="State"/>
+    <indexcol
+      keyposition="4"
+      name="ContactID"/>
+    <indexcol
+      keyposition="5"
+      name="Retired"/>
+  </index>
+</extension>

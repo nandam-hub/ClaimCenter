@@ -1,0 +1,286 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <NewClaimWizard
+    afterCancel="FNOLAfterCancelPage.go(wizardInfo.PageMode)"
+    afterFinish="wizardInfo.afterFinish()"
+    beforeCommit="wizardInfo.onBeforeCommit()"
+    canVisit="perm.Claim.create"
+    cancelWarning="DisplayKey.get(&quot;Wizard.NewClaimWizard.CancelWarning&quot;)"
+    finishConfirmation="wizardInfo.getFinishConfirmation()"
+    id="FNOLWizard"
+    infoBar="ClaimInfoBar(Claim)"
+    menuActions="FNOLMenuActions(Claim, wizardInfo)"
+    parent="ClaimTabForward()"
+    title="DisplayKey.get(&quot;JSP.NewClaimOpenDialog.Title&quot;)">
+    <LocationEntryPoint
+      signature="FNOLWizard()"/>
+    <LocationEntryPoint
+      signature="FNOLWizard(PageMode : boolean)"/>
+    <LocationEntryPoint
+      signature="FNOLWizard(policyType : PolicyType, policyNumber : String, claimMode : gw.api.claim.NewClaimMode, LossDate : java.util.Date, PageMode : boolean)"/>
+    <LocationEntryPoint
+      signature="FNOLWizard(Claim : Claim)"/>
+    <LocationEntryPoint
+      signature="FNOLWizard(searchCriteriaAndSummary : gw.api.claim.NewClaimPolicySearchCriteriaAndSummary, claimMode : gw.api.claim.NewClaimMode, LossDate : java.util.Date, PageMode : boolean)"/>
+    <Variable
+      name="claimMode"
+      type="gw.api.claim.NewClaimMode"/>
+    <Variable
+      initialValue="null"
+      name="LossDate"
+      type="java.util.Date"/>
+    <Variable
+      initialValue="true"
+      name="PageMode"
+      type="boolean"/>
+    <Variable
+      name="policyNumber"
+      type="String"/>
+    <Variable
+      name="searchCriteriaAndSummary"
+      type="gw.api.claim.NewClaimPolicySearchCriteriaAndSummary"/>
+    <Variable
+      name="policyType"
+      type="PolicyType"/>
+    <Variable
+      initialValue="new gw.api.claim.NewClaimWizardInfo(CurrentLocation, gw.api.claim.NewClaimCheck)"
+      name="wizardInfo"
+      type="gw.api.claim.NewClaimWizardInfo"/>
+    <Variable
+      initialValue="wizardInfo.createClaim()"
+      name="Claim"
+      type="Claim"/>
+    <WizardStep
+      allowNext="wizardInfo.IsLossTypeSet"
+      id="FindPolicy"
+      label="DisplayKey.get(&quot;Wizard.NewClaimWizard.NewClaimSelectType.Label&quot;)"
+      onExit="wizardInfo.FindPolicyExit()"
+      onFirstEnter="wizardInfo.FindPolicyFirstEnter()"
+      refreshStepsOnExit="true"
+      save="true"
+      screen="FNOLWizard_FindPolicyScreen(Claim, wizardInfo)"
+      showNextIfLastStep="true"
+      title="wizardInfo.SearchPolicyStepTitle"/>
+    <WizardStep
+      allowNext="true"
+      available="wizardInfo.CanSelectRiskUnits"
+      id="SelectRiskUnitsStep"
+      label="wizardInfo.SelectRiskUnitsLabel"
+      onExit="wizardInfo.onRiskUnitSelectExit()"
+      refreshStepsOnExit="true"
+      save="true"
+      screen="FNOLWizard_PickPolicyRiskUnitsScreen( Claim, wizardInfo )"
+      title="wizardInfo.SelectRiskUnitsTitle"
+      visible="wizardInfo.CanSelectRiskUnits"/>
+    <WizardStepSet
+      available="wizardInfo.useOldWizardStep()"
+      id="GeneralPropertyWizardStepSet"
+      visible="wizardInfo.useOldWizardStep()">
+      <WizardStep
+        handlesValidationIssue="wizardInfo.isMainContactOrReporter(VALUE)"
+        id="ClassicMainContacts"
+        label="&quot;OLD &quot; + DisplayKey.get(&quot;Wizard.NewClaimWizard.NewClaimMainContacts.Label&quot;)"
+        onExit="wizardInfo.checkForDuplicatesNoWarning()"
+        save="true"
+        screen="NewClaimWizard_MainContactsScreen(Claim, wizardInfo)"
+        title="DisplayKey.get(&quot;Wizard.NewClaimWizard.NewClaimMainContacts.Step&quot;,  wizardInfo.CurrentStepNumber ,  wizardInfo.TotalNumberOfSteps)"/>
+      <WizardStep
+        allowFinish="true"
+        handlesValidationIssue="VALUE typeis entity.Claim or VALUE typeis entity.Incident"
+        id="ClassicLossDetails"
+        label="DisplayKey.get(&quot;Wizard.NewClaimWizard.NewClaimLossDetails.Label&quot;)"
+        mode="gw.config.LOBAbstraction.ForClaim.ForLossType.getUIMode(Claim)"
+        onExit="wizardInfo.finishSetupServiceRequests()"
+        onFirstEnter="wizardInfo.initClaim()"
+        save="true"
+        screen="NewClaimWizard_LossDetailsScreen(Claim, wizardInfo)"
+        title="DisplayKey.get(&quot;Wizard.NewClaimWizard.NewClaimLossDetails.Step&quot;,  wizardInfo.CurrentStepNumber, wizardInfo.TotalNumberOfSteps)"/>
+      <WizardStep
+        allowFinish="true"
+        handlesValidationIssue="VALUE typeis entity.Exposure"
+        id="ClassicExposures"
+        label="DisplayKey.get(&quot;Wizard.NewClaimWizard.NewClaimExposures.Label&quot;)"
+        onExit="wizardInfo.finishSetupServiceRequests()"
+        screen="NewClaimWizard_ExposuresScreen(Claim, wizardInfo)"
+        title="DisplayKey.get(&quot;Wizard.NewClaimWizard.NewClaimExposures.Step&quot;, wizardInfo.CurrentStepNumber, wizardInfo.TotalNumberOfSteps)"
+        visible="wizardInfo.ExposureListChangeable"/>
+      <WizardStep
+        allowFinish="true"
+        handlesValidationIssue="!wizardInfo.isMainContactOrReporter(VALUE)"
+        id="ClassicPartiesInvolved"
+        label="DisplayKey.get(&quot;Wizard.NewClaimWizard.NewClaimPartiesInvolved.Label&quot;)"
+        screen="NewClaimWizard_PartiesInvolvedScreen(Claim, wizardInfo)"
+        title="DisplayKey.get(&quot;Wizard.NewClaimWizard.NewClaimPartiesInvolved.Step&quot;, wizardInfo.CurrentStepNumber, wizardInfo.TotalNumberOfSteps)"/>
+      <WizardStep
+        allowFinish="!gw.plugin.Plugins.isEnabled(gw.plugin.document.IDocumentMetadataSource)"
+        id="ClassicDocuments"
+        label="DisplayKey.get(&quot;Wizard.NewClaimWizard.NewClaimDocuments.Label&quot;)"
+        screen="NewClaimWizard_DocumentsScreen(Claim, wizardInfo)"
+        title="DisplayKey.get(&quot;Wizard.NewClaimWizard.NewClaimDocuments.Step&quot;, wizardInfo.CurrentStepNumber, wizardInfo.TotalNumberOfSteps)"/>
+      <WizardStep
+        allowFinish="true"
+        id="ClassicAssign"
+        label="DisplayKey.get(&quot;Wizard.NewClaimWizard.NewClaimAssign.Label&quot;)"
+        screen="NewClaimWizard_AssignScreen(Claim, wizardInfo)"
+        title="DisplayKey.get(&quot;Wizard.NewClaimWizard.NewClaimAssign.Step&quot;, wizardInfo.CurrentStepNumber, wizardInfo.TotalNumberOfSteps)"/>
+      <WizardStep
+        id="ClassicSummary"
+        label="DisplayKey.get(&quot;Wizard.NewClaimWizard.NewClaimSummary.Label&quot;)"
+        screen="NewClaimWizard_SummaryScreen(Claim, wizardInfo)"
+        title="DisplayKey.get(&quot;Wizard.NewClaimWizard.NewClaimSummary.Step&quot;, wizardInfo.CurrentStepNumber, wizardInfo.TotalNumberOfSteps)"/>
+    </WizardStepSet>
+    <WizardStepSet
+      available="wizardInfo.IsLossTypeSet"
+      id="FullWizardStepSet"
+      visible="!wizardInfo.useOldWizardStep()">
+      <WizardStep
+        handlesValidationIssue="wizardInfo.isMainContactOrReporter(VALUE)"
+        id="BasicInfo"
+        label="DisplayKey.get(&quot;Wizard.NewClaimWizard.NewClaimMainContacts.Label&quot;)"
+        mode="gw.config.LOBAbstraction.ForClaim.ForLossType.getUIMode(Claim)"
+        onExit="wizardInfo.BasicInfoExit()"
+        save="true"
+        screen="FNOLWizard_BasicInfoScreen(Claim, wizardInfo)"
+        title="DisplayKey.get(&quot;Wizard.NewClaimWizard.NewClaimMainContacts.Step&quot;, wizardInfo.CurrentStepNumber, wizardInfo.TotalNumberOfSteps)"/>
+      <WizardStep
+        allowFinish="true"
+        handlesValidationIssue="VALUE typeis entity.Claim or VALUE typeis entity.Incident"
+        id="LossDetails"
+        label="DisplayKey.get(&quot;Wizard.NewClaimWizard.NewClaimLossDetails.Label&quot;)"
+        mode="gw.config.LOBAbstraction.ForClaim.ForLossType.getUIMode(Claim)"
+        onEnter="gw.api.claim.FnolServiceRequestHelper.cleanAndFinishServiceRequests(wizardInfo) /* clean up when going back from Services step */"
+        onExit="wizardInfo.LossDetailsExit()"
+        onFirstEnter="wizardInfo.LossDetailsFirstEnter()"
+        save="true"
+        screen="FNOLWizard_NewLossDetailsScreen(Claim, wizardInfo)"
+        title="DisplayKey.get(&quot;Wizard.NewClaimWizard.NewClaimLossDetails.Step&quot;, wizardInfo.CurrentStepNumber, wizardInfo.TotalNumberOfSteps)"/>
+      <WizardStep
+        allowFinish="true"
+        available="wizardInfo.IsServicesStepAvailable"
+        handlesValidationIssue="wizardInfo.isServiceRequest(ISSUE)"
+        id="Services"
+        label="DisplayKey.get(&quot;Web.FNOLWizard.ServicesStep.Label&quot;)"
+        mode="gw.config.LOBAbstraction.ForClaim.ForLossType.getUIMode(Claim)"
+        onExit="gw.api.claim.FnolServiceRequestHelper.cleanAndFinishServiceRequests(wizardInfo)"
+        save="true"
+        screen="FNOLWizard_ServicesScreen(Claim, wizardInfo)"
+        title="DisplayKey.get(&quot;Wizard.NewClaimWizard.NewClaimServices.Step&quot;, wizardInfo.CurrentStepNumber, wizardInfo.TotalNumberOfSteps)"
+        visible="wizardInfo.IsServicesStepAvailable"/>
+      <WizardStep
+        handlesValidationIssue="VALUE typeis entity.Exposure"
+        id="Summary"
+        label="DisplayKey.get(&quot;Wizard.NewClaimWizard.NewClaimAssign.Label&quot;)"
+        onEnter="wizardInfo.addExposureForEveryIncidentIfPossible(); wizardInfo.updateCatastropheAssociation_SP()"
+        mode="gw.config.LOBAbstraction.ForClaim.ForLossType.getUIMode(Claim)"
+        screen="FNOLWizard_AssignSaveScreen(Claim, wizardInfo)"
+        title="DisplayKey.get(&quot;Wizard.NewClaimWizard.NewClaimAssign.Step&quot;, wizardInfo.CurrentStepNumber, wizardInfo.TotalNumberOfSteps)"/>
+    </WizardStepSet>
+    <QuickClaimStep
+      condition="gw.config.LOBAbstraction.ForClaim.ForLossType.isAuto(Claim)"
+      id="QuickClaimAuto"
+      label="DisplayKey.get(&quot;Wizard.NewClaimWizard.QuickClaimAuto.Label&quot;)"
+      onExit="wizardInfo.checkForDuplicates(); wizardInfo.addExposureForEveryIncidentIfPossible()"
+      quickClaimMode="QuickClaimAuto"
+      screen="FNOLWizard_NewQuickClaimScreen(Claim, wizardInfo)"
+      title="DisplayKey.get(&quot;Wizard.NewClaimWizard.QuickClaimAuto.Step&quot;, wizardInfo.CurrentStepNumber, wizardInfo.TotalNumberOfSteps)"/>
+    <QuickClaimStep
+      condition="gw.config.LOBAbstraction.ForClaim.ForLossType.isAuto(Claim)"
+      id="QuickClaimAutoFirstAndFinal"
+      label="DisplayKey.get(&quot;Wizard.NewClaimWizard.AutoFirstAndFinal.Label&quot;)"
+      onEnter="wizardInfo.onAutoFirstAndFinalEnter()"
+      onExit="wizardInfo.onAutoFirstAndFinalExit()"
+      quickClaimMode="AutoFirstAndFinal"
+      screen="FNOLWizard_AutoFirstAndFinalScreen(Claim, wizardInfo)"
+      title="DisplayKey.get(&quot;Wizard.NewClaimWizard.AutoFirstAndFinal.Step&quot;, wizardInfo.CurrentStepNumber, wizardInfo.TotalNumberOfSteps)"/>
+    <QuickClaimStep
+      condition="gw.config.LOBAbstraction.ForClaim.ForLossType.isProperty(Claim) and not wizardInfo.IsHomeownersClaim"
+      id="QuickClaimPr"
+      label="DisplayKey.get(&quot;Wizard.NewClaimWizard.QuickClaimProperty.Label&quot;)"
+      onExit="wizardInfo.checkForDuplicates(); wizardInfo.addExposureForEveryIncidentIfPossible()"
+      quickClaimMode="QuickClaimProperty"
+      screen="NewClaimWizard_QuickClaimScreen(Claim, wizardInfo)"
+      title="DisplayKey.get(&quot;Wizard.NewClaimWizard.QuickClaimProperty.Step&quot;, wizardInfo.CurrentStepNumber, wizardInfo.TotalNumberOfSteps)"/>
+    <QuickClaimStep
+      condition="gw.config.LOBAbstraction.ForClaim.ForLossType.isTravel(Claim)"
+      id="QuickClaimTravelTripCancelOnly"
+      label="DisplayKey.get(&quot;Wizard.NewClaimWizard.QuickClaimTravelCancelOnly.Label&quot;)"
+      onExit="wizardInfo.checkForDuplicates(); wizardInfo.addExposureForEveryIncidentIfPossible()"
+      onFirstEnter="wizardInfo.initClaim()"
+      quickClaimMode="TravelCancelOnly"
+      screen="FNOLWizard_NewQuickClaimScreen(Claim, wizardInfo)"
+      title="DisplayKey.get(&quot;Wizard.NewClaimWizard.QuickClaimTravelTrip.Step&quot;, wizardInfo.CurrentStepNumber, wizardInfo.TotalNumberOfSteps)"/>
+    <QuickClaimStep
+      condition="gw.config.LOBAbstraction.ForClaim.ForLossType.isTravel(Claim)"
+      id="QuickClaimTravelBaggageOnly"
+      label="DisplayKey.get(&quot;Wizard.NewClaimWizard.QuickClaimTravelBaggageDelay.Label&quot;)"
+      onExit="wizardInfo.checkForDuplicates(); wizardInfo.addExposureForEveryIncidentIfPossible()"
+      onFirstEnter="wizardInfo.initClaim()"
+      quickClaimMode="TravelBaggageOnly"
+      screen="FNOLWizard_NewQuickClaimScreen(Claim, wizardInfo)"
+      title="DisplayKey.get(&quot;Wizard.NewClaimWizard.QuickClaimTravelBaggage.Step&quot;, wizardInfo.CurrentStepNumber, wizardInfo.TotalNumberOfSteps)"/>
+    <QuickClaimStep
+      condition="gw.config.LOBAbstraction.ForClaim.ForLossType.isGeneralLiablity(Claim)"
+      id="QuickClaimGL"
+      label="DisplayKey.get(&quot;Wizard.NewClaimWizard.QuickClaimGL.Label&quot;)"
+      onExit="wizardInfo.checkForDuplicates(); wizardInfo.addExposureForEveryIncidentIfPossible()"
+      quickClaimMode="GL"
+      screen="NewClaimWizard_QuickClaimScreen(Claim, wizardInfo)"
+      title="DisplayKey.get(&quot;Wizard.NewClaimWizard.QuickClaimGL.Step&quot;, wizardInfo.CurrentStepNumber, wizardInfo.TotalNumberOfSteps)"/>
+    <WizardStepSet
+      id="IndependentWizardStepSet">
+      <WizardStep
+        available="wizardInfo.IndependentStepAllowed"
+        handlesValidationIssue="wizardInfo.isPartiesInvolvedValidation(VALUE)"
+        id="PartiesInvolved"
+        independent="true"
+        label="DisplayKey.get(&quot;Wizard.NewClaimWizard.NewClaimPartiesInvolved.Label&quot;)"
+        save="true"
+        screen="NewClaimWizard_PartiesInvolvedScreen(Claim, wizardInfo)"
+        title="DisplayKey.get(&quot;Wizard.NewClaimWizard.NewClaimPartiesInvolved.Label&quot;)"
+        visible="!wizardInfo.useOldWizardStep()"/>
+      <WizardStepGroup
+        id="PolicyWizardStepGroup"
+        label="DisplayKey.get(&quot;Wizard.NewClaimWizard.NewClaimPolicyGroup.Label&quot;)">
+        <WizardStep
+          available="wizardInfo.IndependentStepAllowed"
+          handlesValidationIssue="VALUE typeis entity.Policy"
+          id="PolicyGeneral"
+          independent="true"
+          label="DisplayKey.get(&quot;Wizard.NewClaimWizard.NewClaimPolicyGeneral.Label&quot;)"
+          save="true"
+          screen="NewClaimWizard_PolicyGeneralScreen(Claim, wizardInfo)"
+          title="DisplayKey.get(&quot;Wizard.NewClaimWizard.NewClaimPolicyGeneral.Label&quot;)"
+          visible="perm.Policy.view(Claim) and perm.System.viewpolicy"/>
+        <WizardStep
+          available="wizardInfo.IndependentStepAllowed"
+          id="PolicyDetails"
+          independent="true"
+          label="DisplayKey.get(&quot;Wizard.NewClaimWizard.NewClaimPolicyDetails.Label&quot;)"
+          save="true"
+          screen="NewClaimWizard_PolicyDetailsScreen(Claim, wizardInfo)"
+          title="DisplayKey.get(&quot;Wizard.NewClaimWizard.NewClaimPolicyDetails.Label&quot;)"
+          visible="perm.Policy.view(Claim) and perm.System.viewpolicy"/>
+      </WizardStepGroup>
+      <WizardStep
+        available="wizardInfo.IndependentStepAllowed"
+        id="Documents"
+        independent="true"
+        label="DisplayKey.get(&quot;Wizard.NewClaimWizard.NewClaimDocuments.Label&quot;)"
+        save="true"
+        screen="FNOLWizard_DocumentsScreen(Claim, wizardInfo)"
+        title="DisplayKey.get(&quot;Wizard.NewClaimWizard.NewClaimDocuments.Label&quot;)"
+        visible="!wizardInfo.useOldWizardStep()"/>
+      <WizardStep
+        available="wizardInfo.IndependentStepAllowed"
+        id="Notes"
+        independent="true"
+        label="DisplayKey.get(&quot;Web.NewClaimWizard.IndependentSteps.Notes&quot;)"
+        save="true"
+        screen="FNOLWizard_NotesScreen(Claim)"
+        title="DisplayKey.get(&quot;Web.NewClaimWizard.IndependentSteps.Notes&quot;)"
+        visible="!wizardInfo.useOldWizardStep()"/>
+    </WizardStepSet>
+  </NewClaimWizard>
+</PCF>

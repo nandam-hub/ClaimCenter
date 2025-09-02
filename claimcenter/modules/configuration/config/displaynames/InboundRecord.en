@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<Entity
+  name="InboundRecord">
+  <Columns>
+    <Column
+      beanPath="InboundRecord.Config"
+      name="Config"
+      sortOrder="1"/>
+    <Column
+      beanPath="InboundRecord.InboundFile.InputLocation"
+      name="Path"
+      sortOrder="3"/>
+    <Column
+      beanPath="InboundRecord.CreateTime"
+      name="CreateTime"
+      sortOrder="2"/>
+    <Column
+      beanPath="InboundRecord.Status"
+      name="Status"
+      sortOrder="5"/>
+    <Column
+      beanPath="InboundRecord.ErrorMessage"
+      name="ErrorMessage"
+      sortOrder="6"/>
+    <Column
+      beanPath="InboundRecord.LineNumber"
+      name="LineNumber"
+      sortOrder="4"/>
+  </Columns>
+  <DisplayName><![CDATA[return "'" + Config + "' " + Path + "#" + LineNumber + " " + CreateTime + " " + Status + ": " + ErrorMessage]]></DisplayName>
+</Entity>

@@ -1,0 +1,5 @@
+<div id="${inputLabelAriaId}" class="gw-label ${labelClasses} ${!label ? 'gw-emptyLabel'}"
+     style="?{labelWidth}width:${labelWidth}">${labelIcon}${colorIndicatorIcon}${label}</div>
+<div class="gw-value ${valueClasses}" style="${valueStyleBuilder}">
+${:children}
+</div>

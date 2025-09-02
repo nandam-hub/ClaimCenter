@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<extension
+  xmlns="http://guidewire.com/datamodel"
+  entityName="Catastrophe">
+  <onetoone
+    desc="Catastrophe claim template instruction"
+    name="CatClaimTemplateSettings_SP"
+    fkentity="ClaimTemplateSettings_SP"
+    nullok="true"/>
+</extension>

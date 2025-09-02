@@ -1,0 +1,6 @@
+name: "Account Manager"
+endpoints: []
+accessibleFields:
+  "*":
+    edit: "*"
+    view: "*"

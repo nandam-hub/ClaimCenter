@@ -1,0 +1,14 @@
+<div :for="filter" :in="filters" class="gw-CalendarMonth--filter">
+    <div class="gw-ValueWidget" data-gw-change="calendar.filter id:${calendarId} filter:${filter.filterName}">
+        <div class="gw-label gw-filter-label"><div class="gw-label">${filter.title}</div></div>
+        <div class="gw-filter-value">
+          <div class="gw-select-wrapper">
+            <div class="gw-icon"></div>
+            <select id="${prefixId}${filter.filterName}" aria-label="${filter.filterDescription}">
+              <option :if="filter.selectedOption" value="filter.selectedOption.value" selected>${filter.selectedOption.label}</option>
+              <option :for="option" :in="filter.nonSelectedOptions" value="${option.value}">${option.label}</option>
+            </select>
+          </div>
+        </div>
+    </div>
+</div>

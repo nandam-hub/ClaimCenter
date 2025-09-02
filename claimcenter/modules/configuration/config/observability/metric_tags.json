@@ -1,0 +1,17 @@
+{
+  "gw.pl.webrequest": {
+    "location": {
+      "allowValues": [
+        "Claim/ClaimSummaryGroup/ClaimSummary"
+      ]
+    }
+  },
+  "gw.pl.webrequest.widgetevent": {
+    "event_source": {
+      "allowValues": [
+        "NewNoteWorksheet/NewNoteScreen/(ToolbarWidget)/(EditButtonsWidget)/Update",
+        "NewActivity/NewActivityScreen/(ToolbarWidget)/NewActivity_UpdateButton"
+      ]
+    }
+  }
+}

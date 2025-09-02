@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Forward
+    canVisit="true"
+    id="CreateNewClaimForward">
+    <LocationEntryPoint
+      signature="CreateNewClaimForward(policyNumber: String)"/>
+    <Variable
+      name="policyNumber"
+      type="String"/>
+    <ForwardCondition
+      action="FNOLWizard.go(null, policyNumber, null, null, true)"/>
+  </Forward>
+</PCF>

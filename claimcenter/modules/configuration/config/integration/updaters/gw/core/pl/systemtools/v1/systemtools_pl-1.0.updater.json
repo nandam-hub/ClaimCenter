@@ -1,0 +1,18 @@
+{
+  "schemaName": "gw.core.pl.systemtools.v1.systemtools_pl-1.0",
+  "combine": [
+    "gw.core.pl.framework.v1.framework_pl-1.0"
+  ],
+  "typeUses": [ ],
+  "updaters": {
+    "DesignApiExtensionBundle": {
+      "schemaDefinition": "DesignApiExtensionBundle",
+      "root": "gw.rest.core.pl.systemtools.v1.apiextensionbundle.ApiExtensionBundleSummary",
+      "properties": {
+        "definition": {
+          "path": "ApiExtensionBundleSummary.Definition"
+        }
+      }
+    }
+  }
+}

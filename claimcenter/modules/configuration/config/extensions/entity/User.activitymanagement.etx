@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<extension
+  xmlns="http://guidewire.com/datamodel"
+  entityName="User">
+  <array
+    arrayentity="UserPTO_SP"
+    arrayfield="User"
+    desc="List of user PTO periods"
+    name="UserPTO_SP"
+    owner="true"/>
+</extension>

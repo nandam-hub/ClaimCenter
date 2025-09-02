@@ -1,0 +1,79 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "definitions": {
+    "BranchCopied": {
+      "type": "object",
+      "properties": {
+        "source": {
+          "description": "Id of source branch",
+          "type": "string"
+        },
+        "target": {
+          "description": "Id of target branch",
+          "type": "string"
+        },
+        "start": {
+          "description": "New period start date/time",
+          "type": "string",
+          "format": "date-time"
+        },
+        "end": {
+          "description": "New period end date/time",
+          "type": "string",
+          "format": "date-time"
+        },
+        "excludes": {
+          "description": "Paths to exclude from the copy",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "PeriodChanged": {
+      "type": "object",
+      "properties": {
+        "branch": {
+          "description": "Id of branch",
+          "type": "string"
+        },
+        "start": {
+          "description": "New period start date/time",
+          "type": "string",
+          "format": "date-time"
+        },
+        "end": {
+          "description": "New period end date/time",
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "SliceCopied": {
+      "type": "object",
+      "properties": {
+        "source": {
+          "description": "Id of source branch",
+          "type": "string"
+        },
+        "target": {
+          "description": "Id of target branch",
+          "type": "string"
+        },
+        "date": {
+          "description": "Date of slice to copy",
+          "type": "string",
+          "format": "date-time"
+        },
+        "excludes": {
+          "description": "Paths to exclude from the copy",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

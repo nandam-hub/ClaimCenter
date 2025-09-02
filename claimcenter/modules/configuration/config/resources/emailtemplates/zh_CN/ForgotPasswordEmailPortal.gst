@@ -1,0 +1,1 @@
+<%@ params( email: String, portalURL: String, code: String ) %> 尊敬的${email}：<br />请打开以下URL重置您的密码：<br /> <a href="${portalURL}?token=${code}">重置密码</a><br /><br /> 谢谢！  

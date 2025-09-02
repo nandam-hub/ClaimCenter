@@ -1,0 +1,9 @@
+{
+  "schemaName": "gw.content.cc.claim.v1.claim_auto_content-1.0",
+  "combine": [
+    "gw.content.cc.claim.v1.claim_content-1.0",
+    "gw.core.cc.claim.v1.claim_auto_core-1.0",
+    "gw.core.cc.common.v1.common_auto_core-1.0"
+  ],
+  "mappers": { }
+}

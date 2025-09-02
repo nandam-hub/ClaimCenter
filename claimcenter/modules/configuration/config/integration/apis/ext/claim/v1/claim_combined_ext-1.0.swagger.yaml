@@ -1,0 +1,13 @@
+swagger: "2.0"
+basePath: /claim/v1
+x-gw-combine:
+- ext.claim.v1.claim_auto_ext-1.0
+- ext.claim.v1.claim_property_ext-1.0
+- ext.claim.v1.claim_ext-1.0
+x-gw-schema-import:
+  claims: ext.claim.v1.claim_combined_ext-1.0
+x-gw-apihandlers:
+- gw.rest.ext.cc.claim.v1.ClaimApiExtHandler
+- gw.rest.ext.cc.claim.auto.v1.claims.ClaimAutoApiExtHandler
+- gw.rest.ext.cc.claim.property.v1.claims.ClaimPropertyApiExtHandler
+paths: {}

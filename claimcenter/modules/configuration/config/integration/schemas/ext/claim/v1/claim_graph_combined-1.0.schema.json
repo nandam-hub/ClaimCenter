@@ -1,0 +1,6 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "x-gw-combine": [
+    "ext.claim.v1.claim_graph_ext-1.0"
+  ]
+}

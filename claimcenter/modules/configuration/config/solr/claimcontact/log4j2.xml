@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Configuration status="warn">
+  <Properties>
+    <Property name="batchload.logDirectory">logs/</Property>
+    <Property name="file.defaultPattern">%-5p %d{yyyy-MM-dd HH:mm:ss.SSS} %c %m%n</Property>
+  </Properties>
+
+  <Appenders>
+    <Console name="Console" follow="true">
+      <PatternLayout pattern="%8r [%t] %-5p %d{yyyy-MM-dd HH:mm:ss.SSS}; %c %m%n"/>
+    </Console>
+    <File name="File" fileName="${batchload.logDirectory}/solr-batchload.log">
+      <PatternLayout pattern="${file.defaultPattern}" charset="UTF-8"/>
+    </File>
+  </Appenders>
+
+  <Loggers>
+    <Root level="warn">
+      <AppenderRef ref="Console"/>
+      <AppenderRef ref="File"/>
+    </Root>
+
+    <!-- fine tuning -->
+    <Logger name="Solr" level="info"/>
+    <Logger name="org.apache.http" level="error"/>
+    <Logger name="org.apache.hadoop" level="warn"/>
+    <Logger name="org.apache.zookeeper" level="warn"/>
+
+    <!-- set to INFO to enable infostream log messages -->
+    <Logger name="org.apache.solr.update.LoggingInfoStream" level="off"/>
+
+  </Loggers>
+</Configuration>

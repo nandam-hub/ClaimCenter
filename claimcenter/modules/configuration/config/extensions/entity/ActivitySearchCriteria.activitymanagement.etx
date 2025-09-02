@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<extension
+  xmlns="http://guidewire.com/datamodel"
+  entityName="ActivitySearchCriteria">
+  <foreignkey
+    columnName="AssignedQueue_SPID"
+    desc="The queue to which this activity is assigned"
+    fkentity="AssignableQueue"
+    name="AssignedQueue_SP"
+    nullok="true"/>
+  <typekey
+    name="Type_SP"
+    nullok="true"
+    typelist="ActivityType"/>
+</extension>

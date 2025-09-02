@@ -1,0 +1,587 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "x-gw-combine": [
+    "gw.core.pl.framework.v1.framework_pl-1.0"
+  ],
+  "x-gw-localizationKeyPrefix": "systemtools.v1",
+  "definitions": {
+    "ApiRole": {
+      "title": "API role",
+      "description": "An API role is a list of endpoints, operations, and fields that are available to a set of callers through API calls",
+      "type": "object",
+      "x-gw-sinceVersion": "1.13.0",
+      "properties": {
+        "applicableOnThisPlanetClass": {
+          "title": "Applicable on this planet class",
+          "description": "Whether this role is applicable on this planet's planet class",
+          "type": "boolean",
+          "readOnly": true,
+          "x-gw-extensions": {
+            "filterable": true
+          }
+        },
+        "applicablePlanetClasses": {
+          "title": "Applicable planet classes",
+          "description": "The set of planet classes in which this role can be used",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PlanetClass"
+          },
+          "readOnly": true
+        },
+        "id": {
+          "title": "ID",
+          "description": "The unique identifier of this role",
+          "type": "string",
+          "readOnly": true,
+          "x-gw-extensions": {
+            "filterable": true,
+            "sortable": true
+          }
+        }
+      }
+    },
+    "BatchProcess": {
+      "title": "Batch process",
+      "description": "A batch process is an automated process that can be run in the background. Batch processes can be scheduled to run automatically or can be started explicitly via the appropriate API call.",
+      "type": "object",
+      "x-gw-sinceVersion": "1.5.0",
+      "properties": {
+        "distributed": {
+          "title": "Distributed",
+          "description": "Flag indicating whether the batch process is distributed",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "processHistoryId": {
+          "title": "Process history id",
+          "description": "The RestId of the newly created `ProcessHistory` when a batch process is started",
+          "type": "string",
+          "readOnly": true,
+          "x-gw-sinceVersion": "1.11.0"
+        },
+        "processId": {
+          "title": "Process id",
+          "description": "Id of the newly created process when a batch process is started. This property is only populated when starting a batch process, and not when otherwise viewing the details of a batch process.",
+          "type": "integer",
+          "format": "int64",
+          "x-gw-deprecatedVersion": "1.11.0",
+          "x-gw-deprecatedReason": "This field has been deprecated. The `processId` refers to the ID column of the ProcessHistory element created for the new batch run and should not be used to view the ProcessHistory. Use the `processHistoryId` field instead."
+        },
+        "status": {
+          "title": "Status",
+          "description": "Status of the batch process",
+          "$ref": "#/definitions/ProcessStatus",
+          "readOnly": true,
+          "x-gw-extensions": {
+            "defaultViews": [
+              "detail"
+            ]
+          }
+        },
+        "type": {
+          "title": "Type",
+          "description": "The type of batch process",
+          "$ref": "#/definitions/TypeKeyReference",
+          "readOnly": true,
+          "x-gw-extensions": {
+            "filterable": true,
+            "sortable": true,
+            "typelist": "BatchProcessType"
+          }
+        },
+        "wasStopped": {
+          "title": "Was stopped",
+          "description": "Flag indicating whether the batch process was successfully stopped (a `false` value means the batch process was not already running). This property is only populated when stopping a batch process, and not when otherwise viewing the details of a batch process.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "workQueueStatus": {
+          "title": "Work queue status",
+          "description": "Status of the associated work queue, if any",
+          "$ref": "#/definitions/WorkQueueStatus",
+          "readOnly": true,
+          "x-gw-extensions": {
+            "defaultViews": [
+              "detail"
+            ]
+          }
+        }
+      }
+    },
+    "BatchProcessArguments": {
+      "title": "Batch process arguments",
+      "description": "The arguments with which a batch process can be started",
+      "type": "object",
+      "x-gw-sinceVersion": "1.5.0",
+      "properties": {
+        "dbconsistencycheck": {
+          "title": "DBConsistencyCheck",
+          "description": "Arguments for the DBConsistencyCheck batch process",
+          "$ref": "#/definitions/DBConsistencyCheckArguments"
+        },
+        "purgeAsyncApiRequests": {
+          "title": "PurgeAsyncApiRequests",
+          "description": "Arguments for the PurgeAsyncApiRequests batch process",
+          "$ref": "#/definitions/PurgeAsyncApiRequestsArguments"
+        },
+        "syncAdminAppEvents": {
+          "title": "SyncAdminAppEvents",
+          "description": "Arguments for the SyncAdminAppEvents batch process",
+          "$ref": "#/definitions/SyncAdminAppEventsArguments",
+          "x-gw-sinceVersion": "1.8.0"
+        }
+      }
+    },
+    "DBConsistencyCheckArguments": {
+      "title": "DBConsistencyCheckArguments",
+      "description": "Arguments for the DBConsistencyCheck batch process",
+      "type": "object",
+      "x-gw-sinceVersion": "1.5.0",
+      "properties": {
+        "checkTypes": {
+          "title": "Check types",
+          "description": "Array of selected codes (from the ConsistencyCheckType typelist)",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "description": {
+          "title": "Description",
+          "description": "A description of this run",
+          "type": "string"
+        },
+        "rerunKey": {
+          "title": "Rerun key",
+          "description": "Key of previous run, if the batch process is a rerun of that run",
+          "type": "integer",
+          "format": "int64"
+        },
+        "tableNames": {
+          "title": "Table names",
+          "description": "Array of selected table names",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "DatabaseConsistencyCheck": {
+      "title": "Database consistency check",
+      "description": "Details of the consistency check run",
+      "type": "object",
+      "x-gw-sinceVersion": "1.5.0",
+      "properties": {
+        "description": {
+          "title": "Description",
+          "description": "The description of the consistency check run",
+          "type": "string",
+          "readOnly": true,
+          "x-gw-extensions": {
+            "filterable": true
+          }
+        },
+        "duration": {
+          "title": "Duration",
+          "description": "Length of time taken by this consistency check run",
+          "type": "string",
+          "format": "gw-bigdecimal",
+          "readOnly": true
+        },
+        "endTime": {
+          "title": "End time",
+          "description": "Time at which this consistency check run ended",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "x-gw-extensions": {
+            "filterable": true,
+            "sortable": true
+          }
+        },
+        "errors": {
+          "title": "Errors",
+          "description": "Number of errors encountered by the consistency check run",
+          "type": "integer",
+          "readOnly": true
+        },
+        "extensionsSchemaVersion": {
+          "title": "Extensions schema version",
+          "description": "Datamodel extension version",
+          "type": "integer",
+          "readOnly": true
+        },
+        "id": {
+          "title": "Id",
+          "description": "The unique identifier of this consistency check run",
+          "type": "string",
+          "readOnly": true
+        },
+        "key": {
+          "title": "Key",
+          "description": "Key of this run to be used if it should be rerun",
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "majorSchemaVersion": {
+          "title": "Major schema version",
+          "description": "Application major schema version",
+          "type": "integer",
+          "readOnly": true
+        },
+        "minorSchemaVersion": {
+          "title": "Minor schema version",
+          "description": "Application minor schema version",
+          "type": "integer",
+          "readOnly": true
+        },
+        "platformMajorSchemaVersion": {
+          "title": "Platform major schema version",
+          "description": "Platform major schema version",
+          "type": "integer",
+          "readOnly": true
+        },
+        "platformMinorSchemaVersion": {
+          "title": "Platform minor schema version",
+          "description": "Platform minor schema version",
+          "type": "integer",
+          "readOnly": true
+        },
+        "startTime": {
+          "title": "Start time",
+          "description": "Time at which this consistency check run started",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "x-gw-extensions": {
+            "filterable": true,
+            "sortable": true
+          }
+        },
+        "totalChecks": {
+          "title": "Total checks",
+          "description": "Total number of consistency checks that ran in this run",
+          "type": "integer",
+          "readOnly": true
+        }
+      }
+    },
+    "DesignApiExtensionBundle": {
+      "title": "Design-mode API extension bundle",
+      "description": "Design-mode API extension bundle",
+      "type": "object",
+      "x-gw-sinceVersion": "1.13.0",
+      "properties": {
+        "code": {
+          "title": "Code",
+          "description": "The code for this API extension bundle",
+          "type": "string",
+          "readOnly": true,
+          "x-gw-extensions": {
+            "filterable": true,
+            "sortable": true
+          }
+        },
+        "definition": {
+          "title": "Definition",
+          "description": "Definition of the API extension bundle",
+          "type": "object",
+          "x-gw-extensions": {
+            "defaultViews": [
+              "detail"
+            ],
+            "requiredForCreate": true
+          }
+        },
+        "name": {
+          "title": "Name",
+          "description": "The name of this API extension bundle",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "InstalledApiExtensionBundle": {
+      "title": "Installed-mode API extension bundle",
+      "description": "Installed-mode API extension bundle",
+      "type": "object",
+      "x-gw-sinceVersion": "1.13.0",
+      "properties": {
+        "code": {
+          "title": "Code",
+          "description": "The code for this API extension bundle",
+          "type": "string",
+          "readOnly": true,
+          "x-gw-extensions": {
+            "filterable": true,
+            "sortable": true
+          }
+        },
+        "definition": {
+          "title": "Definition",
+          "description": "Definition of the API extension bundle",
+          "type": "object",
+          "readOnly": true,
+          "x-gw-extensions": {
+            "defaultViews": [
+              "detail"
+            ]
+          }
+        },
+        "name": {
+          "title": "Name",
+          "description": "The name of this API extension bundle",
+          "type": "string",
+          "readOnly": true
+        },
+        "shadowed": {
+          "title": "Shadowed",
+          "description": "Designates whether or not the API extension bundle is shadowed by a design-mode definition",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "vendor": {
+          "title": "Name",
+          "description": "A name of supplying vendor",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "PlanetClass": {
+      "title": "Planet class",
+      "description": "The stages of code promotion throughout the software development lifecycle (also known as Orbit)",
+      "type": "object",
+      "x-gw-sinceVersion": "1.13.0",
+      "properties": {
+        "lower": {
+          "title": "Lower",
+          "description": "Whether this planet class is considered a lower environment",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "name": {
+          "title": "Name",
+          "description": "The name of the planet class, such as `staging` or `preprod`",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ProcessHistory": {
+      "title": "Process history",
+      "description": "Contains information about the history of the batch process",
+      "type": "object",
+      "x-gw-extend": [
+        "#/definitions/ProcessHistoryBase"
+      ],
+      "x-gw-sinceVersion": "1.11.0",
+      "properties": {
+        "description": {
+          "title": "Description",
+          "description": "Short description of the run",
+          "type": "string",
+          "readOnly": true
+        },
+        "id": {
+          "title": "ID",
+          "description": "The unique identifier of this element",
+          "type": "string",
+          "readOnly": true
+        },
+        "internalFailure": {
+          "title": "Internal failure",
+          "description": "Whether the failure was internal",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "leaseId": {
+          "title": "Lease id",
+          "description": "The id of the lease",
+          "type": "string",
+          "readOnly": true
+        },
+        "ranToCompletion": {
+          "title": "Ran to completion",
+          "description": "Whether or not the process ran to completion, or failed or was interrupted",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "returnValue": {
+          "title": "Return value",
+          "description": "Return value from the batch process, or null if batch process has not completed, or does not have a return value",
+          "type": "string",
+          "readOnly": true
+        },
+        "scheduled": {
+          "title": "Scheduled",
+          "description": "Whether this was a scheduled run",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "workQueue": {
+          "title": "Work queue status",
+          "description": "Status of the associated work queue, if any",
+          "$ref": "#/definitions/WorkQueueStatus",
+          "readOnly": true
+        }
+      }
+    },
+    "ProcessHistoryBase": {
+      "title": "Process status",
+      "description": "Contains information about the status of the batch process",
+      "type": "object",
+      "x-gw-sinceVersion": "1.11.0",
+      "properties": {
+        "dateCompleted": {
+          "title": "Date completed",
+          "description": "The date the process finished, if it has in fact finished",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "dateCreated": {
+          "title": "Date created",
+          "description": "The date and time that the batch process was last requested to start",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "failedOps": {
+          "title": "Failed operations",
+          "description": "The number of failed operations",
+          "type": "integer",
+          "readOnly": true
+        },
+        "failureReason": {
+          "title": "Failure reason",
+          "description": "If the process failed to complete, the reason why it failed",
+          "type": "string",
+          "readOnly": true
+        },
+        "opsCompleted": {
+          "title": "Operations completed",
+          "description": "The number of operations the process completed so far",
+          "type": "integer",
+          "readOnly": true
+        },
+        "serverId": {
+          "title": "Server ID",
+          "description": "Server that ran (or is running) this batch process",
+          "type": "string",
+          "readOnly": true
+        },
+        "startDate": {
+          "title": "Start date",
+          "description": "The date and time that the batch process was last started",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "type": {
+          "title": "Process type",
+          "description": "The type of process",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ProcessStatus": {
+      "title": "Process status",
+      "description": "Contains information about the status of the batch process",
+      "type": "object",
+      "x-gw-extend": [
+        "#/definitions/ProcessHistoryBase"
+      ],
+      "x-gw-sinceVersion": "1.5.0",
+      "properties": {
+        "opsExpected": {
+          "title": "Operations expected",
+          "description": "The number of operations expected to be completed",
+          "type": "integer",
+          "readOnly": true
+        },
+        "progress": {
+          "title": "Progress",
+          "description": "Progress in the form `x of y` where `x` is the amount of work completed and `y` is the total amount of work. If `y` is unknown, returns just `x`.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "PurgeAsyncApiRequestsArguments": {
+      "title": "PurgeAsyncApiRequestsArguments",
+      "description": "Arguments for the PurgeAsyncApiRequests batch process",
+      "type": "object",
+      "x-gw-sinceVersion": "1.5.0",
+      "properties": {
+        "purgeDaysOld": {
+          "title": "Purge days old",
+          "description": "The number of days to keep async API request rows before they can be deleted",
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "SyncAdminAppEventsArguments": {
+      "title": "SyncAdminAppEventsArguments",
+      "description": "Arguments for the SyncAdminAppEvents batch process",
+      "type": "object",
+      "x-gw-sinceVersion": "1.8.0",
+      "properties": {
+        "adminEntityNames": {
+          "title": "Admin entity names for \"AppEvents\" sync",
+          "description": "Array of admin entity names to be synced with App Events",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "WorkQueueStatus": {
+      "title": "Work queue status",
+      "description": "Contains information about the work queue for a distributed batch process",
+      "type": "object",
+      "x-gw-sinceVersion": "1.5.0",
+      "properties": {
+        "activeWorkersCount": {
+          "title": "Active workers count",
+          "description": "The number of active workers",
+          "type": "integer",
+          "readOnly": true,
+          "x-gw-sinceVersion": "1.11.0"
+        },
+        "checkedOutCount": {
+          "title": "Number of checked out work items",
+          "description": "Number of work items checked out by workers",
+          "type": "integer",
+          "readOnly": true,
+          "x-gw-sinceVersion": "1.11.0"
+        },
+        "failedCount": {
+          "title": "Number of failed work items",
+          "description": "Number of work items that failed during processing",
+          "type": "integer",
+          "readOnly": true,
+          "x-gw-sinceVersion": "1.11.0"
+        },
+        "numActiveExecutors": {
+          "title": "Number of active executors",
+          "description": "The number of active executors",
+          "type": "integer",
+          "readOnly": true
+        },
+        "numActiveWorkItems": {
+          "title": "Number of active work items",
+          "description": "The number of active work items",
+          "type": "integer",
+          "readOnly": true
+        }
+      }
+    }
+  }
+}

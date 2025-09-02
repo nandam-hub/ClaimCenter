@@ -1,0 +1,183 @@
+.gw-PanelRefWidget {
+  // =================================
+  // ====== GENERAL
+  // =================================
+
+  @include gw-panelOuterSpacing();
+  @include gw-widgetStyles($fixed-border-col: $gw-app--DetailView--table--border-color);
+
+  align-self: stretch;
+
+  &[data-gw-collapsible-container] {
+    > .gw-panelRefWidget--titleArea {
+      min-height: $gw-app--PanelRef--title--min-height;
+      border-top: gw-border(transparent);
+      border-bottom: gw-border(transparent);
+      padding: $gw-app--PanelRef--title-area--padding;
+
+      .gw-right-side {
+        .gw-TitleBarWidget.gw-styleTag--PanelRefWidget {
+          &.gw-heading-2, &.gw-heading-3, &.gw-heading-1 {
+            margin: 0;
+            padding: $gw-app--SPACING-rem-S;
+            border-bottom: none; // This is a title bar that already inside of a panel ref that is collapsible, let the panel ref title area handle the borders
+          }
+        }
+      }
+    }
+  }
+
+  > .gw-panelRefWidget--titleArea {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+
+    &:empty {
+      display: none;
+    }
+
+    &[data-gw-click] {
+      @include gw-clickable($gw-app--PanelRef--title--focus-outline-col, $gw-app--PanelRef--title--focus-outline-offset);
+    }
+
+    .gw-left-side {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      flex-grow: 0;
+      flex-shrink: 0;
+
+      &:empty {
+        display: none;
+      }
+
+      .gw-toggle-collapse-icon {
+        margin-right: $gw-app--SPACING-rem-S;
+        flex-grow: 0;
+        flex-shrink: 0;
+
+        display: inline-block;
+
+        .gw-icon {
+          display: inline-block;
+          height: 1em;
+          width: 1em;
+          vertical-align: top;
+        }
+      }
+
+      & > .gw-icon {
+        font-size: $gw-app--PanelRef--toggle-icon-size;
+      }
+    }
+
+    .gw-right-side {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      flex-grow: 1;
+      flex-shrink: 1;
+    }
+  }
+
+  > .gw-panelRefWidget--children {
+    @include gw-panelInnerSpacing();
+
+    transition-property: height;
+    transition-duration: 2s; //NOTE: this doesn't do anything on an "auto" height container
+    transition-timing-function: ease;
+    overflow: hidden;
+    &:empty {
+      display: none;
+    }
+  }
+
+  @mixin makeToggleIcon($glyph) {
+    .gw-icon {
+      color: $gw-app--PanelRef--toggle-icon-col;
+      display: inline-block;
+      @include gw-icon($glyph, $line-height: 100%, $v-align: top, $display: inline-block, $width: 1em, $height: 1em);
+      font-size: $gw-app--PanelRef--toggle-icon-size;
+      height: 1em;
+      width: 1em;
+      line-height: 100%;
+      vertical-align: top;
+      margin-left: $gw-app--PanelRef--toggle-icon-left-indent;
+    }
+  }
+
+  // =================================
+  // ====== NOT COLLAPSED
+  // =================================
+  &[data-gw-collapsible-container]:not(.gw-collapsed) {
+    &.gw-border {
+      > .gw-panelRefWidget--titleArea {
+        border-bottom: gw-border($gw-app--DetailView--table--border-color);
+      }
+    }
+
+    &[data-gw-collapsible-container] {
+      box-shadow: $gw-app--PanelRef--open--box-shadow;
+    }
+
+    > .gw-panelRefWidget--titleArea {
+      background-color: $gw-app--PanelRef--open--title-bg;
+      color: $gw-app--PanelRef--open--title-col;
+
+      @include gw-borderCap($top: true);
+
+
+      &.gw-badge-collapsed-only {
+        .gw-TitleBarWidget {
+          .gw-BadgeWidget {
+            display: none;
+          }
+        }
+      }
+
+      .gw-toggle-collapse-icon {
+        @include makeToggleIcon($gw-app--PanelRef--toggle-icon-opened);
+      }
+    }
+
+    > .gw-panelRefWidget--children {
+      height: auto;
+    }
+  }
+
+  // =================================
+  // ====== COLLAPSED
+  // =================================
+  &.gw-collapsed {
+    &[data-gw-collapsible-container] {
+      box-shadow: $gw-app--PanelRef--collapsed--box-shadow;
+    }
+
+    &.gw-contains-error {
+      @include gw-stateInsetHighlightError();
+      border: gw-border($gw-app--palette--error);
+    }
+
+    > .gw-panelRefWidget--titleArea {
+      background-color: $gw-app--PanelRef--collapsed--title-bg;
+      color: $gw-app--PanelRef--collapsed--title-col;
+      @include gw-borderRadius();
+
+      .gw-toggle-collapse-icon {
+        @include makeToggleIcon($gw-app--PanelRef--toggle-icon-collapsed);
+      }
+    }
+
+    > .gw-panelRefWidget--children {
+      height: 0px; //NOTE: setting height to 0 here does work, but only to allow horizontal spacing and some hidden rendering of things like charts, animating doesn't work against height: auto
+      visibility: hidden;
+      overflow: hidden;
+      pointer-events: none;
+      margin-top: 0 !important;
+      margin-bottom: 0 !important;
+      padding-top: 0 !important;
+      padding-bottom: 0 !important;
+    }
+  }
+}

@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="InboundRecordDV"
+    mode="InboundSubRecordView">
+    <Require
+      name="subrecord"
+      type="KeyableBean"/>
+    <Variable
+      initialValue="subrecord as InboundSubRecordView"
+      name="view"
+      recalculateOnRefresh="true"
+      type="InboundSubRecordView"/>
+    <InputColumn>
+      <TextInput
+        id="InboundRecordDVLineNumber"
+        label="DisplayKey.get(&quot;InboundFile.LineNumber&quot;)"
+        value="view.LineNumber"
+        valueType="java.lang.Integer"/>
+      <TextAreaInput
+        editable="gw.api.inboundfile.InboundFileHelper.canEdit(view)"
+        id="InboundRecordDVContent"
+        label="DisplayKey.get(&quot;InboundFile.Content&quot;)"
+        numRows="20"
+        value="view.Content"
+        visible="gw.api.inboundfile.InboundFileHelper.canView(view)"/>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <InputSet
+    id="CoverageIssuesInputSet"
+    visible="Activity.CoverageIssues.HasElements">
+    <Require
+      name="Activity"
+      type="Activity"/>
+    <ListViewInput
+      boldLabel="true"
+      label="DisplayKey.get(&quot;NVV.Activity.SubView.ActivityDetails.Activity.CoverageIssues&quot;)"
+      labelAbove="true">
+      <Toolbar/>
+      <ListViewPanel
+        id="CoverageIssuesLV">
+        <RowIterator
+          editable="false"
+          elementName="coverageIssue"
+          value="Activity.CoverageIssues"
+          valueType="CoverageIssue[]">
+          <Row>
+            <TextCell
+              id="Coverage"
+              label="DisplayKey.get(&quot;NVV.Activity.SubView.ActivityDetails.Activity.CoverageIssues.RelatedTo&quot;)"
+              value="coverageIssue.CoverageSubtype.DisplayName ?: DisplayKey.get(&quot;NVV.Activity.SubView.ActivityDetails.Activity.CoverageIssues.Policy&quot;)"/>
+            <TypeKeyCell
+              id="Severity"
+              label="DisplayKey.get(&quot;NVV.Activity.SubView.ActivityDetails.Activity.CoverageIssues.Severity&quot;)"
+              value="coverageIssue.Severity"
+              valueType="typekey.CoverageIssueSeverity"/>
+            <TextCell
+              id="Reason"
+              label="DisplayKey.get(&quot;NVV.Activity.SubView.ActivityDetails.Activity.CoverageIssues.Reason&quot;)"
+              value="coverageIssue.Reason"/>
+          </Row>
+        </RowIterator>
+      </ListViewPanel>
+    </ListViewInput>
+  </InputSet>
+</PCF>

@@ -1,0 +1,106 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "x-gw-combine": [
+    "gw.core.cc.claim.v1.claim_core-1.0",
+    "gw.core.cc.common.v1.common_auto_core-1.0"
+  ],
+  "definitions": {
+    "ClaimContact": {
+      "properties": {
+        "licenseNumber": {
+          "title": "Driver's license number",
+          "description": "The person's driver's license number. Only applicable for a `ClaimContact` that represents a person.",
+          "type": "string",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "entitySubtype": "Person"
+          }
+        },
+        "licenseState": {
+          "title": "Driver's license state",
+          "description": "The person's driver's license state. Only applicable for a `ClaimContact` that represents a person.",
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "entitySubtype": "Person",
+            "typelist": "Jurisdiction"
+          }
+        }
+      }
+    },
+    "VehicleRiskUnit": {
+      "title": "Vehicle risk unit",
+      "description": "A covered vehicle risk",
+      "type": "object",
+      "properties": {
+        "RUNumber": {
+          "title": "Risk unit number",
+          "description": "The number automatically assigned to this covered risk unit on the policy",
+          "type": "integer",
+          "readOnly": true,
+          "x-gw-extensions": {
+            "filterable": true,
+            "sortable": true
+          }
+        },
+        "coverages": {
+          "title": "Coverages",
+          "description": "The list of coverages that apply to this risk unit",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Coverage"
+          },
+          "readOnly": true,
+          "x-gw-extensions": {
+            "defaultViews": [
+              "detail"
+            ]
+          }
+        },
+        "description": {
+          "title": "Description",
+          "description": "A description of the risk unit",
+          "type": "string",
+          "x-gw-nullable": true
+        },
+        "id": {
+          "title": "ID",
+          "description": "The unique identifier of this element",
+          "type": "string",
+          "readOnly": true
+        },
+        "policySystemId": {
+          "title": "Policy system ID",
+          "description": "The unique identifier of this element within the policy system",
+          "type": "string",
+          "readOnly": true,
+          "x-gw-extensions": {
+            "filterable": true
+          }
+        },
+        "vehicle": {
+          "title": "Vehicle",
+          "description": "Details of the vehicle that is covered",
+          "$ref": "#/definitions/Vehicle",
+          "x-gw-extensions": {
+            "defaultViews": [
+              "detail"
+            ]
+          }
+        },
+        "vehicleId": {
+          "title": "Vehicle ID",
+          "description": "The unique identifier of the `Vehicle` that is covered",
+          "type": "string",
+          "readOnly": true
+        },
+        "vehicleLocation": {
+          "title": "Vehicle location",
+          "description": "A reference to the `PolicyLocation` that the vehicle is associated with",
+          "$ref": "#/definitions/PolicyLocation",
+          "x-gw-nullable": true
+        }
+      }
+    }
+  }
+}

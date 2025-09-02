@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<delegate
+  name="ExchangeRateInUseDelegate">
+  <implementsInterface
+    iface="gw.currency.fxrate.ExchangeRateInUseDelegateMethods"
+    impl="gw.currency.fxrate.ExchangeRateInUseDelegateMethodsImpl"
+    />
+  <typekey
+    desc="Base currency from which currency conversion is performed. In many cases this will match with the FromCurrency field, but in cases of triangulated rate conversion this represents the base currency used to perform triangulated rate calculation"
+    name="BaseCurrency"
+    nullok="false"
+    typelist="Currency"/>
+  <typekey
+    desc="The Currency this rate converts from"
+    name="FromCurrency"
+    nullok="false"
+    typelist="Currency"/>
+  <typekey
+    desc="The Currency this rate converts to"
+    name="ToCurrency"
+    nullok="false"
+    typelist="Currency"/>
+  <typekey
+    desc="The FXRateMarket for which the rate applies"
+    name="Market"
+    nullok="false"
+    typelist="FXRateMarket"/>
+  <column
+    desc="The exchange spot rate at which a currency pair can be bought or sold"
+    name="Rate"
+    nullok="false"
+    type="decimal">
+    <columnParam
+      name="scale"
+      value="10"/>
+    <columnParam
+      name="precision"
+      value="15"/>
+  </column>
+  <column
+    desc="The point in time when the market indicated the rate was applicable"
+    name="MarketTime"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="The point in time when the quotation was obtained from an external source"
+    name="RetrievedAt"
+    nullok="true"
+    type="datetime"/>
+</delegate>

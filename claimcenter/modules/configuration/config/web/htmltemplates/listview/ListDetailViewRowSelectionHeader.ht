@@ -1,0 +1,11 @@
+<div class="gw-cell-inner">
+    <div class="gw-EmptyHeaderCellValueWidget gw-styleTag--HeaderCellWidget gw-draggable gw-hideable gw-ValueWidget"
+          data-gw-menu-group="Header">
+        <div class="gw-header-content-wrapper">
+            <div class="gw-header--inner">
+                <div class="gw-label">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

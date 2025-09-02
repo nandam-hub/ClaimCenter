@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<PCF xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <InputSet
+    id="EmailUpdatesInputSet">
+    <Require
+      name="person"
+      type="Person"/>
+    <TypeKeyInput
+      editable="true"
+      id="ClaimUpdatesViaEmailOptIn"
+      label="DisplayKey.get(&quot;Web.ContactDetail.Email.EmailUpdatesTo&quot;)"
+      value="person.ClaimUpdatesViaEmailOptIn"
+      valueType="typekey.PreferredEmailType"
+      visible="CurrentLocation.InEditMode"/>
+    <TextInput
+      id="ClaimUpdatesViaEmailOptInValue"
+      label="DisplayKey.get(&quot;Web.ContactDetail.Email.EmailUpdatesTo&quot;)"
+      value="person.ClaimUpdatesViaEmailOptIn.DisplayName"
+      visible="!CurrentLocation.InEditMode"/>
+  </InputSet>
+</PCF>

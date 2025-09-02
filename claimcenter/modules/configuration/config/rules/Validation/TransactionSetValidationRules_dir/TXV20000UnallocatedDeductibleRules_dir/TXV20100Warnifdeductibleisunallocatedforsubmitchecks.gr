@@ -1,0 +1,58 @@
+package rules.Validation.TransactionSetValidationRules_dir.TXV20000UnallocatedDeductibleRules_dir
+uses com.google.common.collect.ImmutableSet
+uses gw.api.locale.DisplayKey
+
+@gw.rules.RuleName("TXV20100 - Warn if deductible is unallocated for submit checks")
+internal class TXV20100Warnifdeductibleisunallocatedforsubmitchecks {
+  static function doCondition(transactionSet  :  entity.TransactionSet) : boolean {
+/*start00rule*/
+  return true
+/*end00rule*/
+}
+
+  static function doAction(transactionSet  :  entity.TransactionSet, actions : gw.rules.Action) {
+/*start00rule*/
+var statuses = ImmutableSet.of(
+        // after escalation
+        TransactionStatus.TC_SUBMITTING,
+
+        // before escalation
+        TransactionStatus.TC_AWAITINGSUBMISSION,
+        TransactionStatus.TC_PENDINGAPPROVAL,
+        TransactionStatus.TC_REJECTED
+    );
+
+    for (txn in transactionSet.Transactions) {
+      if(txn typeis Payment and !txn.OffsetPayment) {
+        if(statuses.contains(txn.Status)) {
+          if(txn.OnsetPayment) {
+            if(txn.OnsetOriginPayment.DeductibleAvailable) {
+              transactionSet.reject(
+                  null, null,
+                  ValidationLevel.TC_NEWLOSS,
+                  DisplayKey.get("Web.NewCheckWizard.NewPaymentDetail.Source",
+                      txn.OnsetOriginPayment.DeductibleWarningMessage)
+              )
+            }
+            if(txn.DeductibleAvailable) {
+              transactionSet.reject(
+                  null, null,
+                  ValidationLevel.TC_NEWLOSS,
+                  DisplayKey.get("Web.NewCheckWizard.NewPaymentDetail.Target",
+                      txn.DeductibleWarningMessage)
+              )
+            }
+          }
+          else if(txn.DeductibleAvailable and transactionSet.ClaimAmount.Amount > 0){
+            transactionSet.reject(
+                null, null,
+                ValidationLevel.TC_NEWLOSS,
+                txn.DeductibleWarningMessage
+            )
+          }
+        }
+      }
+    }
+/*end00rule*/
+  }
+}

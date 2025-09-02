@@ -1,0 +1,56 @@
+.gw-checkboxDiv {
+  $size: gw-roundRemToNearestPixel($gw-app--inputs--checkbox-size-em);
+  $inner-size: $size - (2 * $gw-app--border-width-px);
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  cursor: pointer;
+  @include gw-disabled();
+
+  &.gw-checked .gw-checkboxDiv--inner {
+    background-color: $gw-app--inputs--checkbox-checked-bg;
+    @include gw-iconAfter($gw-app--inputs--checkbox-checked-glyph, gw-roundRemToNearestPixel($gw-app--inputs--checkbox-glyph-size-em), $gw-app--inputs--checkbox-checked-col, $line-height: $inner-size, $display: inline-block, $width: $inner-size, $height: $inner-size, $v-align: middle, $position: absolute, $left: 0, $top: 0, $h-align: center);
+  }
+
+  @include ifNotDisabled() {
+    .gw-checkboxDiv--inner {
+      box-shadow: $gw-app--inputs--editable-inner-shadow;
+    }
+  }
+
+  &.gw-focus {
+    .gw-checkboxDiv--inner {
+      @include gw-addFocusOutline();
+    }
+  }
+
+  .gw-checkboxDiv--inner {
+    flex-grow: 0;
+    flex-shrink: 0;
+    align-self: center;
+    padding: 0;
+    position: relative;
+    display: inline-block;
+    width: $size;
+    height: $size;
+    border-radius: $gw-app--border-radius-px;
+    border: gw-border($gw-app--inputs--border--col);
+    background-color: $gw-app--inputs--bg;
+
+    vertical-align: top;
+    text-align: center;
+  }
+}
+
+.gw-checkboxDiv--icon {
+  margin-left: $gw-app--SPACING-rem-S;
+  position: relative;
+  bottom: -1px;
+}
+
+.gw-checkboxDiv--label {
+  margin-left: $gw-app--SPACING-rem-S;
+}
+
+

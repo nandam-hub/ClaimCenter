@@ -1,0 +1,17 @@
+<div id="gw-PrefPanel">
+    <div id="gw-PrefPanel--inner" role="dialog" aria-labelledby="gw-PrefPanel--title" data-gw-focus-lock>
+        <div id="gw-PrefPanel--top" role="group">
+            <div id="gw-PrefPanel--title">
+                <div class="gw-label" role="heading" aria-level="1">${preferencesLabel}</div>
+            </div>
+            <div id="gw-PrefPanel--toolbar">
+                <div id="gw-PrefPanel--reset" class="gw-button-secondary" data-gw-click="gwPrefPanel.reset" role="button" data-gw-focus-lock-top>${restoreDefaultsLabel}</div>
+                <div id="gw-PrefPanel--cancel" class="gw-button"  data-gw-click="gwPrefPanel.cancel" role="button">${cancelLabel}</div>
+                <div id="gw-PrefPanel--save" class="gw-button" data-gw-click="gwPrefPanel.save" role="button">${saveLabel}</div>
+            </div>
+        </div>
+        <div id="gw-PrefPanel--bottom" role="group">
+            ${:children}
+        </div>
+    </div>
+</div>

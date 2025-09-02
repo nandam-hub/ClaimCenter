@@ -1,0 +1,123 @@
+<!--
+  ~ Copyright 2017 Okta, Inc.
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.okta</groupId>
+        <artifactId>okta-parent</artifactId>
+        <version>24</version>
+    </parent>
+
+    <groupId>com.okta.jwt</groupId>
+    <artifactId>okta-jwt-verifier-parent</artifactId>
+    <version>0.5.7</version>
+    <name>Okta JWT Verifier :: Parent</name>
+    <packaging>pom</packaging>
+
+    <properties>
+        <github.slug>okta/okta-jwt-verifier-java</github.slug>
+        <okhttp.version>4.10.0</okhttp.version>
+        <okta.commons.version>1.3.2</okta.commons.version>
+        <jjwt.version>0.11.5</jjwt.version>
+    </properties>
+
+    <modules>
+        <module>api</module>
+        <module>impl</module>
+        <module>examples</module>
+        <module>integration-tests</module>
+        <module>coverage</module>
+    </modules>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.fasterxml.jackson</groupId>
+                <artifactId>jackson-bom</artifactId>
+                <version>2.14.0-rc1</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- project modules -->
+            <dependency>
+                <groupId>com.okta.jwt</groupId>
+                <artifactId>okta-jwt-verifier</artifactId>
+                <version>0.5.7</version>
+            </dependency>
+            <dependency>
+                <groupId>com.okta.jwt</groupId>
+                <artifactId>okta-jwt-verifier-impl</artifactId>
+                <version>0.5.7</version>
+            </dependency>
+            <dependency>
+                <groupId>com.okta.jwt</groupId>
+                <artifactId>okta-jwt-verifier-integration-tests</artifactId>
+                <version>0.5.7</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.okta.commons</groupId>
+                <artifactId>okta-config-check</artifactId>
+                <version>${okta.commons.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.okta.commons</groupId>
+                <artifactId>okta-commons-lang</artifactId>
+                <version>${okta.commons.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.okta.commons</groupId>
+                <artifactId>okta-http-api</artifactId>
+                <version>${okta.commons.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.okta.commons</groupId>
+                <artifactId>okta-http-okhttp</artifactId>
+                <version>${okta.commons.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.squareup.okhttp3</groupId>
+                <artifactId>okhttp</artifactId>
+                <version>${okhttp.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.squareup.okhttp3</groupId>
+                <artifactId>mockwebserver</artifactId>
+                <version>${okhttp.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>com.okta</groupId>
+                    <artifactId>okta-code-snippet-maven-plugin</artifactId>
+                    <configuration>
+                        <sourceFile>examples/quickstart/src/main/java/com/okta/jwt/example/ReadmeSnippets.java</sourceFile>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+  <scm>
+    <tag>okta-jwt-verifier-parent-0.5.7</tag>
+  </scm>
+</project>

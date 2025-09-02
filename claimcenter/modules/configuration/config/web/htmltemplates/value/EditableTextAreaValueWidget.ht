@@ -1,0 +1,6 @@
+<textarea style="${heightOrMaxHeight}"
+          aria-labelledby="${inputLabelAriaId}" disabled="${disabled}"
+          aria-required="${required ? 'true' : 'false'}" aria-invalid="${invalid ? 'true' : 'false'}"
+          name="${renderId}" maxlength="${maxlength}"
+          placeholder="${placeholder}"
+          class="${noTrack ? 'gw-noTrack'}">${currentValue}</textarea>

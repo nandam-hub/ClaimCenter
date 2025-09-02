@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Individual injury points on a person"
+  entity="BodilyInjuryPoint"
+  exportable="true"
+  platform="false"
+  table="BodilyInjPoint"
+  type="versionable">
+  <implementsEntity
+    name="Extractable"/>
+  <typekey
+    desc="The point on a person that got injured"
+    name="InjuryPoint"
+    nullok="false"
+    typelist="BodilyInjuryPoints"/>
+  <typekey
+    desc="The severity of injury at the injury point"
+    name="InjurySeverity"
+    nullok="true"
+    typelist="DamageSeverity"/>
+  <column
+    desc="Comments regarding the bodily injury"
+    name="Comments"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="200"/>
+  </column>
+  <foreignkey
+    columnName="InjuryIncidentID"
+    desc="The incident that this injury corresponds to"
+    fkentity="InjuryIncident"
+    name="InjuredParty"
+    nullok="true"/>
+</entity>

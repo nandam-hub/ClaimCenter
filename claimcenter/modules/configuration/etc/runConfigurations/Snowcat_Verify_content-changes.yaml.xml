@@ -1,0 +1,19 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Snowcat: Verify content-changes.yaml" type="JUnit" factoryName="JUnit">
+    <module name="cc-snowcat" />
+    <extension name="coverage">
+      <pattern>
+        <option name="PATTERN" value="com.guidewire.cc.nbc.*" />
+        <option name="ENABLED" value="true" />
+      </pattern>
+    </extension>
+    <option name="PACKAGE_NAME" value="com.guidewire.cc.nbc" />
+    <option name="MAIN_CLASS_NAME" value="com.guidewire.cc.nbc.ContentChangeUpgradeTest" />
+    <option name="METHOD_NAME" value="testContentChangesFileIsUpToDate" />
+    <option name="TEST_OBJECT" value="method" />
+    <option name="VM_PARAMETERS" value="-Xmx4g -Dgw.cc.env=h2mem -Dgw.tests.skip.knownbreak=true -Djava.awt.headless=true -ea -Dgw.webapp.dir=idea/webapp -Dgw.classpath.jar=true -Dgw.plugins.gclasses.dir=idea-gclasses -DgosuInit.supportDiscretePackages=true -Djava.locale.providers=COMPAT --add-opens=java.base/sun.reflect.annotation=ALL-UNNAMED" />
+    <method v="2">
+      <option name="MakeIncludingOSGi" enabled="true" />
+    </method>
+  </configuration>
+</component>

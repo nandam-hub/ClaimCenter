@@ -1,0 +1,505 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "x-gw-combine": [
+    "gw.core.cc.common.v1.common_core-1.0",
+    "gw.core.pl.admin.v1.admin_pl-1.0"
+  ],
+  "definitions": {
+    "AuthorityLimit": {
+      "title": "Authority limit",
+      "description": "An authority limit that is attached to an authority limit profile",
+      "type": "object",
+      "x-gw-sinceVersion": "1.4.0",
+      "properties": {
+        "costType": {
+          "title": "CostType",
+          "description": "The cost type that this limit applies to. If set to null, the limit applies to all cost types.",
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "filterable": true,
+            "sortable": true,
+            "typelist": "CostType"
+          }
+        },
+        "coverageType": {
+          "title": "CoverageType",
+          "description": "The coverage type that this limit applies to. If set to null, the limit applies to all coverage types.",
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "filterable": true,
+            "sortable": true,
+            "typelist": "CoverageType"
+          }
+        },
+        "id": {
+          "title": "ID",
+          "description": "The unique identifier of this authority limit",
+          "type": "string",
+          "readOnly": true
+        },
+        "limitAmount": {
+          "title": "LimitAmount",
+          "description": "The monetary amount limit defined on the authority limit",
+          "$ref": "#/definitions/MonetaryAmount",
+          "x-gw-extensions": {
+            "requiredForCreate": true
+          }
+        },
+        "limitType": {
+          "title": "LimitType",
+          "description": "The limit type on the authority limit",
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-extensions": {
+            "filterable": true,
+            "requiredForCreate": true,
+            "sortable": true,
+            "typelist": "AuthorityLimitType"
+          }
+        },
+        "policyType": {
+          "title": "PolicyType",
+          "description": "The policy type that this limit applies to. If set to null, the limit applies to all policy types.",
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "filterable": true,
+            "sortable": true,
+            "typelist": "PolicyType"
+          }
+        }
+      }
+    },
+    "AuthorityLimitProfile": {
+      "title": "Authority limit profile",
+      "description": "An authority limit profile is a collection of authority limits that determine the type of transactions a user can create and whether those new transactions require approval",
+      "type": "object",
+      "x-gw-sinceVersion": "1.4.0",
+      "properties": {
+        "currency": {
+          "title": "Currency",
+          "description": "The currency in which the authority limit profile's limits are defined",
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-extensions": {
+            "requiredForCreate": true,
+            "typelist": "Currency"
+          }
+        },
+        "custom": {
+          "title": "Custom",
+          "description": "A `true` value indicates that this is a custom profile used by a single user",
+          "type": "boolean",
+          "x-gw-extensions": {
+            "createOnly": true,
+            "filterable": true
+          }
+        },
+        "description": {
+          "title": "Description",
+          "description": "A description of this authority limit profile",
+          "type": "string",
+          "x-gw-nullable": true
+        },
+        "displayName": {
+          "title": "Display name",
+          "description": "The formatted name of this authority limit profile",
+          "type": "string",
+          "readOnly": true
+        },
+        "id": {
+          "title": "ID",
+          "description": "The unique identifier of this authority limit profile",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "title": "Name",
+          "description": "The name of this authority limit profile",
+          "type": "string",
+          "x-gw-extensions": {
+            "filterable": true,
+            "sortable": true
+          }
+        }
+      }
+    },
+    "Catastrophe": {
+      "title": "Catastrophe",
+      "description": "Represents a catastrophe to code claims with. Each catastrophe has a unique name and catastrophe number.",
+      "type": "object",
+      "x-gw-sinceVersion": "1.13.0",
+      "properties": {
+        "active": {
+          "title": "Active",
+          "description": "True if a catastrophe can be assigned to a new claim",
+          "type": "boolean"
+        },
+        "bottomRightLatitude": {
+          "title": "Bottom right latitude",
+          "description": "Latitude for the bottom right point of the area of interest, in degrees",
+          "type": "string",
+          "format": "gw-bigdecimal",
+          "x-gw-nullable": true
+        },
+        "bottomRightLongitude": {
+          "title": "Bottom right longitude",
+          "description": "Longitude for the bottom right point of the area of interest, in degrees",
+          "type": "string",
+          "format": "gw-bigdecimal",
+          "x-gw-nullable": true
+        },
+        "catastropheNumber": {
+          "title": "Catastrophe number",
+          "description": "Catastrophe number",
+          "type": "string",
+          "x-gw-extensions": {
+            "filterable": true,
+            "requiredForCreate": true,
+            "sortable": true
+          }
+        },
+        "catastropheValidFrom": {
+          "title": "Catastrophe valid from",
+          "description": "Start date when this catastrophe is valid",
+          "type": "string",
+          "format": "date-time",
+          "x-gw-nullable": true
+        },
+        "catastropheValidTo": {
+          "title": "Catastrophe valid to",
+          "description": "Date when this catastrophe is no longer valid",
+          "type": "string",
+          "format": "date-time",
+          "x-gw-nullable": true
+        },
+        "comments": {
+          "title": "Comments",
+          "description": "Comments regarding the Catastrophe",
+          "type": "string",
+          "x-gw-nullable": true
+        },
+        "description": {
+          "title": "Description",
+          "description": "Description of the catastrophe",
+          "type": "string",
+          "x-gw-nullable": true
+        },
+        "id": {
+          "title": "ID",
+          "description": "The unique identifier of this element",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "title": "Name",
+          "description": "Name of the catastrophe",
+          "type": "string",
+          "x-gw-extensions": {
+            "requiredForCreate": true
+          }
+        },
+        "pcsCatastropheNumber": {
+          "title": "PCS catastrophe number",
+          "description": "PCS catastrophe number from ISO data feed",
+          "type": "string",
+          "x-gw-nullable": true
+        },
+        "policyEffectiveDate": {
+          "title": "Policy effective date",
+          "description": "Effective date for retrieving policy locations from the policy system",
+          "type": "string",
+          "format": "date-time",
+          "x-gw-nullable": true
+        },
+        "policyRetrievalCompletionTime": {
+          "title": "Policy retrieval completion time",
+          "description": "Time when last policy retrieval location was completed",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "policyRetrievalSetTime": {
+          "title": "Policy retrieval set time",
+          "description": "Time when policy location retrieval parameters were last set",
+          "type": "string",
+          "format": "date-time",
+          "x-gw-nullable": true
+        },
+        "scheduleBatch": {
+          "title": "Schedule batch",
+          "description": "Boolean field to mark a catastrophe to be run in the CatastropheClaimFinder batch process",
+          "type": "boolean"
+        },
+        "topLeftLatitude": {
+          "title": "Top left latitude",
+          "description": "Latitude for the top left point of the area of interest, in degrees",
+          "type": "string",
+          "format": "gw-bigdecimal",
+          "x-gw-nullable": true
+        },
+        "topLeftLongitude": {
+          "title": "Top left longitude",
+          "description": "Longitude for the top left point of the area of interest, in degrees",
+          "type": "string",
+          "format": "gw-bigdecimal",
+          "x-gw-nullable": true
+        },
+        "type": {
+          "title": "Type",
+          "description": "Type of the catastrophe (for example, ISO or internal)",
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "typelist": "CatastropheType"
+          }
+        }
+      }
+    },
+    "CatastrophePeril": {
+      "title": "Catastrophe peril",
+      "description": "Details of perils associated to a catastrophe",
+      "type": "object",
+      "x-gw-sinceVersion": "1.13.0",
+      "properties": {
+        "comments": {
+          "title": "Comments",
+          "description": "Comments regarding the peril",
+          "type": "string",
+          "x-gw-nullable": true
+        },
+        "id": {
+          "title": "ID",
+          "description": "The unique identifier of this element",
+          "type": "string",
+          "readOnly": true
+        },
+        "lossCause": {
+          "title": "Loss cause",
+          "description": "The loss cause associated to the peril",
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-extensions": {
+            "filterable": true,
+            "requiredForCreate": true,
+            "sortable": true,
+            "typelist": "LossCause"
+          }
+        },
+        "lossType": {
+          "title": "Loss type",
+          "description": "High level claim type (for example, Auto or Property)",
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-extensions": {
+            "filterable": true,
+            "requiredForCreate": true,
+            "sortable": true,
+            "typelist": "LossType"
+          }
+        }
+      }
+    },
+    "CatastropheZone": {
+      "title": "Catastrophe zone",
+      "description": "A zone of a catastrophe. It contains the zone code, the zone type and the country to which the region belongs.",
+      "type": "object",
+      "x-gw-sinceVersion": "1.13.0",
+      "properties": {
+        "code": {
+          "title": "Code",
+          "description": "The code for this `CatastropheZone`",
+          "type": "string",
+          "readOnly": true,
+          "x-gw-extensions": {
+            "filterable": true,
+            "sortable": true
+          }
+        },
+        "country": {
+          "title": "Country",
+          "description": "The country to which this `CatastropheZone` belongs",
+          "$ref": "#/definitions/TypeKeyReference",
+          "readOnly": true,
+          "x-gw-extensions": {
+            "filterable": true,
+            "sortable": true,
+            "typelist": "Country"
+          }
+        },
+        "geographicZone": {
+          "title": "Geographic zone",
+          "description": "A geographic zone used as a template to create this `CatastropheZone`. Upon creation, this `CatastropheZone` will be assigned the geographic zone's code, country, and zoneType.",
+          "$ref": "#/definitions/SimpleReference",
+          "x-gw-extensions": {
+            "createOnly": true,
+            "requiredForCreate": true,
+            "resourceType": "GeographicZone"
+          }
+        },
+        "id": {
+          "title": "ID",
+          "description": "The unique identifier of this element",
+          "type": "string",
+          "readOnly": true
+        },
+        "zoneType": {
+          "title": "Zone type",
+          "description": "The type of this `CatastropheZone`",
+          "$ref": "#/definitions/TypeKeyReference",
+          "readOnly": true,
+          "x-gw-extensions": {
+            "filterable": true,
+            "sortable": true,
+            "typelist": "ZoneType"
+          }
+        }
+      }
+    },
+    "Group": {
+      "properties": {
+        "groupType": {
+          "x-gw-extensions": {
+            "requiredForCreate": true
+          }
+        },
+        "securityZone": {
+          "readOnly": false,
+          "x-gw-extensions": {
+            "requiredForCreate": true
+          }
+        },
+        "supervisor": {
+          "x-gw-extensions": {
+            "requiredForCreate": true
+          }
+        }
+      }
+    },
+    "ICDCode": {
+      "title": "ICD code",
+      "description": "The International Statistical Classification of Diseases and Related Health Problems (ICD) are medical diagnosis codes that classify diseases",
+      "type": "object",
+      "x-gw-sinceVersion": "1.11.0",
+      "properties": {
+        "availabilityDate": {
+          "title": "Availability date",
+          "description": "The date this `ICDCode` becomes available",
+          "type": "string",
+          "format": "date-time",
+          "x-gw-nullable": true
+        },
+        "bodySystem": {
+          "title": "Body system",
+          "description": "A broad classification of diagnosis types",
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-extensions": {
+            "requiredForCreate": true,
+            "typelist": "ICDBodySystem"
+          }
+        },
+        "chronic": {
+          "title": "Chronic",
+          "description": "Whether the condition is chronic",
+          "type": "boolean"
+        },
+        "code": {
+          "title": "Code",
+          "description": "The ICD Code",
+          "type": "string",
+          "maxLength": 8,
+          "x-gw-extensions": {
+            "filterable": true,
+            "requiredForCreate": true,
+            "sortable": true
+          }
+        },
+        "description": {
+          "title": "Description",
+          "description": "The ICD code description",
+          "type": "string",
+          "x-gw-extensions": {
+            "requiredForCreate": true
+          }
+        },
+        "edition": {
+          "title": "Edition",
+          "description": "The ICD edition of the code",
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-extensions": {
+            "filterable": true,
+            "sortable": true,
+            "typelist": "ICDEdition"
+          }
+        },
+        "expirationDate": {
+          "title": "Expiration date",
+          "description": "The date this `ICDCode` expires",
+          "type": "string",
+          "format": "date-time",
+          "x-gw-nullable": true
+        },
+        "id": {
+          "title": "ID",
+          "description": "The unique identifier of this element",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ICDCodeSearchRequestAttributes": {
+      "title": "ICD code search request attributes",
+      "description": "Criteria of the ICD code to search for",
+      "type": "object",
+      "x-gw-sinceVersion": "1.11.0",
+      "properties": {
+        "activeDate": {
+          "title": "Active date",
+          "description": "A date and time at which the ICD code is active",
+          "type": "string",
+          "format": "date-time"
+        },
+        "bodySystem": {
+          "title": "Body system",
+          "description": "A broad classification of diagnosis types",
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-extensions": {
+            "typelist": "ICDBodySystem"
+          }
+        },
+        "code": {
+          "title": "Code",
+          "description": "The ICD Code",
+          "type": "string"
+        },
+        "description": {
+          "title": "Description",
+          "description": "The ICD code description",
+          "type": "string"
+        },
+        "edition": {
+          "title": "Edition",
+          "description": "The ICD edition of the code",
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-extensions": {
+            "typelist": "ICDEdition"
+          }
+        }
+      }
+    },
+    "User": {
+      "type": "object",
+      "properties": {
+        "authorityLimitProfile": {
+          "title": "AuthorityLimitProfile",
+          "description": "The authority limit profile associated to this user",
+          "$ref": "#/definitions/SimpleReference",
+          "x-gw-nullable": true,
+          "x-gw-sinceVersion": "1.4.0",
+          "x-gw-extensions": {
+            "resourceType": "AuthorityLimitProfile",
+            "securityLevel": "special"
+          }
+        }
+      }
+    }
+  }
+}

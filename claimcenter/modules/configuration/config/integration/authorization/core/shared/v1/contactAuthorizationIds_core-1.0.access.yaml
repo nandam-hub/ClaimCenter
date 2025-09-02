@@ -1,0 +1,987 @@
+resources:
+  Activities:
+    permissions:
+      view: false
+    filter: gw.rest.core.cc.security.NoPermissionsQueryFilter
+  Activity:
+    permissions:
+      view: false
+      edit: false
+      approve: false
+      assign: false
+      complete: false
+      reject: false
+      skip: false
+  ActivityAssignees:
+    permissions:
+      view: false
+  ActivityNotes:
+    permissions:
+      view: false
+      create: false
+    filter: gw.rest.core.cc.security.NoPermissionsQueryFilter
+  ActivityPattern:
+    permissions:
+      view: false
+  AdminOpenApiSchema:
+    permissions:
+      view: true
+  AssessmentContentItem:
+    permissions:
+      view: __inherit
+      edit: __inherit
+      delete: __inherit
+    additionalAccessibleFieldsFilter:
+      viewAndEdit: "user.hasPrivilegedRoleOnClaim(resource.Claim) ? null : \"thirdpartyprivileged\""
+  AssessmentContentItems:
+    permissions:
+      view: __inherit
+      create: __inherit
+    filter: __noFilter
+  AssessmentSummaries:
+    permissions:
+      view: false
+      create: false
+    filter: gw.rest.core.cc.security.NoPermissionsQueryFilter
+  AssessmentSummary:
+    permissions:
+      view: false
+  AssignableQueue:
+    permissions:
+      view: false
+      edit: false
+      delete: false
+  AssignableQueues:
+    permissions:
+      view: false
+      create: false
+    filter: gw.rest.core.cc.security.NoPermissionsQueryFilter
+  Assignee:
+    permissions:
+      view: false
+  Attribute:
+    permissions:
+      view: false
+      edit: false
+      delete: false
+  Attributes:
+    permissions:
+      view: false
+      create: false
+    filter: gw.rest.core.cc.security.NoPermissionsQueryFilter
+  AuthorityLimit:
+    permissions:
+      view: false
+      edit: false
+      delete: false
+  AuthorityLimitProfile:
+    permissions:
+      view: false
+      edit: false
+      delete: false
+  AuthorityLimitProfiles:
+    permissions:
+      view: false
+      create: false
+    filter: gw.rest.core.cc.security.NoPermissionsQueryFilter
+  AuthorityLimits:
+    permissions:
+      view: false
+      create: false
+    filter: gw.rest.core.cc.security.NoPermissionsQueryFilter
+  BaggageIncident:
+    permissions:
+      view: "user.hasPrivilegedRoleOnClaim(resource.Claim) || user.hasExternalUserPrivilegedAccessOnIncident(resource.Incident)"
+      edit: "user.hasExternalUserPrivilegedAccessOnIncident(resource.Incident)"
+      delete: false
+    additionalAccessibleFieldsFilter:
+      viewAndEdit: "user.hasExternalUserPrivilegedAccessOnIncident(resource.Incident) ? (user.hasPrivilegedRoleOnClaim(resource.Claim) ? null : \"thirdpartyprivileged\") : \"restricted\""
+  BodilyInjuryPoint:
+    permissions:
+      view: __inherit
+      edit: __inherit
+      delete: false
+    additionalAccessibleFieldsFilter:
+      viewAndEdit: "user.hasExternalUserPrivilegedAccessOnIncident(resource.InjuryIncident) ? null : \"restricted\""
+  BodilyInjuryPoints:
+    permissions:
+      view: __inherit
+      create: __inherit
+    filter: __noFilter
+  BusinessLineMetadataSchema:
+    permissions:
+      view: false
+  CalendarDateCalculation:
+    permissions:
+      view: false
+      edit: false
+      calculate-date: false
+  Catastrophe:
+    permissions:
+      view: false
+      edit: false
+      delete: false
+  CatastrophePeril:
+    permissions:
+      view: false
+      edit: false
+      delete: false
+  CatastrophePerils:
+    permissions:
+      view: false
+      create: false
+  CatastropheZone:
+    permissions:
+      view: false
+      edit: false
+      delete: false
+  CatastropheZones:
+    permissions:
+      view: false
+      create: false
+  Catastrophes:
+    permissions:
+      view: false
+      create: false
+    filter: gw.rest.core.cc.security.NoPermissionsQueryFilter
+  Check:
+    permissions:
+      view: false
+      edit: false
+      delete: false
+      acknowledge-submission: false
+      mark-cleared: false
+      mark-issued: false
+      mark-stopped: false
+      mark-voided: false
+      request-stop: false
+      request-void: false
+  CheckSet:
+    permissions:
+      view: false
+  CheckSets:
+    permissions:
+      view: false
+      create: false
+    filter: gw.rest.core.cc.security.NoPermissionsQueryFilter
+  Checks:
+    permissions:
+      view: false
+    filter: gw.rest.core.cc.security.NoPermissionsQueryFilter
+  Claim:
+    permissions:
+      view: "user.hasExternalUserAccessOnClaim(resource.Claim)"
+      edit: "user.hasPrivilegedRoleOnClaim(resource.Claim)"
+      assign: false
+      cancel: false
+      close: false
+      reopen: false
+      submit: "user.hasPrivilegedRoleOnClaim(resource.Claim)"
+      validate: false
+    additionalAccessibleFieldsFilter:
+      viewAndEdit: "user.hasPrivilegedRoleOnClaim(resource.Claim) ? null : \"restricted\""
+  ClaimActivities:
+    permissions:
+      view: false
+      create: false
+    filter: gw.rest.core.cc.security.NoPermissionsQueryFilter
+  ClaimActivityAssignees:
+    permissions:
+      view: false
+  ClaimActivityPatterns:
+    permissions:
+      view: false
+  ClaimApiOpenApiSchema:
+    permissions:
+      view: true
+  ClaimBaggageIncidents:
+    permissions:
+      view: __inherit
+      create: __inherit
+    filter: gw.rest.core.cc.shared.v1.RestrictIncidentsForAuthorizationIdsFilter
+  ClaimContact:
+    permissions:
+      view: "user.canViewClaimContact(resource.ClaimContact)"
+      edit: "user.hasPrivilegedRoleOnClaim(resource.Claim) || user.hasExternalUserPrivilegedAccessOnClaimContact(resource.ClaimContact)"
+      delete: false
+      initialize-authorization-id: false
+    additionalAccessibleFieldsFilter:
+      viewAndEdit: "resource.ClaimContact.RestV1_IsVendor ? \"vendor\" : (user.hasExternalUserPrivilegedAccessOnClaimContact(resource.ClaimContact) ? null : \"restricted\")"
+  ClaimContactRoleOwners:
+    permissions:
+      view: false
+  ClaimContacts:
+    permissions:
+      view: __inherit
+      create: __inherit
+    filter: gw.rest.core.cc.shared.v1.RestrictContactsForAuthorizationIdsFilter
+  ClaimDocument:
+    permissions:
+      view: false
+      edit: false
+      delete: false
+  ClaimDocumentContent:
+    permissions:
+      view: false
+  ClaimDocuments:
+    permissions:
+      view: false
+      create: false
+    filter: gw.rest.core.cc.security.NoPermissionsQueryFilter
+  ClaimDwellingIncidents:
+    permissions:
+      view: __inherit
+      create: __inherit
+    filter: gw.rest.core.cc.shared.v1.RestrictIncidentsForAuthorizationIdsFilter
+  ClaimExposures:
+    permissions:
+      view: __inherit
+      create: false
+    filter: gw.rest.core.cc.shared.v1.RestrictExposuresForAuthorizationIdsFilter
+  ClaimFixedPropertyIncidents:
+    permissions:
+      view: __inherit
+      create: __inherit
+    filter: gw.rest.core.cc.shared.v1.RestrictIncidentsForAuthorizationIdsFilter
+  ClaimGeneralIncidents:
+    permissions:
+      view: __inherit
+      create: __inherit
+    filter: gw.rest.core.cc.shared.v1.RestrictIncidentsForAuthorizationIdsFilter
+  ClaimGraphSchema:
+    permissions:
+      view: true
+  ClaimInfo:
+    permissions:
+      view: false
+      edit: false
+      retrieve: false
+  ClaimInfos:
+    permissions:
+      view: false
+    filter: gw.rest.core.cc.security.NoPermissionsQueryFilter
+  ClaimInjuryIncidents:
+    permissions:
+      view: __inherit
+      create: __inherit
+    filter: gw.rest.core.cc.shared.v1.RestrictIncidentsForAuthorizationIdsFilter
+  ClaimIntakeInteractions:
+    permissions:
+      view: false
+      create: false
+    filter: gw.rest.core.cc.security.NoPermissionsQueryFilter
+  ClaimLivingExpensesIncidents:
+    permissions:
+      view: __inherit
+      create: __inherit
+    filter: gw.rest.core.cc.shared.v1.RestrictIncidentsForAuthorizationIdsFilter
+  ClaimMatters:
+    permissions:
+      view: false
+      create: false
+    filter: gw.rest.core.cc.security.NoPermissionsQueryFilter
+  ClaimNotes:
+    permissions:
+      view: false
+      create: false
+    filter: gw.rest.core.cc.security.NoPermissionsQueryFilter
+  ClaimOtherStructureIncidents:
+    permissions:
+      view: __inherit
+      create: __inherit
+    filter: gw.rest.core.cc.shared.v1.RestrictIncidentsForAuthorizationIdsFilter
+  ClaimPropertyContentsIncidents:
+    permissions:
+      view: __inherit
+      create: __inherit
+    filter: gw.rest.core.cc.shared.v1.RestrictIncidentsForAuthorizationIdsFilter
+  ClaimRelatedObjects:
+    permissions:
+      view: false
+  ClaimSearch:
+    permissions:
+      view: false
+    filter: gw.rest.core.cc.security.NoPermissionsQueryFilter
+  ClaimSearchResult:
+    permissions:
+      view: false
+  ClaimSearchResultWrapper:
+    permissions:
+      view: false
+  ClaimSearchV2:
+    permissions:
+      view: false
+  ClaimServiceRequests:
+    permissions:
+      view: __inherit
+      create: false
+    filter: gw.rest.core.cc.shared.v1.RestrictServiceRequestsForAuthorizationIdsFilter
+  ClaimSolrSearch:
+    permissions:
+      view: false
+  ClaimSolrSearchResult:
+    permissions:
+      view: false
+  ClaimTripIncidents:
+    permissions:
+      view: __inherit
+      create: __inherit
+    filter: gw.rest.core.cc.shared.v1.RestrictIncidentsForAuthorizationIdsFilter
+  ClaimVehicleIncidents:
+    permissions:
+      view: __inherit
+      create: __inherit
+    filter: gw.rest.core.cc.shared.v1.RestrictIncidentsForAuthorizationIdsFilter
+  Claims:
+    permissions:
+      view: true
+      create: "user.hasExternalUserAccessToPolicyNumber(data.Attributes.get(\"policyNumber\") as String)"
+    additionalAccessibleFieldsFilter:
+      create: "user.hasPrivilegedRoleOnClaim(minimalChildResource.Element) ? null : \"restricted\""
+    filter: gw.rest.core.cc.shared.v1.RestrictClaimsForAuthorizationIdsFilter
+  CommonOpenApiSchema:
+    permissions:
+      view: true
+  ContactRoleConstraint:
+    permissions:
+      view: false
+  ContactRoleConstraints:
+    permissions:
+      view: false
+  Document:
+    permissions:
+      view: false
+      edit: false
+      delete: false
+  DocumentContent:
+    permissions:
+      view: false
+  DwellingIncident:
+    permissions:
+      view: "user.hasPrivilegedRoleOnClaim(resource.Claim) || user.hasExternalUserPrivilegedAccessOnIncident(resource.Incident)"
+      edit: "user.hasExternalUserPrivilegedAccessOnIncident(resource.Incident)"
+    additionalAccessibleFieldsFilter:
+      viewAndEdit: "user.hasExternalUserPrivilegedAccessOnIncident(resource.Incident) ? (user.hasPrivilegedRoleOnClaim(resource.Claim) ? null : \"thirdpartyprivileged\") : \"restricted\""
+  Endorsement:
+    permissions:
+      view: __inherit
+  EntitySchema:
+    permissions:
+      view: false
+  EntitySchemas:
+    permissions:
+      view: false
+  Exposure:
+    permissions:
+      view: "user.hasPrivilegedRoleOnClaim(resource.Claim) || user.hasExternalUserPrivilegedAccessOnExposure(resource.Exposure)"
+      edit: false
+      delete: false
+      assign: false
+      close: false
+      reopen: false
+      validate: false
+    additionalAccessibleFieldsFilter:
+      viewAndEdit: "user.hasExternalUserPrivilegedAccessOnExposure(resource.Exposure) ? (user.hasPrivilegedRoleOnClaim(resource.Claim) ? null : \"thirdpartyprivileged\") : \"restricted\""
+  FinancialCalculation:
+    permissions:
+      view:
+      - __inherit
+      - "resource.Element.Name == \"TotalPayments\""
+      edit: false
+      get-amount: true
+  FinancialCalculations:
+    permissions:
+      view: __inherit
+  FixedPropertyIncident:
+    permissions:
+      view: "user.hasPrivilegedRoleOnClaim(resource.Claim) || user.hasExternalUserPrivilegedAccessOnIncident(resource.Incident)"
+      edit: "user.hasExternalUserPrivilegedAccessOnIncident(resource.Incident)"
+      delete: false
+    additionalAccessibleFieldsFilter:
+      viewAndEdit: "user.hasExternalUserPrivilegedAccessOnIncident(resource.Incident) ? (user.hasPrivilegedRoleOnClaim(resource.Claim) ? null : \"thirdpartyprivileged\") : \"restricted\""
+  GeneralIncident:
+    permissions:
+      view: "user.hasPrivilegedRoleOnClaim(resource.Claim) || user.hasExternalUserPrivilegedAccessOnIncident(resource.Incident)"
+      edit: "user.hasExternalUserPrivilegedAccessOnIncident(resource.Incident)"
+      delete: false
+    additionalAccessibleFieldsFilter:
+      viewAndEdit: "user.hasExternalUserPrivilegedAccessOnIncident(resource.Incident) ? (user.hasPrivilegedRoleOnClaim(resource.Claim) ? null : \"thirdpartyprivileged\") : \"restricted\""
+  GenericRelation:
+    permissions:
+      view: false
+  GeographicZone:
+    permissions:
+      view: false
+  GeographicZones:
+    permissions:
+      view: false
+    filter: gw.rest.core.cc.security.NoPermissionsQueryFilter
+  Group:
+    permissions:
+      view: false
+      edit: false
+      delete: false
+  GroupRegion:
+    permissions:
+      view: false
+      edit: false
+      delete: false
+  GroupRegions:
+    permissions:
+      view: false
+      create: false
+    filter: gw.rest.core.cc.security.NoPermissionsQueryFilter
+  GroupUser:
+    permissions:
+      view: false
+      edit: false
+      delete: false
+  GroupUsers:
+    permissions:
+      view: false
+      create: false
+    filter: gw.rest.core.cc.security.NoPermissionsQueryFilter
+  Groups:
+    permissions:
+      view: false
+      create: false
+    filter: gw.rest.core.cc.security.NoPermissionsQueryFilter
+  HistoryEvent:
+    permissions:
+      view: false
+  Holiday:
+    permissions:
+      view: false
+      edit: false
+      delete: false
+  HolidayZone:
+    permissions:
+      view: false
+      edit: false
+      delete: false
+  HolidayZones:
+    permissions:
+      view: false
+      create: false
+    filter: gw.rest.core.cc.security.NoPermissionsQueryFilter
+  Holidays:
+    permissions:
+      view: false
+      create: false
+    filter: gw.rest.core.cc.security.NoPermissionsQueryFilter
+  ICDCode:
+    permissions:
+      view: false
+      edit: false
+  ICDCodeSearch:
+    permissions:
+      view: false
+    filter: gw.rest.core.cc.security.NoPermissionsQueryFilter
+  ICDCodes:
+    permissions:
+      view: false
+      create: false
+    filter: gw.rest.core.cc.security.NoPermissionsQueryFilter
+  InjuryIncident:
+    permissions:
+      view: "user.hasPrivilegedRoleOnClaim(resource.Claim) || user.hasExternalUserPrivilegedAccessOnIncident(resource.Incident)"
+      edit: "user.hasExternalUserPrivilegedAccessOnIncident(resource.Incident)"
+      delete: false
+    additionalAccessibleFieldsFilter:
+      viewAndEdit: "user.hasExternalUserPrivilegedAccessOnIncident(resource.Incident) ? (user.hasPrivilegedRoleOnClaim(resource.Claim) ? null : \"thirdpartyprivileged\") : \"restricted\""
+  IntakeInteraction:
+    permissions:
+      view: false
+      edit: false
+  LivingExpensesIncident:
+    permissions:
+      view: "user.hasPrivilegedRoleOnClaim(resource.Claim) || user.hasExternalUserPrivilegedAccessOnIncident(resource.Incident)"
+      edit: "user.hasExternalUserPrivilegedAccessOnIncident(resource.Incident)"
+    additionalAccessibleFieldsFilter:
+      viewAndEdit: "user.hasExternalUserPrivilegedAccessOnIncident(resource.Incident) ? (user.hasPrivilegedRoleOnClaim(resource.Claim) ? null : \"thirdpartyprivileged\") : \"restricted\""
+  LocationBasedRiskUnit:
+    permissions:
+      view: __inherit
+  LocationBasedRiskUnitCoverage:
+    permissions:
+      view: __inherit
+  LocationBasedRiskUnitCoverages:
+    permissions:
+      view: __inherit
+    filter: __noFilter
+  LocationBasedRiskUnits:
+    permissions:
+      view: __inherit
+    filter: __noFilter
+  Matter:
+    permissions:
+      view: false
+      edit: false
+      assign: false
+      close: false
+      reopen: false
+  MedicalDiagnoses:
+    permissions:
+      view:
+      - __inherit
+      - "user.hasExternalUserPrivilegedAccessOnIncident(resource.InjuryIncident)"
+      create: false
+    filter: __noFilter
+  MedicalDiagnosis:
+    permissions:
+      view:
+      - __inherit
+      - "user.hasExternalUserPrivilegedAccessOnIncident(resource.InjuryIncident)"
+      edit: false
+      delete: false
+  MedicalTreatment:
+    permissions:
+      view: false
+      edit: false
+      delete: false
+  MedicalTreatments:
+    permissions:
+      view: false
+      create: false
+  Note:
+    permissions:
+      view: false
+      edit: false
+      delete: false
+  OtherStructureIncident:
+    permissions:
+      view: "user.hasPrivilegedRoleOnClaim(resource.Claim) || user.hasExternalUserPrivilegedAccessOnIncident(resource.Incident)"
+      edit: "user.hasExternalUserPrivilegedAccessOnIncident(resource.Incident)"
+      delete: false
+    additionalAccessibleFieldsFilter:
+      viewAndEdit: "user.hasExternalUserPrivilegedAccessOnIncident(resource.Incident) ? (user.hasPrivilegedRoleOnClaim(resource.Claim) ? null : \"thirdpartyprivileged\") : \"restricted\""
+  Payment:
+    permissions:
+      view: false
+      edit: false
+      acknowledge-submission: false
+  Payments:
+    permissions:
+      view: false
+    filter: gw.rest.core.cc.security.NoPermissionsQueryFilter
+  Policy:
+    permissions:
+      view: "user.hasPrivilegedRoleOnClaim(resource.Claim)"
+  PolicyCoverage:
+    permissions:
+      view: __inherit
+  PolicyCoverages:
+    permissions:
+      view: __inherit
+    filter: __noFilter
+  PolicyEndorsements:
+    permissions:
+      view: __inherit
+    filter: __noFilter
+  PolicyLocation:
+    permissions:
+      view: __inherit
+  PolicyLocations:
+    permissions:
+      view: __inherit
+    filter: __noFilter
+  PropertyContentsIncident:
+    permissions:
+      view: "user.hasPrivilegedRoleOnClaim(resource.Claim) || user.hasExternalUserPrivilegedAccessOnIncident(resource.Incident)"
+      edit: "user.hasExternalUserPrivilegedAccessOnIncident(resource.Incident)"
+      delete: false
+    additionalAccessibleFieldsFilter:
+      viewAndEdit: "user.hasExternalUserPrivilegedAccessOnIncident(resource.Incident) ? (user.hasPrivilegedRoleOnClaim(resource.Claim) ? null : \"thirdpartyprivileged\") : \"restricted\""
+  PropertyContentsScheduledItem:
+    permissions:
+      view: __inherit
+      edit: __inherit
+      delete: __inherit
+    additionalAccessibleFieldsFilter:
+      viewAndEdit: __inherit
+  PropertyContentsScheduledItems:
+    permissions:
+      view: __inherit
+      create: __inherit
+    filter: __noFilter
+  PropertyItem:
+    permissions:
+      view: __inherit
+  PropertyItems:
+    permissions:
+      view: __inherit
+    filter: __noFilter
+  Recoveries:
+    permissions:
+      view: false
+    filter: gw.rest.core.cc.security.NoPermissionsQueryFilter
+  Recovery:
+    permissions:
+      view: false
+      edit: false
+      acknowledge-submission: false
+  RecoveryReserve:
+    permissions:
+      view: false
+      edit: false
+      acknowledge-submission: false
+  RecoveryReserveSet:
+    permissions:
+      view: false
+  RecoveryReserveSets:
+    permissions:
+      view: false
+      create: false
+    filter: gw.rest.core.cc.security.NoPermissionsQueryFilter
+  RecoveryReserves:
+    permissions:
+      view: false
+    filter: gw.rest.core.cc.security.NoPermissionsQueryFilter
+  RecoverySet:
+    permissions:
+      view: false
+  RecoverySets:
+    permissions:
+      view: false
+      create: false
+    filter: gw.rest.core.cc.security.NoPermissionsQueryFilter
+  Region:
+    permissions:
+      view: false
+      edit: false
+      delete: false
+  RegionZone:
+    permissions:
+      view: false
+      edit: false
+      delete: false
+  RegionZones:
+    permissions:
+      view: false
+      create: false
+    filter: gw.rest.core.cc.security.NoPermissionsQueryFilter
+  Regions:
+    permissions:
+      view: false
+      create: false
+    filter: gw.rest.core.cc.security.NoPermissionsQueryFilter
+  Reserve:
+    permissions:
+      view: false
+      edit: false
+      acknowledge-submission: false
+  ReserveSet:
+    permissions:
+      view: false
+  ReserveSets:
+    permissions:
+      view: false
+      create: false
+    filter: gw.rest.core.cc.security.NoPermissionsQueryFilter
+  Reserves:
+    permissions:
+      view: false
+    filter: gw.rest.core.cc.security.NoPermissionsQueryFilter
+  RiskUnitCoverage:
+    permissions:
+      view: __inherit
+  RiskUnitCoverages:
+    permissions:
+      view: __inherit
+    filter: __noFilter
+  Role:
+    permissions:
+      view: false
+      edit: false
+      delete: false
+  RolePermission:
+    permissions:
+      view: false
+      edit: false
+      delete: false
+  RolePermissions:
+    permissions:
+      view: false
+      create: false
+    filter: gw.rest.core.cc.security.NoPermissionsQueryFilter
+  Roles:
+    permissions:
+      view: false
+      create: false
+    filter: gw.rest.core.cc.security.NoPermissionsQueryFilter
+  SecurityZone:
+    permissions:
+      view: false
+      edit: false
+      delete: false
+  SecurityZones:
+    permissions:
+      view: false
+      create: false
+    filter: gw.rest.core.cc.security.NoPermissionsQueryFilter
+  ServiceRequest:
+    permissions:
+      view: "resource.ServiceRequest.RestV1.VisibleToExternalUsers && (user.hasPrivilegedRoleOnClaim(resource.Claim) || user.hasExternalUserPrivilegedAccessOnServiceRequest(resource.ServiceRequest))"
+      edit: false
+      accept: false
+      add-quote: false
+      approve-quote: false
+      assign: false
+      cancel: false
+      complete-work: false
+      decline: false
+      internal-cancel: false
+      submit: false
+    additionalAccessibleFieldsFilter:
+      viewAndEdit: "user.hasExternalUserPrivilegedAccessOnServiceRequest(resource.ServiceRequest) ? (user.hasPrivilegedRoleOnClaim(resource.Claim) ? null : \"thirdpartyprivileged\") : \"restricted\""
+  ServiceRequestHistories:
+    permissions:
+      view: false
+  ServiceRequestHistory:
+    permissions:
+      view: false
+  ServiceRequestInvoice:
+    permissions:
+      view: false
+      edit: false
+      approve: false
+      mark-as-paid: false
+      withdraw: false
+  ServiceRequestInvoices:
+    permissions:
+      view: false
+      create: false
+    filter: gw.rest.core.cc.security.NoPermissionsQueryFilter
+  ServiceRequestMessage:
+    permissions:
+      view: false
+  ServiceRequestMessages:
+    permissions:
+      view: false
+      create: false
+  ServiceRequests:
+    permissions:
+      view: false
+    filter: gw.rest.core.cc.security.NoPermissionsQueryFilter
+  Subrogation:
+    permissions:
+      view: false
+      edit: false
+      delete: false
+  SubrogationSummaries:
+    permissions:
+      view: false
+      create: false
+  SubrogationSummary:
+    permissions:
+      view: false
+      edit: false
+  Subrogations:
+    permissions:
+      view: false
+      create: false
+  TripAccommodation:
+    permissions:
+      view: false
+      edit: false
+      delete: false
+  TripAccommodations:
+    permissions:
+      view: false
+      create: false
+    filter: gw.rest.core.cc.security.NoPermissionsQueryFilter
+  TripIncident:
+    permissions:
+      view: "user.hasPrivilegedRoleOnClaim(resource.Claim) || user.hasExternalUserPrivilegedAccessOnIncident(resource.Incident)"
+      edit: "user.hasExternalUserPrivilegedAccessOnIncident(resource.Incident)"
+      delete: false
+    additionalAccessibleFieldsFilter:
+      viewAndEdit: "user.hasExternalUserPrivilegedAccessOnIncident(resource.Incident) ? (user.hasPrivilegedRoleOnClaim(resource.Claim) ? null : \"thirdpartyprivileged\") : \"restricted\""
+  TripRiskUnit:
+    permissions:
+      view: __inherit
+  TripRiskUnits:
+    permissions:
+      view: __inherit
+    filter: __noFilter
+  TripSegment:
+    permissions:
+      view: false
+      edit: false
+      delete: false
+  TripSegments:
+    permissions:
+      view: false
+      create: false
+    filter: gw.rest.core.cc.security.NoPermissionsQueryFilter
+  TypeList:
+    permissions:
+      view: false
+  TypeLists:
+    permissions:
+      view: false
+  UnverifiedEndorsement:
+    permissions:
+      view: false
+      edit: false
+  UnverifiedLocationBasedRiskUnit:
+    permissions:
+      view: false
+      edit: false
+  UnverifiedLocationBasedRiskUnitCoverage:
+    permissions:
+      view: false
+      edit: false
+  UnverifiedLocationBasedRiskUnitCoverages:
+    permissions:
+      view: false
+      create: false
+    filter: gw.rest.core.cc.security.NoPermissionsQueryFilter
+  UnverifiedLocationBasedRiskUnits:
+    permissions:
+      view: false
+      create: false
+    filter: gw.rest.core.cc.security.NoPermissionsQueryFilter
+  UnverifiedPolicies:
+    permissions:
+      view: false
+      create: false
+    filter: gw.rest.core.cc.security.NoPermissionsQueryFilter
+  UnverifiedPolicy:
+    permissions:
+      view: false
+      edit: false
+  UnverifiedPolicyContacts:
+    permissions:
+      view: false
+      create: false
+    filter: gw.rest.core.cc.security.NoPermissionsQueryFilter
+  UnverifiedPolicyCoverage:
+    permissions:
+      view: false
+      edit: false
+  UnverifiedPolicyCoverages:
+    permissions:
+      view: false
+      create: false
+    filter: gw.rest.core.cc.security.NoPermissionsQueryFilter
+  UnverifiedPolicyEndorsements:
+    permissions:
+      view: false
+      create: false
+    filter: gw.rest.core.cc.security.NoPermissionsQueryFilter
+  UnverifiedPolicyLocation:
+    permissions:
+      view: false
+      edit: false
+  UnverifiedPolicyLocations:
+    permissions:
+      view: false
+      create: false
+    filter: gw.rest.core.cc.security.NoPermissionsQueryFilter
+  UnverifiedPropertyItem:
+    permissions:
+      view: false
+      edit: false
+  UnverifiedPropertyItems:
+    permissions:
+      view: false
+      create: false
+    filter: gw.rest.core.cc.security.NoPermissionsQueryFilter
+  UnverifiedRiskUnitCoverage:
+    permissions:
+      view: false
+      edit: false
+  UnverifiedRiskUnitCoverages:
+    permissions:
+      view: false
+      create: false
+    filter: gw.rest.core.cc.security.NoPermissionsQueryFilter
+  UnverifiedTripRiskUnit:
+    permissions:
+      view: false
+      edit: false
+  UnverifiedTripRiskUnits:
+    permissions:
+      view: false
+      create: false
+    filter: gw.rest.core.cc.security.NoPermissionsQueryFilter
+  UnverifiedVehicleRiskUnit:
+    permissions:
+      view: false
+      edit: false
+  UnverifiedVehicleRiskUnitCoverage:
+    permissions:
+      view: false
+      edit: false
+  UnverifiedVehicleRiskUnitCoverages:
+    permissions:
+      view: false
+      create: false
+    filter: gw.rest.core.cc.security.NoPermissionsQueryFilter
+  UnverifiedVehicleRiskUnits:
+    permissions:
+      view: false
+      create: false
+    filter: gw.rest.core.cc.security.NoPermissionsQueryFilter
+  User:
+    permissions:
+      view: false
+      edit: false
+      delete: false
+  UserAttribute:
+    permissions:
+      view: false
+      edit: false
+      delete: false
+  UserAttributes:
+    permissions:
+      view: false
+      create: false
+    filter: gw.rest.core.cc.security.NoPermissionsQueryFilter
+  UserRegion:
+    permissions:
+      view: false
+      edit: false
+      delete: false
+  UserRegions:
+    permissions:
+      view: false
+      create: false
+    filter: gw.rest.core.cc.security.NoPermissionsQueryFilter
+  Users:
+    permissions:
+      view: false
+      create: false
+    filter: gw.rest.core.cc.security.NoPermissionsQueryFilter
+  VehicleDamagePoint:
+    permissions:
+      view: __inherit
+      edit: __inherit
+      delete: false
+  VehicleDamagePoints:
+    permissions:
+      view: __inherit
+      create: __inherit
+    filter: __noFilter
+  VehicleIncident:
+    permissions:
+      view: "user.hasPrivilegedRoleOnClaim(resource.Claim) || user.hasExternalUserPrivilegedAccessOnIncident(resource.Incident)"
+      edit: "user.hasExternalUserPrivilegedAccessOnIncident(resource.Incident)"
+      delete: false
+    additionalAccessibleFieldsFilter:
+      viewAndEdit: "user.hasExternalUserPrivilegedAccessOnIncident(resource.Incident) ? (user.hasPrivilegedRoleOnClaim(resource.Claim) ? null : \"thirdpartyprivileged\") : \"restricted\""
+  VehicleRiskUnit:
+    permissions:
+      view: __inherit
+  VehicleRiskUnitCoverage:
+    permissions:
+      view: __inherit
+  VehicleRiskUnitCoverages:
+    permissions:
+      view: __inherit
+    filter: __noFilter
+  VehicleRiskUnits:
+    permissions:
+      view: __inherit
+    filter: __noFilter

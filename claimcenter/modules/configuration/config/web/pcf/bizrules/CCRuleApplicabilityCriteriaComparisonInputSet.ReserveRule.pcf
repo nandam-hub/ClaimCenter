@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <InputSet
+    id="CCRuleApplicabilityCriteriaComparisonInputSet"
+    mode="ReserveRule">
+    <Require
+      name="controller"
+      type="gw.bizrules.pcf.RuleVersionComparisonController"/>
+    <Variable
+      initialValue="new gw.bizrules.RuleVersionComparisonHelper&lt;ReserveRule&gt;(controller.RuleVersions)"
+      name="helper"
+      type="gw.bizrules.RuleVersionComparisonHelper&lt;ReserveRule&gt;"/>
+    <InputSetRef
+      def="RuleComparisonSectionLabelInputSet(controller, DisplayKey.get(&quot;Web.BizRules.Rule.ApplicabilityCriteria&quot;))"
+      id="ApplicabilityCriteriaSectionLabel"/>
+    <InputSetRef
+      def="RuleComparisonRowStringInputSet(helper.LossTypeRow)"
+      id="LossType"/>
+    <InputSetRef
+      def="RuleComparisonRowStringInputSet(helper.PolicyTypeRow)"
+      id="PolicyType"/>
+    <InputSetRef
+      def="RuleComparisonRowStringInputSet(helper.JurisdictionRow)"
+      id="Jurisdiction"/>
+    <InputSetRef
+      def="RuleComparisonRowStringInputSet(helper.createRowForTypelist(DisplayKey.get(&quot;Web.BizRules.Rule.ApplicabilityCriteria.ExposureType&quot;), \rule -&gt; rule.ExposureTypes*.ExposureType))"
+      id="ExposureType"/>
+    <InputSetRef
+      def="RuleComparisonRowStringInputSet(helper.createRowForTypelist(DisplayKey.get(&quot;Web.BizRules.Rule.ApplicabilityCriteria.ExposureSegment&quot;), \rule -&gt; rule.ClaimSegments*.ClaimSegment))"
+      id="ClaimSegment"/>
+  </InputSet>
+</PCF>

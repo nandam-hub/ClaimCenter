@@ -1,0 +1,127 @@
+swagger: '2.0'
+x-gw-runlevel: maintenance
+x-gw-schema-import:
+  mbean: gw.pl.system.server_mbeans-1.0
+x-gw-serialization:
+  includeEmptyArrays: false
+basePath: /system/v1/server/mbeans
+x-gw-apihandlers:
+- gw.api.rest.pl.system.v1.ServerMBeansAPIHandler
+paths:
+  /:
+    get:
+      summary: "Get names of all server managed beans"
+      description: "Get names of all server managed beans, optionally specify filter to narrow results"
+      operationId: getAllMBeans
+      x-gw-permissions:
+      - toolsJMXBeansview
+      produces:
+      - application/json
+      parameters:
+      - name: filter
+        in: query
+        description: "Get managed beans containing this text in its name"
+        required: false
+        type: string
+        default: ""
+      responses:
+        '200':
+          description: "Return list of all Mbeans"
+          schema:
+            $ref: "mbean#/definitions/GWMBeanList"
+  /properties/{beanname}:
+      get:
+        summary: "Get properties and operations of a managed bean"
+        description: "Get properties and operations of a managed bean"
+        operationId: getMBeanByName
+        x-gw-permissions:
+        - toolsJMXBeansview
+        produces:
+        - application/json
+        parameters:
+        - $ref: "#/parameters/beanname"
+        - name: verbose
+          in: query
+          description: "If true this will return verbose result including metadata information, operations and notifications corresponding to managed bean"
+          default: false
+          type: boolean
+        responses:
+          '200':
+            description: "Return properties and operations of specified managed bean"
+            schema:
+              "$ref": "mbean#/definitions/GWMBean"
+      patch:
+        summary: "Update properties of a managed bean"
+        description: "Update properties of a managed bean"
+        operationId: updateMBeanProperties
+        x-gw-permissions:
+        - toolsJMXBeansedit
+        consumes:
+        - application/json
+        produces:
+        - application/json
+        parameters:
+        - $ref: "#/parameters/beanname"
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: "mbean#/definitions/NameValuePairs"
+        responses:
+          '200':
+            description: Successful operation
+            schema:
+              "$ref": "mbean#/definitions/GWMBean"
+  /operations/{beanname}/{operationname}:
+      get:
+        summary: "Gets operation info"
+        description: "Gets operation information"
+        operationId: getOperation
+        x-gw-permissions:
+        - toolsJMXBeansview
+        produces:
+          - application/json
+        parameters:
+          - $ref: "#/parameters/beanname"
+          - $ref: "#/parameters/operationname"
+        responses:
+          '200':
+            description: "Successful operation"
+            schema:
+              $ref: 'mbean#/definitions/GWMBeanOperation'
+      post:
+        summary: "Execute managed bean operation"
+        description: "Execute managed bean operation"
+        operationId: executeOperation
+        x-gw-permissions:
+        - toolsJMXBeansedit
+        consumes:
+        - application/json
+        produces:
+        - application/json
+        parameters:
+        - $ref: "#/parameters/beanname"
+        - $ref: "#/parameters/operationname"
+        - name: body
+          in: body
+          required: false
+          schema:
+            $ref: "mbean#/definitions/NameValuePairs"
+        responses:
+          '200':
+            description: Successful operation
+            schema:
+              "$ref": "mbean#/definitions/Value"
+parameters:
+  beanname:
+    name: beanname
+    in: path
+    description: Name of the bean
+    required: true
+    type: string
+  operationname:
+    name: operationname
+    in: path
+    description: Name of the operation to execute
+    required: true
+    type: string

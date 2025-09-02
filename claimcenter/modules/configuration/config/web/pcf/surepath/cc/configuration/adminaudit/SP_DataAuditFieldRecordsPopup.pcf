@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../../pcf.xsd">
+  <Popup
+    canEdit="false"
+    canVisit="perm.System.viewDataAuditHistory_sp and gw.surepath.cc.configuration.adminaudit.util.DataAuditorProperties.INSTANCE.FeatureEnabled"
+    id="SP_DataAuditFieldRecordsPopup"
+    title="DisplayKey.get(&quot;SP.AdminAudit.Admin.Audit.FieldRecordsTitle&quot;)">
+    <LocationEntryPoint
+      signature="SP_DataAuditFieldRecordsPopup(auditRecord: DataAudit_SP)"/>
+    <Variable
+      name="auditRecord"
+      type="DataAudit_SP"/>
+    <Screen>
+      <PanelRef
+        def="SP_DataAuditFieldRecordsDV(auditRecord)"/>
+    </Screen>
+  </Popup>
+</PCF>

@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  loadable="false"
+  entity="InboundChunk"
+  table="inboundrecords"
+  type="keyable"
+  platform="true"
+  replicable="false">
+  <array
+    arrayentity="InboundRecord"
+    name="InboundRecords"/>
+  <typekey
+    desc="The status of Inbound Chunk"
+    name="Status"
+    nullok="false"
+    typelist="InboundChunkStatus"/>
+</entity>

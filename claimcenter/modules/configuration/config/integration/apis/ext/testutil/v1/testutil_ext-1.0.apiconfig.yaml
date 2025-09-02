@@ -1,0 +1,34 @@
+combine:
+- gw.content.cc.testutil.v1.testutil_content-1.0
+resources:
+  TestUtilContact:
+    resource: gw.rest.ext.cc.testutil.v1.contact.TestUtilContactExtResource
+  TestUtilContacts:
+    resource: gw.rest.ext.cc.testutil.v1.contact.TestUtilContactsExtResource
+  TestUtilGroup:
+    resource: gw.rest.ext.cc.testutil.v1.group.TestUtilGroupExtResource
+  TestUtilGroups:
+    resource: gw.rest.ext.cc.testutil.v1.group.TestUtilGroupsExtResource
+  TestUtilPolicies:
+    resource: gw.rest.ext.cc.testutil.v1.policy.TestUtilPoliciesExtResource
+  TestUtilPolicy:
+    resource: gw.rest.ext.cc.testutil.v1.policy.TestUtilPolicyExtResource
+  TestUtilSpecialistService:
+    resource: gw.rest.ext.cc.testutil.v1.servicerequest.TestUtilSpecialistServiceExtResource
+  TestUtilSpecialistServices:
+    resource: gw.rest.ext.cc.testutil.v1.servicerequest.TestUtilSpecialistServicesExtResource
+  TestUtilUser:
+    resource: gw.rest.ext.cc.testutil.v1.user.TestUtilUserExtResource
+  TestUtilUsers:
+    resource: gw.rest.ext.cc.testutil.v1.user.TestUtilUsersExtResource
+mappingFiles:
+- ext.testutil.v1.testutil_ext-1.0
+updaterFiles:
+- ext.testutil.v1.testutil_ext-1.0
+resourceAccess:
+  internal:
+    yaml: ext.testutil.v1.internal_ext-1.0
+  unauthenticated:
+    yaml: ext.testutil.v1.unauthenticatedUser_ext-1.0
+  service:
+    yaml: ext.testutil.v1.serviceUser_ext-1.0

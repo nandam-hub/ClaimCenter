@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<Entity
+  name="OutboundRecord">
+  <Columns>
+    <Column
+      beanPath="OutboundRecord.Config.Name"
+      name="Config"
+      sortOrder="1"/>
+    <Column
+      beanPath="OutboundRecord.BatchID"
+      name="Batch"
+      sortOrder="2"/>
+    <Column
+      beanPath="OutboundRecord.CreateDate"
+      name="CreateDate"
+      sortOrder="3"/>
+  </Columns>
+  <DisplayName><![CDATA[return "'" + Config + "' " + Batch + ": " + CreateDate]]></DisplayName>
+</Entity>

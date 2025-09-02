@@ -1,0 +1,273 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "definitions": {
+    "ProcessNames": {
+      "type": "object",
+      "description": "List of all process names",
+      "properties": {
+        "names": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ValidateArchiveLinksProcessIds": {
+      "type": "object",
+      "description": "ValidateArchiveLinks process ids",
+      "properties": {
+        "ids": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "required": [
+        "ids"
+      ]
+    },
+    "ProcessStartParams": {
+      "type": "object",
+      "description": "Parameters for starting process",
+      "properties": {
+        "processType": {
+          "type": "string",
+          "description": "Batch process type"
+        },
+        "args": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ProcessStatus": {
+      "type": "object",
+      "description": "Contains information about the status of a previously started batch process.  This could contain status information for a process that is currently running or for a process that ran was run in the past.If the process is not currently running, the opsCompleted and failedOps fields won't have any useful information.",
+      "properties": {
+        "processType": {
+          "type": "string",
+          "description": "The type of process"
+        },
+        "opsCompleted": {
+          "type": "integer",
+          "description": "The number of operations the process completed so far"
+        },
+        "opsExpected": {
+          "type": "integer",
+          "description": "The number of operations expected to be completed"
+        },
+        "dateCompleted": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date the process finished, if it has in fact finished"
+        },
+        "dateCreated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date that the process was requested to start"
+        },
+        "startDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date that the process started running"
+        },
+        "failedOps": {
+          "type": "integer",
+          "description": "The number of failed operations"
+        },
+        "failureReason": {
+          "type": "string",
+          "description": "If the process failed to complete, the reason why it failed"
+        },
+        "returnValue": {
+          "type": "string",
+          "description": "A short string value set by the called batch process as a return value"
+        },
+        "serverId": {
+          "type": "string",
+          "description": "Server that ran (or running) this batch process"
+        },
+        "detailedStatus": {
+          "type": "string",
+          "description": "Detailed status of process status, which is useful when integers aren't robust enough"
+        },
+        "progress": {
+          "type": "string",
+          "description": "Progress in the form 'x of y' where 'x' is the amount of work completed and 'y' is the total amount of work. If 'y' is unknown, returns just 'x'."
+        }
+      }
+    },
+    "Workqueues": {
+      "type": "object",
+      "properties": {
+        "workqueues": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Workqueue"
+          }
+        }
+      }
+    },
+    "Workqueue": {
+      "type": "object",
+      "properties": {
+        "processType": {
+          "type": "string",
+          "description": "The process type"
+        },
+        "numActiveExecutors": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of active executors"
+        },
+        "numOfActiveWorkItems": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of active work items"
+        },
+        "executors": {
+          "type": "array",
+          "description": "An array of {See WorkqueueExecutorDetail} for Executors of the given queue",
+          "items": {
+            "$ref": "#/definitions/WorkqueueExecutorDetail"
+          }
+        }
+      }
+    },
+    "WorkqueueExecutorDetail": {
+      "type": "object",
+      "description": "Details for a particular WorkQueueExecutor of a particular WorkQueue for a particular server",
+      "properties": {
+        "serverName": {
+          "type": "string",
+          "description": "The server name"
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The worker start time"
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the given worker was stopped or null if the worker has not been stopped yet"
+        },
+        "active": {
+          "type": "boolean",
+          "description": "Active state of the worker.  More precisely, true if the given worker has not been stopped. This includes workers that are both active and suspended"
+        },
+        "tasks": {
+          "type": "array",
+          "description": "An array of {See WorkqueueTaskDetails} for Workers of the given executor",
+          "items": {
+            "$ref": "#/definitions/WorkqueueTaskDetails"
+          }
+        },
+        "maxNumOfWorkers": {
+          "type": "integer"
+        }
+      }
+    },
+    "WorkqueueTaskDetails": {
+      "type": "object",
+      "description": " Details for a particular Worker Task",
+      "properties": {
+        "serverName": {
+          "type": "string",
+          "description": "The server name"
+        },
+        "instanceId": {
+          "type": "integer",
+          "description": "The Instance ID"
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The worker start time"
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the given worker was stopped or null if the worker has not been stopped yet"
+        },
+        "running": {
+          "type": "boolean",
+          "description": "Active state of the worker.  More precisely, true if the given worker has not been stopped.  This includes workers that are both active and suspended."
+        },
+        "itemsCheckedOut": {
+          "type": "integer",
+          "description": "Number of checked out work items"
+        },
+        "itemsSkipped": {
+          "type": "integer",
+          "description": "Number of skipped work items"
+        },
+        "itemsProcessed": {
+          "type": "integer",
+          "description": "Number of processed work items"
+        },
+        "itemsFailed": {
+          "type": "integer",
+          "description": "Number of failed work items"
+        },
+        "exceptions": {
+          "type": "integer",
+          "description": "Number of exceptions caught during work items processing"
+        },
+        "orphansAdopted": {
+          "type": "integer",
+          "description": "Number of orphans adopted by this task"
+        },
+        "consecutiveExceptions": {
+          "type": "integer",
+          "description": "Number of consecutive exceptions"
+        }
+      }
+    },
+    "WorkqueueConfig": {
+      "type": "object",
+      "properties": {
+        "instances": {
+          "type": "integer",
+          "description": "Number of worker instances configured to run on this server. (Default = 1)",
+          "default": 1
+        },
+        "throttleInterval": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Current sleep time between workitems. (Default = 0)",
+          "default": 0
+        },
+        "batchSize": {
+          "type": "integer",
+          "description": "Max number of workitems to be checked out when a worker wakes up.  (Default = 10)",
+          "default": 10
+        },
+        "maxPollInterval": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Max time in millis that a worker will wait between queries for new workitems.  When a worker exhausts the supply of workitems, it will suspend itself and wait for notifications.  If no notification is received, it will wake up and check for new workitems every maxPollInterval millis. This acts as a safety mechanism in case notifications are lost in a clustered environment, and guarantees a maximum latency for workitem processing.  This parameter should increase with the number of workers configured, to keep the load on the database from growing excessively. (Default = 60000)",
+          "default": 60000
+        }
+      }
+    },
+    "Plugin": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of plugin"
+        },
+        "started": {
+          "type": "boolean",
+          "description": "Indicates whether or not plugin was started"
+        }
+      }
+    }
+  }
+}

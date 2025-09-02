@@ -1,0 +1,36 @@
+package rules.Validation.ContactValidationRules_dir
+
+uses gw.api.locale.DisplayKey
+
+@gw.rules.RuleName("CTV10000 - PreferredContactMethod cannot be null")
+internal class CTV10000PreferredContactMethodcannotbenull {
+  static function doCondition(contact : entity.Contact) : boolean {
+/*start00rule*/
+return contact typeis Person
+    and ((contact as Person).ClaimUpdatesViaEmailOptIn != null or
+    (contact as Person).ClaimUpdatesViaTextOptIn != null)
+/*end00rule*/
+}
+
+  static function doAction(contact : entity.Contact, actions : gw.rules.Action) {
+/*start00rule*/
+ 
+    var person = contact as Person
+    
+    if (person.ClaimUpdatesViaEmailOptIn != null and !person.ClaimUpdatesViaEmailOptIn.isAvailableForContact(person)) 
+    {
+      contact.rejectField("ClaimUpdatesViaEmailOptIn", ValidationLevel.TC_LOADSAVE, 
+          DisplayKey.get("Web.ContactDetail.ClaimUpdatesViaEmailOptIn.Error", person.ClaimUpdatesViaEmailOptIn.DisplayName),
+          null, null)
+    }
+    
+    if (person.ClaimUpdatesViaTextOptIn != null and !person.ClaimUpdatesViaTextOptIn.isAvailableForContact(person)) 
+    {
+      contact.rejectField("ClaimUpdatesViaTextOptIn", ValidationLevel.TC_LOADSAVE, 
+          DisplayKey.get("Web.ContactDetail.ClaimUpdatesViaTextOptIn.Error", person.ClaimUpdatesViaTextOptIn.DisplayName),
+          null, null)
+    }
+    
+/*end00rule*/
+  }
+}

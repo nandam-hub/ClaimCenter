@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<typelist
+  final="true"
+  xmlns="http://guidewire.com/typelists" name="AppEventSyncStatus" desc="Indicates the synchronization status of an entity instance with respect to App Events.">
+  <typecode
+    code="NotSynced"
+    desc="The entity instance is requested to be synchronized with App Events."
+    name="Not Synced"/>
+  <typecode
+    code="ResyncRequested"
+    desc="The entity instance is requested to be resynchronized with App Events."
+    name="Resync Requested"/>
+  <typecode
+    code="Synced"
+    desc="The entity instance is synchronized with App Events."
+    name="Synced"/>
+</typelist>

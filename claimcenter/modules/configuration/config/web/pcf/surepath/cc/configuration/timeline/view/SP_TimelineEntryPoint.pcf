@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../../../pcf.xsd">
+  <EntryPoint
+    id="SP_Timeline"
+    location="SP_TimelineForward(claimNumber, publicID, type, arbitraryLink)">
+    <EntryPointParameter
+      locationParam="claimNumber"
+      type="String"/>
+    <EntryPointParameter
+      locationParam="publicID"
+      type="String"/>
+    <EntryPointParameter
+      locationParam="type"
+      type="String"/>
+    <EntryPointParameter
+      locationParam="arbitraryLink"
+      type="String"/>
+  </EntryPoint>
+</PCF>

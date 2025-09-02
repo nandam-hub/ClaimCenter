@@ -1,0 +1,11 @@
+swagger: "2.0"
+info:
+  title: "ClaimCenter Async Request API"
+consumes:
+- application/json
+produces:
+- application/json
+x-gw-combine:
+- gw.core.pl.async.v1.async_pl-1.0
+- gw.core.cc.framework.v1.framework_core-1.0
+paths: {}

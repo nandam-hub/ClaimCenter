@@ -1,0 +1,248 @@
+{
+  "schemaName": "gw.core.cc.admin.v1.admin_core-1.0",
+  "combine": [
+    "gw.core.cc.common.v1.common_core-1.0",
+    "gw.core.pl.admin.v1.admin_pl-1.0"
+  ],
+  "updaters": {
+    "AuthorityLimit": {
+      "schemaDefinition": "AuthorityLimit",
+      "root": "entity.AuthorityLimit",
+      "properties": {
+        "costType": {
+          "path": "AuthorityLimit.CostType",
+          "valueResolver": {
+            "typeName": "TypeKeyValueResolver"
+          }
+        },
+        "coverageType": {
+          "path": "AuthorityLimit.CoverageType",
+          "valueResolver": {
+            "typeName": "TypeKeyValueResolver"
+          }
+        },
+        "limitAmount": {
+          "path": "AuthorityLimit.LimitAmount",
+          "valueResolver": {
+            "typeName": "CurrencyAmountValueResolver"
+          }
+        },
+        "limitType": {
+          "path": "AuthorityLimit.LimitType",
+          "valueResolver": {
+            "typeName": "TypeKeyValueResolver"
+          }
+        },
+        "policyType": {
+          "path": "AuthorityLimit.PolicyType",
+          "valueResolver": {
+            "typeName": "TypeKeyValueResolver"
+          }
+        }
+      }
+    },
+    "AuthorityLimitProfile": {
+      "schemaDefinition": "AuthorityLimitProfile",
+      "root": "entity.AuthorityLimitProfile",
+      "updateFirst": [
+        "custom"
+      ],
+      "properties": {
+        "currency": {
+          "path": "AuthorityLimitProfile.Currency",
+          "valueResolver": {
+            "typeName": "TypeKeyValueResolver"
+          }
+        },
+        "custom": {
+          "path": "AuthorityLimitProfile.Custom"
+        },
+        "description": {
+          "path": "AuthorityLimitProfile.Description",
+          "allowed": "AuthorityLimitProfile.RestV1_disallowForCustomProfile(\"description\")"
+        },
+        "name": {
+          "path": "AuthorityLimitProfile.Name",
+          "allowed": "AuthorityLimitProfile.RestV1_disallowForCustomProfile(\"name\")"
+        }
+      }
+    },
+    "Catastrophe": {
+      "schemaDefinition": "Catastrophe",
+      "root": "entity.Catastrophe",
+      "properties": {
+        "active": {
+          "path": "Catastrophe.Active"
+        },
+        "bottomRightLatitude": {
+          "path": "Catastrophe.BottomRightLatitude"
+        },
+        "bottomRightLongitude": {
+          "path": "Catastrophe.BottomRightLongitude"
+        },
+        "catastropheNumber": {
+          "path": "Catastrophe.CatastropheNumber"
+        },
+        "catastropheValidFrom": {
+          "path": "Catastrophe.CatastropheValidFrom"
+        },
+        "catastropheValidTo": {
+          "path": "Catastrophe.CatastropheValidTo"
+        },
+        "comments": {
+          "path": "Catastrophe.Comments"
+        },
+        "description": {
+          "path": "Catastrophe.Description"
+        },
+        "name": {
+          "path": "Catastrophe.Name"
+        },
+        "pcsCatastropheNumber": {
+          "path": "Catastrophe.PCSCatastropheNumber"
+        },
+        "policyEffectiveDate": {
+          "path": "Catastrophe.PolicyEffectiveDate"
+        },
+        "policyRetrievalCompletionTime": {
+          "path": "Catastrophe.PolicyRetrievalCompletionTime"
+        },
+        "policyRetrievalSetTime": {
+          "path": "Catastrophe.PolicyRetrievalSetTime"
+        },
+        "scheduleBatch": {
+          "path": "Catastrophe.ScheduleBatch"
+        },
+        "topLeftLatitude": {
+          "path": "Catastrophe.TopLeftLatitude"
+        },
+        "topLeftLongitude": {
+          "path": "Catastrophe.TopLeftLongitude"
+        },
+        "type": {
+          "path": "Catastrophe.Type",
+          "valueResolver": {
+            "typeName": "TypeKeyValueResolver"
+          }
+        }
+      }
+    },
+    "CatastrophePeril": {
+      "schemaDefinition": "CatastrophePeril",
+      "root": "entity.CatastrophePeril",
+      "properties": {
+        "comments": {
+          "path": "CatastrophePeril.Comments"
+        },
+        "lossCause": {
+          "path": "CatastrophePeril.LossCause",
+          "valueResolver": {
+            "typeName": "TypeKeyValueResolver"
+          }
+        },
+        "lossType": {
+          "path": "CatastrophePeril.LossType",
+          "valueResolver": {
+            "typeName": "TypeKeyValueResolver"
+          }
+        }
+      }
+    },
+    "CatastropheZone": {
+      "schemaDefinition": "CatastropheZone",
+      "root": "entity.CatastropheZone",
+      "properties": {
+        "geographicZone": {
+          "path": "CatastropheZone.RestV1_CatastropheZone",
+          "valueResolver": {
+            "typeName": "gw.rest.core.pl.admin.v1.geographiczone.GeographicZoneJsonValueResolver"
+          }
+        }
+      }
+    },
+    "Group": {
+      "schemaDefinition": "Group",
+      "root": "entity.Group",
+      "properties": {
+        "securityZone": {
+          "path": "Group.SecurityZone",
+          "valueResolver": {
+            "typeName": "gw.rest.core.cc.admin.v1.group.SecurityZoneJsonValueResolver"
+          }
+        }
+      }
+    },
+    "ICDCode": {
+      "schemaDefinition": "ICDCode",
+      "root": "entity.ICDCode",
+      "properties": {
+        "availabilityDate": {
+          "path": "ICDCode.AvailabilityDate"
+        },
+        "bodySystem": {
+          "path": "ICDCode.BodySystem",
+          "valueResolver": {
+            "typeName": "TypeKeyValueResolver"
+          }
+        },
+        "chronic": {
+          "path": "ICDCode.Chronic"
+        },
+        "code": {
+          "path": "ICDCode.Code"
+        },
+        "description": {
+          "path": "ICDCode.CodeDesc"
+        },
+        "edition": {
+          "path": "ICDCode.Edition",
+          "valueResolver": {
+            "typeName": "TypeKeyValueResolver"
+          }
+        },
+        "expirationDate": {
+          "path": "ICDCode.ExpiryDate"
+        }
+      }
+    },
+    "ICDCodeSearch": {
+      "schemaDefinition": "ICDCodeSearchRequestAttributes",
+      "root": "gw.icd.ICDSearchCriteria",
+      "properties": {
+        "activeDate": {
+          "path": "ICDSearchCriteria.ActiveDate"
+        },
+        "bodySystem": {
+          "path": "ICDSearchCriteria.ICDBodySystem",
+          "valueResolver": {
+            "typeName": "TypeKeyValueResolver"
+          }
+        },
+        "code": {
+          "path": "ICDSearchCriteria.ICDCode"
+        },
+        "description": {
+          "path": "ICDSearchCriteria.Description"
+        },
+        "edition": {
+          "path": "ICDSearchCriteria.ICDEdition",
+          "valueResolver": {
+            "typeName": "TypeKeyValueResolver"
+          }
+        }
+      }
+    },
+    "User": {
+      "schemaDefinition": "User",
+      "root": "entity.User",
+      "properties": {
+        "authorityLimitProfile": {
+          "path": "User.AuthorityProfile",
+          "valueResolver": {
+            "typeName": "gw.rest.core.cc.admin.v1.authoritylimitprofile.AuthorityLimitProfileJsonValueResolver"
+          }
+        }
+      }
+    }
+  }
+}

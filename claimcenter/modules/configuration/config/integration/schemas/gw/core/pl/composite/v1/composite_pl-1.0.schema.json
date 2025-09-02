@@ -1,0 +1,217 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "x-gw-localizationKeyPrefix": "composite.v1",
+  "definitions": {
+    "CompositeRequest": {
+      "title": "Composite request",
+      "description": "The body of a composite request",
+      "properties": {
+        "requestTag": {
+          "title": "Request tag",
+          "description": "A tag for this composite request that will be added to log entries and request metrics. Composite requests that represent the same high-level action can be given the same tag so that request metrics such as request time can be tracked across all composite requests using that tag.",
+          "type": "string",
+          "maxLength": 150
+        },
+        "requests": {
+          "title": "Requests",
+          "description": "The list of subrequests",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CompositeSubRequest"
+          }
+        },
+        "selections": {
+          "title": "Selections",
+          "description": "The list of selections",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CompositeSelectionRequest"
+          }
+        }
+      }
+    },
+    "CompositeResponse": {
+      "title": "Composite response",
+      "description": "The body of a composite response. The `responses` field will have one element for every entry in the `requests` field, and responses will appear in the same order.",
+      "properties": {
+        "commitError": {
+          "title": "Commit error",
+          "description": "The details of any error that occurred when committed data after processing all subrequests",
+          "type": "object"
+        },
+        "requestFailed": {
+          "title": "Request failed",
+          "description": "This field will be set to `true` if any subrequest failed or if committing data failed",
+          "type": "boolean"
+        },
+        "responses": {
+          "title": "Responses",
+          "description": "The list of subresponses, appearing in the same order as the elements in the `requests` field of the request",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CompositeSubResponse"
+          }
+        },
+        "selections": {
+          "title": "Selections",
+          "description": "The list of selections, appearing in the same order as the elements in the `selections` field of the request",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CompositeSubResponse"
+          }
+        }
+      }
+    },
+    "CompositeSelectionRequest": {
+      "title": "Composite selection request",
+      "description": "An individual selection within the composite request",
+      "required": [
+        "uri"
+      ],
+      "properties": {
+        "parameters": {
+          "title": "Parameters",
+          "description": "Query parameters to apply to the selection. Each key in the parameters object should be the name of the query parameter, while the value should be appropriate for the type of parameter.",
+          "type": "object"
+        },
+        "uri": {
+          "title": "URI",
+          "description": "The path to select. The path must start with `/` and cannot contain whitespace.",
+          "type": "string",
+          "minLength": 1
+        },
+        "vars": {
+          "title": "Vars",
+          "description": "A list of variables to extract from the response to this selection, for use in subsequent selections within the same composite request",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CompositeSubRequestVar"
+          },
+          "maxItems": 25
+        }
+      }
+    },
+    "CompositeSubRequest": {
+      "title": "Composite subrequest",
+      "description": "An individual subrequest of the composite request",
+      "required": [
+        "method",
+        "uri"
+      ],
+      "properties": {
+        "body": {
+          "title": "Body",
+          "description": "The body of the subrequest",
+          "type": "object"
+        },
+        "includeResponse": {
+          "title": "Include response",
+          "description": "Setting this field to `false` will cause the response to this subrequest to be omitted from the composite response. Setting this to false can be useful in cases where intermediate results are not interesting to the caller, saving response time by not sending back those results.",
+          "type": "boolean"
+        },
+        "method": {
+          "title": "Method",
+          "description": "The HTTP method for the subrequest. Must be one of `DELETE`, `PATCH`, `POST`, or `PUT`, compared case insensitively.",
+          "type": "string"
+        },
+        "parameters": {
+          "title": "Parameters",
+          "description": "Query parameters to apply to the subrequest. Each key in the parameters object should be the name of the query parameter, while the value should be appropriate for the type of parameter.",
+          "type": "object"
+        },
+        "uri": {
+          "title": "URI",
+          "description": "The path for the subrequest. The path must start with `/` and cannot contain whitespace.",
+          "type": "string",
+          "minLength": 1
+        },
+        "vars": {
+          "title": "Vars",
+          "description": "A list of variables to extract from the response to this subrequest, for use in subsequent subrequests or selections within the same composite request",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CompositeSubRequestVar"
+          },
+          "maxItems": 25
+        }
+      }
+    },
+    "CompositeSubRequestVar": {
+      "title": "Composite subrequest variable",
+      "description": "A variable used to extract a value from a subrequest or selection response, for use in later subrequests or selections within the same composite request",
+      "required": [
+        "name",
+        "path"
+      ],
+      "properties": {
+        "name": {
+          "title": "Title",
+          "description": "The name of the variable. This is the name which the variable can be referenced by in subsequent subrequests or selections, using `${name}` syntax within the `body`, `uri`, or `parameters` of the subsequent subrequest or selection.",
+          "type": "string",
+          "minLength": 1
+        },
+        "path": {
+          "title": "Path",
+          "description": "The JsonPath expression to execute against the response in order to produce the value",
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "CompositeSubResponse": {
+      "title": "Composite subresponse",
+      "description": "The response to a composite subrequest or selection",
+      "properties": {
+        "body": {
+          "title": "Body",
+          "description": "The body of the subresponse",
+          "type": "object"
+        },
+        "headers": {
+          "title": "Headers",
+          "description": "The headers returned for the subresponse",
+          "$ref": "#/definitions/Headers"
+        },
+        "requestError": {
+          "title": "Request error",
+          "description": "The details of any error that occurred when processing the associated subrequest or selection",
+          "type": "object"
+        },
+        "responseIncluded": {
+          "title": "Response included",
+          "description": "A `false` value indicates that the `includeResponse` property on the corresponding subrequest was set to `false`, and the rest of this subresponse has been omitted",
+          "type": "boolean"
+        },
+        "responseSerializationFailed": {
+          "title": "Response serialization failed",
+          "description": "A `true` value indicates that serializing the response to the corresponding subrequest failed. The error will be logged, but not returned to the caller. Response serialization failures will not cause the overall request to fail and will not prevent data from being committed. This case should rarely, if ever, occur during normal operation.",
+          "type": "boolean"
+        },
+        "skipped": {
+          "title": "Skipped",
+          "description": "A `true` value indicates that the subrequest was skipped due to the failure of an earlier subrequest",
+          "type": "boolean"
+        },
+        "status": {
+          "title": "Status",
+          "description": "The HTTP response status code generated by the associated subrequest or selection",
+          "type": "integer"
+        },
+        "varsError": {
+          "title": "Vars error",
+          "description": "The details of any errors that occurred when attempting to process the `vars` on the associated subrequest or selection",
+          "type": "object"
+        }
+      }
+    },
+    "Headers": {
+      "title": "Headers",
+      "description": "A set of name/value pairs that correspond to HTTP header names and values",
+      "additionalProperties": {
+        "title": "Headers",
+        "description": "A set of name/value pairs that correspond to HTTP header names and values",
+        "type": "string"
+      }
+    }
+  }
+}

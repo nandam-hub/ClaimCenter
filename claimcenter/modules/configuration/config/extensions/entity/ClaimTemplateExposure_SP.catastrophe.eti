@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Coverage / Exposure settings for Catastrophe Quick-Setup"
+  entity="ClaimTemplateExposure_SP"
+  exportable="true"
+  table="claimtemplateexposure_sp"
+  type="retireable">
+  <foreignkey
+    desc="Reference to parent settings."
+    fkentity="ClaimTemplateSettings_SP"
+    name="ClaimTemplateSettings"
+    nullok="false"/>
+  <typekey
+    desc="Coverage Subtype (exposure-only)."
+    name="CoverageSubtype"
+    nullok="true"
+    typelist="CoverageSubtype">
+    <keyfilters>
+      <keyfilter
+        name="CoverageType"/>
+    </keyfilters>
+  </typekey>
+  <typekey
+    desc="Coverage Type (related to PolicyCoverage and Exposure)"
+    name="CoverageType"
+    nullok="true"
+    typelist="CoverageType">
+    <keyfilters>
+      <keyfilter
+        name="PolicyType"/>
+    </keyfilters>
+  </typekey>
+  <typekey
+    desc="The type of policy. (Used to filter down coverage types)"
+    name="PolicyType"
+    nullok="true"
+    typelist="PolicyType"/>
+  <column
+    desc="Percentage of coverage limit (to create exposure)."
+    name="ReservePercent"
+    nullok="true"
+    type="integer"/>
+</entity>

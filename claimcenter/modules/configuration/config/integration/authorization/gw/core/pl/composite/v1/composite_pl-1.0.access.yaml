@@ -1,0 +1,4 @@
+resources:
+  CompositeOpenApiSchema:
+    permissions:
+      view: true

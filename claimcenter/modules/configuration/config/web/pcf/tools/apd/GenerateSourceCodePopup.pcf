@@ -1,0 +1,163 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    afterCancel="ccCodegenInfo.unlockIfOwned(); ccpiCodegenInfo.unlockIfOwned()"
+    afterCommit="pushCodeGeneratedPopup(TopLocation)"
+    afterEnter="ccCodegenInfo.lock(); ccpiCodegenInfo.lock(); popupHelper.setUpCodeGeneration()"
+    beforeCancel="popupHelper.cleanUpCodeGenerationSetup()"
+    canEdit="true"
+    canVisit="true"
+    id="GenerateSourceCodePopup"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.APDProduct.GenerateSourceCode.Title&quot;)">
+    <LocationEntryPoint
+      signature="GenerateSourceCodePopup(product : gw.apdcloud.client.model.APDProductDTO, ccGenerationHelper : gw.apd.model.generate.GenerationHelper, ccpiGenerationHelper: gw.apd.model.generate.GenerationHelper)"/>
+    <Variable
+      name="product"
+      type="gw.apdcloud.client.model.APDProductDTO"/>
+    <Variable
+      name="ccGenerationHelper"
+      type="gw.apd.model.generate.GenerationHelper"/>
+    <Variable
+      name="ccpiGenerationHelper"
+      type="gw.apd.model.generate.GenerationHelper"/>
+    <Variable
+      initialValue="{ccGenerationHelper, ccpiGenerationHelper}.where(\h -> h != null)"
+      name="generationHelpers"
+      type="List&lt;gw.apd.model.generate.GenerationHelper&gt;"/>
+    <Variable
+      initialValue="gw.api.feature.ApdForClaimsFeatureInfo.CCCodeGenManager"
+      name="ccCodegenInfo"
+      type="gw.api.feature.CodegenManager.CC"/>
+    <Variable
+      initialValue="gw.api.feature.ApdForClaimsFeatureInfo.CCPICodeGenManager"
+      name="ccpiCodegenInfo"
+      type="gw.api.feature.CodegenManager.CCPI"/>
+    <Variable
+      initialValue="generationHelpers.allMatch(\h -> h.IsValidForGeneration)"
+      name="productTreeIsValid"
+      type="boolean"/>
+    <Variable
+      initialValue="product.Abbreviation.NotBlank ? product.Abbreviation : &quot;&quot;"
+      name="productAbbrev"
+      type="String"/>
+    <Variable
+      name="branchSuffix"
+      type="String"
+      initialValue="gw.apd.model.generate.GenerationHelper.getBranchSuffix(productAbbrev)"/>
+    <Variable
+      initialValue="new gw.apd.web.GenerateSourceCodePopupHelper(CurrentLocation, generationHelpers, branchSuffix)"
+      name="popupHelper"
+      type="gw.apd.web.GenerateSourceCodePopupHelper"/>
+    <Variable
+      name="hideSetupIndicator"
+      type="boolean"
+      initialValue="false"/>
+    <Variable
+      initialValue="popupHelper.getCurrencyMismatchWarning()"
+      name="currencyMismatchWarning"
+      type="String"/>
+    <Variable
+      initialValue="popupHelper.getModifiedFileWarning()"
+      name="modifiedFileWarning"
+      type="String"/>
+
+    <Screen>
+      <Toolbar>
+        <EditButtons
+          cancelLabel="DisplayKey.get(&quot;Web.APDProduct.GenerateSourceCode.Cancel&quot;)"
+          updateVisible="false"/>
+        <ToolbarButton
+          available="popupHelper.AnyValidForGeneration"
+          hideIfReadOnly="true"
+          id="Update"
+          default="true"
+          action="popupHelper.generateConfiguration(branchSuffix)"
+          showConfirmMessage="popupHelper.canCompleteGeneration(branchSuffix)"
+          confirmMessage="popupHelper.getUpdateConfirmMessage(branchSuffix)"
+          label="DisplayKey.get(&quot;Web.APDProduct.GenerateSourceCode.Update&quot;)"
+          visible="popupHelper.canCompleteGeneration(branchSuffix)"
+        />
+      </Toolbar>
+      <AlertBar
+        id="ccCurrencyMismatchAlert"
+        label="currencyMismatchWarning"
+        visible="currencyMismatchWarning.HasContent"/>
+      <AlertBar
+        id="ccChangesDetectionAlert"
+        label="modifiedFileWarning"
+        visible="modifiedFileWarning.HasContent"/>
+      <DetailViewPanel
+        visible="popupHelper.AnyValidForGeneration">
+        <InputColumn>
+          <ProgressInput
+            id="checkoutProgress"
+            actionOnComplete="hideSetupIndicator = true; popupHelper.compareCheckSumAfterSetup()"
+            label="DisplayKey.get(&quot;Web.APDProduct.GenerateSourceCode.SetupProgress&quot;)"
+            percentage="popupHelper.getSetupProgress()"
+            visible="!hideSetupIndicator and popupHelper.isWaitingSetup()"/>
+          <ProgressInput
+            id="commitProgress"
+            actionOnComplete="popupHelper.afterFinalize()"
+            label="DisplayKey.get(&quot;Web.APDProduct.GenerateSourceCode.FinalizeProgress&quot;)"
+            percentage="popupHelper.getFinalizeProgress()"
+            visible="popupHelper.isWaitingFinalize()"/>
+        </InputColumn>
+      </DetailViewPanel>
+      <PanelRef
+        visible="popupHelper.canShowBranchSuffixPanel()">
+        <Verbatim
+          id="BranchNameDescription"
+          label="DisplayKey.get(&quot;Web.APDProduct.GenerateSourceCode.BranchNameDescription&quot;)"/>
+        <DetailViewPanel
+          editable="true">
+          <InputColumn>
+            <TextInput
+              editable="true"
+              focusOnStartEditing="true"
+              helpText="DisplayKey.get(&quot;Web.APDProduct.GenerateSourceCode.BranchSuffixLength&quot;, generationHelpers.first().BranchPrefix, generationHelpers.first().BranchSuffixLengthLimit)"
+              id="BranchSuffix"
+              label="DisplayKey.get(&quot;Web.APDProduct.GenerateSourceCode.BranchSuffix&quot;)"
+              maxChars="33"
+              required="true"
+              value="branchSuffix">
+              <PostOnChange
+                onChange="popupHelper.checkBranchNameAndShowErrorMessage(branchSuffix)"/>
+            </TextInput>
+            <TextInput
+              id="BranchName"
+              label="DisplayKey.get(&quot;Web.APDProduct.GenerateSourceCode.BranchName&quot;)"
+              required="true"
+              value="generationHelpers.first().BranchPrefix + branchSuffix"
+              visible="branchSuffix != null &amp;&amp; (branchSuffix.length() &gt;= 0)">
+            </TextInput>
+          </InputColumn>
+        </DetailViewPanel>
+      </PanelRef>
+      <AlertBar
+        id="ValidationIssueMessageId"
+        label="DisplayKey.get(&quot;Web.APDProduct.GenerateSourceCode.ValidationErrors.UnableToGenerate&quot;)"
+        visible="!popupHelper.AnyValidForGeneration"/>
+      <PanelRef
+        def="APDValidationErrorsPanelSet(ccGenerationHelper)"
+        id="ValidationErrors"
+        visible="ccGenerationHelper != null"/>
+      <PanelRef
+        def="APDValidationErrorsPanelSet(ccpiGenerationHelper)"
+        id="ValidationErrorsCCPI"
+        visible="ccpiGenerationHelper != null"/>
+    </Screen>
+    <Code><![CDATA[function pushCodeGeneratedPopup(topLocation : pcf.api.Location) {
+  if (topLocation.isInEditMode()) {
+    topLocation.commit()
+    topLocation.startEditing()
+  }
+  ccCodegenInfo.unlockIfOwned()
+  ccpiCodegenInfo.unlockIfOwned()
+  APDCodeGeneratedPopup.push(generationHelpers, branchSuffix)
+}
+]]></Code>
+  </Popup>
+</PCF>

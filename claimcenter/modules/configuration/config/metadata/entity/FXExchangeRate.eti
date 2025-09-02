@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  admin="true"
+  desc="FX rate for converting currencies"
+  entity="FXExchangeRate"
+  platform="true"
+  table="fxexchangerate"
+  type="editable">
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.InsertCallback"
+    impl="com.guidewire.pl.domain.exchangerates.FXExchangeRateImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.UpdateCallback"
+    impl="com.guidewire.pl.domain.exchangerates.FXExchangeRateImpl"/>
+  <foreignkey
+    columnName="FXExchangeRateSetID"
+    desc="The FXExchangeRateSet this FXExchangeRate belongs to."
+    fkentity="FXExchangeRateSet"
+    name="FXExchangeRateSet"
+    nullok="false"/>
+  <typekey
+    desc="The Currency this FXExchangeRate converts from."
+    name="BaseCurrency"
+    nullok="false"
+    typelist="Currency"/>
+  <typekey
+    desc="The Currency this FXExchangeRate converts to."
+    name="PriceCurrency"
+    nullok="false"
+    typelist="Currency"/>
+  <column
+    desc="The exchange rate at which a currency pair can be bought or sold."
+    name="Rate"
+    nullok="false"
+    type="decimal">
+    <columnParam
+      name="scale"
+      value="10"/>
+    <columnParam
+      name="precision"
+      value="15"/>
+  </column>
+  <column
+    desc="The point in time when the market indicated the rate was applicable."
+    name="MarketDateTime"
+    nullok="true"
+    type="datetime"/>
+  <index
+    desc="Ensure uniqueness for combination of base and price currencies for a FXExchangeRateSet."
+    name="fxexchangerateu1"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="FXExchangeRateSetID"/>
+    <indexcol
+      keyposition="2"
+      name="BaseCurrency"/>
+    <indexcol
+      keyposition="3"
+      name="PriceCurrency"/>
+  </index>
+</entity>

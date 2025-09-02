@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  entity="PortalSession_MPExt"
+  exportable="false"
+  ignoreForEvents="true"
+  loadable="false"
+  platform="false"
+  readOnly="false"
+  table="PorSessID_Ext"
+  type="keyable">
+  <fulldescription><![CDATA[
+    A table containing session tokens used to validate various sessions from the edge/portal frameworks
+  ]]></fulldescription>
+  <column
+    desc="Session UUID for a particular entity type + key + user"
+    name="sessionUUID"
+    nullok="false"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="50"/>
+  </column>
+  <column
+    desc="The username of the portal user this session is issued for."
+    name="username"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="50"/>
+  </column>
+  <column
+    desc="The type of entity this session is for"
+    name="sessionType"
+    nullok="false"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="50"/>
+  </column>
+  <column
+    desc="The identifying number of the entity this session is for, this will normally be PublicID but is not required to be"
+    name="foreignId"
+    nullok="false"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="50"/>
+  </column>
+  <column
+    desc="The date on which this session is issued."
+    name="issueDate"
+    nullok="false"
+    type="datetime" />
+
+  <index
+    desc="Index to allowing to find a session by its session ID."
+    name="PorSessID1">
+    <indexcol
+      keyposition="1"
+      name="sessionUUID"/>
+  </index>
+  <index
+    desc="Index to allowing to find a session by its session ID."
+    name="PorSessID2">
+    <indexcol
+      keyposition="1"
+      name="issueDate"/>
+  </index>
+</entity>

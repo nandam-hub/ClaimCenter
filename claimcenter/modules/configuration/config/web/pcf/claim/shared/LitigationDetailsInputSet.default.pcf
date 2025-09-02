@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <InputSet
+    id="LitigationDetailsInputSet"
+    mode="default"
+    visible="Matter.MatterType == TC_LAWSUIT || Matter.MatterType == TC_GENERAL">
+    <Require
+      name="Matter"
+      type="Matter"/>
+    <Label
+      label="DisplayKey.get(&quot;MatterGeneral.Matter.Litigation&quot;)"/>
+    <TypeKeyInput
+      editable="true"
+      id="CourtType"
+      label="DisplayKey.get(&quot;MatterGeneral.Matter.CourtType&quot;)"
+      required="false"
+      value="Matter.CourtType"
+      valueType="typekey.MatterCourtType">
+      <PostOnChange/>
+    </TypeKeyInput>
+    <TypeKeyInput
+      editable="true"
+      id="CourtDistrict"
+      label="DisplayKey.get(&quot;MatterGeneral.Matter.CourtDistrict&quot;)"
+      required="false"
+      value="Matter.CourtDistrict"
+      valueType="typekey.MatterCourtDistrict"/>
+    <TypeKeyInput
+      editable="true"
+      id="LegalSpecialty"
+      label="DisplayKey.get(&quot;MatterGeneral.Matter.LegalSpecialty&quot;)"
+      required="false"
+      value="Matter.LegalSpecialty"
+      valueType="typekey.LegalSpecialty"/>
+    <TypeKeyInput
+      editable="true"
+      id="TrialDetails_PrimaryCause"
+      label="DisplayKey.get(&quot;NVV.Matter.SubView.MatterGeneral.TrialDetails.PrimaryCause&quot;)"
+      required="false"
+      value="Matter.PrimaryCause"
+      valueType="typekey.PrimaryCauseType"/>
+    <InputDivider/>
+  </InputSet>
+</PCF>

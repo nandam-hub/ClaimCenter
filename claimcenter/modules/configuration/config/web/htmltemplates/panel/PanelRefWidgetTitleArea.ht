@@ -1,0 +1,11 @@
+<div id="${renderId}_title" class="gw-panelRefWidget--titleArea ${badgeOnlyOnCollapse}" data-gw-click="?{isCollapsible} gwPanelRef.toggleCollapsed">
+    <div :if="isCollapsible" class="gw-left-side">
+        <div class="gw-toggle-collapse-icon">
+            <div class="gw-icon"></div>
+        </div>
+        ${iconHtml}
+    </div>
+    <div class="gw-right-side">
+        ${:children}
+    </div>
+</div>

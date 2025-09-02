@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  entity="EpdrTypeKeyIdMapEntry"
+  loadable="false"
+  platform="true"
+  table="epdrtypekeyidmapentry"
+  type="editable"
+  extendable="false">
+  <column
+    desc="The ID of a TypeKey"
+    name="TypeKeyId"
+    nullok="false"
+    type="integer"/>
+  <column
+    name="Typelist"
+    nullok="false"
+    type="shorttext"/>
+  <column
+    name="Typecode"
+    nullok="false"
+    type="shorttext"/>
+  <index
+    desc="Ids for dynamic typecodes are unique globally, not per typelist"
+    name="UniqTypeKeyId"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="TypeKeyId"/>
+  </index>
+</entity>

@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="The objective pronoun type"
+  name="PronounObjectiveType"
+  platform="true">
+  <typecode
+    code="him"
+    desc="Him"
+    name="Him"
+    priority="1"/>
+  <typecode
+    code="her"
+    desc="Her"
+    name="Her"
+    priority="2"/>
+</typelist>

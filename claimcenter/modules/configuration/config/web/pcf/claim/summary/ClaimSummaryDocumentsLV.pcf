@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <ListViewPanel
+    id="ClaimSummaryDocumentsLV"
+    stretch="true"
+    visible="true">
+    <Require
+      name="Claim"
+      type="Claim"/>
+    <RowIterator
+      editable="false"
+      elementName="document"
+      value="Claim.Documents.where(\elt -&gt; elt.HighLevelSummary!=null)"
+      valueType="entity.Document[]"
+      visible="true">
+      <Row>
+        <TypeKeyCell
+          id="Type"
+          label="DisplayKey.get(&quot;LV.Claim.Documents.Document.Type&quot;)"
+          printWidth="2"
+          value="document.Type"
+          valueType="typekey.DocumentType"/>
+        <TextCell
+          action="DocumentSummaryPopup.push(document)"
+          enableSort="false"
+          grow="true"
+          id="Claimant"
+          label="DisplayKey.get(&quot;LV.Document.Documents.HighLevelSummary&quot;)"
+          printWidth="0.15"
+          value="document.HighLevelSummary"
+          valueType="String"
+          visible="true"
+          wrap="false"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

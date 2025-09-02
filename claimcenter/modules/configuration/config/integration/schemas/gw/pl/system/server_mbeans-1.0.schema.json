@@ -1,0 +1,294 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "definitions": {
+    "GWMBeanList": {
+      "type": "object",
+      "properties": {
+        "mBeans": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "GWMBean": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GWMBeanProperty"
+          }
+        },
+        "operations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GWMBeanOperation"
+          }
+        },
+        "notifications": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GWMBeanNotification"
+          }
+        }
+      }
+    },
+    "GWMBeanNotification": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "notificationTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "NameValuePair": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "value": {
+          "$ref": "#/definitions/Value"
+        }
+      },
+      "required" : [
+        "name", "value"
+      ]
+    },
+    "NameValuePairs": {
+      "type": "object",
+      "properties": {
+        "nameValuePairs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NameValuePair"
+          }
+        }
+      }
+    },
+    "GWMBeanProperty": {
+      "type": "object",
+      "properties": {
+        "nameValuePair": {
+          "$ref": "#/definitions/NameValuePair"
+        },
+        "description": {
+          "type": "string",
+          "readOnly": true
+        },
+        "isWritable": {
+          "type": "boolean",
+          "readOnly": true
+        },
+        "isReadable": {
+          "type": "boolean",
+          "readOnly": true
+        },
+        "type": {
+          "$ref": "#/definitions/ValueTypeEnum"
+        }
+      }
+    },
+    "Value": {
+      "type": "object",
+      "properties": {
+        "intValue": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "longValue": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "strValue": {
+          "type": "string"
+        },
+        "boolValue": {
+          "type": "boolean"
+        },
+        "doubleValue": {
+          "type": "number",
+          "format": "double"
+        },
+        "bigDecimalValue": {
+          "type": "string",
+          "format": "gw-bigdecimal"
+        },
+        "bigIntegerValue": {
+          "type": "string",
+          "format": "gw-biginteger"
+        },
+        "dateTimeValue": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "dateValue": {
+          "type": "string",
+          "format": "date"
+        },
+        "timeValue": {
+          "type": "string",
+          "format": "time"
+        },
+        "dateArrayValue": {
+          "type": "string",
+          "format": "date"
+        },
+        "timeArrayValue": {
+          "type": "string",
+          "format": "time"
+        },
+        "intArrayValue": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          }
+        },
+        "longArrayValue": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "doubleArrayValue": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "bigDecimalArrayValue": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "gw-bigdecimal"
+          }
+        },
+        "bigIntegerArrayValue": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "gw-biginteger"
+          }
+        },
+        "strArrayValue": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "boolArrayValue": {
+          "type": "array",
+          "items": {
+            "type": "boolean"
+          }
+        },
+        "dateTimeArrayValue": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      }
+    },
+    "ValueTypeEnum": {
+      "type": "object",
+      "properties": {
+        "valueType": {
+          "type": "string",
+          "enum": [
+            "java.lang.Integer",
+            "java.lang.Short",
+            "java.lang.Byte",
+            "java.lang.Integer[]",
+            "java.lang.Short[]",
+            "java.lang.Byte[]",
+            "java.lang.Boolean",
+            "java.lang.Boolean[]",
+            "java.lang.Float",
+            "java.lang.Double",
+            "java.lang.Float[]",
+            "java.lang.Double[]",
+            "java.lang.Long",
+            "java.lang.Long[]",
+            "java.math.BigDecimal",
+            "java.math.BigInteger",
+            "java.math.BigDecimal[]",
+            "java.math.BigInteger[]",
+            "java.lang.Date",
+            "java.lang.Date[]",
+            "java.util.Date",
+            "java.util.Date[]",
+            "java.sql.Time",
+            "java.sql.Time[]",
+            "java.sql.TimeStamp",
+            "java.sql.TimeStamp[]",
+            "java.lang.String",
+            "java.lang.String[]",
+            "java.lang.Void"
+          ]
+        }
+      }
+    },
+    "GWMBeanOperation": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "readOnly": true
+        },
+        "returnType": {
+          "type": "string",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "readOnly": true
+        },
+        "parameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GWMBeanOperationParameter"
+          }
+        }
+      }
+    },
+    "GWMBeanOperationParameter": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "$ref": "#/definitions/ValueTypeEnum"
+        }
+      }
+    }
+  }
+}

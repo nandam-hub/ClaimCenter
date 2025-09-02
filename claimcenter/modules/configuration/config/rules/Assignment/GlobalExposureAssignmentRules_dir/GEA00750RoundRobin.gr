@@ -1,0 +1,62 @@
+package rules.Assignment.GlobalExposureAssignmentRules_dir
+uses gw.api.locale.DisplayKey
+uses gw.api.system.CCLoggerCategory
+uses gw.assignment.AssignExposureSameCoverageImpl
+@gw.rules.RuleName("GEA00750 - Round Robin")
+internal class GEA00750RoundRobin {
+  static function doCondition(exposure : entity.Exposure) : boolean {
+/*start00rule*/
+    return AssignExposureSameCoverageImpl.EnableRoundRobinForExposures_Ext
+/*end00rule*/
+}
+
+  static function doAction(exposure : entity.Exposure, actions : gw.rules.Action) {
+/*start00rule*/
+    var logger = CCLoggerCategory.ASSIGNMENT
+    logger.info("##### GEA00750: Rule triggered for Exposure ID: " + exposure.ID)
+
+    var originalGroup = exposure.AssignedGroup
+
+    // Assign group from claim only if not already set
+    if (originalGroup == null and exposure.Claim.AssignedGroup != null) {
+      exposure.assignGroup(exposure.Claim.AssignedGroup)
+      logger.info("##### GEA00750: AssignedGroup set from Claim: " + exposure.Claim.AssignedGroup)
+
+      // Walk up to root group
+      var rootGroup: Group = exposure.AssignedGroup
+      while (rootGroup.Parent != null) {
+        rootGroup = rootGroup.Parent
+      }
+
+      logger.info("##### GEA00750: Using RootGroup (Claim) for RR — " + rootGroup)
+
+      var success = exposure.assignUserByRoundRobin(true, rootGroup)
+
+      if (success) {
+        logger.info("##### GEA00750: Successfully assigned user — " + exposure.AssignedUser)
+        actions.exit()
+      } else {
+        logger.warn("##### GEA00750: RR failed from root group — proceeding to next rule")
+      }
+
+    } else if (originalGroup != null) {
+      // AssignedGroup already exists — use directly without walking up
+      logger.info("##### GEA00750: Using Existing AssignedGroup without walking to parent — " + originalGroup)
+
+      var success = exposure.assignUserByRoundRobin(true, originalGroup)
+
+      if (success) {
+        logger.info("##### GEA00750: Successfully assigned user — " + exposure.AssignedUser)
+        actions.exit()
+      } else {
+        logger.warn("##### GEA00750: RR failed from existing group — proceeding to next rule")
+      }
+
+    } else {
+      // No assigned group at all
+      logger.info("##### GEA00750: AssignedGroup is null — exiting rule.")
+      actions.exit()
+    }
+/*end00rule*/
+  }
+}

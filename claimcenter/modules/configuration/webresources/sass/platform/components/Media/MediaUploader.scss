@@ -1,0 +1,310 @@
+$gw-MediaUploader--filename-cell-w: gw-emFixed(13);
+$gw-MediaUploader--preview-cell-w: gw-emFixed(12);
+$gw-MediaUploader--file-size-cell-w: gw-emFixed(5);
+$gw-MediaUploader--mod-date-cell-w: gw-emFixed(7);
+$gw-MediaUploader--exif-cell-w: gw-emFixed(25);
+$gw-MediaUploader--information-cell-w: gw-emFixed(25);
+
+$gw-MediaUploader--row-max-h: gw-emFixed(9);
+
+$gw-MediaUploader--ui-section-h: 3em;
+
+.gw-MediaUploaderWidget {
+  @include gw-panelOuterSpacing();
+  @include gw-panelInnerSpacing();
+  @include gw-widgetStyles();
+
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  position: relative;
+
+  &[data-gw-uploading] {
+    @include gw-grayOut();
+    &:after {
+      content: " ";
+      display: inline-block;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      @include gw-loader-dots();
+    }
+  }
+
+  @mixin gw-media-loading() {
+
+    .gw-load-spinner {
+      display: none;
+    }
+
+    .gw-loader {
+      display: none;
+    }
+
+    &.gw-loading {
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      & > div, & > img {
+        display: none;
+      }
+      & > .gw-loader {
+        display: inline-block;
+        @include gw-loader-dots();
+      }
+    }
+  }
+
+  .gw-MediaUploader--ui {
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    background-color: $gw-app--panels--bg;
+    flex-shrink: 0;
+
+    .gw-MediaUploader--ui-left {
+      flex-grow: 1;
+      flex-shrink: 1;
+      display: flex;
+      align-items: center;
+      min-height: $gw-MediaUploader--ui-section-h;
+      padding: $gw-app--SPACING-rem-S;
+
+      .gw-title {
+        text-align: left;
+        font-size: gw-emFixed(1.2);
+      }
+    }
+
+    .gw-MediaUploader--ui-right {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      min-height: $gw-MediaUploader--ui-section-h;
+      padding: $gw-app--SPACING-rem-S;
+
+      & > div, & > input {
+        margin-left: $gw-app--SPACING-rem-M;
+      }
+
+      .gw-divider {
+        display: inline-block;
+        vertical-align: top;
+        width: $gw-app--border-width-px;
+        align-self: stretch;
+        background-color: $gw-app--border--col;
+      }
+
+      .gw-MediaUploader--upload {
+        @include gw-button--normal();
+
+        .gw-icon {
+          margin-right: $gw-app--SPACING-rem-S;
+          @include gw-icon("cloud-upload-alt-solid");
+        }
+      }
+
+      .gw-MediaUploader--paste {
+        @include gw-button--normal();
+
+        .gw-icon {
+          margin-right: $gw-app--SPACING-rem-S;
+          @include gw-icon("paste-solid");
+        }
+      }
+
+      .gw-MediaUploader--import {
+        @include gw-button--normal();
+
+        .gw-MediaUploader--choose-label {
+          &:hover {
+            cursor: pointer;
+          }
+          span {
+            display: inline;
+            vertical-align: baseline;
+          }
+          .gw-icon {
+            margin-right: $gw-app--SPACING-rem-S;
+            @include gw-icon("folder-open-solid");
+          }
+        }
+
+        .gw-MediaUploader--choose {
+          position: fixed;
+          top: -100vh;
+          opacity: 0;
+          width: 0;
+          height: 0;
+          line-height: 0;
+          font-size: 0;
+          border: 0;
+          border-radius: 0;
+        }
+      }
+    }
+
+    .gw-MediaUploader--files-header-ui {
+      border-top: gw-border();
+      flex-basis: 100%;
+      background-color: $gw-app--panels--bg;
+    }
+  }
+
+  .gw-MediaUploader--files {
+    display: block;
+    overflow: auto;
+    flex-grow: 1;
+    flex-shrink: 1;
+    padding-bottom: $gw-app--SPACING-rem-S;
+  }
+
+  .gw-MediaUploader--file-row, .gw-MediaUploader--files-header-ui {
+    display: flex;
+    align-items: stretch;
+    border-bottom: gw-border();
+
+    & > div:not(:first-child) {
+      border-left: gw-border();
+    }
+
+    & > div:last-child {
+      border-right: gw-border();
+    }
+
+    div[class^="gw-header"], .gw-filename, .gw-file-size, .gw-mod-date, .gw-delete, .gw-info-input-wrapper {
+      padding: $gw-app--SPACING-rem-S;
+    }
+
+    .gw-header-delete, .gw-delete {
+      text-align: center;
+      align-self: center;
+      @include gw-button--secondary($is-square: true, $pad-v: $gw-app--SPACING-rem-S, $pad-h: $gw-app--SPACING-rem-S);
+      margin: 1px;
+
+      .gw-icon {
+        margin: 0;
+        padding: 0;
+        display: inline;
+        vertical-align: middle;
+        line-height: 1em;
+        @include gw-icon("trash", $size: .9em, $height: 1em, $width: 1em, $line-height: 1em, $display: inline-block, $v-align: middle);
+      }
+    }
+
+    .gw-header-filename, .gw-filename {
+      width: $gw-MediaUploader--filename-cell-w;
+    }
+
+    .gw-header-preview, .gw-preview {
+      display: inline-block;
+      width: $gw-MediaUploader--preview-cell-w;
+      overflow: hidden;
+
+      @include gw-media-loading();
+
+      img {
+        vertical-align: middle;
+        max-width: 100%;
+        max-height: 100%;
+      }
+    }
+
+    .gw-preview {
+      object-fit: contain;
+      img {
+        object-fit: contain;
+      }
+    }
+
+    .gw-header-file-size, .gw-file-size {
+      width: $gw-MediaUploader--file-size-cell-w;
+    }
+
+    .gw-header-mod-date, .gw-mod-date {
+      width: $gw-MediaUploader--mod-date-cell-w;
+    }
+
+    .gw-header-exif-data, .gw-exif-data {
+      width: $gw-MediaUploader--exif-cell-w;
+      overflow: auto;
+
+      @include gw-media-loading();
+
+      // EXIF DATA TABLES
+      .gw-exif-table {
+        font-size: $gw-app--font-size--smaller-px;
+        max-height: 100%;
+
+        .gw-exif-row {
+          padding: $gw-app--SPACING-rem-XS;
+          border-bottom: $gw-app--border-width-px dotted $gw-app--panels--bg;
+          .gw-exif-cell-key {
+            vertical-align: top;
+            display: inline-block;
+            width: 50%;
+            @include gw-textEllipse();
+          }
+
+          .gw-exif-cell-val {
+            vertical-align: top;
+            display: inline-block;
+            width: 50%;
+            @include gw-wrapOnWhiteSpace();
+            max-height: $gw-MediaUploader--row-max-h * .8;
+            overflow-y: auto;
+          }
+        }
+      }
+    }
+
+    .gw-header-info-label, .gw-info-input-wrapper {
+      width: $gw-MediaUploader--information-cell-w;
+      textarea {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+
+  .gw-MediaUploader--file-row {
+    height: $gw-MediaUploader--row-max-h;
+    @if($gw-app--allow-css-animations) {
+      transition: height .2s linear;
+    }
+
+    &.gw-deleted {
+      @include gw-grayOut();
+      height: $gw-MediaUploader--row-max-h * .5;
+      overflow: hidden;
+    }
+
+    &.gw-invalid-file {
+      .gw-delete {
+        .gw-icon {
+          color: $gw-app--palette--error;
+          @include gw-icon("exclamation-circle");
+          vertical-align: middle;
+        }
+      }
+    }
+
+    .gw-mod-date {
+      //
+    }
+  }
+
+  .gw-no-files-selected {
+    padding: $gw-app--SPACING-rem-S;
+  }
+
+  .gw-MediaUploader--files--inner {
+
+  }
+
+}

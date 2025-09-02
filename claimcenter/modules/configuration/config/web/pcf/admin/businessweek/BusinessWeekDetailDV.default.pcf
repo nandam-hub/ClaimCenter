@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="BusinessWeekDetailDV"
+    mode="default">
+    <Require
+      name="BusinessWeek"
+      type="BusinessWeek"/>
+    <InputColumn>
+      <InputSetRef
+        def="ZonesInputSet(BusinessWeek, BusinessWeek.IntrinsicType.RelativeName)"/>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

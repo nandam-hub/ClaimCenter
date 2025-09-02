@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<import xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="http://www.guidewire.com/cc/import/cc_import.xsd">
+
+  <!-- Do not change the public-id of any of the entity declarations. Except where indicated everything else
+   is configurable. Some optional properties are shown in comments as examples. -->
+
+  <User public-id="claims_autopilot:1">
+    <contact public-id="claims_autopilot:1"/>
+    <credential public-id="claims_autopilot:1"/>
+    <usersettings public-id="claims_autopilot:1"/>
+    <authorityprofile public-id="claims_autopilot:1"/>
+    <!-- "jobTitle" will be set to the DisplayKey "Feature.ClaimsAutopilot.User.JobTitle" -->
+  </User>
+
+  <Credential public-id="claims_autopilot:1">
+    <!-- "username" is fixed internally. Do not try to set it here. -->
+    <password>PPNxQmp1UdWbZrn2G1Tj8+w01rI=</password>
+  </Credential>
+  
+  <UserContact public-id="claims_autopilot:1">
+    <firstname>Claims</firstname>
+    <lastname>Autopilot</lastname>
+    <!--    <emailaddress1>claims_autopilot@acmeins.com</emailaddress1>-->
+    <!--    <employeenumber>1001000</employeenumber>-->
+    <!--    <primaryphone>work</primaryphone>-->
+    <!--    <workphone>xxx-xxx-xxxx</workphone>-->
+    <!--    <primaryAddress public-id="claims_autopilot:1"/>-->
+  </UserContact>
+  
+  <!--  <Address public-id="claims_autopilot:1">-->
+  <!--    <addressline1>123 Main Street</addressline1>-->
+  <!--    <city>Anytown</city>-->
+  <!--    <state>CA</state>-->
+  <!--    <country>us</country>-->
+  <!--    <postalcode>12345</postalcode>-->
+  <!--    <addresstype>business</addresstype>-->
+  <!--  </Address>-->
+
+  <UserSettings public-id="claims_autopilot:1">
+    <startuppage>ClaimSearch</startuppage>
+  </UserSettings>
+
+  <AuthorityLimitProfile public-id="claims_autopilot:1">
+    <!-- "name" will be set to the DisplayKey "Feature.ClaimsAutopilot.AuthorityLimitProfile.Name" -->
+    <!-- "description" will be set to the DisplayKey "Feature.ClaimsAutopilot.AuthorityLimitProfile.Description" -->
+     <currency>usd</currency>
+  </AuthorityLimitProfile>
+  <AuthorityLimit public-id="claims_autopilot:1">
+    <profile public-id="claims_autopilot:1"/>
+    <limittype>ctr</limittype>
+    <limitamount>15000</limitamount>
+  </AuthorityLimit>
+  <AuthorityLimit public-id="claims_autopilot:2">
+    <profile public-id="claims_autopilot:1"/>
+    <limittype>cptd</limittype>
+    <limitamount>15000</limitamount>
+  </AuthorityLimit>
+
+</import>

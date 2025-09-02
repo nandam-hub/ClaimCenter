@@ -1,0 +1,6 @@
+name: "Catastrophe Admin"
+endpoints: []
+accessibleFields:
+  "*":
+    edit: "*"
+    view: "*"

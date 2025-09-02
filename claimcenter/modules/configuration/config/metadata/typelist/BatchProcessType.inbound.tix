@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<internaltypelistextension
+  xmlns="http://guidewire.com/typelists"
+  name="BatchProcessType"
+  desc="Types of batch processes">
+  <typecode
+    code="InboundChunkWQ"
+    desc="Custom work queue to process inbound chunks."
+    name="Inbound Chunk Work Queue">
+    <category
+      code="Schedulable"
+      typelist="BatchProcessTypeUsage"/>
+    <category
+      code="UIRunnable"
+      typelist="BatchProcessTypeUsage"/>
+  </typecode>
+  <typecode
+    code="InboundFilePurgeWQ"
+    desc="Custom work queue to purge inbound file records."
+    name="Inbound File Purge Work Queue">
+    <category
+      code="Schedulable"
+      typelist="BatchProcessTypeUsage"/>
+    <category
+      code="UIRunnable"
+      typelist="BatchProcessTypeUsage"/>
+  </typecode>
+  <typecode
+    code="InboundFileBatchProcess"
+    desc="Inbound File Batch Process"
+    name="InboundFileBatchProcess">
+    <category
+      code="UIRunnable"
+      typelist="BatchProcessTypeUsage"/>
+    <category
+      code="Schedulable"
+      typelist="BatchProcessTypeUsage"/>
+  </typecode>
+</internaltypelistextension>

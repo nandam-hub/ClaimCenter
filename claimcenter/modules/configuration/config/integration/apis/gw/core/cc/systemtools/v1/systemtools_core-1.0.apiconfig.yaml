@@ -1,0 +1,60 @@
+resources:
+  ApiRole:
+    resource: gw.rest.core.cc.systemtools.v1.apirole.ApiRoleCoreResource
+  ApiRoles:
+    resource: gw.rest.core.cc.systemtools.v1.apirole.ApiRolesCoreResource
+    defaultSort:
+    - id
+  BatchProcess:
+    resource: gw.rest.core.cc.systemtools.v1.batch.BatchProcessCoreResource
+  BatchProcesses:
+    resource: gw.rest.core.cc.systemtools.v1.batch.BatchProcessesCoreResource
+    defaultSort:
+    - type
+  DatabaseConsistencyCheck:
+    resource: gw.rest.core.cc.systemtools.v1.dbcc.DatabaseConsistencyCheckCoreResource
+  DatabaseConsistencyCheckReport:
+    resource: gw.rest.core.cc.systemtools.v1.dbcc.DatabaseConsistencyCheckReportCoreResource
+  DatabaseConsistencyChecks:
+    resource: gw.rest.core.cc.systemtools.v1.dbcc.DatabaseConsistencyChecksCoreResource
+    defaultSort:
+    - "-startTime"
+  DesignApiExtensionBundle:
+    resource: gw.rest.core.pl.systemtools.v1.apiextensionbundle.DesignApiExtensionBundlePlatformResource
+  DesignApiExtensionBundles:
+    resource: gw.rest.core.pl.systemtools.v1.apiextensionbundle.DesignApiExtensionBundlesPlatformResource
+    defaultSort:
+    - code
+  InstalledApiExtensionBundle:
+    resource: gw.rest.core.pl.systemtools.v1.apiextensionbundle.InstalledApiExtensionBundlePlatformResource
+  InstalledApiExtensionBundles:
+    resource: gw.rest.core.pl.systemtools.v1.apiextensionbundle.InstalledApiExtensionBundlesPlatformResource
+    defaultSort:
+    - code
+  ProcessHistories:
+    resource: gw.rest.core.cc.systemtools.v1.batch.processhistory.ProcessHistoriesCoreResource
+  ProcessHistory:
+    resource: gw.rest.core.cc.systemtools.v1.batch.processhistory.ProcessHistoryCoreResource
+  SystemToolsOpenApiSchema:
+    resource: gw.api.modules.rest.framework.v1.openapi.v3.OpenApiJsonPlatformResource
+basePaths:
+  systemtools: /systemtools/v1
+mappingFiles:
+- gw.core.cc.systemtools.v1.systemtools_core-1.0
+updaterFiles:
+- gw.core.cc.systemtools.v1.systemtools_core-1.0
+resourceAccess:
+  contactAuthorizationIds:
+    yaml: gw.core.cc.systemtools.v1.contactAuthorizationIds_core-1.0
+  gwabuid:
+    yaml: gw.core.cc.systemtools.v1.gwabuid_core-1.0
+  internal:
+    yaml: gw.core.cc.systemtools.v1.internal_core-1.0
+  policyNumbers:
+    yaml: gw.core.cc.systemtools.v1.policyNumbers_core-1.0
+  producerCodes:
+    yaml: gw.core.cc.systemtools.v1.producerCodes_core-1.0
+  service:
+    yaml: gw.core.cc.systemtools.v1.serviceUser_core-1.0
+  unauthenticated:
+    yaml: gw.core.cc.systemtools.v1.unauthenticatedUser_core-1.0

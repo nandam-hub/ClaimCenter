@@ -1,0 +1,31 @@
+package rules.Validation.TransactionSetValidationRules_dir.TXV20000UnallocatedDeductibleRules_dir
+uses com.google.common.collect.Sets
+
+@gw.rules.RuleName("TXV20200 - Warn if deductible is unallocated for void or stop checks")
+internal class TXV20200Warnifdeductibleisunallocatedforvoidorstopchecks {
+  static function doCondition(transactionSet   :   entity.TransactionSet) : boolean {
+/*start00rule*/
+return true
+/*end00rule*/
+}
+
+  static function doAction(transactionSet   :   entity.TransactionSet, actions : gw.rules.Action) {
+/*start00rule*/
+    if (transactionSet typeis CheckSet) {
+      var statuses = Sets.newHashSet({TransactionStatus.TC_PENDINGVOID,
+          TransactionStatus.TC_PENDINGSTOP})
+
+      transactionSet.Checks
+          .where(\check -> statuses.contains(check.Status))
+          .flatMap(\check -> check.Payments)
+          .where(\payment -> !payment.OffsetPayment)
+          .where(\payment -> payment.DeductibleAvailable)
+          .each(\payment ->
+              transactionSet.reject(null, null,
+                  ValidationLevel.TC_NEWLOSS,
+                  payment.DeductibleWarningMessage)
+          )
+    }
+/*end00rule*/
+  }
+}

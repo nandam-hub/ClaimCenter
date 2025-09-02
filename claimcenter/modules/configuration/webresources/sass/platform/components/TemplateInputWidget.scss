@@ -1,0 +1,18 @@
+.gw-TemplateInputWidget {
+  & > .gw-value {
+    & > .gw-TemplateValueWidget {
+
+      & > .gw-ValueWidget {
+        min-width: 0;
+      }
+
+      & > .gw-ExpressionRangeValueWidget {
+      }
+    }
+  }
+
+  .gw-TemplateValueWidget {
+    select {
+    }
+  }
+}

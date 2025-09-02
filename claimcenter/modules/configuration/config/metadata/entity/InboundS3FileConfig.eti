@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<subtype
+  platform="true"
+  xmlns="http://guidewire.com/datamodel"
+  entity="InboundS3FileConfig"
+  supertype="InboundFileConfig"
+  final="true">
+  <column
+    desc="Amazon S3 user profile for credentials"
+    name="ProfileName"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="128"/>
+  </column>
+  <column
+    desc="Amazon S3 bucket ARN address for input"
+    name="InputS3Bucket"
+    nullok="false"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="128"/>
+  </column>
+  <column
+    desc="The full path name inside Amazon S3 bucket."
+    name="InputS3Prefix"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="512"/>
+  </column>
+  <column
+    desc="Amazon S3 bucket ARN address for archive."
+    name="ArchiveS3Bucket"
+    nullok="false"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="128"/>
+  </column>
+  <column
+    desc="The full path name inside Amazon S3 bucket."
+    name="ArchiveS3Prefix"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="512"/>
+  </column>
+  <column
+    desc="This setting sets the amount of time for a single HTTP attempt, after which the API call can be retried."
+    name="ApiCallTimeoutSec"
+    nullok="true"
+    type="integer">
+  </column>
+  <column
+    desc="The value for this property configures the amount of time for the entire execution, including all retry attempts."
+    name="ApiCallAttemptTimeoutSec"
+    nullok="true"
+    type="integer">
+  </column>
+  <implementsInterface
+    iface="com.guidewire.inboundfile.config.InboundFileConfigMethods"
+    impl="com.guidewire.inboundfile.config.InboundFileS3ConfigImpl"/>
+</subtype>

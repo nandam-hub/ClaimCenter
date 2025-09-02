@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <ModalCell
+    id="ExpressionFragCell"
+    mode="empty">
+    <Require
+      name="fragHolder"
+      type="gw.bizrules.pcf.ExpressionFragmentHolder"/>
+    <Require
+      name="lineHolder"
+      type="gw.bizrules.pcf.RuleConditionLineHolder"/>
+    <FormatCell
+      id="EmptyFormat">
+      <TextInput
+        id="EmptyCell"
+        value="org.apache.commons.lang3.StringUtils.EMPTY"
+        visible="false"/>
+    </FormatCell>
+  </ModalCell>
+</PCF>

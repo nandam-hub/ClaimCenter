@@ -1,0 +1,85 @@
+// Gray
+$gw-app--palette--black: #000000 !default;
+$gw-app--palette--offblack: #1F1F1F !default;
+$gw-app--palette--gray-5: #545C67 !default;
+$gw-app--palette--gray-7: #7b7b7b !default;
+$gw-app--palette--gray-8: #8c8c8c !default;
+$gw-app--palette--gray-9: #969696 !default;
+$gw-app--palette--gray-A: #A1A8B4 !default;
+$gw-app--palette--gray-B: #B7BABC !default;
+$gw-app--palette--gray-C: #C8C8C8 !default;
+$gw-app--palette--gray-D: #D9DDE1 !default;
+$gw-app--palette--gray-E: #E6E6E6 !default;
+$gw-app--palette--offwhite: #f8f9fa !default;
+$gw-app--palette--white: #ffffff !default;
+
+$gw-app--palette--white-for-dark-backgrounds: #ffffff !default;
+$gw-app--palette--black-for-light-backgrounds: #1f1f1f !default;
+
+// Blue
+$gw-app--palette--blue-hint: #ECF8FD !default;
+$gw-app--palette--blue-highlight: #d8f0f9 !default;
+$gw-app--palette--blue-highlight-alt: #b6d6f5 !default;
+$gw-app--palette--blue-active: #88CEE8 !default;
+$gw-app--palette--blue-light: #5EB5DA !default;
+$gw-app--palette--blue-focus: #00baff !default;
+$gw-app--palette--blue: #6C87B6 !default;
+$gw-app--palette--blue-gray: #7086A2 !default;
+$gw-app--palette--blue-dark: #5881b6 !default;
+$gw-app--palette--blue-dark-accent: #3a4859 !default;
+
+// General Base Colors
+$gw-app--palette--yellow: #FFF8D7 !default;
+$gw-app--palette--yellow-dark: #dfda63 !default;
+
+$gw-app--palette--green-light: #cce185 !default;
+$gw-app--palette--green: #84b64d !default;
+$gw-app--palette--green-dark: #4D8C6C !default;
+
+$gw-app--palette--red-very-light: #f2776e !default;
+$gw-app--palette--red-light: #DF675A !default;
+$gw-app--palette--red: #db5345 !default;
+$gw-app--palette--red-dark: #c81414 !default;
+
+$gw-app--palette--orange-light: #FEF6E9 !default;
+$gw-app--palette--orange-medium: #f5b266 !default;
+$gw-app--palette--orange: #EB9C4A !default;
+$gw-app--palette--orange-dark: #D2845C !default;
+$gw-app--palette--orange--vibrant: #FF8c14 !default;
+
+$gw-app--palette--beige: #ffecd5 !default;
+$gw-app--palette--beige-dark: #f0ddc8 !default;
+
+$gw-app--palette--purple: #907DAB !default;
+$gw-app--palette--pink: #D089B9 !default;
+
+$gw-app--palette--platinum: #778291 !default;
+$gw-app--palette--gold: #f2a629 !default;
+$gw-app--palette--silver: #afb6be !default;
+$gw-app--palette--bronze: #8C7853 !default;
+
+// Specific Callout for Left Nav Coloring
+$gw-app--palette--left-nav--bg: #3a4859 !default;
+$gw-app--palette--left-nav--col: $gw-app--palette--gray-E !default;
+$gw-app--palette--left-nav--bg-highlight: #303b49 !default;
+$gw-app--palette--left-nav--bg-lighter: #445468 !default;
+$gw-app--palette--left-nav--border-col: #586D87 !default;
+
+$gw-app--palette--left-nav--wizard-bg: #4e6178 !default;
+
+// Other
+$gw-app--palette--shadow-col: rgba(0, 0, 0, .24) !default;
+$gw-app--palette--shadow-light-col: rgba(0, 0, 0, 0.16) !default;
+
+// Calcs
+// Using luminance ratios to define accessibility is the industry standard: meaning max(colA.lum, colB.lum) / min(colA.lum, colB.lum)
+// However this can result in black text being procedurally selected for a number of use cases where artists and designers would prefer white.
+// Setting this value to true will cause prodecural color selection to use relative luminance when instead of contrast when selecting black or white
+// ie: max(colA.lum, colB.lum) - min(colA.lum, colB.lum)
+// A good example of this is that medium orange will select black as its foreground text when using contrast, but white when using relative
+$gw-app--use-relative-luminance-when-calculating-overlay-text-and-shadow-colors: true !default;
+// Frequently, artistry prefers a contrast ratio that favors saturated colors being paired with white instead of black
+// Even though black will provide a higher luminance contrast ratio to the background.
+// Lowering this value will cause the calculation text selection for background colors to trend towards white.
+// Such that 0 will choose always white, and 1 means calculations relating to contrast luminosity are exact
+$gw-contrast-white-vs-black-fuzzifier-ratio: .74 !default;

@@ -1,0 +1,55 @@
+.gw-DetailViewWidget.gw-isLayoutTable {
+  @include gw-panelInnerSpacing();
+  @include gw-panelOuterSpacing();
+  @include gw-widgetStyles();
+
+  vertical-align: top;
+  position: relative;
+  flex-grow: 0;
+  flex-shrink: 1;
+  @include gw-wrapNever();
+  
+  &:not(.gw-isInline) {
+    display: block;
+  }
+
+  &.gw-isInline {
+    display: inline-block;
+  }
+
+  .gw-tableLayout--table--row {
+
+    .gw-tableLayout--table--cell {
+      min-width: gw-emFixed(3);
+      // Internal padding
+      padding-top: $gw-app--tables--cell--pad-v-rem;
+      padding-left: $gw-app--tables--cell--pad-h-rem;
+      padding-right: $gw-app--tables--cell--pad-h-rem;
+      padding-bottom: $gw-app--tables--cell--pad-v-rem;
+    }
+
+    .gw-styleTag--DetailViewWidget, .gw-styleTag--TableLayoutDetailViewWidget {
+      .gw-emptyLabel {
+        display: none;
+      }
+    }
+  }
+
+  &:not(.gw-childrenHaveBorders) {
+    .gw-tableLayout--table {
+      border-collapse: separate;
+      border-spacing: 0;
+    }
+  }
+
+  &.gw-childrenHaveBorders {
+    .gw-tableLayout--table {
+      border-collapse: collapse;
+    }
+    .gw-tableLayout--table--row {
+      .gw-tableLayout--table--cell {
+        border: gw-border($gw-app--DetailView--table--border-color);
+      }
+    }
+  }
+}

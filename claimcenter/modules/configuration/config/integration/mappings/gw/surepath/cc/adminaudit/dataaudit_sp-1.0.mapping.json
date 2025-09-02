@@ -1,0 +1,43 @@
+{
+    "schemaName": "gw.surepath.cc.adminaudit.dataaudit_sp-1.0",
+    
+    "import" : {
+		"dataauditfieldrecord_sp" : "gw.surepath.cc.adminaudit.dataauditfieldrecord_sp-1.0"
+    },
+	"mappers": {
+        "DataAudit_SP" : {
+            "schemaDefinition" : "DataAudit_SP",
+            "root" : "entity.DataAudit_SP",
+            "properties" : {
+                "OccurrenceDate" : {
+                    "path" : "DataAudit_SP.OccurrenceDate"
+                },
+				"PerformingUser" : {
+                    "path" : "DataAudit_SP.PerformingUser.Credential.UserName"
+                },
+                "AuditableBeanEntityType" : {
+                  "path" : "DataAudit_SP.AuditableBeanEntityType"
+                },
+                "AuditBeanParentEntityType" : {
+                  "path" : "DataAudit_SP.AuditBeanParentEntityType"
+                },
+				"AuditableBeanDisplayName" : {
+                    "path" : "DataAudit_SP.AuditableBeanDisplayName"
+                },
+				"AuditableBeanStatus" : {
+                    "path" : "DataAudit_SP.AuditableBeanStatus.DisplayName"
+                },
+				"UpdateTime" : {
+                    "path" : "DataAudit_SP.UpdateTime"
+                },
+				"FieldRecords" : {
+                    "path" : "DataAudit_SP.FieldRecords",
+					"mapper" : "dataauditfieldrecord_sp#/mappers/DataAuditFieldRecord_SP"
+                },
+				"AuditableEntityPublicID" : {
+                    "path" : "DataAudit_SP.AuditableEntityPublicID"
+                }
+            }
+        }
+    }
+}

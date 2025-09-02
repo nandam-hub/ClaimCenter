@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<subtype
+  priority="6"
+  xmlns="http://guidewire.com/datamodel"
+  desc="Incident for a claim on policy lines designed in Advanced Product Designer."
+  entity="APDIncident"
+  final="true"
+  supertype="Incident">
+</subtype>

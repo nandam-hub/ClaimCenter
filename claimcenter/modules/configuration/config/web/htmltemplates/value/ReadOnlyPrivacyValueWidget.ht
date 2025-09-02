@@ -1,0 +1,6 @@
+<div :if="readableLabel" aria-label="${readableLabel}" class="gw-value-readonly-wrapper" style="${height}">
+    <div aria-hidden="true">${currentValue}</div>
+</div>
+<div :if="!readableLabel" class="gw-value-readonly-wrapper" style="${height}">
+  ${currentValue}
+</div>

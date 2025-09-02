@@ -1,0 +1,75 @@
+$gw-app--images--drop-shadow: 4px 4px 5px 0px rgba(0, 0, 0, 0.75) !default;
+
+@mixin gw-imageHover {
+  cursor: pointer;
+  filter: brightness(130%);
+}
+
+@mixin gw-imageWhiteMatte() {
+  padding: $gw-app--SPACING-rem-L;
+  background-color: #FFF;
+}
+
+@mixin gw-imageBlackMatte() {
+  padding: $gw-app--SPACING-rem-L;
+  background-color: #000;
+}
+
+@mixin gw-imageRounded() {
+  @include gw-borderRadius();
+  .gw-image, img {
+    @include gw-borderRadius();
+  }
+}
+
+@mixin gw-imageRoundedAndRaised() {
+  @include gw-imageRounded();
+  box-shadow: $gw-app--images--drop-shadow;
+}
+
+@mixin gw-imageStyle($child-selector: null) {
+  &.gw-image-style--WhiteMatte {
+    @if ($child-selector == null) {
+      @include gw-imageWhiteMatte();
+    } @else {
+      #{$child-selector} {
+        @include gw-imageWhiteMatte();
+      }
+    }
+  }
+
+  &.gw-image-style--BlackMatte {
+    @if ($child-selector == null) {
+      @include gw-imageBlackMatte();
+    } @else {
+      #{$child-selector} {
+        @include gw-imageBlackMatte();
+      }
+    }
+  }
+
+  &.gw-image-style--Rounded {
+    @if ($child-selector == null) {
+      @include gw-imageRounded();
+    } @else {
+      #{$child-selector} {
+        @include gw-imageRounded();
+      }
+    }
+
+  }
+
+  &.gw-image-style--RoundedAndRaised {
+    @if ($child-selector == null) {
+      @include gw-imageRoundedAndRaised();
+    } @else {
+      #{$child-selector} {
+        @include gw-imageRoundedAndRaised();
+      }
+    }
+  }
+
+  &.gw-image-style--Custom {
+    //None
+  }
+}

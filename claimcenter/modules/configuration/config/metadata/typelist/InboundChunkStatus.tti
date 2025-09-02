@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  name="InboundChunkStatus"
+  desc="The status of Inbound Chunk">
+  <typecode
+    code="loading"
+    desc="Records being loaded prior to completion of the file."
+    name="Loading"/>
+  <typecode
+    code="pending"
+    desc="Records in chunk have not yet been processed."
+    name="Pending"/>
+  <typecode
+    code="processed"
+    desc="Records in chunk were processed successfully."
+    name="Processed"/>
+  <typecode
+    code="processed_with_errors"
+    desc="Records in chunk were processed with errors."
+    name="ProcessedWithErrors"/>
+</typelist>

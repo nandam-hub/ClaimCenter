@@ -1,0 +1,6 @@
+GEA00250Balanceworkloadwithingroup
+GEA00500RoundRobinSimilar
+GEA00750RoundRobin
+GEA01000AutoClaims
+GEA02000Nonautoclaims
+GEA03000Default

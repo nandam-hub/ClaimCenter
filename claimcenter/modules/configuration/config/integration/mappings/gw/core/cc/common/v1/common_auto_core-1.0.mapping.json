@@ -1,0 +1,23 @@
+{
+  "schemaName": "gw.core.cc.common.v1.common_auto_core-1.0",
+  "combine": [
+    "gw.core.cc.common.v1.common_core-1.0"
+  ],
+  "mappers": {
+    "Contact": {
+      "schemaDefinition": "Contact",
+      "root": "entity.Contact",
+      "properties": {
+        "licenseNumber": {
+          "path": "(Contact as Person).LicenseNumber",
+          "predicate": "Contact typeis Person"
+        },
+        "licenseState": {
+          "path": "(Contact as Person).LicenseState",
+          "mapper": "#/mappers/TypeKeyReference",
+          "predicate": "Contact typeis Person"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,3 @@
+# GAR START: config/portal/capabilities/segmentation.gwproperties [/opt/teamcity/agent/work/45c3a2f1b8ee4237/gpm-generator/downloads/edge/backend/xcenter-config/xcenter-utils/cc-utils/../../../Shared/segmentation/src/main]
+handlers.abexperiment=edge.capabilities.segmentation.DemoExperimentHandler
+# GAR END

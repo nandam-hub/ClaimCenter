@@ -1,0 +1,177 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <ListViewPanel
+    id="ServiceRequestLV"
+    stretch="true">
+    <Expose
+      name="ServiceRequestLV"
+      widget="ServiceRequestLV"/>
+    <Require
+      name="claim"
+      type="Claim"/>
+    <Require
+      name="filterServiceRequests"
+      type="boolean"/>
+    <Require
+      name="operationCallbackHelper"
+      type="gw.vendormanagement.ServiceRequestOperationCallbackHelper"/>
+    <Variable
+      initialValue="initializeFilteredServiceRequests()"
+      name="filteredServiceRequests"
+      type="entity.ServiceRequest[]"/>
+    <RowIterator
+      editable="false"
+      elementName="serviceRequest"
+      value="filteredServiceRequests"
+      valueType="entity.ServiceRequest[]">
+      <Variable
+        initialValue="serviceRequest.createStateHandler()"
+        name="stateHandler"
+        type="gw.core.vendormanagement.servicerequeststate.ServiceRequestStateHandler"/>
+      <Variable
+        initialValue="serviceRequest.nextActionDefinition(stateHandler)"
+        name="nextActionDefinition"
+        type="gw.core.vendormanagement.servicerequeststate.ActionDefinition"/>
+      <Row>
+        <BooleanRadioCell
+          icon="serviceRequest.Kind.Icon"
+          iconLabel="serviceRequest.Kind.Label"
+          iconType="svgFileName"
+          id="Kind"
+          label="DisplayKey.get(&quot;LV.Claim.ServiceRequest.Kind&quot;)"
+          showHeaderIcon="false"
+          value="true"
+          valueType="boolean"/>
+        <LinkCell
+          align="center"
+          label="DisplayKey.get(&quot;LV.Claim.ServiceRequest.Status&quot;)">
+          <Link
+            icon="serviceRequest.StatusIcon.Icon"
+            iconColor="serviceRequest.StatusIcon.IconColor"
+            iconType="svgFileName"
+            id="Status"
+            tooltip="serviceRequest.StatusIcon.Label"/>
+          <Link
+            icon="serviceRequest.actionRequiredIcon(stateHandler).Icon"
+            iconColor="serviceRequest.actionRequiredIcon(stateHandler).IconColor"
+            iconType="svgFileName"
+            id="ActionRequired"
+            tooltip="serviceRequest.actionRequiredIcon(stateHandler).Label"
+            visible="serviceRequest.actionRequiredVisible(stateHandler)"/>
+        </LinkCell>
+        <TextCell
+          action="pcf.ClaimServiceRequests.go(claim, serviceRequest)"
+          actionAvailable="filterServiceRequests"
+          id="ServiceRequestNumber"
+          label="DisplayKey.get(&quot;LV.Claim.ServiceRequest.ServiceRequestNumber&quot;)"
+          sortOrder="3"
+          value="serviceRequest.ServiceRequestNumber"/>
+        <TextCell
+          id="ServiceRequestReferenceNumber"
+          label="DisplayKey.get(&quot;LV.Claim.ServiceRequest.ServiceRequestReferenceNumber&quot;)"
+          value="serviceRequest.ServiceRequestReferenceNumberGw"
+          visible="!filterServiceRequests"/>
+        <UserCell
+          id="ServiceRequestAssignee"
+          label="DisplayKey.get(&quot;LV.Claim.ServiceRequest.AssignedUser&quot;)"
+          value="serviceRequest.AssignedUser"
+          valueType="entity.User"
+          wrap="false"/>
+        <LinkCell
+          id="NextAction"
+          label="DisplayKey.get(&quot;LV.Claim.ServiceRequest.NextAction&quot;)"
+          wrap="true">
+          <Link
+            action="goToActionLocation(serviceRequest, stateHandler)"
+            available="nextActionDefinition.ActionLocation != null"
+            confirmMessage="nextActionDefinition.ConfirmationMessage"
+            id="NextActionLink"
+            label="nextActionDefinition.NextAction.ActionName"
+            showConfirmMessage="nextActionDefinition.ConfirmationMessage != null"/>
+        </LinkCell>
+        <TextCell
+          id="ActionOwner"
+          label="DisplayKey.get(&quot;LV.Claim.ServiceRequest.ActionOwner&quot;)"
+          value="serviceRequest.nextActionDefinition(stateHandler).ActionOwnerString"
+          wrap="false"/>
+        <TextCell
+          groupedOnEnter="true"
+          grow="true"
+          id="RelatedTo"
+          label="DisplayKey.get(&quot;LV.Claim.ServiceRequest.RelatesTo&quot;)"
+          sortOrder="1"
+          value="serviceRequest.RelatedToName"/>
+        <TextCell
+          id="Services"
+          label="DisplayKey.get(&quot;LV.Claim.ServiceRequest.Services&quot;)"
+          value="serviceRequest.Instruction.OrderedServices*.Service.join(&quot;\n&quot;)"
+          wrap="false"/>
+        <TextCell
+          action="ClaimContactDetailPopup.push(serviceRequest.Specialist, serviceRequest.Claim)"
+          actionAvailable="serviceRequest.Specialist != null"
+          grow="true"
+          id="Specialist"
+          label="DisplayKey.get(&quot;LV.Claim.ServiceRequest.Specialist&quot;)"
+          sortOrder="2"
+          value="serviceRequest.SpecialistName"/>
+        <DateCell
+          id="ExpectedCompletionDate"
+          label="DisplayKey.get(&quot;LV.Claim.ServiceRequest.Target&quot;)"
+          value="serviceRequest.nextExpectedCompletionDate(stateHandler)"
+          visible="!filterServiceRequests"
+          wrap="false"/>
+        <CurrencyCell
+          formatType="currency"
+          id="QuoteAmount"
+          label="DisplayKey.get(&quot;LV.Claim.ServiceRequest.QuoteAmount&quot;)"
+          value="serviceRequest?.LatestQuote.Amount"
+          wrap="false"/>
+      </Row>
+    </RowIterator>
+    <Code><![CDATA[uses gw.vendormanagement.servicerequeststate.ServiceRequestActionHandler
+uses gw.vendormanagement.servicerequeststate.ServiceRequestActionLocation
+uses java.lang.IllegalArgumentException
+uses gw.core.vendormanagement.servicerequeststate.ServiceRequestStateHandler
+
+function initializeFilteredServiceRequests() : ServiceRequest[] {
+  // Filter the Service Requests to show only "active and non-complete" and "complete with attention required" service requests
+  if (filterServiceRequests) {
+      return claim.ServiceRequests.where(\s -> (s.IsActive and not s.IsDone) or (s.IsDone and s.actionRequiredVisible()))
+  }
+  return claim.ServiceRequests
+}
+
+function goToActionLocation(sr: ServiceRequest, stateHandler : ServiceRequestStateHandler) {
+  var nextActionDefinition = sr.nextActionDefinition(stateHandler)
+  var nextActionLocation = nextActionDefinition.ActionLocation
+  if (nextActionLocation != null) {
+      switch (nextActionLocation) {
+          case ServiceRequestActionLocation.PERFORM_OPERATION_WITH_CONFIRMATION:
+                  operationCallbackHelper.performServiceRequestOperation(CurrentLocation, sr, nextActionDefinition.ActionOperation, stateHandler)
+                  break
+          case ServiceRequestActionLocation.ADD_QUOTE_POPUP:
+                  AddReviseQuotePopup.push(sr)
+                  break
+          case ServiceRequestActionLocation.REVISE_QUOTE_POPUP:
+                  AddReviseQuotePopup.push(sr, sr.LatestQuote)
+                  break
+          case ServiceRequestActionLocation.APPROVE_QUOTE_POPUP:
+                  ApproveQuotePopup.push(sr)
+                  break
+          case ServiceRequestActionLocation.ADD_INVOICE_POPUP:
+                  NewInvoice.go(sr)
+                  break
+          case ServiceRequestActionLocation.SERVICE_REQUEST_INVOICE:
+                  pcf.ClaimServiceRequestForward.go(claim, sr, nextActionDefinition.ActionInvoice)
+                  break
+          case ServiceRequestActionLocation.SERVICE_REQUEST_DETAILS:
+                  pcf.ClaimServiceRequestForward.go(claim, sr)
+                  break
+          default: throw new IllegalArgumentException("ServiceRequestActionLocation not recognized: " + nextActionLocation.Name)
+      }
+  }
+}]]></Code>
+  </ListViewPanel>
+</PCF>

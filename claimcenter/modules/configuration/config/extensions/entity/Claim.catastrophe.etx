@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<!-- Extension to claim table -->
+<extension
+  xmlns="http://guidewire.com/datamodel"
+  entityName="Claim">
+  <column
+    default="0"
+    desc="Was this claim created from a catastrophe claim template?"
+    name="CatFromCatClaimTemplate_SP"
+    nullok="false"
+    type="bit"/>
+</extension>

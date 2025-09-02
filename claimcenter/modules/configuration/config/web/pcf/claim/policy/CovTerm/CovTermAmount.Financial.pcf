@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <ModalCell
+    id="CovTermAmount"
+    mode="Financial">
+    <Require
+      name="covTerm"
+      type="CovTerm"/>
+    <TextCell
+      id="CovTermAmount"
+      value="gw.api.util.CurrencyUtil.renderAsCurrency((covTerm as FinancialCovTerm).FinancialAmount, covTerm.Coverage.Currency)"/>
+  </ModalCell>
+</PCF>

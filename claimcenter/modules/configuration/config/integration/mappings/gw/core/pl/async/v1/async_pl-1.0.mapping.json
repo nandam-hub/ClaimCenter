@@ -1,0 +1,58 @@
+{
+  "schemaName": "gw.core.pl.async.v1.async_pl-1.0",
+  "combine": [
+    "gw.core.pl.framework.v1.framework_pl-1.0"
+  ],
+  "mappers": {
+    "AsyncRequest": {
+      "schemaDefinition": "AsyncRequest",
+      "root": "gw.rest.core.pl.async.v1.request.AsyncApiRequestWrapper",
+      "properties": {
+        "acceptedTime": {
+          "path": "AsyncApiRequestWrapper.AsyncApiRequest.RequestAcceptedTime"
+        },
+        "completionTime": {
+          "path": "AsyncApiRequestWrapper.AsyncApiRequest.RequestCompletionTime"
+        },
+        "id": {
+          "path": "AsyncApiRequestWrapper.AsyncApiRequest.RequestID"
+        },
+        "requestMethod": {
+          "path": "AsyncApiRequestWrapper.AsyncApiRequest.RequestMethod"
+        },
+        "requestPath": {
+          "path": "AsyncApiRequestWrapper.AsyncApiRequest.RequestPath"
+        },
+        "requestQueryString": {
+          "path": "AsyncApiRequestWrapper.AsyncApiRequest.RequestQueryString"
+        },
+        "responseBodyJson": {
+          "path": "AsyncApiRequestWrapper.ResponseBodyJson"
+        },
+        "responseHeaders": {
+          "path": "AsyncApiRequestWrapper.ResponseHeaders",
+          "mapper": "#/mappers/AsyncResponseHeaderMap"
+        },
+        "responseStatus": {
+          "path": "AsyncApiRequestWrapper.AsyncApiRequest.ResponseStatus"
+        },
+        "startTime": {
+          "path": "AsyncApiRequestWrapper.AsyncApiRequest.RequestStartTime"
+        },
+        "status": {
+          "path": "AsyncApiRequestWrapper.AsyncApiRequest.Status",
+          "mapper": "#/mappers/TypeKeyReference"
+        }
+      }
+    },
+    "AsyncResponseHeaderMap": {
+      "schemaDefinition": "AsyncResponseHeaderMap",
+      "root": "gw.api.json.JsonObject",
+      "additionalProperties": {
+        "path": "JsonObject.keySet()",
+        "propertyKey": "value",
+        "propertyValue": "JsonObject.getStringArray(value)"
+      }
+    }
+  }
+}

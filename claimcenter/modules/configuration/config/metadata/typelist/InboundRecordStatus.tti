@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<typelist xmlns="http://guidewire.com/typelists" name="InboundRecordStatus" desc="The status of an inbound record.">
+  <typecode
+    code="pending"
+    desc="The record has not yet been processed."
+    name="Pending"/>
+  <typecode
+    code="processed"
+    desc="The record was processed successfully."
+    name="Processed"/>
+  <typecode
+    code="error"
+    desc="The record could not be processed."
+    name="Error"/>
+  <typecode
+    code="skipped"
+    desc="The record was manually skipped."
+    name="Skipped"/>
+  <typecode
+    code="ignore"
+    desc="The record should be ignored when processing."
+    name="Ignore"/>
+</typelist>

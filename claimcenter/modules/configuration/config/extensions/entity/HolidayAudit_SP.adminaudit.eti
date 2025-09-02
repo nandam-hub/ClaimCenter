@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  entity="HolidayAudit_SP"
+  supertype="DataAudit_SP">
+  <foreignkey
+    columnName="HolidayID"
+    fkentity="Holiday"
+    name="Holiday"
+    nullok="true"/>
+</subtype>

@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<typelistextension xmlns="http://guidewire.com/typelists" name="PropertyValuationSource" desc="Source of valuation of property">
+  <typecode
+    code="demo"
+    desc="Demo"
+    name="Demo"/>
+  <typecode
+    code="manual"
+    desc="Manual"
+    name="Manual"/>
+</typelistextension>

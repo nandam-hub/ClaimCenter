@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <PanelSet
+    id="FNOLWizard_ServicesPolicyPanelSet"
+    mode="Homeowners">
+    <Require
+      name="claim"
+      type="Claim"/>
+    <Require
+      name="wizard"
+      type="gw.api.claim.NewClaimWizardInfo"/>
+    <PanelRef
+      def="HomeownersPanelSet(claim, null, wizard.PropertyOtherServiceRequests, wizard.UnusedServiceRequests)"/>
+  </PanelSet>
+</PCF>

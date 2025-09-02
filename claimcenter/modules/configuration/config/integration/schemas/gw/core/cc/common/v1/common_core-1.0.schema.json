@@ -1,0 +1,275 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "x-gw-combine": [
+    "gw.core.cc.framework.v1.framework_core-1.0",
+    "gw.core.pl.common.v1.common_pl-1.0"
+  ],
+  "definitions": {
+    "Activity": {
+      "properties": {
+        "autopilotHandlingDecision": {
+          "title": "Autopilot handling decision",
+          "description": "Record of the decision made around how to handle this activity. Only intended for use if Claims Autopilot is enabled.",
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-nullable": true,
+          "x-gw-sinceVersion": "1.2.0",
+          "x-gw-extensions": {
+            "defaultViews": [
+              "none"
+            ],
+            "filterable": true,
+            "typelist": "AutopilotHandlingDecision"
+          }
+        },
+        "autopilotId": {
+          "title": "Autopilot ID",
+          "description": "Unique identifier assigned to this activity by the Claims Autopilot system. Only intended for use by the Claims Autopilot system.",
+          "type": "string",
+          "x-gw-nullable": true,
+          "x-gw-sinceVersion": "1.2.0",
+          "x-gw-extensions": {
+            "defaultViews": [
+              "none"
+            ],
+            "filterable": true
+          }
+        },
+        "autopilotPurpose": {
+          "title": "Autopilot purpose",
+          "description": "Activity purpose set by the Claims Autopilot system. Only intended for use by the Claims Autopilot system.",
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-nullable": true,
+          "x-gw-sinceVersion": "1.2.0",
+          "x-gw-extensions": {
+            "defaultViews": [
+              "none"
+            ],
+            "filterable": true,
+            "typelist": "AutopilotPurpose"
+          }
+        },
+        "coverageIssues": {
+          "title": "Coverage issues",
+          "description": "A list of possible issues with coverage for the associated claim",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CoverageIssue"
+          },
+          "x-gw-sinceVersion": "1.2.0",
+          "x-gw-extensions": {
+            "createOnly": true
+          }
+        },
+        "importance": {
+          "title": "Importance",
+          "description": "Level of importance of the activity",
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-extensions": {
+            "typelist": "ImportanceLevel"
+          }
+        },
+        "relatedTo": {
+          "title": "Related to",
+          "description": "A reference to the primary element that the activity is related to",
+          "$ref": "#/definitions/GenericRelation",
+          "x-gw-sinceVersion": "1.3.0"
+        }
+      }
+    },
+    "ActivityPattern": {
+      "properties": {
+        "activityClass": {
+          "x-gw-extensions": {
+            "filterable": true
+          }
+        },
+        "activityType": {
+          "x-gw-extensions": {
+            "filterable": true
+          }
+        },
+        "availableForClosedClaims": {
+          "title": "Available for closed claims",
+          "description": "A `true` value for this field indicates that this activity pattern can be used to create activities on closed claims",
+          "type": "boolean"
+        },
+        "category": {
+          "x-gw-extensions": {
+            "filterable": true
+          }
+        },
+        "claimLossType": {
+          "title": "Claim loss type",
+          "description": "A claim loss type for this pattern. Used to allow filtering activity patterns based on the loss type of the associated claim.",
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-extensions": {
+            "typelist": "LossType"
+          }
+        },
+        "externallyOwned": {
+          "title": "Externally owned",
+          "description": "The default `externallyOwned` value for activities created from this activity pattern",
+          "type": "boolean"
+        },
+        "importance": {
+          "title": "Importance",
+          "description": "The default `importance` value for activities created from this activity pattern",
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-extensions": {
+            "typelist": "ImportanceLevel"
+          }
+        }
+      }
+    },
+    "Assignee": {
+      "properties": {
+        "claimOwner": {
+          "title": "Claim owner",
+          "description": "Set to `true` to indicate that the element should be assigned to the same user and group that own the element's claim",
+          "type": "boolean"
+        }
+      }
+    },
+    "Contact": {
+      "properties": {
+        "doctorSpecialty": {
+          "title": "Doctor specialty",
+          "description": "The doctor's specialty",
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "typelist": "SpecialtyType"
+          }
+        },
+        "medicalLicense": {
+          "title": "Medical license",
+          "description": "The doctor's medical license number",
+          "type": "string",
+          "x-gw-nullable": true
+        },
+        "policySystemId": {
+          "title": "ID",
+          "description": "The unique identifier of this element within the policy system",
+          "type": "string",
+          "readOnly": true,
+          "x-gw-nullable": true
+        },
+        "roles": {
+          "title": "Roles",
+          "description": "The list of all roles that this contact has on the claim",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ContactRole"
+          },
+          "minItems": 1
+        }
+      }
+    },
+    "ContactRole": {
+      "title": "Contact role",
+      "description": "A role that a contact has on a particular claim or element of the claim",
+      "type": "object",
+      "required": [
+        "role",
+        "relatedTo"
+      ],
+      "properties": {
+        "active": {
+          "title": "Active",
+          "description": "A `true` value for this field indicates that the contact is still active for this role on the related element",
+          "type": "boolean"
+        },
+        "comments": {
+          "title": "Comments",
+          "description": "Comments regarding this role",
+          "type": "string"
+        },
+        "relatedTo": {
+          "title": "Related to",
+          "description": "A reference to the element that this role is related to",
+          "$ref": "#/definitions/GenericRelation"
+        },
+        "role": {
+          "title": "Role",
+          "description": "This role this contact plays on the related element",
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-extensions": {
+            "typelist": "ContactRole"
+          }
+        }
+      }
+    },
+    "CoverageIssue": {
+      "title": "Coverage issue",
+      "description": "A potential problem related to coverage",
+      "x-gw-sinceVersion": "1.2.0",
+      "properties": {
+        "coverageSubtype": {
+          "title": "Coverage subtype",
+          "description": "The type of coverage this issue relates to",
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-nullable": true,
+          "x-gw-extensions": {
+            "typelist": "CoverageSubtype"
+          }
+        },
+        "id": {
+          "title": "ID",
+          "description": "The unique identifier of this element",
+          "type": "string",
+          "readOnly": true
+        },
+        "reason": {
+          "title": "Reason",
+          "description": "The reason this issue was raised",
+          "type": "string",
+          "x-gw-nullable": true
+        },
+        "severity": {
+          "title": "Severity",
+          "description": "The severity of the issue",
+          "$ref": "#/definitions/TypeKeyReference",
+          "x-gw-extensions": {
+            "typelist": "CoverageIssueSeverity"
+          }
+        }
+      }
+    },
+    "Document": {
+      "type": "object",
+      "properties": {
+        "relatedTo": {
+          "title": "Related to",
+          "description": "A reference to the element that this document is related to",
+          "$ref": "#/definitions/GenericRelation"
+        }
+      }
+    },
+    "HistoryEvent": {
+      "properties": {
+        "claim": {
+          "title": "Claim",
+          "description": "A reference to the `Claim` that this history is associated with",
+          "$ref": "#/definitions/SimpleReference",
+          "readOnly": true,
+          "x-gw-sinceVersion": "1.11.0",
+          "x-gw-extensions": {
+            "defaultViews": [
+              "detail"
+            ],
+            "resourceType": "Claim"
+          }
+        }
+      }
+    },
+    "Note": {
+      "properties": {
+        "relatedTo": {
+          "title": "Related to",
+          "description": "A reference to the element that this note is related to",
+          "$ref": "#/definitions/GenericRelation"
+        }
+      }
+    }
+  }
+}

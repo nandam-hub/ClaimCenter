@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  desc="Non-persistent set of criteria to use in searching for a specific claim."
+  entity="ArchivedClaimSearchCriteria"
+  supertype="ClaimInfoCriteria">
+  <implementsInterface
+    iface="gw.cc.claim.entity.ArchivedClaimSearchCriteria"
+    impl="com.guidewire.cc.domain.claim.impl.ArchivedClaimSearchCriteriaImpl"/>
+  <fulldescription><![CDATA[
+        Encapsulates the search criteria for a archived Claim search. The system does not store ArchivedClaimSearchCriteria entities,
+        they are exist only for a search and are discarded after use.
+      
+    ]]></fulldescription>
+  <foreignkey
+    columnName="CatastropheID"
+    desc="Match by catastrophe."
+    fkentity="Catastrophe"
+    name="Catastrophe"
+    nullok="true"/>
+  <foreignkey
+    columnName="DateCriterionChoiceID"
+    desc="Match claim by specific date criteria."
+    fkentity="DateCriterionChoice"
+    name="DateCriterionChoice"
+    nullok="false"/>
+  <typekey
+    desc="Match by line of business."
+    name="LOBCode"
+    nullok="true"
+    typelist="LOBCode"/>
+  <typekey
+    desc="Match by loss type."
+    name="LossType"
+    nullok="true"
+    typelist="LossType"/>
+  <typekey
+    desc="Match by litigation status."
+    name="LitigationStatus"
+    nullok="true"
+    typelist="LitigationStatus"/>
+  <column
+    desc="Match claims that are resinsurance reportable."
+    name="ReinsuranceReportable"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Match by incident report."
+    name="IncidentReport"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Match by coverage in question status."
+    name="CoverageInQuestion"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="contact notes"
+    name="Notes"
+    nullok="true"
+    type="longtext"/>
+</subtype>

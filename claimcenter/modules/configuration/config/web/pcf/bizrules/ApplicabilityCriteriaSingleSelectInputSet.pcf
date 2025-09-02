@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <InputSet
+    id="ApplicabilityCriteriaSingleSelectInputSet">
+    <Require
+      name="listBundle"
+      type="gw.bizrules.CCRulePanelSetHelper.SingleSelectBundle"/>
+    <Require
+      name="requiredCriteria"
+      type="boolean"/>
+    <RangeInput
+      align="left"
+      editable="true"
+      hideIfReadOnly="true"
+      id="InputWidget"
+      label="listBundle.Label"
+      noneSelectedLabel="requiredCriteria ? DisplayKey.get(&quot;Java.NameValueView.NoneSelected&quot;) : DisplayKey.get('Web.BizRules.Rule.ApplicabilityCriteria.All') "
+      required="requiredCriteria"
+      value="listBundle.Selected"
+      valueRange="listBundle.Range"
+      valueType="gw.entity.TypeKey">
+      <PostOnChange/>
+    </RangeInput>
+    <TextInput
+      id="ReadonlyDisplay"
+      label="listBundle.Label"
+      value="listBundle.Selected.DisplayName ?: DisplayKey.get('Web.BizRules.Rule.ApplicabilityCriteria.All') "
+      visible="not CurrentLocation.InEditMode"/>
+  </InputSet>
+</PCF>

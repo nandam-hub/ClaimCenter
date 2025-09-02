@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <InputSet
+    id="ZonesInputSet">
+    <Require
+      name="zoneContainer"
+      type="gw.api.zones.ZoneContainer"/>
+    <Require
+      name="screenType"
+      type="String"/>
+    <Variable
+      initialValue="gw.api.admin.BaseAdminUtil.getDefaultCountry()"
+      name="country"
+      type="Country"/>
+    <Variable
+      initialValue="null"
+      name="zoneType"
+      type="ZoneType"/>
+    <Variable
+      initialValue="null"
+      name="linkedZone"
+      type="Zone"/>
+    <Variable
+      initialValue="new gw.api.zones.ZonesInputSetUIHelper(zoneContainer, screenType, country)"
+      name="uiHelper"
+      type="gw.api.zones.ZonesInputSetUIHelper"/>
+    <RangeInput
+      editable="true"
+      hideIfReadOnly="true"
+      id="Country"
+      label="DisplayKey.get(&quot;Web.Admin.ZonesInputSet.Country&quot;)"
+      required="true"
+      value="country"
+      valueRange="uiHelper.PossibleCountries"
+      valueType="typekey.Country">
+      <PostOnChange
+        onChange="linkedZone=null; zoneType=null; uiHelper.ZoneContainer.FilterCriteria.LinkedZone=null; uiHelper.ZoneContainer.FilterCriteria.ZoneType=null; uiHelper = new gw.api.zones.ZonesInputSetUIHelper(zoneContainer, screenType, country)"/>
+    </RangeInput>
+    <RangeInput
+      editable="true"
+      hideIfReadOnly="true"
+      id="ZoneType"
+      label="DisplayKey.get(&quot;Web.Admin.ZonesInputSet.ZoneType&quot;)"
+      value="zoneType"
+      valueRange="uiHelper.ZoneTypes"
+      valueType="typekey.ZoneType">
+      <PostOnChange
+        onChange="linkedZone=null; uiHelper.ZoneContainer.FilterCriteria.LinkedZone=null; uiHelper.ZoneContainer.FilterCriteria.ZoneType=zoneType"/>
+    </RangeInput>
+    <RangeInput
+      editable="true"
+      hideIfReadOnly="true"
+      id="FilterBy"
+      label="uiHelper.FilterByLabel"
+      value="linkedZone"
+      valueRange="Zone.finder.findZones(country, uiHelper.FilterZoneTypeCode)"
+      valueType="entity.Zone"
+      visible="uiHelper.FilterVisible">
+      <PostOnChange
+        onChange="uiHelper.ZoneContainer.FilterCriteria.ZoneType=zoneType; uiHelper.ZoneContainer.FilterCriteria.LinkedZone=linkedZone"/>
+    </RangeInput>
+    <RangeInput
+      editable="true"
+      hideIfReadOnly="true"
+      id="ZoneInput"
+      label="DisplayKey.get(&quot;Web.Admin.ZonesInputSet.Zones&quot;)"
+      multiSelect="true"
+      numRows="10"
+      shuttleList="true"
+      value="uiHelper.ZoneContainer.ZoneCodes"
+      valueRange="Zone.finder.findZoneCodes(country,uiHelper.ZoneContainer.FilterCriteria.ZoneType,uiHelper.ZoneContainer.FilterCriteria.LinkedZone)"
+      valueType="java.lang.String[]"
+      visible="uiHelper.ZoneInputVisible"/>
+    <ListViewInput
+      def="ZonesLV(uiHelper, country)"
+      editable="true"
+      hideIfReadOnly="true"
+      label="DisplayKey.get(&quot;Web.Admin.ZonesInputSet.Zones&quot;)"
+      visible="uiHelper.ListViewVisible">
+      <Toolbar
+        visible="true">
+        <IteratorButtons
+          iterator="ZonesLV.ZonesLV"/>
+      </Toolbar>
+    </ListViewInput>
+  </InputSet>
+</PCF>

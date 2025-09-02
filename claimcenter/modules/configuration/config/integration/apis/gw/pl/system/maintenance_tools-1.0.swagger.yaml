@@ -1,0 +1,368 @@
+swagger: '2.0'
+info:
+  title: "System tools application maintenance API"
+  description: |
+               This API is related to system maintenance resources.
+  version: '1.0'
+basePath: /system/v1/maintenance
+x-gw-permissions:
+- integadmin
+x-gw-runlevel: maintenance
+x-gw-schema-import:
+  maintenance: gw.pl.system.maintenance_tools-1.0
+x-gw-apihandlers:
+- gw.api.rest.pl.system.v1.MaintenanceToolsAPIHandler
+paths:
+  /processes:
+    get:
+      summary: "Gets all batch process names"
+      description: |
+                   Gets set of all batch process names.
+      operationId: getProcesses
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: |
+                       Successful operation
+          schema:
+            $ref: "maintenance#/definitions/ProcessNames"
+    post:
+      summary: "Starts the given batch process"
+      description: |
+                   Starts the given batch process.
+                   If the process is already running on the server, an exception will be thrown.
+      operationId: startBatchProcess
+      consumes:
+      - application/json
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: "maintenance#/definitions/ProcessStartParams"
+      produces:
+      - text/plain
+      responses:
+        '200':
+          description: |
+                       Returns the process id of the job that was started
+          schema:
+            type: string
+  /processes/code/{processCode}:
+    get:
+      summary: "Check status of specific batch process"
+      description: |
+                    Return status of given process if the process code is valid.
+      operationId: getProcessByCode
+      parameters:
+        - $ref: "#/parameters/processCode"
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: |
+                       Successful operation
+          schema:
+            $ref: "maintenance#/definitions/ProcessStatus"
+    delete:
+      summary: "Requests termination of the given batchprocess, if it's currently running"
+      description: |
+                   Requests termination of the given batch process, if it's currently running.
+                   This method does not wait for the batch process to actually terminate.
+      operationId: requestTerminationOfBatchProcessByProcessCode
+      parameters:
+      - $ref: "#/parameters/processCode"
+      produces:
+      - text/plain
+      responses:
+        '202':
+          description: |
+                       Request accepted
+          schema:
+            type: boolean
+  /processes/validatearchivelinks/all:
+    post:
+      summary: "Starts the ValidateArchiveLinks for all TestGraphRoots"
+      description: |
+                    Starts the ValidateArchiveLinks for all TestGraphRoots.
+      operationId: startAllValidateArchiveLinksBatch
+      produces:
+      - text/plain
+      responses:
+        '200':
+          description: |
+                       Returns the process id of the job that was started.
+          schema:
+            type: string
+  /processes/validatearchivelinks/ids:
+      post:
+        summary: "Starts the ValidateArchiveLinks for the TestGraphRoots requested"
+        description: |
+                      Starts the ValidateArchiveLinks for the TestGraphRoots requested.
+        operationId: startValidateArchiveLinksBatchForSpecifiedIds
+        consumes:
+        - application/json
+        parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: "maintenance#/definitions/ValidateArchiveLinksProcessIds"
+        produces:
+        - text/plain
+        responses:
+          '200':
+            description: |
+                         Returns the process id of the job that was started.
+            schema:
+              type: string
+  /processes/validatearchivelinks:
+      post:
+        summary: "Starts the ValidateArchiveLinks for all TestGraphRoots changed within the date range"
+        description: |
+                      Starts the ValidateArchiveLinks for all TestGraphRoots changed within the date range.
+        operationId: startValidateArchiveLinksBatchByDateRange
+        parameters:
+        - name: startTime
+          in: query
+          description: |
+                       Start time
+          required: true
+          type: string
+          format: date-time
+        - name: endTime
+          in: query
+          description: |
+                       End time
+          required: true
+          type: string
+          format: date-time
+        produces:
+          - text/plain
+        responses:
+          '200':
+            description: |
+                       Returns the process id of the job that was started.
+            schema:
+              type: string
+  /processes/id/{processid}:
+    delete:
+      summary: "Requests termination of the given batchprocess, if it's currently running"
+      description: |
+                    Requests termination of the given batch process, if it's currently running.
+                    Note that it's possible that this particular invocation could have finished and another invocation of the same process begun, in which case this won't request the termination of the current invocation.
+                    This method does not wait for the batch process to actually terminate.
+      operationId: requestTerminationOfBatchProcessByID
+      parameters:
+      - $ref: "#/parameters/processid"
+      produces:
+      - text/plain
+      responses:
+        '202':
+          description: |
+                       Request accepted
+          schema:
+            type: boolean
+    get:
+      summary: "Gets the status of a particular batch process invocation"
+      description: |
+                   Gets the status of a particular batch process invocation.
+                   If that invocation is still running, the status will indicate as much, and only the startDate and opsCompleted fields will be filled in.
+                   Otherwise the returned object will contain information about the completed run (see ProcessStatus for information about all the fields returned).
+      operationId: batchProcessStatusByID
+      parameters:
+      - $ref: "#/parameters/processid"
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: |
+                       Successful operation
+          schema:
+            $ref: "maintenance#/definitions/ProcessStatus"
+  /workqueues:
+    get:
+      summary: "Returns the list of work queues for this product minimally with processType populated"
+      description: |
+                   Returns the list of work queues for this product minimally with processType populated.
+                   These names may be used for #/parameters/processType
+      operationId: getWorkQueues
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: "Successful operation"
+          schema:
+            $ref: "maintenance#/definitions/Workqueues"
+  /workqueues/{processType}:
+    get:
+      summary: "Retrieves the work queue for that particular queue"
+      description: |
+                   Retrieves the work queue information including status of active executors for that particular queue.
+                   Each executor contains information about last 25 workers ran by each executor.
+      operationId: getWorkQueue
+      parameters:
+      - $ref: "#/parameters/processType"
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: |
+                        Successful operation
+          schema:
+            $ref: "maintenance#/definitions/Workqueue"
+  /workqueues/{processType}/workers:
+    post:
+      summary: "Perform action on all workers for the specified queue across the cluster"
+      description: |
+                   Perform action on all workers for the specified queue across the cluster.
+                   Actions supported are:
+                    * start
+                    * stop
+                    * notify
+                    * wait
+      operationId: performActionOnWorkers
+      parameters:
+      - $ref: "#/parameters/processType"
+      - name: action
+        in: query
+        description: |
+                     Action to be performed:
+                     * start
+                     * stop
+                     * notify
+                     * wait
+        required: true
+        type: string
+        enum:
+        - start
+        - stop
+        - notify
+        - wait
+      responses:
+        '202':
+          description: |
+                        Operation accepted
+  /workqueues/{processType}/config:
+    get:
+      summary: "Get the current configuration of distributed workers for the specified work queue"
+      description: |
+                   Get the current configuration of distributed workers for the specified work queue.
+      operationId: getWorkQueueConfig
+      parameters:
+      - $ref: "#/parameters/processType"
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: |
+                       Successful operation
+          schema:
+            $ref: "maintenance#/definitions/WorkqueueConfig"
+    patch:
+      summary: "Sets the configuration for distributed workers for the specified work queue"
+      description: |
+                   Sets the configuration for distributed workers for the specified work queue.
+                   Any currently running worker instances will be stopped after the current workitem in process is completed.
+                   New worker instances as specified by the passed in config will be created and started.
+                   Note that the changes made here are temporary; if the server is restarted, the initial values from config.xml will be used when creating and starting workers.
+      operationId: setWorkQueueConfig
+      consumes:
+      - application/json
+      parameters:
+      - $ref: "#/parameters/processType"
+      - name: body
+        in: body
+        description: |
+                     The configuration to establish
+        required: true
+        schema:
+          $ref: "maintenance#/definitions/WorkqueueConfig"
+      responses:
+        '200':
+          description: |
+                       Successful operation
+  /plugins/{pluginname}:
+    get:
+      summary: "Returns info for startable plugin, for now only the status whether or not it is started"
+      description: |
+                   Returns info for startable plugin, for now only the status whether or not it is started.
+      operationId: getPluginByName
+      parameters:
+      - $ref: "#/parameters/pluginname"
+      produces:
+      - application/json
+      x-gw-permissions:
+      - toolspluginview
+      responses:
+        '200':
+          description: |
+                       Operation successful
+          schema:
+            $ref: "maintenance#/definitions/Plugin"
+    post:
+      summary: "Performs specified action on all servers' instance of this named plugin"
+      description: |
+                   Performs specified action on all servers' instance of this named plugin.
+                   Actions supported are:
+                    * start
+                    * stop
+      operationId: performActionOnPlugins
+      parameters:
+      - $ref: "#/parameters/pluginname"
+      - name: action
+        in: query
+        description: |
+                      Action to be performed:
+                      * start
+                      * stop
+        required: true
+        type: string
+        enum:
+        - start
+        - stop
+      - name: timeout
+        in: query
+        description: |
+                      Number of milliseconds to wait for a confirmed start/stop or -1 to skip confirmation and return immediately
+        required: false
+        type: integer
+        format: int64
+      x-gw-permissions:
+      - toolspluginedit
+      responses:
+        '200':
+          description: |
+                       Operation successful
+parameters:
+  processCode:
+    name: processCode
+    in: path
+    description: |
+                 Code of the batch process.
+    required: true
+    type: string
+  processid:
+    name: processid
+    in: path
+    description: |
+                 Id of the process.
+    required: true
+    type: integer
+    format: int64
+    minimum: 0
+  processType:
+    name: processType
+    in: path
+    description: |
+                 Name of the queue.
+    required: true
+    type: string
+  pluginname:
+    name: pluginname
+    in: path
+    description: |
+                 Name of the plugin.
+    required: true
+    type: string

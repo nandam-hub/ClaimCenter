@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<typelist 
+  xmlns="http://guidewire.com/typelists" 
+  name="ServiceRequestExternalStatus" 
+  desc="Status of a service request to be exposed to external users"
+  tableName="servicereqexternalstatus">
+</typelist>

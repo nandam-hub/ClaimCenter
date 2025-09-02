@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  entity="RepairOption_Ext"
+  table="repairoptionchoice_ext"
+  type="retireable"
+  exportable="true"
+  final="false">
+  <typekey
+    desc="The choice or a repair option"
+    name="RepairOptionChoice"
+    nullok="false"
+    typelist="RepairOptionChoice_Ext"/>
+</entity>

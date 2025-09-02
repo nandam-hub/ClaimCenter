@@ -1,0 +1,118 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <!-- This file automatically generated from lv_claim.xml -->
+  <ListViewPanel
+    id="EditableSubrogationPartiesLV"
+    stretch="true">
+    <ExposeIterator
+      valueType="gw.subrogation.financials.AdversePartyWrapper"
+      widget="EditableSubrogationPartiesLV"/>
+    <Require
+      name="subroAdversePartyList"
+      type="List&lt;gw.subrogation.financials.AdversePartyWrapper&gt;"/>
+    <Require
+      name="claim"
+      type="entity.Claim"/>
+    <Variable
+      initialValue="new gw.subrogation.financials.AdversePartyWrapper(null)"
+      name="adversePartyWrapperClaimTotal"
+      type="gw.subrogation.financials.AdversePartyWrapper"/>
+    <RowIterator
+      checkBoxVisible="perm.System.editsubrodetails and adversePartyWrapper.AdverseParty != null"
+      editable="false"
+      elementName="adversePartyWrapper"
+      pageSize="0"
+      toRemove="claim.SubrogationSummary.removeFromSubroAdverseParties(adversePartyWrapper.AdverseParty); subroAdversePartyList.remove(adversePartyWrapper)"
+      value="subroAdversePartyList"
+      valueType="java.util.List&lt;gw.subrogation.financials.AdversePartyWrapper&gt;">
+      <ToolbarFlag
+        condition="perm.Evaluation.edit(claim)"
+        name="Deletable"/>
+      <Row
+        visible="adversePartyWrapper.AdverseParty != null">
+        <LinkCell>
+          <Link
+            icon="&quot;view_detail&quot;"
+            iconType="svgFileName"
+            id="PayeeLink"
+            tooltip="DisplayKey.get(&quot;LV.Subro.AdverseParty.Sum.Tooltip&quot;)"
+            visible="adversePartyWrapper.AdverseParty == null"/>
+        </LinkCell>
+        <TextCell
+          enableSort="false"
+          id="SubroRecoveryPayee1"
+          label="DisplayKey.get(&quot;LV.Claim.Subro.AdversePartyList.Contact&quot;)"
+          required="true"
+          unique="true"
+          value="adversePartyWrapper.AdverseParty.AdverseParty.DisplayName"
+          wrap="false"/>
+        <TextCell
+          enableSort="false"
+          id="LiabilityPercentage1"
+          label="DisplayKey.get(&quot;LV.Claim.Subro.AdversePartyList.Liability&quot;)"
+          required="true"
+          sortDirection="descending"
+          value="gw.subrogation.financials.SubrogationFinancialsHelper.getLiabilityForUI(claim, adversePartyWrapper)"
+          wrap="false"/>
+        <TextCell
+          enableSort="false"
+          id="ExpectedRecovery"
+          label="DisplayKey.get(&quot;LV.Claim.Subro.AdversePartyList.Expectedrecovery&quot;)"
+          required="true"
+          value="gw.subrogation.financials.SubrogationFinancialsHelper.getExpectedRecoveryPercentForUI(claim, adversePartyWrapper)"
+          wrap="false"/>
+        <TypeKeyCell
+          enableSort="false"
+          id="Classification1"
+          label="DisplayKey.get(&quot;LV.Claim.Subro.AdversePartyList.Classification&quot;)"
+          required="false"
+          value="adversePartyWrapper.AdverseParty.Classification"
+          valueType="typekey.SubroClassification"
+          wrap="false"/>
+        <TypeKeyCell
+          enableSort="false"
+          grow="true"
+          id="Strategy1"
+          label="DisplayKey.get(&quot;LV.Claim.Subro.AdversePartyList.Strategy&quot;)"
+          required="false"
+          value="adversePartyWrapper.AdverseParty.Strategy"
+          valueType="typekey.SubroStrategy"/>
+      </Row>
+    </RowIterator>
+    <Row
+      id="ClaimTotalRow"
+      useSubHeaderStyle="true"
+      visible="adversePartyWrapperClaimTotal.AdverseParty == null">
+      <EmptyCell
+        id="BlankCell"/>
+      <TextCell
+        align="right"
+        bold="true"
+        enableSort="false"
+        id="ClaimTotal"
+        unique="true"
+        value="DisplayKey.get(&quot;LV.Subro.AdverseParty.Sum&quot;)"/>
+      <TextCell
+        bold="true"
+        enableSort="false"
+        id="LiabilityPercentageTotal"
+        sortDirection="descending"
+        value="gw.subrogation.financials.SubrogationFinancialsHelper.getLiabilityForUI(claim, adversePartyWrapperClaimTotal)"/>
+      <TextCell
+        bold="true"
+        enableSort="false"
+        id="ExpectedRecoveryTotal"
+        value="gw.subrogation.financials.SubrogationFinancialsHelper.getExpectedRecoveryPercentForUI(claim, adversePartyWrapperClaimTotal)"/>
+      <LinkCell
+        colspan="2"
+        grow="true">
+        <Link
+          action="SubrogationGeneral.go(claim, true)"
+          id="SubrogationFinancialsLink"
+          label="DisplayKey.get(&quot;Web.Subrogation.Financials&quot;)"/>
+      </LinkCell>
+    </Row>
+  </ListViewPanel>
+</PCF>

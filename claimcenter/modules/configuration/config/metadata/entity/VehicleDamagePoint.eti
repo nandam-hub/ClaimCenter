@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Individual Damage points on a vehicle"
+  entity="VehicleDamagePoint"
+  exportable="true"
+  platform="false"
+  table="VehicleDmgPoint"
+  type="versionable">
+  <implementsEntity
+    name="Extractable"/>
+  <typekey
+    desc="The point on a vehicle that got damaged"
+    name="DamagePoint"
+    nullok="false"
+    typelist="VehicleDamagePoints"/>
+  <typekey
+    desc="The severity of the damage at the vehicle damage point"
+    name="DamageSeverity"
+    nullok="true"
+    typelist="DamageSeverity"/>
+  <column
+    desc="Comments regarding the vehicle damage"
+    name="Comments"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="200"/>
+  </column>
+  <foreignkey
+    columnName="VehicleIncidentID"
+    desc="The incident that the vehicle damage corresponds to"
+    fkentity="VehicleIncident"
+    name="VehicleIncident"
+    nullok="true"/>
+</entity>

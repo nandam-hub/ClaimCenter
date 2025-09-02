@@ -1,0 +1,41 @@
+.gw-VerbatimWidget {
+  @include gw-widgetOuterSpacing($gw-app--Verbatim--spacing-widget-top-rem, $gw-app--Verbatim--spacing-widget-right-rem, $gw-app--Verbatim--spacing-widget-bottom-rem, $gw-app--Verbatim--spacing-widget-left-rem);
+  @include gw-widgetStyles();
+
+  &:empty {
+    display: none;
+  }
+
+  &.gw-VerbatimWidget--info {
+    .gw-VerbatimWidget--inner {
+      font-weight: $gw-app--Verbatim--weight;
+      color: $gw-app--Verbatim--col;
+    }
+  }
+
+  &.gw-VerbatimWidget--warning {
+    .gw-VerbatimWidget--inner {
+      font-weight: $gw-app--Verbatim--weight;
+      color: $gw-app--Verbatim--warning-col;
+    }
+  }
+
+  .gw-VerbatimWidget--inner {
+    // Internal padding
+    padding-top: $gw-app--Verbatim--spacing-inner-top-rem;
+    padding-left: $gw-app--Verbatim--spacing-inner-left-rem;
+    padding-right: $gw-app--Verbatim--spacing-inner-right-rem;
+    padding-bottom: $gw-app--Verbatim--spacing-inner-bottom-rem;
+
+    &:empty {
+      display: none;
+    }
+
+    @if ($gw-app--Verbatim--fill-container-width) {
+      display: block;
+    } @else {
+      display: inline-block;
+    }
+  }
+}
+

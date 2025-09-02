@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <!-- This file automatically generated from lv_claim.xml -->
+  <ListViewPanel
+    id="AssociatedClaimsLV">
+    <ExposeIterator
+      valueType="entity.ClaimAssociation"
+      widget="AssociatedClaimsLV"/>
+    <Require
+      name="Claim"
+      type="Claim"/>
+    <Require
+      name="ClaimAssociationList"
+      type="ClaimAssociation[]"/>
+    <RowIterator
+      checkBoxVisible="isEditable(ClaimAssociation)"
+      editable="false"
+      elementName="ClaimAssociation"
+      hasCheckBoxes="true"
+      value="ClaimAssociationList"
+      valueType="entity.ClaimAssociation[]">
+      <Variable
+        name="associatedClaims"
+        initialValue="ClaimAssociation.ClaimsInAssoc"
+        type="entity.ClaimInAssociation[]"/>
+      <Row>
+        <TextCell
+          action="ClaimAssociationDetail.drilldown(Claim, ClaimAssociation)"
+          available="isEditable(ClaimAssociation)"
+          id="Association"
+          label="DisplayKey.get(&quot;LV.Claim.AssociatedClaims.Association&quot;)"
+          sortOrder="1"
+          value="ClaimAssociation.Title"/>
+        <LinkCell
+          label="DisplayKey.get(&quot;LV.Claim.AssociatedClaims.Claim&quot;)"
+          id="Claim"
+          wrap="true">
+          <LinkIterator
+            elementName="claimAssoc"
+            id="ClaimIterator"
+            value="associatedClaims"
+            valueType="entity.ClaimInAssociation[]">
+            <Link
+              id="ClaimAssociationClaimNumber"
+              action="ClaimInfoForward.go(claimAssoc.ClaimInfo)"
+              label="claimAssoc.ClaimNumber"
+              styleClass="noSpaceLink"/>
+            <Link
+              id="AssociationsSeparator"
+              label="DisplayKey.get('Web.Claim.Associations.Seperator')"
+              styleClass="noSpaceLink"
+              visible="claimAssoc!=associatedClaims.last()"/>
+          </LinkIterator>
+        </LinkCell>
+        <TypeKeyCell
+          id="Type"
+          label="DisplayKey.get(&quot;LV.Claim.AssociatedClaims.Type&quot;)"
+          value="ClaimAssociation.ClaimAssocType"
+          valueType="typekey.ClaimAssocType"/>
+      </Row>
+    </RowIterator>
+    <Code>
+      function isEditable(claimAssociation : entity.ClaimAssociation) : boolean {
+        return claimAssociation.ClaimAssocType != ClaimAssocType.TC_BULKARCHIVEDCLAIMRESTORE
+      }
+    </Code>
+  </ListViewPanel>
+</PCF>

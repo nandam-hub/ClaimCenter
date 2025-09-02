@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <InputSet
+    id="ClaimIndicatorInputSet"
+    mode="SubrogationClaimIndicator">
+    <Require
+      name="indicator"
+      type="ClaimIndicator"/>
+    <TypeKeyInput
+      editable="indicator.Claim.SubrogationStatus == null"
+      filter="VALUES.where(\status -&gt; status == TC_OPEN or status == TC_REVIEW).toList()"
+      id="SubrogationStatusSetter"
+      label="DisplayKey.get(&quot;Web.Claim.ClaimStatus.SubrogationStatus&quot;)"
+      value="indicator.Claim.SubrogationStatus"
+      valueType="typekey.SubrogationStatus"
+      visible="indicator.Claim.SubrogationStatus == null"/>
+    <ContentInput
+      label="DisplayKey.get(&quot;Web.Claim.ClaimStatus.SubrogationStatus&quot;)"
+      visible="indicator.Claim.SubrogationStatus != null">
+      <Link
+        icon="indicator.Icon"
+        iconColor="indicator.IconColor"
+        iconType="svgFileName"
+        id="SubrogationStatusIcon"
+        visible="indicator.IsOn"/>
+      <Link
+        id="SubrogationStatusText"
+        label="indicator.Text"/>
+    </ContentInput>
+  </InputSet>
+</PCF>

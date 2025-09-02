@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Popup
+    id="CCRuleVersionDetailsPopup"
+    title="DisplayKey.get('Web.BizRules.Rule.Title',ruleVersion.Rule.Name)">
+    <LocationEntryPoint
+      signature="CCRuleVersionDetailsPopup(context: gw.bizrules.CCRulesNavigationContext, ruleVersion: RuleVersion, importing : boolean)"/>
+    <Variable
+      name="context"
+      type="gw.bizrules.CCRulesNavigationContext"/>
+    <Variable
+      name="ruleVersion"
+      type="RuleVersion"/>
+    <Variable
+      name="importing"
+      type="boolean"/>
+    <Variable
+      initialValue="new gw.bizrules.pcf.RulePageController(ruleVersion, context.UIConfigs, CurrentLocation, gw.bizrules.CCRulesDetailsStateHolder.SwitchableModes)"
+      name="controller"
+      type="gw.bizrules.pcf.RulePageController"/>
+    <Screen>
+      <PanelRef
+        def="RuleDetailPanelSet(context, ruleVersion, importing, controller, controller.Rule.RuleCondition.Type)"/>
+    </Screen>
+  </Popup>
+</PCF>

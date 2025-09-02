@@ -1,0 +1,330 @@
+.gw-MediaGalleryWidget {
+  @include gw-panelInnerSpacing();
+  @include gw-panelOuterSpacing();
+  @include gw-widgetStyles($has-default-border: $gw-app--MediaGallery--has-default-border, $default-border-color: $gw-app--MediaGallery--default-border-col);
+
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  position: relative;
+  overflow: hidden;
+  vertical-align: top;
+  @include gw-borderRadius();
+
+  .gw-MediaGallery--title-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    background-color: $gw-app--MediaGallery--header--bg;
+    padding: $gw-app--MediaGallery--header--padding;
+    border-bottom: $gw-app--MediaGallery--header--bottom-border;
+    @include gw-borderCap($top: true);
+
+    flex-grow: 0;
+    flex-shrink: 0;
+
+    .gw-title {
+      color: $gw-app--MediaGallery--header--font-color;
+      font-size: $gw-app--MediaGallery--header--font-size;
+      font-weight: $gw-app--MediaGallery--header--font-weight;
+      text-align: left;
+      margin-right: $gw-app--SPACING-rem-L;
+    }
+
+    .gw-MediaGallery--paging {
+      display: flex;
+      align-items: center;
+      flex-wrap: nowrap;
+      justify-content: flex-end;
+      flex-shrink: 0;
+
+      .gw-paging--first {
+        @include gw-button--normal($is-square: true, $is-small: true);
+        @include gw-icon($gw-app--IteratorPaging--first-glyph);
+      }
+
+      .gw-paging--prev {
+        @include gw-button--normal($is-square: true, $is-small: true);
+        @include gw-icon($gw-app--IteratorPaging--prev-glyph);
+
+        margin-left: $gw-app--SPACING-rem-S;
+      }
+
+      .gw-paging--number {
+        display: inline;
+        margin-left: $gw-app--SPACING-rem-S;
+      }
+
+      .gw-paging--next {
+        @include gw-button--normal($is-square: true, $is-small: true);
+        @include gw-icon($gw-app--IteratorPaging--next-glyph);
+
+        margin-left: $gw-app--SPACING-rem-S;
+      }
+
+      .gw-paging--last {
+        @include gw-button--normal($is-square: true, $is-small: true);
+        @include gw-icon($gw-app--IteratorPaging--last-glyph);
+
+        margin-left: $gw-app--SPACING-rem-S;
+      }
+    }
+  }
+
+  .gw-MediaGallery--gallery {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: stretch;
+    justify-content: flex-start;
+    align-content: flex-start;
+    overflow-y: auto;
+    background-color: $gw-app--MediaGallery--bg;
+    padding: $gw-app--MediaGallery--tile--margin;
+
+    flex-grow: 1;
+    flex-shrink: 1;
+
+    .gw-GalleryTile {
+      display: flex;
+      max-width: $gw-app--MediaGallery--tiles-max-width-when-grow;
+      max-height: $gw-app--MediaGallery--tile--max-height;
+      flex-basis: $gw-app--MediaGallery--tile--width;
+      flex-direction: column;
+      align-items: stretch;
+      justify-content: flex-start;
+      border: gw-border($gw-app--border--col-lighter);
+      overflow: hidden;
+      background-color: $gw-app--bg;
+      color: $gw-app--col;
+      box-shadow: $gw-app--MediaGallery--tile--shadow;
+      margin: $gw-app--MediaGallery--tile--margin;
+      @include gw-borderRadius();
+
+      @if ($gw-app--MediaGallery--tiles-fill-white-space) {
+        flex-grow: 1;
+      }
+
+      .gw-GalleryTile--top {
+        position: relative;
+        background-color: $gw-app--MediaGallery--tile--image-bg;
+        height: $gw-app--MediaGallery--tile--image-height;
+
+        &:hover {
+          .gw-GalleryTile--thumb {
+            @include gw-imageHover();
+          }
+
+          .gw-GalleryTile--badge {
+            visibility: hidden;
+          }
+        }
+
+        .gw-GalleryTile--thumb {
+          height: 100%;
+          text-align: center;
+
+          &:not(.gw-loading) {
+            img {
+              object-fit: $gw-app--MediaGallery--tile--image-fit;
+              height: 100%;
+              width: 100%;
+            }
+          }
+
+          &.gw-loading {
+            @include gw-loader-dots($svg-size: gw-emFixed(3));
+
+            img {
+              display: none;
+            }
+          }
+        }
+
+        @if ($gw-app--MediaGallery--tile-use-angular-badges) {
+          .gw-GalleryTile--badge {
+            display: inline-block;
+            width: gw-emFixed(10);
+            text-align: center;
+            position: absolute;
+            top: gw-emFixed(1);
+            right: gw-emFixed(-3);
+            padding: gw-emFixed(.3);
+
+            @include gw-possiblyApplyForcedBadgeWidgetColor();
+
+            &:empty {
+              display: none;
+            }
+            transform: rotate(45deg);
+          }
+        } @else {
+          .gw-GalleryTile--badge {
+            text-align: center;
+            position: absolute;
+            right: $gw-app--MediaGallery--tile--text-padding;
+            bottom: $gw-app--MediaGallery--tile--text-padding;
+            padding: .3em; //Specific padding sized to font size
+            font-size: $gw-app--MediaGallery--tile-badge-font-size;
+            @include gw-borderRadius();
+
+            @include gw-possiblyApplyForcedBadgeWidgetColor();
+
+            &:empty {
+              display: none;
+            }
+          }
+        }
+      }
+
+      .gw-GalleryTile--middle {
+        color: $gw-app--MediaGallery--tile--title-font-color;
+        font-size: $gw-app--MediaGallery--tile--title-font-size;
+        background-color: $gw-app--MediaGallery--tile--title-bg;
+        padding: $gw-app--MediaGallery--tile--text-padding;
+        @if ($gw-app--MediaGallery--tile--uses-raised-title-bar) {
+          box-shadow: 0px -1px 6px $gw-app--palette--shadow-light-col;
+          z-index: 1;
+          border-bottom: gw-border($gw-app--border--col-lighter);
+        }
+      }
+
+      .gw-GalleryTile--bottom {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: flex-start;
+        background-color: $gw-app--bg;
+        color: $gw-app--col;
+        flex-grow: 1;
+
+        .gw-GalleryTile--key-values {
+          display: flex;
+          flex-direction: column;
+          align-items: stretch;
+          justify-content: flex-start;
+          overflow: auto;
+
+          & + .gw-GalleryTile--paragraph {
+            border-top: $gw-app--MediaGallery--tile--paragraph--top-border;
+            max-height: $gw-app--MediaGallery--tile--description-max-height;
+          }
+        }
+
+        .gw-GalleryTile--key-value {
+          display: flex;
+          flex-direction: row;
+          align-items: baseline;
+          padding: $gw-app--MediaGallery--tile--text-padding;
+          @include gw-allowShrinkSmallerThanContents;
+          flex-grow: 0;
+          flex-shrink: 0;
+
+          .gw-GalleryTile--key {
+            flex-grow: 0;
+            flex-shrink: 0;
+            flex-basis: $gw-app--MediaGallery--tile--key-width;
+            max-width: 180px;
+            color: $gw-app--MediaGallery--tite--key-font-color;
+          }
+          .gw-GalleryTile--value {
+            flex-shrink: 1;
+            flex-grow: 1;
+            padding-left: $gw-app--MediaGallery--tile--text-padding;
+            @include gw-textEllipse();
+            @include gw-allowShrinkSmallerThanContents;
+          }
+        }
+
+        .gw-GalleryTile--paragraph {
+          overflow: auto;
+          font-size: $gw-app--MediaGallery--tile--paragraph--font-size;
+          padding: $gw-app--MediaGallery--tile--text-padding;
+          font-family: $gw-app--MediaGallery--tile--paragraph--font-family;
+          color: $gw-app--MediaGallery--tile--paragraph--font-color;
+          white-space: normal;
+        }
+      }
+    }
+
+    // =====================================
+    // == HIDDEN DATA SECTIONS
+    // =====================================
+    &.gw-hide-data {
+      .gw-GalleryTile--bottom {
+        display: none !important;
+      }
+    }
+  }
+}
+
+// =====================================
+// == IMAGE IN THE POPUP MODAL
+// =====================================
+.gw-GalleryTile--modal {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  flex-grow: 1;
+  flex-shrink: 1;
+  min-width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #1B1B1B; //TODO: theme
+  @include gw-borderRadius();
+  border: gw-border(white); //TODO: theme
+
+  .gw-GalleryTile--modal-img {
+    max-height: 100%;
+    overflow: auto;
+    flex-grow: 1;
+    text-align: center;
+
+    &.gw-loading {
+      display: inline-block;
+      @include gw-loader-dots-white();
+      min-width: 160px;
+      min-height: 90px;
+      background-color: black;
+      @include gw-borderRadius();
+
+      img {
+        display: none;
+      }
+    }
+
+    img {
+      @include gw-borderRadius();
+      box-shadow: $gw-app--images--drop-shadow;
+      object-fit: contain;
+    }
+  }
+
+  .gw-GalleryTile--modal-data {
+    overflow: auto;
+    flex-shrink: 1;
+    min-width: gw-emFixed(10);
+    background-color: $gw-app--bg;
+    @include gw-borderRadius();
+    margin-left: $gw-app--SPACING-rem-L;
+    border: gw-border();
+    padding: $gw-app--SPACING-rem-L;
+    max-height: 100%;
+
+    .gw-tag-data-table {
+      background-color: black;
+      color: $gw-app--palette--white-for-dark-backgrounds;
+      tr {
+        border-bottom: gw-border();
+        td {
+          overflow: auto;
+          max-width: 25vw;
+          padding: 1px;
+        }
+      }
+    }
+  }
+}

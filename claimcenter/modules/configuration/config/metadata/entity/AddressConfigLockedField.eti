@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<entity
+  loadable="false"
+  platform="true"
+  xmlns="http://guidewire.com/datamodel"
+  entity="AddressConfigLockedField"
+  desc="For locking configuration of per-country address field mapping to prevent invalid changes"
+  table="addressconfiglockedfield"
+  type="keyable"
+  extendable="false">
+  <column
+    desc="The name of the extra field column from the AddressAutofillable entity that will be used to store address data"
+    name="ExtraFieldName"
+    nullok="false"
+    type="shorttext"/>
+  <column
+    desc="The logical name of the address field that will have it's value saved for the combination of Country and ExtraFieldName"
+    name="ExtraFieldValue"
+    nullok="false"
+    type="shorttext"/>
+  <typekey
+    desc="Country for the entry in the address extra fields mapping"
+    name="Country"
+    nullok="false"
+    typelist="Country"/>
+  <index
+    desc="An index to define the constraint that each mapping between Country / ExtraFieldName to ExtraValue must be unique."
+    name="uniqueEntryIndex"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="Country"/>
+    <indexcol
+      keyposition="2"
+      name="ExtraFieldName"/>
+    <indexcol
+      keyposition="3"
+      name="ExtraFieldValue"/>
+  </index>
+</entity>
